@@ -34,20 +34,20 @@ Public Class BackEndInterface
         Public Function GetJSONString(ByRef WebRequest As WebRequest, ByVal PostString As String) As String
 
             Dim C As New Converter
+
             Dim PostData As Byte() = C.StringToByte(PostString, Converter.EncodeType._UTF8)
+            WebRequest.Method = "POST"
+            WebRequest.ContentType = "application/x-www-form-urlencoded"
             WebRequest.ContentLength = PostData.Length
 
-            Try
-                Dim ReqStream As Stream = WebRequest.GetRequestStream()
-                ReqStream.Write(PostData, 0, PostData.Length)
-                ReqStream.Close()
-            Catch ex As Exception
-                Return ""
-            End Try
+            Dim stream As Stream = WebRequest.GetRequestStream()
+            stream.Write(PostData, 0, PostData.Length)
+            stream.Close()
 
-            Dim WebResponse As WebResponse = WebRequest.GetResponse()
-            Dim RespData As Stream = WebResponse.GetResponseStream
-            Return C.ByteToString(C.StreamToByte(RespData), Converter.EncodeType._UTF8)
+            Dim RESP As WebResponse = WebRequest.GetResponse()
+            Dim ST As New StreamReader(RESP.GetResponseStream())
+            Return ST.ReadToEnd
+
         End Function
 
         '------- ส่ง Key ที่เป็น Dash มา----------
@@ -113,6 +113,10 @@ Public Class BackEndInterface
         Public Function Get_Result(ByVal productCode As String) As Response
 
             Dim URL As String = (New BackEndInterface.General).GetProductURL
+
+            '------------ Test ------------
+            URL = "http://www.tit-tech.co.th/cmpg/COM_Wallet.aspx?CUS_ID=1"
+
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
             Dim PostString As String = ""
@@ -128,7 +132,7 @@ Public Class BackEndInterface
 
     Public Class Face_Recognition
 
-        Private Const SubURL As String = "/profiles/customer/face-recognition"
+        Private Const SubURL As String = "profiles/customer/face-recognition"
         Public JSONString As String = ""
 
 #Region "DataModel"
@@ -196,7 +200,7 @@ Public Class BackEndInterface
 
     Public Class Prepaid_Validate_Register
 
-        Private Const SubURL As String = "/profiles/customer/validate-prepaid-register"
+        Private Const SubURL As String = "profiles/customer/validate-prepaid-register"
         Public JSONString As String = ""
 
 #Region "DataModel"
@@ -258,7 +262,7 @@ Public Class BackEndInterface
 
     Public Class Generate_Order_Id
 
-        Private Const SubURL As String = "/aftersales/order/generate-id" '---------- Channel=??? , Dealer =???
+        Private Const SubURL As String = "aftersales/order/generate-id" '---------- Channel=??? , Dealer =???
         Public JSONString As String = ""
 
 #Region "DataModel"
@@ -293,7 +297,7 @@ Public Class BackEndInterface
 
     Public Class Delete_File
 
-        Private Const SubURL As String = "/sales/order/pdf/delete_file"
+        Private Const SubURL As String = "sales/order/pdf/delete_file"
         Public JSONString As String = ""
 
 #Region "DataModel"
@@ -330,7 +334,7 @@ Public Class BackEndInterface
 
     Public Class Save_File
 
-        Private Const SubURL As String = "/sales/order/pdf/save_file"
+        Private Const SubURL As String = "sales/order/pdf/save_file"
         Public JSONString As String = ""
 
 #Region "DataModel"
@@ -372,7 +376,7 @@ Public Class BackEndInterface
 
     Public Class Service_Flow_Create
 
-        Private Const SubURL As String = "/sales/flow/create"
+        Private Const SubURL As String = "sales/flow/create"
         Public JSONString As String = ""
 
         Public Enum FlowType
@@ -481,7 +485,7 @@ Public Class BackEndInterface
 
     Public Class Service_Flow_Finish
 
-        Private Const SubURL As String = "/sales/flow/finish"
+        Private Const SubURL As String = "sales/flow/finish"
         Public JSONString As String = ""
 
 #Region "DataModel"
@@ -552,7 +556,7 @@ Public Class BackEndInterface
 
     Public Class Activity_Start
 
-        Private Const SubURL As String = "/sales/flow/activity/start"
+        Private Const SubURL As String = "sales/flow/activity/start"
         Public JSONString As String = ""
 
 #Region "DataModel"
@@ -597,7 +601,7 @@ Public Class BackEndInterface
 
     Public Class Activity_End
 
-        Private Const SubURL As String = "/sales/flow/activity/end"
+        Private Const SubURL As String = "sales/flow/activity/end"
         Public JSONString As String = ""
 
 #Region "DataModel"
