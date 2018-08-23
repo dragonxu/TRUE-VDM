@@ -8,14 +8,20 @@ Imports System.IO
 Public Class BackEndInterface
 
     Public Class General
-        Public ReadOnly Property BaseURL As String
+        Public ReadOnly Property GetProductURL As String
+            Get
+                Return AppSettings("GetProductURL").ToString
+            End Get
+        End Property
+
+        Public ReadOnly Property BackEndURL As String
             Get
                 Return AppSettings("BackEndURL").ToString
             End Get
         End Property
 
-        Public Function CreateRequest(ByVal SubURL As String) As WebRequest
-            Dim webReq As WebRequest = WebRequest.Create(BaseURL & SubURL)
+        Public Function CreateRequest(ByVal URL As String) As WebRequest
+            Dim webReq As WebRequest = WebRequest.Create(URL)
             '--------------- Config Web Request ------------
             webReq.Method = "POST"
             webReq.ContentType = "application/x-www-form-urlencoded"
@@ -50,6 +56,72 @@ Public Class BackEndInterface
                 JSONString = JSONString.Replace("" & Keys(i) & "", "" & Keys(i).Replace("-", "_") & "")
             Next
             Return JSONString
+        End Function
+
+    End Class
+
+    Public Class Get_Product_Info
+
+        Public JSONString As String = ""
+
+#Region "DataModel"
+        Public Class Response
+
+            Public Property response_data As Response
+
+            Public Class Response
+                Public Property Product As ProductMaster
+                Public Property Price As String
+                Public Property Captions As List(Of Caption)
+            End Class
+
+            Public Class ProductMaster
+                Public Property CODE As String
+                Public Property DESCRIPTION As String
+                Public Property PLANT_CODE As String
+                Public Property PRODUCT_BRAND_CODE As String
+                Public Property PRODUCT_MODEL_CODE As String
+                Public Property IS_SERIAL As String
+                Public Property PRODUCT_TYPE As String
+                Public Property DISPLAY_NAME As String
+                Public Property IS_ENABLE As String
+                Public Property IS_DELETE As String
+                Public Property CATEGORY As String
+                Public Property REQ_SALE_APPROACH As String
+                Public Property IS_VAT As String
+                Public Property VAT_RATE As String
+                Public Property COMPANY_CODE As String
+                Public Property IS_SIM As String
+                Public Property REQUIRE_RECEIVE_FORM As String
+                Public Property APPLE_CARE_SERVICE_CODE As String
+                Public Property COLOR As String
+                Public Property CAPACITY As String
+                Public Property CATEGORY_RECOMMEND As String
+            End Class
+
+            Public Class Caption
+                Public Property SEQ As String
+                Public Property PRODUCT_CODE As String
+                Public Property CAPTION_CODE As String
+                Public Property CAPTION_DESC As String
+                Public Property DETAIL As String
+            End Class
+        End Class
+
+        Private CleanKeys() As String = {"response-data"}
+#End Region
+        Public Function Get_Result(ByVal productCode As String) As Response
+
+            Dim URL As String = (New BackEndInterface.General).GetProductURL
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+
+            Dim PostString As String = ""
+            PostString &= "productCode=" & productCode
+
+            JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, PostString)
+
+            Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+            Return Result
         End Function
 
     End Class
@@ -100,7 +172,8 @@ Public Class BackEndInterface
                                    ByVal face_recog_cust_capture As String,
                                    ByVal seq As String) As Response
 
-            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(SubURL)
+            Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
             Dim PostString As String = ""
             PostString &= "partner-code=" & partner_code & "&"
@@ -113,23 +186,6 @@ Public Class BackEndInterface
             PostString &= "max-seq="
 
             JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, PostString)
-
-            'JSONString =  ""
-            'JSONString &= " {" & vbLf
-            'JSONString &= "     ""status"": ""SUCCESSFUL""," & vbLf
-            'JSONString &= "     ""trx_id"": ""3Q1W5RZRZNB16""," & vbLf
-            'JSONString &= "     ""process_instance"": ""psaapdv1 (instance: SFF_node1)""," & vbLf
-            'JSONString &= "     ""response_data"": {" & vbLf
-            'JSONString &= "         ""face_recognition_result"" : ""pass""," & vbLf
-            'JSONString &= "         ""face_recognition_message"" : ""xxxxx""," & vbLf
-            'JSONString &= "         ""over_max_allow"" : ""true""," & vbLf
-            'JSONString &= "         ""over_max_allow_message"" : ""ทำรายการเกินที่กำหนด""," & vbLf
-            'JSONString &= "         ""is_identical"" : ""true""," & vbLf
-            'JSONString &= "         ""confident_ratio"" : ""0.71""," & vbLf
-            'JSONString &= "         ""face_recog_cust_certificate_id"" : ""xxyyzz""," & vbLf
-            'JSONString &= "         ""face_recog_cust_capture_id"" : ""xxyyzz""" & vbLf
-            'JSONString &= "     }" & vbLf
-            'JSONString &= " }" & vbLf
 
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
             Return Result
@@ -185,8 +241,9 @@ Public Class BackEndInterface
             GetString &= "id-type=" & id_type & "&"
             GetString &= "allow-registered="
 
-            Dim URL As String = SubURL & "?" & GetString
-            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(SubURL)
+            Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+            
 
             JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, "")
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
@@ -225,8 +282,8 @@ Public Class BackEndInterface
             GetString &= "channel=TLR&"
             GetString &= "dealer=" & dealer
 
-            Dim URL As String = SubURL & "?" & GetString
-            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(SubURL)
+            Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
             JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, "")
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
@@ -261,8 +318,8 @@ Public Class BackEndInterface
             GetString &= "order-id=" & order_id & "&"
             GetString &= "form-type=FACE_RECOG_CUST_CERTIFICATE"
 
-            Dim URL As String = SubURL & "?" & GetString
-            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(SubURL)
+            Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
             JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, "")
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
@@ -296,7 +353,8 @@ Public Class BackEndInterface
                                    ByVal fileType As String,
                                    ByVal b64File As String) As Response
 
-            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(SubURL)
+            Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
             Dim PostString As String = ""
             PostString &= "order-id=" & order_id & "&"
@@ -324,7 +382,7 @@ Public Class BackEndInterface
 #Region "DataModel"
         Public Class Response
             Public Property status As String
-            Public Property display_messages() As Display_Message
+            Public Property display_messages As List(Of Display_Message)
             Public Property trx_id As String
             Public Property process_instance As String
             Public Property response_data As Response
@@ -386,8 +444,6 @@ Public Class BackEndInterface
             GetString &= "orderId=" & orderId & "&"
             GetString &= "flowName=" & IIf(FlowType = FlowType.Mobile, "Mobile", "Device")
 
-            Dim URL As String = SubURL & "?" & GetString
-
             Dim PostString As String = ""
             PostString &= "CREATE-BY=" & staffOpenShift & "&"
             PostString &= "ID-NUMBER=" & thaiID & "&"
@@ -413,7 +469,9 @@ Public Class BackEndInterface
             PostString &= "CUST_CERTIFICATE_LASER_ID=&"
             PostString &= "OS=VENDING&"
 
+            Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+
             JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, PostString)
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
             Return Result
@@ -429,7 +487,7 @@ Public Class BackEndInterface
 #Region "DataModel"
         Public Class Response
             Public Property status As String
-            Public Property display_messages() As Display_Message
+            Public Property display_messages As List(Of Display_Message)
             Public Property trx_id As String
             Public Property process_instance As String
             Public Property response_data As Response
@@ -478,12 +536,12 @@ Public Class BackEndInterface
 
             Dim GetString As String = "flow-id=" & orderId & ""
 
-            Dim URL As String = SubURL & "?" & GetString
-
             Dim PostString As String = ""
             PostString &= "orderId=" & orderId
 
+            Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+
             JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, PostString)
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
             Return Result
@@ -502,7 +560,7 @@ Public Class BackEndInterface
             Public Property trx_id As String
             Public Property status As String
             Public Property process_instance As String
-            Public Property display_messages() As Display_Message
+            Public Property display_messages As List(Of Display_Message)
 
             Public Class Display_Message
                 Public Property message As String
@@ -527,8 +585,9 @@ Public Class BackEndInterface
             Dim GetString As String = "flow-id=" & orderId & "&"
             GetString &= "activity-id=CONFIRM_ORDER"
 
-            Dim URL As String = SubURL & "?" & GetString
+            Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+
             JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, "")
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
             Return Result
@@ -546,7 +605,7 @@ Public Class BackEndInterface
             Public Property trx_id As String
             Public Property status As String
             Public Property process_instance As String
-            Public Property display_messages() As Display_Message
+            Public Property display_messages As List(Of Display_Message)
 
             Public Class Display_Message
                 Public Property message As String
@@ -570,8 +629,9 @@ Public Class BackEndInterface
             Dim GetString As String = "flow-id=" & orderId & "&"
             GetString &= "orderId=" & orderId
 
-            Dim URL As String = SubURL & "?" & GetString
+            Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+
             JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, "")
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
             Return Result
