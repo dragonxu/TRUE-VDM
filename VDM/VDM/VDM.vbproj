@@ -101,12 +101,92 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Test_API\Test_API_Interface.aspx" />
+    <Content Include="Test_API\UC_Activity_End.ascx" />
+    <Content Include="Test_API\UC_Activity_Start.ascx" />
+    <Content Include="Test_API\UC_Delete_File.ascx" />
+    <Content Include="Test_API\UC_Face_Recognition.ascx" />
+    <Content Include="Test_API\UC_Generate_Order_Id.ascx" />
+    <Content Include="Test_API\UC_Prepaid_Validate_Register.ascx" />
+    <Content Include="Test_API\UC_Save_File.ascx" />
+    <Content Include="Test_API\UC_Service_Flow_Create.ascx" />
+    <Content Include="Test_API\UC_Service_Flow_Finish.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\BackEndInterface.vb" />
+    <Compile Include="Test_API\Test_API_Interface.aspx.designer.vb">
+      <DependentUpon>Test_API_Interface.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_API\Test_API_Interface.aspx.vb">
+      <DependentUpon>Test_API_Interface.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Test_API\UC_Activity_End.ascx.designer.vb">
+      <DependentUpon>UC_Activity_End.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_API\UC_Activity_End.ascx.vb">
+      <DependentUpon>UC_Activity_End.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_API\UC_Activity_Start.ascx.designer.vb">
+      <DependentUpon>UC_Activity_Start.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_API\UC_Activity_Start.ascx.vb">
+      <DependentUpon>UC_Activity_Start.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_API\UC_Delete_File.ascx.designer.vb">
+      <DependentUpon>UC_Delete_File.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_API\UC_Delete_File.ascx.vb">
+      <DependentUpon>UC_Delete_File.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_API\UC_Face_Recognition.ascx.designer.vb">
+      <DependentUpon>UC_Face_Recognition.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_API\UC_Face_Recognition.ascx.vb">
+      <DependentUpon>UC_Face_Recognition.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_API\UC_Generate_Order_Id.ascx.designer.vb">
+      <DependentUpon>UC_Generate_Order_Id.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_API\UC_Generate_Order_Id.ascx.vb">
+      <DependentUpon>UC_Generate_Order_Id.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_API\UC_Prepaid_Validate_Register.ascx.designer.vb">
+      <DependentUpon>UC_Prepaid_Validate_Register.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_API\UC_Prepaid_Validate_Register.ascx.vb">
+      <DependentUpon>UC_Prepaid_Validate_Register.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_API\UC_Save_File.ascx.designer.vb">
+      <DependentUpon>UC_Save_File.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_API\UC_Save_File.ascx.vb">
+      <DependentUpon>UC_Save_File.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_API\UC_Service_Flow_Create.ascx.designer.vb">
+      <DependentUpon>UC_Service_Flow_Create.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_API\UC_Service_Flow_Create.ascx.vb">
+      <DependentUpon>UC_Service_Flow_Create.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_API\UC_Service_Flow_Finish.ascx.designer.vb">
+      <DependentUpon>UC_Service_Flow_Finish.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_API\UC_Service_Flow_Finish.ascx.vb">
+      <DependentUpon>UC_Service_Flow_Finish.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Content Include="App_Code\VDM_BL.vb" />
     <Compile Include="App_Code\Converter.vb" />
     <Compile Include="Default.aspx.designer.vb">

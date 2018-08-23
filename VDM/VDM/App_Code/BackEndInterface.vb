@@ -243,7 +243,7 @@ Public Class BackEndInterface
 
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
-            
+
 
             JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, "")
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
