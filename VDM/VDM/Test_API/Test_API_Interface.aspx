@@ -28,15 +28,28 @@
         <div>
    
         <asp:Panel ID="pnl_btn" runat="server" Style =" margin-bottom :50px;">
-            <asp:Button ID="btnFace_Recognition" runat="server" Text="Face_Recognition" />
-            <asp:Button ID="btn_Prepaid_Validate_Register" runat="server" Text="Prepaid_Validate_Register" />
-            <asp:Button ID="btn_Generate_Order_Id" runat="server" Text="Generate_Order_Id" />
-            <asp:Button ID="btn_Delete_File" runat="server" Text="Delete_File" />
-            <asp:Button ID="btn_Save_File" runat="server" Text="Save_File" />
-            <asp:Button ID="btn_Service_Flow_Create" runat="server" Text="Service_Flow_Create" />
-            <asp:Button ID="btn_Service_Flow_Finish" runat="server" Text="Service_Flow_Finish" />
-            <asp:Button ID="btn_Activity_Start" runat="server" Text="Activity_Start" />
-            <asp:Button ID="btn_Activity_End" runat="server" Text="Activity_End" />
+            
+
+            <table>
+                <tr>
+                    <td><asp:Button ID="btnFace_Recognition" runat="server" Text="Face_Recognition" /></td>
+                    <td><asp:Button ID="btn_Prepaid_Validate_Register" runat="server" Text="Prepaid_Validate_Register" /></td>
+                    <td><asp:Button ID="btn_Generate_Order_Id" runat="server" Text="Generate_Order_Id" /></td>
+                    <td><asp:Button ID="btn_Delete_File" runat="server" Text="Delete_File" /></td>
+                </tr>
+                <tr>
+                    <td><asp:Button ID="btn_Save_File" runat="server" Text="Save_File" /></td>
+                    <td><asp:Button ID="btn_Service_Flow_Create" runat="server" Text="Service_Flow_Create" /></td>
+                    <td><asp:Button ID="btn_Service_Flow_Finish" runat="server" Text="Service_Flow_Finish" /></td>
+                    <td><asp:Button ID="btn_Activity_Start" runat="server" Text="Activity_Start" /></td>
+                </tr>
+                <tr>
+                    <td><asp:Button ID="btn_Activity_End" runat="server" Text="Activity_End" /></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
 
         </asp:Panel>
         
