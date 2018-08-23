@@ -1,0 +1,50 @@
+﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="UC_Activity_Start.ascx.vb" Inherits="VDM.UC_Activity_Start" %>
+<table>
+    <tr>
+                        <td><h4 style="text-align :center ;">Request</h4></td>
+                        <td>&nbsp;</td>
+                        <td><h4 style="text-align :center ;">Response</h4></td>
+   </tr>
+
+    <tr style ="vertical-align :top;">
+        <td style="line-height: 2;"> 
+                <table>                   
+
+                    <tr>
+                        <td>orderId</td>
+                        <td><asp:TextBox ID="orderId" runat="server" ></asp:TextBox></td>
+                    </tr>
+                    <tr>
+                        <td>activityId</td>
+                        <td><asp:TextBox ID="activityId" runat="server" Text ="CONFIRM_ORDER" ></asp:TextBox></td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td><asp:Button ID="btn_Request" runat="server" Text="OK" /></td>
+                    </tr>                    
+                </table>
+        </td>
+        <td >&nbsp;</td>
+        <td style="line-height: 2;"> 
+           <span>
+                
+            {
+            <br />  "trx-id" : <asp:TextBox ID="trx_id" runat="server" ></asp:TextBox>,
+            <br />  "status" : <asp:TextBox ID="status" runat="server" ></asp:TextBox>,
+            <br />  "process-instance" : <asp:TextBox ID="process_instance" runat="server" ></asp:TextBox>,
+            <br />  "display-messages" : [ {
+            <br />    "message" : <asp:TextBox ID="message" runat="server" ></asp:TextBox>,
+            <br />    "message-type" : <asp:TextBox ID="message_type" runat="server" ></asp:TextBox>,
+            <br />    "en-message" : <asp:TextBox ID="en_message" runat="server" ></asp:TextBox>,
+            <br />    "th-message" : <asp:TextBox ID="th_message" runat="server" ></asp:TextBox>
+            <br />  } ]
+            <br />}
+           
+
+
+
+
+           </span> 
+        </td>
+    </tr>
+</table>
