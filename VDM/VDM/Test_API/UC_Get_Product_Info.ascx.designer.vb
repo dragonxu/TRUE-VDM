@@ -11,133 +11,16 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class UC_Service_Flow_Create
+Partial Public Class UC_Get_Product_Info
     
     '''<summary>
-    '''orderId control.
+    '''productCode control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents orderId As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''FlowType control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents FlowType As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''staffOpenShift control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents staffOpenShift As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''thaiID control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents thaiID As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''subscriber control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents subscriber As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''shopCode control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents shopCode As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''customerName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents customerName As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''proposition control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents proposition As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''pricePlan control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pricePlan As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''sim control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents sim As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''saleCode control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents saleCode As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''face_recognition_result control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents face_recognition_result As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''is_identical control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents is_identical As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''confident_ratio control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents confident_ratio As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents productCode As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''btn_Request control.
@@ -149,121 +32,247 @@ Partial Public Class UC_Service_Flow_Create
     Protected WithEvents btn_Request As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''status control.
+    '''CODE control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents status As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents CODE As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''message control.
+    '''DESCRIPTION control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents message As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents DESCRIPTION As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''message_type control.
+    '''PLANT_CODE control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents message_type As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents PLANT_CODE As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''en_message control.
+    '''PRODUCT_BRAND_CODE control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents en_message As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents PRODUCT_BRAND_CODE As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''th_message control.
+    '''PRODUCT_MODEL_CODE control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents th_message As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents PRODUCT_MODEL_CODE As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''trx_id control.
+    '''IS_SERIAL control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents trx_id As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents IS_SERIAL As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''process_instance control.
+    '''PRODUCT_TYPE control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents process_instance As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents PRODUCT_TYPE As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''THAI_ID control.
+    '''DISPLAY_NAME control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents THAI_ID As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents DISPLAY_NAME As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''LANG control.
+    '''IS_ENABLE control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents LANG As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents IS_ENABLE As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''flow_id control.
+    '''IS_DELETE control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents flow_id As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents IS_DELETE As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''flow_name control.
+    '''CATEGORY control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents flow_name As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents CATEGORY As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''create_date control.
+    '''REQ_SALE_APPROACH control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents create_date As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents REQ_SALE_APPROACH As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''create_by control.
+    '''IS_VAT control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents create_by As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents IS_VAT As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''VAT_RATE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents VAT_RATE As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''COMPANY_CODE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents COMPANY_CODE As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''IS_SIM control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents IS_SIM As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''REQUIRE_RECEIVE_FORM control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents REQUIRE_RECEIVE_FORM As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''APPLE_CARE_SERVICE_CODE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents APPLE_CARE_SERVICE_CODE As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''COLOR control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents COLOR As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''CAPACITY control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CAPACITY As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''CATEGORY_RECOMMEND control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CATEGORY_RECOMMEND As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''Price control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Price As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''SEQ control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SEQ As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''PRODUCT_CODE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PRODUCT_CODE As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''CAPTION_CODE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CAPTION_CODE As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''CAPTION_DESC control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CAPTION_DESC As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''DETAIL control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents DETAIL As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''lblErr_Msg control.

@@ -165,4 +165,13 @@ Partial Public Class UC_Face_Recognition
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents face_recog_cust_capture_id As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''lblErr_Msg control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblErr_Msg As Global.System.Web.UI.WebControls.Label
 End Class

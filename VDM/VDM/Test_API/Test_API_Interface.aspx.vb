@@ -3,15 +3,26 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        pnl_face_recognition.Visible = False
-        pnl_Prepaid_Validate_Register.Visible = False
-        pnl_Generate_Order_Id.Visible = False
-        pnl_Delete_File.Visible = False
-        pnl_Save_File.Visible = False
-        pnl_Service_Flow_Create.Visible = False
-        pnl_Service_Flow_Finish.Visible = False
-        pnl_Activity_Start.Visible = False
-        pnl_Activity_End.Visible = False
+        If Not IsPostBack Then
+            pnl_face_recognition.Visible = False
+            pnl_Prepaid_Validate_Register.Visible = False
+            pnl_Generate_Order_Id.Visible = False
+            pnl_Delete_File.Visible = False
+            pnl_Save_File.Visible = False
+            pnl_Service_Flow_Create.Visible = False
+            pnl_Service_Flow_Finish.Visible = False
+            pnl_Activity_Start.Visible = False
+            pnl_Activity_End.Visible = False
+            pnl_Get_Product_Info.Visible = False
+
+            'Sale
+            pnl_Service_GenerateOrderID.Visible = False
+            pnl_Service_SaveOrder.Visible = False
+            pnl_Service_SubmitOrder.Visible = False
+            pnl_Service_GetOrder.Visible = False
+        End If
+
+
     End Sub
 
     Private Sub btnFace_Recognition_Click(sender As Object, e As EventArgs) Handles btnFace_Recognition.Click
@@ -48,4 +59,23 @@
         pnl_Activity_End.Visible = True
     End Sub
 
+    Private Sub btn_Get_Product_Info_Click(sender As Object, e As EventArgs) Handles btn_Get_Product_Info.Click
+        pnl_Get_Product_Info.Visible = True
+    End Sub
+
+    Private Sub btn_Service_GenerateOrderID_Click(sender As Object, e As EventArgs) Handles btn_Service_GenerateOrderID.Click
+        pnl_Service_GenerateOrderID.Visible = True
+    End Sub
+
+    Private Sub btn_Service_SaveOrder_Click(sender As Object, e As EventArgs) Handles btn_Service_SaveOrder.Click
+        pnl_Service_SaveOrder.Visible = True
+    End Sub
+
+    Private Sub btn_Service_SubmitOrder_Click(sender As Object, e As EventArgs) Handles btn_Service_SubmitOrder.Click
+        pnl_Service_SubmitOrder.Visible = True
+    End Sub
+
+    Private Sub btn_Service_GetOrder_Click(sender As Object, e As EventArgs) Handles btn_Service_GetOrder.Click
+        pnl_Service_GetOrder.Visible = True
+    End Sub
 End Class

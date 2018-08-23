@@ -11,16 +11,25 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class UC_Delete_File
+Partial Public Class UC_Service_GenerateOrderID
     
     '''<summary>
-    '''order_id_REQ control.
+    '''channel control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents order_id_REQ As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents channel As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''dealer control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents dealer As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''btn_Request control.
@@ -30,6 +39,15 @@ Partial Public Class UC_Delete_File
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btn_Request As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''status control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents status As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''trx_id control.
@@ -50,22 +68,13 @@ Partial Public Class UC_Delete_File
     Protected WithEvents process_instance As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''ref_id control.
+    '''response_data control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ref_id As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''order_id_RESP control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents order_id_RESP As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents response_data As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''lblErr_Msg control.

@@ -56,4 +56,7 @@
             }<br />
         </td>
     </tr>
+        <tr>
+        <td colspan ="3"><asp:Label ID="lblErr_Msg" runat="server" Style =" color :red;"  ></asp:Label></td>
+    </tr>
 </table>

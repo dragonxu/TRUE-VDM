@@ -1,4 +1,4 @@
-﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="UC_Activity_Start.ascx.vb" Inherits="VDM.UC_Activity_Start" %>
+﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="UC_Service_GetOrder.ascx.vb" Inherits="VDM.UC_Service_GetOrder" %>
 <table>
     <tr>
                         <td><h4 style="text-align :center ;">Request</h4></td>
@@ -13,32 +13,32 @@
                     <tr>
                         <td>orderId</td>
                         <td><asp:TextBox ID="orderId" runat="server" ></asp:TextBox></td>
-                    </tr>
-                  
+                    </tr> 
                     <tr>
                         <td> </td>
                         <td><asp:Button ID="btn_Request" runat="server" Text="OK" /></td>
                     </tr>                    
                 </table>
+
         </td>
         <td >&nbsp;</td>
         <td style="line-height: 2;"> 
            <span>
                 
-            {
-            <br />  "trx-id" : <asp:TextBox ID="trx_id" runat="server" ></asp:TextBox>,
-            <br />  "status" : <asp:TextBox ID="status" runat="server" ></asp:TextBox>,
-            <br />  "process-instance" : <asp:TextBox ID="process_instance" runat="server" ></asp:TextBox>,
-            <br />  "display-messages" : [ {
-            <br />    "message" : <asp:TextBox ID="message" runat="server" ></asp:TextBox>,
-            <br />    "message-type" : <asp:TextBox ID="message_type" runat="server" ></asp:TextBox>,
-            <br />    "en-message" : <asp:TextBox ID="en_message" runat="server" ></asp:TextBox>,
-            <br />    "th-message" : <asp:TextBox ID="th_message" runat="server" ></asp:TextBox>
-            <br />  } ]
-            <br />}
-           
+ {
+<br />  "status" : <asp:TextBox ID="status" runat="server" ></asp:TextBox>,
+<br />  "display-messages" : [ {
+<br />    "message" : <asp:TextBox ID="message" runat="server" ></asp:TextBox>,
+<br />    "message-type" : <asp:TextBox ID="message_type" runat="server" ></asp:TextBox>,
+<br />    "en-message" : <asp:TextBox ID="en_message" runat="server" ></asp:TextBox>,
+<br />    "th-message" : <asp:TextBox ID="th_message" runat="server" ></asp:TextBox>
+<br />  } ],
+<br />  "trx-id" : <asp:TextBox ID="TextBox1" runat="server" ></asp:TextBox>,
+<br />  "process-instance" : <asp:TextBox ID="process_instance" runat="server" ></asp:TextBox>
+<br />}
 
 
+<br />
 
 
            </span> 

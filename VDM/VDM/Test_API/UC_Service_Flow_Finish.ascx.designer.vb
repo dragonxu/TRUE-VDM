@@ -165,4 +165,13 @@ Partial Public Class UC_Service_Flow_Finish
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents end_by As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''lblErr_Msg control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblErr_Msg As Global.System.Web.UI.WebControls.Label
 End Class

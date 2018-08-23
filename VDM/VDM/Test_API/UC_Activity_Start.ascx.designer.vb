@@ -23,15 +23,6 @@ Partial Public Class UC_Activity_Start
     Protected WithEvents orderId As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''activityId control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents activityId As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
     '''btn_Request control.
     '''</summary>
     '''<remarks>
@@ -102,4 +93,13 @@ Partial Public Class UC_Activity_Start
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents th_message As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''lblErr_Msg control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblErr_Msg As Global.System.Web.UI.WebControls.Label
 End Class
