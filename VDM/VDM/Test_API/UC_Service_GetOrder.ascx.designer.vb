@@ -11,16 +11,16 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class UC_Delete_File
+Partial Public Class UC_Service_GetOrder
     
     '''<summary>
-    '''order_id_REQ control.
+    '''orderId control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents order_id_REQ As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents orderId As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''btn_Request control.
@@ -32,13 +32,58 @@ Partial Public Class UC_Delete_File
     Protected WithEvents btn_Request As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''trx_id control.
+    '''status control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents trx_id As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents status As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''message control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents message As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''message_type control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents message_type As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''en_message control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents en_message As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''th_message control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents th_message As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''TextBox1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TextBox1 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''process_instance control.
@@ -48,24 +93,6 @@ Partial Public Class UC_Delete_File
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents process_instance As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''ref_id control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ref_id As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''order_id_RESP control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents order_id_RESP As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''lblErr_Msg control.

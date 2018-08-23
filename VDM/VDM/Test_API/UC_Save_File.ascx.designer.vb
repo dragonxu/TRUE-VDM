@@ -41,15 +41,6 @@ Partial Public Class UC_Save_File
     Protected WithEvents b64File As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''form_type control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents form_type As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
     '''btn_Request control.
     '''</summary>
     '''<remarks>
@@ -93,4 +84,13 @@ Partial Public Class UC_Save_File
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents order_id_RESP As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''lblErr_Msg control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblErr_Msg As Global.System.Web.UI.WebControls.Label
 End Class

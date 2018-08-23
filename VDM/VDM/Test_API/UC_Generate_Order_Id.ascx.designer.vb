@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class UC_Generate_Order_Id
     
     '''<summary>
-    '''channel control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents channel As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
     '''dealer control.
     '''</summary>
     '''<remarks>
@@ -75,4 +66,13 @@ Partial Public Class UC_Generate_Order_Id
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents response_data As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''lblErr_Msg control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblErr_Msg As Global.System.Web.UI.WebControls.Label
 End Class
