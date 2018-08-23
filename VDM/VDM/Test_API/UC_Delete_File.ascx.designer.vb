@@ -23,15 +23,6 @@ Partial Public Class UC_Delete_File
     Protected WithEvents order_id_REQ As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''form_type control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents form_type As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
     '''btn_Request control.
     '''</summary>
     '''<remarks>

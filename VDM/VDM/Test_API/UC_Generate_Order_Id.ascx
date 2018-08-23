@@ -11,10 +11,7 @@
         <td style="line-height: 2;"> 
                 <table>                   
 
-                    <tr>
-                        <td>channel</td>
-                        <td><asp:TextBox ID="channel" runat="server" Text ="TLR"></asp:TextBox></td>
-                    </tr>
+                    
                     <tr>
                         <td>dealer</td>
                         <td><asp:TextBox ID="dealer" runat="server"></asp:TextBox></td>

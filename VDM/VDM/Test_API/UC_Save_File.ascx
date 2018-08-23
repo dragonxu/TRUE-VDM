@@ -23,11 +23,7 @@
                         <td>b64File</td>
                         <td><asp:TextBox ID="b64File" runat="server"  TextMode ="MultiLine" Style ="margin: 0px; width: 161px; height: 131px;"  ></asp:TextBox></td>
                     </tr>
-
-                    <tr>
-                        <td>form-type</td>
-                        <td><asp:TextBox ID="form_type" runat="server" Text ="FACE_RECOG_CUST_CERTIFICATE" ></asp:TextBox></td>
-                    </tr>                     
+                   
                     <tr>
                         <td> </td>
                         <td><asp:Button ID="btn_Request" runat="server" Text="OK" /></td>

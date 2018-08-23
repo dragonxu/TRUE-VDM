@@ -13,10 +13,6 @@
                     <tr>
                         <td>order_id</td>
                         <td><asp:TextBox ID="order_id_REQ" runat="server" ></asp:TextBox></td>
-                    </tr>
-                    <tr>
-                        <td>form-type</td>
-                        <td><asp:TextBox ID="form_type" runat="server" Text ="FACE_RECOG_CUST_CERTIFICATE" ></asp:TextBox></td>
                     </tr>                     
                     <tr>
                         <td> </td>
