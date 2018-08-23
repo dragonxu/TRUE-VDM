@@ -113,10 +113,6 @@ Public Class BackEndInterface
         Public Function Get_Result(ByVal productCode As String) As Response
 
             Dim URL As String = (New BackEndInterface.General).GetProductURL
-
-            '------------ Test ------------
-            URL = "http://www.tit-tech.co.th/cmpg/COM_Wallet.aspx?CUS_ID=1"
-
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
             Dim PostString As String = ""
@@ -138,10 +134,29 @@ Public Class BackEndInterface
 #Region "DataModel"
 
         Public Class Response
+
             Public Property status As String
+            Public Property fault As faultModel
+            Public Property display_messages As List(Of display_message)
             Public Property trx_id As String
             Public Property process_instance As String
             Public Property response_data As Response
+
+            Public Class faultModel
+                Public Property name As String
+                Public Property code As String
+                Public Property message As String
+                Public Property detailed_message As String
+            End Class
+
+            Public Class display_message
+                Public Property message As String
+                Public Property message_code As String
+                Public Property message_type As String
+                Public Property en_message As String
+                Public Property th_message As String
+                Public Property technical_message As String
+            End Class
 
             Public Class Response
                 Public Property face_recognition_result As String
