@@ -24,7 +24,7 @@ Public Class BackEndInterface
             Dim webReq As WebRequest = WebRequest.Create(URL.Replace("//", "/"))
             '--------------- Config Web Request ------------
             webReq.Method = "POST"
-            webReq.ContentType = "application/x-www-form-urlencoded"
+            'webReq.ContentType = "application/x-www-form-urlencoded"
             webReq.Timeout = 10000
             webReq.Headers.Add("WEB_METHOD_CHANNEL", "VENDING")
             webReq.Headers.Add("E2E_REFID", "")
@@ -86,7 +86,7 @@ Public Class BackEndInterface
 
     Public Class Get_Product_Info
 
-        Public JSONString As String = ""
+        Public JSONString As String = "http://inv-uat.true.th/inventory/service/interface/GetProductInfo.ashx"
 
 #Region "DataModel"
         Public Class Response
@@ -533,6 +533,7 @@ Public Class BackEndInterface
             Public Property display_messages As List(Of display_message)
             Public Property trx_id As String
             Public Property process_instance As String
+            Public Property ref_id As String
             Public Property order_id As String
 
             Public Class faultModel
@@ -562,6 +563,7 @@ Public Class BackEndInterface
                                         "technical-message",
                                         "trx-id",
                                         "process-instance",
+                                        "ref-id",
                                         "order-id"}
 
 #End Region
