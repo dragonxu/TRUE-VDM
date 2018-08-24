@@ -67,7 +67,7 @@ Public Class BackEndInterface
 
             Dim C As New Converter
             Dim JSONSrting As String = JsonConvert.SerializeObject(PostData, Formatting.Indented)
-            'WebRequest.ContentType = "application/json"
+            WebRequest.ContentType = "application/json"
             Dim Data As Byte() = C.StringToByte(JSONSrting, Converter.EncodeType._UTF8)
             WebRequest.ContentLength = Data.Length
 
@@ -163,18 +163,19 @@ Public Class BackEndInterface
     Public Class Face_Recognition
 
         Private Const SubURL As String = "/profiles/customer/face-recognition"
-        Public JSONString As String = ""
 
 #Region "DataModel"
 
         Public Class Response
 
+            Public Property JSONString As String
             Public Property status As String
             Public Property fault As faultModel
             Public Property display_messages As List(Of display_message)
             Public Property trx_id As String
             Public Property process_instance As String
             Public Property response_data As Response
+
 
             Public Class faultModel
                 Public Property name As String
@@ -246,9 +247,9 @@ Public Class BackEndInterface
             PostData.Add("seq", seq)
             PostData.Add("max-seq", "")
 
-            JSONString = (New BackEndInterface.General).SendPostString(WebRequest, PostData)
-
+            Dim JSONString As String = (New BackEndInterface.General).SendPostString(WebRequest, PostData)
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+            Result.JSONString = JSONString
             Return Result
         End Function
 
@@ -257,17 +258,19 @@ Public Class BackEndInterface
     Public Class Prepaid_Validate_Register
 
         Private Const SubURL As String = "/profiles/customer/validate-prepaid-register"
-        Public JSONString As String = ""
 
 #Region "DataModel"
 
         Public Class Response
+
+            Public Property JSONString As String
             Public Property status As String
             Public Property fault As faultModel
             Public Property display_messages As List(Of display_message)
             Public Property trx_id As String
             Public Property process_instance As String
             Public Property response_data As Response
+
 
             Public Class faultModel
                 Public Property name As String
@@ -329,10 +332,9 @@ Public Class BackEndInterface
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
             Dim PostData As New Dictionary(Of String, String)
-            'JSONString = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
-            JSONString = (New BackEndInterface.General).SendGetURL(WebRequest)
-
+            Dim JSONString As String = (New BackEndInterface.General).SendGetURL(WebRequest)
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+            Result.JSONString = JSONString
             Return Result
         End Function
 
@@ -341,11 +343,12 @@ Public Class BackEndInterface
     Public Class Prepaid_Register
 
         Private Const SubURL As String = "/profiles/customer/validate-prepaid-register"
-        Public JSONString As String = ""
 
 #Region "DataModel"
 
         Public Class Response
+
+            Public Property JSONString As String
             Public Property status As String
             Public Property fault As faultModel
             Public Property display_messages As List(Of display_message)
@@ -390,11 +393,12 @@ Public Class BackEndInterface
     Public Class Generate_Order_Id
 
         Private Const SubURL As String = "/aftersales/order/generate-id" '---------- Channel=??? , Dealer =???
-        Public JSONString As String = ""
 
 #Region "DataModel"
 
         Public Class Response
+
+            Public Property JSONString As String
             Public Property status As String
             Public Property fault As faultModel
             Public Property display_messages As List(Of display_message)
@@ -441,9 +445,9 @@ Public Class BackEndInterface
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
-            JSONString = (New BackEndInterface.General).SendGetURL(WebRequest)
-
+            Dim JSONString As String = (New BackEndInterface.General).SendGetURL(WebRequest)
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+            Result.JSONString = JSONString
             Return Result
         End Function
     End Class
@@ -451,10 +455,11 @@ Public Class BackEndInterface
     Public Class Delete_File
 
         Private Const SubURL As String = "/sales/order/pdf/delete_file"
-        Public JSONString As String = ""
 
 #Region "DataModel"
         Public Class Response
+
+            Public Property JSONString As String
             Public Property status As String
             Public Property fault As faultModel
             Public Property display_messages As List(Of display_message)
@@ -502,9 +507,9 @@ Public Class BackEndInterface
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
-            JSONString = (New BackEndInterface.General).SendGetURL(WebRequest)
-
+            Dim JSONString As String = (New BackEndInterface.General).SendGetURL(WebRequest)
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+            Result.JSONString = JSONString
             Return Result
         End Function
 
@@ -513,10 +518,11 @@ Public Class BackEndInterface
     Public Class Save_File
 
         Private Const SubURL As String = "/sales/order/pdf/save_file"
-        Public JSONString As String = ""
 
 #Region "DataModel"
         Public Class Response
+
+            Public Property JSONString As String
             Public Property status As String
             Public Property fault As faultModel
             Public Property display_messages As List(Of display_message)
@@ -570,10 +576,9 @@ Public Class BackEndInterface
             PostData.Add("b64File", b64File)
             PostData.Add("formType", "FACE_RECOG_CUST_CERTIFICATE")
 
-            JSONString = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
-
+            Dim JSONString As String = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
-
+            Result.JSONString = JSONString
             Return Result
         End Function
 
@@ -582,7 +587,6 @@ Public Class BackEndInterface
     Public Class Service_Flow_Create
 
         Private Const SubURL As String = "/sales/flow/create"
-        Public JSONString As String = ""
 
         Public Enum FlowType
             Mobile = 1
@@ -590,6 +594,8 @@ Public Class BackEndInterface
         End Enum
 #Region "DataModel"
         Public Class Response
+
+            Public Property JSONString As String
             Public Property status As String
             Public Property fault As faultModel
             Public Property display_messages As List(Of display_message)
@@ -653,10 +659,8 @@ Public Class BackEndInterface
                                     ByVal subscriber As String,
                                     ByVal shopCode As String,
                                     ByVal customerName As String,
-                                    ByVal proposition As String,
                                     ByVal pricePlan As String,
-                                    ByVal sim As String,
-                                    ByVal saleCode As String,
+                                    ByVal simSerial As String,
                                     ByVal face_recognition_result As String,
                                     ByVal is_identical As String,
                                     ByVal confident_ratio As String) As Response
@@ -674,11 +678,9 @@ Public Class BackEndInterface
             PostData.Add("CAMPAIGN-CODE", "")
             PostData.Add("CAMPAIGN-NAME", "")
             PostData.Add("SERVICE-CODE", "TMV")
-            PostData.Add("PROPO-PROMO", proposition)
             PostData.Add("PRODUCT-NAME", pricePlan)
-            PostData.Add("SERVICE-NAME", "POSTPAID")
-            PostData.Add("SERIAL-NUMBER", sim)
-            PostData.Add("SALE-CODE", saleCode)
+            PostData.Add("SERIAL-NUMBER", simSerial)
+            PostData.Add("SALE-CODE", staffOpenShift)
             PostData.Add("E-SIGNATURE", "NO")
             PostData.Add("READ-THAI-CARD", IIf(thaiID <> "", "YES", "NO"))
             PostData.Add("SUBSCRIBER", subscriber)
@@ -693,9 +695,9 @@ Public Class BackEndInterface
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
-            JSONString = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
-
+            Dim JSONString As String = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+            Result.JSONString = JSONString
             Return Result
         End Function
 
@@ -704,11 +706,12 @@ Public Class BackEndInterface
     Public Class Service_Flow_Finish
 
         Private Const SubURL As String = "/sales/flow/finish"
-        Public JSONString As String = ""
 
 #Region "DataModel"
 
         Public Class Response
+
+            Public Property JSONString As String
             Public Property status As String
             Public Property fault As faultModel
             Public Property display_messages As List(Of display_message)
@@ -778,8 +781,9 @@ Public Class BackEndInterface
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
-            JSONString = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
+            Dim JSONString As String = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+            Result.JSONString = JSONString
             Return Result
 
         End Function
@@ -789,10 +793,11 @@ Public Class BackEndInterface
     Public Class Activity_Start
 
         Private Const SubURL As String = "/sales/flow/activity/start"
-        Public JSONString As String = ""
 
 #Region "DataModel"
         Public Class Response
+
+            Public Property JSONString As String
             Public Property status As String
             Public Property fault As faultModel
             Public Property display_messages As List(Of display_message)
@@ -844,9 +849,9 @@ Public Class BackEndInterface
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
-            JSONString = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
-
+            Dim JSONString As String = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+            Result.JSONString = JSONString
             Return Result
         End Function
 
@@ -855,10 +860,11 @@ Public Class BackEndInterface
     Public Class Activity_End
 
         Private Const SubURL As String = "/sales/flow/activity/end"
-        Public JSONString As String = ""
 
 #Region "DataModel"
         Public Class Response
+
+            Public Property JSONString As String
             Public Property status As String
             Public Property fault As faultModel
             Public Property display_messages As List(Of display_message)
@@ -907,9 +913,9 @@ Public Class BackEndInterface
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
-            JSONString = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
-
+            Dim JSONString As String = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+            Result.JSONString = JSONString
             Return Result
         End Function
 

@@ -17,8 +17,8 @@ Public Class _Default
         'Dim Resp As Get_Product_Info.Response = PD.Get_Result("3000007057") '----------- Samsung ----------
         ''3000007057'----------- SIM ----------
 
-        Dim PP As New Save_File
-        Dim Resp As Save_File.Response = PP.Get_Result("18082400TLR030020001", "PNG", "")
+        Dim PP As New Generate_Order_Id
+        Dim Resp As Generate_Order_Id.Response = PP.Get_Result("18082400")
 
 
     End Sub
