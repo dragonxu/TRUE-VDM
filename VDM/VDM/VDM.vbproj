@@ -107,10 +107,15 @@
     <Content Include="Test_API\UC_Delete_File.ascx" />
     <Content Include="Test_API\UC_Face_Recognition.ascx" />
     <Content Include="Test_API\UC_Generate_Order_Id.ascx" />
+    <Content Include="Test_API\UC_Get_Product_Info.ascx" />
     <Content Include="Test_API\UC_Prepaid_Validate_Register.ascx" />
     <Content Include="Test_API\UC_Save_File.ascx" />
     <Content Include="Test_API\UC_Service_Flow_Create.ascx" />
     <Content Include="Test_API\UC_Service_Flow_Finish.ascx" />
+    <Content Include="Test_API\UC_Service_GenerateOrderID.ascx" />
+    <Content Include="Test_API\UC_Service_GetOrder.ascx" />
+    <Content Include="Test_API\UC_Service_SaveOrder.ascx" />
+    <Content Include="Test_API\UC_Service_SubmitOrder.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -159,6 +164,13 @@
       <DependentUpon>UC_Generate_Order_Id.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Test_API\UC_Get_Product_Info.ascx.designer.vb">
+      <DependentUpon>UC_Get_Product_Info.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_API\UC_Get_Product_Info.ascx.vb">
+      <DependentUpon>UC_Get_Product_Info.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Test_API\UC_Prepaid_Validate_Register.ascx.designer.vb">
       <DependentUpon>UC_Prepaid_Validate_Register.ascx</DependentUpon>
     </Compile>
@@ -185,6 +197,34 @@
     </Compile>
     <Compile Include="Test_API\UC_Service_Flow_Finish.ascx.vb">
       <DependentUpon>UC_Service_Flow_Finish.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_API\UC_Service_GenerateOrderID.ascx.designer.vb">
+      <DependentUpon>UC_Service_GenerateOrderID.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_API\UC_Service_GenerateOrderID.ascx.vb">
+      <DependentUpon>UC_Service_GenerateOrderID.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_API\UC_Service_GetOrder.ascx.designer.vb">
+      <DependentUpon>UC_Service_GetOrder.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_API\UC_Service_GetOrder.ascx.vb">
+      <DependentUpon>UC_Service_GetOrder.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_API\UC_Service_SaveOrder.ascx.designer.vb">
+      <DependentUpon>UC_Service_SaveOrder.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_API\UC_Service_SaveOrder.ascx.vb">
+      <DependentUpon>UC_Service_SaveOrder.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_API\UC_Service_SubmitOrder.ascx.designer.vb">
+      <DependentUpon>UC_Service_SubmitOrder.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_API\UC_Service_SubmitOrder.ascx.vb">
+      <DependentUpon>UC_Service_SubmitOrder.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Content Include="App_Code\VDM_BL.vb" />

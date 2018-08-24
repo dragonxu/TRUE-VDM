@@ -103,7 +103,8 @@
 <br />    "en-message" : <asp:TextBox ID="en_message" runat="server" ></asp:TextBox>,
 <br />    "th-message" : <asp:TextBox ID="th_message" runat="server" ></asp:TextBox>
 <br />  } ],
-<br />  "trx-id" : <asp:TextBox ID="4E1KDT1NTV2C2" runat="server" ></asp:TextBox>,
+<br />  "trx-id" : <asp:TextBox ID="trx_id" runat="server" ></asp:TextBox>,
+
 <br />  "process-instance" : <asp:TextBox ID="process_instance" runat="server" ></asp:TextBox>
 <br />}
 
