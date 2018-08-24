@@ -11,9 +11,10 @@
         Try
 
 
-            BackEndInterface.Get_Result(partner_code.Text, id_number.Text, face_recog_cust_certificate.Text, face_recog_cust_capture.Text, seq.Text)
 
             Dim Response As New BackEndInterface.Face_Recognition.Response
+            Response = BackEndInterface.Get_Result(partner_code.Text, id_number.Text, face_recog_cust_certificate.Text, face_recog_cust_capture.Text, seq.Text)
+
             If Not IsNothing(Response) Then
 
                 status.Text = Response.status

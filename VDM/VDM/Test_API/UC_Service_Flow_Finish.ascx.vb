@@ -9,18 +9,18 @@
 
     Private Sub btn_Request_Click(sender As Object, e As EventArgs) Handles btn_Request.Click
         Try
-            BackEndInterface.Get_Result(orderId.Text)
+
 
             Dim Response As New BackEndInterface.Service_Flow_Finish.Response
+            Response = BackEndInterface.Get_Result(orderId.Text)
             If Not IsNothing(Response) Then
 
                 status.Text = Response.status
 
-                Dim Display_messages As New BackEndInterface.Service_Flow_Finish.Response.Display_Message
-                message.Text = Display_messages.message
-                message_type.Text = Display_messages.message_type
-                en_message.Text = Display_messages.en_message
-                th_message.Text = Display_messages.th_message
+                message.Text = Response.display_messages(0).message
+                message_type.Text = Response.display_messages(0).message_type
+                en_message.Text = Response.display_messages(0).en_message
+                th_message.Text = Response.display_messages(0).th_message
 
                 trx_id.Text = Response.trx_id
                 process_instance.Text = Response.process_instance
