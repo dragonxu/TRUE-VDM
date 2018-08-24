@@ -1,6 +1,10 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="UC_Activity_Start.ascx.vb" Inherits="VDM.UC_Activity_Start" %>
 <table>
-    <tr>
+     <tr>
+                        <td colspan ="3"><h3 style="text-align :center ;">Activity_Start</h3></td>
+                         
+   </tr>
+       <tr>
                         <td><h4 style="text-align :center ;">Request</h4></td>
                         <td>&nbsp;</td>
                         <td><h4 style="text-align :center ;">Response</h4></td>

@@ -1,5 +1,9 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="UC_Service_GetOrder.ascx.vb" Inherits="VDM.UC_Service_GetOrder" %>
 <table>
+      <tr>
+                        <td colspan ="3"><h3 style="text-align :center ;"> Service_GetOrder</h3></td>
+                         
+   </tr>
     <tr>
                         <td><h4 style="text-align :center ;">Request</h4></td>
                         <td>&nbsp;</td>

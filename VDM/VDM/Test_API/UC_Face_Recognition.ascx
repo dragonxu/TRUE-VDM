@@ -1,5 +1,9 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="UC_Face_Recognition.ascx.vb" Inherits="VDM.UC_Face_Recognition" %>
 <table>
+      <tr>
+                        <td colspan ="3"><h3 style="text-align :center ;"> Face_Recognition</h3></td>
+                         
+   </tr>
     <tr>
                         <td><h4 style="text-align :center ;">Request</h4></td>
                         <td>&nbsp;</td>

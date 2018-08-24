@@ -1,6 +1,10 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="UC_Generate_Order_Id.ascx.vb" Inherits="VDM.UC_Generate_Order_Id" %>
 
 <table>
+      <tr>
+                        <td colspan ="3"><h3 style="text-align :center ;">  Generate_Order_Id</h3></td>
+                         
+   </tr>
     <tr>
                         <td><h4 style="text-align :center ;">Request</h4></td>
                         <td>&nbsp;</td>
