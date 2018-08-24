@@ -1,6 +1,4 @@
-﻿Imports System.Web.Script.Serialization
-Imports Newtonsoft.Json
-Imports Newtonsoft.Json.Linq
+﻿Imports Newtonsoft.Json
 Imports System.Configuration.ConfigurationManager
 Imports System.Net
 Imports System.IO
@@ -31,11 +29,24 @@ Public Class BackEndInterface
             Return webReq
         End Function
 
+        Public Function SendGetURL(ByRef WebRequest As WebRequest) As String
+
+            WebRequest.Method = "GET"
+            Dim WebResponse = WebRequest.GetResponse().GetResponseStream()
+            Dim Reader As New StreamReader(WebResponse)
+            Dim Result = Reader.ReadToEnd()
+            Reader.Close()
+            WebResponse.Close()
+
+            Return Result
+        End Function
+
         Public Function SendPostString(ByRef WebRequest As WebRequest, ByVal PostData As Dictionary(Of String, String)) As String
 
             Dim C As New Converter
             Dim PostString As String = String.Join("&", PostData.Select(Function(pair) String.Format("{0}={1}", pair.Key, pair.Value)).ToArray())
-            WebRequest.ContentType = "application/x-www-form-urlencoded"
+            'WebRequest.ContentType = "application/x-www-form-urlencoded"
+            'WebRequest.ContentType = "application/json"
             Dim Data As Byte() = C.StringToByte(PostString, Converter.EncodeType._UTF8)
             WebRequest.ContentLength = Data.Length
 
@@ -56,7 +67,7 @@ Public Class BackEndInterface
 
             Dim C As New Converter
             Dim JSONSrting As String = JsonConvert.SerializeObject(PostData, Formatting.Indented)
-            WebRequest.ContentType = "application/json"
+            'WebRequest.ContentType = "application/json"
             Dim Data As Byte() = C.StringToByte(JSONSrting, Converter.EncodeType._UTF8)
             WebRequest.ContentLength = Data.Length
 
@@ -135,11 +146,9 @@ Public Class BackEndInterface
 #End Region
         Public Function Get_Result(ByVal productCode As String) As Response
 
-            Dim URL As String = (New BackEndInterface.General).GetProductURL
+            Dim URL As String = (New BackEndInterface.General).GetProductURL & "?productCode=" & productCode
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
-            Dim PostString As String = ""
-            PostString &= "productCode=" & productCode
             Dim PostData As New Dictionary(Of String, String)
             PostData.Add("productCode", productCode)
 
@@ -237,12 +246,11 @@ Public Class BackEndInterface
             PostData.Add("seq", seq)
             PostData.Add("max-seq", "")
 
-            JSONString = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
+            JSONString = (New BackEndInterface.General).SendPostString(WebRequest, PostData)
 
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
             Return Result
         End Function
-
 
     End Class
 
@@ -306,13 +314,13 @@ Public Class BackEndInterface
 
 #End Region
 
-        Public Function Get_Result(ByVal key_value As String,
+        Public Function Get_Result(ByVal sim_serial As String,
                 ByVal id_number As String,
                 ByVal id_type As String) As Response
 
             Dim GetString As String = ""
             GetString &= "key-type=SIM&"
-            GetString &= "key-value=" & key_value & "&"
+            GetString &= "key-value=" & sim_serial & "&"
             GetString &= "id-number=" & id_number & "&"
             GetString &= "id-type=" & id_type & "&"
             GetString &= "allow-registered="
@@ -321,7 +329,8 @@ Public Class BackEndInterface
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
             Dim PostData As New Dictionary(Of String, String)
-            JSONString = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
+            'JSONString = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
+            JSONString = (New BackEndInterface.General).SendGetURL(WebRequest)
 
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
             Return Result
@@ -432,10 +441,7 @@ Public Class BackEndInterface
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
-            Dim PostData As New Dictionary(Of String, String)
-
-            'JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, "")
-            JSONString = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
+            JSONString = (New BackEndInterface.General).SendGetURL(WebRequest)
 
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
             Return Result
@@ -496,8 +502,7 @@ Public Class BackEndInterface
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
-            Dim PostData As New Dictionary(Of String, String)
-            JSONString = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
+            JSONString = (New BackEndInterface.General).SendGetURL(WebRequest)
 
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
             Return Result
