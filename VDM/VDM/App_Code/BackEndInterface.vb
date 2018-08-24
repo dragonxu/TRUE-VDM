@@ -31,50 +31,48 @@ Public Class BackEndInterface
             Return webReq
         End Function
 
-        Public Function GetJSONString(ByRef WebRequest As WebRequest, ByVal PostString As String) As String
-
+        Public Function SendPostString(ByRef WebRequest As WebRequest, ByVal PostString As String) As String
             Dim C As New Converter
-
-            Dim PostData As Byte() = C.StringToByte(PostString, Converter.EncodeType._UTF8)
-            WebRequest.Method = "POST"
             WebRequest.ContentType = "application/x-www-form-urlencoded"
-            WebRequest.ContentLength = PostData.Length
+            Dim Data As Byte() = C.StringToByte(PostString, Converter.EncodeType._UTF8)
 
-            Dim stream As Stream = WebRequest.GetRequestStream()
-            stream.Write(PostData, 0, PostData.Length)
-            stream.Close()
+            WebRequest.ContentLength = Data.Length
 
-            Dim RESP As WebResponse = WebRequest.GetResponse()
-            Dim ST As New StreamReader(RESP.GetResponseStream())
-            Return ST.ReadToEnd
+            Dim ST = WebRequest.GetRequestStream()
+            ST.Write(Data, 0, Data.Length)
+            ST.Close()
 
+            Dim WebResponse = WebRequest.GetResponse().GetResponseStream()
 
+            Dim Reader As New StreamReader(WebResponse)
+            Dim Result = Reader.ReadToEnd()
+            Reader.Close()
+            WebResponse.Close()
 
+            Return Result
         End Function
 
-        'Private Function SendRequest(uri As Uri, jsonDataBytes As Byte(), contentType As String, method As String) As String
-        '    Dim req As WebRequest = WebRequest.Create(uri)
-        '    req.ContentType = contentType
-        '    req.Method = method
-        '    req.ContentLength = jsonDataBytes.Length
+        Public Function SendPostJSON(ByRef WebRequest As WebRequest, ByVal PostData As Dictionary(Of String, String)) As String
 
+            Dim C As New Converter
+            Dim JSONSrting As String = JsonConvert.SerializeObject(PostData, Formatting.Indented)
+            WebRequest.ContentType = "application/json"
+            Dim Data As Byte() = C.StringToByte(JSONSrting, Converter.EncodeType._UTF8)
+            WebRequest.ContentLength = Data.Length
 
-        '    Dim stream = req.GetRequestStream()
-        '    stream.Write(jsonDataBytes, 0, jsonDataBytes.Length)
-        '    stream.Close()
+            Dim ST = WebRequest.GetRequestStream()
+            ST.Write(Data, 0, Data.Length)
+            ST.Close()
 
-        '    Dim response = req.GetResponse().GetResponseStream()
+            Dim WebResponse = WebRequest.GetResponse().GetResponseStream()
 
-        '    Dim reader As New StreamReader(response)
-        '    Dim res = reader.ReadToEnd()
-        '    reader.Close()
-        '    response.Close()
+            Dim Reader As New StreamReader(WebResponse)
+            Dim Result = Reader.ReadToEnd()
+            Reader.Close()
+            WebResponse.Close()
 
-        '    Return res
-        'End Function
-
-        'Dim data As Byte() = C.StringToByte(PostString, Converter.EncodeType._UTF8)
-        'Dim result_post = SendRequest(Uri, data, "application/json", "POST")
+            Return Result
+        End Function
 
         '------- ส่ง Key ที่เป็น Dash มา----------
         Public Function CleanJSONDash(ByVal JSONString As String, ByVal Keys As String()) As String
@@ -141,10 +139,13 @@ Public Class BackEndInterface
             Dim URL As String = (New BackEndInterface.General).GetProductURL
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
-            Dim PostString As String = ""
-            PostString &= "productCode=" & productCode
+            'Dim PostString As String = ""
+            'PostString &= "productCode=" & productCode
+            Dim PostData As New Dictionary(Of String, String)
+            PostData.Add("productCode", productCode)
 
-            JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, PostString)
+            'JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, PostString)
+            JSONString = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
 
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
             Return Result
@@ -228,17 +229,28 @@ Public Class BackEndInterface
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
-            Dim PostString As String = ""
-            PostString &= "partner-code=" & partner_code & "&"
-            PostString &= "id-number=" & id_number & "&"
-            PostString &= "face-recog-cust-certificate=" & face_recog_cust_certificate & "&"
-            PostString &= "face-recog-cust-certificate-id=" & "" & "&"
-            PostString &= "face-recog-cust-capture=" & face_recog_cust_capture & "&"
-            PostString &= "face-recog-cust-capture-id=" & "" & "&"
-            PostString &= "seq=" & seq & "&"
-            PostString &= "max-seq="
+            'Dim PostString As String = ""
+            'PostString &= "partner-code=" & partner_code & "&"
+            'PostString &= "id-number=" & id_number & "&"
+            'PostString &= "face-recog-cust-certificate=" & face_recog_cust_certificate & "&"
+            'PostString &= "face-recog-cust-certificate-id=" & "" & "&"
+            'PostString &= "face-recog-cust-capture=" & face_recog_cust_capture & "&"
+            'PostString &= "face-recog-cust-capture-id=" & "" & "&"
+            'PostString &= "seq=" & seq & "&"
+            'PostString &= "max-seq="
 
-            JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, PostString)
+            Dim PostData As New Dictionary(Of String, String)
+            PostData.Add("partner-code", partner_code)
+            PostData.Add("id-number", id_number)
+            PostData.Add("face-recog-cust-certificate", face_recog_cust_certificate)
+            PostData.Add("face-recog-cust-certificate-id", "")
+            PostData.Add("face-recog-cust-capture", face_recog_cust_capture)
+            PostData.Add("face-recog-cust-capture-id", "")
+            PostData.Add("seq", seq)
+            PostData.Add("max-seq", "")
+
+            'JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, PostString)
+            JSONString = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
 
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
             Return Result
@@ -307,13 +319,12 @@ Public Class BackEndInterface
 
 #End Region
 
-        Public Function Get_Result(ByVal key_type As String,
-                ByVal key_value As String,
+        Public Function Get_Result(ByVal key_value As String,
                 ByVal id_number As String,
                 ByVal id_type As String) As Response
 
             Dim GetString As String = ""
-            GetString &= "key-type=" & key_type & "&"
+            GetString &= "key-type=SIM&"
             GetString &= "key-value=" & key_value & "&"
             GetString &= "id-number=" & id_number & "&"
             GetString &= "id-type=" & id_type & "&"
@@ -322,8 +333,10 @@ Public Class BackEndInterface
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
+            Dim PostData As New Dictionary(Of String, String)
+            'JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, "")
+            JSONString = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
 
-            JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, "")
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
             Return Result
         End Function
@@ -381,37 +394,37 @@ Public Class BackEndInterface
 
     Public Class Generate_Order_Id
 
-            Private Const SubURL As String = "/aftersales/order/generate-id" '---------- Channel=??? , Dealer =???
-            Public JSONString As String = ""
+        Private Const SubURL As String = "/aftersales/order/generate-id" '---------- Channel=??? , Dealer =???
+        Public JSONString As String = ""
 
 #Region "DataModel"
 
-            Public Class Response
-                Public Property status As String
-                Public Property fault As faultModel
-                Public Property display_messages As List(Of display_message)
-                Public Property trx_id As String
-                Public Property process_instance As String
-                Public Property response_data As String '--- OrderID
+        Public Class Response
+            Public Property status As String
+            Public Property fault As faultModel
+            Public Property display_messages As List(Of display_message)
+            Public Property trx_id As String
+            Public Property process_instance As String
+            Public Property response_data As String '--- OrderID
 
-                Public Class faultModel
-                    Public Property name As String
-                    Public Property code As String
-                    Public Property message As String
-                    Public Property detailed_message As String
-                End Class
-
-                Public Class display_message
-                    Public Property message As String
-                    Public Property message_code As String
-                    Public Property message_type As String
-                    Public Property en_message As String
-                    Public Property th_message As String
-                    Public Property technical_message As String
-                End Class
+            Public Class faultModel
+                Public Property name As String
+                Public Property code As String
+                Public Property message As String
+                Public Property detailed_message As String
             End Class
 
-            Private CleanKeys() As String = {"detailed-message",
+            Public Class display_message
+                Public Property message As String
+                Public Property message_code As String
+                Public Property message_type As String
+                Public Property en_message As String
+                Public Property th_message As String
+                Public Property technical_message As String
+            End Class
+        End Class
+
+        Private CleanKeys() As String = {"detailed-message",
                                         "display-messages",
                                         "message-code",
                                         "message-type",
@@ -424,54 +437,58 @@ Public Class BackEndInterface
 
 #End Region
 
-            Public Function Get_Result(ByVal dealer As String) As Response
+        Public Function Get_Result(ByVal dealer As String) As Response
 
-                Dim GetString As String = ""
-                GetString &= "channel=TLR&"
-                GetString &= "dealer=" & dealer
+            Dim GetString As String = ""
+            GetString &= "channel=TLR&"
+            GetString &= "dealer=" & dealer
 
-                Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
-                Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+            Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
-                JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, "")
-                Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
-                Return Result
-            End Function
-        End Class
+            Dim PostData As New Dictionary(Of String, String)
 
-        Public Class Delete_File
+            'JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, "")
+            JSONString = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
 
-            Private Const SubURL As String = "/sales/order/pdf/delete_file"
-            Public JSONString As String = ""
+            Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+            Return Result
+        End Function
+    End Class
+
+    Public Class Delete_File
+
+        Private Const SubURL As String = "/sales/order/pdf/delete_file"
+        Public JSONString As String = ""
 
 #Region "DataModel"
-            Public Class Response
-                Public Property status As String
-                Public Property fault As faultModel
-                Public Property display_messages As List(Of display_message)
-                Public Property trx_id As String
-                Public Property process_instance As String
-                Public Property order_id As String
+        Public Class Response
+            Public Property status As String
+            Public Property fault As faultModel
+            Public Property display_messages As List(Of display_message)
+            Public Property trx_id As String
+            Public Property process_instance As String
+            Public Property order_id As String
 
-                Public Class faultModel
-                    Public Property name As String
-                    Public Property code As String
-                    Public Property message As String
-                    Public Property detailed_message As String
-                End Class
-
-                Public Class display_message
-                    Public Property message As String
-                    Public Property message_code As String
-                    Public Property message_type As String
-                    Public Property en_message As String
-                    Public Property th_message As String
-                    Public Property technical_message As String
-                End Class
-
+            Public Class faultModel
+                Public Property name As String
+                Public Property code As String
+                Public Property message As String
+                Public Property detailed_message As String
             End Class
 
-            Private CleanKeys() As String = {"detailed-message",
+            Public Class display_message
+                Public Property message As String
+                Public Property message_code As String
+                Public Property message_type As String
+                Public Property en_message As String
+                Public Property th_message As String
+                Public Property technical_message As String
+            End Class
+
+        End Class
+
+        Private CleanKeys() As String = {"detailed-message",
                                         "display-messages",
                                         "message-code",
                                         "message-type",
@@ -484,55 +501,59 @@ Public Class BackEndInterface
 
 #End Region
 
-            Public Function Get_Result(ByVal order_id As String) As Response
+        Public Function Get_Result(ByVal order_id As String) As Response
 
-                Dim GetString As String = ""
-                GetString &= "order-id=" & order_id & "&"
-                GetString &= "form-type=FACE_RECOG_CUST_CERTIFICATE"
+            Dim GetString As String = ""
+            GetString &= "order-id=" & order_id & "&"
+            GetString &= "form-type=FACE_RECOG_CUST_CERTIFICATE"
 
-                Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
-                Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+            Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
-                JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, "")
-                Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
-                Return Result
-            End Function
+            Dim PostData As New Dictionary(Of String, String)
+
+            'JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, "")
+            JSONString = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
+
+            Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+            Return Result
+        End Function
+
+    End Class
+
+    Public Class Save_File
+
+        Private Const SubURL As String = "/sales/order/pdf/save_file"
+        Public JSONString As String = ""
+
+#Region "DataModel"
+        Public Class Response
+            Public Property status As String
+            Public Property fault As faultModel
+            Public Property display_messages As List(Of display_message)
+            Public Property trx_id As String
+            Public Property process_instance As String
+            Public Property order_id As String
+
+            Public Class faultModel
+                Public Property name As String
+                Public Property code As String
+                Public Property message As String
+                Public Property detailed_message As String
+            End Class
+
+            Public Class display_message
+                Public Property message As String
+                Public Property message_code As String
+                Public Property message_type As String
+                Public Property en_message As String
+                Public Property th_message As String
+                Public Property technical_message As String
+            End Class
 
         End Class
 
-        Public Class Save_File
-
-            Private Const SubURL As String = "/sales/order/pdf/save_file"
-            Public JSONString As String = ""
-
-#Region "DataModel"
-            Public Class Response
-                Public Property status As String
-                Public Property fault As faultModel
-                Public Property display_messages As List(Of display_message)
-                Public Property trx_id As String
-                Public Property process_instance As String
-                Public Property order_id As String
-
-                Public Class faultModel
-                    Public Property name As String
-                    Public Property code As String
-                    Public Property message As String
-                    Public Property detailed_message As String
-                End Class
-
-                Public Class display_message
-                    Public Property message As String
-                    Public Property message_code As String
-                    Public Property message_type As String
-                    Public Property en_message As String
-                    Public Property th_message As String
-                    Public Property technical_message As String
-                End Class
-
-            End Class
-
-            Private CleanKeys() As String = {"detailed-message",
+        Private CleanKeys() As String = {"detailed-message",
                                         "display-messages",
                                         "message-code",
                                         "message-type",
@@ -545,76 +566,84 @@ Public Class BackEndInterface
 
 #End Region
 
-            Public Function Get_Result(ByVal order_id As String,
+        Public Function Get_Result(ByVal order_id As String,
                                    ByVal fileType As String,
                                    ByVal b64File As String) As Response
 
-                Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL
-                Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+            Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
-                Dim PostString As String = ""
-                PostString &= "order-id=" & order_id & "&"
-                PostString &= "fileType=" & fileType & "&"
-                PostString &= "b64File=" & b64File & "&"
-                PostString &= "formType=FACE_RECOG_CUST_CERTIFICATE"
+            'Dim PostString As String = ""
+            'PostString &= "order-id=" & order_id & "&"
+            'PostString &= "fileType=" & fileType & "&"
+            'PostString &= "b64File=" & b64File & "&"
+            'PostString &= "formType=FACE_RECOG_CUST_CERTIFICATE"
 
-                JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, PostString)
-                Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+            Dim PostData As New Dictionary(Of String, String)
+            PostData.Add("order-id", order_id)
+            PostData.Add("fileType", fileType)
+            PostData.Add("b64File", b64File)
+            PostData.Add("formType", "FACE_RECOG_CUST_CERTIFICATE")
 
-                Return Result
-            End Function
+            'JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, PostString)
+            JSONString = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
+
+            Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+
+            Return Result
+        End Function
+
+    End Class
+
+    Public Class Service_Flow_Create
+
+        Private Const SubURL As String = "/sales/flow/create"
+        Public JSONString As String = ""
+
+        Public Enum FlowType
+            Mobile = 1
+            Device = 2
+        End Enum
+#Region "DataModel"
+        Public Class Response
+            Public Property status As String
+            Public Property fault As faultModel
+            Public Property display_messages As List(Of display_message)
+            Public Property trx_id As String
+            Public Property process_instance As String
+            Public Property response_data As Response
+
+            Public Class faultModel
+                Public Property name As String
+                Public Property code As String
+                Public Property message As String
+                Public Property detailed_message As String
+            End Class
+
+            Public Class display_message
+                Public Property message As String
+                Public Property message_code As String
+                Public Property message_type As String
+                Public Property en_message As String
+                Public Property th_message As String
+                Public Property technical_message As String
+            End Class
+
+            Public Class Response
+                Public Property data As language
+                Public Class language
+                    Public Property THAI_ID As String
+                    Public Property LANG As String
+                End Class
+                Public Property flow_id As String
+                Public Property flow_name As String
+                Public Property create_date As String
+                Public Property create_by As String
+            End Class
 
         End Class
 
-        Public Class Service_Flow_Create
-
-            Private Const SubURL As String = "/sales/flow/create"
-            Public JSONString As String = ""
-
-            Public Enum FlowType
-                Mobile = 1
-                Device = 2
-            End Enum
-#Region "DataModel"
-            Public Class Response
-                Public Property status As String
-                Public Property fault As faultModel
-                Public Property display_messages As List(Of display_message)
-                Public Property trx_id As String
-                Public Property process_instance As String
-                Public Property response_data As Response
-
-                Public Class faultModel
-                    Public Property name As String
-                    Public Property code As String
-                    Public Property message As String
-                    Public Property detailed_message As String
-                End Class
-
-                Public Class display_message
-                    Public Property message As String
-                    Public Property message_code As String
-                    Public Property message_type As String
-                    Public Property en_message As String
-                    Public Property th_message As String
-                    Public Property technical_message As String
-                End Class
-
-                Public Class Response
-                    Public Property data As language
-                    Public Class language
-                        Public Property THAI_ID As String
-                        Public Property LANG As String
-                    End Class
-                    Public Property flow_id As String
-                    Public Property flow_name As String
-                    Public Property create_date As String
-                    Public Property create_by As String
-                End Class
-
-            End Class
-
-            Private CleanKeys() As String = {"detailed-message",
+        Private CleanKeys() As String = {"detailed-message",
                                         "display-messages",
                                         "message-code",
                                         "message-type",
@@ -633,7 +662,7 @@ Public Class BackEndInterface
 
 #End Region
 
-            Public Function Get_Result(ByVal orderId As String,
+        Public Function Get_Result(ByVal orderId As String,
                                    ByVal FlowType As FlowType,
                                     ByVal staffOpenShift As String,
                                     ByVal thaiID As String,
@@ -648,93 +677,120 @@ Public Class BackEndInterface
                                     ByVal is_identical As String,
                                     ByVal confident_ratio As String) As Response
 
-                Dim GetString As String = ""
-                GetString &= "orderId=" & orderId & "&"
-                GetString &= "flowName=" & IIf(FlowType = FlowType.Mobile, "Mobile", "Device")
+            Dim GetString As String = ""
+            GetString &= "orderId=" & orderId & "&"
+            GetString &= "flowName=" & IIf(FlowType = FlowType.Mobile, "Mobile", "Device")
 
-                Dim PostString As String = ""
-                PostString &= "CREATE-BY=" & staffOpenShift & "&"
-                PostString &= "ID-NUMBER=" & thaiID & "&"
-                PostString &= "PRODUCT-ID-NUMBER=" & subscriber & "&"
-                PostString &= "PARTNER-CODE=" & shopCode & "&"
-                PostString &= "CUST-NAME=" & customerName & "&"
-                PostString &= "CAMPAIGN-CODE=&"
-                PostString &= "CAMPAIGN-NAME=&"
-                PostString &= "SERVICE-CODE=TMV&"
-                PostString &= "PROPO-PROMO=" & proposition & "&"
-                PostString &= "PRODUCT-NAME=" & pricePlan & "&"
-                PostString &= "SERVICE-NAME=POSTPAID&"
-                PostString &= "SERIAL-NUMBER=" & sim & "&"
-                PostString &= "SALE-CODE=" & saleCode & "&"
-                PostString &= "E-SIGNATURE=NO&"
-                PostString &= "READ-THAI-CARD=" & IIf(thaiID <> "", "YES", "NO") & "&"
-                PostString &= "SUBSCRIBER=" & subscriber & "&"
-                PostString &= "FACE_RECOFNITION_STATUS=" & face_recognition_result & "&"
-                PostString &= "IS_IDENTICAL=" & is_identical & "&"
-                PostString &= "CONFIDENT_RATIO=" & confident_ratio & "&"
-                PostString &= "FACE_RECOG_CUST_CERTIFICATE_SOURCE=READ_CARD&"
-                PostString &= "FACE_RECOG_CUST_CAPTURE_SOURCE=CAPTURE&"
-                PostString &= "CUST_CERTIFICATE_LASER_ID=&"
-                PostString &= "OS=VENDING&"
+            'Dim PostString As String = ""
+            'PostString &= "CREATE-BY=" & staffOpenShift & "&"
+            'PostString &= "ID-NUMBER=" & thaiID & "&"
+            'PostString &= "PRODUCT-ID-NUMBER=" & subscriber & "&"
+            'PostString &= "PARTNER-CODE=" & shopCode & "&"
+            'PostString &= "CUST-NAME=" & customerName & "&"
+            'PostString &= "CAMPAIGN-CODE=&"
+            'PostString &= "CAMPAIGN-NAME=&"
+            'PostString &= "SERVICE-CODE=TMV&"
+            'PostString &= "PROPO-PROMO=" & proposition & "&"
+            'PostString &= "PRODUCT-NAME=" & pricePlan & "&"
+            'PostString &= "SERVICE-NAME=POSTPAID&"
+            'PostString &= "SERIAL-NUMBER=" & sim & "&"
+            'PostString &= "SALE-CODE=" & saleCode & "&"
+            'PostString &= "E-SIGNATURE=NO&"
+            'PostString &= "READ-THAI-CARD=" & IIf(thaiID <> "", "YES", "NO") & "&"
+            'PostString &= "SUBSCRIBER=" & subscriber & "&"
+            'PostString &= "FACE_RECOFNITION_STATUS=" & face_recognition_result & "&"
+            'PostString &= "IS_IDENTICAL=" & is_identical & "&"
+            'PostString &= "CONFIDENT_RATIO=" & confident_ratio & "&"
+            'PostString &= "FACE_RECOG_CUST_CERTIFICATE_SOURCE=READ_CARD&"
+            'PostString &= "FACE_RECOG_CUST_CAPTURE_SOURCE=CAPTURE&"
+            'PostString &= "CUST_CERTIFICATE_LASER_ID=&"
+            'PostString &= "OS=VENDING&"
 
-                Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
-                Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+            Dim PostData As New Dictionary(Of String, String)
+            PostData.Add("CREATE-BY", staffOpenShift)
+            PostData.Add("ID-NUMBER", thaiID)
+            PostData.Add("PRODUCT-ID-NUMBER", subscriber)
+            PostData.Add("PARTNER-CODE", shopCode)
+            PostData.Add("CUST-NAME", customerName)
+            PostData.Add("CAMPAIGN-CODE", "")
+            PostData.Add("CAMPAIGN-NAME", "")
+            PostData.Add("SERVICE-CODE", "TMV")
+            PostData.Add("PROPO-PROMO", proposition)
+            PostData.Add("PRODUCT-NAME", pricePlan)
+            PostData.Add("SERVICE-NAME", "POSTPAID")
+            PostData.Add("SERIAL-NUMBER", sim)
+            PostData.Add("SALE-CODE", saleCode)
+            PostData.Add("E-SIGNATURE", "NO")
+            PostData.Add("READ-THAI-CARD", IIf(thaiID <> "", "YES", "NO"))
+            PostData.Add("SUBSCRIBER", subscriber)
+            PostData.Add("FACE_RECOFNITION_STATUS", face_recognition_result)
+            PostData.Add("IS_IDENTICAL", is_identical)
+            PostData.Add("CONFIDENT_RATIO", confident_ratio)
+            PostData.Add("FACE_RECOG_CUST_CERTIFICATE_SOURCE", "READ_CARD")
+            PostData.Add("FACE_RECOG_CUST_CAPTURE_SOURCE", "CAPTURE")
+            PostData.Add("CUST_CERTIFICATE_LASER_ID", "")
+            PostData.Add("OS", "VENDING")
 
-                JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, PostString)
-                Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
-                Return Result
-            End Function
+            Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
-        End Class
+            'JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, PostString)
+            JSONString = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
 
-        Public Class Service_Flow_Finish
+            Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+            Return Result
+        End Function
 
-            Private Const SubURL As String = "/sales/flow/finish"
-            Public JSONString As String = ""
+    End Class
+
+    Public Class Service_Flow_Finish
+
+        Private Const SubURL As String = "/sales/flow/finish"
+        Public JSONString As String = ""
 
 #Region "DataModel"
 
-            Public Class Response
-                Public Property status As String
-                Public Property fault As faultModel
-                Public Property display_messages As List(Of display_message)
-                Public Property trx_id As String
-                Public Property process_instance As String
-                Public Property response_data As Response
+        Public Class Response
+            Public Property status As String
+            Public Property fault As faultModel
+            Public Property display_messages As List(Of display_message)
+            Public Property trx_id As String
+            Public Property process_instance As String
+            Public Property response_data As Response
 
-                Public Class faultModel
-                    Public Property name As String
-                    Public Property code As String
-                    Public Property message As String
-                    Public Property detailed_message As String
-                End Class
-
-                Public Class display_message
-                    Public Property message As String
-                    Public Property message_code As String
-                    Public Property message_type As String
-                    Public Property en_message As String
-                    Public Property th_message As String
-                    Public Property technical_message As String
-                End Class
-
-                Public Class Response
-                    Public Property data As language
-                    Public Class language
-                        Public Property THAI_ID As String
-                        Public Property LANG As String
-                    End Class
-                    Public Property flow_id As String
-                    Public Property flow_name As String
-                    Public Property create_date As String
-                    Public Property create_by As String
-                    Public Property end_date As String
-                    Public Property end_by As String
-                End Class
-
+            Public Class faultModel
+                Public Property name As String
+                Public Property code As String
+                Public Property message As String
+                Public Property detailed_message As String
             End Class
 
-            Private CleanKeys() As String = {"detailed-message",
+            Public Class display_message
+                Public Property message As String
+                Public Property message_code As String
+                Public Property message_type As String
+                Public Property en_message As String
+                Public Property th_message As String
+                Public Property technical_message As String
+            End Class
+
+            Public Class Response
+                Public Property data As language
+                Public Class language
+                    Public Property THAI_ID As String
+                    Public Property LANG As String
+                End Class
+                Public Property flow_id As String
+                Public Property flow_name As String
+                Public Property create_date As String
+                Public Property create_by As String
+                Public Property end_date As String
+                Public Property end_by As String
+            End Class
+
+        End Class
+
+        Private CleanKeys() As String = {"detailed-message",
                                         "display-messages",
                                         "message-code",
                                         "message-type",
@@ -754,141 +810,157 @@ Public Class BackEndInterface
                                                 }
 #End Region
 
-            Public Function Get_Result(ByVal orderId As String) As Response
+        Public Function Get_Result(ByVal orderId As String) As Response
 
-                Dim GetString As String = "flow-id=" & orderId & ""
+            Dim GetString As String = "flow-id=" & orderId & ""
 
-                Dim PostString As String = ""
-                PostString &= "orderId=" & orderId
+            'Dim PostString As String = ""
+            'PostString &= "orderId=" & orderId
 
-                Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
-                Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+            Dim PostData As New Dictionary(Of String, String)
+            PostData.Add("orderId", orderId)
 
-                JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, PostString)
-                Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
-                Return Result
+            Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
-            End Function
+            'JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, PostString)
+            JSONString = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
+            Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+            Return Result
 
-        End Class
-
-        Public Class Activity_Start
-
-            Private Const SubURL As String = "/sales/flow/activity/start"
-            Public JSONString As String = ""
-
-#Region "DataModel"
-            Public Class Response
-                Public Property status As String
-                Public Property fault As faultModel
-                Public Property display_messages As List(Of display_message)
-                Public Property trx_id As String
-                Public Property process_instance As String
-                Public Property order_id As String
-
-                Public Class faultModel
-                    Public Property name As String
-                    Public Property code As String
-                    Public Property message As String
-                    Public Property detailed_message As String
-                End Class
-
-                Public Class display_message
-                    Public Property message As String
-                    Public Property message_code As String
-                    Public Property message_type As String
-                    Public Property en_message As String
-                    Public Property th_message As String
-                    Public Property technical_message As String
-                End Class
-
-            End Class
-
-            Private CleanKeys() As String = {"detailed-message",
-                                        "display-messages",
-                                        "message-code",
-                                        "message-type",
-                                        "en-message",
-                                        "th-message",
-                                        "technical-message",
-                                        "trx-id",
-                                        "process-instance"
-                                         }
-
-#End Region
-
-            Public Function Get_Result(orderId As String) As Response
-
-                Dim GetString As String = "flow-id=" & orderId & "&"
-                GetString &= "activity-id=CONFIRM_ORDER"
-
-                Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
-                Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
-
-                JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, "")
-                Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
-                Return Result
-            End Function
-
-        End Class
-
-        Public Class Activity_End
-
-            Private Const SubURL As String = "/sales/flow/activity/end"
-            Public JSONString As String = ""
-
-#Region "DataModel"
-            Public Class Response
-                Public Property status As String
-                Public Property fault As faultModel
-                Public Property display_messages As List(Of display_message)
-                Public Property trx_id As String
-                Public Property process_instance As String
-                Public Property order_id As String
-
-                Public Class faultModel
-                    Public Property name As String
-                    Public Property code As String
-                    Public Property message As String
-                    Public Property detailed_message As String
-                End Class
-
-                Public Class display_message
-                    Public Property message As String
-                    Public Property message_code As String
-                    Public Property message_type As String
-                    Public Property en_message As String
-                    Public Property th_message As String
-                    Public Property technical_message As String
-                End Class
-
-            End Class
-
-            Private CleanKeys() As String = {"detailed-message",
-                                        "display-messages",
-                                        "message-code",
-                                        "message-type",
-                                        "en-message",
-                                        "th-message",
-                                        "technical-message",
-                                        "trx-id",
-                                        "process-instance"
-                                         }
-
-#End Region
-
-            Public Function Get_Result(orderId As String) As Response
-                Dim GetString As String = "flow-id=" & orderId & "&"
-                GetString &= "orderId=" & orderId
-
-                Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
-                Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
-
-                JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, "")
-                Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
-                Return Result
-            End Function
-
-        End Class
+        End Function
 
     End Class
+
+    Public Class Activity_Start
+
+        Private Const SubURL As String = "/sales/flow/activity/start"
+        Public JSONString As String = ""
+
+#Region "DataModel"
+        Public Class Response
+            Public Property status As String
+            Public Property fault As faultModel
+            Public Property display_messages As List(Of display_message)
+            Public Property trx_id As String
+            Public Property process_instance As String
+            Public Property order_id As String
+
+            Public Class faultModel
+                Public Property name As String
+                Public Property code As String
+                Public Property message As String
+                Public Property detailed_message As String
+            End Class
+
+            Public Class display_message
+                Public Property message As String
+                Public Property message_code As String
+                Public Property message_type As String
+                Public Property en_message As String
+                Public Property th_message As String
+                Public Property technical_message As String
+            End Class
+
+        End Class
+
+        Private CleanKeys() As String = {"detailed-message",
+                                        "display-messages",
+                                        "message-code",
+                                        "message-type",
+                                        "en-message",
+                                        "th-message",
+                                        "technical-message",
+                                        "trx-id",
+                                        "process-instance"
+                                         }
+
+#End Region
+
+        Public Function Get_Result(orderId As String) As Response
+
+            Dim GetString As String = "flow-id=" & orderId & "&"
+            GetString &= "activity-id=CONFIRM_ORDER"
+
+            Dim PostData As New Dictionary(Of String, String)
+            PostData.Add("orderId", orderId)
+            PostData.Add("activityId", "CONFIRM_ORDER")
+
+
+            Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+
+            'JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, "")
+            JSONString = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
+
+            Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+            Return Result
+        End Function
+
+    End Class
+
+    Public Class Activity_End
+
+        Private Const SubURL As String = "/sales/flow/activity/end"
+        Public JSONString As String = ""
+
+#Region "DataModel"
+        Public Class Response
+            Public Property status As String
+            Public Property fault As faultModel
+            Public Property display_messages As List(Of display_message)
+            Public Property trx_id As String
+            Public Property process_instance As String
+            Public Property order_id As String
+
+            Public Class faultModel
+                Public Property name As String
+                Public Property code As String
+                Public Property message As String
+                Public Property detailed_message As String
+            End Class
+
+            Public Class display_message
+                Public Property message As String
+                Public Property message_code As String
+                Public Property message_type As String
+                Public Property en_message As String
+                Public Property th_message As String
+                Public Property technical_message As String
+            End Class
+
+        End Class
+
+        Private CleanKeys() As String = {"detailed-message",
+                                        "display-messages",
+                                        "message-code",
+                                        "message-type",
+                                        "en-message",
+                                        "th-message",
+                                        "technical-message",
+                                        "trx-id",
+                                        "process-instance"
+                                         }
+
+#End Region
+
+        Public Function Get_Result(orderId As String) As Response
+            Dim GetString As String = "flow-id=" & orderId & "&"
+            GetString &= "orderId=" & orderId
+
+            Dim PostData As New Dictionary(Of String, String)
+            PostData.Add("orderId", orderId)
+
+            Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+
+            'JSONString = (New BackEndInterface.General).GetJSONString(WebRequest, "")
+            JSONString = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
+
+            Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+            Return Result
+        End Function
+
+    End Class
+
+End Class
