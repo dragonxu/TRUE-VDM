@@ -15,7 +15,7 @@
             If Not IsNothing(Response) Then
                 trx_id.Text = Response.trx_id
                 process_instance.Text = Response.process_instance
-                ref_id.Text = Response.ref_id
+                'ref_id.Text = Response.ref_id
                 order_id_RESP.Text = Response.order_id
 
             End If

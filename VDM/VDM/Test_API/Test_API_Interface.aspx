@@ -47,14 +47,17 @@
                     <td style ="padding: 10px;"><asp:Button ID="btn_Generate_Order_Id" runat="server" Text="Generate_Order_Id" /></td>
                     <td style ="padding: 10px;"><asp:Button ID="btn_Delete_File" runat="server" Text="Delete_File" /></td>
                
-                    <td><asp:Button ID="btn_Save_File" runat="server" Text="Save_File" /></td>
-                    <td><asp:Button ID="btn_Service_Flow_Create" runat="server" Text="Service_Flow_Create" /></td>
-                    <td><asp:Button ID="btn_Service_Flow_Finish" runat="server" Text="Service_Flow_Finish" /></td>
-                    <td><asp:Button ID="btn_Activity_Start" runat="server" Text="Activity_Start" /></td>                    
-                    <td><asp:Button ID="btn_Activity_End" runat="server" Text="Activity_End" /></td>
-                    <td style ="padding: 10px;"><asp:Button ID="btn_Get_Product_Info" runat="server" Text="Get_Product_Info" /></td>
+                    <td style ="padding: 10px;"><asp:Button ID="btn_Save_File" runat="server" Text="Save_File" /></td>
                     
                 </tr>
+                 <tr style ="line-height: 2;">
+                    <td style ="padding: 10px;"><asp:Button ID="btn_Service_Flow_Create" runat="server" Text="Service_Flow_Create" /></td>
+                    <td style ="padding: 10px;"><asp:Button ID="btn_Service_Flow_Finish" runat="server" Text="Service_Flow_Finish" /></td>
+                    <td style ="padding: 10px;"><asp:Button ID="btn_Activity_Start" runat="server" Text="Activity_Start" /></td>                    
+                    <td style ="padding: 10px;"><asp:Button ID="btn_Activity_End" runat="server" Text="Activity_End" /></td>
+                    <td style ="padding: 10px;"><asp:Button ID="btn_Get_Product_Info" runat="server" Text="Get_Product_Info" /></td>
+
+                 </tr>
                 <tr style ="line-height: 2;">
                     <td style ="padding: 10px;"><asp:Button ID="btn_Service_GenerateOrderID" runat="server" Text="Service_GenerateOrderID" /></td>
                     <td style ="padding: 10px;"><asp:Button ID="btn_Service_SaveOrder" runat="server" Text="Service_SaveOrder" /></td>

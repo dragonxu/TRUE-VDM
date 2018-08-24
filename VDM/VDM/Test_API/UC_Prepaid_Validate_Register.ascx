@@ -1,6 +1,10 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="UC_Prepaid_Validate_Register.ascx.vb" Inherits="VDM.UC_Prepaid_Validate_Register" %>
 
 <table>
+      <tr>
+                        <td colspan ="3"><h3 style="text-align :center ;"> Prepaid_Validate_Register</h3></td>
+                         
+   </tr>
     <tr>
                         <td><h4 style="text-align :center ;">Request</h4></td>
                         <td>&nbsp;</td>
@@ -11,10 +15,7 @@
         <td style="line-height: 2;"> 
                 <table>                   
 
-                    <tr>
-                        <td>key_type</td>
-                        <td><asp:TextBox ID="key_type" runat="server"></asp:TextBox></td>
-                    </tr>
+                   
                     <tr>
                         <td>key_value</td>
                         <td><asp:TextBox ID="key_value" runat="server"></asp:TextBox></td>

@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class UC_Prepaid_Validate_Register
     
     '''<summary>
-    '''key_type control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents key_type As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
     '''key_value control.
     '''</summary>
     '''<remarks>

@@ -1,6 +1,10 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="UC_Delete_File.ascx.vb" Inherits="VDM.UC_Delete_File" %>
 <table>
-    <tr>
+      <tr>
+                        <td colspan ="3"><h3 style="text-align :center ;"> Delete_File</h3></td>
+                         
+   </tr>
+       <tr>
                         <td><h4 style="text-align :center ;">Request</h4></td>
                         <td>&nbsp;</td>
                         <td><h4 style="text-align :center ;">Response</h4></td>
