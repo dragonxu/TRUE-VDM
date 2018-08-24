@@ -59,13 +59,13 @@ Partial Public Class UC_Service_SaveOrder
     Protected WithEvents th_message As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''4E1KDT1NTV2C2 control.
+    '''trx_id control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents 4E1KDT1NTV2C2 As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents trx_id As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''process_instance control.
