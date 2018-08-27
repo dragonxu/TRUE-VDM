@@ -95,7 +95,7 @@
           </li>
           <li class="menu-accordion" id="mnu_Report" runat="server">
             <a href="javascript:;">
-              <span class="badge pull-right" id="badge_Report" runat="server">4</span>
+              <span class="badge pull-right" id="badge_Report" runat="server">10</span>
               <i class="icon-docs"></i>
               <span>Reports</span>
             </a>
@@ -164,7 +164,7 @@
           </li>
           <li class="menu-accordion" id="mnu_Management" runat="server">
             <a href="javascript:;">
-              <span class="badge pull-right" id="badge_Management" runat="server">3</span>
+              <span class="badge pull-right" id="badge_Management" runat="server">4</span>
               <i class="icon-screen-desktop"></i>
               <span>Management</span>
             </a>
@@ -197,7 +197,7 @@
           </li>
           <li class="menu-accordion" id="mnu_Setting" runat="server">
             <a href="javascript:;">
-              <span class="badge pull-right" id="badge_Setting" runat="server">3</span>
+              <span class="badge pull-right" id="badge_Setting" runat="server">2</span>
               <i class="icon-settings"></i>
               <span>Setting</span>
             </a>

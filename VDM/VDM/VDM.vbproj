@@ -166,6 +166,7 @@
     <Content Include="Scripts\ui\alert.js" />
     <Content Include="Scripts\ui\dashboard.js" />
     <Content Include="Scripts\ui\notifications.js" />
+    <Content Include="SignIn.aspx" />
     <Content Include="Styles\animate.css" />
     <Content Include="Styles\app.css" />
     <Content Include="Styles\app.skins.css" />
@@ -2718,8 +2719,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\BackEndInterface.vb" />
-<<<<<<< HEAD
-=======
     <Compile Include="MasterPage.Master.designer.vb">
       <DependentUpon>MasterPage.Master</DependentUpon>
     </Compile>
@@ -2732,9 +2731,8 @@
     </Compile>
     <Compile Include="SignIn.aspx.vb">
       <DependentUpon>SignIn.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
->>>>>>> 689f8ef0113c13be3e6e56bb835439f3de73000b
     <Compile Include="Test_API\Test_API_Interface.aspx.designer.vb">
       <DependentUpon>Test_API_Interface.aspx</DependentUpon>
     </Compile>

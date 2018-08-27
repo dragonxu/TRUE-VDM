@@ -60,9 +60,12 @@
                   <asp:TextBox ID="txtPass" runat="server" class="form-control input-lg" TextMode="Password" placeholder="Password"></asp:TextBox>
                 </div>
                 <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-danger btn-block btn-lg " Text="Sign In" />
-                <asp:Label ID="lblError" runat="server" CssClass="text-center m-b" style=" width:100%; color:red;">
-                    Invalid admin username and password
-                </asp:Label>
+                <div style="text-align:center;">
+                    <asp:Label ID="lblError" runat="server" CssClass="text-center m-b" style=" width:100%; color:red;">
+                        Invalid admin username and password
+                    </asp:Label>
+                </div>
+                  
               </asp:Panel>
             </div>
           </div>
