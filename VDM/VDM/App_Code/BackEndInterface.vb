@@ -64,11 +64,16 @@ Public Class BackEndInterface
         End Function
 
         Public Function SendPostJSON(ByRef WebRequest As WebRequest, ByVal PostData As Dictionary(Of String, String)) As String
+            Dim JSONString As String = JsonConvert.SerializeObject(PostData, Formatting.Indented)
+            Return SendPostJSON(WebRequest, JSONString)
+        End Function
+
+        Public Function SendPostJSON(ByRef WebRequest As WebRequest, ByVal JSONString As String) As String
 
             Dim C As New Converter
-            Dim JSONSrting As String = JsonConvert.SerializeObject(PostData, Formatting.Indented)
+
             WebRequest.ContentType = "application/json"
-            Dim Data As Byte() = C.StringToByte(JSONSrting, Converter.EncodeType._UTF8)
+            Dim Data As Byte() = C.StringToByte(JSONString, Converter.EncodeType._UTF8)
             WebRequest.ContentLength = Data.Length
 
             Dim ST = WebRequest.GetRequestStream()
@@ -342,7 +347,23 @@ Public Class BackEndInterface
 
     Public Class Prepaid_Register
 
-        Private Const SubURL As String = "/profiles/customer/validate-prepaid-register"
+        Private Const SubURL As String = "/sales/order/submit"
+
+        Public Enum Gender
+            MALE = 1
+            FEMAIL = 2
+        End Enum
+
+        Public Enum IsRegistered
+            Y = 1
+            N = 0
+        End Enum
+
+        Public Enum SubActivity
+            UNPAIR = 1
+            PAIR = 2
+        End Enum
+
 
 #Region "DataModel"
 
@@ -387,7 +408,145 @@ Public Class BackEndInterface
 
 #End Region
 
+        Public Function Get_Result(ByVal OrderID As String,
+                ByVal customer_gender As Gender,
+                ByVal customer_title As String,
+                ByVal customer_language As String,
+                ByVal customer_title_code As String,
+                ByVal customer_firstname As String,
+                ByVal customer_lastname As String,
+                ByVal customer_birthdate As String,
+                ByVal customer_id_number As String,
+                ByVal customer_id_expire_date As String,
+                ByVal address_number As String,
+                ByVal address_moo As String,
+                ByVal address_village As String,
+                ByVal address_street As String,
+                ByVal address_soi As String,
+                ByVal address_district As String,
+                ByVal address_province As String,
+                ByVal address_building_name As String,
+                ByVal address_building_room As String,
+                ByVal address_building_floor As String,
+                ByVal sddress_sub_district As String,
+                ByVal address_zip As String,
+                ByVal shopCode As String,
+                ByVal sale_partner_code As String,
+                ByVal sale_partner_name As String,
+                ByVal sale_code As String,
+                ByVal mat_code As String,
+                ByVal mat_desc As String,
+                ByVal sim_serial As String,
+                ByVal require_print_form As Boolean,
+                ByVal price_plan As String,
+                ByVal subscriber As String,
+                ByVal is_registered As IsRegistered,
+                ByVal sub_activity As SubActivity) As Response
 
+            Dim PostString = ""
+
+            PostString &= "{	" & vbLf
+            PostString &= "    ""order"": {	" & vbLf
+            PostString &= "        ""order-id"": """ & OrderID & """,	" & vbLf
+            PostString &= "        ""customer"": {	" & vbLf
+            PostString &= "            ""gender"": """ & IIf(customer_gender = Gender.MALE, "MALE", "FEMAIL") & """,	" & vbLf
+            PostString &= "            ""title"": """ & customer_title & """,	" & vbLf
+            PostString &= "            ""language"": """ & customer_language & """,	" & vbLf
+            PostString &= "            ""title-code"": """ & customer_title_code & """,	" & vbLf
+            PostString &= "            ""firstname"": """ & customer_firstname & """,	" & vbLf
+            PostString &= "            ""lastname"": """ & customer_lastname & """,	" & vbLf
+            PostString &= "            ""birthdate"": """ & customer_birthdate & """,	" & vbLf
+            PostString &= "            ""customer-type"": ""P"",	" & vbLf
+            PostString &= "            ""id-type"": ""I"",	" & vbLf
+            PostString &= "            ""id-number"": """ & customer_id_number & """,	" & vbLf
+            PostString &= "            ""id-expire-date"": """ & customer_id_expire_date & """,	" & vbLf
+            PostString &= "            ""customer-level"": ""NON-TOP"",	" & vbLf
+            PostString &= "            ""customer-sublevel"": ""NONE"",	" & vbLf
+            PostString &= "            ""customer-sublevel-id"": ""2"",	" & vbLf
+            PostString &= "            ""address-list"": {	" & vbLf
+            PostString &= "                ""CUSTOMER_ADDRESS"": {	" & vbLf
+            PostString &= "                    ""number"": """ & address_number & """,	" & vbLf
+            PostString &= "                    ""moo"": """ & address_moo & """,	" & vbLf
+            PostString &= "                    ""village"": """ & address_village & """,	" & vbLf
+            PostString &= "                    ""street"": """ & address_street & """,	" & vbLf
+            PostString &= "                    ""soi"": """ & address_soi & """,	" & vbLf
+            PostString &= "                    ""district"": """ & address_district & """,	" & vbLf
+            PostString &= "                    ""province"": """ & address_province & """,	" & vbLf
+            PostString &= "                    ""building-name"": """ & address_building_name & """,	" & vbLf
+            PostString &= "                    ""building-room"": """ & address_building_room & """,	" & vbLf
+            PostString &= "                    ""building-floor"": """ & address_building_floor & """,	" & vbLf
+            PostString &= "                    ""sub-district"": """ & sddress_sub_district & """,	" & vbLf
+            PostString &= "                    ""zip"": """ & address_zip & """	" & vbLf
+            PostString &= "                }	" & vbLf
+            PostString &= "            }	" & vbLf
+            PostString &= "        },	" & vbLf
+            PostString &= "        ""sale-agent"": {	" & vbLf
+            PostString &= "            ""name"": """",	" & vbLf
+            PostString &= "            ""channel"": ""TLR"",	" & vbLf
+            PostString &= "            ""partner-code"": """ & shopCode & """,	" & vbLf
+            PostString &= "            ""partner-name"": """ & sale_partner_name & """,	" & vbLf
+            PostString &= "            ""sale-code"": """ & sale_partner_code & """,	" & vbLf
+            PostString &= "            ""partner-type"": ""2""	" & vbLf
+            PostString &= "        },	" & vbLf
+            PostString &= "        ""order-items"": [	" & vbLf
+            PostString &= "            {	" & vbLf
+            PostString &= "                ""product-category"": ""GOODS"",	" & vbLf
+            PostString &= "                ""order-type"": ""NEW"",	" & vbLf
+            PostString &= "                ""name"": ""SALE_GOODS"",	" & vbLf
+            PostString &= "                ""product-name"": """ & mat_desc & """,	" & vbLf
+            PostString &= "                ""product-id-number"": """ & mat_code & """,	" & vbLf
+            PostString &= "                ""product-id-name"": ""MATERIAL_CODE"",	" & vbLf
+            PostString &= "                ""order-data"": {},	" & vbLf
+            PostString &= "                ""primary-order-data"": {	" & vbLf
+            PostString &= "                    ""IS-SIM"": ""1"",	" & vbLf
+            PostString &= "                    ""SERIAL-NO"": """ & sim_serial & """,	" & vbLf
+            PostString &= "                    ""REQUIRE_PRINTFORM"": """ & IIf(require_print_form, "true", "false") & """,	" & vbLf
+            PostString &= "                    ""STOCK-TYPE"": ""TRANSFER""	" & vbLf
+            PostString &= "                }	" & vbLf
+            PostString &= "            },	" & vbLf
+            PostString &= "            {	" & vbLf
+            PostString &= "                ""product-category"": ""TMV"",	" & vbLf
+            PostString &= "                ""order-type"": ""NEW"",	" & vbLf
+            PostString &= "                ""name"": ""PREPAID_REGISTER_PARENT"",	" & vbLf
+            PostString &= "                ""product-name"": ""PRICEPLAN"",	" & vbLf
+            PostString &= "                ""product-id-number"": ""0000000005"",	" & vbLf
+            PostString &= "                ""product-id-name"": ""MSISDN_PARENT"",	" & vbLf
+            PostString &= "                ""order-data"": {}	" & vbLf
+            PostString &= "            },	" & vbLf
+            PostString &= "	" & vbLf
+            PostString &= "            {	" & vbLf
+            PostString &= "                ""product-category"": ""TMV"",	" & vbLf
+            PostString &= "                ""order-type"": ""NEW"",	" & vbLf
+            PostString &= "                ""name"": ""PREPAID_REGISTER"",	" & vbLf
+            PostString &= "                ""product-name"": """ & price_plan & """,	" & vbLf
+            PostString &= "                ""product-id-number"": """ & subscriber & """,	" & vbLf
+            PostString &= "                ""product-id-name"": ""MSISDN"",	" & vbLf
+            PostString &= "                ""order-data"": {	" & vbLf
+            PostString &= "                    ""REF-PARENT-PRODUCT-IDNUMBER"": ""0000000005"",	" & vbLf
+            PostString &= "                    ""IS-REGISTERED"": """ & IIf(is_registered = IsRegistered.Y, "Y", "N") & """,	" & vbLf
+            PostString &= "                    ""SIM"": """ & sim_serial & """,	" & vbLf
+            PostString &= "                    ""STOCK-TYPE"": ""TRANSFER""	" & vbLf
+            PostString &= "                },	" & vbLf
+            PostString &= "                ""primary-order-data"": {	" & vbLf
+            PostString &= "                    ""ACCOUNT-SUB-TYPE-DESCRIPTION"": ""-"",	" & vbLf
+            PostString &= "                    ""SUB-ACTIVITY"": """ & IIf(sub_activity = SubActivity.PAIR, "PREPAID_REGISTER_PAIR", "PREPAID_REGISTER_UNPAIR") & """,	" & vbLf
+            PostString &= "	" & vbLf
+            PostString &= "                    ""ACCOUNT-SUB-TYPE"": ""PRE"",	" & vbLf
+            PostString &= "                    ""COMPANY-CODE"": ""RM""	" & vbLf
+            PostString &= "                }	" & vbLf
+            PostString &= "            }	" & vbLf
+            PostString &= "        ]	" & vbLf
+            PostString &= "    }	" & vbLf
+            PostString &= "}	" & vbLf
+
+            Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+
+            Dim JSONString As String = (New BackEndInterface.General).SendPostJSON(WebRequest, PostString)
+            Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+            Result.JSONString = JSONString
+            Return Result
+        End Function
     End Class
 
     Public Class Generate_Order_Id
