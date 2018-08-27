@@ -227,6 +227,7 @@
       <DependentUpon>UC_Service_SubmitOrder.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="App_Code\TrueMoney.vb" />
     <Content Include="App_Code\VDM_BL.vb" />
     <Compile Include="App_Code\Converter.vb" />
     <Compile Include="Default.aspx.designer.vb">

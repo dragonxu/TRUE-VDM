@@ -19,13 +19,11 @@
                                     subscriber.Text,
                                     shopCode.Text,
                                     customerName.Text,
-                                    proposition.Text,
                                     pricePlan.Text,
                                     sim.Text,
                                     saleCode.Text,
                                     face_recognition_result.Text,
-                                    is_identical.Text,
-                                    confident_ratio.Text)
+            confident_ratio.Text)
             If Not IsNothing(Response) Then
 
                 status.Text = Response.status

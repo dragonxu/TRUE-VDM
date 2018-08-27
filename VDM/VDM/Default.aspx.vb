@@ -4,6 +4,9 @@ Public Class _Default
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        Dim C As New Converter
+
         'Dim PD As New Get_Product_Info
         ''3000013633'----------- Device ----------
         ''3000013631'

@@ -117,4 +117,8 @@ Public Class Converter
         Return InputDate.ToString(Format)
     End Function
 
+    Public Function DateToEpoch(ByVal InputDate As DateTime) As Long
+        Return DateDiff(DateInterval.Second, New DateTime(1970, 1, 1), InputDate)
+    End Function
+
 End Class
