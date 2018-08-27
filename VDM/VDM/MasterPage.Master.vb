@@ -11,21 +11,21 @@
     End Sub
 
     Private Sub SetupMenu()
-        Select Case Session("Role")
-            Case CMPG_BL.StaffRole.Administrator
-                mnu_Dashboard.Visible = True
-                mnu_Report.Visible = True
-                mnu_Management.Visible = True
-                mnu_Setting.Visible = True
-            Case CMPG_BL.StaffRole.Viewer
-                mnu_Dashboard.Visible = True
-                mnu_Report.Visible = True
-                mnu_Management.Visible = False
-                mnu_Setting.Visible = False
-                '------------ Custom Report ------------
-                mnu_Report_Cus_TXN.Visible = False
-                badge_Report.InnerHtml = 3
-        End Select
+        'Select Case Session("Role")
+        '    Case CMPG_BL.StaffRole.Administrator
+        '        mnu_Dashboard.Visible = True
+        '        mnu_Report.Visible = True
+        '        mnu_Management.Visible = True
+        '        mnu_Setting.Visible = True
+        '    Case CMPG_BL.StaffRole.Viewer
+        '        mnu_Dashboard.Visible = True
+        '        mnu_Report.Visible = True
+        '        mnu_Management.Visible = False
+        '        mnu_Setting.Visible = False
+        '        '------------ Custom Report ------------
+        '        mnu_Report_Cus_TXN.Visible = False
+        '        badge_Report.InnerHtml = 3
+        'End Select
 
     End Sub
 
