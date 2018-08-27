@@ -165,7 +165,6 @@
     <Content Include="Scripts\ui\alert.js" />
     <Content Include="Scripts\ui\dashboard.js" />
     <Content Include="Scripts\ui\notifications.js" />
-    <Content Include="SignIn.aspx" />
     <Content Include="Styles\animate.css" />
     <Content Include="Styles\app.css" />
     <Content Include="Styles\app.skins.css" />
@@ -2718,13 +2717,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\BackEndInterface.vb" />
-    <Compile Include="SignIn.aspx.designer.vb">
-      <DependentUpon>SignIn.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="SignIn.aspx.vb">
-      <DependentUpon>SignIn.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Test_API\Test_API_Interface.aspx.designer.vb">
       <DependentUpon>Test_API_Interface.aspx</DependentUpon>
     </Compile>
