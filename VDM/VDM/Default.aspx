@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage.Master" CodeBehind="Default.aspx.vb" Inherits="WEB._Default" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage.Master" CodeBehind="Default.aspx.vb" Inherits="VDM._Default" %>
 <asp:Content ID="HeaderContainer" ContentPlaceHolderID="HeaderContainer" runat="server">
   <!-- page stylesheets -->
   <link rel="stylesheet" href="vendor/c3/c3.min.css">
