@@ -326,6 +326,8 @@ Public Class BackEndInterface
                 ByVal id_number As String,
                 ByVal id_type As String) As Response
 
+            '------------- ID Type I=PersonalCard,P=Passport,H=Other
+
             Dim GetString As String = ""
             GetString &= "key-type=SIM&"
             GetString &= "key-value=" & sim_serial & "&"
@@ -431,8 +433,7 @@ Public Class BackEndInterface
                 ByVal sddress_sub_district As String,
                 ByVal address_zip As String,
                 ByVal shopCode As String,
-                ByVal sale_partner_code As String,
-                ByVal sale_partner_name As String,
+                ByVal shopName As String,
                 ByVal sale_code As String,
                 ByVal mat_code As String,
                 ByVal mat_desc As String,
@@ -441,7 +442,8 @@ Public Class BackEndInterface
                 ByVal price_plan As String,
                 ByVal subscriber As String,
                 ByVal is_registered As IsRegistered,
-                ByVal sub_activity As SubActivity) As Response
+                ByVal sub_activity As SubActivity,
+                ByVal company_code As String) As Response
 
             Dim PostString = ""
 
@@ -481,11 +483,11 @@ Public Class BackEndInterface
             PostString &= "            }	" & vbLf
             PostString &= "        },	" & vbLf
             PostString &= "        ""sale-agent"": {	" & vbLf
-            PostString &= "            ""name"": """",	" & vbLf
+            PostString &= "            ""name"": ""-"",	" & vbLf
             PostString &= "            ""channel"": ""TLR"",	" & vbLf
             PostString &= "            ""partner-code"": """ & shopCode & """,	" & vbLf
-            PostString &= "            ""partner-name"": """ & sale_partner_name & """,	" & vbLf
-            PostString &= "            ""sale-code"": """ & sale_partner_code & """,	" & vbLf
+            PostString &= "            ""partner-name"": """ & shopName & """,	" & vbLf
+            PostString &= "            ""sale-code"": """ & sale_code & """,	" & vbLf
             PostString &= "            ""partner-type"": ""2""	" & vbLf
             PostString &= "        },	" & vbLf
             PostString &= "        ""order-items"": [	" & vbLf
@@ -532,7 +534,7 @@ Public Class BackEndInterface
             PostString &= "                    ""SUB-ACTIVITY"": """ & IIf(sub_activity = SubActivity.PAIR, "PREPAID_REGISTER_PAIR", "PREPAID_REGISTER_UNPAIR") & """,	" & vbLf
             PostString &= "	" & vbLf
             PostString &= "                    ""ACCOUNT-SUB-TYPE"": ""PRE"",	" & vbLf
-            PostString &= "                    ""COMPANY-CODE"": ""RM""	" & vbLf
+            PostString &= "                    ""COMPANY-CODE"": """ & company_code & """	" & vbLf
             PostString &= "                }	" & vbLf
             PostString &= "            }	" & vbLf
             PostString &= "        ]	" & vbLf
@@ -747,10 +749,6 @@ Public Class BackEndInterface
 
         Private Const SubURL As String = "/sales/flow/create"
 
-        Public Enum FlowType
-            Mobile = 1
-            Device = 2
-        End Enum
 #Region "DataModel"
         Public Class Response
 
@@ -812,7 +810,6 @@ Public Class BackEndInterface
 #End Region
 
         Public Function Get_Result(ByVal orderId As String,
-                                   ByVal FlowType As FlowType,
                                     ByVal staffOpenShift As String,
                                     ByVal thaiID As String,
                                     ByVal subscriber As String,
@@ -826,7 +823,7 @@ Public Class BackEndInterface
 
             Dim GetString As String = ""
             GetString &= "orderId=" & orderId & "&"
-            GetString &= "flowName=" & IIf(FlowType = FlowType.Mobile, "Mobile", "Device")
+            GetString &= "flowName=Mobile"
 
             Dim PostData As New Dictionary(Of String, String)
             PostData.Add("CREATE-BY", staffOpenShift)

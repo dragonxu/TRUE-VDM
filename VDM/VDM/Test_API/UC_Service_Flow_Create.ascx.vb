@@ -13,7 +13,6 @@
             Dim Response As New BackEndInterface.Service_Flow_Create.Response
             Response = BackEndInterface.Get_Result(
                                     orderId.Text,
-                                    FlowType.Text,
                                     staffOpenShift.Text,
                                     thaiID.Text,
                                     subscriber.Text,
@@ -21,9 +20,9 @@
                                     customerName.Text,
                                     pricePlan.Text,
                                     sim.Text,
-                                    saleCode.Text,
                                     face_recognition_result.Text,
-            confident_ratio.Text)
+                                    is_identical.Text,
+                                    confident_ratio.Text)
             If Not IsNothing(Response) Then
 
                 status.Text = Response.status
@@ -44,7 +43,6 @@
                 flow_name.Text = Response.response_data.flow_name
                 create_date.Text = Response.response_data.create_date
                 create_by.Text = Response.response_data.create_by
-
 
             End If
         Catch ex As Exception

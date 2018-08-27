@@ -32,6 +32,24 @@ Partial Public Class MasterPage
     Protected WithEvents mnu_Dashboard As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
+    '''badge_Dashboard control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents badge_Dashboard As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''mnu_Dashboard_Overall control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents mnu_Dashboard_Overall As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''mnu_Report control.
     '''</summary>
     '''<remarks>
@@ -50,40 +68,94 @@ Partial Public Class MasterPage
     Protected WithEvents badge_Report As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
-    '''mnu_Report_Site_TXN control.
+    '''mnu_Report_Product_Input control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents mnu_Report_Site_TXN As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents mnu_Report_Product_Input As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
-    '''mnu_Report_Cus_TXN control.
+    '''mnu_Report_Product_Output control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents mnu_Report_Cus_TXN As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents mnu_Report_Product_Output As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
-    '''mnu_Report_Machine_TXN control.
+    '''mnu_Report_Product_Stock control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents mnu_Report_Machine_TXN As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents mnu_Report_Product_Stock As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
-    '''mnu_Report_Site_Summary control.
+    '''mnu_Report_Product_Warning control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents mnu_Report_Site_Summary As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents mnu_Report_Product_Warning As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''mnu_Report_TMS_EDI control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents mnu_Report_TMS_EDI As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''mnu_Report_Money_Stock control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents mnu_Report_Money_Stock As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''mnu_Report_Money_Transaction control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents mnu_Report_Money_Transaction As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''mnu_Report_Sale_Summary control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents mnu_Report_Sale_Summary As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''mnu_Report_Hot_Sale control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents mnu_Report_Hot_Sale As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''mnu_Report_Customer_Transaction control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents mnu_Report_Customer_Transaction As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''mnu_Management control.
@@ -95,22 +167,13 @@ Partial Public Class MasterPage
     Protected WithEvents mnu_Management As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
-    '''Span1 control.
+    '''badge_Management control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Span1 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''mnu_Manage_Customer control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents mnu_Manage_Customer As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents badge_Management As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''mnu_Manage_Machine control.
@@ -122,13 +185,31 @@ Partial Public Class MasterPage
     Protected WithEvents mnu_Manage_Machine As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
-    '''mnu_Manage_Staff control.
+    '''mnu_Manage_Product_Input control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents mnu_Manage_Staff As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents mnu_Manage_Product_Input As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''mnu_Manage_Shift control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents mnu_Manage_Shift As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''mnu_Manage_Product_Info control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents mnu_Manage_Product_Info As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''mnu_Setting control.
@@ -140,13 +221,13 @@ Partial Public Class MasterPage
     Protected WithEvents mnu_Setting As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
-    '''Span2 control.
+    '''badge_Setting control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Span2 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents badge_Setting As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''mnu_Setting_Site control.
@@ -158,22 +239,13 @@ Partial Public Class MasterPage
     Protected WithEvents mnu_Setting_Site As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
-    '''mnu_Setting_Brand control.
+    '''mnu_Setting_Authorize control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents mnu_Setting_Brand As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''mnu_Setting_Service control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents mnu_Setting_Service As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents mnu_Setting_Authorize As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''form1 control.

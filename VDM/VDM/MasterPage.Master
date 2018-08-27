@@ -4,8 +4,12 @@
 <html class="no-js">
 <head runat="server">
      
-  <title>WashUp-Management Console</title>
-
+  <title>VENDING-Management Console</title>
+  <% 
+'ff0000
+'ff6600
+'ffcc00
+      %>
   <meta charset="utf-8" />
   <meta name="description" content="" />
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1" />
@@ -74,11 +78,20 @@
       <nav role="navigation">
         <ul class="nav">
           <!-- dashboard -->
-          <li id="mnu_Dashboard" runat="server">
+          <li class="menu-accordion" id="mnu_Dashboard" runat="server">
             <a href="Default.aspx">
-              <i class="icon-bar-chart"></i>
+              <span class="badge pull-right" id="badge_Dashboard" runat="server">1</span>
+              <i class="icon-pie-chart"></i>
               <span>Dashboard</span>
             </a>
+            <ul class="sub-menu">
+                <li id="mnu_Dashboard_Overall" runat="server">
+                <a href="javascript:;">                  
+                  <i class="icon-pie-chart"></i>
+                  <span>ภาพรวม</span>
+                </a>                
+              </li>   
+            </ul>
           </li>
           <li class="menu-accordion" id="mnu_Report" runat="server">
             <a href="javascript:;">
@@ -87,84 +100,120 @@
               <span>Reports</span>
             </a>
             <ul class="sub-menu">
-              <li id="mnu_Report_Site_TXN" runat="server">
-                <a href="Report_Site_TXN.aspx">                  
-                  <i class="icon-pointer"></i>
-                  <span>Site Transaction</span>
+              <li id="mnu_Report_Product_Input" runat="server">
+                <a href="javascript:;">                  
+                  <i class="icon-docs"></i>
+                  <span>การนำสินค้าเข้าเครื่อง</span>
                 </a>                
               </li>              
-              <li id="mnu_Report_Cus_TXN" runat="server">
-                 <a href="Report_Customer_TXN.aspx">                  
-                  <i class="icon-users"></i>
-                  <span>Customer Transaction</span>
+              <li id="mnu_Report_Product_Output" runat="server">
+                 <a href="javascript:;">                  
+                  <i class="icon-docs"></i>
+                  <span>สินค้าออกจากเครื่อง</span>
                 </a>                
               </li>
-              <li id="mnu_Report_Machine_TXN" runat="server">
-                <a href="Report_Machine_TXN.aspx">                  
-                  <i class="icon-speedometer"></i>
-                  <span>Machine Transaction</span>
+              <li id="mnu_Report_Product_Stock" runat="server">
+                <a href="javascript:;">                  
+                  <i class="icon-docs"></i>
+                  <span>สินค้าคงเครื่อง</span>
                 </a>                
               </li>
-              <li id="mnu_Report_Site_Summary" runat="server">
-                <a href="Report_Site_Summary.aspx">
-                    <i class="icon-pointer"></i>
-                    <span>Site Summary</span>
+              <li id="mnu_Report_Product_Warning" runat="server">
+                <a href="javascript:;">
+                    <i class="icon-docs"></i>
+                    <span>สินค้าใกล้หมด</span>
                 </a>
-              </li>           
+              </li>
+              <li id="mnu_Report_TMS_EDI" runat="server">
+                <a href="javascript:;">
+                    <i class="icon-docs"></i>
+                    <span>EDI ตัดสต็อค TSM</span>
+                </a>
+              </li>
+              <li id="mnu_Report_Money_Stock" runat="server">
+                <a href="javascript:;">
+                    <i class="icon-docs"></i>
+                    <span>ยอดเงินคงเครื่อง</span>
+                </a>
+              </li>
+              <li id="mnu_Report_Money_Transaction" runat="server">
+                <a href="javascript:;">
+                    <i class="icon-docs"></i>
+                    <span>จำนวนเงินเข้า-ออก</span>
+                </a>
+              </li>     
+              <li id="mnu_Report_Sale_Summary" runat="server">
+                <a href="javascript:;">
+                    <i class="icon-docs"></i>
+                    <span>สรุปยอดขาย</span>
+                </a>
+              </li>   
+              <li id="mnu_Report_Hot_Sale" runat="server">
+                <a href="javascript:;">
+                    <i class="icon-docs"></i>
+                    <span>สินค้าขายดี</span>
+                </a>
+              </li>   
+              <li id="mnu_Report_Customer_Transaction" runat="server">
+                <a href="javascript:;">
+                    <i class="icon-docs"></i>
+                    <span>การทำรายการของลูกค้า</span>
+                </a>
+              </li>       
             </ul>
           </li>
           <li class="menu-accordion" id="mnu_Management" runat="server">
             <a href="javascript:;">
-              <span class="badge pull-right" id="Span1" runat="server">3</span>
-              <i class="icon-briefcase"></i>
+              <span class="badge pull-right" id="badge_Management" runat="server">3</span>
+              <i class="icon-screen-desktop"></i>
               <span>Management</span>
             </a>
             <ul class="sub-menu">
-              <li id="mnu_Manage_Customer" runat="server">
-                <a href="Setting_Customer.aspx">                  
-                  <i class="icon-users"></i>
-                  <span>Customer & wallet</span>
-                </a>                
-              </li>
               <li id="mnu_Manage_Machine" runat="server">
-                <a href="Setting_Machine.aspx">                  
-                  <i class="icon-speedometer"></i>
-                  <span>Machine Config</span>
+                <a href="javascript:;">                  
+                  <i class="icon-handbag"></i>
+                  <span>เครื่อง Vending</span>
+                </a>                
+              </li>              
+              <li id="mnu_Manage_Product_Input" runat="server">
+                <a href="javascript:;">                  
+                  <i class="icon-login"></i>
+                  <span>นำสินค้าเข้าเครื่อง</span>
                 </a>                
               </li>
-              <li id="mnu_Manage_Staff" runat="server">
-                <a href="Setting_User.aspx">                  
-                  <i class="icon-lock"></i>
-                  <span>Staff authorization</span>
+              <li id="mnu_Manage_Shift" runat="server">
+                <a href="javascript:;">                  
+                  <i class="icon-clock"></i>
+                  <span>เปิด/ปิด Shift</span>
                 </a>                
               </li>
+              <li id="mnu_Manage_Product_Info" runat="server">
+                <a href="javascript:;">                  
+                  <i class="icon-note"></i>
+                  <span>รายละเอียดสินค้าและซิมการ์ด</span>
+                </a>                
+              </li>              
             </ul>
           </li>
           <li class="menu-accordion" id="mnu_Setting" runat="server">
             <a href="javascript:;">
-              <span class="badge pull-right" id="Span2" runat="server">3</span>
+              <span class="badge pull-right" id="badge_Setting" runat="server">3</span>
               <i class="icon-settings"></i>
               <span>Setting</span>
             </a>
             <ul class="sub-menu">
               <li id="mnu_Setting_Site" runat="server">
-                <a href="setting_site.aspx">
+                <a href="javascript:;">
                   <i class="icon-pointer"></i>
-                  <span>Site</span>
+                  <span>ตำแหน่งที่ตั้ง</span>
                 </a>                
               </li>      
-              <li id="mnu_Setting_Brand" runat="server">
-                <a href="setting_brand.aspx">                  
-                  <i class="icon-badge"></i>
-                  <span>Brand</span>
+              <li id="mnu_Setting_Authorize" runat="server">
+                <a href="javascript:;">
+                  <i class="icon-users"></i>
+                  <span>สิทธิ์เจ้าหน้าที่</span>
                 </a>                
-              </li>
-              <li id="mnu_Setting_Service" runat="server">
-                <a href="setting_service.aspx">                  
-                  <i class="icon-basket"></i>
-                  <span>Service</span>
-                </a>                
-              </li>              
+              </li>          
             </ul>
           </li>
         </ul>
@@ -187,7 +236,7 @@
           <!-- /toggle offscreen menu -->
           <!-- logo -->
           <a class="brand-logo">
-            <img src="Images/Logo500x83_White.png" class="LogoWhite" />
+            <img src="Images/Logo500x83.png" class="LogoWhite" />
           </a>
           <!-- /logo -->
         </div>

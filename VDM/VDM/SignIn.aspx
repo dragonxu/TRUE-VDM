@@ -5,7 +5,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Welcome to - WashUp Management Console</title>
+  <title>Welcome to - VENDING Management Console</title>
   <meta name="description" content="" />
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1" />
   <!-- build:css({.tmp,app}) styles/app.min.css -->
@@ -47,7 +47,7 @@
             <div class="card-block">
               <asp:Panel CssClass="form-layout" ID="pnlLogin" runat="server" DefaultButton="btnLogin">
                 <div class="text-center m-b">
-                  <h4 class="text-uppercase">WashUp Management Console</h4>
+                  <h4 class="text-uppercase">VENDING Management Console</h4>
                     <p>
                         <img src="images/Logo128x128.png" />
                     </p>
@@ -59,7 +59,7 @@
                   <label class="text-uppercase">Password</label>
                   <asp:TextBox ID="txtPass" runat="server" class="form-control input-lg" TextMode="Password" placeholder="Password"></asp:TextBox>
                 </div>
-                <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-info btn-block btn-lg " Text="Sign In" />
+                <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-danger btn-block btn-lg " Text="Sign In" />
                 <asp:Label ID="lblError" runat="server" CssClass="text-center m-b" style=" width:100%; color:red;">
                     Invalid admin username and password
                 </asp:Label>

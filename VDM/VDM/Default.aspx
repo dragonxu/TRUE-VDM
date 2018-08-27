@@ -17,7 +17,7 @@
     <div class="row">
       <%--Line--%>
         <div class="m-x-n-g m-t-n-g overflow-hidden">
-          <div class="card m-b-0 bg-primary-dark text-white p-a-md no-border">
+          <div class="card m-b-0 bg-default-light text-red p-a-md no-border">
             <h5 class="m-t-0">
               <span class="pull-right"><asp:Label ID="lblSalesValues" runat="server"></asp:Label> Last 2 weeks</span>
               <span>Serviced Transactions</span>
@@ -50,10 +50,10 @@
         <div class="col-sm-8">
             <div class="card bg-white" id="BarBlock">
                 <div class="card-block text-center p-t-0">
-                    <h5 class="text-primary">Annual Serviced Transactions</h5>
+                    <h5 class="text-red">Annual Serviced Transactions</h5>
                     <div class="chart bar" style="height: 200px"></div>
                     
-                    <a href="javascript:;" class="btn btn-info btn-xs">Completed Transaction</a>
+                    <a href="javascript:;" class="btn btn-danger btn-xs">Completed Transaction</a>
                     <%--<a href="javascript:;" class="btn btn-danger btn-xs">Lost Transaction</a>--%>
 
                 </div>
@@ -64,11 +64,11 @@
         <div class="col-sm-4">
             <div class="card bg-white" id="RadarBlock">
                 <div class="card-block text-center p-t-0" style="height:unset;">
-                   <h5 class="text-primary">Frequency Service Time in This Month</h5>
+                   <h5 class="text-red">Frequency Service Time in This Month</h5>
                     <div class="canvas-holder">
                         <canvas class="radar" height="200"></canvas>
                     </div>
-                    <a href="javascript:;" class="btn btn-info btn-xs">Completed Transaction</a>
+                    <a href="javascript:;" class="btn btn-danger btn-xs">Completed Transaction</a>
                     <%--<a href="javascript:;" class="btn btn-danger btn-xs">Lost Transaction</a>--%>
                 </div>
             </div>
