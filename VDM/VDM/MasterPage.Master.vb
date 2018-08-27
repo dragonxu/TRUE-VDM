@@ -5,10 +5,6 @@
 
     End Sub
 
-    Private Sub SetupMenu()
-
-    End Sub
-
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
         Session.Abandon()
         Response.Redirect("SignIn.aspx")
