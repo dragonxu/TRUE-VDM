@@ -9,9 +9,10 @@
 
     Private Sub btn_Request_Click(sender As Object, e As EventArgs) Handles btn_Request.Click
         Try
-            BackEndInterface.Get_Result(key_value.Text, id_number.Text, id_type.Text)
+
 
             Dim Response As New BackEndInterface.Prepaid_Validate_Register.Response
+            Response = BackEndInterface.Get_Result(key_value.Text, id_number.Text, id_type.Text)
             If Not IsNothing(Response) Then
 
                 status.Text = Response.status

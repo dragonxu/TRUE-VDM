@@ -9,9 +9,10 @@
 
     Private Sub btn_Request_Click(sender As Object, e As EventArgs) Handles btn_Request.Click
         Try
-            BackEndInterface.Get_Result(order_id_REQ.Text)
+
 
             Dim Response As New BackEndInterface.Delete_File.Response
+            Response = BackEndInterface.Get_Result(order_id_REQ.Text)
             If Not IsNothing(Response) Then
                 trx_id.Text = Response.trx_id
                 process_instance.Text = Response.process_instance
