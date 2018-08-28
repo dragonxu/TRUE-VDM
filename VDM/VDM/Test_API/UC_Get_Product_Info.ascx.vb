@@ -11,11 +11,13 @@
         Try
 
 
+
             Dim Response As New BackEndInterface.Get_Product_Info.Response
             Response = BackEndInterface.Get_Result(productCode.Text)
             If Not IsNothing(Response) Then
 
                 Price.Text = Response.response_data.Price
+
 
                 'Product
                 CODE.Text = Response.response_data.Product.CODE
@@ -40,13 +42,12 @@
                 CAPACITY.Text = Response.response_data.Product.CAPACITY
                 CATEGORY_RECOMMEND.Text = Response.response_data.Product.CATEGORY_RECOMMEND
 
-                'Dim Captions As New BackEndInterface.Get_Product_Info.Response.Caption
-
-                'SEQ.Text = Response.Caption(0).SEQ
-                'PRODUCT_CODE.Text = Captions.PRODUCT_CODE
-                'CAPTION_CODE.Text = Captions.CAPTION_CODE
-                'CAPTION_DESC.Text = Captions.CAPTION_DESC
-                'DETAIL.Text = Captions.DETAIL
+                'Captions
+                SEQ.Text = Response.response_data.Captions(0).SEQ
+                PRODUCT_CODE.Text = Response.response_data.Captions(0).PRODUCT_CODE
+                CAPTION_CODE.Text = Response.response_data.Captions(0).CAPTION_CODE
+                CAPTION_DESC.Text = Response.response_data.Captions(0).CAPTION_DESC
+                DETAIL.Text = Response.response_data.Captions(0).DETAIL
 
             End If
         Catch ex As Exception
