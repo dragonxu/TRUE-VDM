@@ -164,7 +164,7 @@
           </li>
           <li class="menu-accordion" id="mnu_Management" runat="server">
             <a href="javascript:;">
-              <span class="badge pull-right" id="badge_Management" runat="server">4</span>
+              <span class="badge pull-right" id="badge_Management" runat="server">5</span>
               <i class="icon-screen-desktop"></i>
               <span>Management</span>
             </a>
@@ -188,13 +188,13 @@
                 </a>                
               </li>
               <li id="mnu_Manage_Product_Info" runat="server">
-                <a href="javascript:;">                  
+                <a href="javascript:;">
                   <i class="icon-note"></i>
                   <span>รายละเอียดสินค้าและซิมการ์ด</span>
                 </a>                
               </li>
               <li id="mnu_Manage_Brand" runat="server">
-                <a href="javascript:;">                  
+                <a href="Manage_Brand.aspx">
                   <i class="icon-note"></i>
                   <span>แบรนด์สินค้า</span>
                 </a>                
@@ -209,7 +209,7 @@
             </a>
             <ul class="sub-menu">
               <li id="mnu_Setting_Site" runat="server">
-                <a href="javascript:;">
+                <a href="Setting_Site.aspx">
                   <i class="icon-pointer"></i>
                   <span>ตำแหน่งที่ตั้ง</span>
                 </a>                

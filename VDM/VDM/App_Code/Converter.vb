@@ -83,6 +83,8 @@ Public Class Converter
         End Using
     End Function
 
+
+
     Public Function ImageToStream(ByVal IMG As Drawing.Image) As Stream
         Using ST As New MemoryStream()
             IMG.Save(ST, Imaging.ImageFormat.Png)
