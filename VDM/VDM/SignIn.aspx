@@ -5,7 +5,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Welcome to - VENDING Management Console</title>
+  <title>VENDING Management Console</title>
   <meta name="description" content="" />
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1" />
   <!-- build:css({.tmp,app}) styles/app.min.css -->

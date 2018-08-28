@@ -121,7 +121,7 @@
     <Content Include="images\default-avatar.png" />
     <Content Include="images\Logo128x128.png" />
     <Content Include="images\Logo320x55.png" />
-    <Content Include="images\Logo500x83_White.png" />
+    <Content Include="images\Logo500x83.png" />
     <Content Include="images\Logo70x55.png" />
     <Content Include="images\offline.png" />
     <Content Include="images\online.png" />
