@@ -106,13 +106,15 @@ Public Class BackEndInterface
 #Region "DataModel"
         Public Class Response
 
-            Public Property response_data As Response
-
-            Public Class Response
-                Public Property Product As ProductMaster
-                Public Property Price As String
-                Public Property Captions As List(Of Caption)
-            End Class
+            'Public Property response_data As Response
+            Public Property Product As ProductMaster
+            Public Property Price As String
+            Public Property Captions As List(Of Caption)
+            'Public Class Response
+            '    Public Property Product As ProductMaster
+            '    Public Property Price As String
+            '    '
+            'End Class
 
             Public Class ProductMaster
                 Public Property CODE As String
