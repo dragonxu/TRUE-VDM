@@ -126,6 +126,7 @@
     <Content Include="images\offline.png" />
     <Content Include="images\online.png" />
     <Content Include="images\warning.gif" />
+    <Content Include="MS_Product.aspx" />
     <Content Include="Scripts\apps\calendar.js" />
     <Content Include="Scripts\apps\products.js" />
     <Content Include="Scripts\apps\travel.js" />
@@ -2721,6 +2722,13 @@
     </Compile>
     <Compile Include="MasterPage.Master.vb">
       <DependentUpon>MasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MS_Product.aspx.designer.vb">
+      <DependentUpon>MS_Product.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MS_Product.aspx.vb">
+      <DependentUpon>MS_Product.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SignIn.aspx.designer.vb">
