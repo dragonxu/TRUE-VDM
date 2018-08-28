@@ -318,13 +318,5 @@ Partial Public Class Test_API_Interface
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnl_Prepaid_Register As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
-    '''UC_Prepaid_Register control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents UC_Prepaid_Register As Global.VDM.UC_Prepaid_Register
+
 End Class

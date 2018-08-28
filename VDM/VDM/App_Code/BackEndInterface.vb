@@ -252,7 +252,7 @@ Public Class BackEndInterface
             PostData.Add("seq", seq)
             PostData.Add("max-seq", "")
 
-            Dim JSONString As String = (New BackEndInterface.General).SendPostString(WebRequest, PostData)
+            Dim JSONString As String = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
             Result.JSONString = JSONString
             Return Result
