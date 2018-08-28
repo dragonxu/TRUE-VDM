@@ -212,6 +212,15 @@ Partial Public Class MasterPage
     Protected WithEvents mnu_Manage_Product_Info As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
+    '''mnu_Manage_Brand control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents mnu_Manage_Brand As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''mnu_Setting control.
     '''</summary>
     '''<remarks>
