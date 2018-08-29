@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage.Master" CodeBehind="MS_Product.aspx.vb" Inherits="VDM.MS_Product" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage.Master" CodeBehind="Manage_Product_Info.aspx.vb" Inherits="VDM.Manage_Product_Info" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeaderContainer" runat="server">
 </asp:Content>
@@ -11,16 +11,14 @@
 
 
         <div class="page-title" style="margin-top: -80px;">
-            <div class="title">Setting &gt; Product</div>
-            <div class="sub-title">......</div>
+            <div class="title">Management &gt; Manage Product Info</div> 
         </div>
         <div id="MainContent_udpList">
 
-            <div id="MainContent_pnlList" class="card bg-white">
-
+            <div id="pnlList" class="card bg-white">
                 <div class="card-header">
-                    count xx
-                </div>
+                Found : <asp:Label ID="lblTotalList" runat="server"></asp:Label> Product(s)
+            </div>
                 <div class="card-block">
                     <div class="no-more-tables">
                         <table class="table table-bordered table-striped m-b-0">
@@ -57,26 +55,30 @@
                         </table>
                     </div>
                     <div class="row m-t">
-                    </div>
+                    <asp:LinkButton CssClass="btn btn-primary btn-icon loading-demo mr5 btn-shadow" ID="btnAdd" runat="server">
+                      <i class="fa fa-plus-circle"></i>
+                      <span>Add new product</span>
+                    </asp:LinkButton>
+                </div>
                 </div>
 
             </div>
 
         </div>
 
-        <div id="MainContent_pnlEdit" class="card bg-white">
+        <div id="pnlEdit" class="card bg-white">
 
             <div class="card-header">
-                Edit Production
+                Product
             </div>
             <div class="card-block">
                 <div class="form-horizontal">
-                    <%-- <h5>Specification</h5>--%>
+                     <h4>Product Info</h4>
                     <div class="row ">
                         <div class="form-group col-sm-6">
                             <label class="col-sm-4 control-label">Product Code <span style ="color :red;">*</span></label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control   ">
+                                <asp:TextBox ID="txtCode" runat="server"  class="form-control"></asp:TextBox>
                             </div>
                         </div>
 
@@ -88,13 +90,13 @@
                                 <div class="col-sm-3">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio">Yes</label>
+                                            <asp:RadioButton ID="rdIsSerial_Yes" runat ="server" GroupName ="IsSerial" Text ="Yes" /> </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio">No</label>
+                                            <asp:RadioButton ID="rdIsSerial_No" runat ="server" GroupName ="IsSerial" Text ="No" /> </label>
                                     </div>
                                 </div>
                             </div>
@@ -102,22 +104,11 @@
                     </div>
                     <div class="row ">
                         <div class="form-group col-sm-6">
-                            <label class="col-sm-4 control-label">Is Sim <span style ="color :red;">*</span></label>
+                            <label class="col-sm-4 control-label">Brand <span style ="color :red;">*</span></label>
 
 
                             <div class="col-sm-6">
-                                <div class="col-sm-3">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio">Yes</label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio">No</label>
-                                    </div>
-                                </div>
+                                <asp:DropDownList ID="ddlBrand" runat ="server"  class="form-control" ></asp:DropDownList>
                             </div>
 
 
@@ -125,18 +116,18 @@
 
 
                         <div class="form-group col-sm-6">
-                            <label class="col-sm-4 control-label">Requiire Receive Form <span style ="color :red;">*</span></label>
+                            <label class="col-sm-4 control-label">Require Receive Form <span style ="color :red;">*</span></label>
                             <div class="col-sm-6">
                                 <div class="col-sm-3">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio">Yes</label>
+                                            <asp:RadioButton ID="rdRequireReceive_Yes" runat ="server" GroupName ="RequireReceive" Text ="Yes" /></label>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio">No</label>
+                                            <asp:RadioButton ID="rdRequireReceive_No" runat ="server" GroupName ="RequireReceive" Text ="No" /></label>
                                     </div>
                                 </div>
                             </div>
@@ -168,7 +159,7 @@
 
                 </div>
                 <div class="row">
-                    <h5>Specification</h5>
+                    <h4>Specification</h4>
                     <div class="form-group col-sm-12">
                         <div class="card">
                             <div class="card-block p-a-0">
@@ -308,19 +299,7 @@
 
                                                     </div>
                                                 </div>
-
-                                                <div class="form-group col-sm-12">
-                                                    <label class="col-sm-2 control-label">Status Active</label>
-
-
-                                                    <div class="col-sm-10">
-
-                                                        <asp:CheckBox ID="isActive" runat="server" />
-
-                                                    </div>
-
-
-                                                </div>
+                                                 
 
 
 
@@ -451,18 +430,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group col-sm-12">
-                                                    <label class="col-sm-2 control-label">Status Active</label>
-
-
-                                                    <div class="col-sm-10">
-
-                                                        <asp:CheckBox ID="CheckBox1" runat="server" />
-
-                                                    </div>
-
-
-                                                </div>
+                                                
 
 
 
@@ -484,6 +452,27 @@
                         </div>
                     </div>
                 </div>
+
+
+                <div class="form-group" style="margin-left:-5px;">
+                            <h4 class="card-title col-sm-2 control-label" style="text-align:left;">Active Status </h4>  
+                        
+                            <label class="col-sm-10 cb-checkbox cb-md">
+                                <asp:CheckBox ID="chkActive" runat="server" Checked="true" />
+                            </label>
+                </div>
+
+                <div class="form-group" style="text-align:right">
+                            <asp:LinkButton CssClass="btn btn-success btn-icon loading-demo mr5 btn-shadow" ID="btnSave" runat="server">
+                              <i class="fa fa-save"></i>
+                              <span>Save</span>
+                            </asp:LinkButton>
+
+                            <asp:LinkButton CssClass="btn btn-warning btn-icon loading-demo mr5 btn-shadow" ID="btnBack" runat="server">
+                              <i class="fa fa-rotate-left"></i>
+                              <span>Cancel</span>
+                            </asp:LinkButton>
+                      </div>
             </div>
 
 

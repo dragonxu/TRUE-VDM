@@ -114,7 +114,6 @@
     <Content Include="fonts\fontawesome\fontawesome-webfont.svg" />
     <Content Include="fonts\sli\Simple-Line-Icons.dev.svg" />
     <Content Include="fonts\sli\Simple-Line-Icons.svg" />
-    <Content Include="forms-plugins.html" />
     <Content Include="Global.asax" />
     <Content Include="images\avatar.jpg" />
     <Content Include="images\avatar.png" />
@@ -2741,7 +2740,6 @@
     </Compile>
     <Compile Include="MS_Product.aspx.vb">
       <DependentUpon>MS_Product.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="RenderImage.aspx.designer.vb">
       <DependentUpon>RenderImage.aspx</DependentUpon>

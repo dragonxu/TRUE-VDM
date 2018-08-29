@@ -194,7 +194,13 @@
               <li id="mnu_Manage_Product_Info" runat="server">
                 <a href="javascript:;">
                   <i class="icon-note"></i>
-                  <span>รายละเอียดสินค้าและซิมการ์ด</span>
+                  <span>รายละเอียดสินค้า</span>
+                </a>                
+              </li>
+              <li id="mnu_Manage_Sim_Info" runat="server">
+                <a href="javascript:;">
+                  <i class="icon-note"></i>
+                  <span>รายละเอียดซิมการ์ด</span>
                 </a>                
               </li>
               <li id="mnu_Manage_Brand" runat="server">
