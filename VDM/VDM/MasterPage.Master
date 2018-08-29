@@ -192,7 +192,7 @@
                 </a>                
               </li>
               <li id="mnu_Manage_Product_Info" runat="server">
-                <a href="javascript:;">
+                <a href="Manage_Product_Info.aspx">
                   <i class="icon-note"></i>
                   <span>รายละเอียดสินค้า</span>
                 </a>                

@@ -147,8 +147,6 @@
                                 </div>
                           </div>
                       </div>
-                      
-                      
 
                       <div class="form-group" style="margin-left:-5px;">
                             <h5 class="card-title col-sm-2 control-label" style="text-align:left;">Active Status </h5>  

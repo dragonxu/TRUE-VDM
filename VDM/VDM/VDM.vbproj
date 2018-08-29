@@ -127,7 +127,7 @@
     <Content Include="images\online.png" />
     <Content Include="images\warning.gif" />
     <Content Include="Manage_Brand.aspx" />
-    <Content Include="MS_Product.aspx" />
+    <Content Include="Manage_Product_Info.aspx" />
     <Content Include="RenderImage.aspx" />
     <Content Include="Scripts\apps\calendar.js" />
     <Content Include="Scripts\apps\products.js" />
@@ -2728,18 +2728,19 @@
       <DependentUpon>Manage_Brand.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Manage_Product_Info.aspx.designer.vb">
+      <DependentUpon>Manage_Product_Info.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage_Product_Info.aspx.vb">
+      <DependentUpon>Manage_Product_Info.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="MasterPage.Master.designer.vb">
       <DependentUpon>MasterPage.Master</DependentUpon>
     </Compile>
     <Compile Include="MasterPage.Master.vb">
       <DependentUpon>MasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MS_Product.aspx.designer.vb">
-      <DependentUpon>MS_Product.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="MS_Product.aspx.vb">
-      <DependentUpon>MS_Product.aspx</DependentUpon>
     </Compile>
     <Compile Include="RenderImage.aspx.designer.vb">
       <DependentUpon>RenderImage.aspx</DependentUpon>

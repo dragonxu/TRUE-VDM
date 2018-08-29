@@ -4,11 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-
-
     <div class="main-content checkbo">
-
-
 
         <div class="page-title" style="margin-top: -80px;">
             <div class="title">Management &gt; Manage Product Info</div> 
@@ -309,9 +305,7 @@
 
                                         </div>
                                         <div class="tab-pane" id="profile">
-
                                             <div class="row ">
-
                                                 <div class="form-group  col-sm-12">
                                                     <label class="col-sm-2 control-label">Display Name</label>
                                                     <div class="col-sm-10">
@@ -326,9 +320,6 @@
                                                         <textarea class="form-control" rows="3"></textarea>
                                                     </div>
                                                 </div>
-
-
-
                                             </div>
 
                                             <div class="form-group">
@@ -340,16 +331,12 @@
                                                         <img id="img" style="cursor: pointer; max-width: 50%;">
                                                     </div>
                                                     <div>
-
                                                         <asp:LinkButton ID="LinkButton1" runat="server" class="btn btn-success fileinput-button">
                                                               <i class="icon-plus"></i>
                                                             <span>Add Image...</span>
-
                                                         </asp:LinkButton>
 
                                                         <asp:FileUpload ID="FileUpload2" runat="server" Style="display: none;" />
-
-
                                                     </div>
 
                                                     <div class="help-block m-b">Desc : size</div>
@@ -368,17 +355,10 @@
                                                         <div style="float: right; margin-right: 5px;">
                                                             <button class="btn btn-info ripple">Add Spec</button>
                                                         </div>
-
-
-
                                                     </div>
                                                 </div>
 
-
-
                                                 <div class="form-group  col-sm-12">
-
-
                                                     <label class="col-sm-2 control-label"></label>
                                                     <div class="col-sm-10">
 
