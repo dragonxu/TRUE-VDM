@@ -114,6 +114,7 @@
     <Content Include="fonts\fontawesome\fontawesome-webfont.svg" />
     <Content Include="fonts\sli\Simple-Line-Icons.dev.svg" />
     <Content Include="fonts\sli\Simple-Line-Icons.svg" />
+    <Content Include="forms-plugins.html" />
     <Content Include="Global.asax" />
     <Content Include="images\avatar.jpg" />
     <Content Include="images\avatar.png" />
@@ -2720,6 +2721,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\BackEndInterface.vb" />
+    <Compile Include="App_Code\ModuleGlobal.vb" />
     <Compile Include="Manage_Brand.aspx.designer.vb">
       <DependentUpon>Manage_Brand.aspx</DependentUpon>
     </Compile>

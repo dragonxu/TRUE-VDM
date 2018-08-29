@@ -221,7 +221,16 @@ Module ModuleGlobal
     End Function
 
     Public Sub DeleteFile(ByVal Path As String)
-        My.Computer.FileSystem.DeleteFile(Path)
+        Dim TryTime As Integer = 0
+        Dim MaxTry As Integer = 5
+        While File.Exists(Path) And TryTime < MaxTry
+            TryTime += 1
+            Try
+                My.Computer.FileSystem.DeleteFile(Path)
+            Catch
+                Threading.Thread.Sleep(300)
+            End Try
+        End While
     End Sub
 
     Public Sub DeleteDirectory(ByVal Path As String)
