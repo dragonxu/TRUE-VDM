@@ -11,7 +11,79 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class MS_Product
+Partial Public Class Manage_Product_Info
+    
+    '''<summary>
+    '''lblTotalList control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTotalList As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''btnAdd control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAdd As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''txtCode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtCode As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''rdIsSerial_Yes control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rdIsSerial_Yes As Global.System.Web.UI.WebControls.RadioButton
+    
+    '''<summary>
+    '''rdIsSerial_No control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rdIsSerial_No As Global.System.Web.UI.WebControls.RadioButton
+    
+    '''<summary>
+    '''ddlBrand control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlBrand As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''rdRequireReceive_Yes control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rdRequireReceive_Yes As Global.System.Web.UI.WebControls.RadioButton
+    
+    '''<summary>
+    '''rdRequireReceive_No control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rdRequireReceive_No As Global.System.Web.UI.WebControls.RadioButton
     
     '''<summary>
     '''lnkUpload control.
@@ -59,15 +131,6 @@ Partial Public Class MS_Product
     Protected WithEvents DropDownList2 As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
-    '''isActive control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents isActive As Global.System.Web.UI.WebControls.CheckBox
-    
-    '''<summary>
     '''LinkButton1 control.
     '''</summary>
     '''<remarks>
@@ -113,11 +176,29 @@ Partial Public Class MS_Product
     Protected WithEvents DropDownList5 As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
-    '''CheckBox1 control.
+    '''chkActive control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents CheckBox1 As Global.System.Web.UI.WebControls.CheckBox
+    Protected WithEvents chkActive As Global.System.Web.UI.WebControls.CheckBox
+    
+    '''<summary>
+    '''btnSave control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSave As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''btnBack control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
 End Class
