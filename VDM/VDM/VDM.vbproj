@@ -128,6 +128,7 @@
     <Content Include="images\warning.gif" />
     <Content Include="Manage_Brand.aspx" />
     <Content Include="Manage_Product_Info.aspx" />
+    <Content Include="RenderImage.aspx" />
     <Content Include="Scripts\apps\calendar.js" />
     <Content Include="Scripts\apps\products.js" />
     <Content Include="Scripts\apps\travel.js" />
@@ -168,6 +169,8 @@
     <Content Include="Scripts\ui\alert.js" />
     <Content Include="Scripts\ui\dashboard.js" />
     <Content Include="Scripts\ui\notifications.js" />
+    <Content Include="Setting_Site.aspx" />
+    <Content Include="SignIn.aspx" />
     <Content Include="Styles\animate.css" />
     <Content Include="Styles\app.css" />
     <Content Include="Styles\app.skins.css" />
@@ -2717,6 +2720,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\BackEndInterface.vb" />
+    <Compile Include="App_Code\ModuleGlobal.vb" />
     <Compile Include="Manage_Brand.aspx.designer.vb">
       <DependentUpon>Manage_Brand.aspx</DependentUpon>
     </Compile>
@@ -2737,6 +2741,27 @@
     <Compile Include="Manage_Product_Info.aspx.vb">
       <DependentUpon>Manage_Product_Info.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RenderImage.aspx.designer.vb">
+      <DependentUpon>RenderImage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RenderImage.aspx.vb">
+      <DependentUpon>RenderImage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Setting_Site.aspx.designer.vb">
+      <DependentUpon>Setting_Site.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Setting_Site.aspx.vb">
+      <DependentUpon>Setting_Site.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SignIn.aspx.designer.vb">
+      <DependentUpon>SignIn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SignIn.aspx.vb">
+      <DependentUpon>SignIn.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Test_API\Test_API_Interface.aspx.designer.vb">
       <DependentUpon>Test_API_Interface.aspx</DependentUpon>
