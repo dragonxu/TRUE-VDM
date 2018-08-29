@@ -85,6 +85,11 @@ Public Class VDM_BL
         SaveFile(FilePath, B)
     End Sub
 
+    Public Sub Delete_Site_Icon(ByVal SITE_ID As Integer)
+        Dim FilePath As String = Get_Site_Icon_Path(SITE_ID)
+        DeleteFile(FilePath)
+    End Sub
+
     Public Function Get_Brand_Logo_Path(ByVal BRAND_ID As Integer) As String
         Return PicturePath & "\Brand\" & BRAND_ID
     End Function
@@ -97,6 +102,11 @@ Public Class VDM_BL
     Public Sub Save_Brand_Logo(ByVal BRAND_ID As Integer, ByVal B As Byte())
         Dim FilePath As String = Get_Brand_Logo_Path(BRAND_ID)
         SaveFile(FilePath, B)
+    End Sub
+
+    Public Sub Delete_Brand_Logo(ByVal BRAND_ID As Integer)
+        Dim FilePath As String = Get_Brand_Logo_Path(BRAND_ID)
+        DeleteFile(FilePath)
     End Sub
 
     Public Function Get_Product_Picture_Path(ByVal PRODUCT_ID As Integer, ByVal Language As UILanguage) As String
@@ -113,6 +123,11 @@ Public Class VDM_BL
         SaveFile(FilePath, B)
     End Sub
 
+    Public Sub Delete_Product_Picture(ByVal PRODUCT_ID As Integer, ByVal Language As UILanguage)
+        Dim FilePath As String = Get_Product_Picture_Path(PRODUCT_ID, Language)
+        DeleteFile(FilePath)
+    End Sub
+
     Public Function Get_SIM_Package_Picture_Path(ByVal SIM_ID As Integer, ByVal Language As UILanguage) As String
         Return PicturePath & "\SIM\Package\" & SIM_ID & "_" & Get_Language_Code(Language)
     End Function
@@ -125,6 +140,11 @@ Public Class VDM_BL
     Public Sub Save_SIM_Package_Picture(ByVal SIM_ID As Integer, ByVal Language As UILanguage, ByVal B As Byte())
         Dim FilePath As String = Get_SIM_Package_Picture_Path(SIM_ID, Language)
         SaveFile(FilePath, B)
+    End Sub
+
+    Public Sub Delete_SIM_Package_Picture(ByVal SIM_ID As Integer, ByVal Language As UILanguage)
+        Dim FilePath As String = Get_SIM_Package_Picture_Path(SIM_ID, Language)
+        DeleteFile(FilePath)
     End Sub
 
     Public Function Get_SIM_Detail_Picture_Path(ByVal SIM_ID As Integer, ByVal Language As UILanguage) As String
@@ -141,6 +161,10 @@ Public Class VDM_BL
         SaveFile(FilePath, B)
     End Sub
 
+    Public Sub Delete_SIM_Detail_Picture(ByVal SIM_ID As Integer, ByVal Language As UILanguage)
+        Dim FilePath As String = Get_SIM_Detail_Picture_Path(SIM_ID, Language)
+        DeleteFile(FilePath)
+    End Sub
 
     Public Sub Bind_DDL_Province(ByRef ddl As DropDownList, Optional ByVal PROVINCE_CODE As String = "")
 

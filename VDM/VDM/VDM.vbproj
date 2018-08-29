@@ -2728,6 +2728,13 @@
       <DependentUpon>Manage_Brand.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Manage_Product_Info.aspx.designer.vb">
+      <DependentUpon>Manage_Product_Info.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage_Product_Info.aspx.vb">
+      <DependentUpon>Manage_Product_Info.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="MasterPage.Master.designer.vb">
       <DependentUpon>MasterPage.Master</DependentUpon>
     </Compile>
@@ -2735,11 +2742,11 @@
       <DependentUpon>MasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Manage_Product_Info.aspx.designer.vb">
-      <DependentUpon>Manage_Product_Info.aspx</DependentUpon>
+    <Compile Include="RenderImage.aspx.designer.vb">
+      <DependentUpon>RenderImage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Manage_Product_Info.aspx.vb">
-      <DependentUpon>Manage_Product_Info.aspx</DependentUpon>
+    <Compile Include="RenderImage.aspx.vb">
+      <DependentUpon>RenderImage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="RenderImage.aspx.designer.vb">

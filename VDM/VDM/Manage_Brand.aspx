@@ -15,9 +15,11 @@
         <asp:Panel ID="pnlList" runat="server" CssClass="card bg-white" Visible="True">
             <div class="card-header">
                 Found : <asp:Label ID="lblTotalList" runat="server"></asp:Label> Brand(s)
+
             </div>
             <div class="card-block">
                 <div class="no-more-tables">
+
                 <table class="table table-bordered m-b-0" style="text-align:center;">
                   <thead>
                     <tr>

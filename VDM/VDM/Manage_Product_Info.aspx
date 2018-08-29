@@ -4,11 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-
-
     <div class="main-content checkbo">
-
-
 
         <div class="page-title" style="margin-top: -80px;">
             <div class="title">Management &gt; Manage Product Info</div>
@@ -444,7 +440,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="tab-pane active in" id="JAPANESE">
                                             <div class="row ">
                                                 <div class="form-group  col-sm-12">
@@ -503,7 +498,6 @@
                                                                 <tbody>
                                                                     <asp:Repeater ID="rptCaptionList_JP" runat="server">
                                                                         <ItemTemplate>
-
                                                                             <tr>
                                                                                 <td>
                                                                                     <asp:DropDownList class="form-control" ID="ddlSpec" runat="server"></asp:DropDownList></td>
