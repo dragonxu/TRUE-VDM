@@ -11,15 +11,14 @@
         Try
 
 
-
             Dim Response As New BackEndInterface.Get_Product_Info.Response
             Response = BackEndInterface.Get_Result(productCode.Text)
             If Not IsNothing(Response) Then
 
                 Price.Text = Response.Price
 
-
                 'Product
+
                 CODE.Text = Response.Product.CODE
                 DESCRIPTION.Text = Response.Product.DESCRIPTION
                 PLANT_CODE.Text = Response.Product.PLANT_CODE

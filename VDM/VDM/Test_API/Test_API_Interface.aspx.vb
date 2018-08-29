@@ -15,8 +15,8 @@
             pnl_Activity_End.Visible = False
             pnl_Get_Product_Info.Visible = False
 
-            pnl_Prepaid_Register.Visible = False
 
+            pnl_Prepaid_Register.Visible = False
 
         End If
 
@@ -34,6 +34,7 @@
         pnl_Activity_Start.Visible = False
         pnl_Activity_End.Visible = False
         pnl_Get_Product_Info.Visible = False
+
 
         pnl_Prepaid_Register.Visible = False
 
@@ -93,5 +94,4 @@
         ClearForm()
         pnl_Prepaid_Register.Visible = True
     End Sub
-
 End Class

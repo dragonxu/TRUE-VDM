@@ -10,6 +10,10 @@
 <%@ Register Src="~/Test_API/UC_Activity_Start.ascx" TagPrefix="uc1" TagName="UC_Activity_Start" %>
 <%@ Register Src="~/Test_API/UC_Activity_End.ascx" TagPrefix="uc1" TagName="UC_Activity_End" %>
 <%@ Register Src="~/Test_API/UC_Get_Product_Info.ascx" TagPrefix="uc1" TagName="UC_Get_Product_Info" %>
+<%@ Register Src="~/Test_API/UC_Service_GenerateOrderID.ascx" TagPrefix="uc1" TagName="UC_Service_GenerateOrderID" %>
+<%@ Register Src="~/Test_API/UC_Service_SaveOrder.ascx" TagPrefix="uc1" TagName="UC_Service_SaveOrder" %>
+<%@ Register Src="~/Test_API/UC_Service_SubmitOrder.ascx" TagPrefix="uc1" TagName="UC_Service_SubmitOrder" %>
+<%@ Register Src="~/Test_API/UC_Service_GetOrder.ascx" TagPrefix="uc1" TagName="UC_Service_GetOrder" %>
 <%@ Register Src="~/Test_API/UC_Prepaid_Register.ascx" TagPrefix="uc1" TagName="UC_Prepaid_Register" %>
 
 
@@ -48,10 +52,8 @@
                 <asp:Button ID="btn_Activity_Start" runat="server" Text="Activity_Start" />                    
                 <asp:Button ID="btn_Activity_End" runat="server" Text="Activity_End" />
                 <asp:Button ID="btn_Get_Product_Info" runat="server" Text="Get_Product_Info" />
-               
                 <asp:Button ID="btn_Prepaid_Register" runat="server" Text="Prepaid_Register" />
-
-
+                 
         </asp:Panel>
         
         
@@ -94,11 +96,11 @@
             <asp:Panel ID="pnl_Get_Product_Info" runat="server">
                 <uc1:UC_Get_Product_Info runat="server" id="UC_Get_Product_Info" />
             </asp:Panel>
-             <asp:Panel ID="pnl_Prepaid_Register" runat="server">
+
+             
+            <asp:Panel ID="pnl_Prepaid_Register" runat="server"> 
                 <uc1:UC_Prepaid_Register runat="server" id="UC_Prepaid_Register" />
             </asp:Panel>
-
-            
 
          </div>
     </form>
