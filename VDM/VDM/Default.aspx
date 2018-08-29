@@ -15,7 +15,7 @@
 </asp:Content>
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
-      <%--Line--%>
+      <!--Line-->
         <div class="m-x-n-g m-t-n-g overflow-hidden">
           <div class="card m-b-0 bg-default-light text-red p-a-md no-border">
             <h5 class="m-t-0">
@@ -46,7 +46,7 @@
           </div>
         </div>
 
-        <%--Bar--%>
+        <!--Bar-->
         <div class="col-sm-8">
             <div class="card bg-white" id="BarBlock">
                 <div class="card-block text-center p-t-0">
@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        <%--Radar--%>
+        <!--Radar-->
         <div class="col-sm-4">
             <div class="card bg-white" id="RadarBlock">
                 <div class="card-block text-center p-t-0" style="height:unset;">
@@ -69,7 +69,6 @@
                         <canvas class="radar" height="200"></canvas>
                     </div>
                     <a href="javascript:;" class="btn btn-danger btn-xs">Completed Transaction</a>
-                    <%--<a href="javascript:;" class="btn btn-danger btn-xs">Lost Transaction</a>--%>
                 </div>
             </div>
             <%--Pie

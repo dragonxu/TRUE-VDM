@@ -254,7 +254,7 @@ Public Class BackEndInterface
             PostData.Add("seq", seq)
             PostData.Add("max-seq", "")
 
-            Dim JSONString As String = (New BackEndInterface.General).SendPostString(WebRequest, PostData)
+            Dim JSONString As String = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
             Result.JSONString = JSONString
             Return Result
@@ -734,7 +734,7 @@ Public Class BackEndInterface
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
             Dim PostData As New Dictionary(Of String, String)
-            PostData.Add("order-id", order_id)
+            PostData.Add("orderId", order_id)
             PostData.Add("fileType", fileType)
             PostData.Add("b64File", b64File)
             PostData.Add("formType", "FACE_RECOG_CUST_CERTIFICATE")
@@ -828,6 +828,8 @@ Public Class BackEndInterface
             GetString &= "flowName=Mobile"
 
             Dim PostData As New Dictionary(Of String, String)
+            PostData.Add("orderId", orderId)
+            PostData.Add("flowName", "Mobile")
             PostData.Add("CREATE-BY", staffOpenShift)
             PostData.Add("ID-NUMBER", thaiID)
             PostData.Add("PRODUCT-ID-NUMBER", subscriber)
@@ -931,10 +933,11 @@ Public Class BackEndInterface
 
         Public Function Get_Result(ByVal orderId As String) As Response
 
-            Dim GetString As String = "flow-id=" & orderId & ""
+            Dim GetString As String = "flow-id=" & orderId '& "&"
+            'GetString &= "order-id=" & orderId
 
             Dim PostData As New Dictionary(Of String, String)
-            PostData.Add("orderId", orderId)
+            PostData.Add("order-id", orderId)
 
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
