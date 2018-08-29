@@ -236,4 +236,28 @@ Public Class VDM_BL
 
     End Sub
 
+    Public Sub Bind_DDL_Brand(ByRef ddl As DropDownList, Optional ByVal BRAND_CODE As String = "")
+
+        Dim SQL As String = "Select * FROM MS_Brand ORDER BY BRAND_CODE"
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+
+        ddl.Items.Clear()
+        ddl.Items.Add(New ListItem("...", ""))
+        For i As Integer = 0 To DT.Rows.Count - 1
+            Dim Item As New ListItem(DT.Rows(i).Item("BRAND_NAME"), DT.Rows(i).Item("BRAND_CODE"))
+            ddl.Items.Add(Item)
+        Next
+        ddl.SelectedIndex = 0
+        For i As Integer = 0 To ddl.Items.Count - 1
+            If ddl.Items(i).Value = BRAND_CODE Then
+                ddl.SelectedIndex = i
+                Exit For
+            End If
+        Next
+
+    End Sub
+
+
 End Class

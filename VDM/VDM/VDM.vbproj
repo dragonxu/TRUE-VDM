@@ -228,6 +228,13 @@
       <DependentUpon>RenderImage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="RenderImage.aspx.designer.vb">
+      <DependentUpon>RenderImage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RenderImage.aspx.vb">
+      <DependentUpon>RenderImage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Setting_Site.aspx.designer.vb">
       <DependentUpon>Setting_Site.aspx</DependentUpon>
     </Compile>
