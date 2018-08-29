@@ -127,6 +127,7 @@
     <Content Include="images\online.png" />
     <Content Include="images\warning.gif" />
     <Content Include="Manage_Brand.aspx" />
+    <Content Include="Manage_Machine.aspx" />
     <Content Include="Manage_Product_Info.aspx" />
     <Content Include="RenderImage.aspx" />
     <Content Include="Scripts\apps\calendar.js" />
@@ -207,6 +208,13 @@
       <DependentUpon>Manage_Brand.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Manage_Machine.aspx.designer.vb">
+      <DependentUpon>Manage_Machine.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage_Machine.aspx.vb">
+      <DependentUpon>Manage_Machine.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Manage_Product_Info.aspx.designer.vb">
       <DependentUpon>Manage_Product_Info.aspx</DependentUpon>
     </Compile>
@@ -226,14 +234,7 @@
     </Compile>
     <Compile Include="RenderImage.aspx.vb">
       <DependentUpon>RenderImage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="RenderImage.aspx.designer.vb">
-      <DependentUpon>RenderImage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="RenderImage.aspx.vb">
-      <DependentUpon>RenderImage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Setting_Site.aspx.designer.vb">
       <DependentUpon>Setting_Site.aspx</DependentUpon>

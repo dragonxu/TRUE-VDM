@@ -91,7 +91,7 @@ Public Class Setting_Brand
         btnDelete.CommandArgument = e.Item.DataItem("BRAND_ID")
 
         Dim btnPreDelete As HtmlInputButton = e.Item.FindControl("btnPreDelete")
-        btnPreDelete.Attributes("onclick") = "If(confirm('ยืนยันลบ " & lblName.Text & " ?'))$('#" & btnDelete.ClientID & "').click();"
+        btnPreDelete.Attributes("onclick") = "if(confirm('ยืนยันลบ " & lblName.Text & " ?'))$('#" & btnDelete.ClientID & "').click();"
 
 
     End Sub
