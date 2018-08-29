@@ -122,40 +122,13 @@ Partial Public Class Test_API_Interface
     Protected WithEvents btn_Get_Product_Info As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''btn_Service_GenerateOrderID control.
+    '''btn_Prepaid_Register control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btn_Service_GenerateOrderID As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''btn_Service_SaveOrder control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btn_Service_SaveOrder As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''btn_Service_SubmitOrder control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btn_Service_SubmitOrder As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''btn_Service_GetOrder control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btn_Service_GetOrder As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btn_Prepaid_Register As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
     '''pnl_face_recognition control.
@@ -338,12 +311,20 @@ Partial Public Class Test_API_Interface
     Protected WithEvents UC_Get_Product_Info As Global.VDM.UC_Get_Product_Info
     
     '''<summary>
-    '''pnl_Service_GenerateOrderID control.
+    '''pnl_Prepaid_Register control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnl_Service_GenerateOrderID As Global.System.Web.UI.WebControls.Panel
-
+    Protected WithEvents pnl_Prepaid_Register As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''UC_Prepaid_Register control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UC_Prepaid_Register As Global.VDM.UC_Prepaid_Register
 End Class

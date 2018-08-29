@@ -14,6 +14,8 @@
 <%@ Register Src="~/Test_API/UC_Service_SaveOrder.ascx" TagPrefix="uc1" TagName="UC_Service_SaveOrder" %>
 <%@ Register Src="~/Test_API/UC_Service_SubmitOrder.ascx" TagPrefix="uc1" TagName="UC_Service_SubmitOrder" %>
 <%@ Register Src="~/Test_API/UC_Service_GetOrder.ascx" TagPrefix="uc1" TagName="UC_Service_GetOrder" %>
+<%@ Register Src="~/Test_API/UC_Prepaid_Register.ascx" TagPrefix="uc1" TagName="UC_Prepaid_Register" %>
+
 
 
 
@@ -50,12 +52,8 @@
                 <asp:Button ID="btn_Activity_Start" runat="server" Text="Activity_Start" />                    
                 <asp:Button ID="btn_Activity_End" runat="server" Text="Activity_End" />
                 <asp:Button ID="btn_Get_Product_Info" runat="server" Text="Get_Product_Info" />
-                <asp:Button ID="btn_Service_GenerateOrderID" runat="server" Text="Service_GenerateOrderID" />
-                <asp:Button ID="btn_Service_SaveOrder" runat="server" Text="Service_SaveOrder" />
-                <asp:Button ID="btn_Service_SubmitOrder" runat="server" Text="Service_SubmitOrder" />
-                <asp:Button ID="btn_Service_GetOrder" runat="server" Text="Service_GetOrder" />
-            
-
+                <asp:Button ID="btn_Prepaid_Register" runat="server" Text="Prepaid_Register" />
+                 
         </asp:Panel>
         
         
@@ -99,31 +97,9 @@
                 <uc1:UC_Get_Product_Info runat="server" id="UC_Get_Product_Info" />
             </asp:Panel>
 
-
-            <%--sale-smartui-order-prepaid_register-v0.2--%>
-            <asp:Panel ID="pnl_Service_GenerateOrderID" runat="server">
-                <uc1:UC_Service_GenerateOrderID runat="server" id="UC_Service_GenerateOrderID" />
-            </asp:Panel>
-            <asp:Panel ID="pnl_Service_SaveOrder" runat="server">
-                <uc1:UC_Service_SaveOrder runat="server" id="UC_Service_SaveOrder" />
-            </asp:Panel>
-            <asp:Panel ID="pnl_Service_SubmitOrder" runat="server">
-                <uc1:UC_Service_SubmitOrder runat="server" id="UC_Service_SubmitOrder" />
-            </asp:Panel>
-            <asp:Panel ID="pnl_Service_GetOrder" runat="server">
-                <uc1:UC_Service_GetOrder runat="server" id="UC_Service_GetOrder" />
-            </asp:Panel>
-            <asp:Panel ID="Panel2" runat="server">
-
-            </asp:Panel>
-            <asp:Panel ID="Panel4" runat="server">
-
-            </asp:Panel>
-            <asp:Panel ID="Panel5" runat="server">
-
-            </asp:Panel>
-            <asp:Panel ID="Panel6" runat="server">
-
+             
+            <asp:Panel ID="pnl_Prepaid_Register" runat="server"> 
+                <uc1:UC_Prepaid_Register runat="server" id="UC_Prepaid_Register" />
             </asp:Panel>
 
          </div>
