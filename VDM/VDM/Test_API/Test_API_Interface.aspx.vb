@@ -15,8 +15,11 @@
             pnl_Activity_End.Visible = False
             pnl_Get_Product_Info.Visible = False
 
-            pnl_Prepaid_Register.Visible = False
-
+            'Sale
+            pnl_Service_GenerateOrderID.Visible = False
+            pnl_Service_SaveOrder.Visible = False
+            pnl_Service_SubmitOrder.Visible = False
+            pnl_Service_GetOrder.Visible = False
 
         End If
 
@@ -35,7 +38,11 @@
         pnl_Activity_End.Visible = False
         pnl_Get_Product_Info.Visible = False
 
-        pnl_Prepaid_Register.Visible = False
+        'Sale
+        pnl_Service_GenerateOrderID.Visible = False
+        pnl_Service_SaveOrder.Visible = False
+        pnl_Service_SubmitOrder.Visible = False
+        pnl_Service_GetOrder.Visible = False
 
 
     End Sub
@@ -88,10 +95,23 @@
         pnl_Get_Product_Info.Visible = True
     End Sub
 
-
-    Private Sub btn_Prepaid_Register_Click(sender As Object, e As EventArgs) Handles btn_Prepaid_Register.Click
+    Private Sub btn_Service_GenerateOrderID_Click(sender As Object, e As EventArgs) Handles btn_Service_GenerateOrderID.Click
         ClearForm()
-        pnl_Prepaid_Register.Visible = True
+        pnl_Service_GenerateOrderID.Visible = True
     End Sub
 
+    Private Sub btn_Service_SaveOrder_Click(sender As Object, e As EventArgs) Handles btn_Service_SaveOrder.Click
+        ClearForm()
+        pnl_Service_SaveOrder.Visible = True
+    End Sub
+
+    Private Sub btn_Service_SubmitOrder_Click(sender As Object, e As EventArgs) Handles btn_Service_SubmitOrder.Click
+        ClearForm()
+        pnl_Service_SubmitOrder.Visible = True
+    End Sub
+
+    Private Sub btn_Service_GetOrder_Click(sender As Object, e As EventArgs) Handles btn_Service_GetOrder.Click
+        ClearForm()
+        pnl_Service_GetOrder.Visible = True
+    End Sub
 End Class
