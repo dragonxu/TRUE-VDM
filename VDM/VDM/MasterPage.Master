@@ -174,7 +174,7 @@
             </a>
             <ul class="sub-menu">
               <li id="mnu_Manage_Machine" runat="server">
-                <a href="javascript:;">                  
+                <a href="Manage_Machine.aspx">                  
                   <i class="icon-handbag"></i>
                   <span>เครื่อง Vending</span>
                 </a>                

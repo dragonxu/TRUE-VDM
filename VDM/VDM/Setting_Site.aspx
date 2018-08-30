@@ -41,7 +41,7 @@
                           <td data-title="Total Machine(s)" class="numeric"><asp:Label ID="lblKiosk" runat="server"></asp:Label></td>                
                           <td data-title="Edit" id="ColEdit" runat="server"><asp:Button CssClass="btn btn-success" ID="btnEdit" runat="server" Text="Edit" CommandName="Edit" /></td>
                           <td data-title="Delete" id="ColDelete" runat="server">
-                              <input type="btnPreDelete" class="btn btn-danger" value="Delete" id="btnPreDelete" runat="server" />
+                              <input type="button" class="btn btn-danger" value="Delete" id="btnPreDelete" runat="server" />
                               <asp:Button ID="btnDelete" runat="server" CommandName="Delete" style="display:none" />
                           </td>
                         </tr>
