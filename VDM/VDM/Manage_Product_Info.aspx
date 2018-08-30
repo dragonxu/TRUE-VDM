@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="main-content checkbo">
+    <div class="main-content  ">
 
         <div class="page-title" style="margin-top: -80px;">
             <div class="title">Management &gt; Manage Product Info</div>
@@ -687,12 +687,12 @@
                 </div>
 
 
-                <div class="form-group" style="margin-left: -5px;">
-                    <h4 class="card-title col-sm-2 control-label" style="text-align: left;">Active Status </h4>
-
-                    <label class="col-sm-10 cb-checkbox cb-md">
-                        <asp:CheckBox ID="chkActive" runat="server" Checked="true" />
-                    </label>
+                <div class="form-group" style="margin-left:-5px;">
+                            <h4 class="card-title col-sm-2 control-label" style="text-align:left;">Active Status </h4>  
+                        
+                            <label class="col-sm-10 cb-checkbox cb-md">
+                                <asp:CheckBox ID="chkActive" runat="server" Checked="true" />
+                            </label>
                 </div>
 
                 <div class="form-group" style="text-align: right">
