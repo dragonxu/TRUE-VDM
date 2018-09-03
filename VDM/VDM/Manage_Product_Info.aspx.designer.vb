@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class Manage_Product_Info
     
     '''<summary>
+    '''udpList control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents udpList As Global.System.Web.UI.UpdatePanel
+    
+    '''<summary>
     '''pnlList control.
     '''</summary>
     '''<remarks>
@@ -66,6 +75,15 @@ Partial Public Class Manage_Product_Info
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnAdd As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''udpEdit control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents udpEdit As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
     '''pnlEdit control.
@@ -158,6 +176,15 @@ Partial Public Class Manage_Product_Info
     Protected WithEvents Tab_THAI As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
+    '''lnkTab_THAI control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkTab_THAI As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''Tab_ENGLISH control.
     '''</summary>
     '''<remarks>
@@ -165,6 +192,15 @@ Partial Public Class Manage_Product_Info
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Tab_ENGLISH As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''lnkTab_ENGLISH control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkTab_ENGLISH As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''Tab_CHINESE control.
@@ -176,6 +212,15 @@ Partial Public Class Manage_Product_Info
     Protected WithEvents Tab_CHINESE As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
+    '''lnkTab_CHINESE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkTab_CHINESE As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''Tab_JAPANESE control.
     '''</summary>
     '''<remarks>
@@ -183,6 +228,15 @@ Partial Public Class Manage_Product_Info
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Tab_JAPANESE As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''lnkTab_JAPANESE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkTab_JAPANESE As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''Tab_KOREAN control.
@@ -194,6 +248,15 @@ Partial Public Class Manage_Product_Info
     Protected WithEvents Tab_KOREAN As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
+    '''lnkTab_KOREAN control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkTab_KOREAN As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''Tab_RUSSIAN control.
     '''</summary>
     '''<remarks>
@@ -201,6 +264,24 @@ Partial Public Class Manage_Product_Info
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Tab_RUSSIAN As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''lnkTab_RUSSIAN control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkTab_RUSSIAN As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''pnlTHAI control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlTHAI As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''txtDisplayName_TH control.
@@ -248,31 +329,22 @@ Partial Public Class Manage_Product_Info
     Protected WithEvents btnUpdateLogo_TH As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''btnAddCapion_TH control.
+    '''UC_Product_Spec_TH control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAddCapion_TH As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents UC_Product_Spec_TH As Global.VDM.UC_Product_Spec
     
     '''<summary>
-    '''btnAddSpec_TH control.
+    '''pnlENGLISH control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAddSpec_TH As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''rptCaptionList_TH control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rptCaptionList_TH As Global.System.Web.UI.WebControls.Repeater
+    Protected WithEvents pnlENGLISH As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''txtDisplayName_EN control.
@@ -320,103 +392,85 @@ Partial Public Class Manage_Product_Info
     Protected WithEvents btnUpdateLogo_EN As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''btnAddCapion_EN control.
+    '''UC_Product_Spec_EN control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAddCapion_EN As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents UC_Product_Spec_EN As Global.VDM.UC_Product_Spec
     
     '''<summary>
-    '''btnAddSpec_EN control.
+    '''pnlCHINESE control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAddSpec_EN As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents pnlCHINESE As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''rptCaptionList_EN control.
+    '''txtDisplayName_CH control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents rptCaptionList_EN As Global.System.Web.UI.WebControls.Repeater
+    Protected WithEvents txtDisplayName_CH As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''txtDisplayName_CN control.
+    '''txtDescription_CH control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtDisplayName_CN As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtDescription_CH As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''txtDescription_CN control.
+    '''imgIcon_CH control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtDescription_CN As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents imgIcon_CH As Global.System.Web.UI.WebControls.Image
     
     '''<summary>
-    '''imgIcon_CN control.
+    '''ful_CH control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents imgIcon_CN As Global.System.Web.UI.WebControls.Image
+    Protected WithEvents ful_CH As Global.System.Web.UI.WebControls.FileUpload
     
     '''<summary>
-    '''ful_CN control.
+    '''btnUpdateLogo_CH control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ful_CN As Global.System.Web.UI.WebControls.FileUpload
+    Protected WithEvents btnUpdateLogo_CH As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''btnUpdateLogo_CN control.
+    '''UC_Product_Spec_CH control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnUpdateLogo_CN As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents UC_Product_Spec_CH As Global.VDM.UC_Product_Spec
     
     '''<summary>
-    '''btnAddCapion_CN control.
+    '''pnlJAPANESE control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAddCapion_CN As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''btnAddSpec_CN control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnAddSpec_CN As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''rptCaptionList_CN control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rptCaptionList_CN As Global.System.Web.UI.WebControls.Repeater
+    Protected WithEvents pnlJAPANESE As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''txtDisplayName_JP control.
@@ -464,31 +518,22 @@ Partial Public Class Manage_Product_Info
     Protected WithEvents btnUpdateLogo_JP As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''btnAddCapion_JP control.
+    '''UC_Product_Spec_JP control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAddCapion_JP As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents UC_Product_Spec_JP As Global.VDM.UC_Product_Spec
     
     '''<summary>
-    '''btnAddSpec_JP control.
+    '''pnlKOREAN control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAddSpec_JP As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''rptCaptionList_JP control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rptCaptionList_JP As Global.System.Web.UI.WebControls.Repeater
+    Protected WithEvents pnlKOREAN As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''txtDisplayName_KR control.
@@ -536,31 +581,22 @@ Partial Public Class Manage_Product_Info
     Protected WithEvents btnUpdateLogo_KR As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''btnAddCapion_KR control.
+    '''UC_Product_Spec_KR control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAddCapion_KR As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents UC_Product_Spec_KR As Global.VDM.UC_Product_Spec
     
     '''<summary>
-    '''btnAddSpec_KR control.
+    '''pnlRUSSIAN control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAddSpec_KR As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''rptCaptionList_KR control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rptCaptionList_KR As Global.System.Web.UI.WebControls.Repeater
+    Protected WithEvents pnlRUSSIAN As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''txtDisplayName_RS control.
@@ -608,31 +644,13 @@ Partial Public Class Manage_Product_Info
     Protected WithEvents btnUpdateLogo_RS As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''btnAddCapion_RS control.
+    '''UC_Product_Spec_RS control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAddCapion_RS As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''btnAddSpec_RS control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnAddSpec_RS As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''rptCaptionList_RS control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rptCaptionList_RS As Global.System.Web.UI.WebControls.Repeater
+    Protected WithEvents UC_Product_Spec_RS As Global.VDM.UC_Product_Spec
     
     '''<summary>
     '''chkActive control.

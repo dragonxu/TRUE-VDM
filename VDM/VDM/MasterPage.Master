@@ -28,6 +28,9 @@
   <link rel="stylesheet" href="styles/animate.css" />
   <link rel="stylesheet" href="styles/app.css" />
   <link rel="stylesheet" href="styles/app.skins.css" />
+
+  <link rel="stylesheet" href="vendor/sweetalert/dist/sweetalert.css">
+
   <!-- endbuild -->
   
   <!-- Custom Style -->

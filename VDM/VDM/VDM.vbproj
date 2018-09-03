@@ -194,6 +194,7 @@
     <Content Include="Test_API\UC_Save_File.ascx" />
     <Content Include="Test_API\UC_Service_Flow_Create.ascx" />
     <Content Include="Test_API\UC_Service_Flow_Finish.ascx" />
+    <Content Include="UC_Product_Spec.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -365,6 +366,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UC_Product_Spec.ascx.designer.vb">
+      <DependentUpon>UC_Product_Spec.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UC_Product_Spec.ascx.vb">
+      <DependentUpon>UC_Product_Spec.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
