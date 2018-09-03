@@ -678,7 +678,23 @@ Public Class Manage_Product_Info
         End If
 
         '-- Check Caption 
-        Dim DT_Spec As DataTable = UC_Product_Spec_TH.Current_Data()
+
+        Dim DT_Spec As New DataTable
+        Select Case Last_Tab
+            Case VDM_BL.UILanguage.TH
+                DT_Spec = UC_Product_Spec_TH.Current_Data()
+            Case VDM_BL.UILanguage.EN
+                DT_Spec = UC_Product_Spec_EN.Current_Data()
+            Case VDM_BL.UILanguage.CN
+                DT_Spec = UC_Product_Spec_CH.Current_Data()
+            Case VDM_BL.UILanguage.JP
+                DT_Spec = UC_Product_Spec_JP.Current_Data()
+            Case VDM_BL.UILanguage.KR
+                DT_Spec = UC_Product_Spec_KR.Current_Data()
+            Case VDM_BL.UILanguage.RS
+                DT_Spec = UC_Product_Spec_RS.Current_Data()
+        End Select
+
         DT_Spec.DefaultView.RowFilter = "SPEC_ID<=0"
         If DT_Spec.DefaultView.Count > 0 Then
             Alert(Me.Page, "SPEC" & "เลือก Spec ให้ครบ ")
