@@ -57,13 +57,6 @@ Public Class UC_Product_Spec
         Dim ddlSpec_KR As DropDownList = e.Item.FindControl("ddlSpec_KR")
         Dim ddlSpec_RS As DropDownList = e.Item.FindControl("ddlSpec_RS")
 
-        Dim btnSpec_TH As Button = e.Item.FindControl("btnSpec_TH")
-        Dim btnSpec_EN As Button = e.Item.FindControl("btnSpec_EN")
-        Dim btnSpec_CH As Button = e.Item.FindControl("btnSpec_CH")
-        Dim btnSpec_JP As Button = e.Item.FindControl("btnSpec_JP")
-        Dim btnSpec_KR As Button = e.Item.FindControl("btnSpec_KR")
-        Dim btnSpec_RS As Button = e.Item.FindControl("btnSpec_RS")
-
         Dim txtDescription_TH As TextBox = e.Item.FindControl("txtDescription_TH")
         Dim txtDescription_EN As TextBox = e.Item.FindControl("txtDescription_EN")
         Dim txtDescription_CH As TextBox = e.Item.FindControl("txtDescription_CH")
@@ -98,13 +91,6 @@ Public Class UC_Product_Spec
         txtDescription_JP.Text = e.Item.DataItem("DESCRIPTION_JP").ToString
         txtDescription_KR.Text = e.Item.DataItem("DESCRIPTION_KR").ToString
         txtDescription_RS.Text = e.Item.DataItem("DESCRIPTION_RS").ToString
-
-        'ddlSpec_TH.Attributes("onChange") = "$('#" & btnSpec_TH.ClientID & "').click();"
-        'ddlSpec_EN.Attributes("onChange") = "$('#" & btnSpec_EN.ClientID & "').click();"
-        'ddlSpec_CH.Attributes("onChange") = "$('#" & btnSpec_CH.ClientID & "').click();"
-        'ddlSpec_JP.Attributes("onChange") = "$('#" & btnSpec_JP.ClientID & "').click();"
-        'ddlSpec_KR.Attributes("onChange") = "$('#" & btnSpec_KR.ClientID & "').click();"
-        'ddlSpec_RS.Attributes("onChange") = "$('#" & btnSpec_RS.ClientID & "').click();"
 
         ddlSpec_TH.Visible = False
         ddlSpec_EN.Visible = False
@@ -145,14 +131,16 @@ Public Class UC_Product_Spec
                 txtDescription_RS.Visible = True
         End Select
 
-        'btnDelete.CommandArgument = e.Item.DataItem("SPEC_ID")
-        'Dim btnPreDelete As HtmlInputButton = e.Item.FindControl("btnPreDelete")
-
-        'Dim btnPreDelete As HtmlButton = e.Item.FindControl("btnPreDelete")
-        'btnPreDelete.Attributes("onclick") = "If(confirm('ยืนยันลบ " & " ?'))$('#" & btnDelete.ClientID & "').click();"
 
 
-        lnkDelete.CommandArgument = e.Item.DataItem("SPEC_ID")
+        Dim btnSpecDelete As Button = e.Item.FindControl("btnSpecDelete")
+        btnSpecDelete.CommandArgument = e.Item.DataItem("SPEC_ID")
+
+        Dim btnSpecPreDelete As HtmlInputButton = e.Item.FindControl("btnSpecPreDelete")
+        btnSpecPreDelete.Attributes("onclick") = "if(confirm('ยืนยันลบ ?'))$('#" & btnSpecDelete.ClientID & "').click();"
+
+
+
     End Sub
 
     Private Sub rptCaptionList_ItemCommand(source As Object, e As RepeaterCommandEventArgs) Handles rptCaptionList.ItemCommand
@@ -173,7 +161,7 @@ Public Class UC_Product_Spec
 
                 DT = New DataTable
                 DT = Current_Data()
-                DT.Rows.RemoveAt(e.CommandArgument)
+                DT.Rows.RemoveAt(e.Item.ItemIndex)
                 rptCaptionList.DataSource = DT
                 rptCaptionList.DataBind()
 
@@ -242,7 +230,8 @@ Public Class UC_Product_Spec
             Dim txtDescription_KR As TextBox = rpt.FindControl("txtDescription_KR")
             Dim txtDescription_RS As TextBox = rpt.FindControl("txtDescription_RS")
             'Dim btnDelete As Button = rpt.FindControl("btnDelete")
-            Dim lnkDelete As LinkButton = rpt.FindControl("lnkDelete")
+            'Dim lnkDelete As LinkButton = rpt.FindControl("lnkDelete")
+            Dim btnSpecDelete As Button = rpt.FindControl("btnSpecDelete")
 
             Dim DR As DataRow = DT.NewRow
             If ddlSpec_TH.SelectedIndex > 0 Then
@@ -251,9 +240,7 @@ Public Class UC_Product_Spec
                 DR("SPEC_ID") = 0
             End If
 
-
             DR("SEQ") = rpt.ItemIndex + 1
-
             DR("DESCRIPTION_TH") = txtDescription_TH.Text
             DR("DESCRIPTION_EN") = txtDescription_EN.Text
             DR("DESCRIPTION_CH") = txtDescription_CH.Text
@@ -261,7 +248,7 @@ Public Class UC_Product_Spec
             DR("DESCRIPTION_KR") = txtDescription_KR.Text
             DR("DESCRIPTION_RS") = txtDescription_RS.Text
 
-            DR("IsNew_Row") = lnkDelete.CommandArgument = 0
+            DR("IsNew_Row") = btnSpecDelete.CommandArgument = 0
 
             DT.Rows.Add(DR)
         Next
@@ -314,29 +301,30 @@ Public Class UC_Product_Spec
                     ModuleGlobal.ImplementJavaNumericText(txtDescription_RS)
 
                 End If
-
-
             End If
-
-
         Else
 
             '--คืนค่า ddl  หลังจากกด เพิ่ม Spec 
-            If ddlSpec_TH.SelectedValue <> -1 Then
-                ddlSpec.SelectedValue = ddlSpec_TH.SelectedValue
-            ElseIf ddlSpec_EN.SelectedValue <> -1 Then
-                ddlSpec.SelectedValue = ddlSpec_EN.SelectedValue
-            ElseIf ddlSpec_CH.SelectedValue <> -1 Then
-                ddlSpec.SelectedValue = ddlSpec_CH.SelectedValue
-            ElseIf ddlSpec_JP.SelectedValue <> -1 Then
-                ddlSpec.SelectedValue = ddlSpec_JP.SelectedValue
-            ElseIf ddlSpec_KR.SelectedValue <> -1 Then
-                ddlSpec.SelectedValue = ddlSpec_KR.SelectedValue
-            ElseIf ddlSpec_RS.SelectedValue <> -1 Then
-                ddlSpec.SelectedValue = ddlSpec_RS.SelectedValue
-            Else
+            Try
+                If ddlSpec_TH.SelectedValue <> -1 Then
+                    ddlSpec.SelectedValue = ddlSpec_TH.SelectedValue
+                ElseIf ddlSpec_EN.SelectedValue <> -1 Then
+                    ddlSpec.SelectedValue = ddlSpec_EN.SelectedValue
+                ElseIf ddlSpec_CH.SelectedValue <> -1 Then
+                    ddlSpec.SelectedValue = ddlSpec_CH.SelectedValue
+                ElseIf ddlSpec_JP.SelectedValue <> -1 Then
+                    ddlSpec.SelectedValue = ddlSpec_JP.SelectedValue
+                ElseIf ddlSpec_KR.SelectedValue <> -1 Then
+                    ddlSpec.SelectedValue = ddlSpec_KR.SelectedValue
+                ElseIf ddlSpec_RS.SelectedValue <> -1 Then
+                    ddlSpec.SelectedValue = ddlSpec_RS.SelectedValue
+                Else
+                    ddlSpec.SelectedIndex = 0
+                End If
+            Catch ex As Exception
                 ddlSpec.SelectedIndex = 0
-            End If
+            End Try
+
 
             '------Dialog Add Spec
             pnlModal.Visible = True
@@ -348,12 +336,7 @@ Public Class UC_Product_Spec
             txtSpec_KOREAN.Text = ""
             txtSpec_RUSSIAN.Text = ""
             chkIS_QUALITATIVE.Checked = False
-
-
         End If
-
-
-
 
         Current_Data()
 
@@ -384,28 +367,26 @@ Public Class UC_Product_Spec
                 txtDescription_KR.Text = txtDescription.Text
                 txtDescription_RS.Text = txtDescription.Text
             End If
-
-
         End If
 
         Current_Data()
 
     End Sub
 
-    Protected Sub lnkDelete_Click(sender As Object, e As EventArgs)
-        Dim lnk As LinkButton = sender
-        Dim rpt As RepeaterItem = lnk.Parent.Parent
+    'Protected Sub lnkDelete_Click(sender As Object, e As EventArgs)
+    '    Dim lnk As LinkButton = sender
+    '    Dim rpt As RepeaterItem = lnk.Parent.Parent
 
-        Dim lnkDelete As LinkButton = DirectCast(rpt.FindControl("lnkDelete"), LinkButton)
+    '    Dim lnkDelete As LinkButton = DirectCast(rpt.FindControl("lnkDelete"), LinkButton)
 
-        Dim DT As New DataTable
-        DT = Current_Data()
-        DT.Rows.RemoveAt(rpt.ItemIndex)
-        rptCaptionList.DataSource = DT
-        rptCaptionList.DataBind()
+    '    Dim DT As New DataTable
+    '    DT = Current_Data()
+    '    DT.Rows.RemoveAt(rpt.ItemIndex)
+    '    rptCaptionList.DataSource = DT
+    '    rptCaptionList.DataBind()
 
-        initFormPlugin()
-    End Sub
+    '    initFormPlugin()
+    'End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         pnlModal.Visible = False

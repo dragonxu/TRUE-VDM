@@ -129,6 +129,7 @@
     <Content Include="Manage_Brand.aspx" />
     <Content Include="Manage_Machine.aspx" />
     <Content Include="Manage_Product_Info.aspx" />
+    <Content Include="Manage_Sim_Info.aspx" />
     <Content Include="RenderImage.aspx" />
     <Content Include="Scripts\apps\calendar.js" />
     <Content Include="Scripts\apps\products.js" />
@@ -222,6 +223,13 @@
     <Compile Include="Manage_Product_Info.aspx.vb">
       <DependentUpon>Manage_Product_Info.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage_Sim_Info.aspx.designer.vb">
+      <DependentUpon>Manage_Sim_Info.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage_Sim_Info.aspx.vb">
+      <DependentUpon>Manage_Sim_Info.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="MasterPage.Master.designer.vb">
       <DependentUpon>MasterPage.Master</DependentUpon>

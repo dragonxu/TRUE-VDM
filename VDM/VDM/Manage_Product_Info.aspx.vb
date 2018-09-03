@@ -17,15 +17,6 @@ Public Class Manage_Product_Info
         End Set
     End Property
 
-    Protected Property IS_SIM As Integer
-        Get
-            Return Val(txtCode.Attributes("PRODUCT_ID"))
-        End Get
-        Set(value As Integer)
-            txtCode.Attributes("PRODUCT_ID") = value
-        End Set
-    End Property
-
     Protected Property Last_Tab As VDM_BL.UILanguage
         Get
             Return Val(txtCode.Attributes("Last_Tab"))
@@ -265,7 +256,7 @@ Public Class Manage_Product_Info
 
     Private Sub lnkTab_RUSSIAN_Click(sender As Object, e As EventArgs) Handles lnkTab_RUSSIAN.Click
         ClearTab()
-        pnlRUSSIAN.Attributes("class") = "active"
+        Tab_RUSSIAN.Attributes("class") = "active"
         pnlRUSSIAN.Visible = True
 
         Select Case Last_Tab
@@ -293,22 +284,22 @@ Public Class Manage_Product_Info
     Private Sub initFirstTimeJavascript()
         'THAI
         imgIcon_TH.Attributes("onclick") = "window.open(this.src);"
-        ful_TH.Attributes("onchange") = "$('#" & btnUpdateLogo_TH.ClientID & "').click();"
+        ful_TH.Attributes("onchange") = "$('#" & btnUpdateLogo.ClientID & "').click();"
         'ENGLISH
         imgIcon_EN.Attributes("onclick") = "window.open(this.src);"
-        ful_EN.Attributes("onchange") = "$('#" & btnUpdateLogo_EN.ClientID & "').click();"
+        ful_EN.Attributes("onchange") = "$('#" & btnUpdateLogo.ClientID & "').click();"
         'CHINESE
         imgIcon_CH.Attributes("onclick") = "window.open(this.src);"
-        ful_CH.Attributes("onchange") = "$('#" & btnUpdateLogo_CH.ClientID & "').click();"
+        ful_CH.Attributes("onchange") = "$('#" & btnUpdateLogo.ClientID & "').click();"
         'JAPANESE
         imgIcon_JP.Attributes("onclick") = "window.open(this.src);"
-        ful_JP.Attributes("onchange") = "$('#" & btnUpdateLogo_JP.ClientID & "').click();"
+        ful_JP.Attributes("onchange") = "$('#" & btnUpdateLogo.ClientID & "').click();"
         'KOREAN
         imgIcon_KR.Attributes("onclick") = "window.open(this.src);"
-        ful_KR.Attributes("onchange") = "$('#" & btnUpdateLogo_KR.ClientID & "').click();"
+        ful_KR.Attributes("onchange") = "$('#" & btnUpdateLogo.ClientID & "').click();"
         'RUSSIAN
         imgIcon_RS.Attributes("onclick") = "window.open(this.src);"
-        ful_RS.Attributes("onchange") = "$('#" & btnUpdateLogo_RS.ClientID & "').click();"
+        ful_RS.Attributes("onchange") = "$('#" & btnUpdateLogo.ClientID & "').click();"
 
     End Sub
 
@@ -321,7 +312,7 @@ Public Class Manage_Product_Info
 
     Private Sub ClearEditForm()
         PRODUCT_ID = 0
-
+        ModuleGlobal.ImplementJavaIntegerText(txtCode, False, Nothing, "Left")
         txtCode.Text = ""
         rdIsSerial_Yes.Checked = False
         rdIsSerial_No.Checked = False
@@ -405,19 +396,24 @@ Public Class Manage_Product_Info
         Dim lblCountSpec As Label = e.Item.FindControl("lblCountSpec")
         Dim lblPrice As Label = e.Item.FindControl("lblPrice")
         Dim btnEdit As Button = e.Item.FindControl("btnEdit")
-        Dim btnDelete As Button = e.Item.FindControl("btnDelete")
 
         img.ImageUrl = "RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & e.Item.DataItem("PRODUCT_ID") & "&LANG=" & VDM_BL.UILanguage.TH & "&t=" & Now.ToOADate.ToString.Replace(".", "")
         lblProductCode.Text = e.Item.DataItem("PRODUCT_CODE").ToString
         lblDisplayName.Text = e.Item.DataItem("DISPLAY_NAME_TH").ToString
         'lblCountSpec.Text = "" - --------------------
-        lblPrice.Text = FormatNumber(e.Item.DataItem("Price"), 2)
+        If Not IsDBNull(e.Item.DataItem("Price")) Then
+            lblPrice.Text = FormatNumber(e.Item.DataItem("Price"), 2)
+        End If
         'ImageActive
 
         btnEdit.CommandArgument = e.Item.DataItem("PRODUCT_ID")
+
+        Dim btnDelete As Button = e.Item.FindControl("btnDelete")
         btnDelete.CommandArgument = e.Item.DataItem("PRODUCT_ID")
+
         Dim btnPreDelete As HtmlInputButton = e.Item.FindControl("btnPreDelete")
-        btnPreDelete.Attributes("onclick") = "If(confirm('ยืนยันลบ " & lblProductCode.Text & " ?'))$('#" & btnDelete.ClientID & "').click();"
+        btnPreDelete.Attributes("onclick") = "if(confirm('ยืนยันลบ ?'))$('#" & btnDelete.ClientID & "').click();"
+        'btnPreDelete.Attributes("onclick") = "If(confirm('ยืนยันลบ ?'))$('#" & btnDelete.ClientID & "').click();"
 
     End Sub
 
@@ -537,82 +533,46 @@ Public Class Manage_Product_Info
 
 #Region "Upload_Logo"
 
-    Private Sub btnUpdateLogo_Click(sender As Object, e As EventArgs) Handles btnUpdateLogo_TH.Click
+    Private Sub btnUpdateLogo_Click(sender As Object, e As EventArgs) Handles btnUpdateLogo.Click
         Try
             Dim C As New Converter
-            Dim B As Byte() = C.StreamToByte(ful_TH.FileContent)
-
+            Dim B As Byte()
+            Select Case Last_Tab
+                Case VDM_BL.UILanguage.TH
+                    B = C.StreamToByte(ful_TH.FileContent)
+                Case VDM_BL.UILanguage.EN
+                    B = C.StreamToByte(ful_EN.FileContent)
+                Case VDM_BL.UILanguage.CN
+                    B = C.StreamToByte(ful_CH.FileContent)
+                Case VDM_BL.UILanguage.JP
+                    B = C.StreamToByte(ful_JP.FileContent)
+                Case VDM_BL.UILanguage.KR
+                    B = C.StreamToByte(ful_KR.FileContent)
+                Case VDM_BL.UILanguage.RS
+                    B = C.StreamToByte(ful_RS.FileContent)
+            End Select
             Dim img As System.Drawing.Image = System.Drawing.Image.FromStream(C.ByteToStream(B))
-            PRODUCT_Logo_TH = B
+
+            Select Case Last_Tab
+                Case VDM_BL.UILanguage.TH
+                    PRODUCT_Logo_TH = B
+                Case VDM_BL.UILanguage.EN
+                    PRODUCT_Logo_EN = B
+                Case VDM_BL.UILanguage.CN
+                    PRODUCT_Logo_CH = B
+                Case VDM_BL.UILanguage.JP
+                    PRODUCT_Logo_JP = B
+                Case VDM_BL.UILanguage.KR
+                    PRODUCT_Logo_KR = B
+                Case VDM_BL.UILanguage.RS
+                    PRODUCT_Logo_RS = B
+            End Select
         Catch ex As Exception
             Alert(Me.Page, "Support only image jpeg gif png\nAnd file size must not larger than 4MB")
             Exit Sub
         End Try
     End Sub
 
-    Private Sub btnUpdateLogo_EN_Click(sender As Object, e As EventArgs) Handles btnUpdateLogo_EN.Click
-        Try
-            Dim C As New Converter
-            Dim B As Byte() = C.StreamToByte(ful_EN.FileContent)
-
-            Dim img As System.Drawing.Image = System.Drawing.Image.FromStream(C.ByteToStream(B))
-            PRODUCT_Logo_EN = B
-        Catch ex As Exception
-            Alert(Me.Page, "Support only image jpeg gif png\nAnd file size must not larger than 4MB")
-            Exit Sub
-        End Try
-    End Sub
-    Private Sub btnUpdateLogo_CH_Click(sender As Object, e As EventArgs) Handles btnUpdateLogo_CH.Click
-        Try
-            Dim C As New Converter
-            Dim B As Byte() = C.StreamToByte(ful_CH.FileContent)
-
-            Dim img As System.Drawing.Image = System.Drawing.Image.FromStream(C.ByteToStream(B))
-            PRODUCT_Logo_CH = B
-        Catch ex As Exception
-            Alert(Me.Page, "Support only image jpeg gif png\nAnd file size must not larger than 4MB")
-            Exit Sub
-        End Try
-    End Sub
-
-    Private Sub btnUpdateLogo_JP_Click(sender As Object, e As EventArgs) Handles btnUpdateLogo_JP.Click
-        Try
-            Dim C As New Converter
-            Dim B As Byte() = C.StreamToByte(ful_JP.FileContent)
-
-            Dim img As System.Drawing.Image = System.Drawing.Image.FromStream(C.ByteToStream(B))
-            PRODUCT_Logo_JP = B
-        Catch ex As Exception
-            Alert(Me.Page, "Support only image jpeg gif png\nAnd file size must not larger than 4MB")
-            Exit Sub
-        End Try
-    End Sub
-
-    Private Sub btnUpdateLogo_KR_Click(sender As Object, e As EventArgs) Handles btnUpdateLogo_KR.Click
-        Try
-            Dim C As New Converter
-            Dim B As Byte() = C.StreamToByte(ful_KR.FileContent)
-
-            Dim img As System.Drawing.Image = System.Drawing.Image.FromStream(C.ByteToStream(B))
-            PRODUCT_Logo_KR = B
-        Catch ex As Exception
-            Alert(Me.Page, "Support only image jpeg gif png\nAnd file size must not larger than 4MB")
-            Exit Sub
-        End Try
-    End Sub
-
-    Private Sub btnUpdateLogo_RS_Click(sender As Object, e As EventArgs) Handles btnUpdateLogo_RS.Click
-        Try
-            Dim C As New Converter
-            Dim B As Byte() = C.StreamToByte(ful_RS.FileContent)
-
-            Dim img As System.Drawing.Image = System.Drawing.Image.FromStream(C.ByteToStream(B))
-            PRODUCT_Logo_RS = B
-        Catch ex As Exception
-            Alert(Me.Page, "Support only image jpeg gif png\nAnd file size must not larger than 4MB")
-            Exit Sub
-        End Try
-    End Sub
 #End Region
 
 #Region "ADDNewProduct"
@@ -697,14 +657,24 @@ Public Class Manage_Product_Info
 
         DT_Spec.DefaultView.RowFilter = "SPEC_ID<=0"
         If DT_Spec.DefaultView.Count > 0 Then
-            Alert(Me.Page, "SPEC" & "เลือก Spec ให้ครบ ")
+            Alert(Me.Page, "" & "เลือก Spec ให้ครบ ")
             Exit Sub
         End If
 
         DT_Spec.DefaultView.RowFilter = "DESCRIPTION_TH ='' OR DESCRIPTION_TH IS NULL "
         If DT_Spec.DefaultView.Count > 0 Then
-            Alert(Me.Page, "SPEC" & "กรอก Descript ภาษาไทย ให้ครบ ")
+            Alert(Me.Page, "SPEC " & "กรอก Descript ภาษาไทย ให้ครบ ")
             Exit Sub
+        End If
+
+        If DT_Spec.Rows.Count > 0 Then
+            For i As Integer = 0 To DT_Spec.Rows.Count - 1
+                DT_Spec.DefaultView.RowFilter = "SPEC_ID=" & DT_Spec.Rows(i).Item("SPEC_ID")
+                If DT_Spec.DefaultView.Count > 1 Then
+                    Alert(Me.Page, "Spec ซ้ำ ")
+                    Exit Sub
+                End If
+            Next
         End If
 
         Dim SQL As String = "SELECT * FROM MS_Product WHERE PRODUCT_CODE='" & txtCode.Text.Replace("'", "''") & "' AND PRODUCT_ID<>" & PRODUCT_ID
@@ -831,12 +801,69 @@ Public Class Manage_Product_Info
         DA.Fill(DT)
         Return DT.Rows(0).Item(0)
     End Function
+
+
 #End Region
 
 
+#Region "Get Product TSM"
+    Private Sub btnGetProductTSM_Click(sender As Object, e As EventArgs) Handles btnGetProductTSM.Click
+        If txtCode.Text = "" Then
+            Alert(Me.Page, "กรอก Code")
+            Exit Sub
+        End If
+
+        Try
+
+            '-----ดึงข้อมูล check ข้อมูล 
+
+            '-----แสดงข้อมูลใน form
+            Dim Response As New BackEndInterface.Get_Product_Info.Response
+            Response = BackEndInterface.Get_Result(txtCode.Text)
+            If Not IsNothing(Response) Then
+
+                If Response.Product.IS_SIM.ToUpper = "TRUE" Then
+                    Alert(Me.Page, txtCode.Text & "Is Sim ดำเนินการหน้า Manage Sim Info ")
+                    Exit Sub
+                End If
+
+                If Response.Product.IS_SERIAL.ToUpper = "TRUE" Then
+                    rdIsSerial_Yes.Checked = True
+                Else
+                    rdIsSerial_No.Checked = False
+                End If
+
+                ModuleGlobal.ImplementJavaMoneyText(txtPrice)
+                If Not IsDBNull(Response.Price) Then
+                    txtPrice.Text = FormatNumber(Response.Price, 2)
+                End If
+
+                txtDisplayName_TH.Text = Response.Product.DISPLAY_NAME
+                txtDescription_TH.Text = Response.Product.DESCRIPTION
 
 
 
+                '''Captions
+                'If Response.Captions.Count > 0 Then
+                '    SEQ.Text = Response.Captions(0).SEQ
+                '    PRODUCT_CODE.Text = Response.Captions(0).PRODUCT_CODE
+                '    CAPTION_CODE.Text = Response.Captions(0).CAPTION_CODE
+                '    CAPTION_DESC.Text = Response.Captions(0).CAPTION_DESC
+                '    DETAIL.Text = Response.Captions(0).DETAIL
+                'End If
+
+
+            End If
+
+        Catch ex As Exception
+            Alert(Me.Page, "ไม่มีข้อมูล Product Code ใน TSM")
+            Exit Sub
+        End Try
+
+
+
+    End Sub
+#End Region
 
 
 End Class

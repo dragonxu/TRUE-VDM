@@ -171,7 +171,7 @@
           </li>
           <li class="menu-accordion" id="mnu_Management" runat="server">
             <a href="javascript:;">
-              <span class="badge pull-right" id="badge_Management" runat="server">5</span>
+              <span class="badge pull-right" id="badge_Management" runat="server">6</span>
               <i class="icon-screen-desktop"></i>
               <span>Management</span>
             </a>
@@ -201,7 +201,7 @@
                 </a>                
               </li>
               <li id="mnu_Manage_Sim_Info" runat="server">
-                <a href="javascript:;">
+                <a href="Manage_Sim_Info.aspx">
                   <i class="icon-note"></i>
                   <span>รายละเอียดซิมการ์ด</span>
                 </a>                

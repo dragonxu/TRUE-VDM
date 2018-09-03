@@ -1,8 +1,6 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="UC_Product_Spec.ascx.vb" Inherits="VDM.UC_Product_Spec" %>
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
-<asp:UpdatePanel ID="udpEdit" runat="server">
-    <ContentTemplate>
+
         <asp:TextBox ID="txtCode" runat="server" class="form-control" Style="display: none;"></asp:TextBox>
         <div class="form-group  col-sm-12">
             <label class="col-sm-2 control-label">
@@ -30,14 +28,7 @@
                                             <asp:DropDownList class="form-control" ID="ddlSpec_JP" runat="server" Style="border: none; width: 100%;" OnSelectedIndexChanged="ddlSpec_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                                             <asp:DropDownList class="form-control" ID="ddlSpec_KR" runat="server" Style="border: none; width: 100%;" OnSelectedIndexChanged="ddlSpec_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
                                             <asp:DropDownList class="form-control" ID="ddlSpec_RS" runat="server" Style="border: none; width: 100%;" OnSelectedIndexChanged="ddlSpec_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
-
-                                            <asp:Button ID="btnSpec_TH" runat="server" CommandName="Update_TH" Style="display: none" Text="Toggle" />
-                                            <asp:Button ID="btnSpec_EN" runat="server" CommandName="Update_EN" Style="display: none" Text="Toggle" />
-                                            <asp:Button ID="btnSpec_CH" runat="server" CommandName="Update_CH" Style="display: none" Text="Toggle" />
-                                            <asp:Button ID="btnSpec_JP" runat="server" CommandName="Update_JP" Style="display: none" Text="Toggle" />
-                                            <asp:Button ID="btnSpec_KR" runat="server" CommandName="Update_KR" Style="display: none" Text="Toggle" />
-                                            <asp:Button ID="btnSpec_RS" runat="server" CommandName="Update_RS" Style="display: none" Text="Toggle" />
-
+ 
                                         </td>
                                         <td style="padding: 0;">
                                             <asp:TextBox ID="txtDescription_TH" runat="server" TextMode="MultiLine" Rows="3" class="form-control" Style="border: none;" OnTextChanged="txtDescription_TextChanged" AutoPostBack="true"></asp:TextBox>
@@ -49,14 +40,8 @@
 
                                         </td>
                                         <td data-title="Delete" id="Td2" runat="server" style="text-align: center">
-
-
-                                            <asp:LinkButton class="" ID="lnkDelete" runat="server" OnClick="lnkDelete_Click" ToolTip="Delete" Text="Delete">                                                                                            
-                                                                                                <i style ="color :red ;" class="icon-close"></i>                                                                                             
-                                            </asp:LinkButton>
-
-
-
+                                             <input type="button" class="btn btn-danger btn-xs" value="Delete" id="btnSpecPreDelete" runat="server" />
+                                             <asp:Button ID="btnSpecDelete" runat="server" CommandName="Delete" style="display:none" />
                                         </td>
                                     </tr>
                                 </ItemTemplate>
@@ -164,23 +149,3 @@
                 </div>
             </div>
         </asp:Panel>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </ContentTemplate>
-</asp:UpdatePanel>

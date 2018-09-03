@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class UC_Product_Spec
     
     '''<summary>
-    '''udpEdit control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents udpEdit As Global.System.Web.UI.UpdatePanel
-    
-    '''<summary>
     '''txtCode control.
     '''</summary>
     '''<remarks>
