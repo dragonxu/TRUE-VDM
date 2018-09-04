@@ -30,7 +30,8 @@
                                             <h6><asp:Label ID="lblLocation" runat="server"></asp:Label> 
                                                 <asp:Label ID="lblNetworkScope" runat="server"></asp:Label> 
                                                 <asp:Label ID="lblRunningNo" runat="server"></asp:Label> <br />
-                                                Terminal ID : <asp:Label ID="lblTerminalID" runat="server"></asp:Label><br />selling 
+                                                <asp:Label ID="lblTerminalID" runat="server"></asp:Label><br />
+                                                selling 
                                                 <asp:Label ID="lblBundledProduct" runat="server"></asp:Label> product(s)
                                             </h6>
                                         </div>
