@@ -246,12 +246,54 @@ Public Class VDM_BL
         ddl.Items.Clear()
         ddl.Items.Add(New ListItem("...", ""))
         For i As Integer = 0 To DT.Rows.Count - 1
-            Dim Item As New ListItem(DT.Rows(i).Item("BRAND_NAME"), DT.Rows(i).Item("BRAND_CODE"))
+            Dim Item As New ListItem(DT.Rows(i).Item("BRAND_NAME"), DT.Rows(i).Item("BRAND_ID"))
             ddl.Items.Add(Item)
         Next
         ddl.SelectedIndex = 0
         For i As Integer = 0 To ddl.Items.Count - 1
             If ddl.Items(i).Value = BRAND_CODE Then
+                ddl.SelectedIndex = i
+                Exit For
+            End If
+        Next
+
+    End Sub
+
+    Public Sub Bind_DDL_Spec(ByRef ddl As DropDownList, ByRef Language As UILanguage, Optional ByVal SPEC_ID As String = "", Optional ByVal Add_SPEC As Boolean = False)
+        Dim SQL As String = "Select SPEC_ID, " & vbLf
+        Select Case Language
+            Case 1
+                SQL &= " SPEC_NAME_TH SPEC_NAME " & vbLf
+            Case 2
+                SQL &= " SPEC_NAME_EN SPEC_NAME " & vbLf
+            Case 3
+                SQL &= " SPEC_NAME_CH SPEC_NAME " & vbLf
+            Case 4
+                SQL &= " SPEC_NAME_JP SPEC_NAME " & vbLf
+            Case 5
+                SQL &= " SPEC_NAME_KR SPEC_NAME " & vbLf
+            Case 6
+                SQL &= " SPEC_NAME_RS SPEC_NAME " & vbLf
+        End Select
+        SQL &= "  FROM MS_Spec ORDER BY SPEC_NAME"
+
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+
+        ddl.Items.Clear()
+        ddl.Items.Add(New ListItem("...", ""))
+        For i As Integer = 0 To DT.Rows.Count - 1
+            Dim Item As New ListItem(DT.Rows(i).Item("SPEC_NAME"), DT.Rows(i).Item("SPEC_ID"))
+            ddl.Items.Add(Item)
+        Next
+        If Add_SPEC Then
+            ddl.Items.Add(New ListItem("+ Spec", "-1"))
+        End If
+
+        ddl.SelectedIndex = 0
+        For i As Integer = 0 To ddl.Items.Count - 1
+            If ddl.Items(i).Value = SPEC_ID Then
                 ddl.SelectedIndex = i
                 Exit For
             End If

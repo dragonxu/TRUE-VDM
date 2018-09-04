@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Manage_Product_Info
+Partial Public Class Manage_Sim_Info
     
     '''<summary>
     '''udpList control.
@@ -95,13 +95,22 @@ Partial Public Class Manage_Product_Info
     Protected WithEvents pnlEdit As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''btnUpdateLogo control.
+    '''btnUpdate_SimPackage_Logo control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnUpdateLogo As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnUpdate_SimPackage_Logo As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''btnUpdate_SimDetail_Logo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnUpdate_SimDetail_Logo As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
     '''lblEditMode control.
@@ -122,51 +131,6 @@ Partial Public Class Manage_Product_Info
     Protected WithEvents txtCode As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''rdIsSerial_Yes control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rdIsSerial_Yes As Global.System.Web.UI.WebControls.RadioButton
-    
-    '''<summary>
-    '''rdIsSerial_No control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rdIsSerial_No As Global.System.Web.UI.WebControls.RadioButton
-    
-    '''<summary>
-    '''ddlBrand control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ddlBrand As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''rdRequireReceive_Yes control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rdRequireReceive_Yes As Global.System.Web.UI.WebControls.RadioButton
-    
-    '''<summary>
-    '''rdRequireReceive_No control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rdRequireReceive_No As Global.System.Web.UI.WebControls.RadioButton
-    
-    '''<summary>
     '''txtPrice control.
     '''</summary>
     '''<remarks>
@@ -176,13 +140,13 @@ Partial Public Class Manage_Product_Info
     Protected WithEvents txtPrice As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''btnGetProductTSM control.
+    '''btnGetSIMTSM control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnGetProductTSM As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnGetSIMTSM As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
     '''Tab_THAI control.
@@ -338,13 +302,22 @@ Partial Public Class Manage_Product_Info
     Protected WithEvents ful_TH As Global.System.Web.UI.WebControls.FileUpload
     
     '''<summary>
-    '''UC_Product_Spec_TH control.
+    '''imgIcon_TH_Detail control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UC_Product_Spec_TH As Global.VDM.UC_Product_Spec
+    Protected WithEvents imgIcon_TH_Detail As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
+    '''ful_TH_Detail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ful_TH_Detail As Global.System.Web.UI.WebControls.FileUpload
     
     '''<summary>
     '''pnlENGLISH control.
@@ -392,22 +365,22 @@ Partial Public Class Manage_Product_Info
     Protected WithEvents ful_EN As Global.System.Web.UI.WebControls.FileUpload
     
     '''<summary>
-    '''btnUpdateLogo_EN control.
+    '''imgIcon_EN_Detail control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnUpdateLogo_EN As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents imgIcon_EN_Detail As Global.System.Web.UI.WebControls.Image
     
     '''<summary>
-    '''UC_Product_Spec_EN control.
+    '''ful_EN_Detail control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UC_Product_Spec_EN As Global.VDM.UC_Product_Spec
+    Protected WithEvents ful_EN_Detail As Global.System.Web.UI.WebControls.FileUpload
     
     '''<summary>
     '''pnlCHINESE control.
@@ -455,22 +428,22 @@ Partial Public Class Manage_Product_Info
     Protected WithEvents ful_CH As Global.System.Web.UI.WebControls.FileUpload
     
     '''<summary>
-    '''btnUpdateLogo_CH control.
+    '''imgIcon_CH_Detail control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnUpdateLogo_CH As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents imgIcon_CH_Detail As Global.System.Web.UI.WebControls.Image
     
     '''<summary>
-    '''UC_Product_Spec_CH control.
+    '''ful_CH_Detail control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UC_Product_Spec_CH As Global.VDM.UC_Product_Spec
+    Protected WithEvents ful_CH_Detail As Global.System.Web.UI.WebControls.FileUpload
     
     '''<summary>
     '''pnlJAPANESE control.
@@ -518,22 +491,22 @@ Partial Public Class Manage_Product_Info
     Protected WithEvents ful_JP As Global.System.Web.UI.WebControls.FileUpload
     
     '''<summary>
-    '''btnUpdateLogo_JP control.
+    '''imgIcon_JP_Detail control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnUpdateLogo_JP As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents imgIcon_JP_Detail As Global.System.Web.UI.WebControls.Image
     
     '''<summary>
-    '''UC_Product_Spec_JP control.
+    '''ful_JP_Detail control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UC_Product_Spec_JP As Global.VDM.UC_Product_Spec
+    Protected WithEvents ful_JP_Detail As Global.System.Web.UI.WebControls.FileUpload
     
     '''<summary>
     '''pnlKOREAN control.
@@ -581,22 +554,22 @@ Partial Public Class Manage_Product_Info
     Protected WithEvents ful_KR As Global.System.Web.UI.WebControls.FileUpload
     
     '''<summary>
-    '''btnUpdateLogo_KR control.
+    '''imgIcon_KR_Detail control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnUpdateLogo_KR As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents imgIcon_KR_Detail As Global.System.Web.UI.WebControls.Image
     
     '''<summary>
-    '''UC_Product_Spec_KR control.
+    '''ful_KR_Detail control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UC_Product_Spec_KR As Global.VDM.UC_Product_Spec
+    Protected WithEvents ful_KR_Detail As Global.System.Web.UI.WebControls.FileUpload
     
     '''<summary>
     '''pnlRUSSIAN control.
@@ -644,22 +617,22 @@ Partial Public Class Manage_Product_Info
     Protected WithEvents ful_RS As Global.System.Web.UI.WebControls.FileUpload
     
     '''<summary>
-    '''btnUpdateLogo_RS control.
+    '''imgIcon_RS_Detail control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnUpdateLogo_RS As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents imgIcon_RS_Detail As Global.System.Web.UI.WebControls.Image
     
     '''<summary>
-    '''UC_Product_Spec_RS control.
+    '''ful_RS_Detail control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UC_Product_Spec_RS As Global.VDM.UC_Product_Spec
+    Protected WithEvents ful_RS_Detail As Global.System.Web.UI.WebControls.FileUpload
     
     '''<summary>
     '''chkActive control.

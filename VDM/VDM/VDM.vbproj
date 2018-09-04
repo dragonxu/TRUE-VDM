@@ -129,6 +129,7 @@
     <Content Include="Manage_Brand.aspx" />
     <Content Include="Manage_Machine.aspx" />
     <Content Include="Manage_Product_Info.aspx" />
+    <Content Include="Manage_Sim_Info.aspx" />
     <Content Include="RenderImage.aspx" />
     <Content Include="Scripts\apps\calendar.js" />
     <Content Include="Scripts\apps\products.js" />
@@ -195,6 +196,7 @@
     <Content Include="Test_API\UC_Save_File.ascx" />
     <Content Include="Test_API\UC_Service_Flow_Create.ascx" />
     <Content Include="Test_API\UC_Service_Flow_Finish.ascx" />
+    <Content Include="UC_Product_Spec.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -222,6 +224,13 @@
     <Compile Include="Manage_Product_Info.aspx.vb">
       <DependentUpon>Manage_Product_Info.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage_Sim_Info.aspx.designer.vb">
+      <DependentUpon>Manage_Sim_Info.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage_Sim_Info.aspx.vb">
+      <DependentUpon>Manage_Sim_Info.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="MasterPage.Master.designer.vb">
       <DependentUpon>MasterPage.Master</DependentUpon>
@@ -373,6 +382,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UC_Product_Spec.ascx.designer.vb">
+      <DependentUpon>UC_Product_Spec.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UC_Product_Spec.ascx.vb">
+      <DependentUpon>UC_Product_Spec.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
