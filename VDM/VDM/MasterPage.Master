@@ -228,7 +228,7 @@
                 </a>                
               </li>      
               <li id="mnu_Setting_Authorize" runat="server">
-                <a href="javascript:;">
+                <a href="Setting_Authorize.aspx">
                   <i class="icon-users"></i>
                   <span>สิทธิ์เจ้าหน้าที่</span>
                 </a>                
