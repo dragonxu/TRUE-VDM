@@ -131,6 +131,15 @@ Partial Public Class Manage_Machine
     Protected WithEvents lblBundledProduct As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''pnlBlankPrinter control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlBlankPrinter As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
     '''btnMonitor control.
     '''</summary>
     '''<remarks>

@@ -1,9 +1,10 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage.Master" CodeBehind="Manage_Machine.aspx.vb" Inherits="VDM.Manage_Machine" %>
+
 <asp:Content ID="HeaderContainer" ContentPlaceHolderID="HeaderContainer" runat="server">
 </asp:Content>
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="page-title">
-        <div class="title">Setting & Monitoring > Kiosk & Monitoring</div>        
+        <div class="title">Management > เครื่อง Vending</div>        
     </div>
     <asp:UpdatePanel ID="udpList" runat="server">
    <ContentTemplate>
@@ -37,22 +38,22 @@
                                         </div>
                                     </div>
 
-                                    <%--<div class="col-sm-12 mobile_product">
+                                    <div class="col-sm-12 mobile_product">
                                         
-                                        <uc:uc_SIM_Stock_UI ID="SIM_Stock" runat="server" />                                        
-                                        <uc:uc_Printer_Stock_UI ID="Printer" runat="server" />
+                                        <%--<uc:uc_SIM_Stock_UI ID="SIM_Stock" runat="server" /> --%>                                       
+                                        <%--<uc:UC_Printer_Stock_UI ID="Printer" runat="server" />--%>
                                         <asp:Panel ID="pnlBlankPrinter" runat="server" Style="margin-top:20px;" Visible="false"></asp:Panel>                          
                                         
-                                    </div>--%>
+                                    </div>
                                      
 
                                   </div>
                                   <%--<div class="col-sm-9">                                       
-                                      <uc:uc_Peripheral_UI ID="Peripheral" runat="server" />
-                                  </div>
-                                  <div class="col-sm-9">
-                                      <uc:uc_MoneyStock_UI ID="MoneyStock" runat="server" />
-                                  </div>   --%>  
+                                      <uc:UC_Peripheral_UI ID="Peripheral" runat="server" />
+                                  </div>--%>
+                                  <%--<div class="col-sm-9">
+                                      <uc:UC_MoneyStock_UI ID="MoneyStock" runat="server" />
+                                  </div> --%>    
                                  <div class="col-sm-9">
                                      <asp:LinkButton CssClass="btn btn-primary btn-icon loading-demo mr5 btn-shadow col-sm-4" ID="btnMonitor" runat="server" CommandName="Edit">
                                          <i class="icon-target"></i>
@@ -66,7 +67,6 @@
                                           <i class="fa fa-close"></i>
                                           <span>Remove this machine</span>
                                      </asp:LinkButton>
-                                     <%--<ajaxToolkit:ConfirmButtonExtender ID="cfmDelete" runat="server" TargetControlID="btnDelete" />  --%> 
                                  </div>       
                              </div> 
                         </div>
@@ -86,6 +86,9 @@
         </asp:Panel>
     </ContentTemplate>
 </asp:UpdatePanel>
+
+
 </asp:Content>
 <asp:Content ID="ScriptContainer" ContentPlaceHolderID="ScriptContainer" runat="server">
+
 </asp:Content>

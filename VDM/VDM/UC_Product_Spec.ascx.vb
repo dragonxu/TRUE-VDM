@@ -1,9 +1,8 @@
 ﻿
-Imports System.Data
 Imports System.Data.SqlClient
 
 Public Class UC_Product_Spec
-    Inherits System.Web.UI.UserControl
+    Inherits UserControl
 
     Dim BL As New VDM_BL
 
@@ -43,8 +42,6 @@ Public Class UC_Product_Spec
             rptCaptionList.DataSource = Nothing
             rptCaptionList.DataBind()
         End If
-
-
 
     End Sub
 

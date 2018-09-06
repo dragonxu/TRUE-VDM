@@ -68,8 +68,6 @@
 
         <asp:Panel ID="pnlModal" runat="server" Visible="false">
             <div class="sweet-overlay" tabindex="-1" style="opacity: 1.04; display: block;"></div>
-
-
             <div class="sweet-alert show-input showSweetAlert visible form-horizontal "  style="display: block;width: 800px;margin-top: -200px;left: 40%;">
               
                 <h3>Add Spec</h3>
@@ -77,75 +75,73 @@
                  <div class="card-block">
                     <div class="form-horizontal">
 
-                <div class="row ">
-                    <div class="form-group col-sm-6">
-                        <label class="col-sm-4 control-label" style ="padding-top:17px;">Thai <span style="color: red;">*</span></label>
-                        <div class="col-sm-6">
-                            <asp:TextBox ID="txtSpec_THAI" runat="server" class="form-control" Style ="height: 34px;font-size: 0.8125rem;"></asp:TextBox>
+                        <div class="row ">
+                            <div class="form-group col-sm-6">
+                                <label class="col-sm-4 control-label" style ="padding-top:17px;">Thai <span style="color: red;">*</span></label>
+                                <div class="col-sm-6">
+                                    <asp:TextBox ID="txtSpec_THAI" runat="server" class="form-control" Style ="height: 34px;font-size: 0.8125rem;"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label class="col-sm-4 control-label" style ="padding-top:17px;">English <span style="color: red;">*</span></label>
+                                <div class="col-sm-6">
+                                    <asp:TextBox ID="txtSpec_ENGLISH" runat="server" class="form-control"  Style ="height: 34px;font-size: 0.8125rem;"></asp:TextBox>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <label class="col-sm-4 control-label" style ="padding-top:17px;">English <span style="color: red;">*</span></label>
-                        <div class="col-sm-6">
-                            <asp:TextBox ID="txtSpec_ENGLISH" runat="server" class="form-control"  Style ="height: 34px;font-size: 0.8125rem;"></asp:TextBox>
+                        <div class="row ">
+                            <div class="form-group col-sm-6">
+                                <label class="col-sm-4 control-label" style ="padding-top:17px;">Cninese <span style="color: red;">*</span></label>
+                                <div class="col-sm-6">
+                                    <asp:TextBox ID="txtSpec_CHINESE" runat="server" class="form-control"  Style ="height: 34px;font-size: 0.8125rem;"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label class="col-sm-4 control-label" style ="padding-top:17px;">Japanese <span style="color: red;">*</span></label>
+                                <div class="col-sm-6">
+                                    <asp:TextBox ID="txtSpec_JAPANESE" runat="server" class="form-control"  Style ="height: 34px;font-size: 0.8125rem;"></asp:TextBox>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row ">
-                    <div class="form-group col-sm-6">
-                        <label class="col-sm-4 control-label" style ="padding-top:17px;">Cninese <span style="color: red;">*</span></label>
-                        <div class="col-sm-6">
-                            <asp:TextBox ID="txtSpec_CHINESE" runat="server" class="form-control"  Style ="height: 34px;font-size: 0.8125rem;"></asp:TextBox>
+                        <div class="row ">
+                            <div class="form-group col-sm-6">
+                                <label class="col-sm-4 control-label" style ="padding-top:17px;">Korean <span style="color: red;">*</span></label>
+                                <div class="col-sm-6">
+                                    <asp:TextBox ID="txtSpec_KOREAN" runat="server" class="form-control"  Style ="height: 34px;font-size: 0.8125rem;"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label class="col-sm-4 control-label" style ="padding-top:17px;">Russian <span style="color: red;">*</span></label>
+                                <div class="col-sm-6">
+                                    <asp:TextBox ID="txtSpec_RUSSIAN" runat="server" class="form-control"  Style ="height: 34px;font-size: 0.8125rem;"></asp:TextBox>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <label class="col-sm-4 control-label" style ="padding-top:17px;">Japanese <span style="color: red;">*</span></label>
-                        <div class="col-sm-6">
-                            <asp:TextBox ID="txtSpec_JAPANESE" runat="server" class="form-control"  Style ="height: 34px;font-size: 0.8125rem;"></asp:TextBox>
-                        </div>
-                    </div>
-                </div>
-                <div class="row ">
-                    <div class="form-group col-sm-6">
-                        <label class="col-sm-4 control-label" style ="padding-top:17px;">Korean <span style="color: red;">*</span></label>
-                        <div class="col-sm-6">
-                            <asp:TextBox ID="txtSpec_KOREAN" runat="server" class="form-control"  Style ="height: 34px;font-size: 0.8125rem;"></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <label class="col-sm-4 control-label" style ="padding-top:17px;">Russian <span style="color: red;">*</span></label>
-                        <div class="col-sm-6">
-                            <asp:TextBox ID="txtSpec_RUSSIAN" runat="server" class="form-control"  Style ="height: 34px;font-size: 0.8125rem;"></asp:TextBox>
-                        </div>
-                    </div>
-                </div>
-                <div class="row ">
-                    <div class="form-group col-sm-6">
-                        <label class="col-sm-4 control-label" style ="padding-top:17px;">Is Qualitative<span style="color: red;"></span></label>
-                        <div class="col-sm-6">
-                              <label class="col-sm-10 cb-checkbox cb-md">
-                            <asp:CheckBox ID="chkIS_QUALITATIVE" runat="server" Checked="false" />
-                        </label>
-                        </div>
-                    </div>
-                    <div class="form-group col-sm-6">
+                        <div class="row ">
+                            <div class="form-group col-sm-6">
+                                <label class="col-sm-4 control-label" style ="padding-top:17px;">Is Qualitative<span style="color: red;"></span></label>
+                                <div class="col-sm-6">
+                                      <label class="col-sm-10 cb-checkbox cb-md">
+                                    <asp:CheckBox ID="chkIS_QUALITATIVE" runat="server" Checked="false" />
+                                </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-6">
                         
-                    </div>
-                </div>
+                            </div>
+                        </div>
 
  
-
-
-                        </div>
-                     </div>
-
-                 <div class="sa-button-container">
-                     <div style="float: right;">
-                    <asp:Button ID="btnClose" runat="server" class="btn btn-block " Text="Cancel" />
+                    </div>
                 </div>
-                <div style="float: right; margin-right: 5px;">
-                    <asp:Button ID="btnOKSpec" runat="server" class="btn btn-info " Text="Save" />
-                </div>
+
+                <div class="sa-button-container">
+                    <div style="float: right;">
+                        <asp:Button ID="btnClose" runat="server" class="btn btn-block " Text="Cancel" />
+                    </div>
+                    <div style="float: right; margin-right: 5px;">
+                        <asp:Button ID="btnOKSpec" runat="server" class="btn btn-info " Text="Save" />
+                    </div>
                 </div>
             </div>
         </asp:Panel>

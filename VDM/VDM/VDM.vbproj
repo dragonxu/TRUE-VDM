@@ -196,7 +196,7 @@
     <Content Include="Test_API\UC_Save_File.ascx" />
     <Content Include="Test_API\UC_Service_Flow_Create.ascx" />
     <Content Include="Test_API\UC_Service_Flow_Finish.ascx" />
-    <Content Include="UC_Product_Spec.ascx" />
+    <Compile Include="UC_Product_Spec.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
