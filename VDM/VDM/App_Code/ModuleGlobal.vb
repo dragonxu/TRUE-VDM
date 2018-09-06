@@ -332,4 +332,30 @@ Module ModuleGlobal
         Return T.Ticks / 10000
     End Function
 
+
+    Public Function ExcelContentType(ByVal ContentType As String) As Boolean
+        Dim Result As Boolean = True
+        Select Case ContentType
+            Case "application/vnd.ms-excel"
+            Case "application/msexcel"
+            Case "application/x-msexcel"
+            Case "application/x-ms-excel"
+            Case "application/x-excel"
+            Case "application/x-dos_ms_excel"
+            Case "application/xls"
+            Case "application/x-xls"
+            Case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            Case Else
+                Result = False
+        End Select
+        Return Result
+    End Function
+
+    Public Structure FileStructure
+        Public ContentType As String
+        Public FileName As String
+        Public Content As Byte()
+    End Structure
+
+
 End Module
