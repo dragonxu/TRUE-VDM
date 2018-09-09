@@ -36,7 +36,7 @@
                                         <div class="col-sm-12">
                                              <asp:LinkButton CssClass="btn btn-primary btn-icon loading-demo mr5 btn-shadow col-sm-12" ID="btnConsole" runat="server" CommandName="Console">
                                                  <i class="icon-target"></i>
-                                                  <span>Staff COnsole</span>
+                                                  <span>Staff Console</span>
                                              </asp:LinkButton>
                                              <asp:LinkButton CssClass="btn btn-success btn-icon loading-demo mr5 btn-shadow col-sm-12" ID="btnEdit" runat="server" CommandName="Setting">
                                                  <i class="fa fa-cog"></i>
