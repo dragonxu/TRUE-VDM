@@ -204,6 +204,9 @@
     <Content Include="Test_API\UC_Save_File.ascx" />
     <Content Include="Test_API\UC_Service_Flow_Create.ascx" />
     <Content Include="Test_API\UC_Service_Flow_Finish.ascx" />
+    <Content Include="UC_MoneyStock_UI.ascx" />
+    <Content Include="UC_Peripheral_UI.ascx" />
+    <Content Include="UC_Printer_Stock_UI.ascx" />
     <Content Include="UC_Product_Spec.ascx" />
     <Content Include="Upload_User_Form.aspx" />
     <Content Include="Web.config">
@@ -398,6 +401,27 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UC_MoneyStock_UI.ascx.designer.vb">
+      <DependentUpon>UC_MoneyStock_UI.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UC_MoneyStock_UI.ascx.vb">
+      <DependentUpon>UC_MoneyStock_UI.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UC_Peripheral_UI.ascx.designer.vb">
+      <DependentUpon>UC_Peripheral_UI.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UC_Peripheral_UI.ascx.vb">
+      <DependentUpon>UC_Peripheral_UI.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UC_Printer_Stock_UI.ascx.designer.vb">
+      <DependentUpon>UC_Printer_Stock_UI.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UC_Printer_Stock_UI.ascx.vb">
+      <DependentUpon>UC_Printer_Stock_UI.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UC_Product_Spec.ascx.designer.vb">
       <DependentUpon>UC_Product_Spec.ascx</DependentUpon>
