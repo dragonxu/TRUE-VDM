@@ -6,7 +6,7 @@
         <asp:Repeater ID="rptDevice" runat="server">
             <ItemTemplate>
                 <span class="btn btn-success" title="Coin In" id="spanDevice" runat="Server">
-                        <asp:Image ID="iconDevice" runat="server" Width="30px" />
+                        <asp:Image ID="iconDevice" runat="server" Width="24px" />
                         <asp:Label ID="lblDeviceName" runat="Server"></asp:Label>
                 </span>
             </ItemTemplate>

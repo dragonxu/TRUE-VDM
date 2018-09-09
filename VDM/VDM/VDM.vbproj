@@ -125,10 +125,15 @@
     <Content Include="images\avatar.jpg" />
     <Content Include="images\avatar.png" />
     <Content Include="images\BlackDot.png" />
+    <Content Include="images\BlankIcon.png" />
     <Content Include="images\default-avatar.png" />
+    <Content Include="images\Icon\koisk_ab.png" />
+    <Content Include="images\Icon\koisk_ok.png" />
     <Content Include="images\Logo128x128.png" />
     <Content Include="images\Logo320x55.png" />
+    <Content Include="images\Logo320x55_White.png" />
     <Content Include="images\Logo500x83.png" />
+    <Content Include="images\Logo500x83_White.png" />
     <Content Include="images\Logo70x55.png" />
     <Content Include="images\offline.png" />
     <Content Include="images\online.png" />
@@ -206,7 +211,6 @@
     <Content Include="Test_API\UC_Service_Flow_Finish.ascx" />
     <Content Include="UC_MoneyStock_UI.ascx" />
     <Content Include="UC_Peripheral_UI.ascx" />
-    <Content Include="UC_Printer_Stock_UI.ascx" />
     <Content Include="UC_Product_Spec.ascx" />
     <Content Include="Upload_User_Form.aspx" />
     <Content Include="Web.config">
@@ -414,13 +418,6 @@
     </Compile>
     <Compile Include="UC_Peripheral_UI.ascx.vb">
       <DependentUpon>UC_Peripheral_UI.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UC_Printer_Stock_UI.ascx.designer.vb">
-      <DependentUpon>UC_Printer_Stock_UI.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="UC_Printer_Stock_UI.ascx.vb">
-      <DependentUpon>UC_Printer_Stock_UI.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UC_Product_Spec.ascx.designer.vb">

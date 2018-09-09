@@ -41,157 +41,13 @@ Partial Public Class Manage_Machine
     Protected WithEvents lblTotalList As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''imgKioskIcon control.
+    '''rptList control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents imgKioskIcon As Global.System.Web.UI.WebControls.Image
-    
-    '''<summary>
-    '''h3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents h3 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''lblKioskCode control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblKioskCode As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblKOID control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblKOID As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblIP control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblIP As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblLocation control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblLocation As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblNetworkScope control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblNetworkScope As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblRunningNo control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblRunningNo As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblTerminalID control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblTerminalID As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblBundledProduct control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblBundledProduct As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''Printer control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Printer As Global.VDM.UC_Printer_Stock_UI
-    
-    '''<summary>
-    '''pnlBlankPrinter control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnlBlankPrinter As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
-    '''Peripheral control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Peripheral As Global.VDM.UC_Peripheral_UI
-    
-    '''<summary>
-    '''MoneyStock control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents MoneyStock As Global.VDM.UC_MoneyStock_UI
-    
-    '''<summary>
-    '''btnMonitor control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnMonitor As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''btnEdit control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnEdit As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''btnDelete control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnDelete As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents rptList As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
     '''btnAdd control.
@@ -239,229 +95,40 @@ Partial Public Class Manage_Machine
     Protected WithEvents lblEditMode As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''Label1 control.
+    '''lblCode control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblCode As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''Span1 control.
+    '''txtCode control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Span1 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents txtCode As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''ddlLocation control.
+    '''ddlSite control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ddlLocation As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents ddlSite As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
-    '''ddlNetworkScope control.
+    '''txtZone control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ddlNetworkScope As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''txtRunningNo control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtRunningNo As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtTerminal control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtTerminal As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtComName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtComName As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtIP1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtIP1 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtIP2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtIP2 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtIP3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtIP3 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtIP4 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtIP4 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtMacAddress control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtMacAddress As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''btnGetMac control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnGetMac As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''rptBundledProduct control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rptBundledProduct As Global.System.Web.UI.WebControls.Repeater
-    
-    '''<summary>
-    '''rpt_SIM_Slot control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rpt_SIM_Slot As Global.System.Web.UI.WebControls.Repeater
-    
-    '''<summary>
-    '''rpt_Stock control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rpt_Stock As Global.System.Web.UI.WebControls.Repeater
-    
-    '''<summary>
-    '''udpAds control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents udpAds As Global.System.Web.UI.UpdatePanel
-    
-    '''<summary>
-    '''rpt_Ads control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rpt_Ads As Global.System.Web.UI.WebControls.Repeater
-    
-    '''<summary>
-    '''txtAds_RowIndex control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtAds_RowIndex As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtAds_CommandName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtAds_CommandName As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''btnAds_Command control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnAds_Command As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''btnInsertAds control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnInsertAds As Global.System.Web.UI.HtmlControls.HtmlAnchor
-    
-    '''<summary>
-    '''fulInsertAds control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents fulInsertAds As Global.System.Web.UI.WebControls.FileUpload
-    
-    '''<summary>
-    '''btnUpdateAds control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnUpdateAds As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''fulUploadVDO control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents fulUploadVDO As Global.System.Web.UI.WebControls.FileUpload
+    Protected WithEvents txtZone As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''chkActive control.

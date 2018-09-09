@@ -1,8 +1,250 @@
-﻿Public Class Manage_Machine
+﻿Imports System.Data.SqlClient
+
+Public Class Manage_Machine
     Inherits System.Web.UI.Page
 
+    Dim BL As New VDM_BL
+
+    Dim SimList As DataTable
+    Dim DeviceList As DataTable
+    Dim StatusList As DataTable
+    Dim ProductData As DataTable
+
+    Private Property KO_ID As Integer
+        Get
+            Try
+                Return ViewState("KO_ID")
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+        Set(value As Integer)
+            ViewState("KO_ID") = value
+        End Set
+    End Property
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        If Not IsNumeric(Session("USER_ID")) Then
+            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('Please Login'); window.location.href='SignIn.aspx';", True)
+            Exit Sub
+        End If
+
+        If Not IsPostBack Then
+            ResetPage(Nothing, Nothing)
+            initFirstTimeJavascript()
+        Else
+            initFormPlugin()
+        End If
 
     End Sub
+
+    Private Sub initFormPlugin()
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
+    End Sub
+
+    Private Sub initFirstTimeJavascript()
+
+    End Sub
+
+    Private Sub BindList()
+
+        Dim DT As DataTable = BL.GetList_Kiosk
+        DeviceList = BL.GetList_Kiosk_Device
+        StatusList = BL.GetList_Device_Status
+
+        rptList.DataSource = DT
+        rptList.DataBind()
+
+        lblTotalList.Text = FormatNumber(DT.Rows.Count, 0)
+
+        pnlList.Visible = True
+        pnlEdit.Visible = False
+
+    End Sub
+
+    Private Sub rptList_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles rptList.ItemDataBound
+        If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
+
+        Dim imgKioskIcon As Image = e.Item.FindControl("imgKioskIcon")
+        Dim lblKioskCode As Label = e.Item.FindControl("lblKioskCode")
+        Dim lblKOID As Label = e.Item.FindControl("lblKOID")
+        Dim lblSite As Label = e.Item.FindControl("lblSite")
+        Dim lblZone As Label = e.Item.FindControl("lblZone")
+        Dim lblTotalProduct As Label = e.Item.FindControl("lblTotalProduct")
+
+        Dim btnConsole As LinkButton = e.Item.FindControl("btnConsole")
+        Dim btnEdit As LinkButton = e.Item.FindControl("btnEdit")
+        Dim btnDelete As Button = e.Item.FindControl("btnDelete")
+
+        If e.Item.DataItem("IsOnline") Then
+            imgKioskIcon.ImageUrl = "images/Icon/koisk_ok.png"
+        Else
+            imgKioskIcon.ImageUrl = "images/Icon/koisk_ab.png"
+        End If
+
+        lblKioskCode.Text = e.Item.DataItem("KO_CODE").ToString
+        lblKOID.Text = e.Item.DataItem("KO_ID").ToString
+        lblSite.Text = e.Item.DataItem("SITE_CODE").ToString
+        lblZone.Text = e.Item.DataItem("ZONE").ToString
+        lblTotalProduct.Text = FormatNumber(e.Item.DataItem("Total_Product"), 0)
+
+        '--------------- SIM Slot Level---------------------
+
+        '--------------- Peripheral UI ---------------
+        DeviceList.DefaultView.RowFilter = "KO_ID=" & e.Item.DataItem("KO_ID")
+        Dim Peripheral As UC_Peripheral_UI = e.Item.FindControl("Peripheral")
+        Peripheral.BindPeripheral(DeviceList.DefaultView.ToTable.Copy, StatusList)
+
+        '-----------Money Stock Level ---------------
+        DeviceList.DefaultView.RowFilter = "KO_ID=" & e.Item.DataItem("KO_ID") & " AND Max_Qty IS NOT NULL AND Warning_Qty IS NOT NULL AND Critical_Qty IS NOT NULL"
+        Dim MoneyStock As UC_MoneyStock_UI = e.Item.FindControl("MoneyStock")
+        MoneyStock.BindMoneyStock(DeviceList.DefaultView.ToTable.Copy)
+
+        '------------- Set Button By Authorize Level -----------
+        btnConsole.CommandArgument = e.Item.DataItem("KO_ID")
+        btnEdit.CommandArgument = e.Item.DataItem("KO_ID")
+        btnDelete.CommandArgument = e.Item.DataItem("KO_ID")
+        Dim btnPreDelete As HtmlAnchor = e.Item.FindControl("btnPreDelete")
+        btnPreDelete.Attributes("onclick") = "if(confirm('ยืนยันลบ " & lblKioskCode.Text.Replace("'", "") & " ?'))$('#" & btnDelete.ClientID & "').click();"
+
+    End Sub
+
+    Private Sub rptList_ItemCommand(source As Object, e As RepeaterCommandEventArgs) Handles rptList.ItemCommand
+        If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
+
+        Dim lblKioskCode As Label = e.Item.FindControl("lblKioskCode")
+
+        Select Case e.CommandName
+            Case "Console"
+
+            Case "Setting"
+
+                Dim DT As DataTable = BL.GetList_Kiosk(e.CommandArgument)
+                If DT.Rows.Count = 0 Then
+                    ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('" & lblKioskCode.Text.Replace("'", """") & " ไม่พบเครื่อง Vending ดังกล่าว!');", True)
+                    Exit Sub
+                End If
+
+                ClearEditForm()
+                KO_ID = e.CommandArgument
+                lblCode.Text = " : " & DT.Rows(0).Item("KO_Code") & " "
+                txtCode.Text = DT.Rows(0).Item("KO_Code")
+                BL.Bind_DDL_Site(ddlSite, DT.Rows(0).Item("SITE_ID"))
+                txtZone.Text = DT.Rows(0).Item("ZONE").ToString
+                chkActive.Checked = DT.Rows(0).Item("Active_Status")
+                lblEditMode.Text = "Edit"
+
+                pnlList.Visible = False
+                pnlEdit.Visible = True
+
+            Case "Delete"
+                BL.Drop_Kiosk(e.CommandArgument)
+                BindList()
+                ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('ลบ " & lblKioskCode.Text.Replace("'", """") & " สำเร็จ!');", True)
+        End Select
+    End Sub
+
+    Protected Sub ResetPage(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnBack.Click
+        BindList()
+    End Sub
+
+    Private Sub ClearEditForm()
+        KO_ID = 0
+
+        lblCode.Text = " (New)"
+        txtCode.Text = ""
+        BL.Bind_DDL_Site(ddlSite)
+        txtZone.Text = ""
+
+        ''------------------ Manage Bundled Product -----------------
+        'ProductData = BL.GetList_BundledProduct(0)
+        'BindBundledProduct()
+
+        ''------------------ Manage SIM Slot -----------------
+        'BindSIMSlot()
+
+        ''------- Manage Material Stock Control Level --------
+        'BindMaterialStock()
+
+        ''---------------- Manage Ads Rotator ----------------
+        'BindAds()
+
+        chkActive.Checked = True
+        lblEditMode.Text = "Add"
+
+        pnlList.Visible = True
+        pnlEdit.Visible = False
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        ClearEditForm()
+
+        pnlList.Visible = False
+        pnlEdit.Visible = True
+    End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        If txtCode.Text = "" Then
+            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('กรอก Machine Code');", True)
+            Exit Sub
+        End If
+
+        If ddlSite.SelectedIndex < 1 Then
+            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('เลือก Site');", True)
+            Exit Sub
+        End If
+
+        Dim DT As DataTable = BL.GetList_Kiosk()
+        DT.DefaultView.RowFilter = "KO_Code='" & txtCode.Text.Replace("'", "''") & "' AND KO_ID<>" & KO_ID
+        If DT.DefaultView.Count > 0 Then
+            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('Kiosk Code ซ้ำ');", True)
+            Exit Sub
+        End If
+
+        Dim Sql As String = "SELECT * FROM MS_KIOSK WHERE KO_ID=" & KO_ID
+        DT = New DataTable
+        Dim DA As New SqlDataAdapter(Sql, BL.ConnectionString)
+        DA.Fill(DT)
+        Dim DR As DataRow
+        If DT.Rows.Count = 0 Then
+            DR = DT.NewRow
+            DT.Rows.Add(DR)
+            KO_ID = GetNewID()
+            DR("KO_ID") = KO_ID
+            DR("IsOnline") = False
+        Else
+            DR = DT.Rows(0)
+        End If
+
+        DR("SITE_ID") = ddlSite.Items(ddlSite.SelectedIndex).Value
+        If txtZone.Text <> "" Then
+            DR("ZONE") = txtZone.Text
+        Else
+            DR("ZONE") = DBNull.Value
+        End If
+        DR("KO_CODE") = txtCode.Text
+        DR("Active_Status") = chkActive.Checked
+        DR("Update_By") = Session("USER_ID")
+        DR("Update_Time") = Now
+
+        Dim cmd As New SqlCommandBuilder(DA)
+        Try
+            DA.Update(DT)
+        Catch ex As Exception
+            Alert(Me.Page, ex.Message)
+            Exit Sub
+        End Try
+
+        Alert(Me.Page, "บันทึกสำเร็จ")
+        ResetPage(Nothing, Nothing)
+    End Sub
+
+    Private Function GetNewID() As Integer
+        Dim SQL As String = "SELECT IsNull(MAX(KO_ID),0)+1 FROM MS_KIOSK "
+        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT.Rows(0).Item(0)
+    End Function
 
 End Class

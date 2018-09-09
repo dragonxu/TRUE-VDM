@@ -2,10 +2,6 @@
 
 <%@ Register Src="~/UC_MoneyStock_UI.ascx" TagPrefix="uc" TagName="UC_MoneyStock_UI" %>
 <%@ Register Src="~/UC_Peripheral_UI.ascx" TagPrefix="uc" TagName="UC_Peripheral_UI" %>
-<%@ Register Src="~/UC_Printer_Stock_UI.ascx" TagPrefix="uc" TagName="UC_Printer_Stock_UI" %>
-
-
-
 
 <asp:Content ID="HeaderContainer" ContentPlaceHolderID="HeaderContainer" runat="server">
 </asp:Content>
@@ -20,36 +16,47 @@
                 Found : <asp:Label ID="lblTotalList" runat="server"></asp:Label> Machine(s)
             </div>
             <div class="card-block">                
-                <%--<asp:Repeater ID="rptList" runat="server">
-                    <ItemTemplate>--%>
+                <asp:Repeater ID="rptList" runat="server">
+                    <ItemTemplate>
                         <div class="col-sm-12">
                              <div class="card card-block no-border bg-white row-equal align-middle">
                                  <div class="col-sm-3">
                                     <div class="col-sm-12">
-                                        <div class="column">
-                                            <asp:Image ID="imgKioskIcon" runat="server" ImageUrl="images/icon/100/koisk_ok.png" Height="60px" />
+                                        <div class="column col-sm-4" style="vertical-align:top; padding-left: 0; ">
+                                            <asp:Image ID="imgKioskIcon" runat="server" width="90%" ImageUrl="images/icon/koisk_ok.png" />
                                         </div>
-                                        <div class="column">                                            
+                                        <div class="column col-sm-8">                                            
                                             <h3 class="m-a-0 text-green" id="h3" runat="server"><asp:Label ID="lblKioskCode" runat="server"></asp:Label></h3>
-                                            <h4>Ko_ID : <asp:Label ID="lblKOID" runat="server"></asp:Label></h4>
-                                            <h4>IP : <asp:Label ID="lblIP" runat="server"></asp:Label></h4>
-                                            <h6><asp:Label ID="lblLocation" runat="server"></asp:Label> 
-                                                <asp:Label ID="lblNetworkScope" runat="server"></asp:Label> 
-                                                <asp:Label ID="lblRunningNo" runat="server"></asp:Label> <br />
-                                                <asp:Label ID="lblTerminalID" runat="server"></asp:Label><br />
-                                                selling 
-                                                <asp:Label ID="lblBundledProduct" runat="server"></asp:Label> product(s)
+                                            <h4 style="display:none;">KO_ID : <asp:Label ID="lblKOID" runat="server"></asp:Label></h4>
+                                            <h6><asp:Label ID="lblSite" runat="server"></asp:Label> <br/>
+                                                <asp:Label ID="lblZone" runat="server"></asp:Label><br/>
+                                                <asp:Label ID="lblTotalProduct" runat="server"></asp:Label> product(s)
                                             </h6>
                                         </div>
+                                        <div class="col-sm-12">
+                                             <asp:LinkButton CssClass="btn btn-primary btn-icon loading-demo mr5 btn-shadow col-sm-12" ID="btnConsole" runat="server" CommandName="Console">
+                                                 <i class="icon-target"></i>
+                                                  <span>Staff COnsole</span>
+                                             </asp:LinkButton>
+                                             <asp:LinkButton CssClass="btn btn-success btn-icon loading-demo mr5 btn-shadow col-sm-12" ID="btnEdit" runat="server" CommandName="Setting">
+                                                 <i class="fa fa-cog"></i>
+                                                  <span>Setting</span>
+                                             </asp:LinkButton>
+                                             <a href="javascript:;" class="btn btn-default btn-icon loading-demo mr5 btn-shadow col-sm-12" ID="btnPreDelete" runat="server">
+                                                 <i class="fa fa-close"></i>
+                                                  <span>Remove this</span>
+                                             </a>
+                                             <asp:Button ID="btnDelete" runat="server" CommandName="Delete" style="display:none;"></asp:Button>
+                                         </div>  
                                     </div>
-
-                                    <div class="col-sm-12 mobile_product">
+                                     
+                                    <%--<div class="col-sm-12 mobile_product">
                                         
-                                        <%--<uc:uc_SIM_Stock_UI ID="SIM_Stock" runat="server" /> --%>                                       
+                                        <uc:uc_SIM_Stock_UI ID="SIM_Stock" runat="server" />                                      
                                         <uc:UC_Printer_Stock_UI ID="Printer" runat="server" />
                                         <asp:Panel ID="pnlBlankPrinter" runat="server" Style="margin-top:20px;" Visible="false"></asp:Panel>                          
                                         
-                                    </div>                   
+                                    </div> --%>                    
                                   </div>
                                   <div class="col-sm-9">                                       
                                       <uc:UC_Peripheral_UI ID="Peripheral" runat="server" />
@@ -57,25 +64,12 @@
                                   <div class="col-sm-9">
                                       <uc:UC_MoneyStock_UI ID="MoneyStock" runat="server" />
                                   </div>     
-                                 <div class="col-sm-9">
-                                     <asp:LinkButton CssClass="btn btn-primary btn-icon loading-demo mr5 btn-shadow col-sm-4" ID="btnMonitor" runat="server" CommandName="Edit">
-                                         <i class="icon-target"></i>
-                                          <span>Realtime Monitoring</span>
-                                     </asp:LinkButton>
-                                     <asp:LinkButton CssClass="btn btn-success btn-icon loading-demo mr5 btn-shadow col-sm-4" ID="btnEdit" runat="server" CommandName="Edit">
-                                         <i class="fa fa-cog"></i>
-                                          <span>Change configuration</span>
-                                     </asp:LinkButton>
-                                     <asp:LinkButton CssClass="btn btn-danger btn-icon loading-demo mr5 btn-shadow col-sm-4" ID="btnDelete" runat="server" CommandName="Delete">
-                                          <i class="fa fa-close"></i>
-                                          <span>Remove this machine</span>
-                                     </asp:LinkButton>
-                                 </div>       
+                                     
                              </div> 
                         </div>
                         
-        <%--           </ItemTemplate>
-                </asp:Repeater>--%>
+                   </ItemTemplate>
+                </asp:Repeater>
 
               
                 <div class="row">
@@ -94,26 +88,32 @@
     <ContentTemplate>
          <asp:Panel ID="pnlEdit" runat="server"  CssClass="card bg-white">
               <div class="card-header">
-                <asp:Label ID="lblEditMode" runat="server"></asp:Label> Kiosk <asp:Label ID="Label1" runat="server"></asp:Label>
+                <asp:Label ID="lblEditMode" runat="server"></asp:Label> Kiosk <asp:Label ID="lblCode" runat="server"></asp:Label>
               </div>
               <div class="card-block">
                 <div class="row m-a-0">
                   <div class="col-lg-12 form-horizontal">
                   <div class="row m-b">
-                      <h4 class="card-title">Kiosk Info  : &nbsp; &nbsp; <span class="h3 m-a-0 text-green m-l" id="Span1" runat="server"></span></h4> 
                       <div class="form-group">
-                        <label class="col-sm-2 control-label">Location <span style="color:red">*</span></label>
+                        <label class="card-title col-sm-2 control-label"><h4 style="margin-top: 0px;"> Kiosk Code </h4></label> 
                         <div class="col-sm-4">
-                              <asp:DropDownList ID="ddlLocation" runat="server" data-placeholder="Select location" AutoPostBack="true" CssClass="chosen form-control" Width="100%">
-                              </asp:DropDownList>
+                            <asp:TextBox ID="txtCode" runat="server" CssClass="form-control col-lg-4" Font-Bold="true" style="text-align:center;"/>
                         </div>
-                        <label class="col-sm-2 control-label">Network Scope <span style="color:red">*</span></label>
+                      </div>
+                     
+                       <div class="form-group">
+                         <label class="col-sm-2 control-label">Site <span style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                                <asp:DropDownList ID="ddlSite" runat="server" data-placeholder="..." CssClass="chosen form-control" Width="100%">
+                                </asp:DropDownList>
+                        </div>
+                        <label class="col-sm-2 control-label">Zone </label>
                         <div class="col-sm-4">                         
-                              <asp:DropDownList ID="ddlNetworkScope" runat="server" data-placeholder="Select scope" AutoPostBack="true" CssClass="chosen form-control" Width="100%">
-                              </asp:DropDownList>
+                              <asp:TextBox ID="txtZone" runat="server" CssClass="form-control" style="text-align:center; "/>
                         </div>                    
                       </div>
-                      <div class="form-group">
+                      
+                      <%--<div class="form-group">
                         <label class="col-sm-2 control-label  m-b">#Kiosk on Location <span style="color:red">*</span></label>
                         <div class="col-sm-4 m-b">
                             <asp:TextBox ID="txtRunningNo" runat="server" CssClass="form-control" style="text-align:center; " AutoPostBack="true" />
@@ -147,11 +147,11 @@
                           <asp:TextBox ID="txtMacAddress" runat="server" CssClass="form-control" Width="65%" style="display:inline;"></asp:TextBox>
                             <asp:Button ID="btnGetMac" runat="server" CssClass="btn btn-facebook" Width="30%" Text="Get By IP" Visible="false" /> 
                         </div>
-                      </div>                     
+                      </div>--%>                     
 
                   </div>
              
-                 <div class="row m-b">
+                 <%--<div class="row m-b">
                         <h4 class="card-title">Bundled Product(s) Selling on this machine</h4>
                         <div class="form-group" style="margin-left:-5px;">                        
                             
@@ -165,8 +165,7 @@
                             </asp:Repeater>                            
                          </div>   
                  </div>
-                
-                 <div class="row m-b">
+                     <div class="row m-b">
                       <h4 class="card-title">SIM Slot Assignment</h4>  
                       
                      <asp:Repeater ID="rpt_SIM_Slot" runat="server">
@@ -205,9 +204,10 @@
                          </ItemTemplate>
                      </asp:Repeater> 
 
-                  </div>                  
+                  </div>                 
                    <div class="row m-b">
                       <h4 class="card-title">Material Stock Control Level</h4>
+
                         <asp:Repeater ID="rpt_Stock" runat="server">
                             <ItemTemplate>
                                   <div class="card col-sm-3" style="padding:0; padding-right:0;">
@@ -253,7 +253,8 @@
                                     </div>
                                   </div>
                             </ItemTemplate>
-                        </asp:Repeater>                    
+                        </asp:Repeater>
+                                 
                    </div>
                   
                       <div class="form-group" style="margin-left:-5px; border-bottom:1px solid #ccc;">
@@ -318,8 +319,7 @@
                             <div class="help-block col-sm-9 m-b">Support only image jpeg gif png, file dimension must be 1080x320 and file size must not larger than 12MB</div>
                         
                     </div>
-
-                      <div class="row m-b" >
+                          <div class="row m-b" >
                             <asp:FileUpload ID="fulUploadVDO" ClientIDMode="Static" runat="server" style="display:none;"  />
                             <h4 class="card-title col-sm-2 control-label" style="text-align:left;">VDO Screen Saver</h4>
                             <a href="#" onclick="UploadVDO();return false;" class="btn btn-primary btn-icon loading-demo mr5 m-b btn-shadow col-sm-2"  >
@@ -328,13 +328,13 @@
                             </a>
                             <span ID="lblVDOFileName" class="col-sm-8 m-b" ></span>
                       </div>
-                      <div class="row m-b" >
+                          <div class="row m-b" >
                           <h3 class="card-title col-sm-2 control-label" style="text-align:left;">&nbsp;</h3>
                           <div class="help-block col-sm-8 m-b">Support only *.avi, file size must not larger than 100MB</div>
-                      </div>                 
+                      </div>--%>                 
                       
                       <div class="form-group m-t" style="text-align:left;">
-                            <h4 class="card-title col-sm-2 control-label" style="text-align:left;">Active Status </h4>  
+                            <h4 class="card-title col-sm-2 control-label" style="text-align:left; margin-top:0px;">Active Status </h4>  
                             <label class="col-sm-10 cb-checkbox cb-md">
                                 <asp:CheckBox ID="chkActive" runat="server" Checked="true" />
                             </label>

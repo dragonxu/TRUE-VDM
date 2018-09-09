@@ -21,7 +21,7 @@
 
         lblDeviceName.Text = e.Item.DataItem("D_Name").ToString
         spanDevice.Attributes("Title") = e.Item.DataItem("D_Name").ToString
-        iconDevice.ImageUrl = "Render_Hardware_Icon.aspx?C=W&D=" & e.Item.DataItem("D_ID")
+        iconDevice.ImageUrl = e.Item.DataItem("Icon_White")
 
         If IsDBNull(e.Item.DataItem("DS_ID")) Then
             spanDevice.Attributes("class") = "btn btn-default"
