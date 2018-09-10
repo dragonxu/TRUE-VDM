@@ -258,6 +258,7 @@
     <Content Include="images\SignIn\2.jpg" />
     <Content Include="images\SignIn\3.jpg" />
     <Content Include="images\warning.gif" />
+    <Content Include="Machine_Console\TestStock.aspx" />
     <Content Include="SignIn.aspx" />
     <Content Include="Machine_Console\Login.aspx" />
     <Content Include="Machine_Console\Machine_Overview.aspx" />
@@ -345,6 +346,13 @@
   <ItemGroup>
     <Compile Include="App_Code\BackEndInterface.vb" />
     <Compile Include="App_Code\ModuleGlobal.vb" />
+    <Compile Include="Machine_Console\TestStock.aspx.designer.vb">
+      <DependentUpon>TestStock.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Machine_Console\TestStock.aspx.vb">
+      <DependentUpon>TestStock.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="SignIn.aspx.designer.vb">
       <DependentUpon>SignIn.aspx</DependentUpon>
     </Compile>

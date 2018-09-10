@@ -54,7 +54,7 @@
                 <asp:ScriptManager ID="scm" runat="server"></asp:ScriptManager>
                 <div class="row" style="padding: 20px;">
                     <div class="overflow-hidden">
-                        <h1><b>ICONS-01</b> &nbsp; <i class="fa fa-map-marker text-blue "> Location : IconSiam </i> </h1>
+                        <h1><b>ICONS-01</b> &nbsp; <i class="fa fa-map-marker text-blue "> IconSiam </i> </h1>
 
                     </div>
 
