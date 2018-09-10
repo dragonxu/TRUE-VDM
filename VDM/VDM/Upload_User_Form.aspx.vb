@@ -52,15 +52,16 @@ Public Class Upload_User_Form
         F.FileName = Path.GetFileName(ful_User.PostedFile.FileName)
         Session("FILE_IMPORT") = F
         '-------------------------------------------------------------
+        Dim FileName As String = "Temp/Authorize_" & Now.ToOADate.ToString.Replace(".", "")
+
         '--------- Save To Path------------
         F = Session("FILE_IMPORT")
         If Not IsNothing(F) AndAlso Not IsNothing(F.Content) Then
-            Dim FS As FileStream = File.OpenWrite(Server.MapPath("FileImport/Authorize"))
+            Dim FS As FileStream = File.OpenWrite(Server.MapPath(FileName))
             FS.Write(F.Content, 0, F.Content.Length)
             FS.Close()
         End If
-
-        Dim ExcelPath As String = Server.MapPath("FileImport/Authorize")
+        Dim ExcelPath As String = Server.MapPath(FileName)
         Dim Conn As New System.Data.OleDb.OleDbConnection("provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & ExcelPath & "; Extended Properties=Excel 12.0;")
         Conn.Open()
         Dim DT As New DataTable
@@ -96,8 +97,8 @@ Public Class Upload_User_Form
         ful_User = Nothing
         Conn.Close()
         Try
-            If File.Exists(Server.MapPath("FileImport/Authorize")) Then
-                File.Delete(Server.MapPath("FileImport/Authorize"))
+            If File.Exists(Server.MapPath(FileName)) Then
+                File.Delete(Server.MapPath(FileName))
             End If
         Catch : End Try
 
@@ -122,7 +123,7 @@ Public Class Upload_User_Form
     End Sub
 
     Private Sub btnReset_Click(sender As Object, e As EventArgs) Handles btnReset.Click
-        Response.Redirect("Upload_User_Form.aspx.aspx")
+        Response.Redirect("Upload_User_Form.aspx")
     End Sub
 
     Private Sub btnConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
