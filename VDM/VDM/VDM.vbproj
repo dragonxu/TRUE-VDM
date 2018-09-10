@@ -125,15 +125,10 @@
     <Content Include="images\avatar.jpg" />
     <Content Include="images\avatar.png" />
     <Content Include="images\BlackDot.png" />
-    <Content Include="images\BlankIcon.png" />
     <Content Include="images\default-avatar.png" />
-    <Content Include="images\Icon\koisk_ab.png" />
-    <Content Include="images\Icon\koisk_ok.png" />
     <Content Include="images\Logo128x128.png" />
     <Content Include="images\Logo320x55.png" />
-    <Content Include="images\Logo320x55_White.png" />
     <Content Include="images\Logo500x83.png" />
-    <Content Include="images\Logo500x83_White.png" />
     <Content Include="images\Logo70x55.png" />
     <Content Include="images\offline.png" />
     <Content Include="images\online.png" />
@@ -142,7 +137,6 @@
     <Content Include="Manage_Machine.aspx" />
     <Content Include="Manage_Product_Info.aspx" />
     <Content Include="Manage_Sim_Info.aspx" />
-    <Content Include="Manage_Slot_Machine.aspx" />
     <Content Include="PageNavigation.ascx" />
     <Content Include="RenderImage.aspx" />
     <Content Include="Scripts\apps\calendar.js" />
@@ -198,7 +192,6 @@
     <Content Include="Styles\Site.css" />
     <Content Include="Styles\sli.css" />
     <Content Include="Styles\webfont.css" />
-    <Content Include="Test_API\Test_TMN_Payment.aspx" />
     <Content Include="Test_API\Test_API_Interface.aspx" />
     <Content Include="Test_API\UC_Activity_End.ascx" />
     <Content Include="Test_API\UC_Activity_Start.ascx" />
@@ -250,13 +243,6 @@
       <DependentUpon>Manage_Sim_Info.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Manage_Slot_Machine.aspx.designer.vb">
-      <DependentUpon>Manage_Slot_Machine.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Manage_Slot_Machine.aspx.vb">
-      <DependentUpon>Manage_Slot_Machine.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="MasterPage.Master.designer.vb">
       <DependentUpon>MasterPage.Master</DependentUpon>
     </Compile>
@@ -297,13 +283,6 @@
     </Compile>
     <Compile Include="SignIn.aspx.vb">
       <DependentUpon>SignIn.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="Test_API\Test_TMN_Payment.aspx.designer.vb">
-      <DependentUpon>Test_TMN_Payment.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Test_API\Test_TMN_Payment.aspx.vb">
-      <DependentUpon>Test_TMN_Payment.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Test_API\Test_API_Interface.aspx.designer.vb">

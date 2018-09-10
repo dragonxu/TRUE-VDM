@@ -41,7 +41,7 @@
                                                 <asp:Label ID="lblProductCode" runat="server"></asp:Label></td>
                                             <td data-title="PACKAGE NAME">
                                                 <asp:Label ID="lblPackageName" runat="server"></asp:Label></td>
-                                            <td data-title="Price (Baht)">
+                                            <td data-title="Price (Baht)"  style ="text-align :right ;" >
                                                 <asp:Label ID="lblPrice" runat="server"></asp:Label></td>
                                             <td data-title="Status">
 
