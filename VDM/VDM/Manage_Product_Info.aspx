@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/MasterPage.Master" CodeBehind="Manage_Product_Info.aspx.vb" Inherits="VDM.Manage_Product_Info" %>
 
 <%@ Register Src="~/UC_Product_Spec.ascx" TagPrefix="uc1" TagName="UC_Product_Spec" %>
+<%@ Register Src="~/PageNavigation.ascx" TagName="PageNavigation" TagPrefix="uc1" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeaderContainer" runat="server">
@@ -27,8 +28,9 @@
                                 <tr>
                                     <th>Logo</th>
                                     <th>PRODUCT CODE</th>
+                                    <th>BRAND</th>
+                                    <th>MODEL</th>
                                     <th>DISPLAY NAME</th>
-                                    <th>Machine (n)</th>
                                     <th>Price (Baht)</th>
                                     <th>Active</th>
                                     <th id="ColEdit" runat="server">Edit</th>
@@ -44,14 +46,24 @@
                                                 <asp:Image ID="img" runat="server" Width="60px" Height="60px"></asp:Image></td>
                                             <td data-title="PRODUCT CODE">
                                                 <asp:Label ID="lblProductCode" runat="server"></asp:Label></td>
+                                            <td data-title="RRAND">
+                                                <asp:Label ID="lblBrand" runat="server"></asp:Label></td>
+                                            <td data-title="MODEL">
+                                                <asp:Label ID="lblModel" runat="server"></asp:Label></td>
                                             <td data-title="DISPLAY NAME">
                                                 <asp:Label ID="lblDisplayName" runat="server"></asp:Label></td>
-                                            <td data-title="Spec (n)">
-                                                <asp:Label ID="lblCountSpec" runat="server"></asp:Label></td>
+
                                             <td data-title="Price (Baht)">
                                                 <asp:Label ID="lblPrice" runat="server"></asp:Label></td>
-                                            <td data-title="Active">
-                                                <asp:Image ID="ImageActive" runat="server"></asp:Image></td>
+                                            <td data-title="Status">
+
+                                                <asp:Panel ID="pnlChk" runat="server" Enabled="false" Style="text-align: center;">
+                                                    <label class="col-sm-10 cb-checkbox cb-md" aria-disabled="false">
+                                                        <asp:CheckBox ID="chkAvailable" runat="server" />
+                                                    </label>
+                                                </asp:Panel>
+                                                <asp:Button ID="btnToggle" runat="server" CommandName="ToggleStatus" Style="display: none" Text="Toggle" />
+                                            </td>
                                             <td data-title="Edit" id="Td1" runat="server">
                                                 <asp:Button CssClass="btn btn-success" ID="btnEdit" runat="server" Text="Edit" CommandName="Edit" /></td>
                                             <td data-title="Delete" id="Td2" runat="server">
@@ -65,6 +77,7 @@
                             </tbody>
                         </table>
                     </div>
+                    <uc1:PageNavigation ID="Pager" runat="server" />
                     <div class="row m-t">
                         <asp:LinkButton CssClass="btn btn-primary btn-icon loading-demo mr5 btn-shadow" ID="btnAdd" runat="server">
                       <i class="fa fa-plus-circle"></i>
@@ -134,8 +147,17 @@
 
                             </div>
 
-
                             <div class="form-group col-sm-6">
+                                <label class="col-sm-4 control-label">Model <span style="color: red;">*</span></label>
+
+
+                                <div class="col-sm-6">
+                                    <asp:TextBox ID="txtModel" runat="server" class="form-control"></asp:TextBox>
+                                </div>
+
+
+                            </div>
+                            <div class="form-group col-sm-6" id="divRequire" runat="server" visible="false">
                                 <label class="col-sm-4 control-label">Require Receive Form <span style="color: red;">*</span></label>
                                 <div class="col-sm-6">
                                     <div class="col-sm-6">

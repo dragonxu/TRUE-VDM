@@ -51,7 +51,7 @@
                                         <asp:Label ID="lblFullName" runat="server"></asp:Label></td>
                                     <td data-title="Status">
 
-                                        <asp:Panel ID="pnlChe" runat="server" Enabled="false" Style="text-align: center;">
+                                        <asp:Panel ID="pnlChk" runat="server" Enabled="false" Style="text-align: center;">
                                             <label class="col-sm-10 cb-checkbox cb-md" aria-disabled="false">
                                                 <asp:CheckBox ID="chkAvailable" runat="server" />
                                             </label>

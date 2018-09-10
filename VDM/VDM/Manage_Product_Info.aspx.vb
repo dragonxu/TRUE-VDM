@@ -318,6 +318,7 @@ Public Class Manage_Product_Info
         rdIsSerial_No.Checked = False
         BL.Bind_DDL_Brand(ddlBrand)
         ddlBrand.SelectedIndex = 0
+        txtModel.Text = ""
         rdRequireReceive_Yes.Checked = False
         rdRequireReceive_No.Checked = False
         ModuleGlobal.ImplementJavaMoneyText(txtPrice)
@@ -378,13 +379,22 @@ Public Class Manage_Product_Info
         Dim DT As New DataTable
         DA.Fill(DT)
 
-        rptList.DataSource = DT
-        rptList.DataBind()
+        'rptList.DataSource = DT
+        'rptList.DataBind()
 
         lblTotalList.Text = FormatNumber(DT.Rows.Count, 0)
 
         pnlList.Visible = True
         pnlEdit.Visible = False
+
+        Session("Manage_Product_Info") = DT
+        Pager.SesssionSourceName = "Manage_Product_Info"
+        Pager.RenderLayout()
+
+    End Sub
+
+    Protected Sub Pager_PageChanging(ByVal Sender As PageNavigation) Handles Pager.PageChanging
+        Pager.TheRepeater = rptList
     End Sub
 
     Private Sub rptList_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles rptList.ItemDataBound
@@ -392,6 +402,8 @@ Public Class Manage_Product_Info
 
         Dim img As Image = e.Item.FindControl("img")
         Dim lblProductCode As Label = e.Item.FindControl("lblProductCode")
+        Dim lblBrand As Label = e.Item.FindControl("lblBrand")
+        Dim lblModel As Label = e.Item.FindControl("lblModel")
         Dim lblDisplayName As Label = e.Item.FindControl("lblDisplayName")
         Dim lblCountSpec As Label = e.Item.FindControl("lblCountSpec")
         Dim lblPrice As Label = e.Item.FindControl("lblPrice")
@@ -400,7 +412,10 @@ Public Class Manage_Product_Info
         img.ImageUrl = "RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & e.Item.DataItem("PRODUCT_ID") & "&LANG=" & VDM_BL.UILanguage.TH & "&t=" & Now.ToOADate.ToString.Replace(".", "")
         lblProductCode.Text = e.Item.DataItem("PRODUCT_CODE").ToString
         lblDisplayName.Text = e.Item.DataItem("DISPLAY_NAME_TH").ToString
-        'lblCountSpec.Text = "" - --------------------
+
+
+        lblBrand.Text = e.Item.DataItem("BRAND_NAME").ToString
+        lblModel.Text = e.Item.DataItem("MODEL").ToString
         If Not IsDBNull(e.Item.DataItem("Price")) Then
             lblPrice.Text = FormatNumber(e.Item.DataItem("Price"), 2)
         End If
@@ -414,6 +429,9 @@ Public Class Manage_Product_Info
         Dim btnPreDelete As HtmlInputButton = e.Item.FindControl("btnPreDelete")
         btnPreDelete.Attributes("onclick") = "if(confirm('ยืนยันลบ ?'))$('#" & btnDelete.ClientID & "').click();"
         'btnPreDelete.Attributes("onclick") = "If(confirm('ยืนยันลบ ?'))$('#" & btnDelete.ClientID & "').click();"
+
+        Dim chkAvailable As CheckBox = e.Item.FindControl("chkAvailable")
+        chkAvailable.Checked = e.Item.DataItem("Active_Status")
 
     End Sub
 
@@ -441,6 +459,8 @@ Public Class Manage_Product_Info
 
                 '--Detail
                 txtCode.Text = DT.Rows(0).Item("PRODUCT_CODE").ToString
+                txtModel.Text = DT.Rows(0).Item("MODEL").ToString
+
                 If DT.Rows(0).Item("IS_SERIAL") Then
                     rdIsSerial_Yes.Checked = True
                 Else
@@ -601,7 +621,10 @@ Public Class Manage_Product_Info
             Alert(Me.Page, "เลือก Brand")
             Exit Sub
         End If
-
+        If txtModel.Text = "" Then
+            Alert(Me.Page, "กรอก Model")
+            Exit Sub
+        End If
         'If rdRequireReceive_No.Checked = False And rdRequireReceive_Yes.Checked = False Then
         '    Alert(Me.Page, "เลือก Require Receive Form")
         '    Exit Sub
@@ -712,7 +735,7 @@ Public Class Manage_Product_Info
         End If
         DR("PRODUCT_CODE") = txtCode.Text
         DR("BRAND_ID") = ddlBrand.SelectedValue
-        'DR("MODEL") =
+        DR("MODEL") = txtModel.Text
         DR("DISPLAY_NAME_TH") = IIf(txtDisplayName_TH.Text <> "", txtDisplayName_TH.Text, DBNull.Value)
         DR("DISPLAY_NAME_EN") = IIf(txtDisplayName_EN.Text <> "", txtDisplayName_EN.Text, DBNull.Value)
         DR("DISPLAY_NAME_CH") = IIf(txtDisplayName_CH.Text <> "", txtDisplayName_CH.Text, DBNull.Value)

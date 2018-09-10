@@ -66,7 +66,16 @@ Partial Public Class Manage_Product_Info
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents rptList As Global.System.Web.UI.WebControls.Repeater
-    
+
+    '''<summary>
+    '''Pager control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Pager As Global.VDM.PageNavigation
+
     '''<summary>
     '''btnAdd control.
     '''</summary>
@@ -147,6 +156,24 @@ Partial Public Class Manage_Product_Info
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlBrand As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''txtModel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtModel As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''divRequire control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents divRequire As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''rdRequireReceive_Yes control.

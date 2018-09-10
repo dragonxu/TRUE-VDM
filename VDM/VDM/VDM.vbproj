@@ -137,6 +137,8 @@
     <Content Include="Manage_Machine.aspx" />
     <Content Include="Manage_Product_Info.aspx" />
     <Content Include="Manage_Sim_Info.aspx" />
+    <Content Include="Manage_Slot_Machine.aspx" />
+    <Content Include="PageNavigation.ascx" />
     <Content Include="RenderImage.aspx" />
     <Content Include="Scripts\apps\calendar.js" />
     <Content Include="Scripts\apps\products.js" />
@@ -240,11 +242,25 @@
       <DependentUpon>Manage_Sim_Info.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Manage_Slot_Machine.aspx.designer.vb">
+      <DependentUpon>Manage_Slot_Machine.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage_Slot_Machine.aspx.vb">
+      <DependentUpon>Manage_Slot_Machine.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="MasterPage.Master.designer.vb">
       <DependentUpon>MasterPage.Master</DependentUpon>
     </Compile>
     <Compile Include="MasterPage.Master.vb">
       <DependentUpon>MasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PageNavigation.ascx.designer.vb">
+      <DependentUpon>PageNavigation.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="PageNavigation.ascx.vb">
+      <DependentUpon>PageNavigation.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="RenderImage.aspx.designer.vb">

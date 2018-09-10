@@ -43,8 +43,15 @@
                                                 <asp:Label ID="lblPackageName" runat="server"></asp:Label></td>
                                             <td data-title="Price (Baht)">
                                                 <asp:Label ID="lblPrice" runat="server"></asp:Label></td>
-                                            <td data-title="Active">
-                                                <asp:Image ID="ImageActive" runat="server"></asp:Image></td>
+                                            <td data-title="Status">
+
+                                                <asp:Panel ID="pnlChk" runat="server" Enabled="false" Style="text-align: center;">
+                                                    <label class="col-sm-10 cb-checkbox cb-md" aria-disabled="false">
+                                                        <asp:CheckBox ID="chkAvailable" runat="server" />
+                                                    </label>
+                                                </asp:Panel>
+                                                <asp:Button ID="btnToggle" runat="server" CommandName="ToggleStatus" Style="display: none" Text="Toggle" />
+                                            </td>
                                             <td data-title="Edit" id="Td1" runat="server">
                                                 <asp:Button CssClass="btn btn-success" ID="btnEdit" runat="server" Text="Edit" CommandName="Edit" /></td>
                                             <td data-title="Delete" id="Td2" runat="server">

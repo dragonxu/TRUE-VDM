@@ -315,6 +315,8 @@ Public Class Manage_Sim_Info
         Dim btnPreDelete As HtmlInputButton = e.Item.FindControl("btnPreDelete")
         btnPreDelete.Attributes("onclick") = "if(confirm('ยืนยันลบ ?'))$('#" & btnDelete.ClientID & "').click();"
 
+        Dim chkAvailable As CheckBox = e.Item.FindControl("chkAvailable")
+        chkAvailable.Checked = e.Item.DataItem("Active_Status")
     End Sub
 
     Private Sub rptList_ItemCommand(source As Object, e As RepeaterCommandEventArgs) Handles rptList.ItemCommand
