@@ -137,11 +137,23 @@
 
                 <div class="sa-button-container">
                     <div style="float: right;">
-                        <asp:Button ID="btnClose" runat="server" class="btn btn-block " Text="Cancel" />
+                        
+
+                       <%-- <asp:Button ID="btnClose" runat="server" class="btn btn-block  btn-icon loading-demo mr5 btn-shadow" Text="Cancel" />
                     </div>
                     <div style="float: right; margin-right: 5px;">
-                        <asp:Button ID="btnOKSpec" runat="server" class="btn btn-info " Text="Save" />
-                    </div>
+                        <asp:Button ID="btnOKSpec" runat="server" class="btn btn-info  btn-icon loading-demo mr5 btn-shadow" Text="Save" />
+                    </div>--%>
+                    <asp:LinkButton CssClass="btn btn-success btn-icon loading-demo mr5 btn-shadow" ID="btnOKSpec" runat="server">
+                      <i class="fa fa-save"></i>
+                      <span>Save</span>
+                </asp:LinkButton>
+                    <asp:LinkButton CssClass="btn btn-warning btn-icon loading-demo mr5 btn-shadow" ID="btnClose" runat="server">
+                      <i class="fa fa-rotate-left"></i>
+                      <span>Cancel</span>
+                </asp:LinkButton>
+
+
                 </div>
             </div>
         </asp:Panel>

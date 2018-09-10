@@ -113,20 +113,20 @@ Partial Public Class UC_Product_Spec
     Protected WithEvents chkIS_QUALITATIVE As Global.System.Web.UI.WebControls.CheckBox
     
     '''<summary>
-    '''btnClose control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnClose As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
     '''btnOKSpec control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnOKSpec As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnOKSpec As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''btnClose control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnClose As Global.System.Web.UI.WebControls.LinkButton
 End Class
