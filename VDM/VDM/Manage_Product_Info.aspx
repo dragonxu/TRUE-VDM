@@ -11,7 +11,6 @@
 
 
     <div class="page-title" style="">
-        <div class="title">Management &gt; Manage Product Info</div>
     </div>
     <asp:UpdatePanel ID="udpList" runat="server">
         <ContentTemplate>
@@ -26,8 +25,6 @@
                         <table class="table table-bordered  m-b-0">
                             <thead>
                                 <tr>
-                                    <th>Logo</th>
-                                    <th>PRODUCT CODE</th>
                                     <th>BRAND</th>
                                     <th>MODEL</th>
                                     <th>DISPLAY NAME</th>
@@ -42,10 +39,6 @@
                                 <asp:Repeater ID="rptList" runat="server">
                                     <ItemTemplate>
                                         <tr>
-                                            <td data-title="Logo">
-                                                <asp:Image ID="img" runat="server" Width="60px" Height="60px"></asp:Image></td>
-                                            <td data-title="PRODUCT CODE">
-                                                <asp:Label ID="lblProductCode" runat="server"></asp:Label></td>
                                             <td data-title="RRAND">
                                                 <asp:Label ID="lblBrand" runat="server"></asp:Label></td>
                                             <td data-title="MODEL">

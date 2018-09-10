@@ -20,6 +20,7 @@
   <!-- Plug In-->
   <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css" />
   <link rel="stylesheet" href="vendor/checkbo/src/0.1.4/css/checkBo.min.css">
+  <link rel="stylesheet" href="vendor/chosen_v1.4.0/chosen.min.css">
   <!-- End Plug In -->
   
   <link rel="stylesheet" href="styles/font-awesome.css" />
