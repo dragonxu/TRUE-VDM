@@ -183,7 +183,7 @@
                   <span>เครื่อง Vending</span>
                 </a>                
               </li>              
-              <li id="mnu_Manage_Product_Input" runat="server">
+              <%--<li id="mnu_Manage_Product_Input" runat="server">
                 <a href="javascript:;">                  
                   <i class="icon-login"></i>
                   <span>นำสินค้าเข้าเครื่อง</span>
@@ -194,7 +194,7 @@
                   <i class="icon-clock"></i>
                   <span>เปิด/ปิด Shift</span>
                 </a>                
-              </li>
+              </li>--%>
               <li id="mnu_Manage_Product_Info" runat="server">
                 <a href="Manage_Product_Info.aspx">
                   <i class="icon-note"></i>

@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
   <meta charset="utf-8">
-  <title>Staff Console</title>
+  <title>MACHINE CONSOLE</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
   <!-- build:css({.tmp,app}) styles/app.min.css -->
@@ -41,7 +41,7 @@
                     <p>
                         <img id="imgLogo" src="../images/Icon/koisk_ab.png" style="width: 10%;">
                     </p>
-                  <p>Sign In to Staff Console</p>
+                  <p>Sign In to MACHINE CONSOLE</p>
                 </div>
                 <div class="form-inputs">
                   <label class="text-uppercase">User Name</label>

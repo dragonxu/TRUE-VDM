@@ -26,8 +26,7 @@
                       <th>Name</th>
                       <th>Address</th>
                       <th>Total Machine(s)</th>
-                      <th id="ColEdit" runat="server">Edit</th>
-                      <th id="ColDelete" runat="server">Delete</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -38,11 +37,14 @@
                           <td data-title="Site Code"><asp:Label ID="lblCode" runat="server"></asp:Label></td>
                           <td data-title="Site Name"><asp:Label ID="lblName" runat="server"></asp:Label></td>
                           <td data-title="Address"><asp:Label ID="lblAddress" runat="server"></asp:Label></td>
-                          <td data-title="Total Machine(s)" class="numeric"><asp:Label ID="lblKiosk" runat="server"></asp:Label></td>                
-                          <td data-title="Edit" id="ColEdit" runat="server"><asp:Button CssClass="btn btn-success" ID="btnEdit" runat="server" Text="Edit" CommandName="Edit" /></td>
-                          <td data-title="Delete" id="ColDelete" runat="server">
-                              <input type="button" class="btn btn-danger" value="Delete" id="btnPreDelete" runat="server" />
-                              <asp:Button ID="btnDelete" runat="server" CommandName="Delete" style="display:none" />
+                          <td data-title="Total Machine(s)" class="numeric"><asp:Label ID="lblKiosk" runat="server"></asp:Label></td>   
+                          <td data-title="Action" style="width:140px;">
+                              <div class="btn-group">
+                                  <asp:Button CssClass="btn btn-success btn-shadow btn-sm" ID="btnEdit" runat="server" Text="Edit" CommandName="Edit" />
+                                  <input type="button" class="btn btn-danger btn-shadow btn-sm" value="Delete" id="btnPreDelete" runat="server" />
+                                  <asp:Button ID="btnDelete" runat="server" CommandName="Delete" style="display:none" />
+                              </div>
+                              
                           </td>
                         </tr>
                     </ItemTemplate>

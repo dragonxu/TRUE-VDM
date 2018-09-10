@@ -26,28 +26,25 @@
                         <table class="table table-bordered  m-b-0">
                             <thead>
                                 <tr>
-                                    <th>Logo</th>
-                                    <th>PRODUCT CODE</th>
+                                    <th>CODE</th>
                                     <th>BRAND</th>
                                     <th>MODEL</th>
                                     <th>DISPLAY NAME</th>
                                     <th>Price (Baht)</th>
                                     <th>Active</th>
-                                    <th id="ColEdit" runat="server">Edit</th>
-                                    <th id="ColDelete" runat="server">Delete</th>
-
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <asp:Repeater ID="rptList" runat="server">
                                     <ItemTemplate>
                                         <tr>
-                                            <td data-title="Logo">
-                                                <asp:Image ID="img" runat="server" Width="60px" Height="60px"></asp:Image></td>
-                                            <td data-title="PRODUCT CODE">
-                                                <asp:Label ID="lblProductCode" runat="server"></asp:Label></td>
+                                            <td data-title="PRODUCT" align="center">
+                                                <asp:Image ID="img" runat="server" Width="60px"></asp:Image><br/>
+                                                <asp:Label ID="lblProductCode" runat="server"></asp:Label>
+                                            </td>
                                             <td data-title="RRAND">
-                                                <asp:Label ID="lblBrand" runat="server"></asp:Label></td>
+                                                <asp:Image ID="imgBrand" runat="server" Width="60px"/></td>
                                             <td data-title="MODEL">
                                                 <asp:Label ID="lblModel" runat="server"></asp:Label></td>
                                             <td data-title="DISPLAY NAME">
@@ -64,10 +61,12 @@
                                                 </asp:Panel>
                                                 <asp:Button ID="btnToggle" runat="server" CommandName="ToggleStatus" Style="display: none" Text="Toggle" />
                                             </td>
-                                            <td data-title="Edit" id="Td1" runat="server">
-                                                <asp:Button CssClass="btn btn-success" ID="btnEdit" runat="server" Text="Edit" CommandName="Edit" /></td>
-                                            <td data-title="Delete" id="Td2" runat="server">
-                                                <input type="button" class="btn btn-danger" value="Delete" id="btnPreDelete" runat="server" />
+                                            <td data-title="Action" id="tdAction" runat="server" style="width:140px;" >
+
+                                                <div class="btn-group">
+                                                <asp:Button CssClass="btn btn-sm btn-success btn-shadow" ID="btnEdit" runat="server" Text="Edit" CommandName="Edit" />
+                                                <input type="button" class="btn btn-sm btn-danger btn-shadow" value="Delete" id="btnPreDelete" runat="server" />
+                                                </div>
                                                 <asp:Button ID="btnDelete" runat="server" CommandName="Delete" Style="display: none" />
 
                                             </td>

@@ -88,7 +88,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="FileImport\" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -126,14 +125,143 @@
     <Content Include="images\avatar.png" />
     <Content Include="images\BlackDot.png" />
     <Content Include="images\default-avatar.png" />
+    <Content Include="images\Icon\black\account.png" />
+    <Content Include="images\Icon\black\barcode.png" />
+    <Content Include="images\Icon\black\cam.png" />
+    <Content Include="images\Icon\black\camera.png" />
+    <Content Include="images\Icon\black\cash.png" />
+    <Content Include="images\Icon\black\cash100.png" />
+    <Content Include="images\Icon\black\cash1000.png" />
+    <Content Include="images\Icon\black\cash20.png" />
+    <Content Include="images\Icon\black\cash50.png" />
+    <Content Include="images\Icon\black\cash500.png" />
+    <Content Include="images\Icon\black\coin.png" />
+    <Content Include="images\Icon\black\coin1.png" />
+    <Content Include="images\Icon\black\coin10.png" />
+    <Content Include="images\Icon\black\coin2.png" />
+    <Content Include="images\Icon\black\coin5.png" />
+    <Content Include="images\Icon\black\contact.png" />
+    <Content Include="images\Icon\black\creditcard.png" />
+    <Content Include="images\Icon\black\devices.png" />
+    <Content Include="images\Icon\black\ipad.png" />
+    <Content Include="images\Icon\black\iphone.png" />
+    <Content Include="images\Icon\black\laptop.png" />
+    <Content Include="images\Icon\black\printer.png" />
+    <Content Include="images\Icon\black\scanner.png" />
+    <Content Include="images\Icon\black\simcard.png" />
+    <Content Include="images\Icon\gray\account.png" />
+    <Content Include="images\Icon\gray\barcode.png" />
+    <Content Include="images\Icon\gray\cam.png" />
+    <Content Include="images\Icon\gray\camera.png" />
+    <Content Include="images\Icon\gray\cash.png" />
+    <Content Include="images\Icon\gray\cash100.png" />
+    <Content Include="images\Icon\gray\cash1000.png" />
+    <Content Include="images\Icon\gray\cash20.png" />
+    <Content Include="images\Icon\gray\cash50.png" />
+    <Content Include="images\Icon\gray\cash500.png" />
+    <Content Include="images\Icon\gray\coin.png" />
+    <Content Include="images\Icon\gray\coin1.png" />
+    <Content Include="images\Icon\gray\coin10.png" />
+    <Content Include="images\Icon\gray\coin2.png" />
+    <Content Include="images\Icon\gray\coin5.png" />
+    <Content Include="images\Icon\gray\contact.png" />
+    <Content Include="images\Icon\gray\creditcard.png" />
+    <Content Include="images\Icon\gray\devices.png" />
+    <Content Include="images\Icon\gray\ipad.png" />
+    <Content Include="images\Icon\gray\iphone.png" />
+    <Content Include="images\Icon\gray\laptop.png" />
+    <Content Include="images\Icon\gray\printer.png" />
+    <Content Include="images\Icon\gray\scanner.png" />
+    <Content Include="images\Icon\gray\simcard.png" />
+    <Content Include="images\Icon\green\account.png" />
+    <Content Include="images\Icon\green\barcode.png" />
+    <Content Include="images\Icon\green\cam.png" />
+    <Content Include="images\Icon\green\camera.png" />
+    <Content Include="images\Icon\green\cash.png" />
+    <Content Include="images\Icon\green\cash100.png" />
+    <Content Include="images\Icon\green\cash1000.png" />
+    <Content Include="images\Icon\green\cash20.png" />
+    <Content Include="images\Icon\green\cash50.png" />
+    <Content Include="images\Icon\green\cash500.png" />
+    <Content Include="images\Icon\green\coin.png" />
+    <Content Include="images\Icon\green\coin1.png" />
+    <Content Include="images\Icon\green\coin10.png" />
+    <Content Include="images\Icon\green\coin2.png" />
+    <Content Include="images\Icon\green\coin5.png" />
+    <Content Include="images\Icon\green\contact.png" />
+    <Content Include="images\Icon\green\creditcard.png" />
+    <Content Include="images\Icon\green\devices.png" />
+    <Content Include="images\Icon\green\ipad.png" />
+    <Content Include="images\Icon\green\iphone.png" />
+    <Content Include="images\Icon\green\laptop.png" />
+    <Content Include="images\Icon\green\printer.png" />
+    <Content Include="images\Icon\green\scanner.png" />
+    <Content Include="images\Icon\green\simcard.png" />
+    <Content Include="images\Icon\koisk_ab.png" />
+    <Content Include="images\Icon\koisk_ok.png" />
+    <Content Include="images\Icon\red\account.png" />
+    <Content Include="images\Icon\red\barcode.png" />
+    <Content Include="images\Icon\red\cam.png" />
+    <Content Include="images\Icon\red\camera.png" />
+    <Content Include="images\Icon\red\cash.png" />
+    <Content Include="images\Icon\red\cash100.png" />
+    <Content Include="images\Icon\red\cash1000.png" />
+    <Content Include="images\Icon\red\cash20.png" />
+    <Content Include="images\Icon\red\cash50.png" />
+    <Content Include="images\Icon\red\cash500.png" />
+    <Content Include="images\Icon\red\coin.png" />
+    <Content Include="images\Icon\red\coin1.png" />
+    <Content Include="images\Icon\red\coin10.png" />
+    <Content Include="images\Icon\red\coin2.png" />
+    <Content Include="images\Icon\red\coin5.png" />
+    <Content Include="images\Icon\red\contact.png" />
+    <Content Include="images\Icon\red\creditcard.png" />
+    <Content Include="images\Icon\red\devices.png" />
+    <Content Include="images\Icon\red\ipad.png" />
+    <Content Include="images\Icon\red\iphone.png" />
+    <Content Include="images\Icon\red\laptop.png" />
+    <Content Include="images\Icon\red\printer.png" />
+    <Content Include="images\Icon\red\scanner.png" />
+    <Content Include="images\Icon\red\simcard.png" />
+    <Content Include="images\Icon\white\account.png" />
+    <Content Include="images\Icon\white\barcode.png" />
+    <Content Include="images\Icon\white\cam.png" />
+    <Content Include="images\Icon\white\camera.png" />
+    <Content Include="images\Icon\white\cash.png" />
+    <Content Include="images\Icon\white\cash100.png" />
+    <Content Include="images\Icon\white\cash1000.png" />
+    <Content Include="images\Icon\white\cash20.png" />
+    <Content Include="images\Icon\white\cash50.png" />
+    <Content Include="images\Icon\white\cash500.png" />
+    <Content Include="images\Icon\white\coin.png" />
+    <Content Include="images\Icon\white\coin1.png" />
+    <Content Include="images\Icon\white\coin10.png" />
+    <Content Include="images\Icon\white\coin2.png" />
+    <Content Include="images\Icon\white\coin5.png" />
+    <Content Include="images\Icon\white\contact.png" />
+    <Content Include="images\Icon\white\creditcard.png" />
+    <Content Include="images\Icon\white\devices.png" />
+    <Content Include="images\Icon\white\ipad.png" />
+    <Content Include="images\Icon\white\iphone.png" />
+    <Content Include="images\Icon\white\laptop.png" />
+    <Content Include="images\Icon\white\printer.png" />
+    <Content Include="images\Icon\white\scanner.png" />
+    <Content Include="images\Icon\white\simcard.png" />
     <Content Include="images\Logo128x128.png" />
     <Content Include="images\Logo320x55.png" />
     <Content Include="images\Logo500x83.png" />
     <Content Include="images\Logo70x55.png" />
     <Content Include="images\offline.png" />
     <Content Include="images\online.png" />
+    <Content Include="images\SignIn\1.png" />
+    <Content Include="images\SignIn\2.jpg" />
+    <Content Include="images\SignIn\3.jpg" />
     <Content Include="images\warning.gif" />
-    <Content Include="Login2.aspx" />
+    <Content Include="SignIn.aspx" />
+    <Content Include="Machine_Console\Login.aspx" />
+    <Content Include="Machine_Console\Machine_Overview.aspx" />
+    <Content Include="Machine_Console\Manage_OpenClose_Shift.aspx" />
+    <Content Include="Machine_Console\Styles\app.min.725970e8.css" />
     <Content Include="Manage_Brand.aspx" />
     <Content Include="Manage_Machine.aspx" />
     <Content Include="Manage_Product_Info.aspx" />
@@ -166,6 +294,7 @@
     <Content Include="Scripts\helpers\selectfx.js" />
     <Content Include="Scripts\helpers\smartresize.js" />
     <Content Include="MasterPage.Master" />
+    <Content Include="Machine_Console\MaterStaffConsole.Master" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
@@ -182,10 +311,6 @@
     <Content Include="Scripts\ui\notifications.js" />
     <Content Include="Setting_Authorize.aspx" />
     <Content Include="Setting_Site.aspx" />
-    <Content Include="SignIn.aspx" />
-    <Content Include="Staff_Console\Login.aspx" />
-    <Content Include="Staff_Console\Overview.aspx" />
-    <Content Include="Staff_Console\TestStock.aspx" />
     <Content Include="Styles\animate.css" />
     <Content Include="Styles\app.css" />
     <Content Include="Styles\app.skins.css" />
@@ -219,12 +344,40 @@
   <ItemGroup>
     <Compile Include="App_Code\BackEndInterface.vb" />
     <Compile Include="App_Code\ModuleGlobal.vb" />
-    <Compile Include="Login2.aspx.designer.vb">
-      <DependentUpon>Login2.aspx</DependentUpon>
+    <Compile Include="SignIn.aspx.designer.vb">
+      <DependentUpon>SignIn.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Login2.aspx.vb">
-      <DependentUpon>Login2.aspx</DependentUpon>
+    <Compile Include="SignIn.aspx.vb">
+      <DependentUpon>SignIn.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Machine_Console\Login.aspx.designer.vb">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Machine_Console\Login.aspx.vb">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Machine_Console\Machine_Overview.aspx.designer.vb">
+      <DependentUpon>Machine_Overview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Machine_Console\Machine_Overview.aspx.vb">
+      <DependentUpon>Machine_Overview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Machine_Console\Manage_OpenClose_Shift.aspx.designer.vb">
+      <DependentUpon>Manage_OpenClose_Shift.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Machine_Console\Manage_OpenClose_Shift.aspx.vb">
+      <DependentUpon>Manage_OpenClose_Shift.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Machine_Console\MaterStaffConsole.Master.designer.vb">
+      <DependentUpon>MaterStaffConsole.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Machine_Console\MaterStaffConsole.Master.vb">
+      <DependentUpon>MaterStaffConsole.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manage_Brand.aspx.designer.vb">
       <DependentUpon>Manage_Brand.aspx</DependentUpon>
@@ -288,34 +441,6 @@
     <Compile Include="Setting_Site.aspx.vb">
       <DependentUpon>Setting_Site.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SignIn.aspx.designer.vb">
-      <DependentUpon>SignIn.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="SignIn.aspx.vb">
-      <DependentUpon>SignIn.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="Staff_Console\Login.aspx.designer.vb">
-      <DependentUpon>Login.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Staff_Console\Login.aspx.vb">
-      <DependentUpon>Login.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="Staff_Console\Overview.aspx.designer.vb">
-      <DependentUpon>Overview.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Staff_Console\Overview.aspx.vb">
-      <DependentUpon>Overview.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="Staff_Console\TestStock.aspx.designer.vb">
-      <DependentUpon>TestStock.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Staff_Console\TestStock.aspx.vb">
-      <DependentUpon>TestStock.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Test_API\Test_API_Interface.aspx.designer.vb">
       <DependentUpon>Test_API_Interface.aspx</DependentUpon>

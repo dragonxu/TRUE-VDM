@@ -1,0 +1,83 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="MaterStaffConsole.master.vb" Inherits="VDM.MaterStaffConsole" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>MACHINE CONSOLE </title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link rel="stylesheet" href="Styles/app.min.725970e8.css">
+
+
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <!-- page stylesheets -->
+    <link rel="stylesheet" href="../vendor/ioslist/dist/css/jquery.ioslist.css">
+    <!-- end page stylesheets -->
+    <!-- build:css({.tmp,app}) styles/app.min.css -->
+    <link rel="stylesheet" href="../styles/webfont.css">
+    <link rel="stylesheet" href="../styles/climacons-font.css">
+    <link rel="stylesheet" href="../vendor/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../styles/font-awesome.css">
+    <link rel="stylesheet" href="../styles/card.css">
+    <link rel="stylesheet" href="../styles/sli.css">
+    <link rel="stylesheet" href="../styles/animate.css">
+    <link rel="stylesheet" href="../styles/app.css">
+    <link rel="stylesheet" href="../styles/app.skins.css">
+</head>
+
+
+<body>
+
+    <header class="header fixed-sticky">
+        <div class="container">
+            <nav class="heading-font">
+                <!-- branding -->
+                <div class="branding">
+                    <!-- toggle menu -->
+                    <button type="button" class="mobile-toggle"><span class="ti-menu"></span></button>
+                    <!-- /toggle menu -->
+                    <a href="index.html" class="logo transition">MACHINE CONSOLE </a>
+                </div>
+                <!-- /branding -->
+                <!-- links -->
+
+                <!-- /links -->
+            </nav>
+        </div>
+    </header>
+    <!-- /menu navigation -->
+    <!-- how it works section -->
+    <form id="form1" runat="server">
+        <section id="how" class="content-section">
+            <div class="container" style="padding-top: unset;">
+                <asp:ScriptManager ID="scm" runat="server"></asp:ScriptManager>
+                <div class="row" style="padding: 20px;">
+                    <div class="overflow-hidden">
+                        <h1><b>ICONS-01</b> &nbsp; <i class="fa fa-map-marker text-blue "> Location : IconSiam </i> </h1>
+
+                    </div>
+
+                </div>
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </section>
+    </form>
+    <!-- /how it works section -->
+    <!-- footer -->
+    <footer class="content-section">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-sm-12 mb25">
+                    <p>VENDING-Management Console </p>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- /footer -->
+    <script src="scripts/app.min.5b73b68c.js"></script>
+
+</body>
+</html>

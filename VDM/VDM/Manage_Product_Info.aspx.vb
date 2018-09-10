@@ -401,8 +401,8 @@ Public Class Manage_Product_Info
         If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
 
         Dim img As Image = e.Item.FindControl("img")
+        Dim imgBrand As Image = e.Item.FindControl("imgBrand")
         Dim lblProductCode As Label = e.Item.FindControl("lblProductCode")
-        Dim lblBrand As Label = e.Item.FindControl("lblBrand")
         Dim lblModel As Label = e.Item.FindControl("lblModel")
         Dim lblDisplayName As Label = e.Item.FindControl("lblDisplayName")
         Dim lblCountSpec As Label = e.Item.FindControl("lblCountSpec")
@@ -412,9 +412,7 @@ Public Class Manage_Product_Info
         img.ImageUrl = "RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & e.Item.DataItem("PRODUCT_ID") & "&LANG=" & VDM_BL.UILanguage.TH & "&t=" & Now.ToOADate.ToString.Replace(".", "")
         lblProductCode.Text = e.Item.DataItem("PRODUCT_CODE").ToString
         lblDisplayName.Text = e.Item.DataItem("DISPLAY_NAME_TH").ToString
-
-
-        lblBrand.Text = e.Item.DataItem("BRAND_NAME").ToString
+        imgBrand.ImageUrl = "RenderImage.aspx?Mode=D&Entity=Brand&UID=" & e.Item.DataItem("BRAND_ID")
         lblModel.Text = e.Item.DataItem("MODEL").ToString
         If Not IsDBNull(e.Item.DataItem("Price")) Then
             lblPrice.Text = FormatNumber(e.Item.DataItem("Price"), 2)

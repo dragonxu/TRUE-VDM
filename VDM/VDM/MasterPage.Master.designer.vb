@@ -185,24 +185,6 @@ Partial Public Class MasterPage
     Protected WithEvents mnu_Manage_Machine As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
-    '''mnu_Manage_Product_Input control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents mnu_Manage_Product_Input As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''mnu_Manage_Shift control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents mnu_Manage_Shift As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
     '''mnu_Manage_Product_Info control.
     '''</summary>
     '''<remarks>

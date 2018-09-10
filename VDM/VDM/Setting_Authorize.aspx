@@ -22,15 +22,12 @@
                 <table class="table table-bordered m-b-0">
                     <thead>
                         <tr>
-                            <th>User ID</th>
+                            <th width="50">ID</th>
                             <th>Login Name</th>
                             <th>Password</th>
-                            <%--<th>First Name</th>
-                            <th>Lasr Name</th>--%>
                             <th>Name</th>
                             <th>Status</th>
-                            <th id="ColEdit" runat="server">Edit</th>
-                            <th id="ColDelete" runat="server">Delete</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,11 +39,7 @@
                                     <td data-title="Login Name">
                                         <b><asp:Label ID="lblLoginName" runat="server"></asp:Label></b></td>
                                     <td data-title="Password">
-                                        <asp:Label ID="lblPassword" runat="server"></asp:Label></td>
-                                    <%--<td data-title="First Name">
-                                        <asp:Label ID="lblFirstName" runat="server"></asp:Label></td>
-                                    <td data-title="Lasr Name">
-                                        <asp:Label ID="lblLastName" runat="server"></asp:Label></td>--%>
+                                        <asp:Label ID="lblPassword" runat="server"></asp:Label></td>                            
                                     <td data-title="Name">
                                         <asp:Label ID="lblFullName" runat="server"></asp:Label></td>
                                     <td data-title="Status">
@@ -57,12 +50,13 @@
                                             </label>
                                         </asp:Panel>
                                         <asp:Button ID="btnToggle" runat="server" CommandName="ToggleStatus" Style="display: none" Text="Toggle" />
-                                    </td>
-                                    <td data-title="Edit" id="Td1" runat="server">
-                                        <asp:Button CssClass="btn btn-success" ID="btnEdit" runat="server" Text="Edit" CommandName="Edit" /></td>
-                                    <td data-title="Delete" id="Td2" runat="server">
-                                        <input type="button" class="btn btn-danger" value="Delete" id="btnPreDelete" runat="server" />
-                                        <asp:Button ID="btnDelete" runat="server" CommandName="Delete" Style="display: none" />
+                                    </td>              
+                                    <td data-title="Action"  style="width:140px;">
+                                        <div class="btn-group">
+                                            <asp:Button CssClass="btn btn-success btn-shadow btn-sm" ID="btnEdit" runat="server" Text="Edit" CommandName="Edit" />
+                                            <input type="button" class="btn btn-danger btn-shadow btn-sm" value="Delete" id="btnPreDelete" runat="server" />
+                                            <asp:Button ID="btnDelete" runat="server" CommandName="Delete" Style="display: none" />
+                                        </div>
                                     </td>
                                 </tr>
                             </ItemTemplate>
