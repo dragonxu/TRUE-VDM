@@ -88,6 +88,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+<<<<<<< HEAD
+=======
+    <Folder Include="Temp\" />
+>>>>>>> ae4417adc791eef7a0700e8ea1d13724e3f41ee4
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />

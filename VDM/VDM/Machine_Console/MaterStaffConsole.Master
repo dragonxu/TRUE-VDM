@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="../styles/card.css">
     <link rel="stylesheet" href="../styles/sli.css">
     <link rel="stylesheet" href="../styles/animate.css">
-    <link rel="stylesheet" href="../styles/app.css">
+    <link rel="stylesheet" href="../Styles/app.css">
     <link rel="stylesheet" href="../styles/app.skins.css">
 </head>
 
@@ -50,7 +50,7 @@
     <!-- how it works section -->
     <form id="form1" runat="server">
         <section id="how" class="content-section">
-            <div class="container" style="padding-top: unset;">
+            <div class="container" style="padding-top: unset;padding-top: unset;width: 90%;">
                 <asp:ScriptManager ID="scm" runat="server"></asp:ScriptManager>
                 <div class="row" style="padding: 20px;">
                     <div class="overflow-hidden">
