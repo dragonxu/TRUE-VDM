@@ -137,7 +137,6 @@
     <Content Include="Manage_Machine.aspx" />
     <Content Include="Manage_Product_Info.aspx" />
     <Content Include="Manage_Sim_Info.aspx" />
-    <Content Include="Manage_Staff_Console.aspx" />
     <Content Include="PageNavigation.ascx" />
     <Content Include="RenderImage.aspx" />
     <Content Include="Scripts\apps\calendar.js" />
@@ -183,8 +182,10 @@
     <Content Include="Setting_Authorize.aspx" />
     <Content Include="Setting_Site.aspx" />
     <Content Include="SignIn.aspx" />
-    <Content Include="Staff_Console\Login.aspx" />
-    <Content Include="Staff_Console\Overview.aspx" />
+    <Content Include="Machine_Console\Login.aspx" />
+    <Content Include="Machine_Console\Machine_Overview.aspx" />
+    <Content Include="Machine_Console\Manage_OpenClose_Shift.aspx" />
+    <Content Include="Machine_Console\Styles\app.min.725970e8.css" />
     <Content Include="Styles\animate.css" />
     <Content Include="Styles\app.css" />
     <Content Include="Styles\app.skins.css" />
@@ -210,7 +211,6 @@
     <Content Include="UC_MoneyStock_UI.ascx" />
     <Content Include="UC_Peripheral_UI.ascx" />
     <Content Include="UC_Product_Spec.ascx" />
-    <Content Include="UC_Stock_Level.ascx" />
     <Content Include="Upload_User_Form.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -245,13 +245,6 @@
     </Compile>
     <Compile Include="Manage_Sim_Info.aspx.vb">
       <DependentUpon>Manage_Sim_Info.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="Manage_Staff_Console.aspx.designer.vb">
-      <DependentUpon>Manage_Staff_Console.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Manage_Staff_Console.aspx.vb">
-      <DependentUpon>Manage_Staff_Console.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="MasterPage.Master.designer.vb">
@@ -296,19 +289,33 @@
       <DependentUpon>SignIn.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Staff_Console\Login.aspx.designer.vb">
+    <Compile Include="Machine_Console\Login.aspx.designer.vb">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Staff_Console\Login.aspx.vb">
+    <Compile Include="Machine_Console\Login.aspx.vb">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Staff_Console\Overview.aspx.designer.vb">
-      <DependentUpon>Overview.aspx</DependentUpon>
+    <Compile Include="Machine_Console\Machine_Overview.aspx.designer.vb">
+      <DependentUpon>Machine_Overview.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Staff_Console\Overview.aspx.vb">
-      <DependentUpon>Overview.aspx</DependentUpon>
+    <Compile Include="Machine_Console\Machine_Overview.aspx.vb">
+      <DependentUpon>Machine_Overview.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Machine_Console\Manage_OpenClose_Shift.aspx.designer.vb">
+      <DependentUpon>Manage_OpenClose_Shift.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Machine_Console\Manage_OpenClose_Shift.aspx.vb">
+      <DependentUpon>Manage_OpenClose_Shift.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Machine_Console\MaterStaffConsole.Master.designer.vb">
+      <DependentUpon>MaterStaffConsole.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Machine_Console\MaterStaffConsole.Master.vb">
+      <DependentUpon>MaterStaffConsole.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Test_API\Test_API_Interface.aspx.designer.vb">
       <DependentUpon>Test_API_Interface.aspx</DependentUpon>
@@ -445,13 +452,6 @@
     </Compile>
     <Compile Include="UC_Product_Spec.ascx.vb">
       <DependentUpon>UC_Product_Spec.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UC_Stock_Level.ascx.designer.vb">
-      <DependentUpon>UC_Stock_Level.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="UC_Stock_Level.ascx.vb">
-      <DependentUpon>UC_Stock_Level.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Upload_User_Form.aspx.designer.vb">
@@ -735,6 +735,7 @@
     <Content Include="Styles\scss\_plugins.scss" />
     <Content Include="Styles\scss\_utilities.scss" />
     <Content Include="Styles\scss\_variables.scss" />
+    <Content Include="Machine_Console\MaterStaffConsole.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

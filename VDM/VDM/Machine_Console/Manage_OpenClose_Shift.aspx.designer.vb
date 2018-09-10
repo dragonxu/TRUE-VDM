@@ -11,5 +11,5 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Overview
+Partial Public Class Manage_OpenClose_Shift
 End Class
