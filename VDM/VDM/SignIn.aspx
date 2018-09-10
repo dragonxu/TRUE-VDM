@@ -43,9 +43,9 @@
         <div class="carousel-inner" role="listbox">
           <div class="item active" style="background-image:url(../images/SignIn/1.png);background-size:cover;background-repeat: no-repeat;background-position: 50% 50%;">
           </div>
-          <div class="item" style="background-image:url(../images/SignIn/2.jpg);background-size:cover;background-repeat: no-repeat;background-position: 50% 50%;">
+          <div class="item" style="background-image:url(../images/SignIn/2.png);background-size:cover;background-repeat: no-repeat;background-position: 50% 50%;">
           </div>
-          <div class="item" style="background-image:url(../images/SignIn/3.jpg);background-size:cover;background-repeat: no-repeat;background-position: 50% 50%;">
+          <div class="item" style="background-image:url(../images/SignIn/3.png);background-size:cover;background-repeat: no-repeat;background-position: 50% 50%;">
           </div>
         </div>       
       </div>

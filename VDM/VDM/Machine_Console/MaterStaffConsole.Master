@@ -50,14 +50,12 @@
     <!-- how it works section -->
     <form id="form1" runat="server">
         <section id="how" class="content-section">
-            <div class="container" style="padding-top: unset;padding-top: unset;width: 90%;">
+            <div class="container" style="padding-top: unset; width: 90%;">
                 <asp:ScriptManager ID="scm" runat="server"></asp:ScriptManager>
                 <div class="row" style="padding: 20px;">
                     <div class="overflow-hidden">
-                        <h1><b>ICONS-01</b> &nbsp; <i class="fa fa-map-marker text-blue "> IconSiam </i> </h1>
-
+                        <h1><b>ICONS-01</b> &nbsp; <i class="fa fa-map-marker text-blue ">  </i> <span></span>IconSiam </h1>
                     </div>
-
                 </div>
                 <asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>

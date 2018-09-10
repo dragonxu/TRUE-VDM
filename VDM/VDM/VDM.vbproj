@@ -255,8 +255,8 @@
     <Content Include="images\offline.png" />
     <Content Include="images\online.png" />
     <Content Include="images\SignIn\1.png" />
-    <Content Include="images\SignIn\2.jpg" />
-    <Content Include="images\SignIn\3.jpg" />
+    <Content Include="images\SignIn\2.png" />
+    <Content Include="images\SignIn\3.png" />
     <Content Include="images\warning.gif" />
     <Content Include="Machine_Console\TestStock.aspx" />
     <Content Include="SignIn.aspx" />

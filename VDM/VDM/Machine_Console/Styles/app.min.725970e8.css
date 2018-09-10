@@ -12,13 +12,15 @@
        margin:0;border:0;
        position:absolute;
        top:0;width:100%;
-       background-color:#c11f2e
+       background-color:#ff0000;
    }
 
 
    .header nav
    {
-       position:relative;min-height:100px;margin:100px 0
+       position:relative;
+       min-height:100px;
+       margin:100px 0
 
    }
    .header .logo
