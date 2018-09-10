@@ -4,7 +4,7 @@
 <html class="no-js" lang="">
 <head>
   <meta charset="utf-8">
-  <title>Reactor - Bootstrap Admin Template</title>
+  <title>VENDING - Management Console</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
   <!-- build:css({.tmp,app}) styles/app.min.css -->
@@ -38,7 +38,7 @@
 
   <div class="app signin v2 usersession">
     <div class="session-wrapper">
-      <div class="session-carousel slide" data-ride="carousel" data-interval="3000">
+      <div class="session-carousel carousel slide carousel-fade" data-ride="carousel" data-interval="5000">
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
           <div class="item active" style="background-image:url(../images/SignIn/1.png);background-size:cover;background-repeat: no-repeat;background-position: 50% 50%;">

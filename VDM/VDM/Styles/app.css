@@ -5443,7 +5443,7 @@ a.text-bluegrey:focus {
 
 .app.forgot-password .card,
 .app.signin .card {
-  max-width: 500px; }
+  max-width: 350px; }
   .app.forgot-password .card .bottom-link,
   .app.signin .card .bottom-link {
     position: absolute;
@@ -5466,8 +5466,8 @@ a.text-bluegrey:focus {
     bottom: 0;
     margin: 0;
     width: 100%;
-    width: -webkit-calc(100% - 500px);
-    width: calc(100% - 500px); }
+    width: -webkit-calc(100% - 350px);
+    width: calc(100% - 350px); }
     .app.signin.v2 .session-carousel .carousel-inner,
     .app.signup.v2 .session-carousel .carousel-inner {
       width: 100%;
