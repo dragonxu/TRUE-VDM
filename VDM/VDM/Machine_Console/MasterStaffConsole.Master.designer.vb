@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class MaterStaffConsole
+Partial Public Class MasterStaffConsole
     
     '''<summary>
     '''head control.
@@ -39,6 +39,42 @@ Partial Public Class MaterStaffConsole
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents scm As Global.System.Web.UI.ScriptManager
+    
+    '''<summary>
+    '''lblMachine_Name control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblMachine_Name As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblMachine_Location control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblMachine_Location As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''spanZone control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents spanZone As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''lblMachine_Zone control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblMachine_Zone As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''MainContent control.

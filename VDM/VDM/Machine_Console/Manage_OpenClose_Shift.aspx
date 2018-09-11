@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Machine_Console/MaterStaffConsole.Master" CodeBehind="Manage_OpenClose_Shift.aspx.vb" Inherits="VDM.Manage_OpenClose_Shift" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Machine_Console/MasterStaffConsole.Master" CodeBehind="Manage_OpenClose_Shift.aspx.vb" Inherits="VDM.Manage_OpenClose_Shift" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">

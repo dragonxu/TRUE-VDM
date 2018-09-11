@@ -8,6 +8,7 @@ Public Class VDM_BL
     Public ConnectionString As String = ConnectionStrings("ConnectionString").ConnectionString
     Public ServerMapPath As String = AppSettings("ServerMapPath").ToString
     Public PicturePath As String = AppSettings("PicturePath").ToString
+    Public KioskID As String = AppSettings("KioskID").ToString
 
     Public Sub ExecuteNonQuery(ByVal CommandText As String)
         Dim Command As New SqlCommand

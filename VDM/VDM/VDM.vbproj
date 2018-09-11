@@ -296,7 +296,7 @@
     <Content Include="Scripts\helpers\selectfx.js" />
     <Content Include="Scripts\helpers\smartresize.js" />
     <Content Include="MasterPage.Master" />
-    <Content Include="Machine_Console\MaterStaffConsole.Master" />
+    <Content Include="Machine_Console\MasterStaffConsole.Master" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
@@ -381,11 +381,11 @@
       <DependentUpon>Manage_OpenClose_Shift.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Machine_Console\MaterStaffConsole.Master.designer.vb">
-      <DependentUpon>MaterStaffConsole.Master</DependentUpon>
+    <Compile Include="Machine_Console\MasterStaffConsole.Master.designer.vb">
+      <DependentUpon>MasterStaffConsole.Master</DependentUpon>
     </Compile>
-    <Compile Include="Machine_Console\MaterStaffConsole.Master.vb">
-      <DependentUpon>MaterStaffConsole.Master</DependentUpon>
+    <Compile Include="Machine_Console\MasterStaffConsole.Master.vb">
+      <DependentUpon>MasterStaffConsole.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manage_Brand.aspx.designer.vb">

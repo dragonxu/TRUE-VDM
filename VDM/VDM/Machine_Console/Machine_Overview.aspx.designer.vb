@@ -23,6 +23,24 @@ Partial Public Class Machine_Overview
     Protected WithEvents udpList As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
+    '''UC_Peripheral_UI control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UC_Peripheral_UI As Global.VDM.UC_Peripheral_UI
+    
+    '''<summary>
+    '''UC_MoneyStock_UI control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UC_MoneyStock_UI As Global.VDM.UC_MoneyStock_UI
+    
+    '''<summary>
     '''lnkShift control.
     '''</summary>
     '''<remarks>
@@ -30,4 +48,13 @@ Partial Public Class Machine_Overview
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkShift As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''lnklogout control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnklogout As Global.System.Web.UI.WebControls.LinkButton
 End Class
