@@ -18,7 +18,7 @@
                     <div class="display-columns">
                         <div class="column contacts-sidebar hidden-xs bg-white b-r" style="width: 350px;">
                             <div class="scroll">
-                                <div class="p-a">
+                                <div class="p-a" >
                                     <nav role="navigation">
 
                                         <ul class="nav nav-stacked nav-pills">
@@ -26,12 +26,12 @@
 
                                             <li style="margin-top: -5px;">
 
-                                                <h2><b>สิ่งที่ทำระหว่าง เปิด/ปิด Shift</b></h2>
+                                                <h2><b>สิ่งที่ทำ</b></h2>
                                             </li>
                                             <li id="MenuChange" runat="server">
 
                                                 <a id="lnkChange" runat="server">
-                                                    <h3><span class="btn btn-primary btn-outline btn-round" style="padding-right: 0.75rem; padding-left: 0.75rem; font-size: 20px;">4</span>
+                                                    <h3><span class="btn btn-primary btn-outline btn-round" style="padding-right: 0.75rem; padding-left: 0.75rem; font-size: 20px;">1</span>
                                                         <span>จำนวนเงินทอน</span>
 
                                                         <div class="message-sender" style="text-align: right;">
@@ -54,7 +54,7 @@
                                             </li>
                                             <li id="MenuStockProduct" runat="server">
                                                 <a id="lnkStockProduct" runat="server">
-                                                    <h3><span class="btn btn-info btn-outline btn-round" style="padding-right: 0.75rem; padding-left: 0.75rem; font-size: 20px;">1</span>
+                                                    <h3><span class="btn btn-info btn-outline btn-round" style="padding-right: 0.75rem; padding-left: 0.75rem; font-size: 20px;">3</span>
                                                         <span>Stock สินค้า</span><div class="message-sender" style="text-align: right;">
                                                             <p><span class=" h5 text-info">สินค้า</span><span class=" h5"> xx,xxx รายการ</span></p>
                                                         </div>
@@ -63,7 +63,7 @@
                                             </li>
                                             <li id="MenuStockSIM" runat="server">
                                                 <a id="lnkStockSIM" runat="server">
-                                                    <h3><span class="btn btn-warning btn-outline btn-round" style="padding-right: 0.75rem; padding-left: 0.75rem; font-size: 20px;">1</span>
+                                                    <h3><span class="btn btn-warning btn-outline btn-round" style="padding-right: 0.75rem; padding-left: 0.75rem; font-size: 20px;">4</span>
                                                         <span>Stock SIM</span><div class="message-sender" style="text-align: right;">
                                                             <p><span class=" h5 text-info">SIM</span><span class=" h5"> xx,xxx รายการ</span></p>
                                                         </div>
@@ -72,7 +72,7 @@
                                             </li>
                                             <li id="MenuStockPaper" runat="server">
                                                 <a id="lnkStockPaper" runat="server">
-                                                    <h3><span class="btn btn-dark btn-outline btn-round" style="padding-right: 0.75rem; padding-left: 0.75rem; font-size: 20px;">1</span>
+                                                    <h3><span class="btn btn-dark btn-outline btn-round" style="padding-right: 0.75rem; padding-left: 0.75rem; font-size: 20px;">5</span>
                                                         <span>Stock กระดาษพิมพ์</span><div class="message-sender" style="text-align: right;">
                                                             <p><span class=" h5 text-info">พิมพ์ได้</span><span class=" h5"> xxx ครั้ง</span></p>
                                                         </div>
@@ -84,7 +84,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="column contact-view">
+                        <div class="column contact-view" style ="margin-top: -20px;">
                             <%--<div class="p-a">
                                 <div class="pull-left p-r" style="text-align: center;">
                                     <img id="imgLogo" class="avatar avatar-md" src="../images/Icon/koisk_ab.png" style="width: 30%;">

@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class UC_Shift_StockPaper
     
     '''<summary>
+    '''txtMaxPaper control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtMaxPaper As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''txtUnitPaper control.
     '''</summary>
     '''<remarks>
@@ -30,13 +39,4 @@ Partial Public Class UC_Shift_StockPaper
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnAdd As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''txtMaxPaper control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtMaxPaper As Global.System.Web.UI.WebControls.TextBox
 End Class

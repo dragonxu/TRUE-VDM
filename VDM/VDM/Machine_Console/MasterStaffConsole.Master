@@ -52,8 +52,8 @@
         <section id="how" class="content-section">
             <div class="container" style="padding-top: unset; width: 90%;">
                 <asp:ScriptManager ID="scm" runat="server"></asp:ScriptManager>
-                <div class="row" style="padding: 20px;">
-                    <div class="col-xs-6">
+                <div class="row" style="padding-left: 20px;">
+                    <div class="col-xs-12">
                         <div>
                             <h1><b>
                                 <asp:Label ID="lblMachine_Name" runat="server"></asp:Label></b> &nbsp; <i class="fa fa-map-marker text-blue "></i><span></span>
@@ -62,9 +62,11 @@
                                 <asp:Label ID="lblMachine_Zone" runat="server"></asp:Label>
 
                             </h1>
+                            <h3>Close Shift xxxx (เปิดตั้งแต่ xx/xx/xxx)</h3>
+                            <%--<h2>Open Shift (ปิดล่าสุดตั้งแต่ xx/xx/xxx)</h2>--%>
                         </div>
                     </div>
-                    <div class="col-xs-6">
+                   <%-- <div class="col-xs-6">
                         <div class="p-a">
                             <div class="pull-left p-r " style="text-align: right ; ">
                                 <img id="imgLogo" class="avatar avatar-md" src="../images/Icon/koisk_ab.png" style="width: 35%;">
@@ -75,11 +77,11 @@
 
                             </div>
                         </div>
-                    </div>
+                    </div>--%>
 
 
                 </div>
-                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server" >
                 </asp:ContentPlaceHolder>
             </div>
         </section>
