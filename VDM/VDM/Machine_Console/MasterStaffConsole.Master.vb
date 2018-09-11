@@ -8,7 +8,7 @@ Public Class MasterStaffConsole
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Not IsNumeric(Session("USER_ID")) Then
-            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('Please Login'); window.location.href='SignIn.aspx';", True)
+            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('Please Login'); window.location.href='Login.aspx';", True)
             Exit Sub
         End If
 

@@ -259,6 +259,9 @@
     <Content Include="images\SignIn\3.png" />
     <Content Include="images\warning.gif" />
     <Content Include="Machine_Console\TestStock.aspx" />
+    <Content Include="Machine_Console\UC_Shift_Change.ascx" />
+    <Content Include="Machine_Console\UC_Shift_Recieve.ascx" />
+    <Content Include="Machine_Console\UC_Shift_StockPaper.ascx" />
     <Content Include="SignIn.aspx" />
     <Content Include="Machine_Console\Login.aspx" />
     <Content Include="Machine_Console\Machine_Overview.aspx" />
@@ -352,6 +355,27 @@
     <Compile Include="Machine_Console\TestStock.aspx.vb">
       <DependentUpon>TestStock.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Machine_Console\UC_Shift_Change.ascx.designer.vb">
+      <DependentUpon>UC_Shift_Change.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Machine_Console\UC_Shift_Change.ascx.vb">
+      <DependentUpon>UC_Shift_Change.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Machine_Console\UC_Shift_Recieve.ascx.designer.vb">
+      <DependentUpon>UC_Shift_Recieve.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Machine_Console\UC_Shift_Recieve.ascx.vb">
+      <DependentUpon>UC_Shift_Recieve.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Machine_Console\UC_Shift_StockPaper.ascx.designer.vb">
+      <DependentUpon>UC_Shift_StockPaper.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Machine_Console\UC_Shift_StockPaper.ascx.vb">
+      <DependentUpon>UC_Shift_StockPaper.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SignIn.aspx.designer.vb">
       <DependentUpon>SignIn.aspx</DependentUpon>

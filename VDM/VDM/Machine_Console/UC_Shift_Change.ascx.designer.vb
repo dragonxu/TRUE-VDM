@@ -11,221 +11,230 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Manage_OpenClose_Shift
+Partial Public Class UC_Shift_Change
     
     '''<summary>
-    '''udpList control.
+    '''td1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents udpList As Global.System.Web.UI.UpdatePanel
+    Protected WithEvents td1 As Global.System.Web.UI.HtmlControls.HtmlTableCell
     
     '''<summary>
-    '''MenuChange control.
+    '''TextBox9 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents MenuChange As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents TextBox9 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''lnkChange control.
+    '''TextBox10 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkChange As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    Protected WithEvents TextBox10 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''MenuRecieve control.
+    '''TextBox11 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents MenuRecieve As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents TextBox11 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''lnkRecieve control.
+    '''TextBox12 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkRecieve As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    Protected WithEvents TextBox12 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''MenuStockProduct control.
+    '''Label2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents MenuStockProduct As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents Label2 As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lnkStockProduct control.
+    '''td control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkStockProduct As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    Protected WithEvents td As Global.System.Web.UI.HtmlControls.HtmlTableCell
     
     '''<summary>
-    '''MenuStockSIM control.
+    '''TextBox5 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents MenuStockSIM As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents TextBox5 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''lnkStockSIM control.
+    '''TextBox8 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkStockSIM As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    Protected WithEvents TextBox8 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''MenuStockPaper control.
+    '''TextBox6 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents MenuStockPaper As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents TextBox6 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''lnkStockPaper control.
+    '''TextBox7 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkStockPaper As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    Protected WithEvents TextBox7 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''pnlChange control.
+    '''Label1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlChange As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''UC_Shift_Change control.
+    '''td2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UC_Shift_Change As Global.VDM.UC_Shift_Change
+    Protected WithEvents td2 As Global.System.Web.UI.HtmlControls.HtmlTableCell
     
     '''<summary>
-    '''pnlRecieve control.
+    '''TextBox13 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlRecieve As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents TextBox13 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''UC_Shift_Recieve control.
+    '''TextBox14 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UC_Shift_Recieve As Global.VDM.UC_Shift_Recieve
+    Protected WithEvents TextBox14 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''pnlStockProduct control.
+    '''TextBox15 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlStockProduct As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents TextBox15 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''pnlStockSIM control.
+    '''TextBox16 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlStockSIM As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents TextBox16 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''pnlStockPaper control.
+    '''Label3 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlStockPaper As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents Label3 As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''UC_Shift_StockPaper control.
+    '''td3 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UC_Shift_StockPaper As Global.VDM.UC_Shift_StockPaper
+    Protected WithEvents td3 As Global.System.Web.UI.HtmlControls.HtmlTableCell
     
     '''<summary>
-    '''pnlbtn control.
+    '''TextBox17 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlbtn As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents TextBox17 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''lnkConfirm control.
+    '''TextBox18 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkConfirm As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents TextBox18 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''lnkOK control.
+    '''TextBox19 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkOK As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents TextBox19 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''lnklogout control.
+    '''TextBox20 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnklogout As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents TextBox20 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''pnlTemp control.
+    '''Label4 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlTemp As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents Label4 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''Label5 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Label5 As Global.System.Web.UI.WebControls.Label
 End Class

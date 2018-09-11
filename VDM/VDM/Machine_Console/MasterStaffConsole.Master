@@ -53,12 +53,31 @@
             <div class="container" style="padding-top: unset; width: 90%;">
                 <asp:ScriptManager ID="scm" runat="server"></asp:ScriptManager>
                 <div class="row" style="padding: 20px;">
-                    <div >
-                        <h1><b><asp:Label ID="lblMachine_Name" runat ="server" ></asp:Label></b> &nbsp; <i class="fa fa-map-marker text-blue ">  </i> <span></span><asp:Label ID="lblMachine_Location" runat ="server" ></asp:Label>
-                             &nbsp;<span id="spanZone" runat ="server" > <i class="fa fa-bullseye text-cyan ">  </i> </span><asp:Label ID="lblMachine_Zone" runat ="server" ></asp:Label>
+                    <div class="col-xs-6">
+                        <div>
+                            <h1><b>
+                                <asp:Label ID="lblMachine_Name" runat="server"></asp:Label></b> &nbsp; <i class="fa fa-map-marker text-blue "></i><span></span>
+                                <asp:Label ID="lblMachine_Location" runat="server"></asp:Label>
+                                &nbsp;<span id="spanZone" runat="server"> <i class="fa fa-bullseye text-cyan "></i></span>
+                                <asp:Label ID="lblMachine_Zone" runat="server"></asp:Label>
 
-                        </h1>
+                            </h1>
+                        </div>
                     </div>
+                    <div class="col-xs-6">
+                        <div class="p-a">
+                            <div class="pull-left p-r " style="text-align: right ; ">
+                                <img id="imgLogo" class="avatar avatar-md" src="../images/Icon/koisk_ab.png" style="width: 35%;">
+                            </div>
+                            <div class="overflow-hidden">
+                                <p><span class="lead h4 m-t-0 text-info"><b>Open Date  : </b></span><span class=" h4  ">xx/xx/xx</span>  &nbsp; &nbsp; <i class="fa fa-user"></i>&nbsp; User Name </p>
+                                <p><span class="lead h4 m-t-0 text-info"><b>Close Date  : </b></span><span class=" h4 ">xx/xx/xx</span>  &nbsp; &nbsp; <i class="fa fa-user"></i>&nbsp; User Name </p>
+
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
                 <asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>
