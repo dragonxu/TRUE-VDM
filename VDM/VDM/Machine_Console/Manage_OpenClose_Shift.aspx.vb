@@ -85,5 +85,7 @@ Public Class Manage_OpenClose_Shift
 
     End Sub
 
-
+    Private Sub lnkBack_ServerClick(sender As Object, e As EventArgs) Handles lnkBack.ServerClick
+        Response.Redirect("Machine_Overview.aspx")
+    End Sub
 End Class

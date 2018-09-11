@@ -43,8 +43,5 @@ Public Class Machine_Overview
         Response.Redirect("Manage_OpenClose_Shift.aspx")
     End Sub
 
-    Private Sub lnklogout_Click(sender As Object, e As EventArgs) Handles lnklogout.Click
-        Session.Abandon()
-        Response.Redirect("Login.aspx")
-    End Sub
+
 End Class

@@ -13,8 +13,21 @@ Public Class MasterStaffConsole
         End If
 
         If Not IsPostBack Then
+            LoginInfo()
+
             GetMachineInfo()
+
         End If
+    End Sub
+
+    Private Sub LoginInfo()
+        If Not IsNumeric(Session("FULL_NAME")) Then
+            lblLoginName.Text = Session("FULL_NAME")
+        Else
+            Session.Abandon()
+            Response.Redirect("Login.aspx")
+        End If
+
     End Sub
 
     Private Sub GetMachineInfo()
@@ -35,7 +48,8 @@ Public Class MasterStaffConsole
 
     End Sub
 
-
-
-
+    Private Sub lnkLogout_ServerClick(sender As Object, e As EventArgs) Handles lnkLogout.ServerClick
+        Session.Abandon()
+        Response.Redirect("Login.aspx")
+    End Sub
 End Class

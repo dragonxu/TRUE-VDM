@@ -48,13 +48,4 @@ Partial Public Class Machine_Overview
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkShift As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''lnklogout control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lnklogout As Global.System.Web.UI.WebControls.LinkButton
 End Class

@@ -77,6 +77,24 @@ Partial Public Class MasterStaffConsole
     Protected WithEvents lblMachine_Zone As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''lnkLogout control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkLogout As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''lblLoginName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblLoginName As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''MainContent control.
     '''</summary>
     '''<remarks>

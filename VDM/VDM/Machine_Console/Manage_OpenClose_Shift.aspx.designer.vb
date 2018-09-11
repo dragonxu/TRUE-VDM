@@ -113,6 +113,15 @@ Partial Public Class Manage_OpenClose_Shift
     Protected WithEvents lnkStockPaper As Global.System.Web.UI.HtmlControls.HtmlAnchor
     
     '''<summary>
+    '''lnkBack control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkBack As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
     '''pnlChange control.
     '''</summary>
     '''<remarks>
@@ -210,15 +219,6 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkOK As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''lnklogout control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lnklogout As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''pnlTemp control.

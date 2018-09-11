@@ -18,7 +18,7 @@
                     <div class="display-columns">
                         <div class="column contacts-sidebar hidden-xs bg-white b-r" style="width: 350px;">
                             <div class="scroll">
-                                <div class="p-a" >
+                                <div class="p-a">
                                     <nav role="navigation">
 
                                         <ul class="nav nav-stacked nav-pills">
@@ -79,12 +79,22 @@
                                                     </h3>
                                                 </a>
                                             </li>
+                                            <li>
+                                                <div class="col-xs-12" style="text-align: left;">
+                                                    <div class="fa-hover text-default   ">
+                                                        <a id="lnkBack" runat="server" title="Back / กลับไปหน้า Overview">
+                                                            <h2><i class="fa fa-angle-double-left"></i><span class="h3" style="vertical-align: middle;">
+                                                                กลับไปหน้า Overview </span>     </h2>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
                                         </ul>
                                     </nav>
                                 </div>
                             </div>
                         </div>
-                        <div class="column contact-view" style ="margin-top: -20px;">
+                        <div class="column contact-view" style="margin-top: -20px;">
                             <%--<div class="p-a">
                                 <div class="pull-left p-r" style="text-align: center;">
                                     <img id="imgLogo" class="avatar avatar-md" src="../images/Icon/koisk_ab.png" style="width: 30%;">
@@ -118,7 +128,7 @@
                                     </div>
                                 </div>
                                 <h4>
-                                    <uc1:UC_Shift_Recieve runat="server" id="UC_Shift_Recieve" />
+                                    <uc1:UC_Shift_Recieve runat="server" ID="UC_Shift_Recieve" />
                                 </h4>
                             </asp:Panel>
                             <asp:Panel ID="pnlStockProduct" runat="server">
@@ -144,7 +154,9 @@
                                     <div class="pull-left p-r">
                                     </div>
                                     <div class="overflow-hidden">
-                                        <h1><b>Stock กระดาษพิมพ์</b> <img id="imgcash100" src="../images/Icon/green/printer.png" width="40px">  </h1>
+                                        <h1><b>Stock กระดาษพิมพ์</b>
+                                            <img id="imgcash100" src="../images/Icon/green/printer.png" width="40px">
+                                        </h1>
                                     </div>
                                 </div>
 
@@ -160,12 +172,13 @@
                             <asp:Panel ID="pnlbtn" runat="server">
                                 <div class="card-block">
                                     <div class="row ">
-                                        <div class="col-xs-6">
+                                        <div class="col-xs-9">
                                             <p></p>
                                             <asp:LinkButton ID="lnkConfirm" runat="server" class="btn btn-info btn-lg btn-block">
                                             <i class="fa fa-legal"></i>
-                                                <span>Confirm</span>
-
+                                                <span>Open Shift / ยืนยัน Open Shift</span>
+                                                <%--Open Shift / ยืนยัน Open Shift
+                                                Close Shift / ยืนยัน Close Shift--%>
                                             </asp:LinkButton>
 
                                         </div>
@@ -173,20 +186,12 @@
                                             <p></p>
                                             <asp:LinkButton ID="lnkOK" runat="server" class="btn btn-success btn-lg btn-block">
                                                 <i class="fa fa-save"></i>
-                                                    <span>Save and next</span>
+                                                    <span>Next / ถัดไป</span>
 
                                             </asp:LinkButton>
 
                                         </div>
-                                        <div class="col-xs-3">
-                                            <p></p>
-                                            <asp:LinkButton ID="lnklogout" runat="server" class="btn btn-warning btn-lg btn-block">
-                                            <i class="icon-logout"></i>
-                                                <span>Logout</span>
-
-                                            </asp:LinkButton>
-
-                                        </div>
+                                         
 
                                     </div>
                                 </div>

@@ -49,7 +49,7 @@
             </div>
 
             <div class="row ">
-                <div class="col-xs-8">
+                <div class="col-xs-12">
                     <p></p>
                     <asp:LinkButton ID="lnkShift" runat="server" class="btn btn-info btn-lg btn-block">
                     <i class="icon-settings"></i>
@@ -58,15 +58,7 @@
                     </asp:LinkButton>
 
                 </div>
-                <div class="col-xs-4">
-                    <p></p>
-                    <asp:LinkButton ID="lnklogout" runat="server" class="btn btn-warning btn-lg btn-block">
-                    <i class="icon-logout"></i>
-                        <span>Logout</span>
-
-                    </asp:LinkButton>
-
-                </div>
+                
 
             </div>
 

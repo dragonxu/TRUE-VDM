@@ -37,7 +37,7 @@
                     <!-- toggle menu -->
                     <button type="button" class="mobile-toggle"><span class="ti-menu"></span></button>
                     <!-- /toggle menu -->
-                    <a href="index.html" class="logo transition">MACHINE CONSOLE </a>
+                    <a href="Machine_Overview.aspx" class="logo transition">MACHINE CONSOLE </a>
                 </div>
                 <!-- /branding -->
                 <!-- links -->
@@ -53,7 +53,7 @@
             <div class="container" style="padding-top: unset; width: 90%;">
                 <asp:ScriptManager ID="scm" runat="server"></asp:ScriptManager>
                 <div class="row" style="padding-left: 20px;">
-                    <div class="col-xs-12">
+                    <div class="col-xs-8">
                         <div>
                             <h1><b>
                                 <asp:Label ID="lblMachine_Name" runat="server"></asp:Label></b> &nbsp; <i class="fa fa-map-marker text-blue "></i><span></span>
@@ -66,22 +66,15 @@
                             <%--<h2>Open Shift (ปิดล่าสุดตั้งแต่ xx/xx/xxx)</h2>--%>
                         </div>
                     </div>
-                   <%-- <div class="col-xs-6">
-                        <div class="p-a">
-                            <div class="pull-left p-r " style="text-align: right ; ">
-                                <img id="imgLogo" class="avatar avatar-md" src="../images/Icon/koisk_ab.png" style="width: 35%;">
-                            </div>
-                            <div class="overflow-hidden">
-                                <p><span class="lead h4 m-t-0 text-info"><b>Open Date  : </b></span><span class=" h4  ">xx/xx/xx</span>  &nbsp; &nbsp; <i class="fa fa-user"></i>&nbsp; User Name </p>
-                                <p><span class="lead h4 m-t-0 text-info"><b>Close Date  : </b></span><span class=" h4 ">xx/xx/xx</span>  &nbsp; &nbsp; <i class="fa fa-user"></i>&nbsp; User Name </p>
-
-                            </div>
+                    <div class="col-xs-4" style ="text-align :right ;"  >
+                        <div class="fa-hover text-danger   ">
+                           <a id="lnkLogout" runat ="server"  title ="Logout / ออกจากระบบ"  > <h2> <i class="fa fa-power-off"></i>  <span class ="h3" style ="vertical-align :middle ;">  <asp:Label ID="lblLoginName" runat ="server" ></asp:Label></span>     </h2></a>
                         </div>
-                    </div>--%>
+                    </div>
 
 
                 </div>
-                <asp:ContentPlaceHolder ID="MainContent" runat="server" >
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
         </section>
