@@ -41,6 +41,24 @@ Partial Public Class Manage_OpenClose_Shift
     Protected WithEvents lnkChange As Global.System.Web.UI.HtmlControls.HtmlAnchor
     
     '''<summary>
+    '''divMenuChange control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents divMenuChange As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''lbl_Change_Amount control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbl_Change_Amount As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''MenuRecieve control.
     '''</summary>
     '''<remarks>
@@ -57,6 +75,24 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkRecieve As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''divMenuRecieve control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents divMenuRecieve As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''lbl_Recieve_Amount control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbl_Recieve_Amount As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''MenuStockProduct control.
@@ -77,6 +113,24 @@ Partial Public Class Manage_OpenClose_Shift
     Protected WithEvents lnkStockProduct As Global.System.Web.UI.HtmlControls.HtmlAnchor
     
     '''<summary>
+    '''divMenuStockProduct control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents divMenuStockProduct As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''lbl_Product_Count control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbl_Product_Count As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''MenuStockSIM control.
     '''</summary>
     '''<remarks>
@@ -95,6 +149,24 @@ Partial Public Class Manage_OpenClose_Shift
     Protected WithEvents lnkStockSIM As Global.System.Web.UI.HtmlControls.HtmlAnchor
     
     '''<summary>
+    '''divMenuStockSIM control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents divMenuStockSIM As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''lbl_SIM_Count control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbl_SIM_Count As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''MenuStockPaper control.
     '''</summary>
     '''<remarks>
@@ -111,6 +183,24 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkStockPaper As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''divMenuStockPaper control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents divMenuStockPaper As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''lbl_Paper_Count control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbl_Paper_Count As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''lnkBack control.

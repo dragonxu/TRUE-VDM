@@ -11,13 +11,31 @@ Public Class Manage_OpenClose_Shift
         'End If
 
         If Not IsPostBack Then
+            ClearForm()
             ClearMenu()
         Else
-
+            initFormPlugin()
             pnlbtn.Visible = True
         End If
     End Sub
 
+
+    Private Sub initFormPlugin()
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
+    End Sub
+
+    Private Sub ClearForm()
+        '--เงินทอน
+        divMenuChange.Visible = False
+        'เงินรับ
+        divMenuRecieve.Visible = False
+        'Stock สินค้า
+        divMenuStockProduct.Visible = False
+        'Stock Sim
+        divMenuStockSIM.Visible = False
+        'Stock พิมพ์
+        divMenuStockPaper.Visible = False
+    End Sub
     Private Sub ClearMenu()
         MenuChange.Attributes("class") = ""
         MenuRecieve.Attributes("class") = ""
@@ -36,6 +54,49 @@ Public Class Manage_OpenClose_Shift
         'Stock พิมพ์
         pnlStockPaper.Visible = False
         pnlbtn.Visible = False
+        lnkOK.Visible = True
+    End Sub
+
+    Private Sub SetNextForm()
+
+        If pnlChange.Visible Then
+            ClearMenu()
+            lnkRecieve_ServerClick(Nothing, Nothing)
+        ElseIf pnlRecieve.Visible Then
+            ClearMenu()
+            lnkStockProduct_ServerClick(Nothing, Nothing)
+        ElseIf pnlStockProduct.Visible Then
+            ClearMenu()
+            lnkStockSIM_ServerClick(Nothing, Nothing)
+        ElseIf pnlStockSIM.Visible Then
+            ClearMenu()
+            lnkStockPaper_ServerClick(Nothing, Nothing)
+
+            'ElseIf pnlStockPaper.Visible Then
+
+        End If
+
+
+
+
+
+
+
+
+    End Sub
+
+    Private Sub SetSummaryMenu()
+        '----แสดงสรุปแต่ละเมนู หลังจากกด Next
+        If Val(UC_Shift_Change.Total) > 0 Then
+            divMenuChange.Visible = True
+            lbl_Change_Amount.Text = FormatNumber(UC_Shift_Change.Total, 0)
+        Else
+            divMenuChange.Visible = False
+        End If
+
+
+
+
 
     End Sub
     Private Sub lnkChange_ServerClick(sender As Object, e As EventArgs) Handles lnkChange.ServerClick
@@ -43,6 +104,12 @@ Public Class Manage_OpenClose_Shift
         MenuChange.Attributes("class") = "active"
         pnlChange.Visible = True
         pnlbtn.Visible = True
+        SetSummaryMenu()
+        'UC_Shift_Change.SetTextbox()
+
+
+
+
 
     End Sub
 
@@ -51,7 +118,7 @@ Public Class Manage_OpenClose_Shift
         MenuRecieve.Attributes("class") = "active"
         pnlRecieve.Visible = True
         pnlbtn.Visible = True
-
+        SetSummaryMenu()
 
     End Sub
 
@@ -60,7 +127,7 @@ Public Class Manage_OpenClose_Shift
         MenuStockProduct.Attributes("class") = "active"
         pnlStockProduct.Visible = True
         pnlbtn.Visible = True
-
+        SetSummaryMenu()
 
 
     End Sub
@@ -70,7 +137,7 @@ Public Class Manage_OpenClose_Shift
         MenuStockSIM.Attributes("class") = "active"
         pnlStockSIM.Visible = True
         pnlbtn.Visible = True
-
+        SetSummaryMenu()
 
 
     End Sub
@@ -81,11 +148,24 @@ Public Class Manage_OpenClose_Shift
         MenuStockPaper.Attributes("class") = "active"
         pnlStockPaper.Visible = True
         pnlbtn.Visible = True
+        lnkOK.Visible = False
+        SetSummaryMenu()
+
 
 
     End Sub
 
     Private Sub lnkBack_ServerClick(sender As Object, e As EventArgs) Handles lnkBack.ServerClick
         Response.Redirect("Machine_Overview.aspx")
+    End Sub
+
+    Private Sub lnkOK_Click(sender As Object, e As EventArgs) Handles lnkOK.Click
+        '---Action
+        SetSummaryMenu()   '----แสดงจำนวนเงิน ที่ทำแต่ละเมนู
+
+
+        '---ClickNext
+        SetNextForm()
+
     End Sub
 End Class

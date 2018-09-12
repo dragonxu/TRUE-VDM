@@ -34,8 +34,8 @@
                                                     <h3><span class="btn btn-primary btn-outline btn-round" style="padding-right: 0.75rem; padding-left: 0.75rem; font-size: 20px;">1</span>
                                                         <span>จำนวนเงินทอน</span>
 
-                                                        <div class="message-sender" style="text-align: right;">
-                                                            <p><span class=" h5 text-info">จำนวนเงิน</span><span class=" h5"> xx,xxx บาท</span></p>
+                                                        <div id="divMenuChange" runat ="server" class="message-sender" style="text-align: right;">
+                                                            <p><span class=" h5 text-info">จำนวนเงิน</span><span class=" h5"> <asp:Label ID="lbl_Change_Amount" runat ="server" ></asp:Label> บาท</span></p>
                                                         </div>
                                                     </h3>
                                                 </a>
@@ -46,8 +46,8 @@
                                                 <a id="lnkRecieve" runat="server">
                                                     <h3><span class="btn btn-success btn-outline btn-round" style="padding-right: 0.75rem; padding-left: 0.75rem; font-size: 20px;">2</span>
                                                         <span>จำนวนเงินรับ</span>
-                                                        <div class="message-sender" style="text-align: right;">
-                                                            <p><span class=" h5 text-info">จำนวนเงิน</span><span class=" h5"> xx,xxx บาท</span></p>
+                                                        <div id="divMenuRecieve" runat ="server" class="message-sender" style="text-align: right;">
+                                                            <p><span class=" h5 text-info">จำนวนเงิน</span><span class=" h5"> <asp:Label ID="lbl_Recieve_Amount" runat ="server" ></asp:Label> บาท</span></p>
                                                         </div>
                                                     </h3>
                                                 </a>
@@ -55,8 +55,9 @@
                                             <li id="MenuStockProduct" runat="server">
                                                 <a id="lnkStockProduct" runat="server">
                                                     <h3><span class="btn btn-info btn-outline btn-round" style="padding-right: 0.75rem; padding-left: 0.75rem; font-size: 20px;">3</span>
-                                                        <span>Stock สินค้า</span><div class="message-sender" style="text-align: right;">
-                                                            <p><span class=" h5 text-info">สินค้า</span><span class=" h5"> xx,xxx รายการ</span></p>
+                                                        <span>Stock สินค้า</span>
+                                                        <div id="divMenuStockProduct" runat ="server" class="message-sender" style="text-align: right;">
+                                                            <p><span class=" h5 text-info">สินค้า</span><span class=" h5"> <asp:Label ID="lbl_Product_Count" runat ="server" ></asp:Label> รายการ</span></p>
                                                         </div>
                                                     </h3>
                                                 </a>
@@ -64,8 +65,9 @@
                                             <li id="MenuStockSIM" runat="server">
                                                 <a id="lnkStockSIM" runat="server">
                                                     <h3><span class="btn btn-warning btn-outline btn-round" style="padding-right: 0.75rem; padding-left: 0.75rem; font-size: 20px;">4</span>
-                                                        <span>Stock SIM</span><div class="message-sender" style="text-align: right;">
-                                                            <p><span class=" h5 text-info">SIM</span><span class=" h5"> xx,xxx รายการ</span></p>
+                                                        <span>Stock SIM</span>
+                                                        <div id="divMenuStockSIM" runat ="server"  class="message-sender" style="text-align: right;">
+                                                            <p><span class=" h5 text-info">SIM</span><span class=" h5"> <asp:Label ID="lbl_SIM_Count" runat ="server" ></asp:Label> รายการ</span></p>
                                                         </div>
                                                     </h3>
                                                 </a>
@@ -73,8 +75,9 @@
                                             <li id="MenuStockPaper" runat="server">
                                                 <a id="lnkStockPaper" runat="server">
                                                     <h3><span class="btn btn-dark btn-outline btn-round" style="padding-right: 0.75rem; padding-left: 0.75rem; font-size: 20px;">5</span>
-                                                        <span>Stock กระดาษพิมพ์</span><div class="message-sender" style="text-align: right;">
-                                                            <p><span class=" h5 text-info">พิมพ์ได้</span><span class=" h5"> xxx ครั้ง</span></p>
+                                                        <span>Stock กระดาษพิมพ์</span>
+                                                        <div id="divMenuStockPaper" runat ="server" class="message-sender" style="text-align: right;">
+                                                            <p><span class=" h5 text-info">พิมพ์ได้</span><span class=" h5"> <asp:Label ID="lbl_Paper_Count" runat ="server" ></asp:Label> ครั้ง</span></p>
                                                         </div>
                                                     </h3>
                                                 </a>
@@ -113,7 +116,9 @@
                                     <div class="pull-left p-r">
                                     </div>
                                     <div class="overflow-hidden">
-                                        <h1><b>จำนวนเงินทอน</b>  </h1>
+                                        <h1><b>จำนวนเงินทอน</b>  
+                                            <img id="imgChange" src="../images/Icon/green/change.png" width="40">
+                                        </h1>
                                     </div>
                                 </div>
 
@@ -124,7 +129,9 @@
                             <asp:Panel ID="pnlRecieve" runat="server">
                                 <div class="p-a">
                                     <div class="overflow-hidden">
-                                        <h1><b>จำนวนเงินรับ</b>  </h1>
+                                        <h1><b>จำนวนเงินรับ</b>  
+                                            <img id="imgRecieve" src="../images/Icon/green/cash.png" width="40">
+                                        </h1>
                                     </div>
                                 </div>
                                 <h4>
@@ -134,7 +141,9 @@
                             <asp:Panel ID="pnlStockProduct" runat="server">
                                 <div class="p-a">
                                     <div class="overflow-hidden">
-                                        <h1><b>Stock สินค้า</b>  </h1>
+                                        <h1><b>Stock สินค้า</b>  
+                                            <img id="imgProduct" src="../images/Icon/green/barcode.png" width="40">
+                                        </h1>
                                     </div>
                                 </div>
                                 <h4></h4>
@@ -142,7 +151,9 @@
                             <asp:Panel ID="pnlStockSIM" runat="server">
                                 <div class="p-a">
                                     <div class="overflow-hidden">
-                                        <h1><b>Stock SIM</b>  </h1>
+                                        <h1><b>Stock SIM</b>  
+                                            <img id="imgSIM" src="../images/Icon/green/simcard.png" width="40">
+                                        </h1>
                                     </div>
                                 </div>
                                 <h4></h4>
@@ -155,7 +166,7 @@
                                     </div>
                                     <div class="overflow-hidden">
                                         <h1><b>Stock กระดาษพิมพ์</b>
-                                            <img id="imgcash100" src="../images/Icon/green/printer.png" width="40px">
+                                            <img id="imgcash100" src="../images/Icon/green/printer.png" width="40">
                                         </h1>
                                     </div>
                                 </div>

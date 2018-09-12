@@ -34,6 +34,21 @@ Public Class VDM_BL
         RS = 6
     End Enum
 
+    Public Enum DeviceType
+        CashIn = 1
+        Cash20 = 2
+        Cash100 = 3
+        CoinIn = 4
+        Coin1 = 5
+        Coin5 = 6
+        Printer = 7
+        Passport = 8
+        Camera = 9
+        SIMDisp = 10
+        DispenserSlot2 = 11
+        Barcode = 12
+    End Enum
+
     Public Function Get_Language_Code(ByVal Language As UILanguage) As String
         Select Case Language
             Case UILanguage.TH
