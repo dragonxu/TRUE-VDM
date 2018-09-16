@@ -41,6 +41,24 @@ Partial Public Class UC_Product_Shelf
     Protected WithEvents rptFloor As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
+    '''lblWidth control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblWidth As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblHeight control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblHeight As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''lnkAddFloor control.
     '''</summary>
     '''<remarks>

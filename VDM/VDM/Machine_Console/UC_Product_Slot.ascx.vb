@@ -1,6 +1,9 @@
 ﻿Public Class UC_Product_Slot
     Inherits System.Web.UI.UserControl
 
+    Const MarginWidth As Integer = 2 ' Padding 10x2 + border 2x2
+    Const MarginHeight As Integer = 2 ' Padding 10x2 + border 2x2
+
     Dim BL As New VDM_BL
 
     Public Property PixelPerMM As Double
@@ -15,7 +18,7 @@
     Public ReadOnly Property ParentFloor As UC_Product_Floor
         Get
             Try
-                Return Me.Parent.Parent.Parent
+                Return Me.Parent.Parent.Parent.Parent
             Catch ex As Exception
                 Return Nothing
             End Try
@@ -26,11 +29,25 @@
     Public Property SLOT_WIDTH As Integer
         Get
             'Return Slot.Width.Value / PixelPerMM
-            Return Slot.Attributes("SLOT_WIDTH")
+            Return lblWidth.Text
         End Get
         Set(value As Integer)
-            Slot.Width = Unit.Pixel(value * PixelPerMM)
-            Slot.Attributes("SLOT_WIDTH") = value
+            Slot.Width = Unit.Pixel((value * PixelPerMM) - MarginWidth)
+            lblWidth.Text = value
+            pnlCoor.Style("left") = ((value * PixelPerMM) - MarginWidth) & "px"
+            '------------- Update Relate Scale -----------
+            lblXT.Text = POS_X + value
+        End Set
+    End Property
+
+    Public Property SLOT_HEIGHT As Integer
+        Get
+            Return lblHeight.Text
+        End Get
+        Set(value As Integer)
+            lblHeight.Text = value
+            '------------- Update Relate Scale -----------
+            lblYT.Text = POS_Y + value
         End Set
     End Property
 
@@ -42,19 +59,25 @@
 
     Public Property POS_X As Integer
         Get
-            'Return CInt(Slot.Style.Item("left").Replace("px", "") / PixelPerMM)
-            Return Slot.Attributes("POS_X")
+            Return lblXB.Text
         End Get
         Set(value As Integer)
-            Slot.Style.Item("left") = (value * PixelPerMM) & "px"
-            Slot.Attributes("POS_X") = value
+            Slot.Style.Item("right") = ((value * PixelPerMM) - MarginWidth) & "px"
+            lblXB.Text = value
+            '------------- Update Relate Scale -----------
+            lblXT.Text = value + SLOT_WIDTH
         End Set
     End Property
 
-    Public ReadOnly Property POS_Y As Integer
+    Public Property POS_Y As Integer
         Get
-            Return ParentFloor.POS_Y
+            Return lblYB.Text
         End Get
+        Set(value As Integer)
+            lblYB.Text = value
+            '------------- Update Relate Scale -----------
+            lblYT.Text = value + SLOT_HEIGHT
+        End Set
     End Property
 
     Public Property SLOT_ID As Integer
@@ -98,10 +121,8 @@
     End Property
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
+        Slot.Attributes("onClick") = "document.getElementById('" & btnSelect.ClientID & "').click();"
     End Sub
-
-
 
     Public Property IsViewOnly As Boolean
         Get
@@ -157,11 +178,13 @@
         End Get
         Set(value As Integer)
             If value <> 0 Then
+                lblQuantity.Visible = True
                 QuantityBar.Visible = True
                 Slot.Style("background-image") = "url('../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & value & "&LANG=1')"
             Else
+                lblQuantity.Visible = False
                 QuantityBar.Visible = False
-                Slot.Style("background-image") = ""
+                Slot.Style.Remove("background-image")
             End If
             QuantityBar.Attributes("PRODUCT_ID") = value
         End Set
@@ -170,9 +193,9 @@
 #End Region
 
 #Region "Event"
-    Public Event RequestEdit(ByVal Sender As UC_Product_Slot)
+    Public Event RequestEdit(ByRef Sender As UC_Product_Slot)
 
-    Private Sub Slot_Click(sender As Object, e As EventArgs) Handles Slot.Click
+    Private Sub Slot_Click(sender As Object, e As EventArgs) Handles btnSelect.Click
         RaiseEvent RequestEdit(Me)
     End Sub
 #End Region

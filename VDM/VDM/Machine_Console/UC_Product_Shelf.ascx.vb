@@ -1,6 +1,9 @@
 ﻿Public Class UC_Product_Shelf
     Inherits System.Web.UI.UserControl
 
+    Const MarginWidth As Integer = 26 ' Padding 10x2 + border 3x2
+    Const MarginHeight As Integer = 26 ' Padding 10x2 + border 3x2
+
     Public Property PixelPerMM As Double
         Get
             Return Shelf.Attributes("PixelPerMM")
@@ -12,23 +15,28 @@
 
     Public Property SHELF_WIDTH As Integer '--------------- mm Unit ---------------
         Get
-            Return Shelf.Attributes("SHELF_WIDTH")
+            Return lblWidth.Text
         End Get
         Set(value As Integer)
-            Shelf.Width = Unit.Pixel(value * PixelPerMM)
+            Shelf.Width = Unit.Pixel((value * PixelPerMM) + MarginWidth)
             lnkEdit.Width = Shelf.Width
             lnkAddFloor.Width = Shelf.Width
-            Shelf.Attributes("SHELF_WIDTH") = value
+            lblWidth.Text = value
+            '---------------- Update All Floors Size ---------
+            For i As Integer = 0 To Floors.Count - 1
+                '---------------- Default Layout --------------
+                Floors(i).FLOOR_HEIGHT = Floors(i).FLOOR_HEIGHT
+            Next
         End Set
     End Property
 
     Public Property SHELF_HEIGHT As Integer '--------------- mm Unit ---------------
         Get
-            Return Shelf.Attributes("SHELF_HEIGHT")
+            Return lblHeight.Text
         End Get
         Set(value As Integer)
-            Shelf.Height = Unit.Pixel(value * PixelPerMM)
-            Shelf.Attributes("SHELF_HEIGHT") = value
+            Shelf.Height = Unit.Pixel((value * PixelPerMM) + MarginHeight)
+            lblHeight.Text = value
         End Set
     End Property
 
@@ -73,7 +81,11 @@
     End Property
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
+        If Not IsPostBack Then
+            '------- Reset Shelf Size ----------
+            SHELF_WIDTH = SHELF_WIDTH
+            SHELF_HEIGHT = SHELF_HEIGHT
+        End If
     End Sub
 
     Public Function Floors() As List(Of UC_Product_Floor)
@@ -127,7 +139,6 @@
         Dim Floor As UC_Product_Floor = e.Item.FindControl("Floor")
         With Floor
             .FLOOR_ID = e.Item.DataItem("FLOOR_ID")
-            .FLOOR_NAME = Chr(Asc("A") + e.Item.ItemIndex)
             .FLOOR_HEIGHT = e.Item.DataItem("FLOOR_HEIGHT")
             .POS_Y = e.Item.DataItem("POS_Y")
             .IsSelected = e.Item.DataItem("IsSelected")
@@ -138,6 +149,8 @@
                 Dim SlotDatas As DataTable = e.Item.DataItem("SlotDatas")
                 .AddSlots(SlotDatas)
             End If
+            '---------------- Update Relate Slot Name---------
+            .FLOOR_NAME = Chr(Asc("A") + e.Item.ItemIndex)
         End With
     End Sub
 
@@ -161,7 +174,7 @@
         Deselect_All_Slot()
     End Sub
 
-    Public Sub AddFloor(ByVal FLOOR_ID As Integer, ByVal FLOOR_HEIGHT As Integer, ByVal POS_Y As Integer, ByVal IsSelected As Boolean, ByVal IsViewOnly As Boolean, ByVal ShowFloorLabel As Boolean, ByVal PixelPerMM As Double, ByVal SlotDatas As DataTable)
+    Public Sub AddFloor(ByVal FLOOR_ID As Integer, ByVal FLOOR_HEIGHT As Integer, ByVal POS_Y As Integer, ByVal IsSelected As Boolean, ByVal IsViewOnly As Boolean, ByVal ShowFloorLabel As Boolean, ByVal PixelPerMM As Double, ByVal SlotDatas As DataTable, ByVal AddToIndex As Integer)
         Dim DT As DataTable = FloorDatas()
 
         Dim DR As DataRow = DT.NewRow
@@ -173,14 +186,15 @@
         DR("ShowFloorLabel") = ShowFloorLabel
         DR("PixelPerMM") = PixelPerMM
         DR("SlotDatas") = SlotDatas
-        DT.Rows.Add(DR)
+
+        DT.Rows.InsertAt(DR, AddToIndex)
         rptFloor.DataSource = DT
         rptFloor.DataBind()
     End Sub
 
     Public Sub AddFloor(ByVal FloorData As DataRow)
         AddFloor(FloorData("FLOOR_ID"), FloorData("FLOOR_HEIGHT"), FloorData("POS_Y"),
-                  FloorData("IsSelected"), FloorData("IsViewOnly"), FloorData("ShowFloorLabel"), FloorData("PixelPerMM"), FloorData("SlotDatas"))
+                  FloorData("IsSelected"), FloorData("IsViewOnly"), FloorData("ShowFloorLabel"), FloorData("PixelPerMM"), FloorData("SlotDatas"), 0)
     End Sub
 
     Public Sub AddFloors(ByVal FloorsDataTable As DataTable)
@@ -201,12 +215,39 @@
         rptFloor.DataBind()
     End Sub
 
+    Public ReadOnly Property SelectedFloor As UC_Product_Floor
+        Get
+            For i As Integer = 0 To Floors.Count - 1
+                If Floors(i).IsSelected Then
+                    Return Floors(i)
+                End If
+            Next
+            Return Nothing
+        End Get
+    End Property
 
+    Public ReadOnly Property SelectedSlot As UC_Product_Slot
+        Get
+            For i As Integer = 0 To Floors.Count - 1
+                If Not IsNothing(Floors(i).SelectedSlot) Then
+                    Return Floors(i).SelectedSlot
+                End If
+            Next
+            Return Nothing
+        End Get
+    End Property
 
 #Region "Event"
 
-    Public Event RequestEdit(ByVal Sender As UC_Product_Shelf)
-    Public Event RequestAddFloor(ByVal Sender As UC_Product_Shelf)
+    Public Event RequestEdit(ByRef Sender As UC_Product_Shelf)
+    Public Event RequestAddFloor(ByRef Sender As UC_Product_Shelf)
+    Public Event RequestAddFloorAfter(ByVal Index As Integer)
+    Public Event RequestEditFloor(ByRef Sender As UC_Product_Floor)
+    'Public Event RequestRemoveFloorAt(ByVal Index As Integer)
+    'Public Event RequestClearFloorSlot(ByVal Sender As UC_Product_Floor)
+    'Public Event RequestClearFloorProduct(ByVal Sender As UC_Product_Floor)
+    Public Event RequestAddSlot(ByRef Sender As UC_Product_Floor)
+    Public Event RequestEditSlot(ByRef Sender As UC_Product_Slot)
 
     Private Sub lnkEdit_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lnkEdit.Click
         RaiseEvent RequestEdit(Me)
@@ -214,6 +255,61 @@
 
     Private Sub lnkAddFloor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lnkAddFloor.Click
         RaiseEvent RequestAddFloor(Me)
+    End Sub
+
+    Protected Sub Floor_RequestAddFloor(ByVal Sender As UC_Product_Floor)
+        RaiseEvent RequestAddFloorAfter(Floors.IndexOf(Sender))
+    End Sub
+
+    Protected Sub Floor_RequestEdit(ByVal Sender As UC_Product_Floor)
+        RaiseEvent RequestEditFloor(Sender)
+    End Sub
+
+    Protected Sub Floor_RequestRemove(ByVal Sender As UC_Product_Floor)
+        'RaiseEvent RequestRemoveFloorAt(Floors.IndexOf(Sender))
+        Dim DT As DataTable = FloorDatas()
+        DT.Rows.RemoveAt(Floors.IndexOf(Sender))
+        rptFloor.DataSource = DT
+        rptFloor.DataBind()
+    End Sub
+
+    Protected Sub Floor_RequestClearSlot(ByVal Sender As UC_Product_Floor)
+        'RaiseEvent RequestClearFloorSlot(Sender)
+        Dim DT As DataTable = FloorDatas()
+        Dim DR As DataRow = DT.Rows(Floors.IndexOf(Sender))
+        DR("SlotDatas") = DBNull.Value
+        rptFloor.DataSource = DT
+        rptFloor.DataBind()
+    End Sub
+
+    Protected Sub Floor_RequestClearProduct(ByVal Sender As UC_Product_Floor)
+        'RaiseEvent RequestClearFloorProduct(Sender)
+        Dim DT As DataTable = FloorDatas()
+
+        For floor As Integer = 0 To DT.Rows.Count - 1
+            If IsDBNull(DT.Rows(floor).Item("SlotDatas")) Then Continue For
+            Dim SlotDatas As DataTable = DT.Rows(floor).Item("SlotDatas")
+
+            For slot As Integer = 0 To SlotDatas.Rows.Count - 1
+                SlotDatas.Rows(slot).Item("PRODUCT_ID") = 0
+                SlotDatas.Rows(slot).Item("PRODUCT_CODE") = ""
+                SlotDatas.Rows(slot).Item("PRODUCT_QUANTITY") = 0
+                SlotDatas.Rows(slot).Item("PRODUCT_LEVEL_PERCENT") = ""
+                SlotDatas.Rows(slot).Item("PRODUCT_LEVEL_COLOR") = Drawing.Color.White
+                SlotDatas.Rows(slot).Item("QUANTITY_BAR_COLOR") = Drawing.Color.Green
+            Next
+        Next
+
+        rptFloor.DataSource = DT
+        rptFloor.DataBind()
+    End Sub
+
+    Protected Sub Floor_RequestAddSlot(ByVal Sender As UC_Product_Floor)
+        RaiseEvent RequestAddSlot(Sender)
+    End Sub
+
+    Protected Sub Slot_RequestEditSlot(ByVal Sender As UC_Product_Slot)
+        RaiseEvent RequestEditSlot(Sender)
     End Sub
 
 #End Region

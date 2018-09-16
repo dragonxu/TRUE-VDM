@@ -20,7 +20,7 @@ Partial Public Class UC_Product_Slot
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Slot As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents Slot As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''lblName control.
@@ -66,4 +66,76 @@ Partial Public Class UC_Product_Slot
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents QuantityLevel As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''lblXT control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblXT As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblYT control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblYT As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblWidth control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblWidth As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''pnlCoor control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlCoor As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''lblXB control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblXB As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblYB control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblYB As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblHeight control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblHeight As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''btnSelect control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSelect As Global.System.Web.UI.WebControls.Button
 End Class

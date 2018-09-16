@@ -21,25 +21,28 @@
                         <div class="col-lg-12 form-horizontal">              
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Max Width</label>
-                                <div class="col-sm-8">
+                                <div class="col-sm-5">
                                     <asp:TextBox ID="txtShelfWidth" runat="server" CssClass="form-control"></asp:TextBox>
                                 </div>
+                                <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Max Height</label>
-                                <div class="col-sm-8">
-                                    <asp:TextBox ID="txtShelfHeight" runat="server" CssClass="form-control"></asp:TextBox>
+                                <div class="col-sm-5">
+                                    <asp:TextBox ID="txtShelfHeight" runat="server" CssClass="form-control"></asp:TextBox>                                    
                                 </div>
+                                <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>                           
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Slot Depth</label>
-                                <div class="col-sm-8">
-                                    <asp:TextBox ID="txtShelfDepth" runat="server" CssClass="form-control"></asp:TextBox>
+                                <div class="col-sm-5">
+                                    <asp:TextBox ID="txtShelfDepth" runat="server" CssClass="form-control"></asp:TextBox>                                     
                                 </div>
+                                <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>
                             <div class="form-group pull-right">
-                                <asp:LinkButton CssClass="btn btn-danger btn-shadow m-r" ID="btnClearShelf" runat="server">Clear All Floor</asp:LinkButton>
-                                <asp:LinkButton CssClass="btn btn-primary btn-shadow m-r" ID="btnApplyShelf" runat="server">Apply</asp:LinkButton>
+                                <asp:LinkButton CssClass="btn btn-danger btn-shadow" ID="btnClearShelf" runat="server">Clear All Floor</asp:LinkButton>
+                                <asp:LinkButton CssClass="btn btn-primary btn-shadow" ID="btnApplyShelf" runat="server">Apply</asp:LinkButton>
                                 <asp:LinkButton CssClass="btn btn-default btn-shadow" ID="btnCancelShelf" runat="server">Cancel</asp:LinkButton>
                              </div>
                         </div>
@@ -53,31 +56,35 @@
                         <div class="col-lg-12 form-horizontal">              
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Width</label>
-                                <div class="col-sm-8">
-                                     <asp:TextBox ID="txtFloorWidth" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                <div class="col-sm-5">
+                                     <asp:TextBox ID="txtFloorWidth" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>                                     
                                 </div>
+                                <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Height</label>
-                                <div class="col-sm-8">
-                                     <asp:TextBox ID="txtFloorHeight" runat="server" CssClass="form-control"></asp:TextBox>
+                                <div class="col-sm-5">
+                                     <asp:TextBox ID="txtFloorHeight" runat="server" CssClass="form-control"></asp:TextBox>                                     
                                 </div>
+                                <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Depth</label>
-                                <div class="col-sm-8">
-                                     <asp:TextBox ID="txtFloorDepth" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                <div class="col-sm-5">
+                                     <asp:TextBox ID="txtFloorDepth" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>                                     
                                 </div>
+                                <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">POS-Y</label>
-                                <div class="col-sm-8">
-                                    <asp:TextBox ID="txtFloorY" runat="server" CssClass="form-control"></asp:TextBox>
+                                <div class="col-sm-5">
+                                    <asp:TextBox ID="txtFloorY" runat="server" CssClass="form-control"></asp:TextBox>                                    
                                 </div>
+                                <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>
                             <div class="form-group pull-right">
-                                <asp:LinkButton CssClass="btn btn-danger btn-shadow m-r" ID="btnRemoveFloor" runat="server">Remove</asp:LinkButton>
-                                <asp:LinkButton CssClass="btn btn-primary btn-shadow m-r" ID="btnApplyFloor" runat="server">Apply</asp:LinkButton>
+                                <asp:LinkButton CssClass="btn btn-danger btn-shadow" ID="btnRemoveFloor" runat="server">Remove This</asp:LinkButton>
+                                <asp:LinkButton CssClass="btn btn-primary btn-shadow" ID="btnApplyFloor" runat="server">Apply</asp:LinkButton>
                                 <asp:LinkButton CssClass="btn btn-default btn-shadow" ID="btnCancelFloor" runat="server">Cancel</asp:LinkButton>
                              </div>
                         </div>
@@ -91,43 +98,49 @@
                         <div class="col-lg-12 form-horizontal">              
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Width</label>
-                                <div class="col-sm-8">
-                                    <asp:TextBox ID="txtSlotWidth" runat="server" CssClass="form-control"></asp:TextBox>
+                                <div class="col-sm-5">
+                                    <asp:TextBox ID="txtSlotWidth" runat="server" CssClass="form-control"></asp:TextBox>                                    
                                 </div>
+                                <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Height</label>
-                                <div class="col-sm-8">
-                                    <asp:TextBox ID="txtSlotHeight" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                <div class="col-sm-5">
+                                    <asp:TextBox ID="txtSlotHeight" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>                                    
                                 </div>
+                                <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Depth</label>
-                                <div class="col-sm-8">
-                                    <asp:TextBox ID="txtSlotDepth" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                <div class="col-sm-5">
+                                    <asp:TextBox ID="txtSlotDepth" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>                                    
                                 </div>
+                                <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">POS-X</label>
-                                <div class="col-sm-8">
-                                    <asp:TextBox ID="txtSlotX" runat="server" CssClass="form-control"></asp:TextBox>
+                                <div class="col-sm-5">
+                                    <asp:TextBox ID="txtSlotX" runat="server" CssClass="form-control"></asp:TextBox>                                    
                                 </div>
+                                <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">POS-Y</label>
-                                <div class="col-sm-8">
-                                    <asp:TextBox ID="txtSlotY" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                                <div class="col-sm-5">
+                                    <asp:TextBox ID="txtSlotY" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>                                    
                                 </div>
+                                <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Containing</label>
-                                <div class="col-sm-8">
+                                <div class="col-sm-5">
                                     -
                                 </div>
                             </div>
                             <div class="form-group pull-right">
-                                <asp:LinkButton CssClass="btn btn-danger btn-shadow m-r" ID="btnRemoveSlot" runat="server">Remove</asp:LinkButton>
-                                <asp:LinkButton CssClass="btn btn-primary btn-shadow m-r" ID="btnApplySlot" runat="server">Apply</asp:LinkButton>
+                                <asp:LinkButton CssClass="btn btn-danger btn-shadow" ID="btnRemoveSlot" runat="server">Remove This</asp:LinkButton>
+                                <asp:LinkButton CssClass="btn btn-info btn-shadow" ID="btnMoveToSlot" runat="server">Move to Slot</asp:LinkButton>
+                                <asp:LinkButton CssClass="btn btn-primary btn-shadow" ID="btnApplySlot" runat="server">Apply</asp:LinkButton>
                                 <asp:LinkButton CssClass="btn btn-default btn-shadow" ID="btnCancelSlot" runat="server">Cancel</asp:LinkButton>
                              </div>
                         </div>

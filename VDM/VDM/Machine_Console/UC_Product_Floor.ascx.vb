@@ -1,6 +1,9 @@
 ﻿Public Class UC_Product_Floor
     Inherits System.Web.UI.UserControl
 
+    Const MarginWidth As Integer = 2 ' Padding 10x2 + border 2x2
+    Const MarginHeight As Integer = 2 ' Padding 10x2 + border 2x2
+
     Dim BL As New VDM_BL
 
     Public Property PixelPerMM As Double
@@ -15,7 +18,7 @@
     Public ReadOnly Property ParentShelf As UC_Product_Shelf
         Get
             Try
-                Return Me.Parent.Parent.Parent
+                Return Me.Parent.Parent.Parent.Parent
             Catch ex As Exception
                 Return Nothing
             End Try
@@ -28,6 +31,10 @@
         End Get
         Set(value As String)
             FloorLabel.Text = value
+            '------------- Update SlotName -----------
+            For i As Integer = 0 To Slots.Count - 1
+                Slots(i).SLOT_NAME = value & "-" & (i + 1)
+            Next
         End Set
     End Property
 
@@ -38,8 +45,15 @@
             Return Floor.Attributes("FLOOR_HEIGHT")
         End Get
         Set(value As Integer)
-            Floor.Height = Unit.Pixel(value * PixelPerMM)
+            Floor.Height = Unit.Pixel((value * PixelPerMM) - MarginHeight)
             Floor.Attributes("FLOOR_HEIGHT") = value
+            '-------------------- Default Layout---------------------
+            Floor.Width = Unit.Pixel((ParentShelf.SHELF_WIDTH * PixelPerMM) - MarginWidth)
+            Floor.Style("right") = "0"
+            '------------- Update SlotHeight -----------
+            For i As Integer = 0 To Slots.Count - 1
+                Slots(i).SLOT_HEIGHT = value
+            Next
         End Set
     End Property
 
@@ -48,7 +62,15 @@
             Return Floor.Attributes("POS_Y")
         End Get
         Set(value As Integer)
+            Floor.Style("bottom") = ((value * PixelPerMM) - MarginHeight) & "px"
             Floor.Attributes("POS_Y") = value
+            '-------------------- Default Layout---------------------
+            Floor.Width = Unit.Pixel((ParentShelf.SHELF_WIDTH * PixelPerMM) - MarginWidth)
+            Floor.Style("right") = "0"
+            '------------- Update SlotHeight -----------
+            For i As Integer = 0 To Slots.Count - 1
+                Slots(i).POS_Y = value
+            Next
         End Set
     End Property
 
@@ -165,6 +187,9 @@
             .IsSelected = e.Item.DataItem("IsSelected")
             .IsViewOnly = e.Item.DataItem("IsViewOnly")
             .PixelPerMM = e.Item.DataItem("PixelPerMM")
+            '-------------------- Default Value ---------------
+            .SLOT_HEIGHT = FLOOR_HEIGHT
+            .POS_Y = POS_Y
         End With
     End Sub
 
@@ -216,6 +241,9 @@
         DT.Rows.RemoveAt(SlotIndex)
         rptSlot.DataSource = DT
         rptSlot.DataBind()
+        For i As Integer = 0 To Slots.Count - 1
+            Slots(i).SLOT_NAME = FLOOR_NAME & "-" & (i + 1)
+        Next
     End Sub
 
     Public Sub ClearAllSlot()
@@ -223,17 +251,28 @@
         rptSlot.DataBind()
     End Sub
 
-
+    Public ReadOnly Property SelectedSlot As UC_Product_Slot
+        Get
+            For i As Integer = 0 To Slots.Count - 1
+                If Slots(i).IsSelected Then
+                    Return Slots(i)
+                End If
+            Next
+            Return Nothing
+        End Get
+    End Property
 
 #Region "Event"
+
     Public Event RequestEdit(ByVal Sender As UC_Product_Floor)
     Public Event RequestAddFloor(ByVal Sender As UC_Product_Floor)
     Public Event RequestAddSlot(ByVal Sender As UC_Product_Floor)
     Public Event RequestClearSlot(ByVal Sender As UC_Product_Floor)
     Public Event RequestClearProduct(ByVal Sender As UC_Product_Floor)
     Public Event RequestRemove(ByVal Sender As UC_Product_Floor)
+    Public Event RequestEditSlot(ByVal Sender As UC_Product_Slot)
 
-    Private Sub mnuFloorSetting_Click(sender As Object, e As EventArgs) Handles mnuFloorSetting.Click
+    Private Sub mnuFloorSetting_Click(sender As Object, e As EventArgs) Handles mnuFloorSetting.Click, CaptionBlock.Click
         RaiseEvent RequestEdit(Me)
     End Sub
 
@@ -255,6 +294,10 @@
 
     Private Sub mnuRemoveFloor_Click(sender As Object, e As EventArgs) Handles mnuRemoveFloor.Click
         RaiseEvent RequestRemove(Me)
+    End Sub
+
+    Protected Sub Slot_RequestEdit(ByRef Sender As UC_Product_Slot)
+        RaiseEvent RequestEditSlot(Sender)
     End Sub
 
 #End Region
