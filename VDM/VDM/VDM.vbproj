@@ -353,6 +353,13 @@
   <ItemGroup>
     <Compile Include="App_Code\BackEndInterface.vb" />
     <Compile Include="App_Code\ModuleGlobal.vb" />
+    <Compile Include="Machine_Console\MasterStaffConsole.Master.designer.vb">
+      <DependentUpon>MasterStaffConsole.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Machine_Console\MasterStaffConsole.Master.vb">
+      <DependentUpon>MasterStaffConsole.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Machine_Console\TestStock.aspx.designer.vb">
       <DependentUpon>TestStock.aspx</DependentUpon>
     </Compile>
@@ -407,13 +414,6 @@
     </Compile>
     <Compile Include="Machine_Console\Manage_OpenClose_Shift.aspx.vb">
       <DependentUpon>Manage_OpenClose_Shift.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Machine_Console\MasterStaffConsole.Master.designer.vb">
-      <DependentUpon>MasterStaffConsole.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Machine_Console\MasterStaffConsole.Master.vb">
-      <DependentUpon>MasterStaffConsole.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Manage_Brand.aspx.designer.vb">

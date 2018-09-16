@@ -30,7 +30,7 @@ Partial Public Class UC_Shift_StockPaper
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtUnitPaper As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''btnAdd control.
     '''</summary>
@@ -38,9 +38,8 @@ Partial Public Class UC_Shift_StockPaper
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-<<<<<<< HEAD:VDM/VDM/Machine_Console/MaterStaffConsole.Master.designer.vb
     Protected WithEvents scm As Global.System.Web.UI.ScriptManager
-    
+
     '''<summary>
     '''MainContent control.
     '''</summary>
@@ -58,7 +57,6 @@ Partial Public Class UC_Shift_StockPaper
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ScriptContainer As Global.System.Web.UI.WebControls.ContentPlaceHolder
-=======
     Protected WithEvents btnAdd As Global.System.Web.UI.WebControls.LinkButton
->>>>>>> 8c94977f38fa480ee4e02eef3326e367d8ace0eb:VDM/VDM/Machine_Console/UC_Shift_StockPaper.ascx.designer.vb
+
 End Class

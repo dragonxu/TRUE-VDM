@@ -102,4 +102,13 @@ Partial Public Class MasterStaffConsole
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents MainContent As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    
+    '''<summary>
+    '''ScriptContainer control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ScriptContainer As Global.System.Web.UI.WebControls.ContentPlaceHolder
 End Class
