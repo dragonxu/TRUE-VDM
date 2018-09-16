@@ -324,6 +324,25 @@ Public Class VDM_BL
 
     End Sub
 
+#Region "Product"
+
+    Public Function Get_Product_Info_From_ID(ByVal PRODUCT_ID As Integer) As DataTable
+        Dim SQL As String = "SELECT * FROM VW_ALL_PRODUCT WHERE PRODUCT_ID=" & PRODUCT_ID
+        Dim DA As New SqlDataAdapter(Sql, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT
+    End Function
+
+    Public Function Get_Product_Info_From_Code(ByVal PRODUCT_CODE As String) As DataTable
+        Dim SQL As String = "SELECT * FROM VW_ALL_PRODUCT WHERE PRODUCT_CODE='" & PRODUCT_CODE.Replace("'", "''") & "'"
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT
+    End Function
+#End Region
+
 #Region "Kiosk Management"
     Public Function GetList_Kiosk(Optional ByVal KO_ID As Integer = 0) As DataTable
         Dim SQL As String = ""

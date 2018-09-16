@@ -320,6 +320,7 @@
     <Content Include="Styles\climacons-font.css" />
     <Content Include="Styles\font-awesome.css" />
     <Content Include="Styles\jquery.dataTables.min.css" />
+    <Content Include="Styles\product_shelf.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="Styles\sli.css" />
     <Content Include="Styles\webfont.css" />
@@ -337,6 +338,9 @@
     <Content Include="Test_API\UC_Service_Flow_Finish.ascx" />
     <Content Include="UC_MoneyStock_UI.ascx" />
     <Content Include="UC_Peripheral_UI.ascx" />
+    <Content Include="UC_Product_Floor.ascx" />
+    <Content Include="UC_Product_Shelf.ascx" />
+    <Content Include="UC_Product_Slot.ascx" />
     <Content Include="UC_Product_Spec.ascx" />
     <Content Include="Upload_User_Form.aspx" />
     <Content Include="Web.config">
@@ -579,6 +583,27 @@
     </Compile>
     <Compile Include="UC_Peripheral_UI.ascx.vb">
       <DependentUpon>UC_Peripheral_UI.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UC_Product_Floor.ascx.designer.vb">
+      <DependentUpon>UC_Product_Floor.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UC_Product_Floor.ascx.vb">
+      <DependentUpon>UC_Product_Floor.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UC_Product_Shelf.ascx.designer.vb">
+      <DependentUpon>UC_Product_Shelf.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UC_Product_Shelf.ascx.vb">
+      <DependentUpon>UC_Product_Shelf.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UC_Product_Slot.ascx.designer.vb">
+      <DependentUpon>UC_Product_Slot.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UC_Product_Slot.ascx.vb">
+      <DependentUpon>UC_Product_Slot.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UC_Product_Spec.ascx.designer.vb">

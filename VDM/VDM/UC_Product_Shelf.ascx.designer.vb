@@ -11,50 +11,41 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class MaterStaffConsole
+Partial Public Class UC_Product_Shelf
     
     '''<summary>
-    '''head control.
+    '''lnkEdit control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents head As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents lnkEdit As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''form1 control.
+    '''Shelf control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+    Protected WithEvents Shelf As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''scm control.
+    '''rptFloor control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents scm As Global.System.Web.UI.ScriptManager
+    Protected WithEvents rptFloor As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
-    '''MainContent control.
+    '''lnkAddFloor control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents MainContent As Global.System.Web.UI.WebControls.ContentPlaceHolder
-    
-    '''<summary>
-    '''ScriptContainer control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ScriptContainer As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents lnkAddFloor As Global.System.Web.UI.WebControls.LinkButton
 End Class

@@ -11,50 +11,59 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class MaterStaffConsole
+Partial Public Class UC_Product_Slot
     
     '''<summary>
-    '''head control.
+    '''Slot control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents head As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents Slot As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''form1 control.
+    '''lblName control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+    Protected WithEvents lblName As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''scm control.
+    '''lblCode control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents scm As Global.System.Web.UI.ScriptManager
+    Protected WithEvents lblCode As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''MainContent control.
+    '''lblQuantity control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents MainContent As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents lblQuantity As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''ScriptContainer control.
+    '''QuantityBar control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ScriptContainer As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents QuantityBar As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''QuantityLevel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents QuantityLevel As Global.System.Web.UI.WebControls.Panel
 End Class

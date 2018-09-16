@@ -1,0 +1,100 @@
+﻿        .machine_stock {            
+            border: 3px solid #cccccc; 
+            padding:10px;
+            border-radius:5px;
+        }
+        .machine_stock.selected {
+            border: 3px solid #fff29d; 
+        }
+
+        .machine_floor {
+            position:relative;
+            background-color : #fcfcfc;
+            border: 2px solid transparent; 
+            display:block;
+            margin-bottom:5px;
+        }
+
+        .slot_caption {
+            font-size:90%;
+            font-weight:bold;
+            color:#808080;
+            position:absolute;            
+            top:5%;
+            left:5%;
+            z-index:2;
+        }
+
+        .slot_product_code {
+            font-size:70%;
+            color:#808080;
+            position:absolute;
+            bottom:0;
+            width:auto;
+            padding-left : 10px;
+            height:auto;
+        }
+
+        .slot_quantity {
+            font-size:70%;
+            color:#808080;
+            position:absolute;
+            bottom:0;
+            right:10px;
+            width:auto;
+            height:auto;
+        }
+
+        .machine_slot {
+           position:absolute;
+           margin:0;
+           display:block;
+           background-color:#fff;
+           height:100%;
+           border:2px solid #eeeeee;
+           background-repeat:no-repeat;
+           background-size:contain;
+           background-position:center;
+        }
+
+        .machine_slot.selected, .machine_floor.selected {
+            border:2px solid #fff29d;
+        }
+
+        .machine_slot:hover {
+            border:2px solid #fff29d;
+        }
+        
+        .machine_floor_label {   
+            height:100%; 
+            position:absolute;
+            left:-110px;
+            width:90px;           
+        }
+
+        .machine_menu_block {
+           position:absolute; 
+           height:100%; 
+           width:100px;
+           right:-120px;
+        }
+
+        .machine_menu_block > .btn-group, .machine_menu_block > .btn-group > button {
+            height:100%;
+            width:100%;
+            font-size:14px;
+        }
+
+        .machine_slot_quantity_bar {
+            height : 100%; 
+            width:5px; 
+            right:0px; 
+            top: 0px;
+            position:absolute;
+        }
+
+        .machine_slot_quantity_level {
+            bottom:0px; 
+            width:100%; 
+            position:absolute; 
+        }
