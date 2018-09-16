@@ -1,4 +1,4 @@
-﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="MaterStaffConsole.master.vb" Inherits="VDM.MaterStaffConsole" %>
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="MasterStaffConsole.Master.vb" Inherits="VDM.MasterStaffConsole" %>
 
 <!DOCTYPE html>
 
@@ -41,7 +41,7 @@
                     <!-- toggle menu -->
                     <button type="button" class="mobile-toggle"><span class="ti-menu"></span></button>
                     <!-- /toggle menu -->
-                    <a href="index.html" class="logo transition">MACHINE CONSOLE </a>
+                    <a href="Machine_Overview.aspx" class="logo transition">MACHINE CONSOLE </a>
                 </div>
                 <!-- /branding -->
                 <!-- links -->
@@ -56,10 +56,27 @@
         <section id="how" class="content-section">
             <div class="container" style="padding-top: unset; width: 90%;">
                 <asp:ScriptManager ID="scm" runat="server"></asp:ScriptManager>
-                <div class="row" style="padding: 20px;">
-                    <div class="overflow-hidden">
-                        <h1><b>ICONS-01</b> &nbsp; <i class="fa fa-map-marker text-blue ">  </i> <span></span>IconSiam </h1>
+                <div class="row" style="padding-left: 20px;">
+                    <div class="col-xs-8">
+                        <div>
+                            <h1><b>
+                                <asp:Label ID="lblMachine_Name" runat="server"></asp:Label></b> &nbsp; <i class="fa fa-map-marker text-blue "></i><span></span>
+                                <asp:Label ID="lblMachine_Location" runat="server"></asp:Label>
+                                &nbsp;<span id="spanZone" runat="server"> <i class="fa fa-bullseye text-cyan "></i></span>
+                                <asp:Label ID="lblMachine_Zone" runat="server"></asp:Label>
+
+                            </h1>
+                            <h3>Close Shift xxxx (เปิดตั้งแต่ xx/xx/xxx)</h3>
+                            <%--<h2>Open Shift (ปิดล่าสุดตั้งแต่ xx/xx/xxx)</h2>--%>
+                        </div>
                     </div>
+                    <div class="col-xs-4" style ="text-align :right ;"  >
+                        <div class="fa-hover text-danger   ">
+                           <a id="lnkLogout" runat ="server"  title ="Logout / ออกจากระบบ"  > <h2> <i class="fa fa-power-off"></i>  <span class ="h3" style ="vertical-align :middle ;">  <asp:Label ID="lblLoginName" runat ="server" ></asp:Label></span>     </h2></a>
+                        </div>
+                    </div>
+
+
                 </div>
                 <asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>
@@ -79,6 +96,7 @@
         </div>
     </footer>
     <!-- /footer -->
+<<<<<<< HEAD:VDM/VDM/Machine_Console/MaterStaffConsole.Master
 
      <!-- Custom scripts -->
      <script src="../scripts/txtClientControl.js" type="text/javascript"></script>
@@ -123,6 +141,11 @@
     
     <!-- end initialize page scripts -->
     <asp:ContentPlaceHolder ID="ScriptContainer" runat="server"></asp:ContentPlaceHolder>
+=======
+    <script src="scripts/app.min.5b73b68c.js"></script>
+    <script src="../scripts/forms/plugins.js" type="text/javascript"></script>
+    <script src="../scripts/txtClientControl.js" type="text/javascript"></script>
+>>>>>>> 8c94977f38fa480ee4e02eef3326e367d8ace0eb:VDM/VDM/Machine_Console/MasterStaffConsole.Master
 
 </body>
 </html>

@@ -11,311 +11,266 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Manage_OpenClose_Shift
+Partial Public Class UC_Shift_Change
     
     '''<summary>
-    '''udpList control.
+    '''txt_coin1_Before control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents udpList As Global.System.Web.UI.UpdatePanel
+    Protected WithEvents txt_coin1_Before As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''MenuChange control.
+    '''txt_coin1_Pick control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents MenuChange As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents txt_coin1_Pick As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''lnkChange control.
+    '''btn_coin1_Pick_Full control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkChange As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    Protected WithEvents btn_coin1_Pick_Full As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''divMenuChange control.
+    '''txt_coin1_Input control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents divMenuChange As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents txt_coin1_Input As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''lbl_Change_Amount control.
+    '''btn_coin1_Input_Full control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbl_Change_Amount As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents btn_coin1_Input_Full As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''MenuRecieve control.
+    '''txt_coin1_Remain control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents MenuRecieve As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents txt_coin1_Remain As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''lnkRecieve control.
+    '''lbl_coin1_Amount control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkRecieve As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    Protected WithEvents lbl_coin1_Amount As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''divMenuRecieve control.
+    '''txt_coin5_Before control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents divMenuRecieve As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents txt_coin5_Before As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''lbl_Recieve_Amount control.
+    '''txt_coin5_Pick control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbl_Recieve_Amount As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents txt_coin5_Pick As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''MenuStockProduct control.
+    '''btn_coin5_Pick_Full control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents MenuStockProduct As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents btn_coin5_Pick_Full As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''lnkStockProduct control.
+    '''txt_coin5_Input control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkStockProduct As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    Protected WithEvents txt_coin5_Input As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''divMenuStockProduct control.
+    '''btn_coin5_Input_Full control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents divMenuStockProduct As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents btn_coin5_Input_Full As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''lbl_Product_Count control.
+    '''txt_coin5_Remain control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbl_Product_Count As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents txt_coin5_Remain As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''MenuStockSIM control.
+    '''lbl_coin5_Amount control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents MenuStockSIM As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents lbl_coin5_Amount As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lnkStockSIM control.
+    '''txt_cash20_Before control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkStockSIM As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    Protected WithEvents txt_cash20_Before As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''divMenuStockSIM control.
+    '''txt_cash20_Pick control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents divMenuStockSIM As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents txt_cash20_Pick As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''lbl_SIM_Count control.
+    '''btn_cash20_Pick_Full control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbl_SIM_Count As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents btn_cash20_Pick_Full As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''MenuStockPaper control.
+    '''txt_cash20_Input control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents MenuStockPaper As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents txt_cash20_Input As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''lnkStockPaper control.
+    '''btn_cash20_Input_Full control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkStockPaper As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    Protected WithEvents btn_cash20_Input_Full As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''divMenuStockPaper control.
+    '''txt_cash20_Remain control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents divMenuStockPaper As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents txt_cash20_Remain As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''lbl_Paper_Count control.
+    '''lbl_cash20_Amount control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbl_Paper_Count As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lbl_cash20_Amount As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lnkBack control.
+    '''txt_cash100_Before control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkBack As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    Protected WithEvents txt_cash100_Before As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''pnlChange control.
+    '''txt_cash100_Pick control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlChange As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents txt_cash100_Pick As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''UC_Shift_Change control.
+    '''btn_cash100_Pick_Full control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UC_Shift_Change As Global.VDM.UC_Shift_Change
+    Protected WithEvents btn_cash100_Pick_Full As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''pnlRecieve control.
+    '''txt_cash100_Input control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlRecieve As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents txt_cash100_Input As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''UC_Shift_Recieve control.
+    '''btn_cash100_Input_Full control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UC_Shift_Recieve As Global.VDM.UC_Shift_Recieve
+    Protected WithEvents btn_cash100_Input_Full As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''pnlStockProduct control.
+    '''txt_cash100_Remain control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlStockProduct As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents txt_cash100_Remain As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''pnlStockSIM control.
+    '''lbl_cash100_Amount control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlStockSIM As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents lbl_cash100_Amount As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''pnlStockPaper control.
+    '''lblSum control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlStockPaper As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
-    '''UC_Shift_StockPaper control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents UC_Shift_StockPaper As Global.VDM.UC_Shift_StockPaper
-    
-    '''<summary>
-    '''pnlbtn control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnlbtn As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
-    '''lnkConfirm control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lnkConfirm As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''lnkOK control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lnkOK As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''pnlTemp control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnlTemp As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents lblSum As Global.System.Web.UI.WebControls.Label
 End Class

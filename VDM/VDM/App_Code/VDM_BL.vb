@@ -8,6 +8,7 @@ Public Class VDM_BL
     Public ConnectionString As String = ConnectionStrings("ConnectionString").ConnectionString
     Public ServerMapPath As String = AppSettings("ServerMapPath").ToString
     Public PicturePath As String = AppSettings("PicturePath").ToString
+    Public KioskID As String = AppSettings("KioskID").ToString
 
     Public Sub ExecuteNonQuery(ByVal CommandText As String)
         Dim Command As New SqlCommand
@@ -31,6 +32,21 @@ Public Class VDM_BL
         JP = 4
         KR = 5
         RS = 6
+    End Enum
+
+    Public Enum DeviceType
+        CashIn = 1
+        Cash20 = 2
+        Cash100 = 3
+        CoinIn = 4
+        Coin1 = 5
+        Coin5 = 6
+        Printer = 7
+        Passport = 8
+        Camera = 9
+        SIMDisp = 10
+        DispenserSlot2 = 11
+        Barcode = 12
     End Enum
 
     Public Function Get_Language_Code(ByVal Language As UILanguage) As String

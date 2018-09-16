@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 ﻿<%@ Page Title="Stock" Language="vb" AutoEventWireup="false" MasterPageFile="~/Machine_Console/MaterStaffConsole.Master" CodeBehind="TestStock.aspx.vb" Inherits="VDM.TestStock" %>
 
 <%@ Register Src="~/UC_Product_Shelf.ascx" TagPrefix="uc1" TagName="UC_Product_Shelf" %>
 
+=======
+﻿<%@ Page Title="Stock" Language="vb" AutoEventWireup="false" MasterPageFile="~/Machine_Console/MasterStaffConsole.Master" CodeBehind="TestStock.aspx.vb" Inherits="VDM.TestStock" %>
+>>>>>>> 8c94977f38fa480ee4e02eef3326e367d8ace0eb
 <asp:Content ID="head" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
