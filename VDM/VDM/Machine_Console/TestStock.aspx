@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="Stock" Language="vb" AutoEventWireup="false" MasterPageFile="~/Machine_Console/MasterStaffConsole.Master" CodeBehind="TestStock.aspx.vb" Inherits="VDM.TestStock" %>
 
-<%@ Register Src="~/UC_Product_Shelf.ascx" TagPrefix="uc1" TagName="UC_Product_Shelf" %>
+<%@ Register Src="~/Machine_Console/UC_Product_Shelf.ascx" TagPrefix="uc1" TagName="UC_Product_Shelf" %>
 
 <asp:Content ID="head" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

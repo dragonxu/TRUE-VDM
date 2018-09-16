@@ -4,9 +4,6 @@
 <%@ Register Src="~/Machine_Console/UC_Shift_StockPaper.ascx" TagPrefix="uc1" TagName="UC_Shift_StockPaper" %>
 <%@ Register Src="~/Machine_Console/UC_Shift_Recieve.ascx" TagPrefix="uc1" TagName="UC_Shift_Recieve" %>
 
-
-
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -175,10 +172,6 @@
                                     <uc1:UC_Shift_StockPaper runat="server" ID="UC_Shift_StockPaper" />
                                 </h4>
                             </asp:Panel>
-
-
-
-
 
                             <asp:Panel ID="pnlbtn" runat="server">
                                 <div class="card-block">

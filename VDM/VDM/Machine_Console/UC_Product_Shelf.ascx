@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="UC_Product_Shelf.ascx.vb" Inherits="VDM.UC_Product_Shelf" %>
-<%@ Register Src="~/UC_Product_Floor.ascx" TagPrefix="uc1" TagName="UC_Product_Floor" %>
+<%@ Register Src="~/Machine_Console/UC_Product_Floor.ascx" TagPrefix="uc1" TagName="UC_Product_Floor" %>
 
     
 <asp:LinkButton CssClass="h2 btn btn-lg btn-info btn-shadow m-t-0 m-b" ID="lnkEdit"  Width="100%" runat="server" >
