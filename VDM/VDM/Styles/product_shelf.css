@@ -1,10 +1,11 @@
 ﻿        .machine_stock {            
-            border: 3px solid #cccccc; 
+            border: 2px solid #cccccc; 
             padding:10px;
             border-radius:5px;
         }
         .machine_stock.selected {
-            border: 3px solid #fff29d; 
+            border: 2px dashed #fff29d; 
+            animation: blink .5s step-end infinite alternate;
         }
 
         .machine_block_container {
@@ -68,18 +69,24 @@
            background-position:center;
         }
 
-        .machine_slot.selected, .machine_floor.selected {
-            border:3px solid #fff29d;
+        @keyframes blink {
+            50% {
+                border: 2px dashed #ffd800;
+            }
+        }
+
+        .machine_slot.selected, .machine_floor.selected , .panel_property {
+            animation: blink .5s step-end infinite alternate;
         }
 
         .machine_slot:hover {
-            border:3px solid #fff29d;
+            border:3px solid #ffd800;
         }
         
         .machine_floor_label {   
             height:100%; 
             position:absolute;
-            left:-110px;
+            left:-115px;
             width:90px;           
         }
 
@@ -117,15 +124,68 @@
     background-color:white; 
     z-index:3;
 }
+
+.border-red{
+    border:1px solid red;
+}
+
+.scale-right-red{
+    border-right:2px dotted red;
+}
+.scale-left-red{
+    border-left:2px dotted red;
+}
+.scale-top-red{
+    border-top:2px dotted red;
+}
+.scale-bottom-red{
+    border-bottom:2px dotted red;
+}
+
+.bottom-0 {
+    bottom:0px;
+}
+
 .bottom-25 {
     bottom:-25px;
 }
+
+.top-0 {
+    top:0px;
+}
+
 .top-25 {
     top:-25px;
 }
 .left-25 {
     left:-25px;
 }
+.left-30 {
+    left:-30px;
+}
+.left-35 {
+    left:-35px;
+}
+.right-25 {
+    right:-25px;
+}
+
+.left-50 {
+    left:-50px;
+}
+
+.right-50 {
+    right:-50px;
+}
+
+.right-10 {
+    right:-10px;
+}
+
+.left-10 {
+    left:-10px;
+}
+
 .width100pc {
     width:100%;
 }
@@ -138,15 +198,26 @@
     display:table; 
     left:-28px;
 }
-.slot_scale_height > div {
+
+.slot_floor_height {
+    display:table; 
+    right:-25px;
+    top:0;
+}
+
+.slot_scale_height > div, .slot_floor_height > div {
     display:table-cell; 
     vertical-align:middle;
 }
 
-.machine_slot > .slot_scale {
+.machine_slot > .slot_scale, .machine_floor  > .slot_scale {
     display:none;
 }
 
-.machine_slot:hover > .slot_scale {
+.machine_slot:hover > .slot_scale, 
+.machine_slot.selected > .slot_scale , 
+.machine_floor:hover > .slot_scale ,
+.machine_floor.selected > .slot_scale
+ {
     display:table;
 }

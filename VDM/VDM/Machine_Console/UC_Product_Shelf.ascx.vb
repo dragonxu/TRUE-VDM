@@ -109,9 +109,8 @@
         DT.Columns.Add("FLOOR_HEIGHT", GetType(Integer))
         DT.Columns.Add("POS_Y", GetType(Integer))
         DT.Columns.Add("IsSelected", GetType(Boolean))
-        DT.Columns.Add("IsViewOnly", GetType(Boolean))
-        DT.Columns.Add("ShowFloorLabel", GetType(Boolean))
-        DT.Columns.Add("PixelPerMM", GetType(Double))
+        DT.Columns.Add("ShowFloorName", GetType(Boolean))
+        DT.Columns.Add("ShowMenu", GetType(Boolean))
         DT.Columns.Add("SlotDatas", GetType(DataTable))
 
         For Each Item In rptFloor.Items
@@ -123,9 +122,8 @@
             DR("FLOOR_HEIGHT") = Floor.FLOOR_HEIGHT
             DR("POS_Y") = Floor.POS_Y
             DR("IsSelected") = Floor.IsSelected
-            DR("IsViewOnly") = Floor.IsViewOnly
-            DR("ShowFloorLabel") = Floor.ShowFloorLabel
-            DR("PixelPerMM") = Floor.PixelPerMM
+            DR("ShowFloorName") = Floor.ShowFloorName
+            DR("ShowMenu") = Floor.ShowMenu
             DR("SlotDatas") = Floor.SlotDatas
             DT.Rows.Add(DR)
         Next
@@ -142,9 +140,8 @@
             .FLOOR_HEIGHT = e.Item.DataItem("FLOOR_HEIGHT")
             .POS_Y = e.Item.DataItem("POS_Y")
             .IsSelected = e.Item.DataItem("IsSelected")
-            .IsViewOnly = e.Item.DataItem("IsViewOnly")
-            .ShowFloorLabel = e.Item.DataItem("ShowFloorLabel")
-            .PixelPerMM = e.Item.DataItem("PixelPerMM")
+            .ShowFloorName = e.Item.DataItem("ShowFloorName")
+            .ShowMenu = e.Item.DataItem("ShowMenu")
             If Not IsDBNull(e.Item.DataItem("SlotDatas")) And Not IsNothing(e.Item.DataItem("SlotDatas")) Then
                 Dim SlotDatas As DataTable = e.Item.DataItem("SlotDatas")
                 .AddSlots(SlotDatas)
@@ -174,7 +171,7 @@
         Deselect_All_Slot()
     End Sub
 
-    Public Sub AddFloor(ByVal FLOOR_ID As Integer, ByVal FLOOR_HEIGHT As Integer, ByVal POS_Y As Integer, ByVal IsSelected As Boolean, ByVal IsViewOnly As Boolean, ByVal ShowFloorLabel As Boolean, ByVal PixelPerMM As Double, ByVal SlotDatas As DataTable, ByVal AddToIndex As Integer)
+    Public Sub AddFloor(ByVal FLOOR_ID As Integer, ByVal FLOOR_HEIGHT As Integer, ByVal POS_Y As Integer, ByVal IsSelected As Boolean, ByVal ShowFloorName As Boolean, ByVal SlotDatas As DataTable, ByVal ShowMenu As Boolean, ByVal AddToIndex As Integer)
         Dim DT As DataTable = FloorDatas()
 
         Dim DR As DataRow = DT.NewRow
@@ -182,9 +179,8 @@
         DR("FLOOR_HEIGHT") = FLOOR_HEIGHT
         DR("POS_Y") = POS_Y
         DR("IsSelected") = IsSelected
-        DR("IsViewOnly") = IsViewOnly
-        DR("ShowFloorLabel") = ShowFloorLabel
-        DR("PixelPerMM") = PixelPerMM
+        DR("ShowFloorName") = ShowFloorName
+        DR("ShowMenu") = ShowMenu
         DR("SlotDatas") = SlotDatas
 
         DT.Rows.InsertAt(DR, AddToIndex)
@@ -194,7 +190,7 @@
 
     Public Sub AddFloor(ByVal FloorData As DataRow)
         AddFloor(FloorData("FLOOR_ID"), FloorData("FLOOR_HEIGHT"), FloorData("POS_Y"),
-                  FloorData("IsSelected"), FloorData("IsViewOnly"), FloorData("ShowFloorLabel"), FloorData("PixelPerMM"), FloorData("SlotDatas"), 0)
+                  FloorData("IsSelected"), FloorData("ShowFloorName"), FloorData("ShowMenu"), FloorData("SlotDatas"), 0)
     End Sub
 
     Public Sub AddFloors(ByVal FloorsDataTable As DataTable)

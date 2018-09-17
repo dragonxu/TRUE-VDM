@@ -111,4 +111,31 @@ Partial Public Class UC_Product_Floor
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents rptSlot As Global.System.Web.UI.WebControls.Repeater
+    
+    '''<summary>
+    '''lblY control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblY As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblY1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblY1 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblHeight control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblHeight As Global.System.Web.UI.WebControls.Label
 End Class

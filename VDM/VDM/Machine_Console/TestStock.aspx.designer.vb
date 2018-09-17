@@ -77,13 +77,13 @@ Partial Public Class TestStock
     Protected WithEvents btnApplyShelf As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''btnCancelShelf control.
+    '''btnCloseShelf control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnCancelShelf As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnCloseShelf As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''pnlFloor control.
@@ -158,13 +158,13 @@ Partial Public Class TestStock
     Protected WithEvents btnApplyFloor As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''btnCancelFloor control.
+    '''btnCloseFloor control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnCancelFloor As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnCloseFloor As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''pnlSlot control.
@@ -257,11 +257,11 @@ Partial Public Class TestStock
     Protected WithEvents btnApplySlot As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''btnCancelSlot control.
+    '''btnCloseSlot control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnCancelSlot As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnCloseSlot As Global.System.Web.UI.WebControls.LinkButton
 End Class

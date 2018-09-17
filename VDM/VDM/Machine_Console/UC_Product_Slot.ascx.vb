@@ -6,13 +6,10 @@
 
     Dim BL As New VDM_BL
 
-    Public Property PixelPerMM As Double
+    Public ReadOnly Property PixelPerMM As Double
         Get
-            Return Slot.Attributes("PixelPerMM")
+            Return ParentFloor.PixelPerMM
         End Get
-        Set(value As Double)
-            Slot.Attributes("PixelPerMM") = value
-        End Set
     End Property
 
     Public ReadOnly Property ParentFloor As UC_Product_Floor
@@ -28,7 +25,6 @@
     '--------------- Calculate MM------------
     Public Property SLOT_WIDTH As Integer
         Get
-            'Return Slot.Width.Value / PixelPerMM
             Return lblWidth.Text
         End Get
         Set(value As Integer)
@@ -62,7 +58,7 @@
             Return lblXB.Text
         End Get
         Set(value As Integer)
-            Slot.Style.Item("right") = ((value * PixelPerMM) - MarginWidth) & "px"
+            Slot.Style.Item("right") = (value * PixelPerMM) & "px"
             lblXB.Text = value
             '------------- Update Relate Scale -----------
             lblXT.Text = value + SLOT_WIDTH
@@ -124,15 +120,6 @@
         Slot.Attributes("onClick") = "document.getElementById('" & btnSelect.ClientID & "').click();"
     End Sub
 
-    Public Property IsViewOnly As Boolean
-        Get
-            Return Slot.Enabled
-        End Get
-        Set(value As Boolean)
-            Slot.Enabled = value
-        End Set
-    End Property
-
 #Region "Product"
     Public Property PRODUCT_LEVEL_PERCENT As String
         Get
@@ -158,7 +145,7 @@
         End Get
         Set(value As Drawing.Color)
             QuantityLevel.BackColor = value
-            lblQuantity.BackColor = value
+            lblQuantity.ForeColor = value
         End Set
     End Property
 

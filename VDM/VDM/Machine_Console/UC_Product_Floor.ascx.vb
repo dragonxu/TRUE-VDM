@@ -6,13 +6,10 @@
 
     Dim BL As New VDM_BL
 
-    Public Property PixelPerMM As Double
+    Public ReadOnly Property PixelPerMM As Double
         Get
-            Return Floor.Attributes("PixelPerMM")
+            Return ParentShelf.PixelPerMM
         End Get
-        Set(value As Double)
-            Floor.Attributes("PixelPerMM") = value
-        End Set
     End Property
 
     Public ReadOnly Property ParentShelf As UC_Product_Shelf
@@ -41,12 +38,13 @@
     '--------------- Calculate MM------------
     Public Property FLOOR_HEIGHT As Integer
         Get
-            'Return Floor.Height.Value / PixelPerMM
-            Return Floor.Attributes("FLOOR_HEIGHT")
+            Return lblHeight.Text
         End Get
         Set(value As Integer)
             Floor.Height = Unit.Pixel((value * PixelPerMM) - MarginHeight)
-            Floor.Attributes("FLOOR_HEIGHT") = value
+            lblHeight.Text = value
+            '----------- Update Scale --------
+            lblY1.Text = value + POS_Y
             '-------------------- Default Layout---------------------
             Floor.Width = Unit.Pixel((ParentShelf.SHELF_WIDTH * PixelPerMM) - MarginWidth)
             Floor.Style("right") = "0"
@@ -59,15 +57,17 @@
 
     Public Property POS_Y As Integer
         Get
-            Return Floor.Attributes("POS_Y")
+            Return lblY.Text
         End Get
         Set(value As Integer)
             Floor.Style("bottom") = ((value * PixelPerMM) - MarginHeight) & "px"
-            Floor.Attributes("POS_Y") = value
+            lblY.Text = value
+            '----------- Update Scale --------
+            lblY1.Text = value + FLOOR_HEIGHT
             '-------------------- Default Layout---------------------
             Floor.Width = Unit.Pixel((ParentShelf.SHELF_WIDTH * PixelPerMM) - MarginWidth)
             Floor.Style("right") = "0"
-            '------------- Update SlotHeight -----------
+            '------------- Update Slot POS_Y -----------
             For i As Integer = 0 To Slots.Count - 1
                 Slots(i).POS_Y = value
             Next
@@ -96,21 +96,21 @@
         End Set
     End Property
 
-    Public Property IsViewOnly As Boolean
-        Get
-            Return Not pnlMenu.Visible
-        End Get
-        Set(value As Boolean)
-            pnlMenu.Visible = Not value
-        End Set
-    End Property
-
-    Public Property ShowFloorLabel As Boolean
+    Public Property ShowFloorName As Boolean
         Get
             Return CaptionBlock.Visible
         End Get
         Set(value As Boolean)
             CaptionBlock.Visible = value
+        End Set
+    End Property
+
+    Public Property ShowMenu As Boolean
+        Get
+            Return pnlMenu.Visible
+        End Get
+        Set(value As Boolean)
+            pnlMenu.Visible = value
         End Set
     End Property
 
@@ -142,8 +142,6 @@
         DT.Columns.Add("PRODUCT_LEVEL_COLOR", GetType(Drawing.Color))
         DT.Columns.Add("QUANTITY_BAR_COLOR", GetType(Drawing.Color))
         DT.Columns.Add("IsSelected", GetType(Boolean))
-        DT.Columns.Add("IsViewOnly", GetType(Boolean))
-        DT.Columns.Add("PixelPerMM", GetType(Double))
 
         For Each Item In rptSlot.Items
             If Item.ItemType <> ListItemType.Item And Item.ItemType <> ListItemType.AlternatingItem Then Continue For
@@ -160,8 +158,6 @@
             DR("PRODUCT_LEVEL_COLOR") = Slot.PRODUCT_LEVEL_COLOR
             DR("QUANTITY_BAR_COLOR") = Slot.QUANTITY_BAR_COLOR
             DR("IsSelected") = Slot.IsSelected
-            DR("IsViewOnly") = Slot.IsViewOnly
-            DR("PixelPerMM") = Slot.PixelPerMM
             DT.Rows.Add(DR)
         Next
 
@@ -185,8 +181,6 @@
             .PRODUCT_LEVEL_COLOR = e.Item.DataItem("PRODUCT_LEVEL_COLOR")
             .QUANTITY_BAR_COLOR = e.Item.DataItem("QUANTITY_BAR_COLOR")
             .IsSelected = e.Item.DataItem("IsSelected")
-            .IsViewOnly = e.Item.DataItem("IsViewOnly")
-            .PixelPerMM = e.Item.DataItem("PixelPerMM")
             '-------------------- Default Value ---------------
             .SLOT_HEIGHT = FLOOR_HEIGHT
             .POS_Y = POS_Y
@@ -201,7 +195,7 @@
 
     Public Sub AddSlot(ByVal SLOT_ID As Integer, ByVal SLOT_NAME As String, ByVal POS_X As Integer, ByVal SLOT_WIDTH As Integer,
                        ByVal PRODUCT_ID As Integer, ByVal PRODUCT_CODE As String, ByVal PRODUCT_QUANTITY As Integer, ByVal PRODUCT_LEVEL_PERCENT As String,
-                       ByVal PRODUCT_LEVEL_COLOR As Drawing.Color, ByVal QUANTITY_BAR_COLOR As Drawing.Color, ByVal IsSelected As Boolean, ByVal IsViewOnly As Boolean, ByVal PixelPerMM As Double)
+                       ByVal PRODUCT_LEVEL_COLOR As Drawing.Color, ByVal QUANTITY_BAR_COLOR As Drawing.Color, ByVal IsSelected As Boolean)
         Dim DT As DataTable = SlotDatas()
         Dim DR As DataRow = DT.NewRow
 
@@ -216,8 +210,6 @@
         DR("PRODUCT_LEVEL_COLOR") = PRODUCT_LEVEL_COLOR
         DR("QUANTITY_BAR_COLOR") = QUANTITY_BAR_COLOR
         DR("IsSelected") = IsSelected
-        DR("IsViewOnly") = IsViewOnly
-        DR("PixelPerMM") = PixelPerMM
 
         DT.Rows.Add(DR)
         rptSlot.DataSource = DT
@@ -227,7 +219,7 @@
     Public Sub AddSlot(ByVal SlotDataRow As DataRow)
         AddSlot(SlotDataRow("SLOT_ID"), SlotDataRow("SLOT_NAME"), SlotDataRow("POS_X"), SlotDataRow("SLOT_WIDTH"), SlotDataRow("PRODUCT_ID"),
                 SlotDataRow("PRODUCT_CODE"), SlotDataRow("PRODUCT_QUANTITY"), SlotDataRow("PRODUCT_LEVEL_PERCENT"), SlotDataRow("PRODUCT_LEVEL_COLOR"), SlotDataRow("QUANTITY_BAR_COLOR"),
-                SlotDataRow("IsSelected"), SlotDataRow("IsViewOnly"), SlotDataRow("PixelPerMM"))
+                SlotDataRow("IsSelected"))
     End Sub
 
     Public Sub AddSlots(ByVal SlotsDataTable As DataTable)

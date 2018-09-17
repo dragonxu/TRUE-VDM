@@ -14,7 +14,7 @@
 
         </div>
         <div class="col-lg-5 p-l-lg">
-            <asp:Panel ID="pnlShelf" runat="server" CssClass="card bg-white">
+            <asp:Panel ID="pnlShelf" runat="server" CssClass="card bg-white panel_property" BorderWidth="2px">
                 <div class="card-header">Shelf Properties</div>
                 <div class="card-block">
                     <div class="row m-a-0">
@@ -40,16 +40,18 @@
                                 </div>
                                 <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>
-                            <div class="form-group pull-right">
-                                <asp:LinkButton CssClass="btn btn-danger btn-shadow" ID="btnClearShelf" runat="server">Clear All Floor</asp:LinkButton>
-                                <asp:LinkButton CssClass="btn btn-primary btn-shadow" ID="btnApplyShelf" runat="server">Apply</asp:LinkButton>
-                                <asp:LinkButton CssClass="btn btn-default btn-shadow" ID="btnCancelShelf" runat="server">Cancel</asp:LinkButton>
-                             </div>
+                            <div class="form-group">
+                                <div class="btn-group btn-group-justified">
+                                    <asp:LinkButton CssClass="btn btn-warning btn-shadow" ID="btnClearShelf" runat="server">Clear all floor</asp:LinkButton>
+                                    <asp:LinkButton CssClass="btn btn-primary btn-shadow" ID="btnApplyShelf" runat="server">Apply</asp:LinkButton>
+                                    <asp:LinkButton CssClass="btn btn-default btn-shadow" ID="btnCloseShelf" runat="server">Close</asp:LinkButton>
+                                </div> 
+                            </div>
                         </div>
                     </div>
                 </div>
             </asp:Panel>
-            <asp:Panel ID="pnlFloor" runat="server" CssClass="card bg-white">
+            <asp:Panel ID="pnlFloor" runat="server" CssClass="card bg-white panel_property" BorderWidth="2px">
                 <div class="card-header">Floor : <b><asp:Label ID="lblFloorName" runat="server"></asp:Label></b> Properties</div>
                 <div class="card-block">
                     <div class="row m-a-0">
@@ -82,16 +84,18 @@
                                 </div>
                                 <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>
-                            <div class="form-group pull-right">
-                                <asp:LinkButton CssClass="btn btn-danger btn-shadow" ID="btnRemoveFloor" runat="server">Remove This</asp:LinkButton>
-                                <asp:LinkButton CssClass="btn btn-primary btn-shadow" ID="btnApplyFloor" runat="server">Apply</asp:LinkButton>
-                                <asp:LinkButton CssClass="btn btn-default btn-shadow" ID="btnCancelFloor" runat="server">Cancel</asp:LinkButton>
-                             </div>
+                            <div class="form-group">
+                                <div class="btn-group btn-group-justified">
+                                    <asp:LinkButton CssClass="btn btn-danger btn-shadow" ID="btnRemoveFloor" runat="server">Remove this</asp:LinkButton>
+                                    <asp:LinkButton CssClass="btn btn-primary btn-shadow" ID="btnApplyFloor" runat="server">Apply</asp:LinkButton>
+                                    <asp:LinkButton CssClass="btn btn-default btn-shadow" ID="btnCloseFloor" runat="server">Close</asp:LinkButton>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </asp:Panel>
-            <asp:Panel ID="pnlSlot" runat="server" CssClass="card bg-white">
+            <asp:Panel ID="pnlSlot" runat="server" CssClass="card bg-white panel_property" BorderWidth="2px">
                 <div class="card-header">Slot : <b><asp:Label ID="lblSlotName" runat="server"></asp:Label></b> Properties</div>
                 <div class="card-block">
                     <div class="row m-a-0">
@@ -131,17 +135,21 @@
                                 </div>
                                 <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>
+                            <div class="divider"></div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Containing</label>
                                 <div class="col-sm-5">
                                     -
                                 </div>
                             </div>
-                            <div class="form-group pull-right">
-                                <asp:LinkButton CssClass="btn btn-danger btn-shadow" ID="btnRemoveSlot" runat="server">Remove This</asp:LinkButton>
-                                <asp:LinkButton CssClass="btn btn-info btn-shadow" ID="btnMoveToSlot" runat="server">Move to Slot</asp:LinkButton>
-                                <asp:LinkButton CssClass="btn btn-primary btn-shadow" ID="btnApplySlot" runat="server">Apply</asp:LinkButton>
-                                <asp:LinkButton CssClass="btn btn-default btn-shadow" ID="btnCancelSlot" runat="server">Cancel</asp:LinkButton>
+                            <div class="form-group">
+                                <div class="btn-group btn-group-justified">
+                                    <asp:LinkButton CssClass="btn btn-danger btn-shadow" ID="btnRemoveSlot" runat="server">Remove this</asp:LinkButton>
+                                    <asp:LinkButton CssClass="btn btn-warning btn-shadow" ID="btnMoveToSlot" runat="server">Move robot to</asp:LinkButton>
+                                    <asp:LinkButton CssClass="btn btn-primary btn-shadow" ID="btnApplySlot" runat="server">Apply</asp:LinkButton>
+                                    <asp:LinkButton CssClass="btn btn-default btn-shadow" ID="btnCloseSlot" runat="server">Close</asp:LinkButton>
+                                </div>
+                                
                              </div>
                         </div>
                     </div>

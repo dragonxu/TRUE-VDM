@@ -14,6 +14,16 @@ Public Class TestStock
             initFormPlugin()
         End If
 
+        'Dim Slot As UC_Product_Slot = Shelf.Floors(2).Slots(1)
+        'Slot.PRODUCT_ID = 1
+        'Slot.PRODUCT_QUANTITY = 10
+        'Slot.PRODUCT_LEVEL_PERCENT = "40%"
+        'Slot.QUANTITY_BAR_COLOR = Drawing.Color.FromName("#eeeeee")
+        'Slot.PRODUCT_CODE = 310023
+        'Slot.PRODUCT_LEVEL_COLOR = Drawing.Color.Green
+
+
+
     End Sub
 
     Private Sub initFormPlugin()
@@ -109,7 +119,7 @@ Public Class TestStock
         pnlShelf.Visible = True
     End Sub
 
-    Private Sub btnCancelShelf_Click(sender As Object, e As EventArgs) Handles btnCancelShelf.Click
+    Private Sub btnCloseShelf_Click(sender As Object, e As EventArgs) Handles btnCloseShelf.Click
         ClearShelfProperty()
     End Sub
 
@@ -126,7 +136,7 @@ Public Class TestStock
         Shelf.SHELF_HEIGHT = txtShelfHeight.Text
         Shelf.SHELF_DEPTH = txtShelfDepth.Text
 
-        ClearShelfProperty()
+        'ClearShelfProperty()
     End Sub
 
     Private Sub btnClearShelf_Click(sender As Object, e As EventArgs) Handles btnClearShelf.Click
@@ -196,17 +206,19 @@ Public Class TestStock
         '--------------- Apply --------------------
         Select Case True
             Case Shelf.IsSelected And Not IsNothing(Shelf.SelectedFloor) '---------- Add Floor After ----------
-                Shelf.AddFloor(0, txtFloorHeight.Text, txtFloorY.Text, False, False, True, Shelf.PixelPerMM, Nothing, Shelf.Floors.IndexOf(Shelf.SelectedFloor) + 1)
+                Shelf.AddFloor(0, txtFloorHeight.Text, txtFloorY.Text, False, True, Nothing, True, Shelf.Floors.IndexOf(Shelf.SelectedFloor) + 1)
+                ClearFloorProperty()
             Case Shelf.IsSelected  '---------- Add Floor --------------
-                Shelf.AddFloor(0, txtFloorHeight.Text, txtFloorY.Text, False, False, True, Shelf.PixelPerMM, Nothing, Shelf.Floors.Count)
+                Shelf.AddFloor(0, txtFloorHeight.Text, txtFloorY.Text, False, True, Nothing, True, Shelf.Floors.Count)
+                ClearFloorProperty()
             Case Not IsNothing(Shelf.SelectedFloor) '---------- Edit Floor ----------
                 Shelf.SelectedFloor.FLOOR_HEIGHT = txtFloorHeight.Text
                 Shelf.SelectedFloor.POS_Y = txtFloorY.Text
         End Select
-        ClearFloorProperty()
+        '
     End Sub
 
-    Private Sub btnCancelFloor_Click(sender As Object, e As EventArgs) Handles btnCancelFloor.Click
+    Private Sub btnCloseFloor_Click(sender As Object, e As EventArgs) Handles btnCloseFloor.Click
         ClearFloorProperty()
     End Sub
 
@@ -259,7 +271,7 @@ Public Class TestStock
         ClearSlotProperty()
     End Sub
 
-    Private Sub btnCancelSlot_Click(sender As Object, e As EventArgs) Handles btnCancelSlot.Click
+    Private Sub btnCloseSlot_Click(sender As Object, e As EventArgs) Handles btnCloseSlot.Click
         ClearSlotProperty()
     End Sub
 
@@ -276,14 +288,15 @@ Public Class TestStock
                 Dim SlotName As String = Shelf.SelectedFloor.FLOOR_NAME & "-" & Shelf.SelectedFloor.Slots.Count + 1
                 Shelf.SelectedFloor.AddSlot(0, SlotName, txtSlotX.Text, txtSlotWidth.Text,
                                             0, "", 0, "", Drawing.Color.FromName("#f0f0f0"),
-                                            Drawing.Color.Green, False, False, Shelf.PixelPerMM)
+                                            Drawing.Color.Green, False)
+                ClearSlotProperty()
             Case Not IsNothing(Shelf.SelectedSlot) '---------- Edit Slot -----------
                 With Shelf.SelectedSlot
                     .POS_X = txtSlotX.Text
                     .SLOT_WIDTH = txtSlotWidth.Text
                 End With
         End Select
-        ClearSlotProperty()
+
     End Sub
 
     Private Sub btnMoveToSlot_Click(sender As Object, e As EventArgs) Handles btnMoveToSlot.Click
