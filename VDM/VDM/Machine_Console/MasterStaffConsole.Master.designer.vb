@@ -77,6 +77,24 @@ Partial Public Class MasterStaffConsole
     Protected WithEvents lblMachine_Zone As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''lblHeader_Shift control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblHeader_Shift As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblHeader_Shift_Time control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblHeader_Shift_Time As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''lnkLogout control.
     '''</summary>
     '''<remarks>

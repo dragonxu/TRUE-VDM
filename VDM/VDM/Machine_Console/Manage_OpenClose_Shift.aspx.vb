@@ -87,16 +87,25 @@ Public Class Manage_OpenClose_Shift
 
     Private Sub SetSummaryMenu()
         '----แสดงสรุปแต่ละเมนู หลังจากกด Next
+
+        '----เงินทอน
         If Val(UC_Shift_Change.Total) > 0 Then
             divMenuChange.Visible = True
             lbl_Change_Amount.Text = FormatNumber(UC_Shift_Change.Total, 0)
         Else
             divMenuChange.Visible = False
         End If
+        '----เงินรับ
+        'divMenuRecieve.Visible = True
 
+        '----Product
+        'divMenuStockProduct.Visible = True
 
+        '----SIM
+        'divMenuStockSIM.Visible = True
 
-
+        '----Paper
+        'divMenuStockPaper.Visible = True
 
     End Sub
     Private Sub lnkChange_ServerClick(sender As Object, e As EventArgs) Handles lnkChange.ServerClick
@@ -166,6 +175,38 @@ Public Class Manage_OpenClose_Shift
 
         '---ClickNext
         SetNextForm()
+
+    End Sub
+
+    Private Sub lnkConfirm_Click(sender As Object, e As EventArgs) Handles lnkConfirm.Click
+        Dim Validate As Boolean = False
+        Dim ShiftChange_Success As Boolean = False
+
+        Try
+            '--validate
+            If UC_Shift_Change.Validate Then
+                Validate = True
+
+            End If
+
+            '--Save
+            If Validate Then
+                ShiftChange_Success = UC_Shift_Change.Save
+
+            End If
+
+
+            '--Update TB_KIOSK_DEVICE Current,Status sp
+            '--สั่ง Open/Close Shift
+
+
+
+        Catch ex As Exception
+            Alert(Me.Page, ex.Message)
+            Exit Sub
+        End Try
+
+
 
     End Sub
 End Class

@@ -357,5 +357,22 @@ Module ModuleGlobal
         Public Content As Byte()
     End Structure
 
+    Public Function ReportFriendlyTime(ByVal Minute As Integer) As String
+        Select Case True
+            Case Minute < 2
+                Return "last minute"
+            Case Minute < 60
+                Return "last " & Minute & " minutes"
+            Case Minute < 120
+                Return "last hour"
+            Case Minute < 2880
+                Return "last " & Int(Minute / 60) & " hours"
+            Case Minute < 44640
+                Return "last " & Int(Minute / 1440) & " days"
+                'Case Minute < 4017600
+            Case Else
+                Return "Last " & Int(Minute / 44640) & " months"
+        End Select
+    End Function
 
 End Module

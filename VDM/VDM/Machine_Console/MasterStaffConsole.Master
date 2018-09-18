@@ -66,8 +66,8 @@
                                 <asp:Label ID="lblMachine_Zone" runat="server"></asp:Label>
 
                             </h1>
-                            <h3>Close Shift xxxx (เปิดตั้งแต่ xx/xx/xxx)</h3>
-                            <%--<h2>Open Shift (ปิดล่าสุดตั้งแต่ xx/xx/xxx)</h2>--%>
+                            <h3><b><asp:Label ID="lblHeader_Shift" runat ="server" class ="text-indigo" ></asp:Label></b> <asp:Label ID="lblHeader_Shift_Time" runat ="server"  class ="text-grey"  ></asp:Label></h3>
+                           
                         </div>
                     </div>
                     <div class="col-xs-4" style ="text-align :right ;"  >
