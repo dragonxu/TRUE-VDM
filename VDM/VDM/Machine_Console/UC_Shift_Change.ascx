@@ -20,7 +20,7 @@
                     <th colspan="2">เอาออก</th>
                     <th colspan="2">เอาเข้า</th>
                     <th>คงเหลือ</th>
-                    <th class="col-md-5"><span>บาท</span></th>
+                    <th class="col-md-5" style ="text-align :right ;"><span>บาท</span></th>
 
                 </tr>
             </thead>

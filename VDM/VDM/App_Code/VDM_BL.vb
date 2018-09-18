@@ -49,6 +49,12 @@ Public Class VDM_BL
         Barcode = 12
     End Enum
 
+    Public Enum ShiftStatus
+        Close = 0
+        Open = 1
+    End Enum
+
+
     Public Function Get_Language_Code(ByVal Language As UILanguage) As String
         Select Case Language
             Case UILanguage.TH
@@ -520,4 +526,46 @@ Public Class VDM_BL
         Next
     End Sub
 #End Region
+
+
+#Region "Shift"
+
+    Public Function GetShift_Kiosk(Optional ByVal KO_ID As Integer = 0) As DataTable
+        Dim SQL As String = ""
+        SQL &= "   Select TOP 1 SHIFT_ID" & vbLf
+        SQL &= "  ,KO_ID" & vbLf
+        SQL &= "  ,SHIFT_Y,SHIFT_M,SHIFT_D,SHIFT_N" & vbLf
+        SQL &= "  ,'SHIFT'+SHIFT_Y+SHIFT_M+SHIFT_D+ convert(varchar,SHIFT_N)    SHIFT_CODE" & vbLf
+
+        SQL &= "  ,Open_Time,Open_By , USER_Open.FIRST_NAME+' '+ USER_Open.LAST_NAME Open_By_Name" & vbLf
+        SQL &= "  ,Close_Time,Close_By  , USER_Close.FIRST_NAME+' '+ USER_Close.LAST_NAME Close_By_Name" & vbLf
+        SQL &= "  From TB_SHIFT" & vbLf
+        SQL &= "  Left Join MS_USER USER_Open On USER_Open.USER_ID=TB_SHIFT.Open_By" & vbLf
+        SQL &= "  Left Join MS_USER USER_Close ON USER_Close.USER_ID=TB_SHIFT.Close_By" & vbLf
+        SQL &= "  Where KO_ID=" & KO_ID & vbLf
+        SQL &= "  Order By SHIFT_ID" & vbLf
+
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DT.TableName = "Data"
+        DA.Fill(DT)
+        Return DT
+    End Function
+
+    Public Function CheckShift_Open(ByRef DT As DataTable) As Boolean
+        Dim IsOpen As Boolean = False
+        If DT.Rows.Count > 0 Then
+            If IsDBNull(DT.Rows(0).Item("Close_Time")) Then
+                IsOpen = True
+            End If
+        End If
+        Return IsOpen
+    End Function
+
+#End Region
+
+
+
+
+
 End Class
