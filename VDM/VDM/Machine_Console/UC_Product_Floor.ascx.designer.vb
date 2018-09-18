@@ -11,122 +11,131 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class MasterStaffConsole
+Partial Public Class UC_Product_Floor
     
     '''<summary>
-    '''head control.
+    '''Floor control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents head As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents Floor As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''form1 control.
+    '''CaptionBlock control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+    Protected WithEvents CaptionBlock As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''scm control.
+    '''FloorLabel control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents scm As Global.System.Web.UI.ScriptManager
+    Protected WithEvents FloorLabel As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblMachine_Name control.
+    '''pnlMenu control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblMachine_Name As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents pnlMenu As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''lblMachine_Location control.
+    '''mnuFloorSetting control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblMachine_Location As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents mnuFloorSetting As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''spanZone control.
+    '''mnuAddFloor control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents spanZone As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents mnuAddFloor As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''lblMachine_Zone control.
+    '''mnuAddSlot control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblMachine_Zone As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents mnuAddSlot As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''lblHeader_Shift control.
+    '''mnuClearAllSlot control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblHeader_Shift As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents mnuClearAllSlot As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''lblHeader_Shift_Time control.
+    '''mnuClearAllProduct control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblHeader_Shift_Time As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents mnuClearAllProduct As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''lnkLogout control.
+    '''mnuRemoveFloor control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkLogout As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    Protected WithEvents mnuRemoveFloor As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''lblLoginName control.
+    '''rptSlot control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblLoginName As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents rptSlot As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
-    '''MainContent control.
+    '''lblY control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents MainContent As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents lblY As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''ScriptContainer control.
+    '''lblY1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ScriptContainer As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents lblY1 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblHeight control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblHeight As Global.System.Web.UI.WebControls.Label
 End Class

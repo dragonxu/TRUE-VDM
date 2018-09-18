@@ -11,122 +11,131 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class MasterStaffConsole
+Partial Public Class UC_Product_Slot
     
     '''<summary>
-    '''head control.
+    '''Slot control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents head As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents Slot As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''form1 control.
+    '''lblName control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+    Protected WithEvents lblName As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''scm control.
+    '''lblCode control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents scm As Global.System.Web.UI.ScriptManager
+    Protected WithEvents lblCode As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblMachine_Name control.
+    '''lblQuantity control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblMachine_Name As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblQuantity As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblMachine_Location control.
+    '''QuantityBar control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblMachine_Location As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents QuantityBar As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''spanZone control.
+    '''QuantityLevel control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents spanZone As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents QuantityLevel As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''lblMachine_Zone control.
+    '''lblXT control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblMachine_Zone As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblXT As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblHeader_Shift control.
+    '''lblYT control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblHeader_Shift As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblYT As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblHeader_Shift_Time control.
+    '''lblWidth control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblHeader_Shift_Time As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblWidth As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lnkLogout control.
+    '''pnlCoor control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkLogout As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    Protected WithEvents pnlCoor As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''lblLoginName control.
+    '''lblXB control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblLoginName As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblXB As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''MainContent control.
+    '''lblYB control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents MainContent As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents lblYB As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''ScriptContainer control.
+    '''lblHeight control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ScriptContainer As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents lblHeight As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''btnSelect control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSelect As Global.System.Web.UI.WebControls.Button
 End Class

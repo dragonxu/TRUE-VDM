@@ -1,0 +1,223 @@
+﻿        .machine_stock {            
+            border: 2px solid #cccccc; 
+            padding:10px;
+            border-radius:5px;
+        }
+        .machine_stock.selected {
+            border: 2px dashed #fff29d; 
+            animation: blink .5s step-end infinite alternate;
+        }
+
+        .machine_block_container {
+                width:100%; 
+                height:100%; 
+                border:none; 
+                position:relative;
+                padding:0;
+                margin:0;
+        }
+
+        .machine_floor {
+            position:absolute;
+            background-color : #f5f5f5;
+            border: 2px solid transparent; 
+            display:block;
+            margin:0;
+            padding:0;            
+        }
+
+        .slot_caption {
+            font-size:90%;
+            font-weight:bold;
+            color:#808080;
+            position:absolute;            
+            top:5%;
+            left:5%;
+            z-index:2;
+        }
+
+        .slot_product_code {
+            font-size:70%;
+            color:#808080;
+            position:absolute;
+            bottom:0;
+            width:auto;
+            padding-left : 10px;
+            height:auto;
+        }
+
+        .slot_quantity {
+            font-size:70%;
+            color:#808080;
+            position:absolute;
+            bottom:0;
+            right:10px;
+            width:auto;
+            height:auto;
+        }
+
+        .machine_slot {
+           cursor:pointer;
+           position:absolute;
+           margin:0;
+           display:block;
+           background-color:#fff;
+           height:100%;
+           border:2px solid #eeeeee;
+           background-repeat:no-repeat;
+           background-size:contain;
+           background-position:center;
+        }
+
+        @keyframes blink {
+            50% {
+                border: 2px dashed #ffd800;
+            }
+        }
+
+        .machine_slot.selected, .machine_floor.selected , .panel_property {
+            animation: blink .5s step-end infinite alternate;
+        }
+
+        .machine_slot:hover {
+            border:3px solid #ffd800;
+        }
+        
+        .machine_floor_label {   
+            height:100%; 
+            position:absolute;
+            left:-115px;
+            width:90px;           
+        }
+
+        .machine_menu_block {
+           position:absolute; 
+           height:100%; 
+           width:100px;
+           right:-120px;
+        }
+
+        .machine_menu_block > .btn-group, .machine_menu_block > .btn-group > button {
+            height:100%;
+            width:100%;
+            font-size:14px;
+        }
+
+        .machine_slot_quantity_bar {
+            height : 100%; 
+            width:5px; 
+            right:0px; 
+            top: 0px;
+            position:absolute;
+        }
+
+        .machine_slot_quantity_level {
+            bottom:0px; 
+            width:100%; 
+            position:absolute; 
+        }
+
+.slot_scale {
+    position:absolute; 
+    opacity:0.7; 
+    font-size:11px; 
+    background-color:white; 
+    z-index:3;
+}
+
+.border-red{
+    border:1px solid red;
+}
+
+.scale-right-red{
+    border-right:2px dotted red;
+}
+.scale-left-red{
+    border-left:2px dotted red;
+}
+.scale-top-red{
+    border-top:2px dotted red;
+}
+.scale-bottom-red{
+    border-bottom:2px dotted red;
+}
+
+.bottom-0 {
+    bottom:0px;
+}
+
+.bottom-25 {
+    bottom:-25px;
+}
+
+.top-0 {
+    top:0px;
+}
+
+.top-25 {
+    top:-25px;
+}
+.left-25 {
+    left:-25px;
+}
+.left-30 {
+    left:-30px;
+}
+.left-35 {
+    left:-35px;
+}
+.right-25 {
+    right:-25px;
+}
+
+.left-50 {
+    left:-50px;
+}
+
+.right-50 {
+    right:-50px;
+}
+
+.right-10 {
+    right:-10px;
+}
+
+.left-10 {
+    left:-10px;
+}
+
+.width100pc {
+    width:100%;
+}
+
+.height100pc {
+     height:100%;
+}
+
+.slot_scale_height {
+    display:table; 
+    left:-28px;
+}
+
+.slot_floor_height {
+    display:table; 
+    right:-25px;
+    top:0;
+}
+
+.slot_scale_height > div, .slot_floor_height > div {
+    display:table-cell; 
+    vertical-align:middle;
+}
+
+.machine_slot > .slot_scale, .machine_floor  > .slot_scale {
+    display:none;
+}
+
+.machine_slot:hover > .slot_scale, 
+.machine_slot.selected > .slot_scale , 
+.machine_floor:hover > .slot_scale ,
+.machine_floor.selected > .slot_scale
+ {
+    display:table;
+}
