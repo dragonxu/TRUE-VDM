@@ -44,19 +44,12 @@ Public Class VDM_BL
         Printer = 7
         Passport = 8
         Camera = 9
-        SIMDisp = 10
-        DispenserSlot2 = 11
-        Barcode = 12
-
-        'CashIn = 1
-        'CashOut = 2
-        'CoinIn = 3
-        'CoinOut = 4
-        'Printer = 5
-        'PassportScanner = 6
-        'IPCamera = 7
-        'SIMDispenser = 8
-        'BarcodeReader = 9
+        ProductShelf = 10
+        SIMDispenser1 = 11
+        SIMDispenser2 = 12
+        SIMDispenser3 = 13
+        FrontQRReader = 15
+        InternalQRReader = 16
 
     End Enum
 
