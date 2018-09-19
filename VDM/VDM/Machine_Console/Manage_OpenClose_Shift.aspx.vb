@@ -35,7 +35,18 @@ Public Class Manage_OpenClose_Shift
         divMenuStockSIM.Visible = False
         'Stock พิมพ์
         divMenuStockPaper.Visible = False
+        lblConfirm.Text = ""
+
+        Select Case Session("SHIFT_Status")
+            Case VDM_BL.ShiftStatus.Close
+                lblConfirm.Text = "Close Shift / ยืนยัน Close Shift"
+            Case VDM_BL.ShiftStatus.Open
+                lblConfirm.Text = "Open Shift / ยืนยัน Open Shift"
+        End Select
+
     End Sub
+
+
     Private Sub ClearMenu()
         MenuChange.Attributes("class") = ""
         MenuRecieve.Attributes("class") = ""
@@ -76,13 +87,6 @@ Public Class Manage_OpenClose_Shift
 
         End If
 
-
-
-
-
-
-
-
     End Sub
 
     Private Sub SetSummaryMenu()
@@ -95,18 +99,34 @@ Public Class Manage_OpenClose_Shift
         Else
             divMenuChange.Visible = False
         End If
-        '----เงินรับ
-        'divMenuRecieve.Visible = True
-
-        '----Product
-        'divMenuStockProduct.Visible = True
-
-        '----SIM
-        'divMenuStockSIM.Visible = True
-
-        '----Paper
-        'divMenuStockPaper.Visible = True
-
+        '----เงินรับ 
+        If Val(UC_Shift_Recieve.Total) > 0 Then
+            divMenuRecieve.Visible = True
+            lbl_Recieve_Amount.Text = FormatNumber(UC_Shift_Recieve.Total, 0)
+        Else
+            divMenuRecieve.Visible = False
+        End If
+        ''----Product 
+        'If Val(UC_Shift_StockProduct.Total) > 0 Then
+        '    divMenuStockProduct.Visible = True
+        '    lbl_Product_Count.Text = ""
+        'Else
+        '    divMenuStockProduct.Visible = False
+        'End If
+        ''----SIM 
+        'If Val(UC_Shift_StockSIM.Total) > 0 Then
+        '    divMenuStockSIM.Visible = True
+        '    lbl_SIM_Count.Text = ""
+        'Else
+        '    divMenuStockSIM.Visible = False
+        'End If
+        '----Paper 
+        If Val(UC_Shift_StockPaper.Total) > 0 Then
+            divMenuStockPaper.Visible = True
+            lbl_Paper_Count.Text = FormatNumber(UC_Shift_StockPaper.Total, 0)
+        Else
+            divMenuStockPaper.Visible = False
+        End If
     End Sub
     Private Sub lnkChange_ServerClick(sender As Object, e As EventArgs) Handles lnkChange.ServerClick
         ClearMenu()
@@ -114,11 +134,6 @@ Public Class Manage_OpenClose_Shift
         pnlChange.Visible = True
         pnlbtn.Visible = True
         SetSummaryMenu()
-        'UC_Shift_Change.SetTextbox()
-
-
-
-
 
     End Sub
 
@@ -181,24 +196,59 @@ Public Class Manage_OpenClose_Shift
     Private Sub lnkConfirm_Click(sender As Object, e As EventArgs) Handles lnkConfirm.Click
         Dim Validate As Boolean = False
         Dim ShiftChange_Success As Boolean = False
+        Dim ShiftRecieve_Success As Boolean = False
+        Dim ShiftStockPaper_Success As Boolean = False
 
         Try
             '--validate
+            '----เงินทอน
             If UC_Shift_Change.Validate Then
                 Validate = True
+            Else
+                ClearMenu()
+                lnkChange_ServerClick(Nothing, Nothing)
+                Exit Sub
+            End If
+            '----เงินรับ 
+            If UC_Shift_Recieve.Validate Then
+                Validate = True
+            Else
+                ClearMenu()
+                lnkRecieve_ServerClick(Nothing, Nothing)
+                Exit Sub
+            End If
+            '----Product
 
+            '----SIM
+
+            '----Paper
+            If UC_Shift_StockPaper.Validate Then
+                Validate = True
+            Else
+                ClearMenu()
+                lnkStockPaper_ServerClick(Nothing, Nothing)
+                Exit Sub
             End If
 
-            '--Save
-            If Validate Then
-                ShiftChange_Success = UC_Shift_Change.Save
 
-            End If
+            Try
+                '--Save
+                If Validate Then
+                    ShiftChange_Success = UC_Shift_Change.Save
+                    ShiftRecieve_Success = UC_Shift_Recieve.Save
+
+                    ShiftStockPaper_Success = UC_Shift_StockPaper.Save
+                End If
+            Catch ex As Exception
+                Alert(Me.Page, ex.Message)
+                Exit Sub
+            End Try
 
 
             '--Update TB_KIOSK_DEVICE Current,Status sp
             '--สั่ง Open/Close Shift
 
+            Alert(Me.Page, "บันทึกสำเร็จ")
 
 
         Catch ex As Exception

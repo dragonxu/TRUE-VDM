@@ -114,7 +114,7 @@ Public Class UC_Shift_Change
         If Not IsPostBack Then
             ClearEditForm()
             SetTextbox()
-
+            CurrentData()
         Else
             initFormPlugin()
         End If
@@ -182,13 +182,35 @@ Public Class UC_Shift_Change
 
     End Sub
 
-    Public Sub SetData()
-
-        Dim SQL As String = ""
+    Public Sub CurrentData()
+        '--Current 
+        Dim SQL As String = " SELECT * FROM TB_KIOSK_DEVICE WHERE KO_ID=" & BL.KioskID
+        SQL &= " AND D_ID IN (" & VDM_BL.DeviceType.Coin1 & "," & VDM_BL.DeviceType.Coin5 & "," & VDM_BL.DeviceType.Cash20 & "," & VDM_BL.DeviceType.Cash100 & ")"
         Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)
+        If DT.Rows.Count > 0 Then
+            DT.DefaultView.RowFilter = "D_ID=" & VDM_BL.DeviceType.Coin1
+            If DT.DefaultView.Count > 0 Then
+                txt_coin1_Before.Text = FormatNumber(Val(DT.DefaultView(0).Item("Current_Qty")), 0)
+            End If
+            DT.DefaultView.RowFilter = "D_ID=" & VDM_BL.DeviceType.Coin5
+            If DT.DefaultView.Count > 0 Then
+                txt_coin5_Before.Text = FormatNumber(Val(DT.DefaultView(0).Item("Current_Qty")), 0)
+            End If
+            DT.DefaultView.RowFilter = "D_ID=" & VDM_BL.DeviceType.Cash20
+            If DT.DefaultView.Count > 0 Then
+                txt_cash20_Before.Text = FormatNumber(Val(DT.DefaultView(0).Item("Current_Qty")), 0)
+            End If
+            DT.DefaultView.RowFilter = "D_ID=" & VDM_BL.DeviceType.Cash100
+            If DT.DefaultView.Count > 0 Then
+                txt_cash100_Before.Text = FormatNumber(Val(DT.DefaultView(0).Item("Current_Qty")), 0)
+            End If
+
+        End If
+
     End Sub
+
 
 
 #Region "Calculate"
@@ -225,6 +247,9 @@ Public Class UC_Shift_Change
     End Sub
 #End Region
 
+#Region "TextChanged"
+
+
     Private Sub txt_coin1_TextChanged(sender As Object, e As EventArgs) Handles txt_coin1_Before.TextChanged, txt_coin1_Pick.TextChanged, txt_coin1_Input.TextChanged
         Calculate_coin1()
         Calculate_Total()
@@ -245,7 +270,7 @@ Public Class UC_Shift_Change
         Calculate_Total()
     End Sub
 
-
+#End Region
 
 
 
@@ -269,7 +294,7 @@ Public Class UC_Shift_Change
         End If
 
         If Val(txt_cash100_Before.Text) < Val(txt_cash100_Pick.Text) Then
-            Alert(Me.Page, "ตรวจสอบจำนวน เอาออก")
+            Alert(Me.Page, "ตรวจสอบจำนวน เอาออก cash100")
             result = False
         End If
 
@@ -278,93 +303,129 @@ Public Class UC_Shift_Change
 
     Function Save() As Boolean
         Dim result As Boolean = False
-        'clear Device 
-        Dim SQL As String = "DELETE FROM TB_SHIFT_STOCK" & vbNewLine
-        SQL &= " WHERE SHIFT_ID=" & Session("SHIFT_ID") & " AND D_ID IN (" & VDM_BL.DeviceType.Coin1 & "," & VDM_BL.DeviceType.Coin5 & "," & VDM_BL.DeviceType.Cash20 & "," & VDM_BL.DeviceType.Cash100 & ")"
-        BL.ExecuteNonQuery(SQL)
 
-        'save Device
-        SQL = "SELECT * FROM TB_SHIFT_STOCK WHERE SHIFT_ID=" & Session("SHIFT_ID")
-        Dim DT As New DataTable
-        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
-        DA.Fill(DT)
-
-        Dim DR As DataRow
-        'VDM_BL.DeviceType.Coin1
-        DR = DT.NewRow
-        DT.Rows.Add(DR)
-        DR("SHIFT_ID") = Session("SHIFT_ID")
-        DR("D_ID") = VDM_BL.DeviceType.Coin1
-        DR("Unit_Value") = 1
-        Select Case Session("SHIFT_Status")
-            Case VDM_BL.ShiftStatus.Close
-                DR("CLOSE_BEFORE") = IIf(txt_coin1_Before.Text <> "", txt_coin1_Before.Text.Replace(",", ""), DBNull.Value)
-                DR("CLOSE_FINAL") = IIf(txt_coin1_Remain.Text <> "", txt_coin1_Remain.Text.Replace(",", ""), DBNull.Value)
-            Case VDM_BL.ShiftStatus.Open
-                DR("OPEN_BEFORE") = IIf(txt_coin1_Before.Text <> "", txt_coin1_Before.Text.Replace(",", ""), DBNull.Value)
-                DR("OPEN_FINAL") = IIf(txt_coin1_Remain.Text <> "", txt_coin1_Remain.Text.Replace(",", ""), DBNull.Value)
-        End Select
-
-        'VDM_BL.DeviceType.Coin5
-        DR = DT.NewRow
-        DT.Rows.Add(DR)
-        DR("SHIFT_ID") = Session("SHIFT_ID")
-        DR("D_ID") = VDM_BL.DeviceType.Coin5
-        DR("Unit_Value") = 5
-        Select Case Session("SHIFT_Status")
-            Case VDM_BL.ShiftStatus.Close
-                DR("CLOSE_BEFORE") = IIf(txt_coin5_Before.Text <> "", txt_coin5_Before.Text.Replace(",", ""), DBNull.Value)
-                DR("CLOSE_FINAL") = IIf(txt_coin5_Remain.Text <> "", txt_coin5_Remain.Text.Replace(",", ""), DBNull.Value)
-            Case VDM_BL.ShiftStatus.Open
-                DR("OPEN_BEFORE") = IIf(txt_coin5_Before.Text <> "", txt_coin5_Before.Text.Replace(",", ""), DBNull.Value)
-                DR("OPEN_FINAL") = IIf(txt_coin5_Remain.Text <> "", txt_coin5_Remain.Text.Replace(",", ""), DBNull.Value)
-        End Select
-
-        'VDM_BL.DeviceType.Cash20
-        DR = DT.NewRow
-        DT.Rows.Add(DR)
-        DR("SHIFT_ID") = Session("SHIFT_ID")
-        DR("D_ID") = VDM_BL.DeviceType.Cash20
-        DR("Unit_Value") = 20
-        Select Case Session("SHIFT_Status")
-            Case VDM_BL.ShiftStatus.Close
-                DR("CLOSE_BEFORE") = IIf(txt_cash20_Before.Text <> "", txt_cash20_Before.Text.Replace(",", ""), DBNull.Value)
-                DR("CLOSE_FINAL") = IIf(txt_cash20_Remain.Text <> "", txt_cash20_Remain.Text.Replace(",", ""), DBNull.Value)
-            Case VDM_BL.ShiftStatus.Open
-                DR("OPEN_BEFORE") = IIf(txt_cash20_Before.Text <> "", txt_cash20_Before.Text.Replace(",", ""), DBNull.Value)
-                DR("OPEN_FINAL") = IIf(txt_cash20_Remain.Text <> "", txt_cash20_Remain.Text.Replace(",", ""), DBNull.Value)
-        End Select
-
-        'VDM_BL.DeviceType.Cash100
-        DR = DT.NewRow
-        DT.Rows.Add(DR)
-        DR("SHIFT_ID") = Session("SHIFT_ID")
-        DR("D_ID") = VDM_BL.DeviceType.Cash100
-        DR("Unit_Value") = 100
-        Select Case Session("SHIFT_Status")
-            Case VDM_BL.ShiftStatus.Close
-                DR("CLOSE_BEFORE") = IIf(txt_cash100_Before.Text <> "", txt_cash100_Before.Text.Replace(",", ""), DBNull.Value)
-                DR("CLOSE_FINAL") = IIf(txt_cash100_Remain.Text <> "", txt_cash100_Remain.Text.Replace(",", ""), DBNull.Value)
-            Case VDM_BL.ShiftStatus.Open
-                DR("OPEN_BEFORE") = IIf(txt_cash100_Before.Text <> "", txt_cash100_Before.Text.Replace(",", ""), DBNull.Value)
-                DR("OPEN_FINAL") = IIf(txt_cash100_Remain.Text <> "", txt_cash100_Remain.Text.Replace(",", ""), DBNull.Value)
-        End Select
-        Dim cmd As New SqlCommandBuilder(DA)
         Try
+
+            'save Device
+            'VDM_BL.DeviceType.Coin1
+            Dim SQL As String = "SELECT * FROM TB_SHIFT_STOCK "
+            SQL &= " WHERE SHIFT_ID=" & Session("SHIFT_ID") & " AND D_ID=" & VDM_BL.DeviceType.Coin1
+            Dim DT As New DataTable
+            Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+            DA.Fill(DT)
+            Dim DR As DataRow
+            If DT.Rows.Count = 0 Then
+                DR = DT.NewRow
+                DT.Rows.Add(DR)
+                DR("SHIFT_ID") = Session("SHIFT_ID")
+                DR("D_ID") = VDM_BL.DeviceType.Coin1
+                DR("Unit_Value") = 1
+            Else
+                DR = DT.Rows(0)
+            End If
+
+            Select Case Session("SHIFT_Status")
+                Case VDM_BL.ShiftStatus.Close
+                    DR("CLOSE_BEFORE") = IIf(txt_coin1_Before.Text <> "", txt_coin1_Before.Text.Replace(",", ""), DBNull.Value)
+                    DR("CLOSE_FINAL") = IIf(txt_coin1_Remain.Text <> "", txt_coin1_Remain.Text.Replace(",", ""), DBNull.Value)
+                Case VDM_BL.ShiftStatus.Open
+                    DR("OPEN_BEFORE") = IIf(txt_coin1_Before.Text <> "", txt_coin1_Before.Text.Replace(",", ""), DBNull.Value)
+                    DR("OPEN_FINAL") = IIf(txt_coin1_Remain.Text <> "", txt_coin1_Remain.Text.Replace(",", ""), DBNull.Value)
+            End Select
+            Dim cmd As New SqlCommandBuilder(DA)
             DA.Update(DT)
+
+            'VDM_BL.DeviceType.Coin5
+            SQL = "SELECT * FROM TB_SHIFT_STOCK "
+            SQL &= " WHERE SHIFT_ID=" & Session("SHIFT_ID") & " AND D_ID=" & VDM_BL.DeviceType.Coin5
+            DT = New DataTable
+            DA = New SqlDataAdapter(SQL, BL.ConnectionString)
+            DA.Fill(DT)
+            If DT.Rows.Count = 0 Then
+                DR = DT.NewRow
+                DT.Rows.Add(DR)
+                DR("SHIFT_ID") = Session("SHIFT_ID")
+                DR("D_ID") = VDM_BL.DeviceType.Coin5
+                DR("Unit_Value") = 5
+            Else
+                DR = DT.Rows(0)
+            End If
+            Select Case Session("SHIFT_Status")
+                Case VDM_BL.ShiftStatus.Close
+                    DR("CLOSE_BEFORE") = IIf(txt_coin5_Before.Text <> "", txt_coin5_Before.Text.Replace(",", ""), DBNull.Value)
+                    DR("CLOSE_FINAL") = IIf(txt_coin5_Remain.Text <> "", txt_coin5_Remain.Text.Replace(",", ""), DBNull.Value)
+                Case VDM_BL.ShiftStatus.Open
+                    DR("OPEN_BEFORE") = IIf(txt_coin5_Before.Text <> "", txt_coin5_Before.Text.Replace(",", ""), DBNull.Value)
+                    DR("OPEN_FINAL") = IIf(txt_coin5_Remain.Text <> "", txt_coin5_Remain.Text.Replace(",", ""), DBNull.Value)
+            End Select
+            cmd = New SqlCommandBuilder(DA)
+            DA.Update(DT)
+
+            'VDM_BL.DeviceType.Cash20
+            SQL = "SELECT * FROM TB_SHIFT_STOCK  "
+            SQL &= " WHERE SHIFT_ID=" & Session("SHIFT_ID") & " AND D_ID=" & VDM_BL.DeviceType.Cash20
+            DT = New DataTable
+            DA = New SqlDataAdapter(SQL, BL.ConnectionString)
+            DA.Fill(DT)
+            If DT.Rows.Count = 0 Then
+                DR = DT.NewRow
+                DT.Rows.Add(DR)
+                DR("SHIFT_ID") = Session("SHIFT_ID")
+                DR("D_ID") = VDM_BL.DeviceType.Cash20
+                DR("Unit_Value") = 20
+            Else
+                DR = DT.Rows(0)
+            End If
+            Select Case Session("SHIFT_Status")
+                Case VDM_BL.ShiftStatus.Close
+                    DR("CLOSE_BEFORE") = IIf(txt_cash20_Before.Text <> "", txt_cash20_Before.Text.Replace(",", ""), DBNull.Value)
+                    DR("CLOSE_FINAL") = IIf(txt_cash20_Remain.Text <> "", txt_cash20_Remain.Text.Replace(",", ""), DBNull.Value)
+                Case VDM_BL.ShiftStatus.Open
+                    DR("OPEN_BEFORE") = IIf(txt_cash20_Before.Text <> "", txt_cash20_Before.Text.Replace(",", ""), DBNull.Value)
+                    DR("OPEN_FINAL") = IIf(txt_cash20_Remain.Text <> "", txt_cash20_Remain.Text.Replace(",", ""), DBNull.Value)
+            End Select
+            cmd = New SqlCommandBuilder(DA)
+            DA.Update(DT)
+
+            'VDM_BL.DeviceType.Cash100
+            SQL = "SELECT * FROM TB_SHIFT_STOCK  "
+            SQL &= " WHERE SHIFT_ID=" & Session("SHIFT_ID") & " AND D_ID=" & VDM_BL.DeviceType.Cash100
+            DT = New DataTable
+            DA = New SqlDataAdapter(SQL, BL.ConnectionString)
+            DA.Fill(DT)
+            If DT.Rows.Count = 0 Then
+                DR = DT.NewRow
+                DT.Rows.Add(DR)
+                DR("SHIFT_ID") = Session("SHIFT_ID")
+                DR("D_ID") = VDM_BL.DeviceType.Cash100
+                DR("Unit_Value") = 100
+            Else
+                DR = DT.Rows(0)
+            End If
+            Select Case Session("SHIFT_Status")
+                Case VDM_BL.ShiftStatus.Close
+                    DR("CLOSE_BEFORE") = IIf(txt_cash100_Before.Text <> "", txt_cash100_Before.Text.Replace(",", ""), DBNull.Value)
+                    DR("CLOSE_FINAL") = IIf(txt_cash100_Remain.Text <> "", txt_cash100_Remain.Text.Replace(",", ""), DBNull.Value)
+                Case VDM_BL.ShiftStatus.Open
+                    DR("OPEN_BEFORE") = IIf(txt_cash100_Before.Text <> "", txt_cash100_Before.Text.Replace(",", ""), DBNull.Value)
+                    DR("OPEN_FINAL") = IIf(txt_cash100_Remain.Text <> "", txt_cash100_Remain.Text.Replace(",", ""), DBNull.Value)
+            End Select
+            cmd = New SqlCommandBuilder(DA)
+            DA.Update(DT)
+
             result = True
         Catch ex As Exception
             Alert(Me.Page, ex.Message)
-
         End Try
-
-
 
         Return result
     End Function
 
+#Region "btn Full"
+
+
     Function GetDeviceInfo(ByVal D_ID As Integer) As DataTable
-        Dim SQL As String = " SELECT * FROM MS_DEVICE WHERE D_ID=" & D_ID
+        Dim SQL As String = " SELECT * FROM MS_DEVICE WHERE D_ID=" & Val(D_ID)
         Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)
@@ -434,6 +495,6 @@ Public Class UC_Shift_Change
             Exit Sub
         End If
     End Sub
-
+#End Region
 
 End Class

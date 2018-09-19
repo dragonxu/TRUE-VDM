@@ -47,6 +47,17 @@ Public Class VDM_BL
         SIMDisp = 10
         DispenserSlot2 = 11
         Barcode = 12
+
+        'CashIn = 1
+        'CashOut = 2
+        'CoinIn = 3
+        'CoinOut = 4
+        'Printer = 5
+        'PassportScanner = 6
+        'IPCamera = 7
+        'SIMDispenser = 8
+        'BarcodeReader = 9
+
     End Enum
 
     Public Enum ShiftStatus

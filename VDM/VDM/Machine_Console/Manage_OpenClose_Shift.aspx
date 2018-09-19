@@ -3,6 +3,10 @@
 <%@ Register Src="~/Machine_Console/UC_Shift_Change.ascx" TagPrefix="uc1" TagName="UC_Shift_Change" %>
 <%@ Register Src="~/Machine_Console/UC_Shift_StockPaper.ascx" TagPrefix="uc1" TagName="UC_Shift_StockPaper" %>
 <%@ Register Src="~/Machine_Console/UC_Shift_Recieve.ascx" TagPrefix="uc1" TagName="UC_Shift_Recieve" %>
+<%@ Register Src="~/Machine_Console/UC_Shift_StockProduct.ascx" TagPrefix="uc1" TagName="UC_Shift_StockProduct" %>
+<%@ Register Src="~/Machine_Console/UC_Shift_StockSIM.ascx" TagPrefix="uc1" TagName="UC_Shift_StockSIM" %>
+
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -143,7 +147,9 @@
                                         </h1>
                                     </div>
                                 </div>
-                                <h4></h4>
+                                <h4>
+                                    <uc1:UC_Shift_StockProduct runat="server" ID="UC_Shift_StockProduct" />
+                                </h4>
                             </asp:Panel>
                             <asp:Panel ID="pnlStockSIM" runat="server">
                                 <div class="p-a">
@@ -153,7 +159,9 @@
                                         </h1>
                                     </div>
                                 </div>
-                                <h4></h4>
+                                <h4>
+                                    <uc1:UC_Shift_StockSIM runat="server" ID="UC_Shift_StockSIM" />
+                                </h4>
                             </asp:Panel>
 
 
@@ -180,7 +188,7 @@
                                             <p></p>
                                             <asp:LinkButton ID="lnkConfirm" runat="server" class="btn btn-info btn-lg btn-block">
                                             <i class="fa fa-legal"></i>
-                                                <span>Open Shift / ยืนยัน Open Shift</span>
+                                                <span><asp:Label ID="lblConfirm" runat ="server" ></asp:Label></span>
                                                 <%--Open Shift / ยืนยัน Open Shift
                                                 Close Shift / ยืนยัน Close Shift--%>
                                             </asp:LinkButton>
