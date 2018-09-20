@@ -28,6 +28,8 @@ Public Class Login
             Session("LOGIN_NAME") = DT.Rows(0).Item("LOGIN_NAME").ToString
             Session("FULL_NAME") = DT.Rows(0).Item("FIRST_NAME").ToString & " " & DT.Rows(0).Item("LAST_NAME").ToString
 
+            Session("KO_ID") = 1
+
             Response.Redirect("Machine_Overview.aspx")
         End If
 

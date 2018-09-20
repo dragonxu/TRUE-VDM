@@ -5,7 +5,7 @@
 <asp:LinkButton CssClass="h2 btn btn-lg btn-info btn-shadow m-t-0 m-b" ID="lnkEdit"  Width="100%" runat="server" >
     <i class="fa fa-th"></i> Product Shelf
 </asp:LinkButton>
-<asp:Panel ID="Shelf" runat="server" CssClass="machine_stock btn-shadow" PixelPerMM="0.25" SHELF_DEPTH="1200">
+<asp:Panel ID="Shelf" runat="server" CssClass="machine_stock btn-shadow" PixelPerMM="0.25" SHELF_DEPTH="1200" SHELF_ID="0">
     <div class="machine_block_container" >    
         <asp:Repeater ID="rptFloor" runat="server">
             <ItemTemplate>

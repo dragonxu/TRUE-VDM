@@ -4,6 +4,11 @@ Public Class MasterStaffConsole
     Inherits System.Web.UI.MasterPage
     Dim BL As New VDM_BL
 
+    Private ReadOnly Property KO_ID As Integer
+        Get
+            Return Session("KO_ID")
+        End Get
+    End Property
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
@@ -31,7 +36,7 @@ Public Class MasterStaffConsole
     End Sub
 
     Private Sub GetMachineInfo()
-        Dim DT As DataTable = BL.GetList_Kiosk(BL.KioskID)
+        Dim DT As DataTable = BL.GetList_Kiosk(KO_ID)
         If DT.Rows.Count > 0 Then
             lblMachine_Name.Text = DT.Rows(0).Item("KO_CODE").ToString()
             lblMachine_Location.Text = DT.Rows(0).Item("SITE_CODE").ToString()
@@ -42,7 +47,7 @@ Public Class MasterStaffConsole
             End If
 
             '--Set Shift
-            Dim DT_Shift As DataTable = BL.GetShift_Kiosk(BL.KioskID)
+            Dim DT_Shift As DataTable = BL.GetShift_Kiosk(KO_ID)
             Dim strClose_Time As String = ""
             Dim strOpen_Time As String = ""
             Dim SHIFT_ID As Integer = 0

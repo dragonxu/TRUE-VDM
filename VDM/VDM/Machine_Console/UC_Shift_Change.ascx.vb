@@ -6,6 +6,12 @@ Public Class UC_Shift_Change
 
     Dim BL As New VDM_BL
 
+    Private ReadOnly Property KO_ID As Integer
+        Get
+            Return Session("KO_ID")
+        End Get
+    End Property
+
 #Region "Property"
 
     Public ReadOnly Property Total() As Integer
@@ -50,7 +56,7 @@ Public Class UC_Shift_Change
         SQL &= "      ,NULL Input " & vbLf
 
         SQL &= "  From MS_DEVICE  " & vbLf
-        SQL &= "  Left Join TB_KIOSK_DEVICE ON TB_KIOSK_DEVICE.D_ID=MS_DEVICE.D_ID  And KO_ID=" & BL.KioskID  & vbLf
+        SQL &= "  Left Join TB_KIOSK_DEVICE ON TB_KIOSK_DEVICE.D_ID=MS_DEVICE.D_ID  And KO_ID=" & KO_ID & vbLf
         SQL &= "  WHERE MS_DEVICE.D_ID IN (" & VDM_BL.Device.Coin1 & "," & VDM_BL.Device.Coin5 & "," & VDM_BL.Device.Cash20 & "," & VDM_BL.Device.Cash100 & ")"
         SQL &= "  AND Active_Status=1 "
         SQL &= "  ORDER BY Unit_Value "

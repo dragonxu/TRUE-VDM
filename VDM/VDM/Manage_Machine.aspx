@@ -6,6 +6,7 @@
 
 
 <asp:Content ID="HeaderContainer" ContentPlaceHolderID="HeaderContainer" runat="server">
+    <link href="Styles/product_shelf.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="page-title">
@@ -114,26 +115,17 @@
                               <asp:TextBox ID="txtZone" runat="server" CssClass="form-control" style="text-align:center; "/>
                         </div>                    
                       </div>
-                      
-
-
                   </div>
-            <%-- <div class="row m-b"><h4>Shelf Physical Setting</h4></div>
-             <div class="row m-b"> </div>
-            <div class="row m-a-0">
-                 <div class="cols-sm-2></div>
-                <div class="cols-sm-10">
+
+
+                 <div class="form-group" style="margin-left:-5px; border-top:1px solid #ccc;">
+                        <h4 class="card-title col-sm-12 control-label m-t m-b p-t" style="text-align:left;">Shelf Physical Setting</h4>
+                            
                      <div class="row">
-
-                         <uc:UC_Kiosk_Shelf runat="server" id="UC_Kiosk_Shelf" />
-
-                     </div>
-                 </div>
-            </div>--%>
-                
-                 
-             
-                                  
+                        <uc:UC_Kiosk_Shelf runat="server" ID="Shelf" />
+                     </div>  
+                     
+                </div>
                       
                       <div class="form-group m-t" style="text-align:left;">
                             <h4 class="card-title col-sm-2 control-label" style="text-align:left; margin-top:0px;">Active Status </h4>  

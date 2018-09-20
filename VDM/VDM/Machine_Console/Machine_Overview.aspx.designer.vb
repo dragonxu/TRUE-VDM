@@ -41,6 +41,33 @@ Partial Public Class Machine_Overview
     Protected WithEvents UC_MoneyStock_UI As Global.VDM.UC_MoneyStock_UI
     
     '''<summary>
+    '''Shelf control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Shelf As Global.VDM.UC_Kiosk_Shelf
+    
+    '''<summary>
+    '''btnSaveProduct control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSaveProduct As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''btnResetProduct control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnResetProduct As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''lnkShift control.
     '''</summary>
     '''<remarks>

@@ -8,7 +8,6 @@ Public Class VDM_BL
     Public ConnectionString As String = ConnectionStrings("ConnectionString").ConnectionString
     Public ServerMapPath As String = AppSettings("ServerMapPath").ToString
     Public PicturePath As String = AppSettings("PicturePath").ToString
-    Public KioskID As String = AppSettings("KioskID").ToString
 
     Public Sub ExecuteNonQuery(ByVal CommandText As String)
         Dim Command As New SqlCommand
@@ -24,6 +23,14 @@ Public Class VDM_BL
         Conn.Close()
         Conn.Dispose()
     End Sub
+
+    Public Function GetNewPrimaryID(ByVal TableName As String, ByVal PrimaryKeyName As String) As Integer
+        Dim SQL As String = "SELECT IsNull(MAX(" & PrimaryKeyName & "),0)+1 FROM " & TableName
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT.Rows(0).Item(0)
+    End Function
 
     Public Enum UILanguage
         TH = 1
@@ -458,7 +465,7 @@ Public Class VDM_BL
 
     Public Sub Drop_Kiosk(ByVal KO_ID As Integer)
         '--------- Delete Relation---------
-        Drop_PRODUCT_FLOOR(KO_ID)
+        Drop_PRODUCT_SHELF(KO_ID)
         Drop_KIOSK_DEVICE(KO_ID)
         Drop_SHIFT(KO_ID)
 
@@ -466,20 +473,20 @@ Public Class VDM_BL
         ExecuteNonQuery(SQL)
     End Sub
 
-    Public Sub Drop_PRODUCT_STOCK_SERIAL(ByVal SERIAL As String)
+    Public Sub Drop_PRODUCT_STOCK_SERIAL(ByVal SERIAL_NO As String)
         Dim SQL As String = "SELECT SLOT_ID FROM TB_PRODUCT_SERIAL_STOCK" & vbLf
-        SQL &= "WHERE SERIAL='" & SERIAL.Replace("'", "''") & "'"
+        SQL &= "WHERE SERIAL_NO='" & SERIAL_NO.Replace("'", "''") & "'"
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         DA.Fill(DT)
 
         For i As Integer = 0 To DT.Rows.Count - 1
-            Drop_PRODUCT_STOCK_SERIAL(DT.Rows(0).Item("SLOT_ID"), SERIAL)
+            Drop_PRODUCT_STOCK_SERIAL(DT.Rows(0).Item("SLOT_ID"), SERIAL_NO)
         Next
     End Sub
 
     Public Sub Drop_PRODUCT_STOCK_SERIAL(ByVal SLOT_ID As Integer)
-        Dim SQL As String = "SELECT SERIAL FROM TB_PRODUCT_SERIAL_STOCK" & vbLf
+        Dim SQL As String = "SELECT SERIAL_NO FROM TB_PRODUCT_SERIAL_STOCK" & vbLf
         SQL &= "WHERE SLOT_ID=" & SLOT_ID
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
@@ -490,9 +497,9 @@ Public Class VDM_BL
         Next
     End Sub
 
-    Public Sub Drop_PRODUCT_STOCK_SERIAL(ByVal SLOT_ID As Integer, ByVal SERIAL As String)
+    Public Sub Drop_PRODUCT_STOCK_SERIAL(ByVal SLOT_ID As Integer, ByVal SERIAL_NO As String)
         Dim SQL As String = "DELETE FROM TB_PRODUCT_SERIAL_STOCK" & vbLf
-        SQL &= "WHERE SLOT_ID=" & SLOT_ID & " AND SERIAL='" & SERIAL.Replace("'", "''") & "'"
+        SQL &= "WHERE SLOT_ID=" & SLOT_ID & " AND SERIAL_NO='" & SERIAL_NO.Replace("'", "''") & "'"
         ExecuteNonQuery(SQL)
     End Sub
 
@@ -512,23 +519,31 @@ Public Class VDM_BL
         Next
     End Sub
 
-    Public Sub Drop_PRODUCT_FLOOR(ByVal KO_ID As Integer, ByVal FLOOR_ID As Integer)
+    Public Sub Drop_PRODUCT_FLOOR(ByVal SHELF_ID As Integer, ByVal FLOOR_ID As Integer)
         Drop_PRODUCT_SLOT(FLOOR_ID)
 
         Dim SQL As String = "DELETE FROM TB_PRODUCT_FLOOR" & vbLf
-        SQL &= "WHERE KO_ID=" & KO_ID & " AND FLOOR_ID=" & FLOOR_ID
+        SQL &= "WHERE SHELF_ID=" & SHELF_ID & " AND FLOOR_ID=" & FLOOR_ID
         ExecuteNonQuery(SQL)
     End Sub
 
-    Public Sub Drop_PRODUCT_FLOOR(ByVal KO_ID As Integer)
-        Dim SQL As String = "SELECT FLOOR_ID FROM TB_PRODUCT_FLOOR WHERE KO_ID=" & KO_ID
+    Public Sub Drop_PRODUCT_FLOOR(ByVal SHELF_ID As Integer)
+        Dim SQL As String = "SELECT FLOOR_ID FROM TB_PRODUCT_FLOOR WHERE SHELF_ID=" & SHELF_ID
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         DA.Fill(DT)
 
         For i As Integer = 0 To DT.Rows.Count - 1
-            Drop_PRODUCT_FLOOR(KO_ID, DT.Rows(i).Item("FLOOR_ID"))
+            Drop_PRODUCT_FLOOR(SHELF_ID, DT.Rows(i).Item("FLOOR_ID"))
         Next
+    End Sub
+
+    Public Sub Drop_PRODUCT_SHELF(ByVal KO_ID As Integer)
+        Drop_PRODUCT_FLOOR(KO_ID)
+
+        Dim SQL As String = "DELETE FROM TB_PRODUCT_SHELF" & vbLf
+        SQL &= "WHERE KO_ID=" & KO_ID
+        ExecuteNonQuery(SQL)
     End Sub
 
     Public Sub Drop_KIOSK_DEVICE(ByVal KO_ID As Integer, ByVal D_ID As Integer)
@@ -564,6 +579,7 @@ Public Class VDM_BL
             Drop_SHIFT(KO_ID, DT.Rows(i).Item("SHIFT_ID"))
         Next
     End Sub
+
 #End Region
 
 
@@ -591,13 +607,10 @@ Public Class VDM_BL
     End Function
 
     Public Function CheckShift_Open(ByRef DT As DataTable) As Boolean
-        Dim IsOpen As Boolean = False
-        If DT.Rows.Count > 0 Then
-            If IsDBNull(DT.Rows(0).Item("Close_Time")) Then
-                IsOpen = True
-            End If
+        If DT.Rows.Count > 0 AndAlso IsDBNull(DT.Rows(0).Item("Close_Time")) Then
+            Return True
         End If
-        Return IsOpen
+        Return False
     End Function
 
     Public Function GetKiosk_Current_OTY(ByRef KO_ID As Integer, ByRef D_ID As Integer, ByRef Unit_Value As Integer) As Integer

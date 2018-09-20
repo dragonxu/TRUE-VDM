@@ -2,6 +2,8 @@
 
 <%@ Register Src="~/UC_Peripheral_UI.ascx" TagPrefix="uc1" TagName="UC_Peripheral_UI" %>
 <%@ Register Src="~/UC_MoneyStock_UI.ascx" TagPrefix="uc1" TagName="UC_MoneyStock_UI" %>
+<%@ Register Src="~/UC_Kiosk_Shelf.ascx" TagPrefix="uc1" TagName="UC_Kiosk_Shelf" %>
+
 
 
 
@@ -35,6 +37,20 @@
                             Product Stock
                         </div>
                     </h3>
+                </div>
+                <div class="row ">
+                    <uc1:UC_Kiosk_Shelf runat="server" ID="Shelf" />
+                    <div class="form-group" style="text-align:right">
+                            <asp:LinkButton CssClass="btn btn-success btn-icon loading-demo mr5 btn-shadow" ID="btnSaveProduct" runat="server">
+                              <i class="fa fa-save"></i>
+                              <span>Save</span>
+                            </asp:LinkButton>
+
+                            <asp:LinkButton CssClass="btn btn-default btn-icon loading-demo mr5 btn-shadow" ID="btnResetProduct" runat="server">
+                              <i class="fa fa-reply"></i>
+                              <span>Reset</span>
+                            </asp:LinkButton>
+                      </div>
                 </div>
             </div>
 

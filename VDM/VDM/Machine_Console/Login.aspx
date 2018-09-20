@@ -34,7 +34,7 @@
       <div class="page-height-o row-equal align-middle">
         <div class="column">
           <div class="card bg-white no-border">
-            <div class="card-block">
+            
               <asp:Panel CssClass="form-layout" ID="pnlLogin" runat="server" DefaultButton="btnLogin">
                 <div class="text-center m-b">
                   <h4 class="text-uppercase">VENDING Management CONSOLE</h4>
@@ -57,7 +57,7 @@
                 </div>
                   
               </asp:Panel>
-            </div>
+        
           </div>
         </div>
       </div>
@@ -84,15 +84,38 @@
     </footer>
     <!-- /bottom footer -->
   </div>
+
+     <!-- build:js({.tmp,app}) scripts/app.min.js -->
+    <script src="../scripts/helpers/modernizr.js" type="text/javascript"></script>
+    <script src="../vendor/jquery/dist/jquery.js" type="text/javascript"></script>
+    <script src="../vendor/bootstrap/dist/js/bootstrap.js" type="text/javascript"></script>
+    <script src="../vendor/fastclick/lib/fastclick.js" type="text/javascript"></script>
+    <script src="../vendor/perfect-scrollbar/js/perfect-scrollbar.jquery.js" type="text/javascript"></script>
+    <script src="../scripts/helpers/smartresize.js" type="text/javascript"></script>
+    <script src="../scripts/jquery.cookie.min.js" type="text/javascript"></script>
+    <script src="../scripts/constants.js" type="text/javascript"></script>
+    <script src="../scripts/main.js" type="text/javascript"></script>
+
   <!-- build:js({.tmp,app}) scripts/app.min.js -->
-  <script type="text/javascript" src="scripts/helpers/modernizr.js"></script>
-  <script type="text/javascript" src="vendor/jquery/dist/jquery.js"></script>
-  <script type="text/javascript" src="vendor/bootstrap/dist/js/bootstrap.js"></script>
-  <script type="text/javascript" src="vendor/fastclick/lib/fastclick.js"></script>
-  <script type="text/javascript" src="vendor/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
-  <script type="text/javascript" src="scripts/helpers/smartresize.js"></script>
-  <script type="text/javascript" src="scripts/constants.js"></script>
-  <script type="text/javascript" src="scripts/main.js"></script>
+  <script src="../vendor/chosen_v1.4.0/chosen.jquery.js" type="text/javascript" language="javascript"></script>
+    <script src="../vendor/checkbo/src/0.1.4/js/checkBo.min.js" type="text/javascript" language="javascript"></script>
+    <script src="../vendor/intl-tel-input//build/js/intlTelInput.min.js" type="text/javascript" language="javascript"></script>
+    <script src="../vendor/jquery.tagsinput/src/jquery.tagsinput.js"></script>
+    <script src="../vendor/moment/min/moment.min.js"></script>
+    <script src="../vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="../vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="../vendor/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+    <script src="../vendor/clockpicker/dist/jquery-clockpicker.min.js"></script>
+    <script src="../vendor/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>  
+    <script src="../vendor/moment/min/moment.min.js" type="text/javascript" language="javascript"></script>
+    <script src="../vendor/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js" type="text/javascript" language="javascript"></script>
+    <script src="../vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js" type="text/javascript" language="javascript"></script>
+    <script src="../vendor/select2/dist/js/select2.js" type="text/javascript" language="javascript"></script>
+    <script src="../vendor/selectize/dist/js/standalone/selectize.min.js" type="text/javascript" language="javascript"></script>
+    <script src="../vendor/jquery-labelauty/source/jquery-labelauty.js" type="text/javascript" language="javascript"></script>
+    <script src="../vendor/bootstrap-maxlength/bootstrap-maxlength.min.js" type="text/javascript" language="javascript"></script>
+    <script src="../vendor/typeahead.js/dist/typeahead.bundle.js" type="text/javascript" language="javascript"></script>
+    <script src="../vendor/multiselect/js/jquery.multi-select.js" type="text/javascript" language="javascript"></script>
   <!-- endbuild -->
 
 </form>

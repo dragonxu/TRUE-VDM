@@ -239,7 +239,7 @@ Public Class UC_Shift_StockProduct
         pnlSlot.Visible = True
     End Sub
 
-    Private Sub Shelf_RequestEditSlot(ByRef Sender As UC_Product_Slot) Handles Shelf.RequestEditSlot
+    Private Sub Shelf_SlotSelecting(ByRef Sender As UC_Product_Slot) Handles Shelf.SlotSelecting
         ClearSlotProperty()
         '----------- Inherited Property --------
         txtSlotDepth.Text = Sender.ParentFloor.ParentShelf.SHELF_DEPTH

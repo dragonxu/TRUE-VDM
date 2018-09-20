@@ -10,6 +10,22 @@
         End Get
         Set(value As Double)
             Shelf.Attributes("PixelPerMM") = value
+
+            '----------------- ReDisplay------------
+            SHELF_WIDTH = SHELF_WIDTH
+            SHELF_HEIGHT = SHELF_HEIGHT
+            Dim TMP As DataTable = FloorDatas()
+            rptFloor.DataSource = TMP
+            rptFloor.DataBind()
+        End Set
+    End Property
+
+    Public Property SHELF_ID As Integer
+        Get
+            Return Shelf.Attributes("SHELF_ID")
+        End Get
+        Set(value As Integer)
+            Shelf.Attributes("SHELF_ID") = value
         End Set
     End Property
 
@@ -149,6 +165,12 @@
             '---------------- Update Relate Slot Name---------
             .FLOOR_NAME = Chr(Asc("A") + e.Item.ItemIndex)
         End With
+    End Sub
+
+    Public Sub ResetDimension()
+        SHELF_WIDTH = 1900
+        SHELF_HEIGHT = 1900
+        SHELF_DEPTH = 1200
     End Sub
 
     Public Sub Deselect_All_Slot()

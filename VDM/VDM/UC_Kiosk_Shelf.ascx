@@ -1,20 +1,16 @@
-﻿<%@ Page Title="Stock" Language="vb" AutoEventWireup="false" MasterPageFile="~/Machine_Console/MasterStaffConsole.Master" CodeBehind="TestStock.aspx.vb" Inherits="VDM.TestStock" %>
+﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="UC_Kiosk_Shelf.ascx.vb" Inherits="VDM.UC_Kiosk_Shelf" %>
 
 <%@ Register Src="~/Machine_Console/UC_Product_Shelf.ascx" TagPrefix="uc1" TagName="UC_Product_Shelf" %>
 
-<asp:Content ID="head" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
-
-    <div class="row">
+<div class="row">
         <div class="col-lg-1"></div> 
         <div class="col-lg-6">
             
-            <uc1:UC_Product_Shelf runat="server" ID="Shelf" />
+            <uc1:UC_Product_Shelf runat="server" ID="Shelf"/>
 
         </div>
         <div class="col-lg-5 p-l-lg">
-            <asp:Panel ID="pnlShelf" runat="server" CssClass="card bg-white panel_property" BorderWidth="2px">
+            <asp:Panel ID="pnlShelf" runat="server" CssClass="card bg-white panel_property" BorderWidth="2px" KO_ID="0">
                 <div class="card-header">Shelf Properties</div>
                 <div class="card-block">
                     <div class="row m-a-0">
@@ -158,8 +154,3 @@
             
         </div>
     </div>
-   
-
-</asp:Content>
-
-<asp:Content ID="ScriptContainer" runat="server" ContentPlaceHolderID="ScriptContainer"></asp:Content>

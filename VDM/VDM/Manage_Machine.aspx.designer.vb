@@ -131,6 +131,15 @@ Partial Public Class Manage_Machine
     Protected WithEvents txtZone As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''Shelf control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Shelf As Global.VDM.UC_Kiosk_Shelf
+    
+    '''<summary>
     '''chkActive control.
     '''</summary>
     '''<remarks>

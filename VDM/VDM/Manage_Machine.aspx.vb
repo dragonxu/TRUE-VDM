@@ -137,6 +137,10 @@ Public Class Manage_Machine
                 pnlList.Visible = False
                 pnlEdit.Visible = True
 
+                '------------ Setting Shelf ---------------
+                Shelf.KO_ID = KO_ID
+                Shelf.BindData()
+
             Case "Delete"
                 BL.Drop_Kiosk(e.CommandArgument)
                 BindList()
@@ -155,6 +159,11 @@ Public Class Manage_Machine
         txtCode.Text = ""
         BL.Bind_DDL_Site(ddlSite)
         txtZone.Text = ""
+
+        '---------------- Manage Shelf -------------------
+        Shelf.PixelPerMM = 0.25
+        Shelf.KO_ID = KO_ID
+        Shelf.BindData()
 
         ''------------------ Manage Bundled Product -----------------
         'ProductData = BL.GetList_BundledProduct(0)
@@ -234,6 +243,13 @@ Public Class Manage_Machine
             Alert(Me.Page, ex.Message)
             Exit Sub
         End Try
+
+        '-------------- Save Product Shelf -------------
+        Shelf.KO_ID = KO_ID
+        If Not Shelf.SaveData Then
+            Alert(Me.Page, "ไม่สามารถบันทึก Layout ของ Product Shelf")
+            Exit Sub
+        End If
 
         Alert(Me.Page, "บันทึกสำเร็จ")
         ResetPage(Nothing, Nothing)

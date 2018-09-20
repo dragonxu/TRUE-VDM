@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class TestStock
+Partial Public Class UC_Kiosk_Shelf
     
     '''<summary>
     '''Shelf control.

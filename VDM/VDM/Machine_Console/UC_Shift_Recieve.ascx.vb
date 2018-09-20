@@ -6,6 +6,12 @@ Public Class UC_Shift_Recieve
 
     Dim BL As New VDM_BL
 
+    Private ReadOnly Property KO_ID As Integer
+        Get
+            Return Session("KO_ID")
+        End Get
+    End Property
+
 #Region "Property"
     Public ReadOnly Property Total() As Integer
         Get
@@ -94,7 +100,7 @@ Public Class UC_Shift_Recieve
         img.Attributes("Src") = "../" & e.Item.DataItem("Icon_Green").ToString
 
         If Not IsDBNull(e.Item.DataItem("Unit_Value")) Then
-            txt_Before.Text = FormatNumber(Val(BL.GetKiosk_Current_OTY(BL.KioskID, VDM_BL.Device.CoinIn, e.Item.DataItem("Unit_Value"))), 0)
+            txt_Before.Text = FormatNumber(Val(BL.GetKiosk_Current_OTY(KO_ID, VDM_BL.Device.CoinIn, e.Item.DataItem("Unit_Value"))), 0)
         End If
 
         If Not IsDBNull(e.Item.DataItem("Pick")) Then
@@ -253,7 +259,7 @@ Public Class UC_Shift_Recieve
         img.Attributes("Src") = "../" & e.Item.DataItem("Icon_Green").ToString
 
         If Not IsDBNull(e.Item.DataItem("Unit_Value")) Then
-            txt_Before.Text = FormatNumber(Val(BL.GetKiosk_Current_OTY(BL.KioskID, VDM_BL.Device.CashIn, e.Item.DataItem("Unit_Value"))), 0)
+            txt_Before.Text = FormatNumber(Val(BL.GetKiosk_Current_OTY(KO_ID, VDM_BL.Device.CashIn, e.Item.DataItem("Unit_Value"))), 0)
         End If
 
 

@@ -258,7 +258,6 @@
     <Content Include="images\SignIn\2.png" />
     <Content Include="images\SignIn\3.png" />
     <Content Include="images\warning.gif" />
-    <Content Include="Machine_Console\TestStock.aspx" />
     <Content Include="Machine_Console\UC_Shift_Change.ascx" />
     <Content Include="Machine_Console\UC_Shift_Recieve.ascx" />
     <Content Include="Machine_Console\UC_Shift_StockPaper.ascx" />
@@ -362,13 +361,6 @@
     <Compile Include="Machine_Console\MasterStaffConsole.Master.vb">
       <DependentUpon>MasterStaffConsole.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Machine_Console\TestStock.aspx.designer.vb">
-      <DependentUpon>TestStock.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Machine_Console\TestStock.aspx.vb">
-      <DependentUpon>TestStock.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Machine_Console\UC_Shift_Change.ascx.designer.vb">
       <DependentUpon>UC_Shift_Change.ascx</DependentUpon>

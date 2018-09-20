@@ -95,6 +95,7 @@
            height:100%; 
            width:100px;
            right:-120px;
+           /*z-index: 2;*/
         }
 
         .machine_menu_block > .btn-group, .machine_menu_block > .btn-group > button {

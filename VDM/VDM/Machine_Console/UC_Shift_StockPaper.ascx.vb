@@ -4,6 +4,12 @@ Public Class UC_Shift_StockPaper
     Inherits System.Web.UI.UserControl
     Dim BL As New VDM_BL
 
+    Private ReadOnly Property KO_ID As Integer
+        Get
+            Return Session("KO_ID")
+        End Get
+    End Property
+
 #Region "Property"
 
 
@@ -65,7 +71,7 @@ Public Class UC_Shift_StockPaper
             End If
         End If
 
-        SQL = " SELECT * FROM TB_KIOSK_DEVICE WHERE KO_ID=" & BL.KioskID & " AND D_ID=" & VDM_BL.Device.Printer
+        SQL = " SELECT * FROM TB_KIOSK_DEVICE WHERE KO_ID=" & KO_ID & " AND D_ID=" & VDM_BL.Device.Printer
         DA = New SqlDataAdapter(SQL, BL.ConnectionString)
         DT = New DataTable
         DA.Fill(DT)
