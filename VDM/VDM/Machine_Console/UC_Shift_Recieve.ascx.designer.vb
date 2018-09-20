@@ -14,382 +14,58 @@ Option Explicit On
 Partial Public Class UC_Shift_Recieve
     
     '''<summary>
-    '''txt_coin1_Before control.
+    '''rptListCoinIn control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txt_coin1_Before As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents rptListCoinIn As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
-    '''txt_coin1_Pick control.
+    '''lbl_RemainCoinIn control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txt_coin1_Pick As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents lbl_RemainCoinIn As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''btn_coin1_Pick_Full control.
+    '''lbl_SumCoinIn control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btn_coin1_Pick_Full As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents lbl_SumCoinIn As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''txt_coin1_Input control.
+    '''rptListCashIn control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txt_coin1_Input As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents rptListCashIn As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
-    '''btn_coin1_Input_Full control.
+    '''lbl_RemainCashIn control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btn_coin1_Input_Full As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents lbl_RemainCashIn As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''txt_coin1_Remain control.
+    '''lbl_SumCashIn control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txt_coin1_Remain As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''lbl_coin1_Amount control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lbl_coin1_Amount As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''txt_coin5_Before control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txt_coin5_Before As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txt_coin5_Pick control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txt_coin5_Pick As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''btn_coin5_Pick_Full control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btn_coin5_Pick_Full As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''txt_coin5_Input control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txt_coin5_Input As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''btn_coin5_Input_Full control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btn_coin5_Input_Full As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''txt_coin5_Remain control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txt_coin5_Remain As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''lbl_coin5_Amount control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lbl_coin5_Amount As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''txt_cash20_Before control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txt_cash20_Before As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txt_cash20_Pick control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txt_cash20_Pick As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''btn_cash20_Pick_Full control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btn_cash20_Pick_Full As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''txt_cash20_Input control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txt_cash20_Input As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''btn_cash20_Input_Full control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btn_cash20_Input_Full As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''txt_cash20_Remain control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txt_cash20_Remain As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''lbl_cash20_Amount control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lbl_cash20_Amount As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''txt_cash100_Before control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txt_cash100_Before As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txt_cash100_Pick control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txt_cash100_Pick As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''btn_cash100_Pick_Full control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btn_cash100_Pick_Full As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''txt_cash100_Input control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txt_cash100_Input As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''btn_cash100_Input_Full control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btn_cash100_Input_Full As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''txt_cash100_Remain control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txt_cash100_Remain As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''lbl_cash100_Amount control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lbl_cash100_Amount As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''txt_cash500_Before control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txt_cash500_Before As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txt_cash500_Pick control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txt_cash500_Pick As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''btn_cash500_Pick_Full control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btn_cash500_Pick_Full As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''txt_cash500_Input control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txt_cash500_Input As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''btn_cash500_Input_Full control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btn_cash500_Input_Full As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''txt_cash500_Remain control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txt_cash500_Remain As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''lbl_cash500_Amount control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lbl_cash500_Amount As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''txt_cash1000_Before control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txt_cash1000_Before As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txt_cash1000_Pick control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txt_cash1000_Pick As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''btn_cash1000_Pick_Full control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btn_cash1000_Pick_Full As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''txt_cash1000_Input control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txt_cash1000_Input As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''btn_cash1000_Input_Full control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btn_cash1000_Input_Full As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''txt_cash1000_Remain control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txt_cash1000_Remain As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''lbl_cash1000_Amount control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lbl_cash1000_Amount As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lbl_SumCashIn As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''lblSum control.

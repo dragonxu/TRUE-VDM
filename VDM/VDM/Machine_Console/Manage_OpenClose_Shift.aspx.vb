@@ -297,13 +297,13 @@ Public Class Manage_OpenClose_Shift
 
         '----เงินรับ 
         '---------  CoinIn  
-        Dim Current_Qty_CoinIn As Integer = 0
-        Dim DT_CoinIn As DataTable = BL.GetCoinIn_List()
-        If DT_CoinIn.Rows.Count > 0 Then
-            For i As Integer = 0 To DT_CoinIn.Rows.Count - 1
-                Current_Qty_CoinIn = Current_Qty_CoinIn + BL.GetKiosk_Current_OTY(BL.KioskID, VDM_BL.Device.CoinIn, DT_CoinIn.Rows(i).Item("Unit_Value"))
-            Next
-        End If
+        'Dim Current_Qty_CoinIn As Integer = 0
+        'Dim DT_CoinIn As DataTable = BL.GetCoinIn_List()
+        'If DT_CoinIn.Rows.Count > 0 Then
+        '    For i As Integer = 0 To DT_CoinIn.Rows.Count - 1
+        '        Current_Qty_CoinIn = Current_Qty_CoinIn + BL.GetKiosk_Current_OTY(BL.KioskID, VDM_BL.Device.CoinIn, DT_CoinIn.Rows(i).Item("Unit_Value"))
+        '    Next
+        'End If
 
         SQL = "SELECT * FROM TB_KIOSK_DEVICE "
             SQL &= " WHERE KO_ID=" & BL.KioskID & " AND D_ID=" & VDM_BL.Device.CoinIn
@@ -328,13 +328,14 @@ Public Class Manage_OpenClose_Shift
 
         '----------------------------------------------------------
         '---------  CashIn
-        Dim Current_Qty_CashIn As Integer = 0
-        Dim DT_CashIn As DataTable = BL.GetCashIn_List()
-        If DT_CashIn.Rows.Count > 0 Then
-            For i As Integer = 0 To DT_CashIn.Rows.Count - 1
-                Current_Qty_CashIn = Current_Qty_CashIn + BL.GetKiosk_Current_OTY(BL.KioskID, VDM_BL.Device.CashIn, DT_CashIn.Rows(i).Item("Unit_Value"))
-            Next
-        End If
+        'Dim Current_Qty_CashIn As Integer = 0
+        'Dim DT_CashIn As DataTable = BL.GetCashIn_List()
+        'If DT_CashIn.Rows.Count > 0 Then
+        '    For i As Integer = 0 To DT_CashIn.Rows.Count - 1
+        '        Current_Qty_CashIn = Current_Qty_CashIn + BL.GetKiosk_Current_OTY(BL.KioskID, VDM_BL.Device.CashIn, DT_CashIn.Rows(i).Item("Unit_Value"))
+        '    Next
+        'End If
+
         SQL = "SELECT * FROM TB_KIOSK_DEVICE "
         SQL &= " WHERE KO_ID=" & BL.KioskID & " AND D_ID=" & VDM_BL.Device.CashIn
         DT = New DataTable
@@ -348,7 +349,7 @@ Public Class Manage_OpenClose_Shift
         Else
             DR = DT.Rows(0)
         End If
-        DR("Current_Qty") = Current_Qty_CashIn
+        DR("Current_Qty") = Val(UC_Shift_Recieve.Remain_cash)
         DR("DT_ID") = VDM_BL.DeviceType.CashIn
         'DR("DS_ID") =
         DR("Update_Time") = Now

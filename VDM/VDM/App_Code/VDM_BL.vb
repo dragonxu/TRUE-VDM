@@ -639,12 +639,13 @@ Public Class VDM_BL
     Public Function GetCoinIn_List() As DataTable
         Dim DT_CoinIn As New DataTable
         DT_CoinIn.Columns.Add("Unit_Value")
+        DT_CoinIn.Columns.Add("Icon_Green")
         DT_CoinIn.Columns.Add("Active_Status", GetType(Boolean))
 
-        DT_CoinIn.Rows.Add(1, 1)
-        DT_CoinIn.Rows.Add(2, 0)
-        DT_CoinIn.Rows.Add(5, 1)
-        DT_CoinIn.Rows.Add(10, 0)
+        DT_CoinIn.Rows.Add(1, "images/Icon/Green/coin1.png", 1)
+        DT_CoinIn.Rows.Add(2, "images/Icon/Green/coin2.png", 1)
+        DT_CoinIn.Rows.Add(5, "images/Icon/Green/coin5.png", 1)
+        DT_CoinIn.Rows.Add(10, "images/Icon/Green/coin10.png", 1)
 
         DT_CoinIn.DefaultView.RowFilter = "Active_Status=1"
         Return DT_CoinIn
@@ -653,13 +654,14 @@ Public Class VDM_BL
     Public Function GetCashIn_List() As DataTable
         Dim DT_CashIn As New DataTable
         DT_CashIn.Columns.Add("Unit_Value")
+        DT_CashIn.Columns.Add("Icon_Green")
         DT_CashIn.Columns.Add("Active_Status", GetType(Boolean))
 
-        DT_CashIn.Rows.Add(20, 1)
-        DT_CashIn.Rows.Add(50, 0)
-        DT_CashIn.Rows.Add(100, 1)
-        DT_CashIn.Rows.Add(500, 1)
-        DT_CashIn.Rows.Add(1000, 1)
+        DT_CashIn.Rows.Add(20, "images/Icon/Green/cash20.png", 1)
+        DT_CashIn.Rows.Add(50, "images/Icon/Green/cash50.png", 1)
+        DT_CashIn.Rows.Add(100, "images/Icon/Green/cash100.png", 1)
+        DT_CashIn.Rows.Add(500, "images/Icon/Green/cash500.png", 1)
+        DT_CashIn.Rows.Add(1000, "images/Icon/Green/cash1000.png", 1)
 
         DT_CashIn.DefaultView.RowFilter = "Active_Status=1"
         Return DT_CashIn

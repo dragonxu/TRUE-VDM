@@ -126,7 +126,7 @@ Public Class UC_Shift_Change
                 If DT.Rows.Count > 0 Then
                     txt_Input.Text = FormatNumber(Val(DT.Rows(0).Item("Max_Qty")), 0)
                 Else
-                    Alert(Me.Page, "ตรวจสอบ Device coin1")
+                    Alert(Me.Page, "ตรวจสอบ Device " & Val(txt_Remain.Attributes("Unit_Value")) & "")
                     Exit Sub
                 End If
 
