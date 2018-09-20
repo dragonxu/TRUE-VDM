@@ -629,6 +629,17 @@ Public Class VDM_BL
         Return Current_QTY
     End Function
 
+    Public Function CheckDevice_Status(ByRef KO_ID As Integer, ByRef D_ID As Integer) As Integer
+        Dim DS_ID As Integer = 1
+
+
+
+
+
+
+
+        Return DS_ID
+    End Function
 
 
 #End Region
