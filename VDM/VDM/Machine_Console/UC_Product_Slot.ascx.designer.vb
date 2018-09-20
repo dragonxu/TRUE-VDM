@@ -131,6 +131,24 @@ Partial Public Class UC_Product_Slot
     Protected WithEvents lblHeight As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''mask control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents mask As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''mask_content control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents mask_content As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''btnSelect control.
     '''</summary>
     '''<remarks>

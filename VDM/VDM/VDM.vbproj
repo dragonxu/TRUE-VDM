@@ -346,6 +346,7 @@
     <Content Include="Machine_Console\UC_Product_Floor.ascx" />
     <Content Include="Machine_Console\UC_Product_Shelf.ascx" />
     <Content Include="Machine_Console\UC_Product_Slot.ascx" />
+    <Content Include="UC_Kiosk_Shelf.ascx" />
     <Content Include="UC_Product_Spec.ascx" />
     <Content Include="Upload_User_Form.aspx" />
     <Content Include="Web.config">
@@ -644,6 +645,13 @@
     </Compile>
     <Compile Include="Machine_Console\UC_Product_Slot.ascx.vb">
       <DependentUpon>UC_Product_Slot.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UC_Kiosk_Shelf.ascx.designer.vb">
+      <DependentUpon>UC_Kiosk_Shelf.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UC_Kiosk_Shelf.ascx.vb">
+      <DependentUpon>UC_Kiosk_Shelf.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UC_Product_Spec.ascx.designer.vb">

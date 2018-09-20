@@ -243,7 +243,7 @@
     'Public Event RequestClearFloorSlot(ByVal Sender As UC_Product_Floor)
     'Public Event RequestClearFloorProduct(ByVal Sender As UC_Product_Floor)
     Public Event RequestAddSlot(ByRef Sender As UC_Product_Floor)
-    Public Event RequestEditSlot(ByRef Sender As UC_Product_Slot)
+    Public Event SlotSelecting(ByRef Sender As UC_Product_Slot)
 
     Private Sub lnkEdit_Click(ByVal sender As Object, ByVal e As EventArgs) Handles lnkEdit.Click
         RaiseEvent RequestEdit(Me)
@@ -304,8 +304,8 @@
         RaiseEvent RequestAddSlot(Sender)
     End Sub
 
-    Protected Sub Slot_RequestEditSlot(ByVal Sender As UC_Product_Slot)
-        RaiseEvent RequestEditSlot(Sender)
+    Protected Sub Slot_Selecting(ByVal Sender As UC_Product_Slot)
+        RaiseEvent SlotSelecting(Sender)
     End Sub
 
 #End Region

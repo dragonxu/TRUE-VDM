@@ -39,7 +39,7 @@
     <div class="machine_block_container">
         <asp:Repeater ID="rptSlot" runat="server">
             <ItemTemplate>
-                <uc1:UC_Product_Slot runat="server" id="Slot" OnRequestEdit="Slot_RequestEdit" />
+                <uc1:UC_Product_Slot runat="server" id="Slot" onSelecting="Slot_Selecting" />
             </ItemTemplate>
         </asp:Repeater> 
     </div> 

@@ -16,7 +16,7 @@
                     OnRequestClearSlot="Floor_RequestClearSlot"
                     OnRequestClearProduct="Floor_RequestClearProduct"
                     OnRequestAddSlot="Floor_RequestAddSlot"
-                    OnRequestEditSlot="Slot_RequestEditSlot"
+                    OnSlotSelecting="Slot_Selecting"
                  />
             </ItemTemplate>
         </asp:Repeater>

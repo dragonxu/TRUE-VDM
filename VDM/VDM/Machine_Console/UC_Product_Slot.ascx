@@ -3,7 +3,7 @@
 
     <asp:Label ID="lblName" runat="server" CssClass="slot_caption"></asp:Label>
     <asp:Label ID="lblCode" runat="server" CssClass="slot_product_code"></asp:Label>
-    <asp:Label ID="lblQuantity" runat="server" CssClass="slot_quantity" ForeColor="White" BackColor="White"></asp:Label>
+    <asp:Label ID="lblQuantity" runat="server" CssClass="slot_quantity" ForeColor="White" BackColor="White" Visible="false"></asp:Label>
     <asp:Panel CssClass="machine_slot_quantity_bar" ID="QuantityBar" runat="server" BackColor="#eeeeee" PRODUCT_ID="0" Visible="false">
         <asp:Panel CssClass="machine_slot_quantity_level" ID="QuantityLevel" runat="server" BackColor="White">
         </asp:Panel>
@@ -23,6 +23,13 @@
             <asp:Label ID="lblHeight" runat="server">0</asp:Label>
         </div>        
     </div>
+
+    <div id="mask" runat="server" class="mask_container" Visible="false">
+        <div class="mask_content" id="mask_content" runat="server">
+        </div>  
+        <div class="mask_slot"></div>            
+    </div>
+
 </asp:Panel>
 
  <asp:Button ID="btnSelect" runat="server" style="display:none;" />

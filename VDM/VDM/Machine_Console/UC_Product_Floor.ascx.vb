@@ -262,7 +262,7 @@
     Public Event RequestClearSlot(ByVal Sender As UC_Product_Floor)
     Public Event RequestClearProduct(ByVal Sender As UC_Product_Floor)
     Public Event RequestRemove(ByVal Sender As UC_Product_Floor)
-    Public Event RequestEditSlot(ByVal Sender As UC_Product_Slot)
+    Public Event SlotSelecting(ByVal Sender As UC_Product_Slot)
 
     Private Sub mnuFloorSetting_Click(sender As Object, e As EventArgs) Handles mnuFloorSetting.Click, CaptionBlock.Click
         RaiseEvent RequestEdit(Me)
@@ -288,8 +288,8 @@
         RaiseEvent RequestRemove(Me)
     End Sub
 
-    Protected Sub Slot_RequestEdit(ByRef Sender As UC_Product_Slot)
-        RaiseEvent RequestEditSlot(Sender)
+    Protected Sub Slot_Selecting(ByRef Sender As UC_Product_Slot)
+        RaiseEvent SlotSelecting(Sender)
     End Sub
 
 #End Region

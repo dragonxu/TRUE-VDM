@@ -116,6 +116,26 @@
         End Set
     End Property
 
+    Public Property ShowMask As Boolean
+        Get
+            Return mask.Visible
+        End Get
+        Set(value As Boolean)
+            mask.Visible = value
+        End Set
+    End Property
+
+    Public Property MaskContent As String
+        Get
+            Return mask_content.InnerHtml
+        End Get
+        Set(value As String)
+            mask_content.InnerHtml = value
+        End Set
+    End Property
+
+
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Slot.Attributes("onClick") = "document.getElementById('" & btnSelect.ClientID & "').click();"
     End Sub
@@ -165,25 +185,31 @@
         End Get
         Set(value As Integer)
             If value <> 0 Then
-                lblQuantity.Visible = True
-                QuantityBar.Visible = True
                 Slot.Style("background-image") = "url('../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & value & "&LANG=1')"
             Else
-                lblQuantity.Visible = False
-                QuantityBar.Visible = False
                 Slot.Style.Remove("background-image")
             End If
             QuantityBar.Attributes("PRODUCT_ID") = value
         End Set
     End Property
 
+    Public Property ShowQuantity As Boolean
+        Get
+            Return QuantityBar.Visible
+        End Get
+        Set(value As Boolean)
+            lblQuantity.Visible = value
+            QuantityBar.Visible = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "Event"
-    Public Event RequestEdit(ByRef Sender As UC_Product_Slot)
+    Public Event Selecting(ByRef Sender As UC_Product_Slot)
 
     Private Sub Slot_Click(sender As Object, e As EventArgs) Handles btnSelect.Click
-        RaiseEvent RequestEdit(Me)
+        RaiseEvent Selecting(Me)
     End Sub
 #End Region
 
