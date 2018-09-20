@@ -257,6 +257,15 @@ Partial Public Class Manage_OpenClose_Shift
     Protected WithEvents pnlStockProduct As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
+    '''UC_Shift_StockProduct control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UC_Shift_StockProduct As Global.VDM.UC_Shift_StockProduct
+    
+    '''<summary>
     '''pnlStockSIM control.
     '''</summary>
     '''<remarks>
@@ -264,6 +273,15 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlStockSIM As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''UC_Shift_StockSIM control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UC_Shift_StockSIM As Global.VDM.UC_Shift_StockSIM
     
     '''<summary>
     '''pnlStockPaper control.
@@ -300,6 +318,15 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkConfirm As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''lblConfirm control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblConfirm As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''lnkOK control.

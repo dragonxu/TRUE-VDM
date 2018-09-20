@@ -35,7 +35,18 @@ Public Class Manage_OpenClose_Shift
         divMenuStockSIM.Visible = False
         'Stock พิมพ์
         divMenuStockPaper.Visible = False
+        lblConfirm.Text = ""
+
+        Select Case Session("SHIFT_Status")
+            Case VDM_BL.ShiftStatus.Close
+                lblConfirm.Text = "Close Shift / ยืนยัน Close Shift"
+            Case VDM_BL.ShiftStatus.Open
+                lblConfirm.Text = "Open Shift / ยืนยัน Open Shift"
+        End Select
+
     End Sub
+
+
     Private Sub ClearMenu()
         MenuChange.Attributes("class") = ""
         MenuRecieve.Attributes("class") = ""
@@ -76,13 +87,6 @@ Public Class Manage_OpenClose_Shift
 
         End If
 
-
-
-
-
-
-
-
     End Sub
 
     Private Sub SetSummaryMenu()
@@ -95,18 +99,34 @@ Public Class Manage_OpenClose_Shift
         Else
             divMenuChange.Visible = False
         End If
-        '----เงินรับ
-        'divMenuRecieve.Visible = True
-
-        '----Product
-        'divMenuStockProduct.Visible = True
-
-        '----SIM
-        'divMenuStockSIM.Visible = True
-
-        '----Paper
-        'divMenuStockPaper.Visible = True
-
+        '----เงินรับ 
+        If Val(UC_Shift_Recieve.Total) > 0 Then
+            divMenuRecieve.Visible = True
+            lbl_Recieve_Amount.Text = FormatNumber(UC_Shift_Recieve.Total, 0)
+        Else
+            divMenuRecieve.Visible = False
+        End If
+        ''----Product 
+        'If Val(UC_Shift_StockProduct.Total) > 0 Then
+        '    divMenuStockProduct.Visible = True
+        '    lbl_Product_Count.Text = ""
+        'Else
+        '    divMenuStockProduct.Visible = False
+        'End If
+        ''----SIM 
+        'If Val(UC_Shift_StockSIM.Total) > 0 Then
+        '    divMenuStockSIM.Visible = True
+        '    lbl_SIM_Count.Text = ""
+        'Else
+        '    divMenuStockSIM.Visible = False
+        'End If
+        '----Paper 
+        If Val(UC_Shift_StockPaper.Total) > 0 Then
+            divMenuStockPaper.Visible = True
+            lbl_Paper_Count.Text = FormatNumber(UC_Shift_StockPaper.Total, 0)
+        Else
+            divMenuStockPaper.Visible = False
+        End If
     End Sub
     Private Sub lnkChange_ServerClick(sender As Object, e As EventArgs) Handles lnkChange.ServerClick
         ClearMenu()
@@ -114,11 +134,6 @@ Public Class Manage_OpenClose_Shift
         pnlChange.Visible = True
         pnlbtn.Visible = True
         SetSummaryMenu()
-        'UC_Shift_Change.SetTextbox()
-
-
-
-
 
     End Sub
 
@@ -181,24 +196,60 @@ Public Class Manage_OpenClose_Shift
     Private Sub lnkConfirm_Click(sender As Object, e As EventArgs) Handles lnkConfirm.Click
         Dim Validate As Boolean = False
         Dim ShiftChange_Success As Boolean = False
+        Dim ShiftRecieve_Success As Boolean = False
+        Dim ShiftStockPaper_Success As Boolean = False
 
         Try
             '--validate
+            '----เงินทอน
             If UC_Shift_Change.Validate Then
                 Validate = True
+            Else
+                ClearMenu()
+                lnkChange_ServerClick(Nothing, Nothing)
+                Exit Sub
+            End If
+            '----เงินรับ 
+            If UC_Shift_Recieve.Validate Then
+                Validate = True
+            Else
+                ClearMenu()
+                lnkRecieve_ServerClick(Nothing, Nothing)
+                Exit Sub
+            End If
+            '----Product
 
+            '----SIM
+
+            '----Paper
+            If UC_Shift_StockPaper.Validate Then
+                Validate = True
+            Else
+                ClearMenu()
+                lnkStockPaper_ServerClick(Nothing, Nothing)
+                Exit Sub
             End If
 
-            '--Save
-            If Validate Then
-                ShiftChange_Success = UC_Shift_Change.Save
+            Try
+                '--Save
+                If Validate Then
+                    ShiftChange_Success = UC_Shift_Change.Save
+                    ShiftRecieve_Success = UC_Shift_Recieve.Save
 
-            End If
+                    ShiftStockPaper_Success = UC_Shift_StockPaper.Save
+                End If
+            Catch ex As Exception
+                Alert(Me.Page, ex.Message)
+                Exit Sub
+            End Try
 
 
-            '--Update TB_KIOSK_DEVICE Current,Status sp
+            '--Update TB_KIOSK_DEVICE
+            UPDATE_DEVICE_Qty()
+
             '--สั่ง Open/Close Shift
 
+            Alert(Me.Page, "บันทึกสำเร็จ")
 
 
         Catch ex As Exception
@@ -209,4 +260,132 @@ Public Class Manage_OpenClose_Shift
 
 
     End Sub
+
+
+    Private Sub UPDATE_DEVICE_Qty()
+        '----เงินทอน
+        Dim Change As DataTable = UC_Shift_Change.Current_Data()
+        Dim SQL As String = ""
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter
+        Dim DR As DataRow
+        Dim cmd As New SqlCommandBuilder
+        If Change.Rows.Count > 0 Then
+            For i As Integer = 0 To Change.Rows.Count - 1
+                SQL = "SELECT * FROM TB_KIOSK_DEVICE "
+                SQL &= " WHERE KO_ID=" & BL.KioskID & " AND D_ID=" & Change.Rows(i).Item("D_ID")
+                DT = New DataTable
+                DA = New SqlDataAdapter(SQL, BL.ConnectionString)
+                DA.Fill(DT)
+                If DT.Rows.Count = 0 Then
+                    DR = DT.NewRow
+                    DT.Rows.Add(DR)
+                    DR("KO_ID") = BL.KioskID
+                    DR("D_ID") = Change.Rows(i).Item("D_ID")
+                Else
+                    DR = DT.Rows(0)
+                End If
+
+                DR("Current_Qty") = IIf(Val(Change.Rows(i).Item("Remain")) <> 0, Val(Change.Rows(i).Item("Remain")), DBNull.Value)
+                DR("DT_ID") = Change.Rows(i).Item("DT_ID")
+                DR("DS_ID") = BL.CheckDevice_Status(BL.KioskID, Change.Rows(i).Item("D_ID"))
+                DR("Update_Time") = Now
+                cmd = New SqlCommandBuilder(DA)
+                DA.Update(DT)
+            Next
+        End If
+
+        '----เงินรับ 
+        '---------  CoinIn  
+        SQL = "SELECT * FROM TB_KIOSK_DEVICE "
+            SQL &= " WHERE KO_ID=" & BL.KioskID & " AND D_ID=" & VDM_BL.Device.CoinIn
+            DT = New DataTable
+            DA = New SqlDataAdapter(SQL, BL.ConnectionString)
+            DA.Fill(DT)
+            If DT.Rows.Count = 0 Then
+                DR = DT.NewRow
+                DT.Rows.Add(DR)
+                DR("KO_ID") = BL.KioskID
+                DR("D_ID") = VDM_BL.Device.CoinIn
+            Else
+                DR = DT.Rows(0)
+            End If
+            DR("Current_Qty") = Val(UC_Shift_Recieve.Remain_coin)
+            DR("DT_ID") = VDM_BL.DeviceType.CoinIn
+        DR("DS_ID") = BL.CheckDevice_Status(BL.KioskID, VDM_BL.Device.CoinIn)
+        DR("Update_Time") = Now
+        cmd = New SqlCommandBuilder(DA)
+        DA.Update(DT)
+
+
+        '----------------------------------------------------------
+        '---------  CashIn
+
+        SQL = "SELECT * FROM TB_KIOSK_DEVICE "
+        SQL &= " WHERE KO_ID=" & BL.KioskID & " AND D_ID=" & VDM_BL.Device.CashIn
+        DT = New DataTable
+        DA = New SqlDataAdapter(SQL, BL.ConnectionString)
+        DA.Fill(DT)
+        If DT.Rows.Count = 0 Then
+            DR = DT.NewRow
+            DT.Rows.Add(DR)
+            DR("KO_ID") = BL.KioskID
+            DR("D_ID") = VDM_BL.Device.CashIn
+        Else
+            DR = DT.Rows(0)
+        End If
+        DR("Current_Qty") = Val(UC_Shift_Recieve.Remain_cash)
+        DR("DT_ID") = VDM_BL.DeviceType.CashIn
+        DR("DS_ID") = BL.CheckDevice_Status(BL.KioskID, VDM_BL.Device.CashIn)
+        DR("Update_Time") = Now
+        cmd = New SqlCommandBuilder(DA)
+        DA.Update(DT)
+
+        '----Product
+
+        '----SIM
+
+
+        '----Paper
+        SQL = "SELECT * FROM TB_KIOSK_DEVICE "
+        SQL &= " WHERE KO_ID=" & BL.KioskID & " AND D_ID=" & VDM_BL.Device.Printer
+        DT = New DataTable
+        DA = New SqlDataAdapter(SQL, BL.ConnectionString)
+        DA.Fill(DT)
+        If DT.Rows.Count = 0 Then
+            DR = DT.NewRow
+            DT.Rows.Add(DR)
+            DR("KO_ID") = BL.KioskID
+            DR("D_ID") = VDM_BL.Device.Printer
+        Else
+            DR = DT.Rows(0)
+        End If
+        DR("Current_Qty") = Val(UC_Shift_StockPaper.Total)
+        DR("DT_ID") = VDM_BL.DeviceType.Printer
+        DR("DS_ID") = BL.CheckDevice_Status(BL.KioskID, VDM_BL.Device.Printer)
+        DR("Update_Time") = Now
+        cmd = New SqlCommandBuilder(DA)
+        DA.Update(DT)
+
+
+
+        '--2   Cash 20
+        '--3   Cash 100
+        '--5   Coin 1
+        '--6   Coin 5
+
+        '--1   Cash In
+        '--4   Coin In
+
+        '10  Product Shelf
+        '11  SIM Dispenser 1
+        '12  SIM Dispenser 2
+        '13  SIM Dispenser 3
+
+        '--7   Printer
+
+
+    End Sub
+
+
 End Class

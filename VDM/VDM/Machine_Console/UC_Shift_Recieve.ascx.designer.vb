@@ -14,227 +14,65 @@ Option Explicit On
 Partial Public Class UC_Shift_Recieve
     
     '''<summary>
-    '''td1 control.
+    '''rptListCoinIn control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents td1 As Global.System.Web.UI.HtmlControls.HtmlTableCell
+    Protected WithEvents rptListCoinIn As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
-    '''TextBox9 control.
+    '''lbl_RemainCoinIn control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents TextBox9 As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents lbl_RemainCoinIn As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''TextBox10 control.
+    '''lbl_SumCoinIn control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents TextBox10 As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents lbl_SumCoinIn As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''TextBox11 control.
+    '''rptListCashIn control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents TextBox11 As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents rptListCashIn As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
-    '''TextBox12 control.
+    '''lbl_RemainCashIn control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents TextBox12 As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents lbl_RemainCashIn As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''Label2 control.
+    '''lbl_SumCashIn control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Label2 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lbl_SumCashIn As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''td control.
+    '''lblSum control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents td As Global.System.Web.UI.HtmlControls.HtmlTableCell
-    
-    '''<summary>
-    '''TextBox5 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TextBox5 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''TextBox8 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TextBox8 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''TextBox6 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TextBox6 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''TextBox7 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TextBox7 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''Label1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''td2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents td2 As Global.System.Web.UI.HtmlControls.HtmlTableCell
-    
-    '''<summary>
-    '''TextBox13 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TextBox13 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''TextBox14 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TextBox14 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''TextBox15 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TextBox15 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''TextBox16 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TextBox16 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''Label3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Label3 As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''td3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents td3 As Global.System.Web.UI.HtmlControls.HtmlTableCell
-    
-    '''<summary>
-    '''TextBox17 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TextBox17 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''TextBox18 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TextBox18 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''TextBox19 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TextBox19 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''TextBox20 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TextBox20 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''Label4 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Label4 As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''Label5 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Label5 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblSum As Global.System.Web.UI.WebControls.Label
 End Class

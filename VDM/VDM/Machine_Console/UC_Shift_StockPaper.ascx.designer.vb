@@ -23,40 +23,20 @@ Partial Public Class UC_Shift_StockPaper
     Protected WithEvents txtMaxPaper As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''txtUnitPaper control.
+    '''txtRemainPaper control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtUnitPaper As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''btnAdd control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents scm As Global.System.Web.UI.ScriptManager
-
-    '''<summary>
-    '''MainContent control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents MainContent As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents txtRemainPaper As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''ScriptContainer control.
+    '''btnInput_Full control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ScriptContainer As Global.System.Web.UI.WebControls.ContentPlaceHolder
-    Protected WithEvents btnAdd As Global.System.Web.UI.WebControls.LinkButton
-
+    Protected WithEvents btnInput_Full As Global.System.Web.UI.WebControls.LinkButton
 End Class
