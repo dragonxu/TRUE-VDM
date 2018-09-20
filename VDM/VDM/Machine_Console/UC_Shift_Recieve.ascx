@@ -12,14 +12,15 @@
         }
     </style>
 
-        <style type ="text/css" >
+    <style type="text/css">
         .table > tbody > tr > td {
-        border-color: transparent ;
-        height :100px;
+            border-color: transparent;
+            height: 100px;
         }
+
         .table > tfoot > tr > td {
-        /*border-color: transparent ;*/
-         height :100px;
+            /*border-color: transparent ;*/
+            height: 100px;
         }
     </style>
 
@@ -32,13 +33,14 @@
                     <th colspan="2">เอาออก</th>
                     <th colspan="2">เอาเข้า</th>
                     <th>คงเหลือ</th>
-                    <th class="col-md-5" style ="text-align :right ;"><span>บาท</span></th>
+                    <th class="col-md-5" style="text-align: right;"><span>บาท</span></th>
 
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td data-title="Logo" colspan="2"><h4><b>เครื่องรับเหรียญ</b></h4>
+                    <td data-title="Logo" colspan="2">
+                        <h4><b>เครื่องรับเหรียญ</b></h4>
                     </td>
                 </tr>
                 <tr>
@@ -46,17 +48,17 @@
                         <img id="imgcoin1" src="../images/Icon/green/coin1.png" width="40">
                     </td>
                     <td data-title="เดิม">
-                        <asp:TextBox ID="txt_coin1_Before" runat="server" AutoPostBack ="true"  class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_coin1_Before" runat="server" AutoPostBack="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="เอาออก" style="padding-right: 0px;">
-                        <asp:TextBox ID="txt_coin1_Pick" runat="server"  AutoPostBack ="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_coin1_Pick" runat="server" AutoPostBack="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="เอาออก" style="text-align: left; padding-left: 0px;">
-                         <asp:LinkButton CssClass="btn btn-dark " ID="btn_coin1_Pick_Full" runat="server">
+                        <asp:LinkButton CssClass="btn btn-dark " ID="btn_coin1_Pick_Full" runat="server">
                               <span class ="h4"> เต็มจำนวน </span>
                         </asp:LinkButton>
                     <td data-title="เอาเข้า" style="padding-right: 0px;">
-                        <asp:TextBox ID="txt_coin1_Input" runat="server"  AutoPostBack ="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_coin1_Input" runat="server" AutoPostBack="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="เอาเข้า" style="text-align: left; padding-left: 0px;">
                         <asp:LinkButton CssClass="btn btn-dark " ID="btn_coin1_Input_Full" runat="server">
@@ -65,32 +67,31 @@
                     </td>
 
                     <td data-title="คงเหลือ">
-                        <asp:TextBox ID="txt_coin1_Remain" runat="server"  Enabled ="false"  class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_coin1_Remain" runat="server" Enabled="false" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="จำนวนเงิน" style="text-align: right;">
                         <b>
-                            <asp:Label ID="lbl_coin1_Amount" runat="server" ></asp:Label></b>
+                            <asp:Label ID="lbl_coin1_Amount" runat="server"></asp:Label></b>
                     </td>
 
 
                 </tr>
-
                 <tr>
                     <td data-title="Logo" style="text-align: center;">
                         <img id="imgcoin5" src="../images/Icon/green/coin5.png" width="40">
                     </td>
                     <td data-title="เดิม">
-                        <asp:TextBox ID="txt_coin5_Before" runat="server" AutoPostBack ="true"  class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_coin5_Before" runat="server" AutoPostBack="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="เอาออก" style="padding-right: 0px;">
-                        <asp:TextBox ID="txt_coin5_Pick" runat="server"  AutoPostBack ="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_coin5_Pick" runat="server" AutoPostBack="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="เอาออก" style="text-align: left; padding-left: 0px;">
-                         <asp:LinkButton CssClass="btn btn-dark " ID="btn_coin5_Pick_Full" runat="server">
+                        <asp:LinkButton CssClass="btn btn-dark " ID="btn_coin5_Pick_Full" runat="server">
                               <span class ="h4"> เต็มจำนวน </span>
                         </asp:LinkButton>
                     <td data-title="เอาเข้า" style="padding-right: 0px;">
-                        <asp:TextBox ID="txt_coin5_Input" runat="server"  AutoPostBack ="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_coin5_Input" runat="server" AutoPostBack="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="เอาเข้า" style="text-align: left; padding-left: 0px;">
                         <asp:LinkButton CssClass="btn btn-dark " ID="btn_coin5_Input_Full" runat="server">
@@ -99,17 +100,18 @@
                     </td>
 
                     <td data-title="คงเหลือ">
-                        <asp:TextBox ID="txt_coin5_Remain" runat="server"  Enabled ="false"  class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_coin5_Remain" runat="server" Enabled="false" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="จำนวนเงิน" style="text-align: right;">
                         <b>
-                            <asp:Label ID="lbl_coin5_Amount" runat="server" ></asp:Label></b>
+                            <asp:Label ID="lbl_coin5_Amount" runat="server"></asp:Label></b>
                     </td>
 
 
                 </tr>
                 <tr>
-                    <td data-title="Logo" colspan="2"><h4><b>เครื่องรับแบงค์</b></h4>
+                    <td data-title="Logo" colspan="2">
+                        <h4><b>เครื่องรับแบงค์</b></h4>
                     </td>
                 </tr>
                 <tr>
@@ -117,17 +119,17 @@
                         <img id="imgcash20" src="../images/Icon/green/cash20.png" width="40">
                     </td>
                     <td data-title="เดิม">
-                        <asp:TextBox ID="txt_cash20_Before" runat="server" AutoPostBack ="true"  class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_cash20_Before" runat="server" AutoPostBack="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="เอาออก" style="padding-right: 0px;">
-                        <asp:TextBox ID="txt_cash20_Pick" runat="server"  AutoPostBack ="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_cash20_Pick" runat="server" AutoPostBack="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="เอาออก" style="text-align: left; padding-left: 0px;">
-                         <asp:LinkButton CssClass="btn btn-dark " ID="btn_cash20_Pick_Full" runat="server">
+                        <asp:LinkButton CssClass="btn btn-dark " ID="btn_cash20_Pick_Full" runat="server">
                               <span class ="h4"> เต็มจำนวน </span>
                         </asp:LinkButton>
                     <td data-title="เอาเข้า" style="padding-right: 0px;">
-                        <asp:TextBox ID="txt_cash20_Input" runat="server"  AutoPostBack ="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_cash20_Input" runat="server" AutoPostBack="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="เอาเข้า" style="text-align: left; padding-left: 0px;">
                         <asp:LinkButton CssClass="btn btn-dark " ID="btn_cash20_Input_Full" runat="server">
@@ -136,11 +138,11 @@
                     </td>
 
                     <td data-title="คงเหลือ">
-                        <asp:TextBox ID="txt_cash20_Remain" runat="server"  Enabled ="false"  class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_cash20_Remain" runat="server" Enabled="false" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="จำนวนเงิน" style="text-align: right;">
                         <b>
-                            <asp:Label ID="lbl_cash20_Amount" runat="server" ></asp:Label></b>
+                            <asp:Label ID="lbl_cash20_Amount" runat="server"></asp:Label></b>
                     </td>
 
 
@@ -151,17 +153,17 @@
                         <img id="imgcash100" src="../images/Icon/green/cash100.png" width="40">
                     </td>
                     <td data-title="เดิม">
-                        <asp:TextBox ID="txt_cash100_Before" runat="server" AutoPostBack ="true"  class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_cash100_Before" runat="server" AutoPostBack="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="เอาออก" style="padding-right: 0px;">
-                        <asp:TextBox ID="txt_cash100_Pick" runat="server"  AutoPostBack ="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_cash100_Pick" runat="server" AutoPostBack="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="เอาออก" style="text-align: left; padding-left: 0px;">
-                         <asp:LinkButton CssClass="btn btn-dark " ID="btn_cash100_Pick_Full" runat="server">
+                        <asp:LinkButton CssClass="btn btn-dark " ID="btn_cash100_Pick_Full" runat="server">
                               <span class ="h4"> เต็มจำนวน </span>
                         </asp:LinkButton>
                     <td data-title="เอาเข้า" style="padding-right: 0px;">
-                        <asp:TextBox ID="txt_cash100_Input" runat="server"  AutoPostBack ="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_cash100_Input" runat="server" AutoPostBack="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="เอาเข้า" style="text-align: left; padding-left: 0px;">
                         <asp:LinkButton CssClass="btn btn-dark " ID="btn_cash100_Input_Full" runat="server">
@@ -170,11 +172,11 @@
                     </td>
 
                     <td data-title="คงเหลือ">
-                        <asp:TextBox ID="txt_cash100_Remain" runat="server"  Enabled ="false"  class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_cash100_Remain" runat="server" Enabled="false" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="จำนวนเงิน" style="text-align: right;">
                         <b>
-                            <asp:Label ID="lbl_cash100_Amount" runat="server" ></asp:Label></b>
+                            <asp:Label ID="lbl_cash100_Amount" runat="server"></asp:Label></b>
                     </td>
 
 
@@ -184,17 +186,17 @@
                         <img id="imgcash500" src="../images/Icon/green/cash500.png" width="40">
                     </td>
                     <td data-title="เดิม">
-                        <asp:TextBox ID="txt_cash500_Before" runat="server" AutoPostBack ="true"  class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_cash500_Before" runat="server" AutoPostBack="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="เอาออก" style="padding-right: 0px;">
-                        <asp:TextBox ID="txt_cash500_Pick" runat="server"  AutoPostBack ="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_cash500_Pick" runat="server" AutoPostBack="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="เอาออก" style="text-align: left; padding-left: 0px;">
-                         <asp:LinkButton CssClass="btn btn-dark " ID="btn_cash500_Pick_Full" runat="server">
+                        <asp:LinkButton CssClass="btn btn-dark " ID="btn_cash500_Pick_Full" runat="server">
                               <span class ="h4"> เต็มจำนวน </span>
                         </asp:LinkButton>
                     <td data-title="เอาเข้า" style="padding-right: 0px;">
-                        <asp:TextBox ID="txt_cash500_Input" runat="server"  AutoPostBack ="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_cash500_Input" runat="server" AutoPostBack="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="เอาเข้า" style="text-align: left; padding-left: 0px;">
                         <asp:LinkButton CssClass="btn btn-dark " ID="btn_cash500_Input_Full" runat="server">
@@ -203,32 +205,32 @@
                     </td>
 
                     <td data-title="คงเหลือ">
-                        <asp:TextBox ID="txt_cash500_Remain" runat="server"  Enabled ="false"  class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_cash500_Remain" runat="server" Enabled="false" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="จำนวนเงิน" style="text-align: right;">
                         <b>
-                            <asp:Label ID="lbl_cash500_Amount" runat="server" ></asp:Label></b>
+                            <asp:Label ID="lbl_cash500_Amount" runat="server"></asp:Label></b>
                     </td>
 
 
                 </tr>
- 
+
                 <tr>
                     <td data-title="Logo" style="text-align: center;">
                         <img id="imgcash1000" src="../images/Icon/green/cash1000.png" width="40">
                     </td>
                     <td data-title="เดิม">
-                        <asp:TextBox ID="txt_cash1000_Before" runat="server" AutoPostBack ="true"  class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_cash1000_Before" runat="server" AutoPostBack="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="เอาออก" style="padding-right: 0px;">
-                        <asp:TextBox ID="txt_cash1000_Pick" runat="server"  AutoPostBack ="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_cash1000_Pick" runat="server" AutoPostBack="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="เอาออก" style="text-align: left; padding-left: 0px;">
-                         <asp:LinkButton CssClass="btn btn-dark " ID="btn_cash1000_Pick_Full" runat="server">
+                        <asp:LinkButton CssClass="btn btn-dark " ID="btn_cash1000_Pick_Full" runat="server">
                               <span class ="h4"> เต็มจำนวน </span>
                         </asp:LinkButton>
                     <td data-title="เอาเข้า" style="padding-right: 0px;">
-                        <asp:TextBox ID="txt_cash1000_Input" runat="server"  AutoPostBack ="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_cash1000_Input" runat="server" AutoPostBack="true" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="เอาเข้า" style="text-align: left; padding-left: 0px;">
                         <asp:LinkButton CssClass="btn btn-dark " ID="btn_cash1000_Input_Full" runat="server">
@@ -237,30 +239,30 @@
                     </td>
 
                     <td data-title="คงเหลือ">
-                        <asp:TextBox ID="txt_cash1000_Remain" runat="server"  Enabled ="false"  class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
+                        <asp:TextBox ID="txt_cash1000_Remain" runat="server" Enabled="false" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
                     </td>
                     <td data-title="จำนวนเงิน" style="text-align: right;">
                         <b>
-                            <asp:Label ID="lbl_cash1000_Amount" runat="server" ></asp:Label></b>
+                            <asp:Label ID="lbl_cash1000_Amount" runat="server"></asp:Label></b>
                     </td>
 
 
                 </tr>
- 
+
             </tbody>
-            <tfoot >
+            <tfoot>
                 <tr>
-                    <td colspan ="7" data-title="Logo" style="text-align: right;"><b>รวม</b> </td>
+                    <td colspan="7" data-title="Logo" style="text-align: right;"><b>รวม</b> </td>
                     <td data-title="รวม" style="text-align: right;">
                         <b>
-                            <asp:Label ID="lblSum" runat="server" ></asp:Label></b>
+                            <asp:Label ID="lblSum" runat="server"></asp:Label></b>
                     </td>
                 </tr>
             </tfoot>
         </table>
     </div>
 
- 
+
 
 
 </div>

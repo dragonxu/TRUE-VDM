@@ -34,7 +34,7 @@ Public Class VDM_BL
         RS = 6
     End Enum
 
-    Public Enum DeviceType
+    Public Enum Device
         CashIn = 1
         Cash20 = 2
         Cash100 = 3
@@ -52,6 +52,22 @@ Public Class VDM_BL
         InternalQRReader = 16
 
     End Enum
+
+    Public Enum DeviceType
+        CashIn = 1
+        CashOut = 2
+        CoinIn = 3
+        CoinOut = 4
+        Printer = 5
+        PassportScanner = 6
+        IPCamera = 7
+        SIMDispenser = 8
+        BarcodeReader = 9
+        ProductShelf = 10
+
+    End Enum
+
+
 
     Public Enum ShiftStatus
         Close = 0
@@ -557,9 +573,8 @@ Public Class VDM_BL
         Dim SQL As String = ""
         SQL &= "   Select TOP 1 SHIFT_ID" & vbLf
         SQL &= "  ,KO_ID" & vbLf
-        SQL &= "  ,SHIFT_Y,SHIFT_M,SHIFT_D,SHIFT_N" & vbLf
-        SQL &= "  ,'SHIFT'+SHIFT_Y+SHIFT_M+SHIFT_D+ convert(varchar,SHIFT_N)    SHIFT_CODE" & vbLf
-
+        SQL &= "  ,SHIFT_Y,SHIFT_M,SHIFT_D,SHIFT_N,KO_CODE" & vbLf
+        SQL &= "  ,dbo.FN_SHIFT_CODE(SHIFT_Y,SHIFT_M,SHIFT_D,ISNULL(KO_CODE,dbo.FN_KO_CODE(KO_ID)),SHIFT_N)    SHIFT_CODE" & vbLf
         SQL &= "  ,Open_Time,Open_By , USER_Open.FIRST_NAME+' '+ USER_Open.LAST_NAME Open_By_Name" & vbLf
         SQL &= "  ,Close_Time,Close_By  , USER_Close.FIRST_NAME+' '+ USER_Close.LAST_NAME Close_By_Name" & vbLf
         SQL &= "  From TB_SHIFT" & vbLf
@@ -585,10 +600,71 @@ Public Class VDM_BL
         Return IsOpen
     End Function
 
+    Public Function GetKiosk_Current_OTY(ByRef KO_ID As Integer, ByRef D_ID As Integer, ByRef Unit_Value As Integer) As Integer
+        Dim Current_QTY As Integer = 0
+        Dim SQL As String = ""
+
+        SQL &= "  --หา Stock ของ CoinIn CashIn para(KO_ID,D_ID,Unit_Value) " & vbLf
+
+        SQL &= "  Select TOP 1 TB_TRANSACTION_STOCK.TXN_ID " & vbLf
+        SQL &= "      ,TB_TRANSACTION_STOCK.D_ID " & vbLf
+        SQL &= "      ,TB_TRANSACTION_STOCK.Unit_Value " & vbLf
+        SQL &= "      ,TB_TRANSACTION_STOCK.BEFORE_QUANTITY " & vbLf
+        SQL &= "      ,TB_TRANSACTION_STOCK.DIFF_QUANTITY " & vbLf
+        SQL &= "    ,(TB_TRANSACTION_STOCK.BEFORE_QUANTITY)+ (TB_TRANSACTION_STOCK.DIFF_QUANTITY*MS_DEVICE_TYPE.Movement_Direction) CURRENT_QTY " & vbLf
+        SQL &= "  From TB_TRANSACTION_STOCK " & vbLf
+        SQL &= "  Left Join TB_SERVICE_TRANSACTION ON TB_SERVICE_TRANSACTION.TXN_ID=TB_TRANSACTION_STOCK.TXN_ID " & vbLf
+        SQL &= "  Left Join MS_DEVICE ON MS_DEVICE.D_ID=TB_TRANSACTION_STOCK.D_ID " & vbLf
+        SQL &= "  Left Join MS_DEVICE_TYPE ON MS_DEVICE_TYPE.DT_ID=MS_DEVICE.DT_ID  " & vbLf
+        SQL &= "  WHERE TB_SERVICE_TRANSACTION.KO_ID =" & KO_ID & "   " & vbLf
+        SQL &= "  And TB_TRANSACTION_STOCK.D_ID=" & D_ID & " " & vbLf
+        SQL &= "  And TB_TRANSACTION_STOCK.Unit_Value=" & Unit_Value & "  " & vbLf
+        SQL &= "  ORDER BY TB_TRANSACTION_STOCK.TXN_ID DESC " & vbLf
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        If DT.Rows.Count > 0 Then
+            Current_QTY = Val(DT.Rows(0).Item("CURRENT_QTY").ToString.Replace(",", ""))
+        End If
+        Return Current_QTY
+    End Function
+
+
+
 #End Region
 
+#Region "SetUnit_Value CoinIn CashIn"
 
 
+    Public Function GetCoinIn_List() As DataTable
+        Dim DT_CoinIn As New DataTable
+        DT_CoinIn.Columns.Add("Unit_Value")
+        DT_CoinIn.Columns.Add("Active_Status", GetType(Boolean))
 
+        DT_CoinIn.Rows.Add(1, 1)
+        DT_CoinIn.Rows.Add(2, 0)
+        DT_CoinIn.Rows.Add(5, 1)
+        DT_CoinIn.Rows.Add(10, 0)
+
+        DT_CoinIn.DefaultView.RowFilter = "Active_Status=1"
+        Return DT_CoinIn
+    End Function
+
+    Public Function GetCashIn_List() As DataTable
+        Dim DT_CashIn As New DataTable
+        DT_CashIn.Columns.Add("Unit_Value")
+        DT_CashIn.Columns.Add("Active_Status", GetType(Boolean))
+
+        DT_CashIn.Rows.Add(20, 1)
+        DT_CashIn.Rows.Add(50, 0)
+        DT_CashIn.Rows.Add(100, 1)
+        DT_CashIn.Rows.Add(500, 1)
+        DT_CashIn.Rows.Add(1000, 1)
+
+        DT_CashIn.DefaultView.RowFilter = "Active_Status=1"
+        Return DT_CashIn
+    End Function
+
+#End Region
 
 End Class

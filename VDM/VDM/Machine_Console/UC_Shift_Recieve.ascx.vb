@@ -13,6 +13,18 @@ Public Class UC_Shift_Recieve
         End Get
     End Property
 
+    Public ReadOnly Property Remain_coin() As Integer
+        Get
+            Return FormatNumber(coin1_Remain + coin5_Remain, 0)
+        End Get
+    End Property
+
+    Public ReadOnly Property Remain_cash() As Integer
+        Get
+            Return FormatNumber(cash20_Remain + cash100_Remain + cash500_Remain + cash1000_Remain, 0)
+        End Get
+    End Property
+
     'Coin1
     Public ReadOnly Property coin1_Before() As Integer
         Get
@@ -246,33 +258,33 @@ Public Class UC_Shift_Recieve
     Public Sub CurrentData()
         '--Current 
         Dim SQL As String = " SELECT * FROM TB_KIOSK_DEVICE WHERE KO_ID=" & BL.KioskID
-        SQL &= " AND D_ID IN (" & VDM_BL.DeviceType.Coin1 & "," & VDM_BL.DeviceType.CoinIn & "," & VDM_BL.DeviceType.CashIn & ")"
+        SQL &= " AND D_ID IN (" & VDM_BL.Device.Coin1 & "," & VDM_BL.Device.CoinIn & "," & VDM_BL.Device.CashIn & ")"
         Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)
         If DT.Rows.Count > 0 Then
-            DT.DefaultView.RowFilter = "D_ID=" & VDM_BL.DeviceType.CoinIn '& " AND Unit_Value=1"
+            DT.DefaultView.RowFilter = "D_ID=" & VDM_BL.Device.CoinIn '& " AND Unit_Value=1"
             If DT.DefaultView.Count > 0 Then
                 txt_coin1_Before.Text = FormatNumber(Val(DT.DefaultView(0).Item("Current_Qty")), 0)
             End If
-            DT.DefaultView.RowFilter = "D_ID=" & VDM_BL.DeviceType.CoinIn '& " AND Unit_Value=5"
+            DT.DefaultView.RowFilter = "D_ID=" & VDM_BL.Device.CoinIn '& " AND Unit_Value=5"
             If DT.DefaultView.Count > 0 Then
                 txt_coin5_Before.Text = FormatNumber(Val(DT.DefaultView(0).Item("Current_Qty")), 0)
             End If
-            DT.DefaultView.RowFilter = "D_ID=" & VDM_BL.DeviceType.CashIn '& " AND Unit_Value=20"
+            DT.DefaultView.RowFilter = "D_ID=" & VDM_BL.Device.CashIn '& " AND Unit_Value=20"
             If DT.DefaultView.Count > 0 Then
                 txt_cash20_Before.Text = FormatNumber(Val(DT.DefaultView(0).Item("Current_Qty")), 0)
             End If
-            DT.DefaultView.RowFilter = "D_ID=" & VDM_BL.DeviceType.CashIn '& " AND Unit_Value=100"
+            DT.DefaultView.RowFilter = "D_ID=" & VDM_BL.Device.CashIn '& " AND Unit_Value=100"
             If DT.DefaultView.Count > 0 Then
                 txt_cash100_Before.Text = FormatNumber(Val(DT.DefaultView(0).Item("Current_Qty")), 0)
             End If
 
-            'DT.DefaultView.RowFilter = "D_ID=" & VDM_BL.DeviceType.CashIn & " AND Unit_Value=500"
+            'DT.DefaultView.RowFilter = "D_ID=" & VDM_BL.Device.CashIn & " AND Unit_Value=500"
             'If DT.DefaultView.Count > 0 Then
             '    txt_cash500_Before.Text = FormatNumber(Val(DT.DefaultView(0).Item("Current_Qty")), 0)
             'End If
-            'DT.DefaultView.RowFilter = "D_ID=" & VDM_BL.DeviceType.CashIn & " AND Unit_Value=1000"
+            'DT.DefaultView.RowFilter = "D_ID=" & VDM_BL.Device.CashIn & " AND Unit_Value=1000"
             'If DT.DefaultView.Count > 0 Then
             '    txt_cash1000_Before.Text = FormatNumber(Val(DT.DefaultView(0).Item("Current_Qty")), 0)
             'End If
@@ -385,7 +397,7 @@ Public Class UC_Shift_Recieve
         txt_coin1_TextChanged(Nothing, Nothing)
     End Sub
     Private Sub btn_coin1_Input_Full_Click(sender As Object, e As EventArgs) Handles btn_coin1_Input_Full.Click
-        Dim DT As DataTable = GetDeviceInfo(VDM_BL.DeviceType.CoinIn)
+        Dim DT As DataTable = GetDeviceInfo(VDM_BL.Device.CoinIn)
         If DT.Rows.Count > 0 Then
             txt_coin1_Input.Text = FormatNumber(Val(DT.Rows(0).Item("Max_Qty")), 0)
             txt_coin1_TextChanged(Nothing, Nothing)
@@ -401,7 +413,7 @@ Public Class UC_Shift_Recieve
         txt_coin5_TextChanged(Nothing, Nothing)
     End Sub
     Private Sub btn_coin5_Input_Full_Click(sender As Object, e As EventArgs) Handles btn_coin5_Input_Full.Click
-        Dim DT As DataTable = GetDeviceInfo(VDM_BL.DeviceType.CoinIn)
+        Dim DT As DataTable = GetDeviceInfo(VDM_BL.Device.CoinIn)
         If DT.Rows.Count > 0 Then
             txt_coin5_Input.Text = FormatNumber(Val(DT.Rows(0).Item("Max_Qty")), 0)
             txt_coin5_TextChanged(Nothing, Nothing)
@@ -417,7 +429,7 @@ Public Class UC_Shift_Recieve
         txt_cash20_TextChanged(Nothing, Nothing)
     End Sub
     Private Sub btn_cash20_Input_Full_Click(sender As Object, e As EventArgs) Handles btn_cash20_Input_Full.Click
-        Dim DT As DataTable = GetDeviceInfo(VDM_BL.DeviceType.CashIn)
+        Dim DT As DataTable = GetDeviceInfo(VDM_BL.Device.CashIn)
         If DT.Rows.Count > 0 Then
             txt_cash20_Input.Text = FormatNumber(Val(DT.Rows(0).Item("Max_Qty")), 0)
             txt_cash20_TextChanged(Nothing, Nothing)
@@ -433,7 +445,7 @@ Public Class UC_Shift_Recieve
         txt_cash100_TextChanged(Nothing, Nothing)
     End Sub
     Private Sub btn_cash100_Input_Full_Click(sender As Object, e As EventArgs) Handles btn_cash100_Input_Full.Click
-        Dim DT As DataTable = GetDeviceInfo(VDM_BL.DeviceType.CashIn)
+        Dim DT As DataTable = GetDeviceInfo(VDM_BL.Device.CashIn)
         If DT.Rows.Count > 0 Then
             txt_cash100_Input.Text = FormatNumber(Val(DT.Rows(0).Item("Max_Qty")), 0)
             txt_cash100_TextChanged(Nothing, Nothing)
@@ -449,7 +461,7 @@ Public Class UC_Shift_Recieve
         txt_cash500_TextChanged(Nothing, Nothing)
     End Sub
     Private Sub btn_cash500_Input_Full_Click(sender As Object, e As EventArgs) Handles btn_cash500_Input_Full.Click
-        Dim DT As DataTable = GetDeviceInfo(VDM_BL.DeviceType.CashIn)
+        Dim DT As DataTable = GetDeviceInfo(VDM_BL.Device.CashIn)
         If DT.Rows.Count > 0 Then
             txt_cash500_Input.Text = FormatNumber(Val(DT.Rows(0).Item("Max_Qty")), 0)
             txt_cash500_TextChanged(Nothing, Nothing)
@@ -464,7 +476,7 @@ Public Class UC_Shift_Recieve
         txt_cash1000_TextChanged(Nothing, Nothing)
     End Sub
     Private Sub btn_cash1000_Input_Full_Click(sender As Object, e As EventArgs) Handles btn_cash1000_Input_Full.Click
-        Dim DT As DataTable = GetDeviceInfo(VDM_BL.DeviceType.CashIn)
+        Dim DT As DataTable = GetDeviceInfo(VDM_BL.Device.CashIn)
         If DT.Rows.Count > 0 Then
             txt_cash1000_Input.Text = FormatNumber(Val(DT.Rows(0).Item("Max_Qty")), 0)
             txt_cash1000_TextChanged(Nothing, Nothing)
@@ -479,32 +491,32 @@ Public Class UC_Shift_Recieve
     Function Validate() As Boolean
         Dim result As Boolean = True
         If Val(txt_coin1_Before.Text) < Val(txt_coin1_Pick.Text) Then
-            Alert(Me.Page, "ตรวจสอบจำนวน เอาออก coin1")
+            Alert(Me.Page, "ตรวจสอบจำนวนเงินเอาออก 1 บาท")
             result = False
         End If
 
         If Val(txt_coin5_Before.Text) < Val(txt_coin5_Pick.Text) Then
-            Alert(Me.Page, "ตรวจสอบจำนวน เอาออก coin5")
+            Alert(Me.Page, "ตรวจสอบจำนวนเงินเอาออก 5 บาท")
             result = False
         End If
 
         If Val(txt_cash20_Before.Text) < Val(txt_cash20_Pick.Text) Then
-            Alert(Me.Page, "ตรวจสอบจำนวน เอาออก cash20")
+            Alert(Me.Page, "ตรวจสอบจำนวนเงินเอาออก 20 บาท")
             result = False
         End If
 
         If Val(txt_cash100_Before.Text) < Val(txt_cash100_Pick.Text) Then
-            Alert(Me.Page, "ตรวจสอบจำนวน เอาออก cash100")
+            Alert(Me.Page, "ตรวจสอบจำนวนเงินเอาออก 100 บาท")
             result = False
         End If
 
         If Val(txt_cash500_Before.Text) < Val(txt_cash500_Pick.Text) Then
-            Alert(Me.Page, "ตรวจสอบจำนวน เอาออก cash500")
+            Alert(Me.Page, "ตรวจสอบจำนวนเงินเอาออก 500 บาท")
             result = False
         End If
 
         If Val(txt_cash1000_Before.Text) < Val(txt_cash1000_Pick.Text) Then
-            Alert(Me.Page, "ตรวจสอบจำนวน เอาออก cash1000")
+            Alert(Me.Page, "ตรวจสอบจำนวนเงินเอาออก 1000 บาท")
             result = False
         End If
 
@@ -515,9 +527,9 @@ Public Class UC_Shift_Recieve
         Dim result As Boolean = False
         Try
             'save Device
-            'VDM_BL.DeviceType.Coin1
+            'VDM_BL.Device.Coin1
             Dim SQL As String = "SELECT * FROM TB_SHIFT_STOCK "
-            SQL &= " WHERE SHIFT_ID=" & Session("SHIFT_ID") & " AND D_ID=" & VDM_BL.DeviceType.CoinIn & " AND Unit_Value=1"
+            SQL &= " WHERE SHIFT_ID=" & Session("SHIFT_ID") & " AND D_ID=" & VDM_BL.Device.CoinIn & " AND Unit_Value=1"
             Dim DT As New DataTable
             Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
             DA.Fill(DT)
@@ -527,7 +539,7 @@ Public Class UC_Shift_Recieve
                 DR = DT.NewRow
                 DT.Rows.Add(DR)
                 DR("SHIFT_ID") = Session("SHIFT_ID")
-                DR("D_ID") = VDM_BL.DeviceType.CoinIn
+                DR("D_ID") = VDM_BL.Device.CoinIn
                 DR("Unit_Value") = 1
             Else
                 DR = DT.Rows(0)
@@ -543,9 +555,9 @@ Public Class UC_Shift_Recieve
             Dim cmd As New SqlCommandBuilder(DA)
             DA.Update(DT)
 
-            'VDM_BL.DeviceType.Coin5
+            'VDM_BL.Device.Coin5
             SQL = "SELECT * FROM TB_SHIFT_STOCK "
-            SQL &= " WHERE SHIFT_ID=" & Session("SHIFT_ID") & " AND D_ID=" & VDM_BL.DeviceType.CoinIn & " AND Unit_Value=5"
+            SQL &= " WHERE SHIFT_ID=" & Session("SHIFT_ID") & " AND D_ID=" & VDM_BL.Device.CoinIn & " AND Unit_Value=5"
             DT = New DataTable
             DA = New SqlDataAdapter(SQL, BL.ConnectionString)
             DA.Fill(DT)
@@ -553,7 +565,7 @@ Public Class UC_Shift_Recieve
                 DR = DT.NewRow
                 DT.Rows.Add(DR)
                 DR("SHIFT_ID") = Session("SHIFT_ID")
-                DR("D_ID") = VDM_BL.DeviceType.CoinIn
+                DR("D_ID") = VDM_BL.Device.CoinIn
                 DR("Unit_Value") = 5
             Else
                 DR = DT.Rows(0)
@@ -569,9 +581,9 @@ Public Class UC_Shift_Recieve
             cmd = New SqlCommandBuilder(DA)
             DA.Update(DT)
 
-            'VDM_BL.DeviceType.Cash20
+            'VDM_BL.Device.Cash20
             SQL = "SELECT * FROM TB_SHIFT_STOCK "
-            SQL &= " WHERE SHIFT_ID=" & Session("SHIFT_ID") & " AND D_ID=" & VDM_BL.DeviceType.CashIn & " AND Unit_Value=20"
+            SQL &= " WHERE SHIFT_ID=" & Session("SHIFT_ID") & " AND D_ID=" & VDM_BL.Device.CashIn & " AND Unit_Value=20"
             DT = New DataTable
             DA = New SqlDataAdapter(SQL, BL.ConnectionString)
             DA.Fill(DT)
@@ -579,7 +591,7 @@ Public Class UC_Shift_Recieve
                 DR = DT.NewRow
                 DT.Rows.Add(DR)
                 DR("SHIFT_ID") = Session("SHIFT_ID")
-                DR("D_ID") = VDM_BL.DeviceType.CashIn
+                DR("D_ID") = VDM_BL.Device.CashIn
                 DR("Unit_Value") = 20
             Else
                 DR = DT.Rows(0)
@@ -595,9 +607,9 @@ Public Class UC_Shift_Recieve
             cmd = New SqlCommandBuilder(DA)
             DA.Update(DT)
 
-            'VDM_BL.DeviceType.Cash100
+            'VDM_BL.Device.Cash100
             SQL = "SELECT * FROM TB_SHIFT_STOCK "
-            SQL &= " WHERE SHIFT_ID=" & Session("SHIFT_ID") & " AND D_ID=" & VDM_BL.DeviceType.CashIn & " AND Unit_Value=100"
+            SQL &= " WHERE SHIFT_ID=" & Session("SHIFT_ID") & " AND D_ID=" & VDM_BL.Device.CashIn & " AND Unit_Value=100"
             DT = New DataTable
             DA = New SqlDataAdapter(SQL, BL.ConnectionString)
             DA.Fill(DT)
@@ -605,7 +617,7 @@ Public Class UC_Shift_Recieve
                 DR = DT.NewRow
                 DT.Rows.Add(DR)
                 DR("SHIFT_ID") = Session("SHIFT_ID")
-                DR("D_ID") = VDM_BL.DeviceType.CashIn
+                DR("D_ID") = VDM_BL.Device.CashIn
                 DR("Unit_Value") = 100
             Else
                 DR = DT.Rows(0)
@@ -621,9 +633,9 @@ Public Class UC_Shift_Recieve
             cmd = New SqlCommandBuilder(DA)
             DA.Update(DT)
 
-            'VDM_BL.DeviceType.Cash500
+            'VDM_BL.Device.Cash500
             SQL = "SELECT * FROM TB_SHIFT_STOCK "
-            SQL &= " WHERE SHIFT_ID=" & Session("SHIFT_ID") & " AND D_ID=" & VDM_BL.DeviceType.CashIn & " AND Unit_Value=500"
+            SQL &= " WHERE SHIFT_ID=" & Session("SHIFT_ID") & " AND D_ID=" & VDM_BL.Device.CashIn & " AND Unit_Value=500"
             DT = New DataTable
             DA = New SqlDataAdapter(SQL, BL.ConnectionString)
             DA.Fill(DT)
@@ -631,7 +643,7 @@ Public Class UC_Shift_Recieve
                 DR = DT.NewRow
                 DT.Rows.Add(DR)
                 DR("SHIFT_ID") = Session("SHIFT_ID")
-                DR("D_ID") = VDM_BL.DeviceType.CashIn
+                DR("D_ID") = VDM_BL.Device.CashIn
                 DR("Unit_Value") = 500
             Else
                 DR = DT.Rows(0)
@@ -645,9 +657,9 @@ Public Class UC_Shift_Recieve
                     DR("OPEN_FINAL") = IIf(txt_cash500_Remain.Text <> "", txt_cash500_Remain.Text.Replace(",", ""), DBNull.Value)
             End Select
 
-            'VDM_BL.DeviceType.Cash1000
+            'VDM_BL.Device.Cash1000
             SQL = "SELECT * FROM TB_SHIFT_STOCK "
-            SQL &= " WHERE SHIFT_ID=" & Session("SHIFT_ID") & " AND D_ID=" & VDM_BL.DeviceType.CashIn & " AND Unit_Value=1000"
+            SQL &= " WHERE SHIFT_ID=" & Session("SHIFT_ID") & " AND D_ID=" & VDM_BL.Device.CashIn & " AND Unit_Value=1000"
             DT = New DataTable
             DA = New SqlDataAdapter(SQL, BL.ConnectionString)
             DA.Fill(DT)
@@ -655,7 +667,7 @@ Public Class UC_Shift_Recieve
                 DR = DT.NewRow
                 DT.Rows.Add(DR)
                 DR("SHIFT_ID") = Session("SHIFT_ID")
-                DR("D_ID") = VDM_BL.DeviceType.CashIn
+                DR("D_ID") = VDM_BL.Device.CashIn
                 DR("Unit_Value") = 1000
             Else
                 DR = DT.Rows(0)

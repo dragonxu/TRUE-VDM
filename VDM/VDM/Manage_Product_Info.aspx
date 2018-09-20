@@ -40,7 +40,7 @@
                                     <ItemTemplate>
                                         <tr>
                                             <td data-title="PRODUCT" align="center">
-                                                <asp:Image ID="img" runat="server" Width="60px"></asp:Image><br/>
+                                                <asp:Image ID="img" runat="server"  Width="60px"></asp:Image><br/>
                                                 <asp:Label ID="lblProductCode" runat="server"></asp:Label>
                                             </td>
                                             <td data-title="RRAND">

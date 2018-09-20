@@ -230,7 +230,6 @@ Public Class Manage_OpenClose_Shift
                 Exit Sub
             End If
 
-
             Try
                 '--Save
                 If Validate Then
@@ -245,7 +244,9 @@ Public Class Manage_OpenClose_Shift
             End Try
 
 
-            '--Update TB_KIOSK_DEVICE Current,Status sp
+            '--Update TB_KIOSK_DEVICE
+            UPDATE_DEVICE_Qty()
+
             '--สั่ง Open/Close Shift
 
             Alert(Me.Page, "บันทึกสำเร็จ")
@@ -259,4 +260,146 @@ Public Class Manage_OpenClose_Shift
 
 
     End Sub
+
+
+    Private Sub UPDATE_DEVICE_Qty()
+        '----เงินทอน
+        Dim Change As DataTable = UC_Shift_Change.Current_Data()
+        Dim SQL As String = ""
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter
+        Dim DR As DataRow
+        Dim cmd As New SqlCommandBuilder
+        If Change.Rows.Count > 0 Then
+            For i As Integer = 0 To Change.Rows.Count - 1
+                SQL = "SELECT * FROM TB_KIOSK_DEVICE "
+                SQL &= " WHERE KO_ID=" & BL.KioskID & " AND D_ID=" & Change.Rows(i).Item("D_ID")
+                DT = New DataTable
+                DA = New SqlDataAdapter(SQL, BL.ConnectionString)
+                DA.Fill(DT)
+                If DT.Rows.Count = 0 Then
+                    DR = DT.NewRow
+                    DT.Rows.Add(DR)
+                    DR("KO_ID") = BL.KioskID
+                    DR("D_ID") = Change.Rows(i).Item("D_ID")
+                Else
+                    DR = DT.Rows(0)
+                End If
+
+                DR("Current_Qty") = IIf(Val(Change.Rows(i).Item("Remain")) <> 0, Val(Change.Rows(i).Item("Remain")), DBNull.Value)
+                DR("DT_ID") = Change.Rows(i).Item("DT_ID")
+                'DR("DS_ID") =
+                DR("Update_Time") = Now
+                cmd = New SqlCommandBuilder(DA)
+                DA.Update(DT)
+            Next
+        End If
+
+        '----เงินรับ 
+        '---------  CoinIn  
+        Dim Current_Qty_CoinIn As Integer = 0
+        Dim DT_CoinIn As DataTable = BL.GetCoinIn_List()
+        If DT_CoinIn.Rows.Count > 0 Then
+            For i As Integer = 0 To DT_CoinIn.Rows.Count - 1
+                Current_Qty_CoinIn = Current_Qty_CoinIn + BL.GetKiosk_Current_OTY(BL.KioskID, VDM_BL.Device.CoinIn, DT_CoinIn.Rows(i).Item("Unit_Value"))
+            Next
+        End If
+
+        SQL = "SELECT * FROM TB_KIOSK_DEVICE "
+            SQL &= " WHERE KO_ID=" & BL.KioskID & " AND D_ID=" & VDM_BL.Device.CoinIn
+            DT = New DataTable
+            DA = New SqlDataAdapter(SQL, BL.ConnectionString)
+            DA.Fill(DT)
+            If DT.Rows.Count = 0 Then
+                DR = DT.NewRow
+                DT.Rows.Add(DR)
+                DR("KO_ID") = BL.KioskID
+                DR("D_ID") = VDM_BL.Device.CoinIn
+            Else
+                DR = DT.Rows(0)
+            End If
+            DR("Current_Qty") = Val(UC_Shift_Recieve.Remain_coin)
+            DR("DT_ID") = VDM_BL.DeviceType.CoinIn
+            'DR("DS_ID") =
+            DR("Update_Time") = Now
+            cmd = New SqlCommandBuilder(DA)
+        DA.Update(DT)
+
+
+        '----------------------------------------------------------
+        '---------  CashIn
+        Dim Current_Qty_CashIn As Integer = 0
+        Dim DT_CashIn As DataTable = BL.GetCashIn_List()
+        If DT_CashIn.Rows.Count > 0 Then
+            For i As Integer = 0 To DT_CashIn.Rows.Count - 1
+                Current_Qty_CashIn = Current_Qty_CashIn + BL.GetKiosk_Current_OTY(BL.KioskID, VDM_BL.Device.CashIn, DT_CashIn.Rows(i).Item("Unit_Value"))
+            Next
+        End If
+        SQL = "SELECT * FROM TB_KIOSK_DEVICE "
+        SQL &= " WHERE KO_ID=" & BL.KioskID & " AND D_ID=" & VDM_BL.Device.CashIn
+        DT = New DataTable
+        DA = New SqlDataAdapter(SQL, BL.ConnectionString)
+        DA.Fill(DT)
+        If DT.Rows.Count = 0 Then
+            DR = DT.NewRow
+            DT.Rows.Add(DR)
+            DR("KO_ID") = BL.KioskID
+            DR("D_ID") = VDM_BL.Device.CashIn
+        Else
+            DR = DT.Rows(0)
+        End If
+        DR("Current_Qty") = Current_Qty_CashIn
+        DR("DT_ID") = VDM_BL.DeviceType.CashIn
+        'DR("DS_ID") =
+        DR("Update_Time") = Now
+        cmd = New SqlCommandBuilder(DA)
+        DA.Update(DT)
+
+        '----Product
+
+        '----SIM
+
+
+        '----Paper
+        SQL = "SELECT * FROM TB_KIOSK_DEVICE "
+        SQL &= " WHERE KO_ID=" & BL.KioskID & " AND D_ID=" & VDM_BL.Device.Printer
+        DT = New DataTable
+        DA = New SqlDataAdapter(SQL, BL.ConnectionString)
+        DA.Fill(DT)
+        If DT.Rows.Count = 0 Then
+            DR = DT.NewRow
+            DT.Rows.Add(DR)
+            DR("KO_ID") = BL.KioskID
+            DR("D_ID") = VDM_BL.Device.Printer
+        Else
+            DR = DT.Rows(0)
+        End If
+        DR("Current_Qty") = Val(UC_Shift_StockPaper.Total)
+        DR("DT_ID") = VDM_BL.DeviceType.Printer
+        'DR("DS_ID") =
+        DR("Update_Time") = Now
+        cmd = New SqlCommandBuilder(DA)
+        DA.Update(DT)
+
+
+
+        '--2   Cash 20
+        '--3   Cash 100
+        '--5   Coin 1
+        '--6   Coin 5
+
+        '--1   Cash In
+        '--4   Coin In
+
+        '10  Product Shelf
+        '11  SIM Dispenser 1
+        '12  SIM Dispenser 2
+        '13  SIM Dispenser 3
+
+        '--7   Printer
+
+
+    End Sub
+
+
 End Class
