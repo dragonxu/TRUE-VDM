@@ -98,70 +98,65 @@ Module ModuleGlobal
         ScriptManager.RegisterStartupScript(Page, GetType(String), UNIQUE_POPUP_ID, Script, True)
     End Sub
 
-    Public Enum ToaStrMode
+    Public Enum ToastrMode
         Success = 1
         Warning = 2
         Danger = 3
         Info = 4
+        Confirm = 5
     End Enum
 
-    Public Enum ToaStrPositon
+    Public Enum ToastrPositon
         TopLeft = 1
-        TopCenter = 2
+        Top = 2
         TopRight = 3
         BottomLeft = 4
-        BottomCenter = 5
+        Bottom = 5
         BottomRight = 6
-        TopFullWidth = 7
-        BottomFullWidth = 8
     End Enum
 
-    Public Sub Message_ToaStr(ByVal Message As String, ByVal Mode As ToaStrMode, ByVal Position As ToaStrPositon, ByVal Page As Page, Optional ByVal TimeOut_MS As Integer = 5000, Optional ByVal ExtendTimeOut_MS As Integer = 5000)
+    Public Sub Message_Toastr(ByVal Message As String, ByVal Mode As ToaStrMode, ByVal Position As ToaStrPositon, ByVal Page As Page, Optional ByVal TimeOut_MS As Integer = 5000)
         Dim _mode As String = ""
 
         Select Case Mode
-            Case ToaStrMode.Success
+            Case ToastrMode.Success
                 _mode = "success"
-            Case ToaStrMode.Warning
+            Case ToastrMode.Warning
                 _mode = "warning"
-            Case ToaStrMode.Danger
+            Case ToastrMode.Danger
                 _mode = "error"
-            Case ToaStrMode.Info
-                _mode = "info"
+            Case ToastrMode.Info
+                _mode = "information"
+            Case ToastrMode.Confirm
+                _mode = "confirm"
         End Select
 
         Dim _position As String = ""
         Select Case Position
-            Case ToaStrPositon.TopLeft
-                _position = "toast-top-left"
-            Case ToaStrPositon.TopCenter
-                _position = "toast-top-center"
-            Case ToaStrPositon.TopRight
-                _position = "toast-top-right"
-            Case ToaStrPositon.BottomLeft
-                _position = "toast-bottom-left"
-            Case ToaStrPositon.BottomCenter
-                _position = "toast-bottom-center"
-            Case ToaStrPositon.BottomRight
-                _position = "toast-bottom-right"
-            Case ToaStrPositon.TopFullWidth
-                _position = "toast-top-full-width"
-            Case ToaStrPositon.BottomFullWidth
-                _position = "toast-bottom-full-width"
+            Case ToastrPositon.TopLeft
+                _position = "topLeft"
+            Case ToastrPositon.Top
+                _position = "top"
+            Case ToastrPositon.TopRight
+                _position = "topRight"
+            Case ToastrPositon.BottomLeft
+                _position = "bottomLeft"
+            Case ToastrPositon.Bottom
+                _position = "bottom"
+            Case ToastrPositon.BottomRight
+                _position = "bottomRight"
+
         End Select
 
+        Message = Message.Replace("'", "\'").Replace("""", "\""").Replace(vbLf, "<br/>")
 
+        Dim Script = "$('#toastrMessage').val(""" & Message & """);" & vbLf
+        Script &= "$('#toastrType').val(""" & _mode & """);" & vbLf
+        Script &= "$('#toastrPosition').val(""" & _position & """);" & vbLf
+        Script &= "$('#toastrTimeout').val(""" & TimeOut_MS & """);" & vbLf
+        Script &= " $('.showToastr').click();" & vbLf
 
-        Message = Message.Replace("'", "\'").Replace(vbLf, "<br/>")
-
-        Dim _option = " {" & vbLf
-        _option &= "'extendedTimeOut': '" & ExtendTimeOut_MS & "'," & vbLf
-        _option &= "'timeOut': '" & TimeOut_MS & "'," & vbLf
-        _option &= "'positionClass':'" & _position & "'" & vbLf
-        _option &= "}"
-        Dim SCript As String = "toastr." & _mode & "('" & Message & "', '', " & _option & ");"
-
-        ScriptManager.RegisterStartupScript(Page, GetType(String), "toastr_msg", SCript, True)
+        ScriptManager.RegisterStartupScript(Page, GetType(String), "toastr_msg", Script, True)
     End Sub
 #End Region
 
@@ -252,54 +247,6 @@ Module ModuleGlobal
         Return String.Join("", System.Security.Cryptography.MD5.Create().ComputeHash(System.Text.Encoding.ASCII.GetBytes(Input)).Select(Function(x) x.ToString("x2")))
     End Function
 
-#Region "MaterialForm"
-    Public Sub StoreMaterialForm(ByRef Panel As Control)
-        For i As Integer = 0 To Panel.Controls.Count - 1
-            Dim _ctrl As Control = Panel.Controls(i)
-            If _ctrl.HasControls Then
-                For j As Integer = 0 To _ctrl.Controls.Count - 1
-                    StoreMaterialForm(_ctrl.Controls(j))
-                Next
-            Else
-                Dim _class As String() = _ctrl.GetType().ToString().Split(".")
-                Dim _ctrlClass As String = _class(_class.Length - 1)
-                Select Case _ctrlClass
-                    Case "TextBox"
-                        If CType(_ctrl, TextBox).CssClass.IndexOf("form-control") > -1 And CType(_ctrl, TextBox).Text = "" Then
-                            AddCssClass(_ctrl, "empty")
-                        ElseIf CType(_ctrl, TextBox).CssClass.IndexOf("form-control") > -1 Then
-                            RemoveCssClass(_ctrl, "empty")
-                        End If
-                End Select
-            End If
-        Next
-    End Sub
-
-    Public Sub AddCssClass(ByRef Control As TextBox, ByVal CssClass As String)
-        Dim _Class() As String = Control.CssClass.Split(" ")
-        Dim Result As String = ""
-        For i As Integer = 0 To _Class.Length - 1
-            If _Class(i) <> "" And _Class(i) <> CssClass And Result.IndexOf(" " & _Class(i)) = -1 Then
-                Result &= " " & Trim(_Class(i))
-            End If
-        Next
-        If Result <> "" Then Result = Result.Substring(1)
-        Result &= " " & CssClass
-        Control.CssClass = Result
-    End Sub
-
-    Public Sub RemoveCssClass(ByRef Control As TextBox, ByVal CssClass As String)
-        Dim _Class() As String = Control.CssClass.Split(" ")
-        Dim Result As String = ""
-        For i As Integer = 0 To _Class.Length - 1
-            If _Class(i) <> "" And _Class(i) <> CssClass Then
-                Result &= " " & Trim(_Class(i))
-            End If
-        Next
-        If Result <> "" Then Result = Result.Substring(1)
-        Control.CssClass = Result
-    End Sub
-#End Region
 
 #Region "JSON"
     '---- Report Result in Collection Format -----------
@@ -332,6 +279,16 @@ Module ModuleGlobal
         Return T.Ticks / 10000
     End Function
 
+    Public Function RemoveTagCssClass(ByVal CurrentClass As String, ByVal ClassToRemove As String) As String
+        Dim Result As String = CurrentClass
+        While Result.IndexOf(ClassToRemove) > -1
+            Result = Result.Replace(ClassToRemove, "")
+        End While
+        While Result.IndexOf("  ") > -1
+            Result = Result.Replace("  ", " ")
+        End While
+        Return Result
+    End Function
 
     Public Function ExcelContentType(ByVal ContentType As String) As Boolean
         Dim Result As Boolean = True

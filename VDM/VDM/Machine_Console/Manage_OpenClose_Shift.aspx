@@ -9,6 +9,16 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style  type="text/css">
+        .nav-pills > li.active > a, 
+        .nav-pills > li.active > a:hover,
+        .nav-pills > li.active > a:focus,
+        .nav > li > a:hover, 
+        .nav > li > a:focus {
+            background-color:beige !important;
+            color: #454545 !important;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:UpdatePanel ID="udpList" runat="server">
@@ -84,11 +94,10 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <div class="col-xs-12" style="text-align: left;">
+                                                <div class="col-xs-12 text-left">
                                                     <div class="fa-hover text-default   ">
                                                         <a id="lnkBack" runat="server" title="Back / กลับไปหน้า Overview">
-                                                            <h2><i class="fa fa-angle-double-left"></i><span class="h3" style="vertical-align: middle;">
-                                                                กลับไปหน้า Overview </span>     </h2>
+                                                            <h3><i class="fa fa-angle-double-left"></i> กลับไปหน้า Overview </h3>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -143,7 +152,7 @@
                                 <div class="p-a">
                                     <div class="overflow-hidden">
                                         <h1><b>Stock สินค้า</b>  
-                                            <img id="imgProduct" src="../images/Icon/green/barcode.png" width="40">
+                                            <img id="imgProduct" src="../images/Icon/green/shelf.png" width="40">
                                         </h1>
                                     </div>
                                 </div>

@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="vendor/bootstrap-daterangepicker/daterangepicker-bs3.css">
   <link rel="stylesheet" href="vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css">
   <link rel="stylesheet" href="vendor/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
+  <link rel="stylesheet" href="vendor/sweetalert/dist/sweetalert.css">
   <!-- End Plug In -->
   
   <link rel="stylesheet" href="styles/font-awesome.css" />
@@ -33,9 +34,9 @@
   <link rel="stylesheet" href="styles/animate.css" />
   <link rel="stylesheet" href="styles/app.css" />
   <link rel="stylesheet" href="styles/app.skins.css" />
-
-  <link rel="stylesheet" href="vendor/sweetalert/dist/sweetalert.css">
-
+  <!------VDM Extent------>
+  <link rel="stylesheet" href="styles/product_shelf.css">
+    <!-- end VDM Extent -->
   <!-- endbuild -->
   
   <!-- Custom Style -->
@@ -282,6 +283,7 @@
             <ul class="dropdown-menu">
               <li>
                 <asp:LinkButton ID="btnLogout" runat="server">Logout</asp:LinkButton>
+                  
               </li>
             </ul>
           </li>
@@ -294,15 +296,20 @@
           <div class="main-content checkbo">      
             <asp:ScriptManager ID="scm" runat="server"></asp:ScriptManager>
 
-            <asp:ContentPlaceHolder ID="MainContent" runat="server">
-        
-            </asp:ContentPlaceHolder>      
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
           </div>
-      <!-- /main area -->
-      
-    <!-- /content panel -->
-    
+      <!-- /main area -->      
+    <!-- /content panel -->    
   </div>
+  
+    <div style="display:none;" id="toastBuffer">
+        <textarea id="toastrMessage"></textarea>
+        <input type="text" id="toastrType" />
+        <input type="text" id="toastrPosition" />
+        <input type="text" id="toastrTimeout" />
+        <input type="button" href="javascript:;" class="showToastr"/>
+    </div>  
+
   </form>
   <!-- build:js({.tmp,app}) scripts/app.min.js -->
   <script src="scripts/helpers/modernizr.js" type="text/javascript"></script>
@@ -341,10 +348,13 @@
   <script src="vendor/bootstrap-maxlength/bootstrap-maxlength.min.js" type="text/javascript" language="javascript"></script>
   <script src="vendor/typeahead.js/dist/typeahead.bundle.js" type="text/javascript" language="javascript"></script>
   <script src="vendor/multiselect/js/jquery.multi-select.js" type="text/javascript" language="javascript"></script>
+  <script src="vendor/noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+  <script src="scripts/helpers/noty-defaults.js"></script>
   <!-- end page scripts -->
   <!-- initialize page scripts -->
   <script src="scripts/forms/plugins.js" type="text/javascript"></script>
-  <!-- end initialize page scripts -->
+  <script src="scripts/toastr.js" type="text/javascript"></script>
+  <!-- end page scripts -->
   <asp:ContentPlaceHolder ID="ScriptContainer" runat="server"></asp:ContentPlaceHolder>
 
 </body>

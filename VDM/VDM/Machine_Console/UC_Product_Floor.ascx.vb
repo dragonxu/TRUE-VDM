@@ -6,6 +6,8 @@
 
     Dim BL As New VDM_BL
 
+
+
     Public ReadOnly Property PixelPerMM As Double
         Get
             Return ParentShelf.PixelPerMM
@@ -83,16 +85,33 @@
         End Set
     End Property
 
-    Public Property IsSelected As Boolean
+    Public Property HighLight As UC_Product_Slot.HighLightMode
         Get
-            Return Floor.CssClass = "machine_floor selected"
+            Select Case True
+                Case Floor.CssClass.IndexOf("highlightYellow") > -1
+                    Return UC_Product_Slot.HighLightMode.YellowDotted
+                Case Floor.CssClass.IndexOf("highlightGreen") > -1
+                    Return UC_Product_Slot.HighLightMode.GreenSolid
+                Case Floor.CssClass.IndexOf("highlightRed") > -1
+                    Return UC_Product_Slot.HighLightMode.RedSolid
+                Case Else
+                    Return UC_Product_Slot.HighLightMode.None
+            End Select
         End Get
-        Set(value As Boolean)
-            If value Then
-                Floor.CssClass = "machine_floor selected"
-            Else
-                Floor.CssClass = "machine_floor"
-            End If
+        Set(value As UC_Product_Slot.HighLightMode)
+            Floor.CssClass = RemoveTagCssClass(Floor.CssClass, "highlightYellow")
+            Floor.CssClass = RemoveTagCssClass(Floor.CssClass, "highlightGreen")
+            Floor.CssClass = RemoveTagCssClass(Floor.CssClass, "highlightRed")
+            Select Case value
+                Case UC_Product_Slot.HighLightMode.YellowDotted
+                    Floor.CssClass &= " highlightYellow"
+                Case UC_Product_Slot.HighLightMode.GreenSolid
+                    Floor.CssClass &= " highlightGreen"
+                Case UC_Product_Slot.HighLightMode.RedSolid
+                    Floor.CssClass &= " highlightRed"
+                Case UC_Product_Slot.HighLightMode.None
+                    '-------- Donothing --------------
+            End Select
         End Set
     End Property
 
@@ -141,7 +160,7 @@
         DT.Columns.Add("PRODUCT_LEVEL_PERCENT", GetType(String))
         DT.Columns.Add("PRODUCT_LEVEL_COLOR", GetType(Drawing.Color))
         DT.Columns.Add("QUANTITY_BAR_COLOR", GetType(Drawing.Color))
-        DT.Columns.Add("IsSelected", GetType(Boolean))
+        DT.Columns.Add("HighLight", GetType(Integer))
 
         For Each Item In rptSlot.Items
             If Item.ItemType <> ListItemType.Item And Item.ItemType <> ListItemType.AlternatingItem Then Continue For
@@ -157,7 +176,7 @@
             DR("PRODUCT_LEVEL_PERCENT") = Slot.PRODUCT_LEVEL_PERCENT
             DR("PRODUCT_LEVEL_COLOR") = Slot.PRODUCT_LEVEL_COLOR
             DR("QUANTITY_BAR_COLOR") = Slot.QUANTITY_BAR_COLOR
-            DR("IsSelected") = Slot.IsSelected
+            DR("HighLight") = Slot.HighLight
             DT.Rows.Add(DR)
         Next
 
@@ -180,7 +199,7 @@
             .PRODUCT_LEVEL_PERCENT = e.Item.DataItem("PRODUCT_LEVEL_PERCENT")
             .PRODUCT_LEVEL_COLOR = e.Item.DataItem("PRODUCT_LEVEL_COLOR")
             .QUANTITY_BAR_COLOR = e.Item.DataItem("QUANTITY_BAR_COLOR")
-            .IsSelected = e.Item.DataItem("IsSelected")
+            .HighLight = e.Item.DataItem("HighLight")
             '-------------------- Default Value ---------------
             .SLOT_HEIGHT = FLOOR_HEIGHT
             .POS_Y = POS_Y
@@ -189,13 +208,13 @@
 
     Public Sub DeselectAllSlot()
         For i As Integer = 0 To Slots.Count - 1
-            Slots(i).IsSelected = False
+            Slots(i).HighLight = UC_Product_Slot.HighLightMode.None
         Next
     End Sub
 
     Public Sub AddSlot(ByVal SLOT_ID As Integer, ByVal SLOT_NAME As String, ByVal POS_X As Integer, ByVal SLOT_WIDTH As Integer,
                        ByVal PRODUCT_ID As Integer, ByVal PRODUCT_CODE As String, ByVal PRODUCT_QUANTITY As Integer, ByVal PRODUCT_LEVEL_PERCENT As String,
-                       ByVal PRODUCT_LEVEL_COLOR As Drawing.Color, ByVal QUANTITY_BAR_COLOR As Drawing.Color, ByVal IsSelected As Boolean)
+                       ByVal PRODUCT_LEVEL_COLOR As Drawing.Color, ByVal QUANTITY_BAR_COLOR As Drawing.Color, ByVal HighLight As UC_Product_Slot.HighLightMode)
         Dim DT As DataTable = SlotDatas()
         Dim DR As DataRow = DT.NewRow
 
@@ -209,7 +228,7 @@
         DR("PRODUCT_LEVEL_PERCENT") = PRODUCT_LEVEL_PERCENT
         DR("PRODUCT_LEVEL_COLOR") = PRODUCT_LEVEL_COLOR
         DR("QUANTITY_BAR_COLOR") = QUANTITY_BAR_COLOR
-        DR("IsSelected") = IsSelected
+        DR("HighLight") = HighLight
 
         DT.Rows.Add(DR)
         rptSlot.DataSource = DT
@@ -219,7 +238,7 @@
     Public Sub AddSlot(ByVal SlotDataRow As DataRow)
         AddSlot(SlotDataRow("SLOT_ID"), SlotDataRow("SLOT_NAME"), SlotDataRow("POS_X"), SlotDataRow("SLOT_WIDTH"), SlotDataRow("PRODUCT_ID"),
                 SlotDataRow("PRODUCT_CODE"), SlotDataRow("PRODUCT_QUANTITY"), SlotDataRow("PRODUCT_LEVEL_PERCENT"), SlotDataRow("PRODUCT_LEVEL_COLOR"), SlotDataRow("QUANTITY_BAR_COLOR"),
-                SlotDataRow("IsSelected"))
+                SlotDataRow("HighLight"))
     End Sub
 
     Public Sub AddSlots(ByVal SlotsDataTable As DataTable)
@@ -246,7 +265,7 @@
     Public ReadOnly Property SelectedSlot As UC_Product_Slot
         Get
             For i As Integer = 0 To Slots.Count - 1
-                If Slots(i).IsSelected Then
+                If Slots(i).HighLight <> UC_Product_Slot.HighLightMode.None Then
                     Return Slots(i)
                 End If
             Next

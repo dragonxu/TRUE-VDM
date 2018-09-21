@@ -90,6 +90,7 @@
               <asp:Literal ID="lblNotificationList" runat="server"></asp:Literal>              
             </div>            
           </div>--%>
+   
      </div>
 </asp:Content>
 <asp:Content ID="ScriptContainer" ContentPlaceHolderID="ScriptContainer" runat="server">

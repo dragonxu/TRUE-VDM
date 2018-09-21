@@ -118,7 +118,7 @@ Public Class UC_Kiosk_Shelf
         txtShelfWidth.Text = Shelf.SHELF_WIDTH
         txtShelfHeight.Text = Shelf.SHELF_HEIGHT
         txtShelfDepth.Text = Shelf.SHELF_DEPTH
-        Shelf.IsSelected = True
+        Shelf.HighLight = UC_Product_Slot.HighLightMode.YellowDotted
 
         btnClearShelf.Visible = Shelf.Floors.Count > 0
         pnlShelf.Visible = True
@@ -163,7 +163,7 @@ Public Class UC_Kiosk_Shelf
         lblFloorName.Text = Chr(Asc("A") + Shelf.Floors.Count) & " (new) "
 
         btnRemoveFloor.Visible = False
-        Shelf.IsSelected = True
+        Shelf.HighLight = UC_Product_Slot.HighLightMode.YellowDotted
         pnlFloor.Visible = True
     End Sub
 
@@ -176,8 +176,8 @@ Public Class UC_Kiosk_Shelf
         lblFloorName.Text = Chr(Asc("A") + Index + 1) & " (new)"
 
         btnRemoveFloor.Visible = False
-        Shelf.IsSelected = True
-        Shelf.Floors(Index).IsSelected = True
+        Shelf.HighLight = UC_Product_Slot.HighLightMode.YellowDotted
+        Shelf.Floors(Index).HighLight = UC_Product_Slot.HighLightMode.YellowDotted
         pnlFloor.Visible = True
     End Sub
 
@@ -192,7 +192,7 @@ Public Class UC_Kiosk_Shelf
         '-------- Set Floor Name -----------
         lblFloorName.Text = Sender.FLOOR_NAME
 
-        Sender.IsSelected = True
+        Sender.HighLight = UC_Product_Slot.HighLightMode.YellowDotted
         pnlFloor.Visible = True
     End Sub
 
@@ -210,10 +210,10 @@ Public Class UC_Kiosk_Shelf
         End If
         '--------------- Apply --------------------
         Select Case True
-            Case Shelf.IsSelected And Not IsNothing(Shelf.SelectedFloor) '---------- Add Floor After ----------
+            Case Shelf.HighLight <> UC_Product_Slot.HighLightMode.None And Not IsNothing(Shelf.SelectedFloor) '---------- Add Floor After ----------
                 Shelf.AddFloor(0, txtFloorHeight.Text, txtFloorY.Text, False, True, Nothing, True, Shelf.Floors.IndexOf(Shelf.SelectedFloor) + 1)
                 ClearFloorProperty()
-            Case Shelf.IsSelected  '---------- Add Floor --------------
+            Case Shelf.HighLight <> UC_Product_Slot.HighLightMode.None  '---------- Add Floor --------------
                 Shelf.AddFloor(0, txtFloorHeight.Text, txtFloorY.Text, False, True, Nothing, True, Shelf.Floors.Count)
                 ClearFloorProperty()
             Case Not IsNothing(Shelf.SelectedFloor) '---------- Edit Floor ----------
@@ -241,7 +241,7 @@ Public Class UC_Kiosk_Shelf
 
         btnRemoveSlot.Visible = False
 
-        Sender.IsSelected = True '-------- Select Floor -----------
+        Sender.HighLight = UC_Product_Slot.HighLightMode.YellowDotted '-------- Select Floor -----------
         pnlSlot.Visible = True
     End Sub
 
@@ -259,7 +259,7 @@ Public Class UC_Kiosk_Shelf
 
         btnRemoveSlot.Visible = True
 
-        Sender.IsSelected = True '-------- Select Slot -----------
+        Sender.HighLight = UC_Product_Slot.HighLightMode.YellowDotted '-------- Select Slot -----------
         pnlSlot.Visible = True
     End Sub
 
@@ -330,7 +330,7 @@ Public Class UC_Kiosk_Shelf
 
         '------------ Bind Floor -----------------
         SQL = "SELECT FLOOR_ID,HEIGHT,POS_Y," & vbLf
-        SQL &= "CAST(0 AS BIT) IsSelected,CAST(1 AS BIT) ShowFloorName,CAST(1 AS BIT) ShowMenu,NULL SlotDatas " & vbLf
+        SQL &= "0 HighLight,CAST(1 AS BIT) ShowFloorName,CAST(1 AS BIT) ShowMenu,NULL SlotDatas " & vbLf
         SQL &= "FROM TB_PRODUCT_FLOOR" & vbLf
         SQL &= "WHERE SHELF_ID=" & Shelf.SHELF_ID & " ORDER BY FLOOR_ID"
         DT = New DataTable

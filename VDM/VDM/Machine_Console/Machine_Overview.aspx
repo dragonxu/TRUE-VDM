@@ -32,10 +32,8 @@
 
             <div class="card-block">
                 <div class="row ">
-                    <h3>
-                        <div class="row m-a-0 text-uppercase bold mobile_group_head">
-                            Product Stock
-                        </div>
+                    <h3 class="row m-a-0 text-uppercase bold mobile_group_head">
+                        Product Stock
                     </h3>
                 </div>
                 <div class="row ">

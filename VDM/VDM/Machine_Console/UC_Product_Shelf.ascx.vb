@@ -83,16 +83,33 @@
         End Set
     End Property
 
-    Public Property IsSelected As Boolean
+    Public Property HighLight As UC_Product_Slot.HighLightMode
         Get
-            Return Shelf.CssClass = "machine_stock btn-shadow selected"
+            Select Case True
+                Case Shelf.CssClass.IndexOf("highlightYellow") > -1
+                    Return UC_Product_Slot.HighLightMode.YellowDotted
+                Case Shelf.CssClass.IndexOf("highlightGreen") > -1
+                    Return UC_Product_Slot.HighLightMode.GreenSolid
+                Case Shelf.CssClass.IndexOf("highlightRed") > -1
+                    Return UC_Product_Slot.HighLightMode.RedSolid
+                Case Else
+                    Return UC_Product_Slot.HighLightMode.None
+            End Select
         End Get
-        Set(value As Boolean)
-            If value Then
-                Shelf.CssClass = "machine_stock btn-shadow selected"
-            Else
-                Shelf.CssClass = "machine_stock btn-shadow"
-            End If
+        Set(value As UC_Product_Slot.HighLightMode)
+            Shelf.CssClass = RemoveTagCssClass(Shelf.CssClass, "highlightYellow")
+            Shelf.CssClass = RemoveTagCssClass(Shelf.CssClass, "highlightGreen")
+            Shelf.CssClass = RemoveTagCssClass(Shelf.CssClass, "highlightRed")
+            Select Case value
+                Case UC_Product_Slot.HighLightMode.YellowDotted
+                    Shelf.CssClass &= " highlightYellow"
+                Case UC_Product_Slot.HighLightMode.GreenSolid
+                    Shelf.CssClass &= " highlightGreen"
+                Case UC_Product_Slot.HighLightMode.RedSolid
+                    Shelf.CssClass &= " highlightRed"
+                Case UC_Product_Slot.HighLightMode.None
+                    '-------- Donothing --------------
+            End Select
         End Set
     End Property
 
@@ -124,7 +141,7 @@
         DT.Columns.Add("FLOOR_ID", GetType(Integer))
         DT.Columns.Add("FLOOR_HEIGHT", GetType(Integer))
         DT.Columns.Add("POS_Y", GetType(Integer))
-        DT.Columns.Add("IsSelected", GetType(Boolean))
+        DT.Columns.Add("HighLight", GetType(Integer))
         DT.Columns.Add("ShowFloorName", GetType(Boolean))
         DT.Columns.Add("ShowMenu", GetType(Boolean))
         DT.Columns.Add("SlotDatas", GetType(DataTable))
@@ -137,7 +154,7 @@
             DR("FLOOR_ID") = Floor.FLOOR_ID
             DR("FLOOR_HEIGHT") = Floor.FLOOR_HEIGHT
             DR("POS_Y") = Floor.POS_Y
-            DR("IsSelected") = Floor.IsSelected
+            DR("HighLight") = Floor.HighLight
             DR("ShowFloorName") = Floor.ShowFloorName
             DR("ShowMenu") = Floor.ShowMenu
             DR("SlotDatas") = Floor.SlotDatas
@@ -155,7 +172,7 @@
             .FLOOR_ID = e.Item.DataItem("FLOOR_ID")
             .FLOOR_HEIGHT = e.Item.DataItem("FLOOR_HEIGHT")
             .POS_Y = e.Item.DataItem("POS_Y")
-            .IsSelected = e.Item.DataItem("IsSelected")
+            .HighLight = e.Item.DataItem("HighLight")
             .ShowFloorName = e.Item.DataItem("ShowFloorName")
             .ShowMenu = e.Item.DataItem("ShowMenu")
             If Not IsDBNull(e.Item.DataItem("SlotDatas")) And Not IsNothing(e.Item.DataItem("SlotDatas")) Then
@@ -176,31 +193,31 @@
     Public Sub Deselect_All_Slot()
         For i As Integer = 0 To Floors.Count - 1
             For j As Integer = 0 To Floors(i).Slots.Count - 1
-                Floors(i).Slots(j).IsSelected = False
+                Floors(i).Slots(j).HighLight = UC_Product_Slot.HighLightMode.None
             Next
         Next
     End Sub
 
     Public Sub Deselect_All_Floor()
         For i As Integer = 0 To Floors.Count - 1
-            Floors(i).IsSelected = False
+            Floors(i).HighLight = UC_Product_Slot.HighLightMode.None
         Next
     End Sub
 
     Public Sub Deselect_All()
-        IsSelected = False
+        HighLight = UC_Product_Slot.HighLightMode.None
         Deselect_All_Floor()
         Deselect_All_Slot()
     End Sub
 
-    Public Sub AddFloor(ByVal FLOOR_ID As Integer, ByVal FLOOR_HEIGHT As Integer, ByVal POS_Y As Integer, ByVal IsSelected As Boolean, ByVal ShowFloorName As Boolean, ByVal SlotDatas As DataTable, ByVal ShowMenu As Boolean, ByVal AddToIndex As Integer)
+    Public Sub AddFloor(ByVal FLOOR_ID As Integer, ByVal FLOOR_HEIGHT As Integer, ByVal POS_Y As Integer, ByVal HighLight As UC_Product_Slot.HighLightMode, ByVal ShowFloorName As Boolean, ByVal SlotDatas As DataTable, ByVal ShowMenu As Boolean, ByVal AddToIndex As Integer)
         Dim DT As DataTable = FloorDatas()
 
         Dim DR As DataRow = DT.NewRow
         DR("FLOOR_ID") = FLOOR_ID
         DR("FLOOR_HEIGHT") = FLOOR_HEIGHT
         DR("POS_Y") = POS_Y
-        DR("IsSelected") = IsSelected
+        DR("HighLight") = HighLight
         DR("ShowFloorName") = ShowFloorName
         DR("ShowMenu") = ShowMenu
         DR("SlotDatas") = SlotDatas
@@ -212,7 +229,7 @@
 
     Public Sub AddFloor(ByVal FloorData As DataRow)
         AddFloor(FloorData("FLOOR_ID"), FloorData("FLOOR_HEIGHT"), FloorData("POS_Y"),
-                  FloorData("IsSelected"), FloorData("ShowFloorName"), FloorData("ShowMenu"), FloorData("SlotDatas"), 0)
+                  FloorData("HighLight"), FloorData("ShowFloorName"), FloorData("ShowMenu"), FloorData("SlotDatas"), 0)
     End Sub
 
     Public Sub AddFloors(ByVal FloorsDataTable As DataTable)
@@ -236,7 +253,7 @@
     Public ReadOnly Property SelectedFloor As UC_Product_Floor
         Get
             For i As Integer = 0 To Floors.Count - 1
-                If Floors(i).IsSelected Then
+                If Floors(i).HighLight <> UC_Product_Slot.HighLightMode.None Then
                     Return Floors(i)
                 End If
             Next

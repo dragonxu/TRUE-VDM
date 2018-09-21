@@ -5,9 +5,7 @@
 <%@ Register Src="~/UC_Kiosk_Shelf.ascx" TagPrefix="uc" TagName="UC_Kiosk_Shelf" %>
 
 
-<asp:Content ID="HeaderContainer" ContentPlaceHolderID="HeaderContainer" runat="server">
-    <link href="Styles/product_shelf.css" rel="stylesheet" />
-</asp:Content>
+<asp:Content ID="HeaderContainer" ContentPlaceHolderID="HeaderContainer" runat="server"></asp:Content>
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="page-title">
         <div class="title">Management > เครื่อง Vending</div>        

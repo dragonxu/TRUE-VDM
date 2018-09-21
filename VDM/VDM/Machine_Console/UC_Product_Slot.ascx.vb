@@ -6,6 +6,13 @@
 
     Dim BL As New VDM_BL
 
+    Public Enum HighLightMode
+        None = 0
+        YellowDotted = 1
+        GreenSolid = 2
+        RedSolid = 3
+    End Enum
+
     Public ReadOnly Property PixelPerMM As Double
         Get
             Return ParentFloor.PixelPerMM
@@ -85,16 +92,33 @@
         End Set
     End Property
 
-    Public Property IsSelected As Boolean
+    Public Property HighLight As HighLightMode
         Get
-            Return Slot.CssClass = "machine_slot selected"
+            Select Case True
+                Case Slot.CssClass.IndexOf("highlightYellow") > -1
+                    Return HighLightMode.YellowDotted
+                Case Slot.CssClass.IndexOf("highlightGreen") > -1
+                    Return HighLightMode.GreenSolid
+                Case Slot.CssClass.IndexOf("highlightRed") > -1
+                    Return HighLightMode.RedSolid
+                Case Else
+                    Return HighLightMode.None
+            End Select
         End Get
-        Set(value As Boolean)
-            If value Then
-                Slot.CssClass = "machine_slot selected"
-            Else
-                Slot.CssClass = "machine_slot"
-            End If
+        Set(value As HighLightMode)
+            Slot.CssClass = RemoveTagCssClass(Slot.CssClass, "highlightYellow")
+            Slot.CssClass = RemoveTagCssClass(Slot.CssClass, "highlightGreen")
+            Slot.CssClass = RemoveTagCssClass(Slot.CssClass, "highlightRed")
+            Select Case value
+                Case HighLightMode.YellowDotted
+                    Slot.CssClass &= " highlightYellow"
+                Case HighLightMode.GreenSolid
+                    Slot.CssClass &= " highlightGreen"
+                Case HighLightMode.RedSolid
+                    Slot.CssClass &= " highlightRed"
+                Case HighLightMode.None
+                    '-------- Donothing --------------
+            End Select
         End Set
     End Property
 

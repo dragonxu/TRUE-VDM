@@ -3,10 +3,6 @@
             padding:10px;
             border-radius:5px;
         }
-        .machine_stock.selected {
-            border: 2px dashed #fff29d; 
-            animation: blink .5s step-end infinite alternate;
-        }
 
         .machine_block_container {
                 width:100%; 
@@ -69,14 +65,34 @@
            background-position:center;
         }
 
-        @keyframes blink {
+        @keyframes blinkYellowDotted {
             50% {
                 border: 2px dashed #ffd800;
             }
         }
 
-        .machine_slot.selected, .machine_floor.selected , .panel_property {
-            animation: blink .5s step-end infinite alternate;
+        @keyframes blinkGreenSolid {
+            50% {
+                border: 2px dashed green;
+            }
+        }
+
+        @keyframes blinkRedSolid {
+            50% {
+                border: 2px dashed red;
+            }
+        }
+
+        .machine_slot.highlightYellow, .machine_floor.highlightYellow , .machine_stock.highlightYellow , .panel_property {
+            animation: blinkYellowDotted .5s step-end infinite alternate;
+        }
+
+        .machine_slot.highlightGreen, .machine_floor.highlightGreen {
+            animation: blinkGreenSolid .5s step-end infinite alternate;
+        }
+
+        .machine_slot.highlightRed, .machine_floor.highlightRed {
+            animation: blinkRedSolid .5s step-end infinite alternate;
         }
 
         .machine_slot:hover {
@@ -224,7 +240,9 @@
 
 .slot_floor_height {
     display:table; 
-    right:-25px;
+    right: -35px;
+    width: 30px;
+    text-align: center;
     top:0;
 }
 
@@ -238,9 +256,9 @@
 }
 
 .machine_slot:hover > .slot_scale, 
-.machine_slot.selected > .slot_scale , 
+.machine_slot.highlightYellow > .slot_scale , 
 .machine_floor:hover > .slot_scale ,
-.machine_floor.selected > .slot_scale
+.machine_floor.highlightYellow > .slot_scale
  {
     display:table;
 }
