@@ -324,6 +324,7 @@
     <Content Include="Styles\app.skins.css" />
     <Content Include="Styles\card.css" />
     <Content Include="Styles\climacons-font.css" />
+    <Content Include="Styles\Extent.css" />
     <Content Include="Styles\font-awesome.css" />
     <Content Include="Styles\jquery.dataTables.min.css" />
     <Content Include="Styles\product_shelf.css" />
