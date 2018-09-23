@@ -43,20 +43,22 @@
             </ItemTemplate>
         </asp:Repeater> 
     </div> 
-    
-     <div class="slot_scale bottom-0 left-35" style="z-index:4; width:30px; text-align:right;">
-        <div class="width100pc height100pc">
-            <asp:Label ID="lblY" runat="server">0</asp:Label>
-        </div>        
-    </div>
-    <div class="slot_scale top-0 left-35" style="z-index:4;width:30px; text-align:right;">
-        <div class="width100pc height100pc">
-            <asp:Label ID="lblY1" runat="server">0</asp:Label>
-        </div>        
-    </div>
-    <div class="slot_scale height100pc slot_floor_height scale-left-red">
-        <div class="width100pc height100pc">
-            <asp:Label ID="lblHeight" runat="server">0</asp:Label>
-        </div>        
-    </div>
+
+    <asp:PlaceHolder ID="pnlScale" runat="server">
+         <div class="slot_scale bottom-0 left-35" style="z-index:4; width:30px; text-align:right;">
+            <div class="width100pc height100pc">
+                <asp:Label ID="lblY" runat="server">0</asp:Label>
+            </div>        
+        </div>
+        <div class="slot_scale top-0 left-35" style="z-index:4;width:30px; text-align:right;">
+            <div class="width100pc height100pc">
+                <asp:Label ID="lblY1" runat="server">0</asp:Label>
+            </div>        
+        </div>
+        <div class="slot_scale height100pc slot_floor_height scale-left-red">
+            <div class="width100pc height100pc">
+                <asp:Label ID="lblHeight" runat="server">0</asp:Label>
+            </div>        
+        </div>
+    </asp:PlaceHolder>
 </asp:Panel>    

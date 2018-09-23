@@ -133,6 +133,15 @@
         End Set
     End Property
 
+    Public Property ShowScale As Boolean
+        Get
+            Return pnlScale.Visible
+        End Get
+        Set(value As Boolean)
+            pnlScale.Visible = value
+        End Set
+    End Property
+
     Public Function Slots() As List(Of UC_Product_Slot)
         Dim Result As New List(Of UC_Product_Slot)
         For Each Item In rptSlot.Items
@@ -141,10 +150,6 @@
             Result.Add(Slot)
         Next
         Return Result
-    End Function
-
-    Public Function Slots(ByVal Index As Integer) As UC_Product_Slot
-        Return rptSlot.Items(Index).FindControl("Slot")
     End Function
 
     Public Function SlotDatas() As DataTable

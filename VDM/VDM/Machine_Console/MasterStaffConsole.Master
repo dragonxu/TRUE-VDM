@@ -7,7 +7,7 @@
     <title>MACHINE CONSOLE </title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
-    <%--<link rel="stylesheet" href="Styles/app.min.725970e8.css">--%>
+    <link rel="stylesheet" href="../Styles/app.css">
 
 
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="../vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css">
     <link rel="stylesheet" href="../vendor/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
     <link rel="stylesheet" href="../vendor/sweetalert/dist/sweetalert.css">
+    <link rel="stylesheet" href="../vendor/jquery-labelauty/source/jquery-labelauty.css">
     <!-- End Plug In -->
 
     <link rel="stylesheet" href="../styles/font-awesome.css">

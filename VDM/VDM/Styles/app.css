@@ -8308,7 +8308,7 @@ input.labelauty:not(:checked):not([disabled]) + label:hover {
   background-color: #dddddd; }
 
 input.labelauty:checked + label {
-  background-color: #ffcc00;
+  background-color: #6164C1;
   color: white; }
 
 input.labelauty:checked:not([disabled]) + label:hover {

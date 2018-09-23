@@ -113,6 +113,15 @@ Partial Public Class UC_Product_Floor
     Protected WithEvents rptSlot As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
+    '''pnlScale control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlScale As Global.System.Web.UI.WebControls.PlaceHolder
+    
+    '''<summary>
     '''lblY control.
     '''</summary>
     '''<remarks>

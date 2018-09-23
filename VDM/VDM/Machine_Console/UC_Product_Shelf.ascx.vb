@@ -65,6 +65,15 @@
         End Set
     End Property
 
+    Public Property ShowScale As Boolean
+        Get
+            Return pnlScale.Visible
+        End Get
+        Set(value As Boolean)
+            pnlScale.Visible = value
+        End Set
+    End Property
+
     Public Property ShowAddFloor As Boolean
         Get
             Return lnkAddFloor.Visible
@@ -131,10 +140,6 @@
         Return Result
     End Function
 
-    Public Function Floors(ByVal Index As Integer) As UC_Product_Floor
-        Return rptFloor.Items(Index).FindControl("Floor")
-    End Function
-
     Private Function FloorDatas() As DataTable
         Dim DT As New DataTable
 
@@ -164,6 +169,18 @@
         Return DT
     End Function
 
+    Public Sub HideFloorName()
+        For i As Integer = 0 To Floors.Count - 1
+            Floors(i).ShowFloorName = False
+        Next
+    End Sub
+
+    Public Sub HideFloorMenu()
+        For i As Integer = 0 To Floors.Count - 1
+            Floors(i).ShowMenu = False
+        Next
+    End Sub
+
     Private Sub rptFloor_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles rptFloor.ItemDataBound
         If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
 
@@ -183,6 +200,18 @@
             .FLOOR_NAME = Chr(Asc("A") + e.Item.ItemIndex)
         End With
     End Sub
+
+    Public Function Slots() As List(Of UC_Product_Slot)
+        Dim Result As New List(Of UC_Product_Slot)
+        For Each Item In rptFloor.Items
+            If Item.ItemType <> ListItemType.Item And Item.ItemType <> ListItemType.AlternatingItem Then Continue For
+            Dim Floor As UC_Product_Floor = Item.FindControl("Floor")
+            For i As Integer = 0 To Floor.Slots.Count - 1
+                Result.Add(Floor.Slots(i))
+            Next
+        Next
+        Return Result
+    End Function
 
     Public Sub ResetDimension()
         SHELF_WIDTH = 1900

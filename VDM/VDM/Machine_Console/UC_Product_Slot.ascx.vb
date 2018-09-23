@@ -140,6 +140,15 @@
         End Set
     End Property
 
+    Public Property ShowScale As Boolean
+        Get
+            Return pnlScale.Visible
+        End Get
+        Set(value As Boolean)
+            pnlScale.Visible = value
+        End Set
+    End Property
+
     Public Property ShowMask As Boolean
         Get
             Return mask.Visible

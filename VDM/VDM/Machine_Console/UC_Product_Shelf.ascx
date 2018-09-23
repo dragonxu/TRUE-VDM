@@ -20,8 +20,12 @@
                  />
             </ItemTemplate>
         </asp:Repeater>
-        <div style="position:absolute; right:-40px; bottom:-40px; font-size:12px;">0,0</div>
-        <div style="position:absolute; left:-120px; top:-40px; width:100px; text-align:right;  font-size:12px;"><asp:Label ID="lblWidth" runat="server">1900</asp:Label>,<asp:Label ID="lblHeight" runat="server">1900</asp:Label></div>
+
+        <asp:PlaceHolder ID="pnlScale" runat="server">
+            <div style="position:absolute; right:-40px; bottom:-40px; font-size:12px;">0,0</div>
+            <div style="position:absolute; left:-120px; top:-40px; width:100px; text-align:right;  font-size:12px;"><asp:Label ID="lblWidth" runat="server">1900</asp:Label>,<asp:Label ID="lblHeight" runat="server">1900</asp:Label></div>
+        </asp:PlaceHolder>
+        
     </div>
 </asp:Panel>
 <asp:LinkButton CssClass="h2 btn btn-lg btn-info btn-shadow m-t m-b-0" ID="lnkAddFloor"  Width="100%" runat="server" >

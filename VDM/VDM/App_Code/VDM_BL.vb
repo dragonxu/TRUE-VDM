@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports VDM
+Imports System.IO
 Imports System.Data
 Imports System.Data.SqlClient
 Imports System.Configuration.ConfigurationManager
@@ -393,6 +394,64 @@ Public Class VDM_BL
 #End Region
 
 #Region "Kiosk Management"
+
+    Public Sub Bind_Product_Shelf(ByRef Shelf As UC_Product_Shelf, ByVal KO_ID As Integer)
+
+        Shelf.ResetDimension()
+        Shelf.ClearAllFloor()
+        '--------------- BindShelf ----------------
+        Dim SQL As String = "SELECT * FROM TB_PRODUCT_SHELF WHERE KO_ID=" & KO_ID
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        DA.Fill(DT)
+        If DT.Rows.Count = 0 Then Exit Sub
+
+        Shelf.SHELF_ID = DT.Rows(0).Item("SHELF_ID")
+        Shelf.SHELF_DEPTH = DT.Rows(0).Item("DEPTH")
+        Shelf.SHELF_WIDTH = DT.Rows(0).Item("WIDTH")
+        Shelf.SHELF_HEIGHT = DT.Rows(0).Item("HEIGHT")
+
+        '------------ Bind Floor -----------------
+        SQL = "SELECT FLOOR_ID,HEIGHT,POS_Y," & vbLf
+        SQL &= "0 HighLight,CAST(1 AS BIT) ShowFloorName,CAST(1 AS BIT) ShowMenu,NULL SlotDatas " & vbLf
+        SQL &= "FROM TB_PRODUCT_FLOOR" & vbLf
+        SQL &= "WHERE SHELF_ID=" & Shelf.SHELF_ID & " ORDER BY FLOOR_ID"
+        DT = New DataTable
+        DA = New SqlDataAdapter(SQL, ConnectionString)
+        DA.Fill(DT)
+
+        For f As Integer = 0 To DT.Rows.Count - 1
+
+            Dim FLOOR_ID As Integer = DT.Rows(f).Item("FLOOR_ID")
+            Dim FLOOR_HEIGHT As Integer = DT.Rows(f).Item("HEIGHT")
+            Dim POS_Y As Integer = DT.Rows(f).Item("POS_Y")
+
+            Shelf.AddFloor(FLOOR_ID, FLOOR_HEIGHT, POS_Y, False, True, Nothing, True, f)
+            Dim Floor As UC_Product_Floor = Shelf.Floors(f)
+            '-------------- Bind Slot --------------
+            SQL = "SELECT * FROM TB_PRODUCT_SLOT WHERE FLOOR_ID=" & FLOOR_ID
+            Dim ST = New DataTable
+            DA = New SqlDataAdapter(SQL, ConnectionString)
+            DA.Fill(ST)
+
+            For s As Integer = 0 To ST.Rows.Count - 1
+                Dim SLOT_ID As Integer = ST.Rows(s).Item("SLOT_ID")
+                Dim POS_X As Integer = ST.Rows(s).Item("POS_X")
+                Dim SLOT_WIDTH As Integer = ST.Rows(s).Item("WIDTH")
+                Floor.AddSlot(SLOT_ID, Chr(Asc("A") + f) & "-" & s + 1, POS_X, SLOT_WIDTH, 0, "", 0, "", Drawing.Color.White, Drawing.Color.White, False)
+                Dim Slot As UC_Product_Slot = Floor.Slots(s)
+                '------------------- Bind Product----------------
+                'Slot.PRODUCT_ID = xxxxxxxxxxxxx
+                'Slot.PRODUCT_CODE = xxxxxxxxxxxxxxx
+                'Slot.PRODUCT_QUANTITY = xxxxxxxxxxxxxxxxx
+                'Slot.PRODUCT_LEVEL_PERCENT = xxxxxxxxxxxxxxxxxx
+                'Slot.PRODUCT_LEVEL_COLOR = xxxxxxxxxxxxxxxxxx
+                'Slot.QUANTITY_BAR_COLOR = xxxxxxxxxxxxxxxx
+            Next
+
+        Next
+    End Sub
+
     Public Function GetList_Kiosk(Optional ByVal KO_ID As Integer = 0) As DataTable
         Dim SQL As String = ""
         SQL &= " SELECT KO.KO_ID,KO.KO_CODE,KO.SITE_ID,Site.SITE_CODE,KO.ZONE,KO.IP,KO.Mac   " & vbLf

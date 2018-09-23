@@ -1,77 +1,311 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Machine_Console/MasterStaffConsole.Master" CodeBehind="TestScan.aspx.vb" Inherits="VDM.TestScan" %>
 
 <%@ Register Src="~/UC_Kiosk_Shelf.ascx" TagPrefix="uc1" TagName="UC_Kiosk_Shelf" %>
-
+<%@ Register Src="~/Machine_Console/UC_Product_Shelf.ascx" TagPrefix="uc1" TagName="UC_Product_Shelf" %>
 
 <asp:Content ID="head" ContentPlaceHolderID="head" runat="server">
+    <style>
+        td {
+        text-align:center;
+        }
+        th {
+            background-color:#f5f5f5;
+        }
+
+        .cb-checkbox {
+            padding: 0px !important;
+            margin-bottom:0px !important;
+        }
+
+        #tbScan > thead > tr > th > .cb-checkbox.checked .cb-inner,
+        #tbScan > tbody > tr > th > .cb-checkbox.checked .cb-inner {
+            border-color:#4aa85d !important;
+            background-color:#4aa85d !important;
+        }
+
+        #tbSlot > thead > tr > th > .cb-checkbox.checked .cb-inner,
+        #tbSlot > tbody > tr > th > .cb-checkbox.checked .cb-inner {
+            border-color:#4347ac !important;
+            background-color:#4347ac !important;
+        }
+
+        .nav-tabs > li.active::before {
+             background-color:#4aa85d !important;
+        }
+
+        .nav-tabs > li.active {
+            background-color:aliceblue;
+        }
+        
+    </style>
 </asp:Content>
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
 <asp:UpdatePanel ID="UDP" runat="server">
     <ContentTemplate>
 
-          <div class="card-block">
-                <div class="row ">
-                    <h3 class="row m-a-0 text-uppercase bold mobile_group_head">
-                        Product Stock <asp:LinkButton ID="btnTest" runat="server">Test</asp:LinkButton>
-                    </h3>
-                </div>
-                <div class="row ">
-                    <uc1:UC_Kiosk_Shelf runat="server" ID="Shelf" />
-                    <div class="form-group" style="text-align:right">
-                            <asp:LinkButton CssClass="btn btn-success btn-icon loading-demo mr5 btn-shadow" ID="btnSaveProduct" runat="server">
-                              <i class="fa fa-save"></i>
-                              <span>Save</span>
-                            </asp:LinkButton>
+  <asp:Panel CssClass="modal-dialog" style="width:90%; margin: 0px auto; position:absolute; top:20px; z-index:3;" ID="pnlScanProduct" runat="server" KO_ID="0" DefaultButton="btnBarcode">
 
-                            <asp:LinkButton CssClass="btn btn-default btn-icon loading-demo mr5 btn-shadow" ID="btnResetProduct" runat="server">
-                              <i class="fa fa-reply"></i>
-                              <span>Reset</span>
-                            </asp:LinkButton>
-                      </div>
-                </div>
-            </div>
-    </ContentTemplate>
-</asp:UpdatePanel>
-
-
-  <div class="modal bs-modal-sm">
-    <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" >×</button>
-          <h4 class="modal-title">Contact</h4>
+          <button type="button" class="close" >×</button>
+          <h4 class="modal-title">Manage Product Stock</h4>
         </div>
         <div class="modal-body">
-          <p>Feel free to contact us for any issues you might have with our products.</p>
-          <form class="form-horizontal" role="form">
-            <div class="form-group">
-              <label class="col-sm-2 control-label">name</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="Name">
+          <p>จัดการสินค้าที่อยู่ใน Shelf ด้วยการ 
+              <img src="../images/Icon/green/signal_wifi_3.png" height="30" /> Scan Barcode หรือ 
+              <img src="../images/Icon/green/repeat.png" height="30" />              
+              เคลื่อนย้ายสินค้าที่อยู่ในตู้</p>
+
+          <div class="row" >
+              <div class="col-sm-6" >
+                  <uc1:UC_Product_Shelf runat="server" ID="Shelf" />
+
+
+                  <asp:Panel ID="pnlSlot" runat="server" CssClass="card bg-white m-b m-t-md">
+                      <div class="card-header">
+                        <h3 class="m-t-0 m-b-0 pull-left">
+                            <img src="../images/Icon/green/shelf.png" height="30"> Slot : <asp:Label ID="lblSlotName" runat="server"></asp:Label>
+                        </h3>
+                        <asp:LinkButton ID="btnSeeShelf" runat="server" CssClass="pull-right btn btn-primary btn-sm">
+                          <i class="fa fa-reply"></i>
+                          <span>see all</span>
+                        </asp:LinkButton>
+
+                      </div>
+                      <div class="card-block">
+                        <div class="row">
+                          <div class="m-t-n m-b">
+                                <div class="row ">
+                                    <div class="col col-xs-4 m-t text-center">
+                                        <asp:Image ID="imgSlot_Product" runat="server" CssClass="profile-avatar" ImageUrl="../RenderImage.aspx?Mode=D&UID=1&Entity=Product&LANG=1" />
+                                        <small>CODE : <asp:Label ID="lblSlot_ProductCode" runat="server"></asp:Label></small>                                        
+                                    </div>
+                                    <div class="col col-xs-8 p-t p-l">
+                                        <div class="row">
+                                            <div class="col-xs-9">
+                                                <h4 class="m-t-0 m-b-0"><asp:Label ID="lblSlot_ProductName" runat="server"></asp:Label></h4>
+                                                <h6><asp:Label ID="lblSlot_ProductDesc" runat="server"></asp:Label></h6>
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <h3 class="bold text-default m-t-0" id="tagSlot_Empty" runat="server">Empty</h3>
+                                                <asp:Image ID="imgSlot_Brand" runat="server" CssClass="profile-avatar" ImageUrl="../RenderImage.aspx?Mode=D&UID=1&Entity=Brand&LANG=1" />
+                                            </div>
+                                        </div>
+                                            
+                                            <asp:Panel ID="pnlSlotProductSize" runat="server" CssClass="row text-center text-white  m-t">
+                                                <div class="col-xs-4 bg-info p-t">
+                                                    <h4 class="m-t-0 m-b-0"><asp:Label ID="lblSlot_Product_Width" runat="server"></asp:Label></h4>
+                                                    <small>Package Width</small>
+                                                </div>
+                                                <div class="col-xs-4 bg-info p-t">
+                                                    <h4 class="m-t-0 m-b-0"><asp:Label ID="lblSlot_Product_Height" runat="server"></asp:Label></h4>
+                                                    <small>Package Height</small>
+                                                </div>
+                                                <div class="col-xs-4 bg-info p-t">
+                                                    <h4 class="m-t-0 m-b-0"><asp:Label ID="lblSlot_Product_Depth" runat="server"></asp:Label></h4>
+                                                    <small>Package Depth</small>
+                                                </div>
+                                            </asp:Panel>
+                                            <div class="row text-center text-white">
+                                                <div class="col-xs-4 bg-blue p-t">
+                                                    <h4 class="m-t-0 m-b-0"><asp:Label ID="lblSlot_Width" runat="server"></asp:Label></h4>
+                                                    <small>Slot Width</small>
+                                                </div>
+                                                <div class="col-xs-4 bg-blue p-t">
+                                                    <h4 class="m-t-0 m-b-0"><asp:Label ID="lblSlot_Height" runat="server"></asp:Label></h4>
+                                                    <small>Slot Height</small>
+                                                </div>
+                                                <div class="col-xs-4 bg-blue p-t">
+                                                    <h4 class="m-t-0 m-b-0"><asp:Label ID="lblSlot_Depth" runat="server"></asp:Label></h4>
+                                                    <small>Slot Depth</small>
+                                                </div>
+                                            </div>
+                                                                             
+                                                <asp:Panel ID="pnlSlotCapacity" runat="server" CssClass="row bg-default left h5" Height="10px">
+                                                    <asp:Panel CssClass="bg-success" style="height:100%;" ID="levelProduct" runat="server" ></asp:Panel>  
+                                                    <div style="position:absolute; bottom:-15px;" class="text-grey">
+                                                        Available Space : <b class="text-blue"><asp:Label ID="lblFreeSpace" runat="server"></asp:Label></b>
+                                                    </div>
+                                                    <div style="position:absolute; right:0px; bottom:-15px;" class="text-grey">
+                                                        Max : <b class="text-danger"><asp:Label ID="lblMaxSpace" runat="server"></asp:Label></b>
+                                                    </div>                                                
+                                                </asp:Panel>
+                                    </div>
+                                </div>
+                              <div class="row m-t-md">
+                                  <div class="card bg-white m-b" style="font-size:14px;">
+                                                                 
+                                          <table class="table m-b-0 checkbo" id="tbSlot">
+                                            <thead>
+                                                <tr>
+                                                    <th> 
+                                                        <label class="cb-checkbox cb-md">
+                                                                <asp:CheckBox ID="chkSlot" runat="server" Checked="true" />
+                                                        </label>
+                                                    </th>
+                                                    <th>Code</th>
+                                                    <th id="thSlotSerail" runat="server">Serial</th>
+                                                    <th>Recent</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <asp:Repeater ID="rptSlotProduct" runat="server">
+                                                    <ItemTemplate>
+                                                        <tr>
+                                                            <td><asp:CheckBox CssClass="to-labelauty-icon" ID="chk" runat="server" /></td>
+                                                            <td><asp:Label ID="lblCode" runat="server"></asp:Label></td>
+                                                            <td id="tdSerail" runat="server"><asp:Label ID="lblSerial" runat="server"></asp:Label></td>
+                                                            <td><asp:Label ID="lblRecent" runat="server"></asp:Label></td>                                                
+                                                          </tr>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+                                                  
+                                              
+                                            </tbody>
+                                          </table>                                   
+                                 
+                                        <asp:LinkButton ID="btnMoveRight" runat="server" CssClass="btn btn-primary btn-lg btn-block">                                          
+                                            <span>Move</span>
+                                            <i class="fa fa-arrow-right"></i>
+                                        </asp:LinkButton>
+
+                                    </div>
+                              </div>
+                               
+                            </div>
+                        </div>
+                      </div>
+                    </asp:Panel>
+
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Email</label>
-              <div class="col-sm-10">
-                <input type="email" class="form-control" placeholder="Email">
+           
+              <div class="col-sm-6">
+                    <div class="card bg-white m-b">
+                      <div class="card-header">
+                        <h3 class="m-t-0 m-b-0">
+                            <img src="../images/Icon/green/shelf.png" height="30"> สินค้ารอจัดการ
+                            <asp:TextBox ID="txtBarcode" runat="server" Width="0px" style="visibility:hidden;"></asp:TextBox>
+                            <asp:Button ID="btnBarcode" runat="server" style="display:none;"/>
+                          </h3>
+                      </div>
+                        <ul class="nav nav-tabs" style="font-size:14px;">
+                            <asp:Repeater ID="rptProductTab" runat="server">
+                                <ItemTemplate>
+                                    <asp:LinkButton id="lnk" runat="server" CssClass="active">
+                                        <asp:Image ID="img" runat="server" width="30px" />  
+                                        <asp:Label ID="lblName" runat="server"></asp:Label> (<asp:Label ID="lblQuantity" runat="server" Font-Bold="true"></asp:Label>)
+                                    </asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                         
+                            
+                          </ul>
+                      <div class="card-block">
+                        <div class="row">
+                          <div class="row">
+                          <div class="m-t-n m-b">
+                                <div class="row ">
+                                    <div class="col col-xs-4 m-t text-center">
+                                        <asp:Image ID="imgScan_Product" runat="server" CssClass="profile-avatar" ImageUrl="../RenderImage.aspx?Mode=D&UID=1&Entity=Product&LANG=1" /> 
+                                        <small>CODE : <asp:Label ID="lblScan_ProductCode" runat="server"></asp:Label></small>                                        
+                                    </div>
+                                    <div class="col col-xs-8 p-t p-l">
+                                        <div class="row">
+                                            <div class="col-xs-9">
+                                                <h4 class="m-t-0 m-b-0"><asp:Label ID="lblScan_ProductName" runat="server"></asp:Label></h4>
+                                                <h6><asp:Label ID="lblScan_ProductDesc" runat="server"></asp:Label></h6>
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <asp:Image ID="imgScan_Brand" runat="server" CssClass="profile-avatar" ImageUrl="../RenderImage.aspx?Mode=D&UID=1&Entity=Brand&LANG=1" />
+                                            </div>
+                                        </div>
+                                            
+                                            <div class="row text-center text-white  m-t">
+                                                <div class="col-xs-4 bg-success p-t">
+                                                    <h4 class="m-t-0 m-b-0"><asp:Label ID="lblScan_Product_Width" runat="server"></asp:Label></h4>
+                                                    <small>Package Width</small>
+                                                </div>
+                                                <div class="col-xs-4 bg-success p-t">
+                                                    <h4 class="m-t-0 m-b-0"><asp:Label ID="lblScan_Product_Height" runat="server"></asp:Label></h4>
+                                                    <small>Package Height</small>
+                                                </div>
+                                                <div class="col-xs-4 bg-success p-t">
+                                                    <h4 class="m-t-0 m-b-0"><asp:Label ID="lblScan_Product_Depth" runat="server"></asp:Label></h4>
+                                                    <small>Package Depth</small>
+                                                </div>
+                                            </div>                                            
+                                                
+                                    </div>
+                                </div>
+                              <div class="row m-t-md">
+                                  <div class="card bg-white m-b" style="font-size:14px;">
+                                                                 
+                                          <table class="table m-b-0 checkbo" id="tbScan">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <label class="cb-checkbox cb-md">
+                                                                <asp:CheckBox ID="chkScan" runat="server" Checked="true" />
+                                                        </label>
+                                                    </th>
+                                                    <th>Code</th>
+                                                    <th id="thScanSerail" runat="server">Serial</th>
+                                                    <th>Recent</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <asp:Repeater ID="rptScanProduct" runat="server">
+                                                    <ItemTemplate>
+                                                        <tr>
+                                                            <td><asp:CheckBox CssClass="to-labelauty-icon" ID="chk" runat="server" /></td>
+                                                            <td><asp:Label ID="lblCode" runat="server"></asp:Label></td>
+                                                            <td id="tdSerail" runat="server"><asp:Label ID="lblSerial" runat="server"></asp:Label></td>
+                                                            <td><asp:Label ID="lblRecent" runat="server"></asp:Label></td>                                                
+                                                          </tr>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+                                            </tbody>
+                                          </table>                                        
+                                 
+                                        <asp:LinkButton ID="btnMoveLeft" runat="server" CssClass="btn btn-success btn-lg btn-block">                                          
+                                            <i class="fa fa-arrow-left"></i>
+                                            <span>Move</span>                                            
+                                        </asp:LinkButton>
+                                    </div>
+                              </div>
+                               
+                            </div>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-sm-2 control-label">Message</label>
-              <div class="col-sm-10">
-                <textarea class="form-control" rows="3"></textarea>
-              </div>
-            </div>
-          </form>
+          </div>
+                
+          
         </div>
         <div class="modal-footer no-border">
-          <button type="button" class="btn btn-default">Close</button>
-          <button type="button" class="btn btn-primary">Send</button>
+          <asp:Button ID="btnReset" runat="server" CssClass="btn btn-shadow btn-default" Text="Reset" />
+          <asp:Button ID="btnConfirm" runat="server" CssClass="btn btn-shadow btn-primary" Text="Confirm" />
         </div>
-      </div>
-    </div>
-  </div>
 
-</asp:Content>
+      </div>
+  
+      <script type="text/javascript" language="javascript">
+            var focusBarcode = function setFocusBarcode() {           
+              $("#<%=txtBarcode.ClientID%>").focus();
+            }
+            setInterval(focusBarcode, 300);
+        </script>
+  
+  </asp:Panel>
+
+    </ContentTemplate>
+</asp:UpdatePanel>
+ </asp:Content>
+
+
 <asp:Content ID="ScriptContainer" ContentPlaceHolderID="ScriptContainer" runat="server">
+
+    
 </asp:Content>

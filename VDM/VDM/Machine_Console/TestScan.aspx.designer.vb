@@ -23,13 +23,13 @@ Partial Public Class TestScan
     Protected WithEvents UDP As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
-    '''btnTest control.
+    '''pnlScanProduct control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnTest As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents pnlScanProduct As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''Shelf control.
@@ -38,23 +38,374 @@ Partial Public Class TestScan
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Shelf As Global.VDM.UC_Kiosk_Shelf
+    Protected WithEvents Shelf As Global.VDM.UC_Product_Shelf
     
     '''<summary>
-    '''btnSaveProduct control.
+    '''pnlSlot control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnSaveProduct As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents pnlSlot As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''btnResetProduct control.
+    '''lblSlotName control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnResetProduct As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents lblSlotName As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''btnSeeShelf control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSeeShelf As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''imgSlot_Product control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents imgSlot_Product As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
+    '''lblSlot_ProductCode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSlot_ProductCode As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblSlot_ProductName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSlot_ProductName As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblSlot_ProductDesc control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSlot_ProductDesc As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''tagSlot_Empty control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents tagSlot_Empty As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''imgSlot_Brand control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents imgSlot_Brand As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
+    '''pnlSlotProductSize control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlSlotProductSize As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''lblSlot_Product_Width control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSlot_Product_Width As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblSlot_Product_Height control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSlot_Product_Height As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblSlot_Product_Depth control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSlot_Product_Depth As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblSlot_Width control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSlot_Width As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblSlot_Height control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSlot_Height As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblSlot_Depth control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSlot_Depth As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''pnlSlotCapacity control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlSlotCapacity As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''levelProduct control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents levelProduct As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''lblFreeSpace control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblFreeSpace As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblMaxSpace control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblMaxSpace As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''chkSlot control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents chkSlot As Global.System.Web.UI.WebControls.CheckBox
+    
+    '''<summary>
+    '''thSlotSerail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents thSlotSerail As Global.System.Web.UI.HtmlControls.HtmlTableCell
+    
+    '''<summary>
+    '''rptSlotProduct control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rptSlotProduct As Global.System.Web.UI.WebControls.Repeater
+    
+    '''<summary>
+    '''btnMoveRight control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnMoveRight As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''txtBarcode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtBarcode As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''btnBarcode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnBarcode As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''rptProductTab control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rptProductTab As Global.System.Web.UI.WebControls.Repeater
+    
+    '''<summary>
+    '''imgScan_Product control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents imgScan_Product As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
+    '''lblScan_ProductCode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblScan_ProductCode As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblScan_ProductName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblScan_ProductName As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblScan_ProductDesc control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblScan_ProductDesc As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''imgScan_Brand control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents imgScan_Brand As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
+    '''lblScan_Product_Width control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblScan_Product_Width As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblScan_Product_Height control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblScan_Product_Height As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblScan_Product_Depth control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblScan_Product_Depth As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''chkScan control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents chkScan As Global.System.Web.UI.WebControls.CheckBox
+    
+    '''<summary>
+    '''thScanSerail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents thScanSerail As Global.System.Web.UI.HtmlControls.HtmlTableCell
+    
+    '''<summary>
+    '''rptScanProduct control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rptScanProduct As Global.System.Web.UI.WebControls.Repeater
+    
+    '''<summary>
+    '''btnMoveLeft control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnMoveLeft As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''btnReset control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnReset As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''btnConfirm control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnConfirm As Global.System.Web.UI.WebControls.Button
 End Class
