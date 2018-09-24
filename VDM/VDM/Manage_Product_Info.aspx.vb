@@ -373,8 +373,25 @@ Public Class Manage_Product_Info
         pnlTHAI.Visible = True
     End Sub
 
+
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        BindList()
+    End Sub
+
     Private Sub BindList()
-        Dim SQL As String = "SELECT * FROM VW_ALL_PRODUCT ORDER BY PRODUCT_CODE "
+        Dim SQL As String = "SELECT * FROM VW_ALL_PRODUCT " & vbLf
+
+        If txtSearch.Text <> "" Then
+            SQL &= " WHERE " & vbLf
+            SQL &= " PRODUCT_CODE LIKE '%" & txtSearch.Text.Replace("'", "''") & "%' OR " & vbLf
+            SQL &= " MODEL LIKE '%" & txtSearch.Text.Replace("'", "''") & "%' OR " & vbLf
+            SQL &= " BRAND_NAME LIKE '%" & txtSearch.Text.Replace("'", "''") & "%' OR " & vbLf
+            SQL &= " CAT_NAME LIKE '%" & txtSearch.Text.Replace("'", "''") & "%' OR " & vbLf
+            SQL &= " DISPLAY_NAME_TH LIKE '%" & txtSearch.Text.Replace("'", "''") & "%' OR " & vbLf
+            SQL &= " GS1 LIKE '%" & txtSearch.Text.Replace("'", "''") & "%' " & vbLf
+        End If
+
+        SQL &= " ORDER BY PRODUCT_CODE "
         Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)
@@ -884,6 +901,8 @@ Public Class Manage_Product_Info
 
 
     End Sub
+
+
 #End Region
 
 

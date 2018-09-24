@@ -98,6 +98,9 @@ Public Class UC_Kiosk_Shelf
         txtSlotX.Text = ""
         txtSlotY.Text = ""
         '----------------- Containing Product --------------
+        pnlProduct.Visible = False
+        pnlSlotCapacity.Visible = False
+        pnlEmpty.Visible = True
 
         btnRemoveSlot.Visible = True
 
@@ -271,6 +274,31 @@ Public Class UC_Kiosk_Shelf
         txtSlotX.Text = Sender.POS_X
 
         lblSlotName.Text = Sender.SLOT_NAME
+
+        '--------------- Product --------------
+        If Sender.PRODUCT_ID <> 0 Then
+
+            Dim ProductImageURL As String = "../RenderImage.aspx?Mode=D&UID=" & Sender.PRODUCT_ID & "&Entity=Product&LANG=1&DI=images/TransparentDot.png"
+            'imgProduct.ImageUrl = ProductImageURL
+            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "updateImageProduct", "$('#imgProduct').attr('src','" & ProductImageURL & "');", True)
+
+
+            lblSlot_ProductCode.Text = Sender.PRODUCT_CODE
+            lblSlotQuantity.Text = "x " & Sender.PRODUCT_QUANTITY
+
+            Dim DT As DataTable = BL.Get_Product_Info_From_ID(Sender.PRODUCT_ID)
+            If DT.Rows.Count > 0 AndAlso Not IsDBNull(DT.Rows(0).Item("DEPTH")) AndAlso DT.Rows(0).Item("DEPTH") > 0 Then
+                pnlSlotCapacity.Visible = True
+                lblProductName.Text = DT.Rows(0).Item("DISPLAY_NAME_TH").ToString
+                Dim MaxQuantity As Integer = Math.Floor(Shelf.SHELF_DEPTH / DT.Rows(0).Item("DEPTH"))
+                lblMaxSpace.Text = MaxQuantity
+                lblFreeSpace.Text = MaxQuantity - Sender.PRODUCT_QUANTITY
+                levelProduct.Width = Unit.Percentage(Sender.PRODUCT_QUANTITY * 100 / MaxQuantity)
+            End If
+
+            pnlProduct.Visible = True
+            pnlEmpty.Visible = False
+        End If
 
         btnRemoveSlot.Visible = Sender.PRODUCT_ID = 0
 

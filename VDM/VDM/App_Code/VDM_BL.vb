@@ -528,7 +528,7 @@ Public Class VDM_BL
         End If
     End Function
 
-    Public Sub Save_Product_Movement_Log(ByVal PRODUCT_ID As Integer, ByVal SERIAL_NO As String, ByVal MOVE_ID As StockMovementType, ByVal MOVE_FROM As String, ByVal MOVE_TO As String, ByVal REMARK As String, ByVal MOVE_BY As Integer, ByVal MOVE_TIME As DateTime)
+    Public Sub Save_Product_Movement_Log(ByVal PRODUCT_ID As Integer, ByVal SERIAL_NO As String, ByVal MOVE_ID As StockMovementType, ByVal MOVE_FROM As String, ByVal MOVE_FROM_SLOT As Integer, ByVal MOVE_TO As String, ByVal MOVE_TO_SLOT As Integer, ByVal REMARK As String, ByVal MOVE_BY As Integer, ByVal MOVE_TIME As DateTime)
         Dim SQL As String = "Select TOP 0 * FROM TB_PRODUCT_MOVEMENT"
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, LogConnectionString)
@@ -541,7 +541,9 @@ Public Class VDM_BL
         DR("SERIAL_NO") = SERIAL_NO
         DR("MOVE_ID") = MOVE_ID
         DR("MOVE_FROM") = MOVE_FROM
+        If MOVE_FROM_SLOT <> 0 Then DR("MOVE_FROM_SLOT") = MOVE_FROM_SLOT
         DR("MOVE_TO") = MOVE_TO
+        If MOVE_TO_SLOT <> 0 Then DR("MOVE_TO_SLOT") = MOVE_TO_SLOT
         DR("REMARK") = REMARK
         DR("MOVE_BY") = MOVE_BY
         DR("MOVE_TIME") = MOVE_TIME
@@ -664,6 +666,7 @@ Public Class VDM_BL
                     Else
                         Slots(i).PRODUCT_LEVEL_COLOR = Drawing.Color.Green
                     End If
+                    Slots(i).QUANTITY_BAR_COLOR = Drawing.Color.FromArgb(245, 245, 245)
                     Slots(i).ShowQuantity = True
                     Slots(i).ShowMask = False
                     Slots(i).MaskContent = ""

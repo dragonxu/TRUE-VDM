@@ -131,11 +131,31 @@
                                 </div>
                                 <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>
-                            <div class="divider"></div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Containing</label>
-                                <div class="col-sm-5">
-                                    -
+                                <div class="col-sm-6">
+                                      <asp:Panel CssClass="col-xs-12 text-center m-b" ID="pnlProduct" runat="server">
+                                        <asp:Label ID="lblProductName" runat="server" CssClass="h5"></asp:Label>
+                                        <%--<asp:Image ID="imgProduct" runat="server" style="width:100%" />--%>
+                                          <img id="imgProduct" style="width:100%;" />
+                                                                   
+                                        <small>CODE : <asp:Label ID="lblSlot_ProductCode" runat="server"></asp:Label></small>
+                                        <asp:Label ID="lblSlotQuantity" runat="server" Font-Bold="true" ForeColor="SteelBlue" CssClass="h5"></asp:Label>
+                                        <asp:Panel ID="pnlSlotCapacity" runat="server" CssClass="row bg-default left h6" Height="10px">
+                                                <asp:Panel CssClass="bg-success" style="height:100%;" ID="levelProduct" runat="server" ></asp:Panel>  
+                                                <div style="position:absolute; bottom:-15px;" class="text-grey">
+                                                    Available Space : <b class="text-blue"><asp:Label ID="lblFreeSpace" runat="server"></asp:Label></b>
+                                                </div>
+                                                <div style="position:absolute; right:0px; bottom:-15px;" class="text-grey">
+                                                    Max : <b class="text-danger"><asp:Label ID="lblMaxSpace" runat="server"></asp:Label></b>
+                                                </div>                                                
+                                         </asp:Panel>
+                                      </asp:Panel>
+
+                                      <asp:Panel CssClass="col-xs-12" ID="pnlEmpty" runat="server">
+                                        <h3 class="bold text-default m-t-0" id="tagSlot_Empty" runat="server">Empty</h3>
+                                     </asp:Panel>
+
                                 </div>
                             </div>
                             <div class="form-group">

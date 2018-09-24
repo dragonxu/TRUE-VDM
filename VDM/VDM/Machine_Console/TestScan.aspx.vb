@@ -854,7 +854,7 @@ Public Class TestScan
                     Dim cmd As New SqlCommandBuilder(DA)
                     DA.Update(DT)
                     '------------------ Keep Log ---------------
-                    BL.Save_Product_Movement_Log(PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.ChangeSlot, DR("RECENT"), DR("CURRENT"), "ย้าย Slot จาก " & DR("CURRENT") & " ไปยัง " & DR("CURRENT"), Session("USER_ID"), Now)
+                    BL.Save_Product_Movement_Log(PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.ChangeSlot, DR("RECENT"), SLOT_FROM, DR("CURRENT"), SLOT_TO, "ย้าย Slot จาก " & DR("CURRENT") & " ไปยัง " & DR("CURRENT"), Session("USER_ID"), Now)
                 End If
 
             ElseIf Not IsDBNull(DR("RECENT")) And IsDBNull(DR("CURRENT")) Then
@@ -870,7 +870,7 @@ Public Class TestScan
                     Dim cmd As New SqlCommandBuilder(DA)
                     DA.Update(DT)
                     '------------------ Keep Log ---------------
-                    BL.Save_Product_Movement_Log(PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.CheckOut, DR("RECENT"), "Stores หลัก", "ย้ายออกจาก " & KO_Code & " ช่อง " & DR("RECENT") & " ไปยัง Store หลัก", Session("USER_ID"), Now)
+                    BL.Save_Product_Movement_Log(PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.CheckOut, DR("RECENT"), SLOT_FROM, "Stores หลัก", 0, "ย้ายออกจาก " & KO_Code & " ช่อง " & DR("RECENT") & " ไปยัง Store หลัก", Session("USER_ID"), Now)
                 End If
 
             ElseIf IsDBNull(DR("RECENT")) And Not IsDBNull(DR("CURRENT")) Then
@@ -890,13 +890,13 @@ Public Class TestScan
                 Dim cmd As New SqlCommandBuilder(DA)
                 DA.Update(DT)
                 '------------------ Keep Log ---------------
-                BL.Save_Product_Movement_Log(PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.CheckIn, "Stores หลัก", DR("CURRENT"), "สแกนของเข้าตู้ช่อง " & DR("CURRENT"), Session("USER_ID"), Now)
+                BL.Save_Product_Movement_Log(PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.CheckIn, "Stores หลัก", 0, DR("CURRENT"), SLOT_TO, "สแกนของเข้าตู้ช่อง " & DR("CURRENT"), Session("USER_ID"), Now)
 
             Else 'If IsDBNull(DR("RECENT")) And IsDBNull(DR("CURRENT")) Then
                 '----------- Do Nothing / Scan But Unmanaged---------------
 
                 '------------------ Keep Log ---------------
-                BL.Save_Product_Movement_Log(PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.CheckIn, "Stores หลัก", KO_Code, "สแกนของแต่ไม่เอาเข้าตู้", Session("USER_ID"), Now)
+                BL.Save_Product_Movement_Log(PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.CheckIn, "Stores หลัก", 0, KO_Code, 0, "สแกนของแต่ไม่เอาเข้าตู้", Session("USER_ID"), Now)
             End If
         Next
 
