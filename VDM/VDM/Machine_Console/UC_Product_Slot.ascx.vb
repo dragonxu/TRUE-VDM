@@ -218,7 +218,7 @@
         End Get
         Set(value As Integer)
             If value <> 0 Then
-                Slot.Style("background-image") = "url('../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & value & "&LANG=1')"
+                Slot.Style("background-image") = "url('../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & value & "&LANG=1&DI=images/WhiteDot.png')"
             Else
                 Slot.Style.Remove("background-image")
             End If
@@ -233,6 +233,15 @@
         Set(value As Boolean)
             lblQuantity.Visible = value
             QuantityBar.Visible = value
+        End Set
+    End Property
+
+    Public Property ShowProductCode As Boolean
+        Get
+            Return lblCode.Visible
+        End Get
+        Set(value As Boolean)
+            lblCode.Visible = value
         End Set
     End Property
 

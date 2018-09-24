@@ -32,6 +32,15 @@ Partial Public Class TestScan
     Protected WithEvents pnlScanProduct As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
+    '''pnlZoom control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlZoom As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
     '''btnZoomOut control.
     '''</summary>
     '''<remarks>
@@ -111,6 +120,15 @@ Partial Public Class TestScan
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblSlot_ProductCode As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblSlotQuantity control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSlotQuantity As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''lblSlot_ProductName control.
@@ -257,13 +275,13 @@ Partial Public Class TestScan
     Protected WithEvents chkSlot As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''rptSlotProduct control.
+    '''rptSlot control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents rptSlotProduct As Global.System.Web.UI.WebControls.Repeater
+    Protected WithEvents rptSlot As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
     '''btnMoveRight control.
@@ -435,4 +453,13 @@ Partial Public Class TestScan
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnConfirm As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''btnSave control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSave As Global.System.Web.UI.WebControls.Button
 End Class

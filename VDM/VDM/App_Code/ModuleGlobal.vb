@@ -247,6 +247,13 @@ Module ModuleGlobal
         Return String.Join("", System.Security.Cryptography.MD5.Create().ComputeHash(System.Text.Encoding.ASCII.GetBytes(Input)).Select(Function(x) x.ToString("x2")))
     End Function
 
+    Public Function IsFormatGUID(ByVal Input As String) As Boolean
+        Dim isGuid As Regex = New Regex("^(\{){0,1}[0-9a-fA-F]{8}\-" &
+                     "[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-" &
+                     "[0-9a-fA-F]{12}(\}){0,1}$", RegexOptions.Compiled)
+        Return isGuid.IsMatch(Input)
+    End Function
+
 
 #Region "JSON"
     '---- Report Result in Collection Format -----------

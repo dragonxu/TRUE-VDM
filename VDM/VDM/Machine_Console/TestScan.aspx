@@ -59,16 +59,13 @@
 
           <div class="row" >
               <div class="col-sm-6" >
-                  <div class="row m-b-md">
-                                          
-                      <div class="btn-group">  
+                  <asp:Panel ID="pnlZoom" runat="server" CssClass="row m-b-md btn-group">                     
                         <asp:LinkButton ID="btnZoomOut" runat="server" CssClass="btn btn-warning">-</asp:LinkButton>
                         <asp:LinkButton ID="btnZoomReset" runat="server" CssClass="btn btn-info">x</asp:LinkButton>
-                        <asp:LinkButton ID="btnZoomIn" runat="server" CssClass="btn btn-success">+</asp:LinkButton>
-                      </div>                      
-                  </div>
+                        <asp:LinkButton ID="btnZoomIn" runat="server" CssClass="btn btn-success">+</asp:LinkButton>                                  
+                  </asp:Panel>
                   <uc1:UC_Product_Shelf runat="server" ID="Shelf" />
-                  <asp:Panel ID="pnlSlot" runat="server" CssClass="card bg-white m-b m-t-md">
+                  <asp:Panel ID="pnlSlot" runat="server" CssClass="card bg-white m-b m-t-md" PRODUCT_ID="0">
                       <div class="card-header">
                         <h3 class="m-t-0 m-b-0 pull-left">
                             <img src="../images/Icon/green/shelf.png" height="30"> Slot : <asp:Label ID="lblSlotName" runat="server" SLOT_ID="0"></asp:Label>
@@ -85,7 +82,9 @@
                                 <div class="row ">
                                     <div class="col col-xs-4 m-t text-center">
                                         <asp:Image ID="imgSlot_Product" runat="server" CssClass="product-Image" ImageUrl="../RenderImage.aspx?Mode=D&UID=1&Entity=Product&LANG=1" />
-                                        <small>CODE : <asp:Label ID="lblSlot_ProductCode" runat="server"></asp:Label></small>                                        
+                                        
+                                        <small>CODE : <asp:Label ID="lblSlot_ProductCode" runat="server"></asp:Label></small><br/>
+                                        <asp:Label ID="lblSlotQuantity" runat="server" Font-Bold="true" ForeColor="SteelBlue" CssClass="h2"></asp:Label>                                    
                                     </div>
                                     <div class="col col-xs-8 p-t p-l">
                                         <div class="row">
@@ -146,25 +145,30 @@
                                             <thead>
                                                 <tr>
                                                     <th> 
-                                                        <asp:LinkButton ID="chkSlot" runat="server">
-
-                                                        </asp:LinkButton>
-                                                        
+                                                        <asp:LinkButton ID="chkSlot" runat="server"></asp:LinkButton>                                                        
                                                     </th>
-                                                    <th>Code</th>
                                                     <th>Serial</th>
                                                     <th>Recent</th>
+                                                    <th>Remove</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <asp:Repeater ID="rptSlotProduct" runat="server">
-                                                    <ItemTemplate>
-                                                        <tr>
-                                                            <td><asp:CheckBox CssClass="to-labelauty-icon" ID="chk" runat="server" /></td>
-                                                            <td><asp:Label ID="lblCode" runat="server"></asp:Label></td>
-                                                            <td><asp:Label ID="lblSerial" runat="server"></asp:Label></td>
-                                                            <td><asp:Label ID="lblRecent" runat="server"></asp:Label></td>                                                
-                                                          </tr>
+                                                <asp:Repeater ID="rptSlot" runat="server">
+                                                    <ItemTemplate>                                                
+                                                                <tr>
+                                                                    <td>
+                                                                        <asp:LinkButton CssClass="btn btn-primary btn-sm btn-icon" ID="chk" runat="server" CommandName="Check">
+                                                                          <i class="icon-check"></i>
+                                                                       </asp:LinkButton>
+                                                                    </td>
+                                                                    <td><asp:Label ID="lblSerial" runat="server"></asp:Label></td>
+                                                                    <td><asp:Label ID="lblRecent" runat="server"></asp:Label></td>
+                                                                    <td>
+                                                                        <asp:LinkButton CssClass="btn btn-danger btn-icon-icon btn-sm" ID="del" runat="server" CommandName="Delete">
+                                                                            <i class="fa fa-remove"></i>
+                                                                        </asp:LinkButton>
+                                                                    </td>                                              
+                                                                  </tr>                                                        
                                                     </ItemTemplate>
                                                     <FooterTemplate></FooterTemplate>
                                                 </asp:Repeater>
@@ -209,11 +213,7 @@
                                 </ItemTemplate>
                             </asp:Repeater>
                           </ul>
-                        <ul class="nav nav-tabs" style="font-size:14px;">
-                            <a>
-
-                            </a>
-                        </ul>
+                        
                       <asp:Panel ID="pnlScan" runat="server" CssClass="card-block">
                         <div class="row">
                           <div class="row">
@@ -264,9 +264,9 @@
                                                           <i class="icon-check"></i>
                                                        </asp:LinkButton>
                                                     </th>
-                                                    <th>Code</th>
                                                     <th>Serial</th>
                                                     <th>Recent</th>
+                                                    <th>Remove</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -278,12 +278,15 @@
                                                                   <i class="icon-check"></i>
                                                                </asp:LinkButton>
                                                             </td>
-                                                            <td><asp:Label ID="lblCode" runat="server"></asp:Label></td>
                                                             <td><asp:Label ID="lblSerial" runat="server"></asp:Label></td>
-                                                            <td><asp:Label ID="lblRecent" runat="server"></asp:Label></td>                                                
+                                                            <td><asp:Label ID="lblRecent" runat="server"></asp:Label></td>  
+                                                            <td>
+                                                                <asp:LinkButton CssClass="btn btn-danger btn-icon-icon btn-sm" ID="del" runat="server" CommandName="Delete">
+                                                                    <i class="fa fa-remove"></i>
+                                                                </asp:LinkButton>
+                                                            </td>                                                
                                                           </tr>
                                                     </ItemTemplate>
-                                                    <FooterTemplate></FooterTemplate>
                                                 </asp:Repeater>
                                             </tbody>
                                           </table>                                        
@@ -308,6 +311,7 @@
         <div class="modal-footer no-border">
           <asp:Button ID="btnReset" runat="server" CssClass="btn btn-shadow btn-default" Text="Reset" />
           <asp:Button ID="btnConfirm" runat="server" CssClass="btn btn-shadow btn-primary" Text="Confirm" />
+            <asp:Button ID="btnSave" runat="server" CssClass="btn btn-shadow btn-success" Text="Save" />
         </div>
 
       </div>

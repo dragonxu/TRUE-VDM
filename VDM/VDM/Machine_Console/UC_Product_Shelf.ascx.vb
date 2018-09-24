@@ -140,6 +140,24 @@
         Return Result
     End Function
 
+    Public Function AccessFloorFromName(ByVal FLOOR_NAME As String) As UC_Product_Floor
+        For i As Integer = 0 To Floors.Count - 1
+            If Floors(i).FLOOR_NAME = FLOOR_NAME Then
+                Return Floors(i)
+            End If
+        Next
+        Return Nothing
+    End Function
+
+    Public Function AccessSlotFromName(ByVal SLOT_NAME As String) As UC_Product_Slot
+        For i As Integer = 0 To Slots.Count - 1
+            If Slots(i).SLOT_NAME = SLOT_NAME Then
+                Return Slots(i)
+            End If
+        Next
+        Return Nothing
+    End Function
+
     Private Function FloorDatas() As DataTable
         Dim DT As New DataTable
 
