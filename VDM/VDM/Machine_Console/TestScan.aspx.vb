@@ -136,7 +136,7 @@ Public Class TestScan
 
     Private Sub BindShelfLayout() '------------ เรียกครั้งแรกครั้งเดียว ---------------
 
-        BL.Bind_Product_Shelf(Shelf, KO_ID)
+        BL.Bind_Product_Shelf_Layout(Shelf, KO_ID)
 
         '-------------- Configure ------------
         Shelf.ShowAddFloor = False
@@ -281,47 +281,9 @@ Public Class TestScan
     Private Sub BindShelfProduct()
 
         Dim DT As DataTable = STOCK_DATA.Copy
-        Dim Slots As List(Of UC_Product_Slot) = Shelf.Slots
-        For i As Integer = 0 To Shelf.Slots.Count - 1
-            DT.DefaultView.RowFilter = "CURRENT='" & Slots(i).SLOT_NAME & "'"
-            If DT.DefaultView.Count = 0 Then
-                Slots(i).PRODUCT_ID = 0
-                Slots(i).PRODUCT_CODE = ""
-                Slots(i).PRODUCT_QUANTITY = 0
-                Slots(i).ShowQuantity = False
-                Slots(i).ShowMask = True
-                Slots(i).MaskContent = "<b class='text-default'>EMPTY</b>"
-            Else
-                Slots(i).PRODUCT_ID = DT.DefaultView(0).Item("PRODUCT_ID")
-                Slots(i).PRODUCT_CODE = DT.DefaultView(0).Item("PRODUCT_CODE")
-                Slots(i).PRODUCT_QUANTITY = DT.DefaultView.Count
-                '----------- Calculate Percent -------------
-                VW_ALL_PRODUCT.DefaultView.RowFilter = "PRODUCT_ID=" & Slots(i).PRODUCT_ID
-                Dim DV As DataRowView = VW_ALL_PRODUCT.DefaultView(0)
+        DT.Columns("CURRENT").ColumnName = "SLOT_NAME"
+        BL.Bind_Product_Shelf_Stock(Shelf, DT, VW_ALL_PRODUCT)
 
-                If Not IsDBNull(DV("DEPTH")) AndAlso DV("DEPTH") > 0 Then
-                    Dim MaxQuantity As Integer = Math.Floor(Shelf.SHELF_DEPTH / DV("DEPTH"))
-                    Dim Percent As Integer = Math.Floor((Slots(i).PRODUCT_QUANTITY * 100) / MaxQuantity)
-                    Slots(i).PRODUCT_LEVEL_PERCENT = Percent & "%"
-                    If Percent <= BL.Product_Critical_Percent Then
-                        Slots(i).PRODUCT_LEVEL_COLOR = Drawing.Color.Red
-                    Else
-                        Slots(i).PRODUCT_LEVEL_COLOR = Drawing.Color.Green
-                    End If
-                    Slots(i).ShowQuantity = True
-                    Slots(i).ShowMask = False
-                    Slots(i).MaskContent = ""
-                Else
-                    Slots(i).ShowProductCode = True
-                    Slots(i).ShowQuantity = False
-                    Slots(i).ShowMask = True
-                    Slots(i).MaskContent = "<small class='text-warning'>Product dimension is not set</small>"
-                End If
-
-
-
-            End If
-        Next
     End Sub
 
     Private Property SLOT_PRODUCT_ID As Integer

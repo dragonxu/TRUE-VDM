@@ -77,6 +77,24 @@ Partial Public Class UC_Product_Floor
     Protected WithEvents mnuAddSlot As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
+    '''mnuDivider control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents mnuDivider As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''liRemoveSlot control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents liRemoveSlot As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''mnuClearAllSlot control.
     '''</summary>
     '''<remarks>
@@ -93,6 +111,15 @@ Partial Public Class UC_Product_Floor
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents mnuClearAllProduct As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''liRemoveFloor control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents liRemoveFloor As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''mnuRemoveFloor control.

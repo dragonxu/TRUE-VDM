@@ -121,6 +121,14 @@ Public Class UC_Kiosk_Shelf
         Shelf.HighLight = UC_Product_Slot.HighLightMode.YellowDotted
 
         btnClearShelf.Visible = Shelf.Floors.Count > 0
+
+        For i As Integer = 0 To Sender.Slots.Count - 1
+            If Sender.Slots(i).PRODUCT_ID <> 0 Then
+                btnRemoveFloor.Visible = False
+                Exit For
+            End If
+        Next
+
         pnlShelf.Visible = True
     End Sub
 
@@ -192,6 +200,13 @@ Public Class UC_Kiosk_Shelf
         '-------- Set Floor Name -----------
         lblFloorName.Text = Sender.FLOOR_NAME
 
+        For i As Integer = 0 To Sender.Slots.Count - 1
+            If Sender.Slots(i).PRODUCT_ID <> 0 Then
+                btnRemoveFloor.Visible = False
+                Exit For
+            End If
+        Next
+
         Sender.HighLight = UC_Product_Slot.HighLightMode.YellowDotted
         pnlFloor.Visible = True
     End Sub
@@ -257,7 +272,7 @@ Public Class UC_Kiosk_Shelf
 
         lblSlotName.Text = Sender.SLOT_NAME
 
-        btnRemoveSlot.Visible = True
+        btnRemoveSlot.Visible = Sender.PRODUCT_ID = 0
 
         Sender.HighLight = UC_Product_Slot.HighLightMode.YellowDotted '-------- Select Slot -----------
         pnlSlot.Visible = True
@@ -315,7 +330,8 @@ Public Class UC_Kiosk_Shelf
 
     Public Sub BindData()
 
-        BL.Bind_Product_Shelf(Shelf, KO_ID)
+        BL.Bind_Product_Shelf_Layout(Shelf, KO_ID)
+        BL.Bind_Product_Shelf_Stock(Shelf, KO_ID)
 
     End Sub
 
@@ -328,7 +344,6 @@ Public Class UC_Kiosk_Shelf
         If Not SaveShelf() Then Return False
         If Not SaveFloor() Then Return False
         If Not SaveSlot() Then Return False
-        If Not SaveProductSerial() Then Return False
 
         Return True
 
@@ -507,11 +522,6 @@ Public Class UC_Kiosk_Shelf
 
         Return True
 
-    End Function
-
-    Private Function SaveProductSerial() As Boolean
-
-        Return True
     End Function
 
 #End Region

@@ -23,14 +23,14 @@
             <li>
                 <asp:LinkButton ID="mnuAddSlot" runat="server">Add slot</asp:LinkButton>
             </li>                                
-            <li class="divider"></li>
-            <li>
+            <li class="divider" id="mnuDivider" runat="server"></li>
+            <li id="liRemoveSlot" runat="server">
                 <asp:LinkButton ID="mnuClearAllSlot" runat="server">Remove all slot</asp:LinkButton>
             </li>
-            <li>
+            <li style="display:none;">
                 <asp:LinkButton ID="mnuClearAllProduct" runat="server" Visible="false">Remove all product</asp:LinkButton>
             </li>
-            <li>
+            <li id="liRemoveFloor" runat="server">
                 <asp:LinkButton ID="mnuRemoveFloor" runat="server">Remove this floor</asp:LinkButton>
             </li>
             </ul>
