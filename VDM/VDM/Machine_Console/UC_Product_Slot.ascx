@@ -28,8 +28,7 @@
 
     <div id="mask" runat="server" class="mask_container" Visible="false">
         <div class="mask_content" id="mask_content" runat="server">
-        </div>  
-        <div class="mask_slot"></div>            
+        </div>       
     </div>
 
 </asp:Panel>

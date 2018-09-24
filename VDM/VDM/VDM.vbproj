@@ -355,12 +355,9 @@
     <Content Include="images\SignIn\3.png" />
     <Content Include="images\TransparentDot.png" />
     <Content Include="images\warning.gif" />
-<<<<<<< HEAD
     <Content Include="images\WhiteDot.png" />
     <Content Include="Machine_Console\PrintBarcode.aspx" />
-=======
     <Content Include="Machine_Console\Styles\app.min.725970e8.css" />
->>>>>>> 8568e4abe7dd69c13a526285c38690c076f6d474
     <Content Include="Machine_Console\TestScan.aspx" />
     <Content Include="Machine_Console\UC_Shift_Change.ascx" />
     <Content Include="Machine_Console\UC_Shift_Recieve.ascx" />

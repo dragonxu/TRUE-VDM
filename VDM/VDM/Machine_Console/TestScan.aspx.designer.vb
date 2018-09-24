@@ -32,6 +32,33 @@ Partial Public Class TestScan
     Protected WithEvents pnlScanProduct As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
+    '''btnZoomOut control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnZoomOut As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''btnZoomReset control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnZoomReset As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''btnZoomIn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnZoomIn As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''Shelf control.
     '''</summary>
     '''<remarks>

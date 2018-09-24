@@ -59,6 +59,14 @@
 
           <div class="row" >
               <div class="col-sm-6" >
+                  <div class="row m-b-md">
+                                          
+                      <div class="btn-group">  
+                        <asp:LinkButton ID="btnZoomOut" runat="server" CssClass="btn btn-warning">-</asp:LinkButton>
+                        <asp:LinkButton ID="btnZoomReset" runat="server" CssClass="btn btn-info">x</asp:LinkButton>
+                        <asp:LinkButton ID="btnZoomIn" runat="server" CssClass="btn btn-success">+</asp:LinkButton>
+                      </div>                      
+                  </div>
                   <uc1:UC_Product_Shelf runat="server" ID="Shelf" />
                   <asp:Panel ID="pnlSlot" runat="server" CssClass="card bg-white m-b m-t-md">
                       <div class="card-header">

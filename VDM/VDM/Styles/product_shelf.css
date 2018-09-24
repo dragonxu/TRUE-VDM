@@ -158,12 +158,6 @@
      display:table;
 }
 
-.mask_slot {
-     opacity:0.7;
-     background-color:#fcfcfc;
-     z-index:2;
-}
-
 .border-red{
     border:1px solid red;
 }

@@ -24,6 +24,18 @@ Public Class TestScan
         End Set
     End Property
 
+    Public ReadOnly Property VW_ALL_PRODUCT As DataTable
+        Get
+            If IsNothing(Session("VW_ALL_PRODUCT_" & MY_UNIQUE_ID)) Then
+                Dim SQL As String = "SELECT * FROM VW_ALL_PRODUCT"
+                Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+                Dim DT As New DataTable
+                DA.Fill(DT)
+                Session("VW_ALL_PRODUCT_" & MY_UNIQUE_ID) = DT
+            End If
+            Return Session("VW_ALL_PRODUCT_" & MY_UNIQUE_ID)
+        End Get
+    End Property
 
     Public Property PixelPerMM As Double
         Get
@@ -46,7 +58,13 @@ Public Class TestScan
     Public Property STOCK_DATA As DataTable
         Get
             If IsNothing(Session("STOCK_DATA_" & MY_UNIQUE_ID)) Then
-                BindExistingStock() '------------- Get From Database -------------
+                Dim SQL As String = "SELECT PRODUCT_ID,PRODUCT_CODE,PRODUCT_NAME,SERIAL_NO,SLOT_NAME RECENT,SLOT_NAME [CURRENT]" & vbLf
+                SQL &= "FROM VW_CURRENT_PRODUCT_STOCK" & vbLf
+                SQL &= "WHERE KO_ID=" & KO_ID
+                Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+                Dim DT As New DataTable
+                DA.Fill(DT)
+                Session("STOCK_DATA_" & MY_UNIQUE_ID) = DT
             End If
             Return Session("STOCK_DATA_" & MY_UNIQUE_ID)
         End Get
@@ -59,9 +77,12 @@ Public Class TestScan
 
         If Not IsPostBack Then
             KO_ID = 1 '--------------- For Test ---------------
-            BindShelf()
+            BindShelfLayout()
             SCAN_PRODUCT_ID = -1
             BindScanProduct()
+            '-------- Left Side -------
+            ResetProductSlot()
+            BindShelfProduct()
         Else
             initFormPlugin()
         End If
@@ -106,8 +127,8 @@ Public Class TestScan
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
     End Sub
 
-    Private Sub BindShelf() '------------ เรียกครั้งแรกครั้งเดียว ---------------
-        PixelPerMM = 0.25
+    Private Sub BindShelfLayout() '------------ เรียกครั้งแรกครั้งเดียว ---------------
+
         BL.Bind_Product_Shelf(Shelf, KO_ID)
 
         '-------------- Configure ------------
@@ -116,6 +137,10 @@ Public Class TestScan
         Shelf.HideFloorName()
         Shelf.HideFloorMenu()
 
+        HideShelfScale()
+    End Sub
+
+    Private Sub HideShelfScale()
         '------------ Hide All Scale----------
         For i As Integer = 0 To Shelf.Slots.Count - 1
             Shelf.Slots(i).ShowScale = False
@@ -126,15 +151,23 @@ Public Class TestScan
         Shelf.ShowScale = False
     End Sub
 
-    Private Sub BindExistingStock()
-        Dim SQL As String = "SELECT PRODUCT_ID,PRODUCT_CODE,PRODUCT_NAME,SERIAL_NO,SLOT_NAME RECENT,SLOT_NAME [CURRENT]" & vbLf
-        SQL &= "FROM VW_CURRENT_PRODUCT_STOCK" & vbLf
-        SQL &= "WHERE KO_ID=" & KO_ID
-        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
-        Dim DT As New DataTable
-        DA.Fill(DT)
+    Private Sub btnZoomIn_Click(sender As Object, e As EventArgs) Handles btnZoomIn.Click
+        PixelPerMM += 0.05
+        HideShelfScale()
+        BindShelfProduct()
+    End Sub
 
-        STOCK_DATA = DT
+    Private Sub btnZoomOut_Click(sender As Object, e As EventArgs) Handles btnZoomOut.Click
+        If PixelPerMM <= 0.1 Then Exit Sub
+        PixelPerMM -= 0.05
+        HideShelfScale()
+        BindShelfProduct()
+    End Sub
+
+    Private Sub btnZoomReset_Click(sender As Object, e As EventArgs) Handles btnZoomReset.Click
+        PixelPerMM = 0.25
+        HideShelfScale()
+        BindShelfProduct()
     End Sub
 
     Private Property SCAN_PRODUCT_ID As Integer
@@ -184,7 +217,9 @@ Public Class TestScan
         End Set
     End Property
 
-    Private Sub ResetSlot()
+    Private Sub ResetProductSlot()
+
+        Shelf.Deselect_All()
 
         lblSlotName.Text = ""
         imgSlot_Product.ImageUrl = "../images/TransparentDot.png" '"../RenderImage.aspx?Mode=D&UID=0&Entity=Product&LANG=1"
@@ -217,7 +252,50 @@ Public Class TestScan
         Shelf.Visible = True
     End Sub
 
+    Private Sub BindShelfProduct()
+
+        Dim DT As DataTable = STOCK_DATA.Copy
+        Dim Slots As List(Of UC_Product_Slot) = Shelf.Slots
+        For i As Integer = 0 To Shelf.Slots.Count - 1
+            DT.DefaultView.RowFilter = "CURRENT='" & Slots(i).SLOT_NAME & "'"
+            If DT.DefaultView.Count = 0 Then
+                Slots(i).PRODUCT_ID = 0
+                Slots(i).PRODUCT_CODE = ""
+                Slots(i).PRODUCT_QUANTITY = 0
+                Slots(i).ShowQuantity = False
+                Slots(i).ShowMask = True
+                Slots(i).MaskContent = "<b class='text-default'>EMPTY</b>"
+            Else
+                Slots(i).PRODUCT_ID = DT.DefaultView(0).Item("PRODUCT_ID")
+                Slots(i).PRODUCT_CODE = DT.DefaultView(0).Item("PRODUCT_CODE")
+                Slots(i).PRODUCT_QUANTITY = DT.DefaultView.Count
+                '----------- Calculate Percent -------------
+                VW_ALL_PRODUCT.DefaultView.RowFilter = "PRODUCT_ID=" & Slots(i).PRODUCT_ID
+                Dim DV As DataRowView = VW_ALL_PRODUCT.DefaultView(0)
+
+                If Not IsDBNull(DV("DEPTH")) AndAlso DV("DEPTH") > 0 Then
+                    Slots(i).PRODUCT_LEVEL_PERCENT = Math.Floor(Slots(i).SLOT_WIDTH * 100 / DV("DEPTH")) & "%"
+                    Slots(i).ShowMask = False
+                    Slots(i).MaskContent = ""
+                Else
+                    Slots(i).ShowMask = True
+                    Slots(i).MaskContent = "<b class='text-default'>Product dimension is not set</b>"
+                End If
+
+                Slots(i).ShowQuantity = True
+
+            End If
+        Next
+    End Sub
+
+    Private Sub btnSeeShelf_Click(sender As Object, e As EventArgs) Handles btnSeeShelf.Click
+
+    End Sub
+
 #End Region
+
+#Region "Scan"
+
 
     Private Sub ResetScanProductTab() '------------- Reset เฉพาะ pnlProduct ที่เลือก ----------
 
@@ -329,7 +407,8 @@ Public Class TestScan
         Dim PRODUCT_ID As Integer = SCAN_PRODUCT_ID
         If PRODUCT_ID = -1 Then Exit Sub
 
-        Dim DT As DataTable = BL.Get_Product_Info_From_ID(PRODUCT_ID)
+        VW_ALL_PRODUCT.DefaultView.RowFilter = "PRODUCT_ID=" & PRODUCT_ID
+        Dim DT As DataTable = VW_ALL_PRODUCT.DefaultView.ToTable
         If DT.Rows.Count = 0 Then
             Message_Toastr("ไม่พบข้อมูล Product", ToastrMode.Danger, ToastrPositon.TopLeft, Me.Page)
             Exit Sub
@@ -405,7 +484,36 @@ Public Class TestScan
 
     End Sub
 
-    Private Sub btnSeeShelf_Click(sender As Object, e As EventArgs) Handles btnSeeShelf.Click
+    Private Function RightSelectedList() As List(Of DataRow)
+        '----------------- Create Strucure ----------
+        Dim Result As New List(Of DataRow)
+        For Each Item As RepeaterItem In rptScan.Items
+            If Item.ItemType <> ListItemType.Item And Item.ItemType <> ListItemType.AlternatingItem Then Continue For
+            Dim chk As LinkButton = Item.FindControl("chk")
+            If IsButtonCheck(chk) Then
+                Dim lblSerial As Label = Item.FindControl("lblSerial")
+                STOCK_DATA.DefaultView.RowFilter = "SERIAL_NO='" & lblSerial.Text.Replace("'", "''") & "'"
+                If STOCK_DATA.DefaultView.Count > 0 Then
+                    Result.Add(STOCK_DATA.DefaultView(0).Row)
+                End If
+            End If
+        Next
+        Return Result
+    End Function
+
+    Private Sub btnMoveLeft_Click(sender As Object, e As EventArgs) Handles btnMoveLeft.Click
+        Dim MoveList As List(Of DataRow) = RightSelectedList()
+        If MoveList.Count = 0 Then
+            Message_Toastr("เลือกรายการที่จะย้าย", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page)
+            Exit Sub
+        End If
+    End Sub
+
+#End Region
+
+    Public Sub SaveStock()
 
     End Sub
+
+
 End Class
