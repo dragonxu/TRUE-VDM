@@ -107,7 +107,7 @@ Public Class Setting_Brand
                 DA.Fill(DT)
 
                 If DT.Rows.Count = 0 Then
-                    Alert(Me.Page, "ไม่พบข้อมูล")
+                    Message_Toastr("ไม่พบข้อมูล", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page)
                     BindList()
                     Exit Sub
                 End If
@@ -154,7 +154,7 @@ Public Class Setting_Brand
             Dim img As System.Drawing.Image = System.Drawing.Image.FromStream(C.ByteToStream(B))
             BRAND_Logo = B
         Catch ex As Exception
-            Alert(Me.Page, "Support only image jpeg gif png\nAnd file size must not larger than 4MB")
+            Message_Toastr("Support only image jpeg gif png\nAnd file size must not larger than 4MB", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page)
             Exit Sub
         End Try
     End Sub
@@ -169,17 +169,17 @@ Public Class Setting_Brand
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         If txtCode.Text = "" Then
-            Alert(Me.Page, "กรอก Code")
+            Message_Toastr("กรอก Code", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page)
             Exit Sub
         End If
 
         If txtName.Text = "" Then
-            Alert(Me.Page, "กรอก Name")
+            Message_Toastr("กรอก Name", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page)
             Exit Sub
         End If
 
         If IsNothing(BRAND_Logo) Then
-            Alert(Me.Page, "เลือก Logo")
+            Message_Toastr("เลือก Logo", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page)
             Exit Sub
         End If
 
@@ -188,7 +188,7 @@ Public Class Setting_Brand
         Dim DT As New DataTable
         DA.Fill(DT)
         If DT.Rows.Count > 0 Then
-            Alert(Me.Page, "Code ซ้ำ")
+            Message_Toastr("Code ซ้ำ", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page)
             Exit Sub
         End If
 
@@ -197,7 +197,7 @@ Public Class Setting_Brand
         DT = New DataTable
         DA.Fill(DT)
         If DT.Rows.Count > 0 Then
-            Alert(Me.Page, "Name ซ้ำ")
+            Message_Toastr("Name ซ้ำ", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page)
             Exit Sub
         End If
 
@@ -230,7 +230,7 @@ Public Class Setting_Brand
             Exit Sub
         End Try
 
-        Alert(Me.Page, "บันทึกสำเร็จ")
+        Message_Toastr("บันทึกสำเร็จ", ToastrMode.Success, ToastrPositon.TopRight, Me.Page)
         ResetPage(Nothing, Nothing)
     End Sub
 

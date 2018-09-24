@@ -227,16 +227,7 @@ Partial Public Class TestScan
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents chkSlot As Global.System.Web.UI.WebControls.CheckBox
-    
-    '''<summary>
-    '''thSlotSerail control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents thSlotSerail As Global.System.Web.UI.HtmlControls.HtmlTableCell
+    Protected WithEvents chkSlot As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''rptSlotProduct control.
@@ -255,6 +246,15 @@ Partial Public Class TestScan
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnMoveRight As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''lblTotalScan control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTotalScan As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''txtBarcode control.
@@ -282,6 +282,15 @@ Partial Public Class TestScan
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents rptProductTab As Global.System.Web.UI.WebControls.Repeater
+    
+    '''<summary>
+    '''pnlScan control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlScan As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''imgScan_Product control.
@@ -362,25 +371,16 @@ Partial Public Class TestScan
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents chkScan As Global.System.Web.UI.WebControls.CheckBox
+    Protected WithEvents chkScan As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''thScanSerail control.
+    '''rptScan control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents thScanSerail As Global.System.Web.UI.HtmlControls.HtmlTableCell
-    
-    '''<summary>
-    '''rptScanProduct control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rptScanProduct As Global.System.Web.UI.WebControls.Repeater
+    Protected WithEvents rptScan As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
     '''btnMoveLeft control.

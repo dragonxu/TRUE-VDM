@@ -132,7 +132,7 @@ Public Class Setting_Site
                 DA.Fill(DT)
 
                 If DT.Rows.Count = 0 Then
-                    Alert(Me.Page, "ไม่พบข้อมูล")
+                    Message_Toastr("ไม่พบข้อมูล", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page)
                     BindList()
                     Exit Sub
                 End If
@@ -161,6 +161,7 @@ Public Class Setting_Site
                 SQL &= " WHERE SITE_ID=" & e.CommandArgument
                 BL.ExecuteNonQuery(SQL)
                 BindList()
+                Message_Toastr("ลบสำเร็จ", ToastrMode.Success, ToastrPositon.TopRight, Me.Page)
         End Select
     End Sub
 
@@ -206,7 +207,7 @@ Public Class Setting_Site
             Dim img As System.Drawing.Image = System.Drawing.Image.FromStream(C.ByteToStream(B))
             SITE_Icon = B
         Catch ex As Exception
-            Alert(Me.Page, "Support only image jpeg gif png\nAnd file size must not larger than 4MB")
+            Message_Toastr("Support only image jpeg gif png\nAnd file size must not larger than 4MB", ToastrMode.Danger, ToastrPositon.TopRight, Me.Page)
             Exit Sub
         End Try
     End Sub
@@ -221,17 +222,17 @@ Public Class Setting_Site
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         If txtCode.Text = "" Then
-            Alert(Me.Page, "กรอก Code")
+            Message_Toastr("กรอก Code", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page)
             Exit Sub
         End If
 
         If txtName.Text = "" Then
-            Alert(Me.Page, "กรอก Name")
+            Message_Toastr("กรอก Name", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page)
             Exit Sub
         End If
 
         If IsNothing(SITE_Icon) Then
-            Alert(Me.Page, "เลือก Icon")
+            Message_Toastr("เลือก Icon", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page)
             Exit Sub
         End If
 
@@ -240,7 +241,7 @@ Public Class Setting_Site
         Dim DT As New DataTable
         DA.Fill(DT)
         If DT.Rows.Count > 0 Then
-            Alert(Me.Page, "Code ซ้ำ")
+            Message_Toastr("Code ซ้ำ", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page)
             Exit Sub
         End If
 
@@ -249,7 +250,7 @@ Public Class Setting_Site
         DT = New DataTable
         DA.Fill(DT)
         If DT.Rows.Count > 0 Then
-            Alert(Me.Page, "Name ซ้ำ")
+            Message_Toastr("Name ซ้ำ", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page)
             Exit Sub
         End If
 
@@ -302,11 +303,11 @@ Public Class Setting_Site
             DA.Update(DT)
             BL.Save_Site_Icon(SITE_ID, SITE_Icon)
         Catch ex As Exception
-            Alert(Me.Page, ex.Message)
+            Message_Toastr(ex.Message, ToastrMode.Danger, ToastrPositon.TopRight, Me.Page)
             Exit Sub
         End Try
 
-        Alert(Me.Page, "บันทึกสำเร็จ")
+        Message_Toastr("บันทึกสำเร็จ", ToastrMode.Success, ToastrPositon.TopRight, Me.Page)
         ResetPage(Nothing, Nothing)
     End Sub
 

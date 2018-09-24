@@ -41,9 +41,9 @@ Public Class Machine_Overview
     Private Sub btnSaveProduct_Click(sender As Object, e As EventArgs) Handles btnSaveProduct.Click
         Shelf.KO_ID = KO_ID
         If Not Shelf.SaveData Then
-            Alert(Me.Page, "ไม่สามารถบันทึก Layout ของ Product Shelf")
+            Message_Toastr("ไม่สามารถบันทึก Layout ของ Product Shelf", ToastrMode.Danger, ToastrPositon.TopRight, Me.Page)
         Else
-            Alert(Me.Page, "บันทึกสำเร็จ")
+            Message_Toastr("บันทึกสำเร็จ", ToastrMode.Success, ToastrPositon.TopRight, Me.Page)
             Shelf.ResetProperty()
             SetProductShelf()
         End If

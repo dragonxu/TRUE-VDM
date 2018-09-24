@@ -1,0 +1,165 @@
+﻿<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>Reactor - Bootstrap Admin Template</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+  <!-- build:css({.tmp,app}) styles/app.min.css -->
+  <link rel="stylesheet" href="styles/webfont.css">
+  <link rel="stylesheet" href="styles/climacons-font.css">
+  <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="styles/font-awesome.css">
+  <link rel="stylesheet" href="styles/card.css">
+  <link rel="stylesheet" href="styles/sli.css">
+  <link rel="stylesheet" href="styles/animate.css">
+  <link rel="stylesheet" href="styles/app.css">
+  <link rel="stylesheet" href="styles/app.skins.css">
+  <!-- endbuild -->
+</head>
+
+<body class="page-loading">
+  <div class="app layout-fixed-header">
+
+    <!-- content panel -->
+    <div class="main-panel">
+
+      <!-- main area -->
+      <div class="main-content">
+        <div class="row">
+          <div class="col-sm-6">
+            <ul class="sortable-list connectedSortable">
+              <li>
+                <span class="badge bg-success pull-right">6</span>
+                <i class="icon-home m-r"></i>Home
+              </li>
+              <li>
+                <span class="badge bg-warning pull-right">8</span>
+                <i class="icon-envelope m-r"></i>Mailbox
+              </li>
+              <li>
+                <span class="badge bg-danger pull-right">2</span>
+                <i class="icon-users m-r"></i>Group
+              </li>
+              <li>
+                <i class="icon-picture m-r"></i>Pictures</li>
+              <li>
+                <span class="badge bg-primary pull-right">2</span>
+                <i class="icon-star m-r"></i>Sales
+              </li>
+              <li>
+                <span class="badge bg-warning pull-right">4</span>
+                <i class="icon-support m-r"></i>Forums
+              </li>
+              <li>
+                <span class="badge bg-danger pull-right">6</span>
+                <i class="icon-link m-r"></i>Links
+              </li>
+              <li>
+                <i class="icon-paper-clip m-r"></i>Attachments</li>
+              <li>
+                <span class="badge bg-primary pull-right">9</span>
+                <i class="icon-tag m-r"></i>Tags
+              </li>
+              <li>
+                <i class="icon-settings m-r"></i>Settings</li>
+            </ul>
+          </div>
+          <div class="col-sm-6">
+            <ul class="sortable-list connectedSortable">
+              <li>
+                Nullam id dolor id nibh ultricies vehicula ut id elit.
+              </li>
+              <li>
+                Cras mattis consectetur purus sit amet fermentum.
+              </li>
+              <li>
+                Maecenas faucibus mollis interdum.
+              </li>
+              <li>
+                Vestibulum id ligula porta felis euismod semper.
+              </li>
+              <li>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </li>
+              <li>
+                Curabitur blandit tempus porttitor.
+              </li>
+              <li>
+                Aenean lacinia bibendum nulla sed consectetur.
+              </li>
+              <li>
+                Sed posuere consectetur est at lobortis.
+              </li>
+              <li>
+                Cras mattis consectetur purus sit amet fermentum.
+              </li>
+              <li>
+                Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- /main area -->
+    </div>
+    <!-- /content panel -->
+
+  </div>
+  <!-- build:js({.tmp,app}) scripts/app.min.js -->
+
+  <script src="vendor/jquery/dist/jquery.js"></script>
+
+
+  <script src="scripts/helpers/smartresize.js"></script>
+  <script src="scripts/constants.js"></script>
+  <script src="scripts/main.js"></script>
+  <!-- endbuild -->
+  <!-- page scripts -->
+  <script src="vendor/jquery.ui/ui/core.js"></script>
+  <script src="vendor/jquery.ui/ui/widget.js"></script>
+  <script src="vendor/jquery.ui/ui/mouse.js"></script>
+  <script src="vendor/jquery.ui/ui/sortable.js"></script>
+  <!-- end page scripts -->
+  <!-- initialize page scripts -->
+  <script type="text/javascript">
+    (function ($) {
+      'use strict';
+      $('.sortable-list').sortable({
+        placeholder: 'ui-state-highlight',
+        connectWith: '.connectedSortable'
+        //  ,
+        //receive: function (event, ui) { sortRecieve(event, ui); },
+        //change: function (event, ui) { sortChange(event, ui); }
+      }).disableSelection();
+    })(jQuery);
+
+    //function sortChange(event, ui) {
+    //    alert("Change : " + ui.item.html());
+    //}
+
+    //function sortRecieve(event, ui) {
+    //    alert("Recieve : " + ui.item.html());
+    //}
+      //activate
+      //beforeStop
+      //change
+      //create
+      //deactivate
+      //out
+      //over
+      //receive
+      //remove
+      //sort
+      //start
+      //stop
+      //update
+     
+  </script>
+  <!-- end initialize page scripts -->
+
+    
+</body>
+
+</html>

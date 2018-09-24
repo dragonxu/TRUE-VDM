@@ -121,7 +121,7 @@ Public Class Manage_Machine
 
                 Dim DT As DataTable = BL.GetList_Kiosk(e.CommandArgument)
                 If DT.Rows.Count = 0 Then
-                    ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('" & lblKioskCode.Text.Replace("'", """") & " ไม่พบเครื่อง Vending ดังกล่าว!');", True)
+                    Message_Toastr(lblKioskCode.Text.Replace("'", """") & " ไม่พบเครื่อง Vending ดังกล่าว!", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page)
                     Exit Sub
                 End If
 
@@ -144,7 +144,7 @@ Public Class Manage_Machine
             Case "Delete"
                 BL.Drop_Kiosk(e.CommandArgument)
                 BindList()
-                ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('ลบ " & lblKioskCode.Text.Replace("'", """") & " สำเร็จ!');", True)
+                Message_Toastr("ลบ " & lblKioskCode.Text.Replace("'", """") & " สำเร็จ!", ToastrMode.Success, ToastrPositon.TopRight, Me.Page)
         End Select
     End Sub
 
@@ -194,19 +194,19 @@ Public Class Manage_Machine
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         If txtCode.Text = "" Then
-            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('กรอก Machine Code');", True)
+            Message_Toastr("กรอก Machine Code", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page)
             Exit Sub
         End If
 
         If ddlSite.SelectedIndex < 1 Then
-            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('เลือก Site');", True)
+            Message_Toastr("เลือก Site", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page)
             Exit Sub
         End If
 
         Dim DT As DataTable = BL.GetList_Kiosk()
         DT.DefaultView.RowFilter = "KO_Code='" & txtCode.Text.Replace("'", "''") & "' AND KO_ID<>" & KO_ID
         If DT.DefaultView.Count > 0 Then
-            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('Kiosk Code ซ้ำ');", True)
+            Message_Toastr("Kiosk Code ซ้ำ", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page)
             Exit Sub
         End If
 
@@ -240,18 +240,18 @@ Public Class Manage_Machine
         Try
             DA.Update(DT)
         Catch ex As Exception
-            Alert(Me.Page, ex.Message)
+            Message_Toastr(ex.Message, ToastrMode.Danger, ToastrPositon.TopRight, Me.Page)
             Exit Sub
         End Try
 
         '-------------- Save Product Shelf -------------
         Shelf.KO_ID = KO_ID
         If Not Shelf.SaveData Then
-            Alert(Me.Page, "ไม่สามารถบันทึก Layout ของ Product Shelf")
+            Message_Toastr("ไม่สามารถบันทึก Layout ของ Product Shelf", ToastrMode.Danger, ToastrPositon.TopRight, Me.Page)
             Exit Sub
         End If
 
-        Alert(Me.Page, "บันทึกสำเร็จ")
+        Message_Toastr("บันทึกสำเร็จ", ToastrMode.Success, ToastrPositon.TopRight, Me.Page)
         ResetPage(Nothing, Nothing)
     End Sub
 

@@ -391,6 +391,120 @@ Public Class VDM_BL
         DA.Fill(DT)
         Return DT
     End Function
+
+    Public Class BarcodeScanResult
+        Public PRODUCT_ID As Integer = 0
+        Public PRODUCT_CODE As String = ""
+        Public DISPLAY_NAME As String = ""
+        Public IS_SERIAL As Boolean = False
+        Public TYPE As String = ""
+
+        Public WIDTH As Integer = 0
+        Public HEIGHT As Integer = 0
+        Public DEPTH As Integer = 0
+
+        Public SERIAL_NO As String = ""
+
+        Public Result As Boolean = False
+        Public Message As String = "Not found"
+
+    End Class
+
+    Public Function Get_Product_Barcode_scan_Result(ByVal Shop_Code As String, ByVal Search As String) As BarcodeScanResult
+        Dim Result As New BarcodeScanResult
+
+        Dim SQL As String = "SELECT PRODUCT_ID,PRODUCT_CODE,DISPLAY_NAME,IS_SERIAL,GS1,TYPE" & vbLf
+        SQL &= ", WIDTH, HEIGHT, DEPTH, SERIAL_NO, SLOT_ID" & vbLf
+        SQL &= " From VW_PRODUCT_FOR_SCAN" & vbLf
+        SQL &= "WHERE PRODUCT_CODE='" & Search.Replace("'", "''") & "' OR GS1 ='" & Search.Replace("'", "''") & "'"
+
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        DA.Fill(DT)
+
+        If DT.Rows.Count > 0 Then
+            Result.PRODUCT_ID = DT.Rows(0).Item("PRODUCT_ID")
+            Result.PRODUCT_CODE = DT.Rows(0).Item("PRODUCT_CODE").ToString
+            Result.DISPLAY_NAME = DT.Rows(0).Item("DISPLAY_NAME").ToString
+            Result.IS_SERIAL = DT.Rows(0).Item("IS_SERIAL")
+            Result.TYPE = DT.Rows(0).Item("TYPE").ToString
+            If Not IsDBNull(DT.Rows(0).Item("WIDTH")) Then Result.WIDTH = DT.Rows(0).Item("WIDTH")
+            If Not IsDBNull(DT.Rows(0).Item("HEIGHT")) Then Result.HEIGHT = DT.Rows(0).Item("HEIGHT")
+            If Not IsDBNull(DT.Rows(0).Item("DEPTH")) Then Result.DEPTH = DT.Rows(0).Item("DEPTH")
+
+            If DT.Rows(0).Item("IS_SERIAL") Then
+                '---------------- เป็น Product Serial แต่ไม่ได้ยิง Serial มา --------------
+                Result.Result = False
+                Result.Message = "Product นี้ต้องยิง Serial"
+                Return Result
+            Else
+                Result.Result = True
+                Result.Message = "Success"
+                Return Result
+            End If
+        Else
+            '----------- Get From TSM : Hardcode For Test--------------
+            Result.IS_SERIAL = True
+            Result.SERIAL_NO = Search
+            Result.PRODUCT_CODE = Get_TSM_Product_Code_From_Serial("", Search) '---------------  ตรวจสอบเลข Serial กับ TSM ---------
+
+            If Result.PRODUCT_CODE = "" Then
+                Result.Result = False
+                Result.Message = "ไม่พบเลข Barcode"
+                Return Result
+            Else
+                SQL = "SELECT PRODUCT_ID,PRODUCT_CODE,DISPLAY_NAME,IS_SERIAL,GS1,TYPE" & vbLf
+                SQL &= ",WIDTH, HEIGHT, DEPTH, SERIAL_NO, SLOT_ID" & vbLf
+                SQL &= " From VW_PRODUCT_FOR_SCAN" & vbLf
+                SQL &= "WHERE PRODUCT_CODE='" & Result.PRODUCT_CODE.Replace("'", "''") & "'"
+                DT = New DataTable
+                DA = New SqlDataAdapter(SQL, ConnectionString)
+                DA.Fill(DT)
+                If DT.Rows.Count = 0 Then
+                    Result.Result = False
+                    Result.Message = "ไม่พบ Product Code"
+                    Return Result
+                Else
+                    Result.PRODUCT_ID = DT.Rows(0).Item("PRODUCT_ID")
+                    Result.DISPLAY_NAME = DT.Rows(0).Item("DISPLAY_NAME").ToString
+                    Result.TYPE = DT.Rows(0).Item("TYPE").ToString
+                    If Not IsDBNull(DT.Rows(0).Item("WIDTH")) Then Result.WIDTH = DT.Rows(0).Item("WIDTH")
+                    If Not IsDBNull(DT.Rows(0).Item("HEIGHT")) Then Result.HEIGHT = DT.Rows(0).Item("HEIGHT")
+                    If Not IsDBNull(DT.Rows(0).Item("DEPTH")) Then Result.DEPTH = DT.Rows(0).Item("DEPTH")
+
+                    '---------------- ตรวจสอบว่ามีอยู่ใน Stock ปัจจุบันหรือไม่----------------
+                    DT.DefaultView.RowFilter = "SERIAL_NO='" & Search.Replace("'", "''") & "'"
+                    If DT.DefaultView.Count > 0 Then
+                        Result.Result = False
+                        Result.Message = "สินค้านี้มีอยู่ใน Stock แล้ว (ซ้ำ)"
+                        Return Result
+                    Else
+                        Result.Result = True
+                        Result.Message = "Success"
+                        Return Result
+                    End If
+                End If
+            End If
+        End If
+
+    End Function
+
+    Public Function Get_TSM_Product_Code_From_Serial(ByVal Shop_Code As String, ByVal SERIAL_NO As String) As String
+        '----------- Get From TSM : Hardcode For Test--------------
+        Dim SQL As String = "SELECT PRODUCT_CODE,SERIAL_NO FROM TMP_Serial" & vbLf
+        SQL &= "WHERE SERIAL_NO='" & SERIAL_NO.Replace("'", "''") & "'"
+
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        DA.Fill(DT)
+
+        If DT.Rows.Count = 0 Then
+            Return ""
+        Else
+            Return DT.Rows(0).Item("PRODUCT_CODE").ToString
+        End If
+    End Function
+
 #End Region
 
 #Region "Kiosk Management"
@@ -400,7 +514,7 @@ Public Class VDM_BL
         Shelf.ResetDimension()
         Shelf.ClearAllFloor()
         '--------------- BindShelf ----------------
-        Dim SQL As String = "SELECT * FROM TB_PRODUCT_SHELF WHERE KO_ID=" & KO_ID
+        Dim SQL As String = "Select * FROM TB_PRODUCT_SHELF WHERE KO_ID=" & KO_ID
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         DA.Fill(DT)
@@ -412,10 +526,11 @@ Public Class VDM_BL
         Shelf.SHELF_HEIGHT = DT.Rows(0).Item("HEIGHT")
 
         '------------ Bind Floor -----------------
-        SQL = "SELECT FLOOR_ID,HEIGHT,POS_Y," & vbLf
-        SQL &= "0 HighLight,CAST(1 AS BIT) ShowFloorName,CAST(1 AS BIT) ShowMenu,NULL SlotDatas " & vbLf
+        SQL = "Select FLOOR_ID, HEIGHT, POS_Y, " & vbLf
+        SQL &= "0 HighLight, CAST(1 As BIT) ShowFloorName, CAST(1 As BIT) ShowMenu, NULL SlotDatas " & vbLf
         SQL &= "FROM TB_PRODUCT_FLOOR" & vbLf
-        SQL &= "WHERE SHELF_ID=" & Shelf.SHELF_ID & " ORDER BY FLOOR_ID"
+        SQL &= "WHERE SHELF_ID=" & Shelf.SHELF_ID & vbLf
+        SQL &= " ORDER BY FLOOR_ORDER" & vbLf
         DT = New DataTable
         DA = New SqlDataAdapter(SQL, ConnectionString)
         DA.Fill(DT)
@@ -429,7 +544,9 @@ Public Class VDM_BL
             Shelf.AddFloor(FLOOR_ID, FLOOR_HEIGHT, POS_Y, False, True, Nothing, True, f)
             Dim Floor As UC_Product_Floor = Shelf.Floors(f)
             '-------------- Bind Slot --------------
-            SQL = "SELECT * FROM TB_PRODUCT_SLOT WHERE FLOOR_ID=" & FLOOR_ID
+            SQL = "Select * FROM TB_PRODUCT_SLOT " & vbLf
+            SQL &= "WHERE FLOOR_ID=" & FLOOR_ID & vbLf
+            SQL &= "ORDER BY SLOT_ORDER"
             Dim ST = New DataTable
             DA = New SqlDataAdapter(SQL, ConnectionString)
             DA.Fill(ST)
@@ -454,16 +571,16 @@ Public Class VDM_BL
 
     Public Function GetList_Kiosk(Optional ByVal KO_ID As Integer = 0) As DataTable
         Dim SQL As String = ""
-        SQL &= " SELECT KO.KO_ID,KO.KO_CODE,KO.SITE_ID,Site.SITE_CODE,KO.ZONE,KO.IP,KO.Mac   " & vbLf
-        SQL &= " ,KO.IsOnline,COUNT(SLOT.PRODUCT_ID) Total_Product,KO.Active_Status " & vbLf
+        SQL &= " Select KO.KO_ID, KO.KO_CODE, KO.SITE_ID, Site.SITE_CODE, KO.ZONE, KO.IP, KO.Mac   " & vbLf
+        SQL &= " , KO.IsOnline, COUNT(SLOT.PRODUCT_ID) Total_Product, KO.Active_Status " & vbLf
         SQL &= " FROM MS_KIOSK KO           " & vbLf
-        SQL &= " INNER JOIN MS_Site Site on KO.SITE_ID = Site.SITE_ID" & vbLf
-        SQL &= " LEFT JOIN VW_KIOSK_SLOT SLOT ON  KO.KO_ID=SLOT.KO_ID         " & vbLf
+        SQL &= " INNER JOIN MS_Site Site On KO.SITE_ID = Site.SITE_ID" & vbLf
+        SQL &= " LEFT JOIN VW_KIOSK_SLOT SLOT On  KO.KO_ID=SLOT.KO_ID         " & vbLf
         SQL &= " " & vbLf
         If KO_ID <> 0 Then
             SQL &= " WHERE KO.KO_ID=" & KO_ID & vbLf
         End If
-        SQL &= " GROUP BY KO.KO_ID,KO.KO_CODE,KO.SITE_ID,Site.SITE_CODE,KO.ZONE,KO.IP,KO.Mac,KO.IsOnline,KO.Active_Status" & vbLf
+        SQL &= " GROUP BY KO.KO_ID, KO.KO_CODE, KO.SITE_ID, Site.SITE_CODE, KO.ZONE, KO.IP, KO.Mac, KO.IsOnline, KO.Active_Status" & vbLf
         SQL &= " ORDER BY KO.KO_ID" & vbLf
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         Dim DT As New DataTable
@@ -476,13 +593,13 @@ Public Class VDM_BL
         SQL &= " Select " & vbLf
         SQL &= " K.KO_ID, D.D_ID, D.D_Name, D.DT_ID, DT.DT_Name, " & vbLf
         SQL &= " D.Unit_Value, " & vbLf
-        SQL &= " ISNULL(D.Max_Qty, D.Max_Qty) Max_Qty," & vbLf
-        SQL &= " ISNULL(D.Warning_Qty,D.Warning_Qty) Warning_Qty," & vbLf
-        SQL &= " ISNULL(D.Critical_Qty,D.Critical_Qty) Critical_Qty,KD.Current_Qty,DT.Movement_Direction," & vbLf
+        SQL &= " ISNULL(D.Max_Qty, D.Max_Qty) Max_Qty, " & vbLf
+        SQL &= " ISNULL(D.Warning_Qty, D.Warning_Qty) Warning_Qty, " & vbLf
+        SQL &= " ISNULL(D.Critical_Qty, D.Critical_Qty) Critical_Qty,KD.Current_Qty,DT.Movement_Direction," & vbLf
         SQL &= " DS.DS_ID,DS.DS_Name,DS.IsProblem,KD.Update_Time,D.D_Order,Icon_White,Icon_Red,Icon_Green" & vbLf
         SQL &= " FROM " & vbLf
         SQL &= " MS_KIOSK K " & vbLf
-        SQL &= " INNER JOIN MS_DEVICE D ON K.Active_Status=1 AND D.Active_Status=1" & vbLf
+        SQL &= " INNER JOIN MS_DEVICE D On K.Active_Status=1 And D.Active_Status=1" & vbLf
         SQL &= " INNER JOIN MS_DEVICE_TYPE DT On D.DT_ID= DT.DT_ID " & vbLf
         SQL &= " LEFT JOIN TB_KIOSK_DEVICE KD On D.D_ID=KD.D_ID And KD.KO_ID=K.KO_ID" & vbLf
         SQL &= " LEFT JOIN MS_DEVICE_STATUS DS On KD.DS_ID=DS.DS_ID" & vbLf
@@ -533,7 +650,7 @@ Public Class VDM_BL
     End Sub
 
     Public Sub Drop_PRODUCT_STOCK_SERIAL(ByVal SERIAL_NO As String)
-        Dim SQL As String = "SELECT SLOT_ID FROM TB_PRODUCT_SERIAL_STOCK" & vbLf
+        Dim SQL As String = "Select SLOT_ID FROM TB_PRODUCT_SERIAL_STOCK" & vbLf
         SQL &= "WHERE SERIAL_NO='" & SERIAL_NO.Replace("'", "''") & "'"
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)

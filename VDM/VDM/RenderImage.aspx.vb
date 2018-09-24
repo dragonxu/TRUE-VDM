@@ -29,18 +29,28 @@ Public Class RenderImage
         End Get
     End Property
 
+    Private Property DefaultImage As String
+        Get
+            If IsNothing(Request.QueryString("DI")) OrElse Request.QueryString("DI") = "" Then
+                Return "images/BlankIcon.png"
+            Else
+                Return Request.QueryString("DI")
+            End If
+        End Get
+        Set(value As String)
+
+        End Set
+    End Property
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        Dim ErrorImage As String = "images/BlankIcon.png"
         Try
             Select Case Mode.ToUpper
                 Case "S" '---------------- Session ----------------
-                    ErrorImage = "images/BlankIcon.png"
                     Response.Clear()
                     Response.BinaryWrite(Session(UID))
                     Response.AddHeader("Content-Type", "image/png")
                 Case "D" '--------------- DB ----------------------
-                    ErrorImage = "images/BlankIcon.png"
                     Response.Clear()
                     Response.AddHeader("Content-Type", "image/png")
                     Select Case Entity.ToUpper
@@ -62,7 +72,7 @@ Public Class RenderImage
                     End Select
             End Select
         Catch ex As Exception
-            Response.Redirect(ErrorImage)
+            Response.Redirect(DefaultImage)
         End Try
 
     End Sub
