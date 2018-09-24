@@ -77,17 +77,24 @@ Public Class TestScan
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Not IsPostBack Then
+            Session("USER_ID") = 1 '--------------- For Test ---------------
             KO_ID = 1 '--------------- For Test ---------------
-            BindShelfLayout()
-            SCAN_PRODUCT_ID = -1
-            BindScanProduct()
-            '-------- Left Side -------
-            ResetProductSlot()
-            BindShelfProduct()
+            BindData()
         Else
             initFormPlugin()
         End If
 
+    End Sub
+
+    Public Sub BindData()
+        'MY_UNIQUE_ID = GenerateNewUniqueID()
+        pnlScanProduct.Attributes("MY_UNIQUE_ID") = GenerateNewUniqueID()
+        BindShelfLayout()
+        SCAN_PRODUCT_ID = -1
+        BindScanProduct()
+        '-------- Left Side -------
+        ResetProductSlot()
+        BindShelfProduct()
     End Sub
 
 #Region "CheckButton"
@@ -254,6 +261,7 @@ Public Class TestScan
         lblSlot_Width.Text = "-"
         lblSlot_Height.Text = "-"
         lblSlot_Depth.Text = "-"
+        lblSlotQuantity.Text = "-"
         pnlSlotCapacity.Visible = False
         levelProduct.Visible = False
         lblFreeSpace.Text = "-"
@@ -300,15 +308,17 @@ Public Class TestScan
                     Else
                         Slots(i).PRODUCT_LEVEL_COLOR = Drawing.Color.Green
                     End If
-
+                    Slots(i).ShowQuantity = True
                     Slots(i).ShowMask = False
                     Slots(i).MaskContent = ""
                 Else
+                    Slots(i).ShowProductCode = True
+                    Slots(i).ShowQuantity = False
                     Slots(i).ShowMask = True
-                    Slots(i).MaskContent = "<b class='text-warning'>Product dimension is not set</b>"
+                    Slots(i).MaskContent = "<small class='text-warning'>Product dimension is not set</small>"
                 End If
 
-                Slots(i).ShowQuantity = True
+
 
             End If
         Next
@@ -376,6 +386,8 @@ Public Class TestScan
             tagSlot_Empty.Visible = False
             imgSlot_Brand.Visible = True
             imgSlot_Brand.ImageUrl = "../RenderImage.aspx?Mode=D&UID=" & DV("BRAND_ID").ToString & "&Entity=Brand&LANG=1&DI=images/TransparentDot.png"
+
+            lblSlotQuantity.Text = "<small>X</small> " & Sender.PRODUCT_QUANTITY
 
             pnlSlotProductSize.Visible = True
             If Not IsDBNull(DV("WIDTH")) Then
@@ -840,15 +852,112 @@ Public Class TestScan
         '----------- Bind Left Side ----------
         BindShelfProduct()
         BindSlotProduct(SLOT)
-
-
     End Sub
 
 #End Region
 
-    Public Sub SaveStock()
+#Region "Command"
+    Public Function Save() As Boolean
 
+        Dim result As Boolean = False
+        Dim KT As DataTable = BL.GetList_Kiosk(KO_ID)
+        Dim KO_Code As String = KT.Rows(0).Item("KO_CODE")
+
+        Dim SQL As String = ""
+
+        For i As Integer = 0 To STOCK_DATA.Rows.Count - 1
+            Dim DR As DataRow = STOCK_DATA.Rows(i)
+
+            Dim PRODUCT_ID As Integer = DR("PRODUCT_ID")
+            Dim PRODUCT_CODE As String = DR("PRODUCT_CODE")
+            Dim PRODUCT_NAME As String = DR("PRODUCT_NAME")
+            Dim SERIAL_NO As String = DR("SERIAL_NO")
+
+
+            If Not IsDBNull(DR("RECENT")) And Not IsDBNull(DR("CURRENT")) Then
+
+                '-------------------- Not Changed------------------
+                If DR("RECENT") = DR("CURRENT") Then Continue For
+
+                '------------------ Move Other Slot ---------------
+                Dim SLOT_FROM As Integer = Shelf.AccessSlotFromName(DR("RECENT")).SLOT_ID
+                Dim SLOT_TO As Integer = Shelf.AccessSlotFromName(DR("CURRENT")).SLOT_ID
+                SQL = "SELECT * FROM TB_PRODUCT_SERIAL WHERE SERIAL_NO='" & SERIAL_NO.Replace("'", "''") & "' AND SLOT_ID=" & SLOT_FROM
+                Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+                Dim DT As New DataTable
+                DA.Fill(DT)
+                If DT.Rows.Count > 0 Then
+                    DT.Rows(0).Item("SLOT_ID") = SLOT_TO
+                    '------------------ Save Stock ---------------
+                    Dim cmd As New SqlCommandBuilder(DA)
+                    DA.Update(DT)
+                    '------------------ Keep Log ---------------
+                    BL.Save_Product_Movement_Log(PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.ChangeSlot, DR("RECENT"), DR("CURRENT"), "ย้าย Slot จาก " & DR("CURRENT") & " ไปยัง " & DR("CURRENT"), Session("USER_ID"), Now)
+                End If
+
+            ElseIf Not IsDBNull(DR("RECENT")) And IsDBNull(DR("CURRENT")) Then
+                '--------------- Move Out / CheckOut Stock --------
+                Dim SLOT_FROM As Integer = Shelf.AccessSlotFromName(DR("RECENT")).SLOT_ID
+                SQL = "SELECT * FROM TB_PRODUCT_SERIAL WHERE SERIAL_NO='" & SERIAL_NO.Replace("'", "''") & "' AND SLOT_ID=" & SLOT_FROM
+                Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+                Dim DT As New DataTable
+                DA.Fill(DT)
+                If DT.Rows.Count > 0 Then
+                    DT.Rows(0).Delete()
+                    '------------------ Save Stock ---------------
+                    Dim cmd As New SqlCommandBuilder(DA)
+                    DA.Update(DT)
+                    '------------------ Keep Log ---------------
+                    BL.Save_Product_Movement_Log(PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.CheckOut, DR("RECENT"), "Stores หลัก", "ย้ายออกจาก " & KO_Code & " ช่อง " & DR("RECENT") & " ไปยัง Store หลัก", Session("USER_ID"), Now)
+                End If
+
+            ElseIf IsDBNull(DR("RECENT")) And Not IsDBNull(DR("CURRENT")) Then
+                '----------------- CheckIn By Scan ----------------
+                Dim SLOT_TO As Integer = Shelf.AccessSlotFromName(DR("CURRENT")).SLOT_ID
+                SQL = "SELECT TOP 0 * FROM TB_PRODUCT_SERIAL"
+                Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+                Dim DT As New DataTable
+                DA.Fill(DT)
+                Dim R As DataRow = DT.NewRow
+                R("SLOT_ID") = SLOT_TO
+                R("PRODUCT_ID") = PRODUCT_ID
+                R("SERIAL_NO") = SERIAL_NO
+                R("CheckIn_Time") = Now
+                DT.Rows.Add(R)
+                '------------------ Save Stock ---------------
+                Dim cmd As New SqlCommandBuilder(DA)
+                DA.Update(DT)
+                '------------------ Keep Log ---------------
+                BL.Save_Product_Movement_Log(PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.CheckIn, "Stores หลัก", DR("CURRENT"), "สแกนของเข้าตู้ช่อง " & DR("CURRENT"), Session("USER_ID"), Now)
+
+            Else 'If IsDBNull(DR("RECENT")) And IsDBNull(DR("CURRENT")) Then
+                '----------- Do Nothing / Scan But Unmanaged---------------
+
+                '------------------ Keep Log ---------------
+                BL.Save_Product_Movement_Log(PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.CheckIn, "Stores หลัก", KO_Code, "สแกนของแต่ไม่เอาเข้าตู้", Session("USER_ID"), Now)
+            End If
+        Next
+
+        BindData()
+        Return True
+    End Function
+
+
+    Private Sub btnReset_Click(sender As Object, e As EventArgs) Handles btnReset.Click
+        BindData()
     End Sub
 
+    Public Event Confirm(ByVal Sender As Object)
+    Private Sub btnConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
+        RaiseEvent Confirm(Me)
+    End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Save()
+    End Sub
+
+
+
+#End Region
 
 End Class

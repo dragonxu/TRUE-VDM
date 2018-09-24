@@ -20,6 +20,7 @@ Public Class UC_Shift_StockPaper
     End Property
 
 #End Region
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'If Not IsNumeric(Session("USER_ID")) Then
         '    ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('กรุณาเข้าสู่ระบบ'); window.location.href='Login.aspx';", True)

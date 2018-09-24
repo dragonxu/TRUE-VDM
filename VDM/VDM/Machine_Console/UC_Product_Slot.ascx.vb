@@ -218,7 +218,7 @@
         End Get
         Set(value As Integer)
             If value <> 0 Then
-                Slot.Style("background-image") = "url('../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & value & "&LANG=1')"
+                Slot.Style("background-image") = "url('../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & value & "&LANG=1&DI=images/WhiteDot.png')"
             Else
                 Slot.Style.Remove("background-image")
             End If

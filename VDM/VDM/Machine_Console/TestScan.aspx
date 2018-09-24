@@ -82,7 +82,9 @@
                                 <div class="row ">
                                     <div class="col col-xs-4 m-t text-center">
                                         <asp:Image ID="imgSlot_Product" runat="server" CssClass="product-Image" ImageUrl="../RenderImage.aspx?Mode=D&UID=1&Entity=Product&LANG=1" />
-                                        <small>CODE : <asp:Label ID="lblSlot_ProductCode" runat="server"></asp:Label></small>                                        
+                                        
+                                        <small>CODE : <asp:Label ID="lblSlot_ProductCode" runat="server"></asp:Label></small><br/>
+                                        <asp:Label ID="lblSlotQuantity" runat="server" Font-Bold="true" ForeColor="SteelBlue" CssClass="h2"></asp:Label>                                    
                                     </div>
                                     <div class="col col-xs-8 p-t p-l">
                                         <div class="row">
@@ -309,6 +311,7 @@
         <div class="modal-footer no-border">
           <asp:Button ID="btnReset" runat="server" CssClass="btn btn-shadow btn-default" Text="Reset" />
           <asp:Button ID="btnConfirm" runat="server" CssClass="btn btn-shadow btn-primary" Text="Confirm" />
+            <asp:Button ID="btnSave" runat="server" CssClass="btn btn-shadow btn-success" Text="Save" />
         </div>
 
       </div>

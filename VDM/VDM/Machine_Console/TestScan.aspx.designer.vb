@@ -122,6 +122,15 @@ Partial Public Class TestScan
     Protected WithEvents lblSlot_ProductCode As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''lblSlotQuantity control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSlotQuantity As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''lblSlot_ProductName control.
     '''</summary>
     '''<remarks>
@@ -444,4 +453,13 @@ Partial Public Class TestScan
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnConfirm As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''btnSave control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSave As Global.System.Web.UI.WebControls.Button
 End Class

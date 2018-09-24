@@ -7,6 +7,7 @@ Imports System.Configuration.ConfigurationManager
 Public Class VDM_BL
 
     Public ConnectionString As String = ConnectionStrings("ConnectionString").ConnectionString
+    Public LogConnectionString As String = ConnectionStrings("LogConnectionString").ConnectionString
     Public ServerMapPath As String = AppSettings("ServerMapPath").ToString
     Public PicturePath As String = AppSettings("PicturePath").ToString
     Public Product_Critical_Percent As Integer = 30 '----------- Level ที่สีแดงใน Product Stock -----------
@@ -15,6 +16,21 @@ Public Class VDM_BL
     Public Sub ExecuteNonQuery(ByVal CommandText As String)
         Dim Command As New SqlCommand
         Dim Conn As New SqlConnection(ConnectionString)
+
+        Conn.Open()
+        With Command
+            .Connection = Conn
+            .CommandText = CommandText
+            .ExecuteNonQuery()
+            .Dispose()
+        End With
+        Conn.Close()
+        Conn.Dispose()
+    End Sub
+
+    Public Sub ExecuteNonQuery_Log(ByVal CommandText As String)
+        Dim Command As New SqlCommand
+        Dim Conn As New SqlConnection(LogConnectionString)
 
         Conn.Open()
         With Command
@@ -77,7 +93,12 @@ Public Class VDM_BL
 
     End Enum
 
-
+    Public Enum StockMovementType
+        CheckIn = 1
+        CheckOut = 2
+        Sell = 3
+        ChangeSlot = 4
+    End Enum
 
     Public Enum ShiftStatus
         Close = 0
@@ -505,6 +526,37 @@ Public Class VDM_BL
         Else
             Return DT.Rows(0).Item("PRODUCT_CODE").ToString
         End If
+    End Function
+
+    Public Sub Save_Product_Movement_Log(ByVal PRODUCT_ID As Integer, ByVal SERIAL_NO As String, ByVal MOVE_ID As StockMovementType, ByVal MOVE_FROM As String, ByVal MOVE_TO As String, ByVal REMARK As String, ByVal MOVE_BY As Integer, ByVal MOVE_TIME As DateTime)
+        Dim SQL As String = "Select TOP 0 * FROM TB_PRODUCT_MOVEMENT"
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, LogConnectionString)
+        DA.Fill(DT)
+        Dim DR As DataRow = DT.NewRow
+
+
+        DR("HIS_ID") = GetNewPrimaryLogID("TB_PRODUCT_MOVEMENT", "HIS_ID")
+        DR("PRODUCT_ID") = PRODUCT_ID
+        DR("SERIAL_NO") = SERIAL_NO
+        DR("MOVE_ID") = MOVE_ID
+        DR("MOVE_FROM") = MOVE_FROM
+        DR("MOVE_TO") = MOVE_TO
+        DR("REMARK") = REMARK
+        DR("MOVE_BY") = MOVE_BY
+        DR("MOVE_TIME") = MOVE_TIME
+
+        DT.Rows.Add(DR)
+        Dim cmd As New SqlCommandBuilder(DA)
+        DA.Update(DT)
+    End Sub
+
+    Public Function GetNewPrimaryLogID(ByVal TableName As String, ByVal PrimaryKeyName As String) As Integer
+        Dim SQL As String = "SELECT IsNull(MAX(" & PrimaryKeyName & "),0)+1 FROM " & TableName
+        Dim DA As New SqlDataAdapter(SQL, LogConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT.Rows(0).Item(0)
     End Function
 
 #End Region
