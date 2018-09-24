@@ -32,6 +32,15 @@ Partial Public Class TestScan
     Protected WithEvents pnlScanProduct As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
+    '''pnlZoom control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlZoom As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
     '''btnZoomOut control.
     '''</summary>
     '''<remarks>
@@ -257,13 +266,13 @@ Partial Public Class TestScan
     Protected WithEvents chkSlot As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''rptSlotProduct control.
+    '''rptSlot control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents rptSlotProduct As Global.System.Web.UI.WebControls.Repeater
+    Protected WithEvents rptSlot As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
     '''btnMoveRight control.

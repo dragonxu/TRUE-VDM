@@ -236,6 +236,15 @@
         End Set
     End Property
 
+    Public Property ShowProductCode As Boolean
+        Get
+            Return lblCode.Visible
+        End Get
+        Set(value As Boolean)
+            lblCode.Visible = value
+        End Set
+    End Property
+
 #End Region
 
 #Region "Event"

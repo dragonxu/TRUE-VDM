@@ -332,9 +332,6 @@ Public Class UC_Kiosk_Shelf
 
         Return True
 
-        '----------------TB_PRODUCT_SERIAL_STOCK-----------------
-
-        Return True
     End Function
 
     Private Function SaveShelf() As Boolean

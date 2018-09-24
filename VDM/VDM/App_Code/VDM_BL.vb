@@ -9,6 +9,8 @@ Public Class VDM_BL
     Public ConnectionString As String = ConnectionStrings("ConnectionString").ConnectionString
     Public ServerMapPath As String = AppSettings("ServerMapPath").ToString
     Public PicturePath As String = AppSettings("PicturePath").ToString
+    Public Product_Critical_Percent As Integer = 30 '----------- Level ที่สีแดงใน Product Stock -----------
+    Public SIM_Critical_Percent As Integer = 30 '----------- Level ที่สีแดงใน Product Stock -----------
 
     Public Sub ExecuteNonQuery(ByVal CommandText As String)
         Dim Command As New SqlCommand
@@ -650,7 +652,7 @@ Public Class VDM_BL
     End Sub
 
     Public Sub Drop_PRODUCT_STOCK_SERIAL(ByVal SERIAL_NO As String)
-        Dim SQL As String = "Select SLOT_ID FROM TB_PRODUCT_SERIAL_STOCK" & vbLf
+        Dim SQL As String = "Select SLOT_ID FROM TB_PRODUCT_SERIAL" & vbLf
         SQL &= "WHERE SERIAL_NO='" & SERIAL_NO.Replace("'", "''") & "'"
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
@@ -662,7 +664,7 @@ Public Class VDM_BL
     End Sub
 
     Public Sub Drop_PRODUCT_STOCK_SERIAL(ByVal SLOT_ID As Integer)
-        Dim SQL As String = "SELECT SERIAL_NO FROM TB_PRODUCT_SERIAL_STOCK" & vbLf
+        Dim SQL As String = "SELECT SERIAL_NO FROM TB_PRODUCT_SERIAL" & vbLf
         SQL &= "WHERE SLOT_ID=" & SLOT_ID
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
@@ -674,7 +676,7 @@ Public Class VDM_BL
     End Sub
 
     Public Sub Drop_PRODUCT_STOCK_SERIAL(ByVal SLOT_ID As Integer, ByVal SERIAL_NO As String)
-        Dim SQL As String = "DELETE FROM TB_PRODUCT_SERIAL_STOCK" & vbLf
+        Dim SQL As String = "DELETE FROM TB_PRODUCT_SERIAL" & vbLf
         SQL &= "WHERE SLOT_ID=" & SLOT_ID & " AND SERIAL_NO='" & SERIAL_NO.Replace("'", "''") & "'"
         ExecuteNonQuery(SQL)
     End Sub
