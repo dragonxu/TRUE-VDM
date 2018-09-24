@@ -4,9 +4,8 @@
 
         <div class="form-group  col-sm-12">
             <label class="col-sm-4 control-label h3">เต็มม้วนพิมพ์ได้ </label>
-            <div class="col-sm-4">
-                <asp:TextBox ID="txtMaxPaper" runat="server" class="form-control h3" Style="text-align: center;"></asp:TextBox>
-               <%-- <h3><asp:Label ID="lblMaxPaper" runat ="server" ></asp:Label></h3>--%>
+            <div class="col-sm-4" style ="text-align :center ;">
+                 <h3><asp:Label ID="lblMaxPaper" runat ="server"  ></asp:Label></h3>
             </div>
             <div class="col-sm-4">
                <h3> <span   >ครั้ง</span></h3>

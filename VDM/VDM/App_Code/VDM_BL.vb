@@ -413,7 +413,7 @@ Public Class VDM_BL
     Public Function Get_Product_Barcode_scan_Result(ByVal Shop_Code As String, ByVal Search As String) As BarcodeScanResult
         Dim Result As New BarcodeScanResult
 
-        Dim SQL As String = "SELECT PRODUCT_ID,PRODUCT_CODE,DISPLAY_NAME,IS_SERIAL,GS1,TYPE" & vbLf
+        Dim SQL As String = "SELECT PRODUCT_ID,PRODUCT_CODE,DISPLAY_NAME,ISNULL(IS_SERIAL,0) IS_SERIAL,GS1,TYPE" & vbLf
         SQL &= ", WIDTH, HEIGHT, DEPTH, SERIAL_NO, SLOT_ID" & vbLf
         SQL &= " From VW_PRODUCT_FOR_SCAN" & vbLf
         SQL &= "WHERE PRODUCT_CODE='" & Search.Replace("'", "''") & "' OR GS1 ='" & Search.Replace("'", "''") & "'"
@@ -865,6 +865,56 @@ Public Class VDM_BL
 
         DT_CashIn.DefaultView.RowFilter = "Active_Status=1"
         Return DT_CashIn
+    End Function
+
+#End Region
+
+
+#Region "Kiosk"
+
+    Public Function GetList_Current_Brand_Kiosk(Optional ByVal KO_ID As Integer = 0) As DataTable
+        Dim SQL As String = ""
+        SQL &= "   Select DISTINCT MS_BRAND.BRAND_ID , MS_BRAND.BRAND_NAME" & vbLf
+        SQL &= "   From VW_CURRENT_PRODUCT_STOCK" & vbLf
+        SQL &= "   INNER Join MS_BRAND ON MS_BRAND.BRAND_ID=VW_CURRENT_PRODUCT_STOCK.BRAND_ID" & vbLf
+        SQL &= "   WHERE KO_ID =" & KO_ID & " And MS_BRAND.Active_Status = 1" & vbLf
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT
+    End Function
+
+    Public Function GetList_Current_Category_Kiosk(Optional ByVal KO_ID As Integer = 0) As DataTable
+        Dim SQL As String = ""
+        SQL &= "   Select   DISTINCT MS_PRODUCT_CAT.CAT_ID  , MS_PRODUCT_CAT.CAT_NAME " & vbLf
+        SQL &= "   From VW_CURRENT_PRODUCT_STOCK" & vbLf
+        SQL &= "   INNER Join MS_PRODUCT_CAT ON MS_PRODUCT_CAT.CAT_ID =VW_CURRENT_PRODUCT_STOCK.CAT_ID" & vbLf
+        SQL &= "   WHERE KO_ID = " & KO_ID & "" & vbLf
+        SQL &= "   UNION ALL" & vbLf
+        SQL &= "   -- กรณี Product ไม่ได้ Set Category" & vbLf
+        SQL &= "   Select   DISTINCT 0 CAT_ID  , 'Other' CAT_NAME " & vbLf
+        SQL &= "   From VW_CURRENT_PRODUCT_STOCK" & vbLf
+        SQL &= "   Where KO_ID =" & KO_ID & " And VW_CURRENT_PRODUCT_STOCK.CAT_ID Is NULL" & vbLf
+
+
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT
+    End Function
+
+    Public Function Get_Show_Default_Product(Optional ByVal MODEL As String = "") As DataTable
+        Dim SQL As String = ""
+        SQL &= "   Select * " & vbLf
+        SQL &= "   From VW_ALL_PRODUCT" & vbLf
+        If MODEL <> "" Then
+            SQL &= "  WHERE MODEL='" & MODEL & "'" & vbLf
+        End If
+        SQL &= "  ORDER BY PRODUCT_ID" & vbLf
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT
     End Function
 
 #End Region

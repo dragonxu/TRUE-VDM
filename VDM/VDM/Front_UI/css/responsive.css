@@ -1,0 +1,144 @@
+
+@media (max-width: 1366px) {
+header .right .social{padding-top:3px; }
+header .right .social .image-cropper{width:37px; height:37px; }
+header nav a{font-size:18px; }
+}
+
+@media (max-width: 1280px) {
+header nav a{font-size:17px; }
+header .right form{margin: 0 10px 0 0;}
+header .right form .dropdown-menu > li > a{font-size:15px; }
+header .right .social{padding-top:4px; }
+header .right .social .image-cropper{width:35px; height:35px; }
+
+.location .content .address .pic img{width:100%; }
+}
+
+@media (max-width: 1200px) {
+.main{width:100%; padding:0 20px; display:inline-block;}
+.maguro-menu .mm-slide{width:100%; padding:0 30px; }
+.slides{width:100%; }
+
+footer .address .add-slider{padding:0 40px; }
+footer .address .add-slider .slick-next{right:-10px; }
+footer .address .add-slider .slick-prev{left:-10px; }
+.slick-initialized .slick-slide{padding:0 15px !important;}
+
+}
+
+@media (max-width: 1024px) {
+#hamburger{ display:block;}
+#nav-icon1, #nav-icon2, #nav-icon3, #nav-icon4{ display:block;}
+#nav-icon2{top:30px; }
+html.mm-opening #nav-icon2{right:45%;}
+
+header{padding:20px 20px; }
+header nav, header .right{display:none;}
+
+.about .h-about .content{min-height:420px; }
+
+}
+
+@media (max-width: 991px) {
+html.mm-opening #nav-icon2{right:46.5%;}
+
+.about .h-about .pic span.col-md-12{width:100%; }
+.about .h-about .pic span.col-md-6{width:50%; }
+
+.contact form label{width: 16.66666667%; float:left;}
+.contact form input[type="text"]{width: 83.33333333%; float:left;}
+.contact form textarea{width: 83.33333333%; float:left;}
+}
+
+@media (max-width: 768px) {
+html.mm-opening #nav-icon2{right:60%;}
+
+.m-topic h3{text-shadow: 1px 1px 1px rgba(150, 150, 150, 1);}
+.m-detail{ margin-bottom:30px; }
+
+.about .h-about section:last-child .content{padding-bottom:70px; }
+
+.location ul.nav li{padding:20px 15px; }
+
+.contact{margin-bottom:30px; }
+.mm-gallery .content #menu1{padding-bottom:30px; }
+
+}
+
+@media (max-width: 668px) {
+.about .h-about .pic{width:100%; }
+.about .h-about section:last-child{padding-bottom:65px; }
+.about .h-about .content{width:100%; margin:15px 0; }
+.about .h-about .content span{width:100%; }
+
+.blog section{margin:20px 0; }
+.blog section .pic{width:100%;}
+.blog section .container{width:100%; margin-top:15px; }
+.blog section:nth-child(even) .pic, .blog section:nth-child(even) .container{float:left;}
+
+.contact form label{width:100%; }
+.contact form input[type="text"]{width:100%;}
+.contact form textarea{width:100%;}
+.contact form label{border:0; }
+.contact form input[type="text"]{padding:0; }
+}
+
+@media (max-width: 414px) {
+html.mm-opening #nav-icon2{right:84%;}
+
+.about .h-about{ margin:15px 0;}
+.about .h-about section{margin:15px 0 0 0; }
+.about .h-about section:last-child{margin:0; }
+.about .h-about .content{min-height:auto; }
+.about .h-about section:last-child .content{padding-bottom:0; }
+.about .topic span{ font-size:23px;}
+.about .h-about .content span h4{padding-top:0; font-size:25px; font-weight:bold !important; }
+.about .h-about .content span p, .about .h-about .content span .pp-about{font-size:19px;}
+.about .h-about .content span p br{display:none; }
+.about .topic span{width:100%; }
+
+.about .d-about{display:none;}
+.about .m-about{display:inline-block;}
+
+.w-banner{margin:0;}
+.m-detail .bottom .f-share{padding:0; margin:20px 0 0 0; border:0; }
+.m-detail .container .content{ width:100%;}
+
+.location ul.nav li{width:100%; margin:0; margin-bottom:1px; }
+.location .content .address, .location .content .gmap{width:100%; }
+.location .content .address p{height:auto; margin-bottom:15px; }
+.location .content .gmap iframe{height:300px; }
+
+.slick-initialized .slick-slide{padding:0 !important; }
+
+.w-banner, .w-banner2{display:none;}
+
+#rc-imageselect, .g-recaptcha {transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;}
+}
+
+@media (max-width: 375px) {
+html.mm-opening #nav-icon2{right:83.5%;}
+
+.about .topic span{ font-size:20px;}
+.about .h-about .content span h4{font-size:22px; }
+
+footer .bottom{text-align:center; }
+footer .bottom p{width:100%; padding-bottom:10px; text-align:center; }
+footer .bottom .to-top{float:none;}
+}
+
+@media (max-width: 346px) {
+.car ul li{width:100%;}
+}
+
+@media (max-width: 320px) {
+.car-detail .c-color a .btu-color{height:45px;}
+
+.about .topic span{ font-size:18px;}
+.about .h-about .content span h4{font-size:19px;}
+.about .h-about .content span p{font-size:16px;}
+.about .h-about .content span .pp-about{font-size:16px;}
+
+.blog .bottom a{padding: 9px 20px;}
+}

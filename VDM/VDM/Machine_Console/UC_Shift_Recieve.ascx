@@ -29,10 +29,10 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th>เดิม</th>
+                    <th class="col-md-5" style="text-align: right;">เดิม</th>
                     <th colspan="2">เอาออก</th>
                     <th colspan="2">เอาเข้า</th>
-                    <th>คงเหลือ</th>
+                    <th class="col-md-5" style="text-align: right;">คงเหลือ</th>
                     <th class="col-md-5" style="text-align: right;"><span>บาท</span></th>
 
                 </tr>
@@ -50,9 +50,9 @@
                             <td data-title="Logo" style="text-align: center;">
                                 <img id="img" runat="server" width="40">
                             </td>
-                            <td data-title="เดิม">
-                                <asp:TextBox ID="txt_Before" runat="server" class="form-control" Style="width: 80px; text-align: center;" OnTextChanged="txt_TextChanged_CoinIn" AutoPostBack="true"></asp:TextBox>
-                            </td>
+                            <td data-title="เดิม"  style="text-align: right;">
+                                <asp:Label ID="lbl_Before" runat="server"></asp:Label> 
+                             </td>
                             <td data-title="เอาออก" style="padding-right: 0px;">
                                 <asp:TextBox ID="txt_Pick" runat="server" class="form-control" Style="width: 80px; text-align: center;" OnTextChanged="txt_TextChanged_CoinIn" AutoPostBack="true"></asp:TextBox>
                             </td>
@@ -69,9 +69,9 @@
 
                             </td>
 
-                            <td data-title="คงเหลือ">
-                                <asp:TextBox ID="txt_Remain" runat="server" Enabled="false" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
-                            </td>
+                            <td data-title="คงเหลือ"  style="text-align: right;">
+                                <asp:Label ID="lbl_Remain" runat="server"></asp:Label>
+                             </td>
                             <td data-title="จำนวนเงิน" style="text-align: right;">
                                 <b>
                                     <asp:Label ID="lbl_Amount" runat="server"></asp:Label></b>
@@ -102,9 +102,9 @@
                             <td data-title="Logo" style="text-align: center;">
                                 <img id="img" runat="server" width="40">
                             </td>
-                            <td data-title="เดิม">
-                                <asp:TextBox ID="txt_Before" runat="server" class="form-control" Style="width: 80px; text-align: center;" OnTextChanged="txt_TextChanged_CashIn" AutoPostBack="true"></asp:TextBox>
-                            </td>
+                            <td data-title="เดิม"  style="text-align: right;">
+                                <asp:Label ID="lbl_Before" runat="server"></asp:Label> 
+                             </td>
                             <td data-title="เอาออก" style="padding-right: 0px;">
                                 <asp:TextBox ID="txt_Pick" runat="server" class="form-control" Style="width: 80px; text-align: center;" OnTextChanged="txt_TextChanged_CashIn" AutoPostBack="true"></asp:TextBox>
                             </td>
@@ -121,9 +121,9 @@
 
                             </td>
 
-                            <td data-title="คงเหลือ">
-                                <asp:TextBox ID="txt_Remain" runat="server" Enabled="false" class="form-control" Style="width: 80px; text-align: center;"></asp:TextBox>
-                            </td>
+                            <td data-title="คงเหลือ" style="text-align: right;">
+                                <asp:Label ID="lbl_Remain" runat="server"></asp:Label>
+                             </td>
                             <td data-title="จำนวนเงิน" style="text-align: right;">
                                 <b>
                                     <asp:Label ID="lbl_Amount" runat="server"></asp:Label></b>
