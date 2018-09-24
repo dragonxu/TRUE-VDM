@@ -22,10 +22,10 @@ Public Class UC_Shift_StockPaper
 #End Region
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'If Not IsNumeric(Session("USER_ID")) Then
-        '    ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('กรุณาเข้าสู่ระบบ'); window.location.href='Login.aspx';", True)
-        '    Exit Sub
-        'End If
+        If Not IsNumeric(Session("USER_ID")) Then
+            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('กรุณาเข้าสู่ระบบ'); window.location.href='Login.aspx';", True)
+            Exit Sub
+        End If
 
         If Not IsPostBack Then
             ClearEditForm()
@@ -40,7 +40,7 @@ Public Class UC_Shift_StockPaper
     End Sub
 
     Private Sub ClearEditForm()
-        txtMaxPaper.Text = ""
+        lblMaxPaper.Text = ""
         txtRemainPaper.Text = ""
 
 
@@ -68,7 +68,7 @@ Public Class UC_Shift_StockPaper
         DA.Fill(DT)
         If DT.Rows.Count > 0 Then
             If Not IsDBNull(DT.Rows(0).Item("Max_Qty")) Then
-                txtMaxPaper.Text = FormatNumber(Val(DT.Rows(0).Item("Max_Qty")), 0)
+                lblMaxPaper.Text = FormatNumber(Val(DT.Rows(0).Item("Max_Qty")), 0)
             End If
         End If
 
@@ -86,18 +86,14 @@ Public Class UC_Shift_StockPaper
 
     Private Sub btnInput_Full_Click(sender As Object, e As EventArgs) Handles btnInput_Full.Click
 
-        If txtMaxPaper.Text <> "" Then
-            txtRemainPaper.Text = FormatNumber(Val(txtMaxPaper.Text.Replace(",", "")), 0)
+        If lblMaxPaper.Text <> "" Then
+            txtRemainPaper.Text = FormatNumber(Val(lblMaxPaper.Text.Replace(",", "")), 0)
         Else
             Dim SQL As String = " SELECT * FROM MS_DEVICE WHERE D_ID=" & VDM_BL.Device.Printer
             Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
             Dim DT As New DataTable
             DA.Fill(DT)
 
-            'Dim SQL As String = " SELECT * FROM TB_KIOSK_DEVICE WHERE KO_ID=" & BL.KioskID & " AND D_ID=" & VDM_BL.Device.Printer
-            'Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
-            'Dim DT As New DataTable
-            'DA.Fill(DT)
             If DT.Rows.Count > 0 Then
                 If Not IsDBNull(DT.Rows(0).Item("Max_Qty")) Then
                     txtRemainPaper.Text = FormatNumber(Val(DT.Rows(0).Item("Max_Qty")), 0)
@@ -114,7 +110,7 @@ Public Class UC_Shift_StockPaper
 
     Function Validate() As Boolean
         Dim result As Boolean = True
-        If Val(txtMaxPaper.Text) < Val(txtRemainPaper.Text) Then
+        If Val(lblMaxPaper.Text) < Val(txtRemainPaper.Text) Then
             Alert(Me.Page, "ตรวจสอบจำนวนที่พิมพ์ได้")
             result = False
         End If
@@ -145,10 +141,10 @@ Public Class UC_Shift_StockPaper
         DR("Unit_Value") = 0
         Select Case Session("SHIFT_Status")
             Case VDM_BL.ShiftStatus.Close
-                DR("CLOSE_BEFORE") = IIf(txtMaxPaper.Text <> "", txtMaxPaper.Text.Replace(",", ""), DBNull.Value)
+                DR("CLOSE_BEFORE") = IIf(lblMaxPaper.Text <> "", lblMaxPaper.Text.Replace(",", ""), DBNull.Value)
                 DR("CLOSE_FINAL") = IIf(txtRemainPaper.Text <> "", txtRemainPaper.Text.Replace(",", ""), DBNull.Value)
             Case VDM_BL.ShiftStatus.Open
-                DR("OPEN_BEFORE") = IIf(txtMaxPaper.Text <> "", txtMaxPaper.Text.Replace(",", ""), DBNull.Value)
+                DR("OPEN_BEFORE") = IIf(lblMaxPaper.Text <> "", lblMaxPaper.Text.Replace(",", ""), DBNull.Value)
                 DR("OPEN_FINAL") = IIf(txtRemainPaper.Text <> "", txtRemainPaper.Text.Replace(",", ""), DBNull.Value)
         End Select
         Dim cmd As New SqlCommandBuilder(DA)

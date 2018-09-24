@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Front_UI\images\icon\" />
     <Folder Include="Temp\" />
   </ItemGroup>
   <ItemGroup>
@@ -122,6 +123,144 @@
     <Content Include="fonts\fontawesome\fontawesome-webfont.svg" />
     <Content Include="fonts\sli\Simple-Line-Icons.dev.svg" />
     <Content Include="fonts\sli\Simple-Line-Icons.svg" />
+    <Content Include="Front_UI\css\bootstrap-select.css" />
+    <Content Include="Front_UI\css\bootstrap.css" />
+    <Content Include="Front_UI\css\font-awesome.min.css" />
+    <Content Include="Front_UI\css\jquery.fancybox.css" />
+    <Content Include="Front_UI\css\jquery.mCustomScrollbar.css" />
+    <Content Include="Front_UI\css\lightslider.css" />
+    <Content Include="Front_UI\css\responsive.css" />
+    <Content Include="Front_UI\css\slick-theme.css" />
+    <Content Include="Front_UI\css\slick.css" />
+    <Content Include="Front_UI\css\style.css" />
+    <Content Include="Front_UI\css\true.css" />
+    <Content Include="Front_UI\Device_Brand.aspx" />
+    <Content Include="Front_UI\Device_Category.aspx" />
+    <Content Include="Front_UI\Device_Product_Detail.aspx" />
+    <Content Include="Front_UI\fonts\fontawesome-webfont.svg" />
+    <Content Include="Front_UI\fonts\tbold.svg" />
+    <Content Include="Front_UI\fonts\tboldspecial.svg" />
+    <Content Include="Front_UI\fonts\tlight.svg" />
+    <Content Include="Front_UI\fonts\tmedium.svg" />
+    <Content Include="Front_UI\Home.aspx" />
+    <Content Include="Front_UI\images\bg-bottom.png" />
+    <Content Include="Front_UI\images\bg-slide_card-.png" />
+    <Content Include="Front_UI\images\bg-slide_card.png" />
+    <Content Include="Front_UI\images\bg-slide_card2.png" />
+    <Content Include="Front_UI\images\bg-slide_card3.png" />
+    <Content Include="Front_UI\images\bg-slide_card4.png" />
+    <Content Include="Front_UI\images\bg-top.png" />
+    <Content Include="Front_UI\images\btu-cart-.png" />
+    <Content Include="Front_UI\images\btu-cart.png" />
+    <Content Include="Front_UI\images\btu-close.jpg" />
+    <Content Include="Front_UI\images\btu-close.png" />
+    <Content Include="Front_UI\images\btu-home.png" />
+    <Content Include="Front_UI\images\btu-prev.png" />
+    <Content Include="Front_UI\images\fancybox_loading%402x.gif" />
+    <Content Include="Front_UI\images\fancybox_loading.gif" />
+    <Content Include="Front_UI\images\fancybox_overlay.png" />
+    <Content Include="Front_UI\images\fancybox_sprite%402x.png" />
+    <Content Include="Front_UI\images\fancybox_sprite.png" />
+    <Content Include="Front_UI\images\flag-cn.png" />
+    <Content Include="Front_UI\images\flag-en.png" />
+    <Content Include="Front_UI\images\flag-jp.png" />
+    <Content Include="Front_UI\images\flag-kr.png" />
+    <Content Include="Front_UI\images\flag-ru.png" />
+    <Content Include="Front_UI\images\flag-th.png" />
+    <Content Include="Front_UI\images\icon-app.png" />
+    <Content Include="Front_UI\images\icon-bill.png" />
+    <Content Include="Front_UI\images\icon-cart.png" />
+    <Content Include="Front_UI\images\icon-cash-hover.png" />
+    <Content Include="Front_UI\images\icon-cash.png" />
+    <Content Include="Front_UI\images\icon-check.jpg" />
+    <Content Include="Front_UI\images\icon-checked.jpg" />
+    <Content Include="Front_UI\images\icon-coupon.png" />
+    <Content Include="Front_UI\images\icon-credit-hover.png" />
+    <Content Include="Front_UI\images\icon-credit.png" />
+    <Content Include="Front_UI\images\icon-delete.png" />
+    <Content Include="Front_UI\images\icon-dinersclub.png" />
+    <Content Include="Front_UI\images\icon-dis.png" />
+    <Content Include="Front_UI\images\icon-express.png" />
+    <Content Include="Front_UI\images\icon-mail.png" />
+    <Content Include="Front_UI\images\icon-online-banking.png" />
+    <Content Include="Front_UI\images\icon-pack.png" />
+    <Content Include="Front_UI\images\icon-point.png" />
+    <Content Include="Front_UI\images\icon-reward.png" />
+    <Content Include="Front_UI\images\icon-sms.png" />
+    <Content Include="Front_UI\images\icon-truemoney-hover.png" />
+    <Content Include="Front_UI\images\icon-truemoney.png" />
+    <Content Include="Front_UI\images\icon-truepoint.png" />
+    <Content Include="Front_UI\images\icon-visa.png" />
+    <Content Include="Front_UI\images\iphonex-black.png" />
+    <Content Include="Front_UI\images\iphonex-white.png" />
+    <Content Include="Front_UI\images\keyborad.png" />
+    <Content Include="Front_UI\images\pic-card1.png" />
+    <Content Include="Front_UI\images\pic-card2.png" />
+    <Content Include="Front_UI\images\pic-card3.png" />
+    <Content Include="Front_UI\images\pic-catalog1.jpg" />
+    <Content Include="Front_UI\images\pic-catalog2.jpg" />
+    <Content Include="Front_UI\images\pic-catalog3.jpg" />
+    <Content Include="Front_UI\images\pic-catalog4.jpg" />
+    <Content Include="Front_UI\images\pic-catalog5.jpg" />
+    <Content Include="Front_UI\images\pic-catalog6.jpg" />
+    <Content Include="Front_UI\images\pic-catalog7.jpg" />
+    <Content Include="Front_UI\images\pic-catalog8.jpg" />
+    <Content Include="Front_UI\images\pic-catalog9.jpg" />
+    <Content Include="Front_UI\images\pic-devices-.jpg" />
+    <Content Include="Front_UI\images\pic-devices.jpg" />
+    <Content Include="Front_UI\images\pic-home.png" />
+    <Content Include="Front_UI\images\pic-idcard.png" />
+    <Content Include="Front_UI\images\pic-idcard2.png" />
+    <Content Include="Front_UI\images\pic-lang.jpg" />
+    <Content Include="Front_UI\images\pic-pay_idcard.png" />
+    <Content Include="Front_UI\images\pic-scanface.png" />
+    <Content Include="Front_UI\images\pic-sim-.jpg" />
+    <Content Include="Front_UI\images\pic-sim.jpg" />
+    <Content Include="Front_UI\images\pic-step1.png" />
+    <Content Include="Front_UI\images\pic-step2.png" />
+    <Content Include="Front_UI\images\pic-step3.png" />
+    <Content Include="Front_UI\images\pic-step4.png" />
+    <Content Include="Front_UI\images\pic-thank.png" />
+    <Content Include="Front_UI\images\pic-top_catalog.png" />
+    <Content Include="Front_UI\images\pic-top_sim.png" />
+    <Content Include="Front_UI\images\qr-code.png" />
+    <Content Include="Front_UI\images\qr-code2.png" />
+    <Content Include="Front_UI\images\qr-code3.png" />
+    <Content Include="Front_UI\images\red-circle.png" />
+    <Content Include="Front_UI\images\sim-price.png" />
+    <Content Include="Front_UI\images\sim1.jpg" />
+    <Content Include="Front_UI\images\sim2.jpg" />
+    <Content Include="Front_UI\images\sim3-.jpg" />
+    <Content Include="Front_UI\images\sim3.jpg" />
+    <Content Include="Front_UI\images\sim4.jpg" />
+    <Content Include="Front_UI\images\sim5.jpg" />
+    <Content Include="Front_UI\images\sim6.jpg" />
+    <Content Include="Front_UI\images\sim7.jpg" />
+    <Content Include="Front_UI\images\sim8.jpg" />
+    <Content Include="Front_UI\images\true-you.png" />
+    <Content Include="Front_UI\js\bookflip.js" />
+    <Content Include="Front_UI\js\bootstrap-select.js" />
+    <Content Include="Front_UI\js\bootstrap.js" />
+    <Content Include="Front_UI\js\jquery-1.12.2.min.js" />
+    <Content Include="Front_UI\js\jquery-1.8.2.min.js" />
+    <Content Include="Front_UI\js\jquery-1.9.1.min.js" />
+    <Content Include="Front_UI\js\jquery-3.2.1.min.js" />
+    <Content Include="Front_UI\js\jquery.bookblock.js" />
+    <Content Include="Front_UI\js\jquery.easing.1.3.js" />
+    <Content Include="Front_UI\js\jquery.fancybox.js" />
+    <Content Include="Front_UI\js\jquery.mCustomScrollbar.js" />
+    <Content Include="Front_UI\js\jquery.mmenu.all.js" />
+    <Content Include="Front_UI\js\jquery.mmenu.min.all.js" />
+    <Content Include="Front_UI\js\jquery.xgallerify.js" />
+    <Content Include="Front_UI\js\jquery.youtubecarousel.js" />
+    <Content Include="Front_UI\js\jquerypp.custom.js" />
+    <Content Include="Front_UI\js\lightslider.js" />
+    <Content Include="Front_UI\js\main.js" />
+    <Content Include="Front_UI\js\menu.js" />
+    <Content Include="Front_UI\js\modernizr.custom.js" />
+    <Content Include="Front_UI\js\slick.js" />
+    <Content Include="Front_UI\Product_List.aspx" />
+    <Content Include="Front_UI\Select_Language.aspx" />
     <Content Include="Global.asax" />
     <Content Include="images\avatar.jpg" />
     <Content Include="images\avatar.png" />
@@ -402,6 +541,24 @@
     <Content Include="Scripts\helpers\smartresize.js" />
     <Content Include="MasterPage.Master" />
     <Content Include="Machine_Console\MasterStaffConsole.Master" />
+    <Content Include="Front_UI\fonts\fontawesome-webfont.eot" />
+    <Content Include="Front_UI\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Front_UI\fonts\fontawesome-webfont.woff" />
+    <Content Include="Front_UI\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Front_UI\fonts\tbold.eot" />
+    <Content Include="Front_UI\fonts\tbold.woff" />
+    <Content Include="Front_UI\fonts\tbold.woff2" />
+    <Content Include="Front_UI\fonts\tboldspecial.eot" />
+    <Content Include="Front_UI\fonts\tboldspecial.woff" />
+    <Content Include="Front_UI\fonts\tboldspecial.woff2" />
+    <Content Include="Front_UI\fonts\tlight.eot" />
+    <Content Include="Front_UI\fonts\tlight.ttf" />
+    <Content Include="Front_UI\fonts\tlight.woff" />
+    <Content Include="Front_UI\fonts\tlight.woff2" />
+    <Content Include="Front_UI\fonts\tmedium.eot" />
+    <Content Include="Front_UI\fonts\tmedium.woff" />
+    <Content Include="Front_UI\fonts\tmedium.woff2" />
+    <Content Include="Front_UI\MasterFront.Master" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
@@ -458,6 +615,55 @@
   <ItemGroup>
     <Compile Include="App_Code\BackEndInterface.vb" />
     <Compile Include="App_Code\ModuleGlobal.vb" />
+    <Compile Include="Front_UI\Device_Brand.aspx.designer.vb">
+      <DependentUpon>Device_Brand.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\Device_Brand.aspx.vb">
+      <DependentUpon>Device_Brand.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Front_UI\Device_Category.aspx.designer.vb">
+      <DependentUpon>Device_Category.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\Device_Category.aspx.vb">
+      <DependentUpon>Device_Category.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Front_UI\Device_Product_Detail.aspx.designer.vb">
+      <DependentUpon>Device_Product_Detail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\Device_Product_Detail.aspx.vb">
+      <DependentUpon>Device_Product_Detail.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Front_UI\Home.aspx.designer.vb">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\Home.aspx.vb">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Front_UI\MasterFront.Master.designer.vb">
+      <DependentUpon>MasterFront.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\MasterFront.Master.vb">
+      <DependentUpon>MasterFront.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Front_UI\Product_List.aspx.designer.vb">
+      <DependentUpon>Product_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\Product_List.aspx.vb">
+      <DependentUpon>Product_List.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Front_UI\Select_Language.aspx.designer.vb">
+      <DependentUpon>Select_Language.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\Select_Language.aspx.vb">
+      <DependentUpon>Select_Language.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Machine_Console\MasterStaffConsole.Master.designer.vb">
       <DependentUpon>MasterStaffConsole.Master</DependentUpon>
     </Compile>

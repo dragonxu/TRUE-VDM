@@ -14,13 +14,13 @@ Option Explicit On
 Partial Public Class UC_Shift_StockPaper
     
     '''<summary>
-    '''txtMaxPaper control.
+    '''lblMaxPaper control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtMaxPaper As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents lblMaxPaper As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''txtRemainPaper control.

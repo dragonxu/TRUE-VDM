@@ -71,24 +71,22 @@ Public Class UC_Shift_Change
         If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
 
         Dim img As HtmlImage = e.Item.FindControl("img")
-        Dim txt_Before As TextBox = e.Item.FindControl("txt_Before")
+        Dim lbl_Before As Label = e.Item.FindControl("lbl_Before")
         Dim txt_Pick As TextBox = e.Item.FindControl("txt_Pick")
         Dim btn_Pick_Full As Button = e.Item.FindControl("btn_Pick_Full")
         Dim txt_Input As TextBox = e.Item.FindControl("txt_Input")
         Dim btn_Input_Full As Button = e.Item.FindControl("btn_Input_Full")
-        Dim txt_Remain As TextBox = e.Item.FindControl("txt_Remain")
+        Dim lbl_Remain As Label = e.Item.FindControl("lbl_Remain")
         Dim lbl_Amount As Label = e.Item.FindControl("lbl_Amount")
 
-        ModuleGlobal.ImplementJavaNumericText(txt_Before, "Center")
+
         ModuleGlobal.ImplementJavaNumericText(txt_Pick, "Center")
         ModuleGlobal.ImplementJavaNumericText(txt_Input, "Center")
-        ModuleGlobal.ImplementJavaNumericText(txt_Remain, "Center")
-
 
 
         img.Attributes("Src") = "../" & e.Item.DataItem("Icon_Green").ToString
         If Not IsDBNull(e.Item.DataItem("Current_Qty")) Then
-            txt_Before.Text = FormatNumber(Val(e.Item.DataItem("Current_Qty")), 0)
+            lbl_Before.Text = FormatNumber(Val(e.Item.DataItem("Current_Qty")), 0)
         End If
         If Not IsDBNull(e.Item.DataItem("Pick")) Then
             txt_Pick.Text = FormatNumber(Val(e.Item.DataItem("Pick")), 0)
@@ -96,11 +94,11 @@ Public Class UC_Shift_Change
         If Not IsDBNull(e.Item.DataItem("Input")) Then
             txt_Input.Text = FormatNumber(Val(e.Item.DataItem("Input")), 0)
         End If
-        txt_Remain.Attributes("Unit_Value") = Val(e.Item.DataItem("Unit_Value"))
-        txt_Remain.Attributes("DT_ID") = Val(e.Item.DataItem("DT_ID"))
+        lbl_Remain.Attributes("Unit_Value") = Val(e.Item.DataItem("Unit_Value"))
+        lbl_Remain.Attributes("DT_ID") = Val(e.Item.DataItem("DT_ID"))
 
-        txt_Remain.Text = FormatNumber((Val(txt_Before.Text.Replace(",", "")) - Val(txt_Pick.Text.Replace(",", ""))) + Val(txt_Input.Text.Replace(",", "")), 0)
-        lbl_Amount.Text = FormatNumber(Val(txt_Remain.Text.Replace(",", "")) * Val(e.Item.DataItem("Unit_Value")), 0)
+        lbl_Remain.Text = FormatNumber((Val(lbl_Before.Text.Replace(",", "")) - Val(txt_Pick.Text.Replace(",", ""))) + Val(txt_Input.Text.Replace(",", "")), 0)
+        lbl_Amount.Text = FormatNumber(Val(lbl_Remain.Text.Replace(",", "")) * Val(e.Item.DataItem("Unit_Value")), 0)
 
         btn_Pick_Full.CommandArgument = e.Item.DataItem("D_ID")
         btn_Input_Full.CommandArgument = e.Item.DataItem("D_ID")
@@ -109,20 +107,20 @@ Public Class UC_Shift_Change
     Private Sub rptList_ItemCommand(source As Object, e As RepeaterCommandEventArgs) Handles rptList.ItemCommand
         If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
 
-        Dim txt_Before As TextBox = e.Item.FindControl("txt_Before")
+        Dim lbl_Before As Label = e.Item.FindControl("lbl_Before")
         Dim txt_Pick As TextBox = e.Item.FindControl("txt_Pick")
         Dim btn_Pick_Full As Button = e.Item.FindControl("btn_Pick_Full")
         Dim txt_Input As TextBox = e.Item.FindControl("txt_Input")
         Dim btn_Input_Full As Button = e.Item.FindControl("btn_Input_Full")
-        Dim txt_Remain As TextBox = e.Item.FindControl("txt_Remain")
+        Dim lbl_Remain As Label = e.Item.FindControl("lbl_Remain")
         Dim lbl_Amount As Label = e.Item.FindControl("lbl_Amount")
 
         Select Case e.CommandName
             Case "Pick_Full"
-                txt_Pick.Text = FormatNumber(Val(txt_Before.Text.Replace(",", "")), 0)
+                txt_Pick.Text = FormatNumber(Val(lbl_Before.Text.Replace(",", "")), 0)
 
-                txt_Remain.Text = FormatNumber((Val(txt_Before.Text.Replace(",", "")) - Val(txt_Pick.Text.Replace(",", ""))) + Val(txt_Input.Text.Replace(",", "")), 0)
-                lbl_Amount.Text = FormatNumber(Val(txt_Remain.Text.Replace(",", "")) * Val(txt_Remain.Attributes("Unit_Value")), 0)
+                lbl_Remain.Text = FormatNumber((Val(lbl_Before.Text.Replace(",", "")) - Val(txt_Pick.Text.Replace(",", ""))) + Val(txt_Input.Text.Replace(",", "")), 0)
+                lbl_Amount.Text = FormatNumber(Val(lbl_Remain.Text.Replace(",", "")) * Val(lbl_Remain.Attributes("Unit_Value")), 0)
 
             Case "Input_Full"
                 Dim SQL As String = " SELECT * FROM MS_DEVICE WHERE D_ID=" & Val(btn_Input_Full.CommandArgument)
@@ -132,12 +130,12 @@ Public Class UC_Shift_Change
                 If DT.Rows.Count > 0 Then
                     txt_Input.Text = FormatNumber(Val(DT.Rows(0).Item("Max_Qty")), 0)
                 Else
-                    Alert(Me.Page, "ตรวจสอบ Device " & Val(txt_Remain.Attributes("Unit_Value")) & "")
+                    Alert(Me.Page, "ตรวจสอบ Device " & Val(lbl_Remain.Attributes("Unit_Value")) & "")
                     Exit Sub
                 End If
 
-                txt_Remain.Text = FormatNumber((Val(txt_Before.Text.Replace(",", "")) - Val(txt_Pick.Text.Replace(",", ""))) + Val(txt_Input.Text.Replace(",", "")), 0)
-                lbl_Amount.Text = FormatNumber(Val(txt_Remain.Text.Replace(",", "")) * Val(txt_Remain.Attributes("Unit_Value")), 0)
+                lbl_Remain.Text = FormatNumber((Val(lbl_Before.Text.Replace(",", "")) - Val(txt_Pick.Text.Replace(",", ""))) + Val(txt_Input.Text.Replace(",", "")), 0)
+                lbl_Amount.Text = FormatNumber(Val(lbl_Remain.Text.Replace(",", "")) * Val(lbl_Remain.Attributes("Unit_Value")), 0)
 
 
         End Select
@@ -150,16 +148,16 @@ Public Class UC_Shift_Change
         Dim txt As TextBox = sender
         Dim rpt As RepeaterItem = txt.Parent
 
-        Dim txt_Before As TextBox = DirectCast(rpt.FindControl("txt_Before"), TextBox)
+        Dim lbl_Before As Label = DirectCast(rpt.FindControl("lbl_Before"), Label)
         Dim txt_Pick As TextBox = DirectCast(rpt.FindControl("txt_Pick"), TextBox)
         Dim btn_Pick_Full As Button = DirectCast(rpt.FindControl("btn_Pick_Full"), Button)
         Dim txt_Input As TextBox = DirectCast(rpt.FindControl("txt_Input"), TextBox)
         Dim btn_Input_Full As Button = DirectCast(rpt.FindControl("btn_Input_Full"), Button)
-        Dim txt_Remain As TextBox = DirectCast(rpt.FindControl("txt_Remain"), TextBox)
+        Dim lbl_Remain As Label = DirectCast(rpt.FindControl("lbl_Remain"), Label)
         Dim lbl_Amount As Label = DirectCast(rpt.FindControl("lbl_Amount"), Label)
 
-        txt_Remain.Text = FormatNumber((Val(txt_Before.Text.Replace(",", "")) - Val(txt_Pick.Text.Replace(",", ""))) + Val(txt_Input.Text.Replace(",", "")), 0)
-        lbl_Amount.Text = FormatNumber(Val(txt_Remain.Text.Replace(",", "")) * Val(txt_Remain.Attributes("Unit_Value")), 0)
+        lbl_Remain.Text = FormatNumber((Val(lbl_Before.Text.Replace(",", "")) - Val(txt_Pick.Text.Replace(",", ""))) + Val(txt_Input.Text.Replace(",", "")), 0)
+        lbl_Amount.Text = FormatNumber(Val(lbl_Remain.Text.Replace(",", "")) * Val(lbl_Remain.Attributes("Unit_Value")), 0)
 
 
         Current_Data()
@@ -181,23 +179,23 @@ Public Class UC_Shift_Change
         For Each rpt As RepeaterItem In rptList.Items
             If rpt.ItemType <> ListItemType.AlternatingItem And rpt.ItemType <> ListItemType.Item Then Continue For
 
-            Dim txt_Before As TextBox = rpt.FindControl("txt_Before")
+            Dim lbl_Before As Label = rpt.FindControl("lbl_Before")
             Dim txt_Pick As TextBox = rpt.FindControl("txt_Pick")
             Dim btn_Pick_Full As Button = rpt.FindControl("btn_Pick_Full")
             Dim txt_Input As TextBox = rpt.FindControl("txt_Input")
             Dim btn_Input_Full As Button = rpt.FindControl("btn_Input_Full")
-            Dim txt_Remain As TextBox = rpt.FindControl("txt_Remain")
+            Dim lbl_Remain As Label = rpt.FindControl("lbl_Remain")
             Dim lbl_Amount As Label = rpt.FindControl("lbl_Amount")
 
             Dim DR As DataRow = DT.NewRow
 
             DR("D_ID") = btn_Pick_Full.CommandArgument
-            DR("Current_Qty") = Val(txt_Before.Text.Replace(",", ""))
+            DR("Current_Qty") = Val(lbl_Before.Text.Replace(",", ""))
             DR("Pick") = Val(txt_Pick.Text.Replace(",", ""))
             DR("Input") = Val(txt_Input.Text.Replace(",", ""))
-            DR("Remain") = Val(txt_Remain.Text.Replace(",", ""))
-            DR("DT_ID") = txt_Remain.Attributes("DT_ID")
-            DR("Unit_Value") = txt_Remain.Attributes("Unit_Value")
+            DR("Remain") = Val(lbl_Remain.Text.Replace(",", ""))
+            DR("DT_ID") = lbl_Remain.Attributes("DT_ID")
+            DR("Unit_Value") = lbl_Remain.Attributes("Unit_Value")
             DT.Rows.Add(DR)
             Sum = Sum + Val(lbl_Amount.Text.Replace(",", ""))
         Next
