@@ -11,15 +11,22 @@ Public Class Manage_OpenClose_Shift
         End Get
     End Property
 
+    Private ReadOnly Property SHOP_CODE As String
+        Get
+            Return Session("SHOP_CODE")
+        End Get
+    End Property
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'If Not IsNumeric(Session("USER_ID")) Then
-        '    ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('กรุณาเข้าสู่ระบบ'); window.location.href='Login.aspx';", True)
-        '    Exit Sub
-        'End If
+        If Not IsNumeric(Session("USER_ID")) Then
+            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('กรุณาเข้าสู่ระบบ'); window.location.href='Login.aspx';", True)
+            Exit Sub
+        End If
 
         If Not IsPostBack Then
             ClearForm()
             ClearMenu()
+            ResetProductStock()
         Else
             initFormPlugin()
             pnlbtn.Visible = True
@@ -89,9 +96,6 @@ Public Class Manage_OpenClose_Shift
         ElseIf pnlStockSIM.Visible Then
             ClearMenu()
             lnkStockPaper_ServerClick(Nothing, Nothing)
-
-            'ElseIf pnlStockPaper.Visible Then
-
         End If
 
     End Sub
@@ -135,6 +139,7 @@ Public Class Manage_OpenClose_Shift
             divMenuStockPaper.Visible = False
         End If
     End Sub
+
     Private Sub lnkChange_ServerClick(sender As Object, e As EventArgs) Handles lnkChange.ServerClick
         ClearMenu()
         MenuChange.Attributes("class") = "active"
@@ -307,18 +312,18 @@ Public Class Manage_OpenClose_Shift
         SQL = "SELECT * FROM TB_KIOSK_DEVICE "
         SQL &= " WHERE KO_ID=" & KO_ID & " AND D_ID=" & VDM_BL.Device.CoinIn
         DT = New DataTable
-            DA = New SqlDataAdapter(SQL, BL.ConnectionString)
-            DA.Fill(DT)
-            If DT.Rows.Count = 0 Then
-                DR = DT.NewRow
-                DT.Rows.Add(DR)
+        DA = New SqlDataAdapter(SQL, BL.ConnectionString)
+        DA.Fill(DT)
+        If DT.Rows.Count = 0 Then
+            DR = DT.NewRow
+            DT.Rows.Add(DR)
             DR("KO_ID") = KO_ID
             DR("D_ID") = VDM_BL.Device.CoinIn
-            Else
-                DR = DT.Rows(0)
-            End If
-            DR("Current_Qty") = Val(UC_Shift_Recieve.Remain_coin)
-            DR("DT_ID") = VDM_BL.DeviceType.CoinIn
+        Else
+            DR = DT.Rows(0)
+        End If
+        DR("Current_Qty") = Val(UC_Shift_Recieve.Remain_coin)
+        DR("DT_ID") = VDM_BL.DeviceType.CoinIn
         DR("DS_ID") = BL.CheckDevice_Status(KO_ID, VDM_BL.Device.CoinIn)
         DR("Update_Time") = Now
         cmd = New SqlCommandBuilder(DA)
@@ -385,6 +390,10 @@ Public Class Manage_OpenClose_Shift
         '--4   Coin In
 
         '10  Product Shelf
+        'Product_Stock.SHIFT_ID =ระบุเพิ่ม
+        'Product_Stock.SHIFT_STATUS =ระบุเพิ่ม
+        'Product_Stock.Save() >> Return True/False
+
         '11  SIM Dispenser 1
         '12  SIM Dispenser 2
         '13  SIM Dispenser 3
@@ -393,6 +402,39 @@ Public Class Manage_OpenClose_Shift
 
 
     End Sub
+
+#Region "Scan Product Stock"
+
+    Private Sub ResetProductStock() '--------- Call First Time -------------
+        Product_Stock.KO_ID = KO_ID
+        Product_Stock.SHOP_CODE = SHOP_CODE
+        Product_Stock.BindData()
+
+        UpdateProductSummary()
+    End Sub
+
+    Private Sub UpdateProductSummary()
+        Dim STOCK_DATA As DataTable = Product_Stock.STOCK_DATA.Copy
+        STOCK_DATA.Columns("CURRENT").ColumnName = "SLOT_NAME"
+        BL.Bind_Product_Shelf_Layout(Kiosk_Shelf, KO_ID)
+        BL.Bind_Product_Shelf_Stock(Kiosk_Shelf, STOCK_DATA)
+        Kiosk_Shelf.HideFloorMenu()
+        Kiosk_Shelf.HideFloorName()
+        Kiosk_Shelf.ShowAddFloor = False
+        Kiosk_Shelf.ShowEditShelf = False
+
+    End Sub
+
+    Private Sub CloseScanProduct_Click(sender As Object, e As EventArgs) Handles btnCloseScanProduct.Click, lnkCloseScanProduct.Click
+        pnlScanProduct.Visible = False
+        UpdateProductSummary()
+    End Sub
+
+    Private Sub btnResetScanProduct_Click(sender As Object, e As EventArgs) Handles btnResetScanProduct.Click
+        ResetProductStock()
+    End Sub
+
+#End Region
 
 
 End Class

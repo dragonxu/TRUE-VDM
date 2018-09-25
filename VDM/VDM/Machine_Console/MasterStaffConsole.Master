@@ -79,7 +79,8 @@
                                 <asp:Label ID="lblMachine_Zone" runat="server"></asp:Label>
 
                             </h1>
-                            <h3><b><asp:Label ID="lblHeader_Shift" runat ="server" class ="text-indigo" ></asp:Label></b> <asp:Label ID="lblHeader_Shift_Time" runat ="server"  class ="text-grey"  ></asp:Label></h3>
+                            <h3><asp:Label ID="lblHeader_Shift" runat ="server" style="padding:3px 6px 3px 6px;" Font-Bold="true" BorderStyle="Solid" BorderWidth="5px" ></asp:Label> 
+                                <asp:Label ID="lblHeader_Shift_Time" runat ="server"  class ="text-grey"  ></asp:Label></h3>
                            
                         </div>
                     </div>
@@ -102,7 +103,7 @@
     <footer class="content-section">
         <div class="container">
             <div class="row text-center">
-                <div class="col-sm-12 mb25">
+                <div class="col-sm-12 mb20">
                     <p>VENDING-Management Console </p>
 
                 </div>

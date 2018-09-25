@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="UC_Peripheral_UI.ascx.vb" Inherits="VDM.UC_Peripheral_UI" %>
-    <div class="row m-a-0 text-uppercase bold mobile_group_head">
+    <div class="row m-a-0 m-b text-uppercase bold mobile_group_head">
         Peripheral Condition
     </div>
     <div class="row demo-button">

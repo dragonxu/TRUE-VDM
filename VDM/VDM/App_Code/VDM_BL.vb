@@ -101,8 +101,10 @@ Public Class VDM_BL
     End Enum
 
     Public Enum ShiftStatus
+        OnGoing = -1
         Close = 0
         Open = 1
+        Unknown = 99
     End Enum
 
 
@@ -528,15 +530,18 @@ Public Class VDM_BL
         End If
     End Function
 
-    Public Sub Save_Product_Movement_Log(ByVal PRODUCT_ID As Integer, ByVal SERIAL_NO As String, ByVal MOVE_ID As StockMovementType, ByVal MOVE_FROM As String, ByVal MOVE_FROM_SLOT As Integer, ByVal MOVE_TO As String, ByVal MOVE_TO_SLOT As Integer, ByVal REMARK As String, ByVal MOVE_BY As Integer, ByVal MOVE_TIME As DateTime)
+    Public Sub Save_Product_Movement_Log(ByVal SHIFT_ID As Integer, ByVal SHIFT_STATUS As ShiftStatus, ByVal PRODUCT_ID As Integer, ByVal SERIAL_NO As String, ByVal MOVE_ID As StockMovementType, ByVal MOVE_FROM As String, ByVal MOVE_FROM_SLOT As Integer, ByVal MOVE_TO As String, ByVal MOVE_TO_SLOT As Integer, ByVal REMARK As String, ByVal MOVE_BY As Integer, ByVal MOVE_TIME As DateTime)
         Dim SQL As String = "Select TOP 0 * FROM TB_PRODUCT_MOVEMENT"
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, LogConnectionString)
         DA.Fill(DT)
         Dim DR As DataRow = DT.NewRow
 
-
         DR("HIS_ID") = GetNewPrimaryLogID("TB_PRODUCT_MOVEMENT", "HIS_ID")
+
+        If SHIFT_ID <> 0 Then DR("SHIFT_ID") = SHIFT_ID
+        If SHIFT_STATUS <> ShiftStatus.Unknown Then DR("SHIFT_STATUS") = SHIFT_STATUS
+
         DR("PRODUCT_ID") = PRODUCT_ID
         DR("SERIAL_NO") = SERIAL_NO
         DR("MOVE_ID") = MOVE_ID
@@ -874,7 +879,7 @@ Public Class VDM_BL
 
 #Region "Shift"
 
-    Public Function GetShift_Kiosk(Optional ByVal KO_ID As Integer = 0) As DataTable
+    Public Function Get_Kiosk_Current_Shift(Optional ByVal KO_ID As Integer = 0) As DataTable
         Dim SQL As String = ""
         SQL &= "   Select TOP 1 SHIFT_ID" & vbLf
         SQL &= "  ,KO_ID" & vbLf
@@ -893,13 +898,6 @@ Public Class VDM_BL
         DT.TableName = "Data"
         DA.Fill(DT)
         Return DT
-    End Function
-
-    Public Function CheckShift_Open(ByRef DT As DataTable) As Boolean
-        If DT.Rows.Count > 0 AndAlso IsDBNull(DT.Rows(0).Item("Close_Time")) Then
-            Return True
-        End If
-        Return False
     End Function
 
     Public Function GetKiosk_Current_OTY(ByRef KO_ID As Integer, ByRef D_ID As Integer, ByRef Unit_Value As Integer) As Integer

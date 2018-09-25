@@ -5,6 +5,10 @@
 <%@ Register Src="~/Machine_Console/UC_Shift_Recieve.ascx" TagPrefix="uc1" TagName="UC_Shift_Recieve" %>
 <%@ Register Src="~/Machine_Console/UC_Shift_StockProduct.ascx" TagPrefix="uc1" TagName="UC_Shift_StockProduct" %>
 <%@ Register Src="~/Machine_Console/UC_Shift_StockSIM.ascx" TagPrefix="uc1" TagName="UC_Shift_StockSIM" %>
+<%@ Register Src="~/Machine_Console/UC_Product_Stock.ascx" TagPrefix="uc1" TagName="UC_Product_Stock" %>
+<%@ Register Src="~/UC_Kiosk_Shelf.ascx" TagPrefix="uc1" TagName="UC_Kiosk_Shelf" %>
+<%@ Register Src="~/Machine_Console/UC_Product_Shelf.ascx" TagPrefix="uc1" TagName="UC_Product_Shelf" %>
+
 
 
 
@@ -27,7 +31,7 @@
                 <div class="row">
 
                     <div class="display-columns">
-                        <div class="column contacts-sidebar hidden-xs bg-white b-r" style="width: 350px;">
+                        <div class="column contacts-sidebar hidden-xs bg-white b-r">
                             <div class="scroll">
                                 <div class="p-a">
                                     <nav role="navigation">
@@ -86,7 +90,7 @@
                                             <li id="MenuStockPaper" runat="server">
                                                 <a id="lnkStockPaper" runat="server">
                                                     <h3><span class="btn btn-dark btn-outline btn-round" style="padding-right: 0.75rem; padding-left: 0.75rem; font-size: 20px;">5</span>
-                                                        <span>Stock กระดาษพิมพ์</span>
+                                                        <span>กระดาษพิมพ์</span>
                                                         <div id="divMenuStockPaper" runat ="server" class="message-sender" style="text-align: right;">
                                                             <p><span class=" h5 text-info">พิมพ์ได้</span><span class=" h5"> <asp:Label ID="lbl_Paper_Count" runat ="server" ></asp:Label> ครั้ง</span></p>
                                                         </div>
@@ -97,7 +101,7 @@
                                                 <div class="col-xs-12 text-left">
                                                     <div class="fa-hover text-default   ">
                                                         <a id="lnkBack" runat="server" title="Back / กลับไปหน้า Overview">
-                                                            <h3><i class="fa fa-angle-double-left"></i> กลับไปหน้า Overview </h3>
+                                                            <h3><i class="fa fa-angle-double-left"></i> Overview </h3>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -154,11 +158,18 @@
                                         <h1><b>Stock สินค้า</b>  
                                             <img id="imgProduct" src="../images/Icon/green/shelf.png" width="40">
                                         </h1>
+                                        <div class="col-sm-8">
+                                            <uc1:UC_Product_Shelf runat="server" ID="Kiosk_Shelf" />
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <h2>Stock Summary</h2>
+
+                                        </div>
+                                        
+
                                     </div>
                                 </div>
-                                <h4>
-                                    <uc1:UC_Shift_StockProduct runat="server" ID="UC_Shift_StockProduct" />
-                                </h4>
+                                
                             </asp:Panel>
                             <asp:Panel ID="pnlStockSIM" runat="server">
                                 <div class="p-a">
@@ -218,74 +229,33 @@
                                 </div>
                             </asp:Panel>
 
-                            <asp:Panel ID="pnlTemp" runat="server" Visible="false">
-                                <div class="scroll full-height">
-                                    <div class="full-height">
-                                        <div class="contact-header m-b">
-                                            <div class="contact-toolbar visible-xs m-b">
-                                                <a href="#">
-                                                    <span class="icon-close visible-xs m-r m-l"></span>
-                                                </a>
-                                            </div>
-                                            <div class="p-a">
-                                                <div class="pull-left p-r">
-                                                    <img src="../images/face4.jpg" class="avatar avatar-lg img-circle" alt="">
-                                                </div>
-                                                <div class="overflow-hidden">
-                                                    <h1><b>Kralj</b> Franc</h1>
-                                                    <h3>Web developer</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row m-b">
-                                            <div class="col-xs-4 text-right">
-                                                <span class="text-muted">email</span>
-                                            </div>
-                                            <div class="col-xs-8">
-                                                <a href="email@example.com">email@example.com</a>
-                                            </div>
-                                        </div>
-                                        <div class="row m-b">
-                                            <div class="col-xs-4 text-right">
-                                                <span class="text-muted">mobile</span>
-                                            </div>
-                                            <div class="col-xs-8">
-                                                <span>+1 123 456 789</span>
-                                            </div>
-                                        </div>
-                                        <div class="row m-b">
-                                            <div class="col-xs-4 text-right">
-                                                <span class="text-muted">home</span>
-                                            </div>
-                                            <div class="col-xs-8">
-                                                <a href="http://www.example.com">http://www.example.com</a>
-                                            </div>
-                                        </div>
-                                        <div class="row m-b">
-                                            <div class="col-xs-4 text-right">
-                                                <span class="text-muted">country</span>
-                                            </div>
-                                            <div class="col-xs-8">
-                                                <span>Slovenia</span>
-                                            </div>
-                                        </div>
-                                        <div class="row m-b">
-                                            <div class="col-xs-4 text-right">
-                                                <span class="text-muted">note</span>
-                                            </div>
-                                            <div class="col-xs-8">
-                                                <span>Cras mattis consectetur purus sit amet fermentum. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean lacinia bibendum nulla sed consectetur. Nulla vitae elit libero, a pharetra augue. Maecenas faucibus mollis interdum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec ullamcorper nulla non metus auctor fringilla.</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </asp:Panel>
+                            
                         </div>
                     </div>
 
                 </div>
             </div>
 
+<asp:Panel CssClass="modal-dialog" style="width:90%; margin: 0px auto; position:absolute; top:20px; z-index:3;" ID="pnlScanProduct" runat="server"  Visible="false">
+ <div class="modal-content">
+        <div class="modal-header">
+          <asp:LinkButton CssClass="close" ID="lnkCloseScanProduct" runat="server" >×</asp:LinkButton>
+          <h4 class="modal-title">Manage Product Stock</h4>
+        </div>
+        <div class="modal-body">
+          <p>จัดการสินค้าที่อยู่ใน Shelf ด้วยการ 
+              <img src="../images/Icon/green/signal_wifi_3.png" height="30" /> Scan Barcode หรือ 
+              <img src="../images/Icon/green/repeat.png" height="30" />              
+              เคลื่อนย้ายสินค้าที่อยู่ในตู้</p>
+            <uc1:UC_Product_Stock runat="server" id="Product_Stock" />
+        </div>
+    <div class="modal-footer no-border">
+        <asp:Button ID="btnResetScanProduct" runat="server" CssClass="btn btn-shadow btn-default" Text="Reset" />
+        <asp:Button ID="btnCloseScanProduct" runat="server" CssClass="btn btn-shadow btn-primary" Text="Close" />
+    </div>
+
+    </div>
+</asp:Panel>
 
         </ContentTemplate>
     </asp:UpdatePanel>

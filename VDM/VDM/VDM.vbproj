@@ -498,6 +498,7 @@
     <Content Include="Machine_Console\PrintBarcode.aspx" />
     <Content Include="Machine_Console\Styles\app.min.725970e8.css" />
     <Content Include="Machine_Console\TestScan.aspx" />
+    <Content Include="Machine_Console\UC_Product_Stock.ascx" />
     <Content Include="Machine_Console\UC_Shift_Change.ascx" />
     <Content Include="Machine_Console\UC_Shift_Recieve.ascx" />
     <Content Include="Machine_Console\UC_Shift_StockPaper.ascx" />
@@ -684,6 +685,13 @@
     <Compile Include="Machine_Console\TestScan.aspx.vb">
       <DependentUpon>TestScan.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Machine_Console\UC_Product_Stock.ascx.designer.vb">
+      <DependentUpon>UC_Product_Stock.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Machine_Console\UC_Product_Stock.ascx.vb">
+      <DependentUpon>UC_Product_Stock.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Machine_Console\UC_Shift_Change.ascx.designer.vb">
       <DependentUpon>UC_Shift_Change.ascx</DependentUpon>

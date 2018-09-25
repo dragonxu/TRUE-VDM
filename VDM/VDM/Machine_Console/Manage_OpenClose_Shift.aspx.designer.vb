@@ -257,13 +257,13 @@ Partial Public Class Manage_OpenClose_Shift
     Protected WithEvents pnlStockProduct As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''UC_Shift_StockProduct control.
+    '''Kiosk_Shelf control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UC_Shift_StockProduct As Global.VDM.UC_Shift_StockProduct
+    Protected WithEvents Kiosk_Shelf As Global.VDM.UC_Product_Shelf
     
     '''<summary>
     '''pnlStockSIM control.
@@ -338,11 +338,47 @@ Partial Public Class Manage_OpenClose_Shift
     Protected WithEvents lnkOK As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''pnlTemp control.
+    '''pnlScanProduct control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlTemp As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents pnlScanProduct As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''lnkCloseScanProduct control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkCloseScanProduct As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''Product_Stock control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Product_Stock As Global.VDM.UC_Product_Stock
+    
+    '''<summary>
+    '''btnResetScanProduct control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnResetScanProduct As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''btnCloseScanProduct control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnCloseScanProduct As Global.System.Web.UI.WebControls.Button
 End Class
