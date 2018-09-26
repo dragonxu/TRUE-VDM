@@ -275,8 +275,6 @@ Public Class Manage_OpenClose_Shift
 
 
     Private Sub UPDATE_DEVICE_Qty()
-        '--รอเพิ่ม PREVIOUS_SHIFT กรณีเปิด Shift ว่าก่อนหน้า อยู่ Shift ไหน
-
         '----เงินทอน
         Dim Change As DataTable = UC_Shift_Change.Current_Data()
         Dim SQL As String = ""
@@ -449,7 +447,7 @@ Public Class Manage_OpenClose_Shift
         pnlScanProduct.Visible = True
         Dim Script As String = "txtBarcode='" & Product_Stock.BarcodeClientID & "';" & vbLf
         Script &= "startFocusBarcode();"
-        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "focusBarcode", Script, True)
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "focusBarcodeReader", Script, True)
     End Sub
 
     Private Sub CloseScanProduct_Click(sender As Object, e As EventArgs) Handles btnCloseScanProduct.Click, lnkCloseScanProduct.Click

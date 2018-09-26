@@ -7,9 +7,9 @@
         <asp:Panel ID="pnlSlot" runat="server" CssClass="card bg-white m-b m-t-md" SIM_ID="0">
             <div class="card-header">
             <h3 class="m-t-0 m-b-0 pull-left">
-                <img src="../images/Icon/green/shelf.png" height="30"> SIM Slot <asp:Label ID="lblSlotID" runat="server" SLOT_ID="0"></asp:Label>
+                <img src="../images/Icon/green/shelf.png" height="30"> SIM Slot <asp:Label ID="lblSlotID" runat="server"></asp:Label>
             </h3>
-            <asp:LinkButton ID="btnSeeShelf" runat="server" CssClass="pull-right btn btn-primary btn-sm">
+            <asp:LinkButton ID="btnSeeShelf" runat="server" CssClass="pull-right btn btn-primary btn-sm" KO_ID="0" SHOP_CODE="" MY_UNIQUE_ID="" SHIFT_ID="0" SHIFT_STATUS="99">
                 <i class="fa fa-reply"></i>
                 <span>see all</span>
             </asp:LinkButton>
