@@ -135,6 +135,7 @@
 
     <!-- Custom scripts -->
     <script src="../scripts/txtClientControl.js" type="text/javascript"></script>
+    <script src="../scripts/extent.js" type="text/javascript"></script>
     <!-- End Custom scripts -->
 
     <!-- page scripts -->

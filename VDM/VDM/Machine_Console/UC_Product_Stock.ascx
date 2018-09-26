@@ -217,13 +217,11 @@
                                             <h4 class="m-t-0 m-b-0"><asp:Label ID="lblScan_Product_Depth" runat="server"></asp:Label></h4>
                                             <small>Package Depth</small>
                                         </div>
-                                    </div>                                            
-                                                
+                                    </div>      
                             </div>
                         </div>
                         <div class="row m-t-md">
-                            <div class="card bg-white m-b" style="font-size:14px;">
-                                                                 
+                            <div class="card bg-white m-b" style="font-size:14px;">                                                                 
                                 <table class="table m-b-0">
                                     <thead>
                                         <tr>
