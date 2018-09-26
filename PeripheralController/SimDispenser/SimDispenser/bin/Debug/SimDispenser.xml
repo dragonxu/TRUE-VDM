@@ -1,0 +1,371 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SimDispenser</name>
+    </assembly>
+    <members>
+        <member name="T:SimDispenser.Deveice">
+            <summary>
+            Method control Periperal
+            </summary>
+        </member>
+        <member name="M:SimDispenser.Deveice.Rotates(System.IO.Ports.SerialPort,System.String)">
+            <summary>
+            <para>return success ? true : false</para>
+            <para>0102 : rotate motor {1st}</para>
+            <para>0202 : rotate motor {2nd}</para>
+            <para>0302 : rotate motor {3rd}</para>
+            <para>0402 : rotate motor {4th}</para>
+            <para>0502 : rotate motor {5th}</para>
+            <para>0602 : rotate motor {6th}</para>
+            <para name="target">parameter : 0102, 0202, 0302, 0402, 0502, 0602</para> 
+            </summary>
+            <summary>
+            <para>Note : target มอเตอร์ที่ต้องการให้หมุน</para>
+            <para>return success ? true : false</para>
+            <para>0101 : rotate motor {1st}</para>
+            <para>0201 : rotate motor {2nd}</para>
+            <para>0301 : rotate motor {3rd}</para>
+            <para>0401 : rotate motor {4th}</para>
+            <para>0501 : rotate motor {5th}</para>
+            <para>0601 : rotate motor {6th}</para>
+            <para name="target">parameter : 0101, 0201, 0301, 0401, 0501, 0601</para> 
+            </summary>
+            <summary>
+            <para>Note : target คือ มอเตอรที่ต้องการให้หยุด</para>
+            <para>return success ? true : false</para>
+            <para>0100 : stop motor {1st}</para>
+            <para>0200 : stop motor {2nd}</para>
+            <para>0300 : stop motor {3rd}</para>
+            <para>0400 : stop motor {4th}</para>
+            <para>0500 : stop motor {5th}</para>
+            <para>0600 : stop motor {6th}</para>
+            <para name="target">parameter : 0100, 0200, 0300, 0400, 0500, 0600</para> 
+            </summary>
+        </member>
+        <member name="M:SimDispenser.Deveice.Received(System.IO.Ports.SerialPort,System.String)">
+            <summary>
+            <para>Note : return -> ค่าที่ได้ค่า sensor เป็น 0 : 1, command -> sensor ที่ต้องการอ่านค่า</para>
+            <para>21 : read proximity sensor {1st} return 1:on, 0:off</para>
+            <para>22 : read proximity sensor {2nd} return 1:on, 0:off</para>
+            <para>23 : read proximity sensor {3rd} return 1:on, 0:off</para>
+            <para>24 : read proximity sensor {4th} return 1:on, 0:off</para>
+            <para>25 : read proximity sensor {5th} return 1:on, 0:off</para>
+            <para>26 : read proximity sensor {6th} return 1:on, 0:off</para>
+            <para>FF : read proximity sensor all</para>
+            <para>F0 : Firmware version</para>
+            <para name="command">parameter : 21, 22, 23, 24, 25, 26, FF, F0</para>
+            <para>return String </para>
+            </summary>
+        </member>
+        <member name="M:SimDispenser.Deveice.Blink(System.IO.Ports.SerialPort,System.String)">
+            <summary>
+            <para>Note : command คือ led ที่ต้องการให้กระพริบ.</para>
+            <para>4000 : led1 OFF, led2 OFF</para>
+            <para>4001 : led1 OFF, led2 ON</para>
+            <para>4002 : led1 ON, led2 OFF</para>
+            <para>4003 : led1 ON, led2 ON</para>
+            <para>return success ? true : false</para> 
+            <para name="command">parameter : 4000, 4001, 4002, 4003</para>
+            </summary>
+        </member>
+        <member name="T:SimDispenser.DeviceInfo">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinLEDA">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinLEDB">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinLEDOff">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinInput1">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinInput2">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinInput3">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinInput4">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinInput5">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinInput6">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinOutput1A">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinOutput1B">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinOutput2A">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinOutput2B">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinOutput3A">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinOutput3B">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinOutput4A">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinOutput4B">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinOutput5A">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinOutput5B">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinOutput6A">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinOutput6B">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinBreak1">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinBreak2">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinBreak3">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinBreak4">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinBreak5">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.DeviceInfo.PinBreak6">
+            <summary>
+            <para>Note : data devices config</para>
+            </summary>
+        </member>
+        <member name="T:SimDispenser.Events">
+            <summary>
+            <para>Note : handlers message event</para>
+            </summary>
+        </member>
+        <member name="M:SimDispenser.Events.#ctor(System.String)">
+            <summary>
+            <para>Note : message setter</para>
+            </summary>
+        </member>
+        <member name="P:SimDispenser.Events.Message">
+            <summary>
+            <para>Note : message getter</para>
+            </summary>
+        </member>
+        <member name="T:SimDispenser.SimDispenser">
+            <summary>
+            <para>MCU Devices Library</para>
+            </summary>
+        </member>
+        <member name="M:SimDispenser.SimDispenser.ReadSensor(SimDispenser.Events)">
+            <summary>
+            delegate method handle raise event
+            </summary>
+            <param name="e">message event</param>
+        </member>
+        <member name="F:SimDispenser.SimDispenser._serialPort">
+            Initialzed*
+        </member>
+        <member name="F:SimDispenser.SimDispenser.init">
+            <summary>
+            Initial Port
+            </summary>
+        </member>
+        <member name="M:SimDispenser.SimDispenser.SetPort(System.String)">
+            <summary>
+            <para>Note : Set Port to MCU device</para> 
+            </summary>
+        </member>
+        <member name="M:SimDispenser.SimDispenser.GetPort">
+            <summary>
+            GetPort Name
+            </summary>
+            <returns>PortName</returns>
+        </member>
+        <member name="M:SimDispenser.SimDispenser.Dispenser1(System.Int32)">
+            <summary>
+            <para>return success ? true : false</para>
+            <para name="target">parameter : 0102, 0202, 0302, 0402, 0502, 0602</para> 
+            <para name="target">parameter : 0101, 0201, 0301, 0401, 0501, 0601</para> 
+            </summary>
+        </member>
+        <member name="M:SimDispenser.SimDispenser.Dispenser2(System.Int32)">
+            <summary>
+            <para>return success ? true : false</para>
+            <para name="target">parameter : 0102, 0202, 0302, 0402, 0502, 0602</para> 
+            <para name="target">parameter : 0101, 0201, 0301, 0401, 0501, 0601</para> 
+            </summary>
+        </member>
+        <member name="M:SimDispenser.SimDispenser.Dispenser3(System.Int32)">
+            <summary>
+            <para>return success ? true : false</para>
+            <para name="target">parameter : 0102, 0202, 0302, 0402, 0502, 0602</para> 
+            <para name="target">parameter : 0101, 0201, 0301, 0401, 0501, 0601</para> 
+            </summary>
+        </member>
+        <member name="M:SimDispenser.SimDispenser.Dispenser4(System.Int32)">
+            <summary>
+            <para>return success ? true : false</para>
+            <para name="target">parameter : 0102, 0202, 0302, 0402, 0502, 0602</para> 
+            <para name="target">parameter : 0101, 0201, 0301, 0401, 0501, 0601</para> 
+            </summary>
+        </member>
+        <member name="M:SimDispenser.SimDispenser.Dispenser5(System.Int32)">
+            <summary>
+            <para>return success ? true : false</para>
+            <para name="target">parameter : 0102, 0202, 0302, 0402, 0502, 0602</para> 
+            <para name="target">parameter : 0101, 0201, 0301, 0401, 0501, 0601</para> 
+            </summary>
+        </member>
+        <member name="M:SimDispenser.SimDispenser.RotateLeft">
+            <summary>
+            <para>return success ? true : false</para>
+            <para name="target">rotates : 0601,0602 break : 0600</para> 
+            </summary>
+        </member>
+        <member name="M:SimDispenser.SimDispenser.BlinkA(System.Int32)">
+            <summary>
+            Method Blink LED A
+            </summary>
+            <param name="Interval">Timer blink</param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:SimDispenser.SimDispenser.BlinkB(System.Int32)">
+            <summary>
+            Method Blink LED B
+            </summary>
+            <param name="Interval">Timer blink</param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="T:SimDispenser.InitialPort">
+            <summary>
+            Inititalzed serial port
+            </summary>
+        </member>
+        <member name="P:SimDispenser.InitialPort.Comport">
+            <summary>
+            setter and getter comport
+            </summary>
+        </member>
+        <member name="P:SimDispenser.InitialPort.BaudRate">
+            <summary>
+            setter and getter BaudRate
+            </summary>
+        </member>
+        <member name="P:SimDispenser.InitialPort.DataBits">
+            <summary>
+            setter and getter DataBits
+            </summary>
+        </member>
+        <member name="P:SimDispenser.InitialPort.DtrEnable">
+            <summary>
+            setter and getter DtrEnable
+            </summary>
+        </member>
+        <member name="T:SimDispenser.SerialPortHelper">
+            <summary>
+            <para>Note : Initialzed Serial Port</para>
+            </summary>
+        </member>
+        <member name="M:SimDispenser.SerialPortHelper.Initial(SimDispenser.InitialPort)">
+            <summary>
+            Initial serial port
+            </summary>
+            <param name="init">port config class</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimDispenser.SerialPortHelper.ConvertBinaryToHex(System.String)">
+            <summary>
+            convert String binary format to String hex format.
+            </summary>
+            <param name="binary">string binary format.</param>
+            <returns>string hex format</returns>
+        </member>
+        <member name="M:SimDispenser.SerialPortHelper.ConvertHexToByte(System.String)">
+            <summary>
+            convert string hex to byte.
+            </summary>
+            <param name="hex">string hex format.</param>
+            <returns>Byte[]</returns>
+        </member>
+        <member name="M:SimDispenser.SerialPortHelper.ConvertByteToString(System.Byte[])">
+            <summary>
+            convert byte data to String hex format.
+            </summary>
+            <param name="bytes">data byte</param>
+            <returns>string hex format.</returns>
+        </member>
+    </members>
+</doc>
