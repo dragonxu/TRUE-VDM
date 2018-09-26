@@ -99,6 +99,12 @@ Public Class UC_Product_Stock
         End Set
     End Property
 
+    Public ReadOnly Property BarcodeClientID As String
+        Get
+            Return txtBarcode.ClientID
+        End Get
+    End Property
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Not IsPostBack Then

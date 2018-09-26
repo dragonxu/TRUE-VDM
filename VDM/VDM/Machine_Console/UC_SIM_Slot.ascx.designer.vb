@@ -14,13 +14,13 @@ Option Explicit On
 Partial Public Class UC_SIM_Slot
     
     '''<summary>
-    '''aContainer control.
+    '''pnlContainer control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents aContainer As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents pnlContainer As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''lblID control.
@@ -120,4 +120,13 @@ Partial Public Class UC_SIM_Slot
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblPrice As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''btnSelect control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSelect As Global.System.Web.UI.WebControls.Button
 End Class

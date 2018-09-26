@@ -445,7 +445,9 @@ Public Class Manage_OpenClose_Shift
 
     Private Sub btnManageProductStock_Click(sender As Object, e As EventArgs) Handles btnManageProductStock.Click
         pnlScanProduct.Visible = True
-        lnkCloseScanProduct.Focus()
+        Dim Script As String = "txtBarcode='" & Product_Stock.BarcodeClientID & "';" & vbLf
+        Script &= "startFocusBarcode();"
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "focusBarcode", Script, True)
     End Sub
 
     Private Sub CloseScanProduct_Click(sender As Object, e As EventArgs) Handles btnCloseScanProduct.Click, lnkCloseScanProduct.Click
@@ -456,10 +458,22 @@ Public Class Manage_OpenClose_Shift
     Private Sub btnResetScanProduct_Click(sender As Object, e As EventArgs) Handles btnResetScanProduct.Click
         ResetProductStock()
     End Sub
-
-
-
 #End Region
 
+#Region "SIM Stock"
+
+    Private Sub ResetSIMStock() '--------- Call First Time -------------
+        'Dispenser.KO_ID = KO_ID
+        'Product_Stock.SHOP_CODE = SHOP_CODE
+        ''Dispenser.BindData()
+
+        UpdateProductSummary()
+    End Sub
+
+    Private Sub UpdateSIMSummary()
+
+    End Sub
+
+#End Region
 
 End Class

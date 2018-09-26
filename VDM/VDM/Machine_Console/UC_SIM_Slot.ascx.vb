@@ -3,18 +3,18 @@
 
     Public Property Column12Style As Integer
         Get
-            Dim Css As String = aContainer.CssClass
+            Dim Css As String = pnlContainer.CssClass
             For i As Integer = 1 To 12
                 If ExistingCssClass(Css, "col-sm-" & i) Then Return i
             Next
             Return 0
         End Get
         Set(value As Integer)
-            Dim Css As String = aContainer.CssClass
+            Dim Css As String = pnlContainer.CssClass
             For i As Integer = 1 To 12
                 Css = RemoveTagCssClass(Css, "col-sm-" & i)
             Next
-            aContainer.CssClass &= " col-sm-" & value
+            pnlContainer.CssClass &= " col-sm-" & value
         End Set
     End Property
 
@@ -54,10 +54,10 @@
 
     Public Property DEVICE_ID As Integer
         Get
-            Return aContainer.Attributes("DEVICE_ID")
+            Return pnlContainer.Attributes("DEVICE_ID")
         End Get
         Set(value As Integer)
-            aContainer.Attributes("DEVICE_ID") = value
+            pnlContainer.Attributes("DEVICE_ID") = value
         End Set
     End Property
 
@@ -163,27 +163,27 @@
     Public Property HighLight As UC_Product_Slot.HighLightMode
         Get
             Select Case True
-                Case aContainer.CssClass.IndexOf("highlightYellow") > -1
+                Case pnlContainer.CssClass.IndexOf("highlightYellow") > -1
                     Return UC_Product_Slot.HighLightMode.YellowDotted
-                Case aContainer.CssClass.IndexOf("highlightGreen") > -1
+                Case pnlContainer.CssClass.IndexOf("highlightGreen") > -1
                     Return UC_Product_Slot.HighLightMode.GreenSolid
-                Case aContainer.CssClass.IndexOf("highlightRed") > -1
+                Case pnlContainer.CssClass.IndexOf("highlightRed") > -1
                     Return UC_Product_Slot.HighLightMode.RedSolid
                 Case Else
                     Return UC_Product_Slot.HighLightMode.None
             End Select
         End Get
         Set(value As UC_Product_Slot.HighLightMode)
-            aContainer.CssClass = RemoveTagCssClass(aContainer.CssClass, "highlightYellow")
-            aContainer.CssClass = RemoveTagCssClass(aContainer.CssClass, "highlightGreen")
-            aContainer.CssClass = RemoveTagCssClass(aContainer.CssClass, "highlightRed")
+            pnlContainer.CssClass = RemoveTagCssClass(pnlContainer.CssClass, "highlightYellow")
+            pnlContainer.CssClass = RemoveTagCssClass(pnlContainer.CssClass, "highlightGreen")
+            pnlContainer.CssClass = RemoveTagCssClass(pnlContainer.CssClass, "highlightRed")
             Select Case value
                 Case UC_Product_Slot.HighLightMode.YellowDotted
-                    aContainer.CssClass &= " highlightYellow"
+                    pnlContainer.CssClass &= " highlightYellow"
                 Case UC_Product_Slot.HighLightMode.GreenSolid
-                    aContainer.CssClass &= " highlightGreen"
+                    pnlContainer.CssClass &= " highlightGreen"
                 Case UC_Product_Slot.HighLightMode.RedSolid
-                    aContainer.CssClass &= " highlightRed"
+                    pnlContainer.CssClass &= " highlightRed"
                 Case UC_Product_Slot.HighLightMode.None
                     '-------- Donothing --------------
             End Select
@@ -260,11 +260,23 @@
 
 #Region "Event"
 
-    Public Event Selecting(ByRef Sender As UC_SIM_Slot)
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        initJavascript()
+    End Sub
 
-    Private Sub aContainer_Click(sender As Object, e As EventArgs) Handles aContainer.Click
+    Private Sub initFormPlugin()
+
+    End Sub
+
+    Private Sub initJavascript()
+        pnlContainer.Attributes("onclick") = "document.getElementById('" & btnSelect.ClientID & "').click();"
+    End Sub
+
+    Private Sub btnSelect_Click(sender As Object, e As EventArgs) Handles btnSelect.Click
         RaiseEvent Selecting(Me)
     End Sub
+
+    Public Event Selecting(ByRef Sender As UC_SIM_Slot)
 
 #End Region
 

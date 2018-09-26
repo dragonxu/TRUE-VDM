@@ -202,6 +202,7 @@
         End Get
     End Property
 
+
 #Region "Event"
     Public Event Selecting(ByRef Sender As UC_SIM_Slot)
     Protected Sub Slot_Selecting(ByRef Sender As UC_SIM_Slot)

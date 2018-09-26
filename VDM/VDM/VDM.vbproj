@@ -497,7 +497,6 @@
     <Content Include="images\WhiteDot.png" />
     <Content Include="Machine_Console\PrintBarcode.aspx" />
     <Content Include="Machine_Console\Styles\app.min.725970e8.css" />
-    <Content Include="Machine_Console\TestSIM.aspx" />
     <Content Include="Machine_Console\UC_Product_Stock.ascx" />
     <Content Include="Machine_Console\UC_Shift_Change.ascx" />
     <Content Include="Machine_Console\UC_Shift_Recieve.ascx" />
@@ -505,6 +504,7 @@
     <Content Include="Machine_Console\UC_SIM.ascx" />
     <Content Include="Machine_Console\UC_SIM_Dispenser.ascx" />
     <Content Include="Machine_Console\UC_SIM_Slot.ascx" />
+    <Content Include="Scripts\extent.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="SignIn.aspx" />
     <Content Include="Machine_Console\Login.aspx" />
@@ -609,7 +609,7 @@
     <Content Include="Machine_Console\UC_Product_Slot.ascx" />
     <Content Include="UC_Kiosk_Shelf.ascx" />
     <Content Include="UC_Product_Spec.ascx" />
-    <Content Include="UC_SIM_Stock.ascx" />
+    <Content Include="Machine_Console\UC_SIM_Stock.ascx" />
     <Content Include="Upload_User_Form.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -679,13 +679,6 @@
     </Compile>
     <Compile Include="Machine_Console\PrintBarcode.aspx.vb">
       <DependentUpon>PrintBarcode.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="Machine_Console\TestSIM.aspx.designer.vb">
-      <DependentUpon>TestSIM.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Machine_Console\TestSIM.aspx.vb">
-      <DependentUpon>TestSIM.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Machine_Console\UC_Product_Stock.ascx.designer.vb">
@@ -993,10 +986,10 @@
       <DependentUpon>UC_Product_Spec.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UC_SIM_Stock.ascx.designer.vb">
+    <Compile Include="Machine_Console\UC_SIM_Stock.ascx.designer.vb">
       <DependentUpon>UC_SIM_Stock.ascx</DependentUpon>
     </Compile>
-    <Compile Include="UC_SIM_Stock.ascx.vb">
+    <Compile Include="Machine_Console\UC_SIM_Stock.ascx.vb">
       <DependentUpon>UC_SIM_Stock.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
