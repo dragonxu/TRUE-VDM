@@ -123,6 +123,7 @@
     <Content Include="fonts\fontawesome\fontawesome-webfont.svg" />
     <Content Include="fonts\sli\Simple-Line-Icons.dev.svg" />
     <Content Include="fonts\sli\Simple-Line-Icons.svg" />
+    <Content Include="Front_UI\Complete_Order.aspx" />
     <Content Include="Front_UI\css\bootstrap-select.css" />
     <Content Include="Front_UI\css\bootstrap.css" />
     <Content Include="Front_UI\css\font-awesome.min.css" />
@@ -136,7 +137,9 @@
     <Content Include="Front_UI\css\true.css" />
     <Content Include="Front_UI\Device_Brand.aspx" />
     <Content Include="Front_UI\Device_Category.aspx" />
+    <Content Include="Front_UI\Device_Verify.aspx" />
     <Content Include="Front_UI\Device_Product_Detail.aspx" />
+    <Content Include="Front_UI\Device_Shoping_Cart.aspx" />
     <Content Include="Front_UI\fonts\fontawesome-webfont.svg" />
     <Content Include="Front_UI\fonts\tbold.svg" />
     <Content Include="Front_UI\fonts\tboldspecial.svg" />
@@ -156,6 +159,7 @@
     <Content Include="Front_UI\images\btu-close.png" />
     <Content Include="Front_UI\images\btu-home.png" />
     <Content Include="Front_UI\images\btu-prev.png" />
+    <Content Include="Front_UI\images\COUNTDOWN.gif" />
     <Content Include="Front_UI\images\fancybox_loading%402x.gif" />
     <Content Include="Front_UI\images\fancybox_loading.gif" />
     <Content Include="Front_UI\images\fancybox_overlay.png" />
@@ -260,7 +264,10 @@
     <Content Include="Front_UI\js\modernizr.custom.js" />
     <Content Include="Front_UI\js\slick.js" />
     <Content Include="Front_UI\Product_List.aspx" />
+    <Content Include="Front_UI\Device_Payment.aspx" />
     <Content Include="Front_UI\Select_Language.aspx" />
+    <Content Include="Front_UI\UC_Scan_Face_Recognition.ascx" />
+    <Content Include="Front_UI\UC_Scan_IDCart.ascx" />
     <Content Include="Global.asax" />
     <Content Include="images\avatar.jpg" />
     <Content Include="images\avatar.png" />
@@ -615,6 +622,13 @@
   <ItemGroup>
     <Compile Include="App_Code\BackEndInterface.vb" />
     <Compile Include="App_Code\ModuleGlobal.vb" />
+    <Compile Include="Front_UI\Complete_Order.aspx.designer.vb">
+      <DependentUpon>Complete_Order.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\Complete_Order.aspx.vb">
+      <DependentUpon>Complete_Order.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Front_UI\Device_Brand.aspx.designer.vb">
       <DependentUpon>Device_Brand.aspx</DependentUpon>
     </Compile>
@@ -629,11 +643,25 @@
       <DependentUpon>Device_Category.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Front_UI\Device_Verify.aspx.designer.vb">
+      <DependentUpon>Device_Verify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\Device_Verify.aspx.vb">
+      <DependentUpon>Device_Verify.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Front_UI\Device_Product_Detail.aspx.designer.vb">
       <DependentUpon>Device_Product_Detail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Front_UI\Device_Product_Detail.aspx.vb">
       <DependentUpon>Device_Product_Detail.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Front_UI\Device_Shoping_Cart.aspx.designer.vb">
+      <DependentUpon>Device_Shoping_Cart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\Device_Shoping_Cart.aspx.vb">
+      <DependentUpon>Device_Shoping_Cart.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Front_UI\Home.aspx.designer.vb">
@@ -657,12 +685,33 @@
       <DependentUpon>Product_List.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Front_UI\Device_Payment.aspx.designer.vb">
+      <DependentUpon>Device_Payment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\Device_Payment.aspx.vb">
+      <DependentUpon>Device_Payment.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Front_UI\Select_Language.aspx.designer.vb">
       <DependentUpon>Select_Language.aspx</DependentUpon>
     </Compile>
     <Compile Include="Front_UI\Select_Language.aspx.vb">
       <DependentUpon>Select_Language.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Front_UI\UC_Scan_Face_Recognition.ascx.designer.vb">
+      <DependentUpon>UC_Scan_Face_Recognition.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\UC_Scan_Face_Recognition.ascx.vb">
+      <DependentUpon>UC_Scan_Face_Recognition.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Front_UI\UC_Scan_IDCart.ascx.designer.vb">
+      <DependentUpon>UC_Scan_IDCart.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\UC_Scan_IDCart.ascx.vb">
+      <DependentUpon>UC_Scan_IDCart.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Machine_Console\MasterStaffConsole.Master.designer.vb">
       <DependentUpon>MasterStaffConsole.Master</DependentUpon>

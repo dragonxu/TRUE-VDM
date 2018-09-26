@@ -93,6 +93,23 @@ Public Class VDM_BL
 
     End Enum
 
+    Public Enum Spec
+        Color = 1
+        Capacity = 2
+        Warranty = 3
+        Length = 4
+        Width = 5
+        Height = 6
+        Weight = 7
+        CapacityAccessories = 8
+    End Enum
+
+    Public Enum Category
+        Mobile = 1
+        Tablet = 2
+        Accessories = 3
+    End Enum
+
     Public Enum StockMovementType
         CheckIn = 1
         CheckOut = 2
@@ -363,7 +380,7 @@ Public Class VDM_BL
             Case 2
                 SQL &= " SPEC_NAME_EN SPEC_NAME " & vbLf
             Case 3
-                SQL &= " SPEC_NAME_CH SPEC_NAME " & vbLf
+                SQL &= " SPEC_NAME_CN SPEC_NAME " & vbLf
             Case 4
                 SQL &= " SPEC_NAME_JP SPEC_NAME " & vbLf
             Case 5
@@ -401,7 +418,7 @@ Public Class VDM_BL
 
     Public Function Get_Product_Info_From_ID(ByVal PRODUCT_ID As Integer) As DataTable
         Dim SQL As String = "SELECT * FROM VW_ALL_PRODUCT WHERE PRODUCT_ID=" & PRODUCT_ID
-        Dim DA As New SqlDataAdapter(Sql, ConnectionString)
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)
         Return DT
@@ -970,6 +987,103 @@ Public Class VDM_BL
         DA.Fill(DT)
         Return DT
     End Function
+
+    Public Function GetList_Product_Model(ByVal MODEL As String, Optional ByVal KO_ID As Integer = 0, Optional ByVal PRODUCT_ID As Integer = 0) As DataTable
+        Dim SQL As String = ""
+        SQL &= "  Select * FROM VW_CURRENT_PRODUCT_DETAIL " & vbLf
+        SQL &= "  WHERE MODEL='" & MODEL.ToString() & "' AND KO_ID=" & KO_ID
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT
+    End Function
+
+    Public Function GetList_Product_Spec_Capacity(ByVal MODEL As String, Optional ByVal KO_ID As Integer = 0, Optional ByVal CAT_ID As Integer = 0, Optional ByRef LANGUAGE As Integer = UILanguage.TH) As DataTable
+        Dim SQL As String = ""
+        SQL &= "  SELECT DISTINCT SPEC_ID  "
+        SQL &= "  , dbo.UDF_Clean_Line_ITem(SPEC_NAME_" & Get_Language_Code(LANGUAGE) & ") SPEC_NAME"
+        SQL &= "  , dbo.UDF_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION"
+        Select Case CAT_ID
+            Case Category.Accessories
+                SQL &= " , 'mbps' Unit "
+            Case Else
+                SQL &= " , 'GB' Unit "
+        End Select
+
+        SQL &= "  FROM VW_CURRENT_PRODUCT_SPEC " & vbLf
+        SQL &= "  WHERE KO_ID=" & KO_ID
+        SQL &= "        AND MODEL='" & MODEL & "'" & vbLf
+
+        Select Case CAT_ID
+            Case Category.Accessories
+                SQL &= "        AND SPEC_ID IN (" & Spec.CapacityAccessories & ") "
+            Case Else
+                SQL &= "        AND SPEC_ID IN (" & Spec.Capacity & ") "
+        End Select
+
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT
+    End Function
+
+    Public Function GetList_Product_Spec_Warranty(ByVal PRODUCT_ID As Integer, Optional ByVal KO_ID As Integer = 0, Optional ByRef LANGUAGE As Integer = UILanguage.TH) As DataTable
+        Dim SQL As String = ""
+        SQL &= "  SELECT SEQ ,PRODUCT_ID ,SPEC_ID  "
+        SQL &= "  , dbo.UDF_Clean_Line_ITem(SPEC_NAME_" & Get_Language_Code(LANGUAGE) & ") SPEC_NAME"
+        SQL &= "  , dbo.UDF_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION"
+
+        SQL &= "  FROM VW_CURRENT_PRODUCT_SPEC " & vbLf
+        SQL &= "  WHERE KO_ID=" & KO_ID
+        SQL &= "        AND PRODUCT_ID=" & PRODUCT_ID
+        SQL &= "        AND SPEC_ID IN (" & Spec.Warranty & ") "
+        SQL &= " ORDER BY SEQ "
+
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT
+    End Function
+
+    Public Function GetList_Product_Spec_Color(ByVal MODEL As  String , Optional ByVal KO_ID As Integer = 0, Optional ByRef LANGUAGE As Integer = UILanguage.TH) As DataTable
+        Dim SQL As String = ""
+        SQL &= "  SELECT SEQ ,PRODUCT_ID ,SPEC_ID  "
+        SQL &= "  , dbo.UDF_Clean_Line_ITem(SPEC_NAME_" & Get_Language_Code(LANGUAGE) & ") SPEC_NAME"
+        SQL &= "  , dbo.UDF_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION"
+
+        SQL &= "  FROM VW_CURRENT_PRODUCT_SPEC " & vbLf
+        SQL &= "  WHERE KO_ID=" & KO_ID
+        SQL &= "        AND MODEL='" & MODEL & "'" & vbLf
+        SQL &= "        AND SPEC_ID IN (" & Spec.Color & ") "
+        SQL &= " ORDER BY SEQ "
+
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT
+    End Function
+
+    Public Function GetList_Product_Spec_Other(ByVal PRODUCT_ID As Integer, Optional ByVal KO_ID As Integer = 0, Optional ByRef LANGUAGE As Integer = UILanguage.TH) As DataTable
+        Dim SQL As String = ""
+        SQL &= "  SELECT SEQ  "
+        SQL &= "  , dbo.UDF_Clean_Line_ITem(SPEC_NAME_" & Get_Language_Code(LANGUAGE) & ") SPEC_NAME"
+        SQL &= "  , dbo.UDF_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION"
+
+        SQL &= "  FROM VW_CURRENT_PRODUCT_SPEC " & vbLf
+        SQL &= "  WHERE KO_ID=" & KO_ID
+        SQL &= "        AND PRODUCT_ID=" & PRODUCT_ID
+        SQL &= "        AND SPEC_ID NOT IN (" & Spec.Capacity & "," & Spec.Color & "," & Spec.CapacityAccessories & "," & Spec.Warranty & ") "
+        SQL &= " ORDER BY SEQ "
+
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT
+    End Function
+
+
+
+
 
 #End Region
 

@@ -1,10 +1,10 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" CodeBehind="Device_Product_Detail.aspx.vb" Inherits="VDM.Device_Product_Detail" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Device_Product_Detail.aspx.vb" Inherits="VDM.Device_Product_Detail" %>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-    <title>TRUE</title>
+    <title>Kiosk</title>
     <link href="css/true.css" rel="stylesheet" type="text/css" />
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -29,110 +29,220 @@
     </script>
 </head>
 <body class="bg2">
-    <div class="warp">
-        <header>
-            <img src="images/bg-top.png" />
-        </header>
-        <main>
-            <div class="priceplan">
-                <div class="main3">
-                    <div class="detail-slider">
-                        <div>
-                            <div class="description">
-                                <div class="pic">
-                                    <img src="images/iphonex-white.png" />
-                                </div>
-                                <figure class="col-md-6">
-                                    <div class="topic true-l">
-                                        <h3>
-                                             <span  class="true-l" ><asp:Label ID="lblDISPLAY_NAME" runat="server" Text="iPhone X" style="font-size :78pt;"></asp:Label> </span>
-                                          
-                                        </h3>
-                                         
-                                        <form class="capacity">
+    <form id="form1" runat="server">
+        <div class="warp">
+            <header>
+                <img src="images/bg-top.png" />
+            </header>
+            <main>
+                <div class="priceplan">
+                    <asp:Label ID="lblCode" runat="server" Style="display: none;"></asp:Label>
+                    <div class="main3">
+                        <div class="detail-slider">
 
-                                            <asp:Repeater ID="rptCapacity" runat="server">
-                                                <ItemTemplate>
-                                                    <asp:Button ID="btnCapacity" runat="server" class="button active true-l" CommandName="Capacity" value="64GB" />
-                                                </ItemTemplate>
-                                            </asp:Repeater>
+                            <%--<asp:Repeater ID="rptProductList" runat="server">
+                                <ItemTemplate>--%>
+                                    <div>
+                                        <div class="description">
+                                            <div class="col-md-5">
+                                                <div class="pic" style="padding: unset;">
+                                                    <%-- <img src="images/iphonex-white.png" />    Width="250px"--%>
+                                                    <asp:Image ID="img" runat="server"></asp:Image>
+                                                </div>
 
-                                            <%--<input class="button active true-l" name="sliver64GB" type="button" value="64GB" />
+                                            </div>
+                                            <div class="col-md-7">
+                                                <figure class="col-md-12">
+                                                    <div class="topic true-l">
+                                                        <div>
+                                                            <h3>
+                                                                <span class="true-l">
+                                                                    <asp:Label ID="lblDISPLAY_NAME" runat="server" Text="iPhone X" Style="font-size: 78pt; line-height: 70px;"></asp:Label>
+                                                                </span>
+                                                            </h3>
+                                                        </div>
+                                                        <div class="capacity" style="padding-top: 20px;">
+                                                            <asp:Repeater ID="rptCapacity" runat="server" >
+                                                                <ItemTemplate>
+                                                                   <%-- <asp:Button ID="btnCapacity" runat="server" class="active true-l" CommandName="Capacity" value="64GB" Visible="false" />
+                                                                    --%>
+                                                                    <asp:LinkButton ID="lnkCapacity" runat="server" class="btu true-bs" Text="เลือก"></asp:LinkButton>
+                                                                    
+                                                                </ItemTemplate>
+                                                            </asp:Repeater>
+                                                            <%--<input class="button active true-l" name="sliver64GB" type="button" value="64GB" />
                                             <input class="button true-l" name="sliver128GB" type="button" value="128GB" />--%>
+                                                        </div>
+                                                    </div>
+                                                    <asp:Repeater ID="rptSpec" runat="server">
+                                                        <ItemTemplate>
+                                                            <span class="true-l">
+                                                                <div style="float: left;">
+                                                                    <p class="true-m">
+                                                                        <asp:Label ID="lblSPEC_NAME" runat="server"></asp:Label>
 
-                                        </form>
-                                    </div>
-                                    <asp:Repeater ID="rptSpec" runat="server">
-                                        <ItemTemplate>
-                                             <span class="true-l"><p class="true-m"><asp:Label ID="lblSPEC_NAME" runat ="server" ></asp:Label>:</p><asp:Label ID="lblDESCRIPTION" runat ="server" ></asp:Label></span>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
+                                                                    </p>
+                                                                </div>
+                                                                <div style="float: left;">
+                                                                    :
+                                                                </div>
+                                                                <div style="float: left;">
+                                                                    <asp:Label ID="lblDESCRIPTION" runat="server" Style="float: left;"></asp:Label>
+                                                                </div>
+                                                            </span>
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
 
-                                    <%--<span class="true-l"><p class="true-m">ความสูง:</p>143.6 มม. (5.65 นิ้ว)</span>--%>
-                                     
-                                    <span>
-                                        <p class="bottom true-m"><asp:Label ID="lblSPEC_Warranty" runat ="server" ></asp:Label> &nbsp; <asp:Label ID="lblDESCRIPTION_Warranty" runat ="server" ></asp:Label> </p>
-                                    </span>
-                                    <div class="thumb">
-                                        <asp:Repeater ID="rptColor" runat="server">
-                                            <ItemTemplate>
-                                                 <span><i class="current">
-                                                     <a id="btnBrand" runat ="server" ><asp:Image ID="img" runat="server"  Width="311px"></asp:Image></a></i><p class="true-m"><asp:Label ID="lblColor" runat ="server" ></asp:Label></p>
-                                                </span>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
+                                                    <%--<span class="true-l"><p class="true-m">ความสูง:</p>143.6 มม. (5.65 นิ้ว)</span>--%>
+                                                    <asp:Panel ID="pnlSPEC_Warranty" runat="server">
+                                                        <span>
+                                                            <p class="bottom true-m">
+                                                                <asp:Label ID="lblSPEC_Warranty" runat="server"></asp:Label>
+                                                                &nbsp;
+                                                            <asp:Label ID="lblDESCRIPTION_Warranty" runat="server"></asp:Label>
+                                                            </p>
+                                                        </span>
+                                                    </asp:Panel>
 
-                                       <%-- <span><i class="current">
+                                                    <div class="thumb">
+                                                        <asp:Repeater ID="rptColor" runat="server" >
+                                                            <ItemTemplate>
+                                                                <span><i class="current" style ="padding :20px 30px;">
+                                                                    <asp:LinkButton ID="lnkColor" runat ="server" >
+                                                                        <a id="btnColor" runat="server">
+                                                                            <asp:Image ID="img" runat="server" Style ="height: 70px;width: unset;" ></asp:Image>
+                                                                        </a>
+                                                                    </asp:LinkButton>
+                                                                      </i><p class="true-m">
+                                                                            <asp:Label ID="lblColor" runat="server"></asp:Label>
+                                                                        </p>
+                                                                </span>
+                                                            </ItemTemplate>
+                                                        </asp:Repeater>
+
+                                                        
+     
+
+
+
+                                                        <%-- <span><i class="current">
                                             <img src="images/iphonex-white.png" /></i><p class="true-m">SILVER</p>
                                         </span>
                                         <span><i>
                                             <img src="images/iphonex-black.png" /></i><p class="true-m">SPACEGREY</p>
                                         </span>--%>
+                                                    </div>
+                                                </figure>
+
+                                            </div>
+
+                                        </div>
+                                        <ul class="detail">
+
+                                            <h4 class="true-l">
+                                                <asp:Label ID="lblDescription_Header" runat="server" Text="รายละเอียดสินค้า"></asp:Label></h4>
+                                            <li class="true-l">
+                                                <asp:Label ID="lblDescription_Detail" runat="server"></asp:Label></li>
+                                             
+                                        </ul>
+                                        <div class="list">
+                                            <li class="no-border">
+                                                <h3 class="true-l" style="width: unset; margin-right: 20px;">
+                                                    <asp:Label ID="lblPrice_str" runat="server" Text="ราคา"></asp:Label></h3>
+                                                <h2 class="true-l" style="width: unset;" title="฿">
+                                                    <asp:Label ID="lblPrice_Money" runat="server" Text="39,000"></asp:Label>
+                                                    <span>
+                                                        <asp:Label ID="lblCurrency_Str" runat="server" Text="บาท"></asp:Label></span></h2>
+
+                                                <div class="col-md-12">
+                                                    <asp:LinkButton ID="btnSelect_str" runat="server" class="btu true-bs" Text="เลือก"></asp:LinkButton>
+                                                </div>
+
+                                            </li>
+                                            <br />
+                                            <br />
+                                            <br />
+                                            <br />
+
+
+
+                                        </div>
                                     </div>
-                                </figure>
-                            </div>
-                            <ul class="detail">
-                                <em> </em>
-                                <h4 class="true-l"><asp:Label ID="lblDescription_Header" runat ="server" Text ="รายละเอียดสินค้า" ></asp:Label></h4>
-                                <li class="true-l"><asp:Label ID="lblDescription_Detail" runat ="server" ></asp:Label></li>
-                                <%--<li class="true-l">ดีไซน์แบบกระจกและอะลูมิเนียมทั้งหมด ทนน้ำและฝุ่น2</li>
-                                <li class="true-l">กล้องคู่ความละเอียด 12MP พร้อมระบบ OIS, โหมดภาพถ่ายบุคคล, คุณสมบัติ "การจัดแสงภาพถ่ายบุคคล" และวิดีโอระดับ 4K สูงสุด 60 fps4</li>
-                                <li class="true-l">กล้อง FaceTime HD ความละเอียด 7MP พร้อม Retina Flash เพื่อภาพเซลฟี่ที่สวยงามน่าทึ่ง</li>
-                                <li class="true-l">5 Touch ID เพื่อการยืนยันตัวตนที่ปลอดภัย</li>
-                                <li class="true-l">ชิพ A11 Bionic ที่ทรงพลังและฉลาดที่สุดในสมาร์ทโฟน</li>
-                                <li class="true-l">การชาร์จแบบไร้สายที่ใช้ร่วมกับแท่นชาร์จ Qi ได้1</li>--%>
-                            </ul>
-                            <div class="list">
-                                <li class="no-border">
-                                    <h3 class="true-l"><asp:Label ID="lblPrice_str" runat ="server" Text ="ราคา" ></asp:Label></h3>
-                                    <h2 class="true-l" title="฿"><asp:Label ID="lblPrice_Money" runat ="server" Text ="39,000" ></asp:Label></h2>
-                                    <div class="col-md-12"><a id="clicksetp1" class="btu true-bs" href="#popup1"><asp:Label ID="lblbtnSelect_str" runat ="server" Text ="เลือก" ></asp:Label> </a></div>
-                                </li>
-                                <br />
-                                <br />
-                                <br />
-                                <br />
+                                <%--</ItemTemplate>
+                            </asp:Repeater>--%>
 
 
-
-                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </main>
+            </main>
 
 
-    </div>
-    <footer style="bottom: 0px">
-        <nav>
-            <div class="main">
-                <span class="col-md-6"><a href="home.html">
-                    <img src="images/btu-home.png" /></a></span>
-                <span class="col-md-6"><a href="javascript:history.back();">
-                    <img src="images/btu-prev.png" /></a></span>
-            </div>
-        </nav>
-    </footer>
-    <script type="text/javascript" src="js/slick.js"></script>
+        </div>
+        <footer style="bottom: 0px">
+            <nav>
+                <div class="main">
+                    <span class="col-md-6"><a href="home.html">
+                        <img src="images/btu-home.png" /></a></span>
+                    <span class="col-md-6"><a href="javascript:history.back();">
+                        <img src="images/btu-prev.png" /></a></span>
+                </div>
+            </nav>
+        </footer>
+    </form>
+</body>
+<script type="text/javascript" src="js/slick.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $('.button').click(function () {
+            $(this).addClass("active").siblings().removeClass("active");
+        });
+
+        $('.detail-slider').slick({
+            infinite: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+
+        });
+
+        $("#c-slider1").lightSlider({
+            adaptiveHeight: true,
+            auto: false,
+            item: 3,
+            slideMargin: 10,
+            loop: true,
+            pager: true,
+            galleryMargin: 0,
+            controls: false,
+        });
+
+        $("#c-slider2").lightSlider({
+            adaptiveHeight: true,
+            auto: false,
+            item: 3,
+            slideMargin: 10,
+            loop: true,
+            pager: true,
+            galleryMargin: 0,
+            controls: false,
+        });
+
+        $("#c-slider3").lightSlider({
+            adaptiveHeight: true,
+            auto: false,
+            item: 3,
+            slideMargin: 10,
+            loop: true,
+            pager: true,
+            galleryMargin: 0,
+            controls: false,
+        });
+
+    });
+
+</script>
+
+
 </html>

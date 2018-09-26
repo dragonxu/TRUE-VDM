@@ -13,52 +13,7 @@
             <div class="pic-devices" style="margin-top: unset; padding-top: 100px;">
                 <h3 class="true-l">Devices</h3>
             </div>
-
-           <%-- ลองดึงข้อมูล Product ใส่ ตาราง--%>
-            <asp:Panel ID="pnlTable" runat="server" Visible="false">
-                <div class="frame">
-                    <div class="no-more-tables">
-
-                        <table class="table table-bordered  m-b-0">
-                            <thead>
-                                <tr>
-                                    <th>CODE</th>
-                                    <th>BRAND</th>
-                                    <th>Product</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <asp:Repeater ID="rptList" runat="server">
-                                    <ItemTemplate>
-                                        <tr>
-                                            <td data-title="PRODUCT" align="center">
-                                                <asp:Image ID="img" runat="server" Width="60px"></asp:Image><br />
-                                                <asp:Label ID="lblProductCode" runat="server" Style="display: none"></asp:Label>
-                                                <asp:Image ID="imgBrand" runat="server" Width="60px" Style="display: none" />
-                                                <asp:Label ID="lblDisplayName" runat="server" Style="display: none"></asp:Label>
-                                            </td>
-
-                                            <td data-title="Product">
-                                                <asp:Label ID="lblModel" runat="server"></asp:Label></td>
-
-
-                                            <td data-title="Price (Baht)" style="text-align: right;">
-                                                <asp:Label ID="lblPrice" runat="server"></asp:Label>
-                                                <asp:Button CssClass="btn btn-sm btn-success btn-shadow" ID="btnEdit" runat="server" Text="Edit" CommandName="Edit" Style="display: none" />
-                                            </td>
-
-
-                                        </tr>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                            </tbody>
-                        </table>
-                    </div>
-                    <uc1:PageNavigation ID="Pager" runat="server" PageSize="10" />
-                </div>
-
-            </asp:Panel>
-
+             
 
             <div class="row"></div>
             <ul style="display: unset;">
@@ -66,7 +21,7 @@
                     <ItemTemplate>
                         <li class="col-md-3"><a id="btnBrand" runat="server">
                             <p class="true-m">
-                                <asp:Label ID="lblBrand" runat="server"></asp:Label>
+                                <asp:Label ID="lblProduct" runat="server"></asp:Label>
                             </p>
                             <asp:Image ID="img" runat="server" Width="250px"></asp:Image></a></li>
                         <asp:Button ID="btnSelect" runat="server" Style="display: none;" CommandName="Select" />

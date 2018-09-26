@@ -270,6 +270,8 @@ Public Class Manage_OpenClose_Shift
 
 
     Private Sub UPDATE_DEVICE_Qty()
+        '--รอเพิ่ม PREVIOUS_SHIFT กรณีเปิด Shift ว่าก่อนหน้า อยู่ Shift ไหน
+
         '----เงินทอน
         Dim Change As DataTable = UC_Shift_Change.Current_Data()
         Dim SQL As String = ""
@@ -307,18 +309,18 @@ Public Class Manage_OpenClose_Shift
         SQL = "SELECT * FROM TB_KIOSK_DEVICE "
         SQL &= " WHERE KO_ID=" & KO_ID & " AND D_ID=" & VDM_BL.Device.CoinIn
         DT = New DataTable
-            DA = New SqlDataAdapter(SQL, BL.ConnectionString)
-            DA.Fill(DT)
-            If DT.Rows.Count = 0 Then
-                DR = DT.NewRow
-                DT.Rows.Add(DR)
+        DA = New SqlDataAdapter(SQL, BL.ConnectionString)
+        DA.Fill(DT)
+        If DT.Rows.Count = 0 Then
+            DR = DT.NewRow
+            DT.Rows.Add(DR)
             DR("KO_ID") = KO_ID
             DR("D_ID") = VDM_BL.Device.CoinIn
-            Else
-                DR = DT.Rows(0)
-            End If
-            DR("Current_Qty") = Val(UC_Shift_Recieve.Remain_coin)
-            DR("DT_ID") = VDM_BL.DeviceType.CoinIn
+        Else
+            DR = DT.Rows(0)
+        End If
+        DR("Current_Qty") = Val(UC_Shift_Recieve.Remain_coin)
+        DR("DT_ID") = VDM_BL.DeviceType.CoinIn
         DR("DS_ID") = BL.CheckDevice_Status(KO_ID, VDM_BL.Device.CoinIn)
         DR("Update_Time") = Now
         cmd = New SqlCommandBuilder(DA)

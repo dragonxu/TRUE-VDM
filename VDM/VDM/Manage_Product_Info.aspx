@@ -341,7 +341,7 @@
                                                         <div class="form-group  col-sm-12">
                                                             <label class="col-sm-2 control-label">Description </label>
                                                             <div class="col-sm-10">
-                                                                <asp:TextBox ID="txtDescription_CH" runat="server" TextMode="MultiLine" Rows="10" class="form-control"></asp:TextBox>
+                                                                <asp:TextBox ID="txtDESCRIPTION_CN" runat="server" TextMode="MultiLine" Rows="10" class="form-control"></asp:TextBox>
                                                             </div>
                                                         </div>
                                                     </div>
