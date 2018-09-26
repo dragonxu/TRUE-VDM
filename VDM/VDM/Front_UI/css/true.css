@@ -292,9 +292,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', end
 .priceplan .description .topic h5{width:auto; line-height:38px; margin:0; font-size:42px; font-weight:normal; }
 /* .priceplan .description .topic .capacity{line-height:50px; padding:0 25px; font-size:55px; text-align:center; border-radius:5px; border:2px #47464B solid; display:inline-block; float:left;} */
 .priceplan .description .topic .capacity{display:inline-block; text-align:left;}
-.priceplan .description .topic .capacity input[type="button"]{line-height:50px; padding:0 25px; color:#47464B; font-size:55px; text-align:center; border-radius:5px; border:2px #47464B solid; background:#FFF; display:inline-block;}
-.priceplan .description .topic .capacity input[type="button"].active{color:#FFF; background:#47464B; }
+/*.priceplan .description .topic .capacity input[type="button"]{line-height:50px; padding:0 25px; color:#47464B; font-size:55px; text-align:center; border-radius:5px; border:2px #47464B solid; background:#FFF; display:inline-block;}
+.priceplan .description .topic .capacity input[type="button"].active{color:#FFF; background:#47464B; }*/
 .priceplan .description .topic .capacity p{line-height:50px; padding:0 25px; font-size:55px; text-align:center; border-radius:5px; border:2px #47464B solid; display:inline-block; float:left;}
+.priceplan .description .topic .capacity span{line-height:50px;  font-size:55px; text-align:center;  display:inline-block; float:left;}
+ 
+.priceplan .description .topic .capacity a.btu{line-height:50px; padding:2px 25px; color:#47464B; font-size:55px; text-align:center; border-radius:5px; border:2px #47464B solid; background:#FFF; display:inline-block;}
+.priceplan .description .topic .capacity a.btu .active{color:#FFF; background:#47464B; }
+
+
 .priceplan .description .topic .d-capacity{line-height:25px; padding:0 0 0 15px; font-size:36px; text-align:left; display:inline-block; float:left;}
 .priceplan .description .topic .capacity .color{line-height:50px; padding:0 0 0 15px; font-size:39px; text-align:left; display:inline-block; float:left;}
 .priceplan .description span{width:100%; line-height:30px; padding:0; font-size:36px; display:inline-block;}
@@ -308,13 +314,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', end
 .priceplan .description span.price i{ padding-left:10px; font-style:normal;}
 .priceplan .description span.price i::before{content:attr(title); font-size:40px; position:relative; left:-10px; top:-15px; }
 .priceplan .description .thumb{width:100%; padding:25px 0 0 0; display:inline-block;}
-.priceplan .description .thumb span{width:156px !important; margin:0 2px 0 0; display:inline-block; float:left;}
+.priceplan .description .thumb span{width:130px !important; margin:0 5px 0 0; display:inline-block; float:left;}
 .priceplan .description .thumb span:last-child{margin:0; }
 .priceplan .description .thumb span i{width:100%; padding:20px 0; text-align:center; border:2px solid #D1D1D1; border-radius:7px; display:inline-block;}
 .priceplan .description .thumb span i img{width:40%; margin:auto; text-align:center; }
 .priceplan .description .thumb span i.current{border:1px solid #D80915; }
 .priceplan .description .thumb span p{width:100%; line-height:34px; padding:5px 0 0 0; color:#434748; font-size:30px; text-align:center; display:inline-block;}
-.priceplan .detail{width:100%; padding-left:150px; margin:20px 0 40px 0; color:#000; position:relative; display:inline-block;}
+.priceplan .detail{width:100%; padding-left:60px; margin:20px 0 40px 0; color:#000; position:relative; display:inline-block;}
 .priceplan .detail em{ display:inline-block; position:absolute; left:0; top:0;
 }
 .priceplan .detail h4{width:100%; margin:0; font-size:55px; display:inline-block;}
@@ -540,7 +546,7 @@ background-image:none;
 .priceplan .step-payment h4.margin-re{line-height:50px; margin:0 0 50px 0; color:#424146; font-size:66px; text-align:center; display:inline-block;}
 .priceplan .step-payment h4.margin{margin-top:120px; }
 .priceplan .step-payment h4 i{width:100%; line-height:46px; color:#424146; font-size:46px; font-style:normal; text-align:center; display:inline-block;}
-.priceplan .step-payment .idcard{width:100%; margin:100px 0 60px 0; text-align:center; display:inline-block; }
+.priceplan .step-payment .idcard{width:100%; margin:60px 0 60px 0; text-align:center; display:inline-block; }
 .priceplan .step-payment .idcard img{text-align:center;}
 .priceplan .step-payment .btu-payment{width:100%; margin:120px 0 0 0; display:inline-block; float:left;}
 .priceplan .step-payment .btu-payment .row{margin:0 -7px; }
@@ -602,8 +608,10 @@ background: linear-gradient(to bottom, rgba(204,204,204,1) 0%, rgba(204,204,204,
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cccccc', endColorstr='#ffffff', GradientType=0 );
 }
 .priceplan .step-payment .f-cash h4{width:94%; margin:0 0 15px 0; line-height:55px; color:#424146; font-size:66px; text-align:center; display:inline-block;}
-.priceplan .step-payment .f-cash p{width:70%; line-height:86px; color:#424146; font-size:66px; border-radius:10px; border:1px solid #6B6A72; text-align:center; display:inline-block; position:relative;}
-.priceplan .step-payment .f-cash p::before{content:"฿"; position:absolute; left:30px; font-family: 'true_lightregular' !important; }
+.priceplan .step-payment .f-cash p{width:70%; line-height:86px; color:#424146; font-size:70px; border-radius:10px; border:1px solid #6B6A72; text-align:center; display:inline-block; position:relative;}
+.priceplan .step-payment .f-cash label{ position:absolute; left:30px; font-family: 'true_lightregular' !important; }
+/*.priceplan .step-payment .f-cash p::before{content:"฿"; position:absolute; left:30px; font-family: 'true_lightregular' !important; }*/
+
 .priceplan .step-payment p.time{width:94%; margin:50px 0 0 0; line-height:46px; color:#424146; font-size:46px; text-align:center; display:inline-block;}
 
 .priceplan .step-payment .f-card{width:97%; padding:30px 0; border-radius:15px; background:#FFF; display:inline-block;

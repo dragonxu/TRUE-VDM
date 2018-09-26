@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Device_Product_Detail
+Partial Public Class Device_Shoping_Cart
     
     '''<summary>
     '''form1 control.
@@ -23,24 +23,6 @@ Partial Public Class Device_Product_Detail
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
     
     '''<summary>
-    '''lblCode control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblCode As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''img control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents img As Global.System.Web.UI.WebControls.Image
-    
-    '''<summary>
     '''lblDISPLAY_NAME control.
     '''</summary>
     '''<remarks>
@@ -50,76 +32,67 @@ Partial Public Class Device_Product_Detail
     Protected WithEvents lblDISPLAY_NAME As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''rptCapacity control.
+    '''pnlCapacity control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents rptCapacity As Global.System.Web.UI.WebControls.Repeater
+    Protected WithEvents pnlCapacity As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''rptSpec control.
+    '''lblCapacity control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents rptSpec As Global.System.Web.UI.WebControls.Repeater
+    Protected WithEvents lblCapacity As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''pnlSPEC_Warranty control.
+    '''lblColor control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlSPEC_Warranty As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents lblColor As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblSPEC_Warranty control.
+    '''lblHeader_Package control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblSPEC_Warranty As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblHeader_Package As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblDESCRIPTION_Warranty control.
+    '''lblDetail_Package control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblDESCRIPTION_Warranty As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblDetail_Package As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''rptColor control.
+    '''lblHeader_Promotion control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents rptColor As Global.System.Web.UI.WebControls.Repeater
+    Protected WithEvents lblHeader_Promotion As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblDescription_Header control.
+    '''lblDetail_Promotion control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblDescription_Header As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblDescription_Detail control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblDescription_Detail As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblDetail_Promotion As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''lblPrice_str control.
@@ -149,11 +122,11 @@ Partial Public Class Device_Product_Detail
     Protected WithEvents lblCurrency_Str As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''btnSelect_str control.
+    '''btnConfirm_str control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnSelect_str As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnConfirm_str As Global.System.Web.UI.WebControls.Button
 End Class

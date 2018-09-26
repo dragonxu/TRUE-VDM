@@ -336,7 +336,7 @@ Public Class Manage_Product_Info
 
         'CHINESE
         txtDisplayName_CH.Text = ""
-        txtDescription_CH.Text = ""
+        txtDESCRIPTION_CN.Text = ""
         PRODUCT_Logo_CH = Nothing
 
         'JAPANESE
@@ -519,8 +519,8 @@ Public Class Manage_Product_Info
 
 
                 '==CHINESE==
-                txtDisplayName_CH.Text = DT.Rows(0).Item("DISPLAY_NAME_CH").ToString()
-                txtDescription_CH.Text = DT.Rows(0).Item("DESCRIPTION_CH").ToString()
+                txtDisplayName_CH.Text = DT.Rows(0).Item("DISPLAY_NAME_CN").ToString()
+                txtDESCRIPTION_CN.Text = DT.Rows(0).Item("DESCRIPTION_CN").ToString()
                 PRODUCT_Logo_CH = BL.Get_Product_Picture(PRODUCT_ID, VDM_BL.UILanguage.CN)
                 UC_Product_Spec_CH.BindList(DT_SPEC, VDM_BL.UILanguage.CN)
 
@@ -753,13 +753,13 @@ Public Class Manage_Product_Info
         DR("MODEL") = txtModel.Text
         DR("DISPLAY_NAME_TH") = IIf(txtDisplayName_TH.Text <> "", txtDisplayName_TH.Text, DBNull.Value)
         DR("DISPLAY_NAME_EN") = IIf(txtDisplayName_EN.Text <> "", txtDisplayName_EN.Text, DBNull.Value)
-        DR("DISPLAY_NAME_CH") = IIf(txtDisplayName_CH.Text <> "", txtDisplayName_CH.Text, DBNull.Value)
+        DR("DISPLAY_NAME_CN") = IIf(txtDisplayName_CH.Text <> "", txtDisplayName_CH.Text, DBNull.Value)
         DR("DISPLAY_NAME_JP") = IIf(txtDisplayName_JP.Text <> "", txtDisplayName_JP.Text, DBNull.Value)
         DR("DISPLAY_NAME_KR") = IIf(txtDisplayName_KR.Text <> "", txtDisplayName_KR.Text, DBNull.Value)
         DR("DISPLAY_NAME_RS") = IIf(txtDisplayName_RS.Text <> "", txtDisplayName_RS.Text, DBNull.Value)
         DR("DESCRIPTION_TH") = IIf(txtDescription_TH.Text <> "", txtDescription_TH.Text, DBNull.Value)
         DR("DESCRIPTION_EN") = IIf(txtDescription_EN.Text <> "", txtDescription_EN.Text, DBNull.Value)
-        DR("DESCRIPTION_CH") = IIf(txtDescription_CH.Text <> "", txtDescription_CH.Text, DBNull.Value)
+        DR("DESCRIPTION_CN") = IIf(txtDESCRIPTION_CN.Text <> "", txtDESCRIPTION_CN.Text, DBNull.Value)
         DR("DESCRIPTION_JP") = IIf(txtDescription_JP.Text <> "", txtDescription_JP.Text, DBNull.Value)
         DR("DESCRIPTION_KR") = IIf(txtDescription_KR.Text <> "", txtDescription_KR.Text, DBNull.Value)
         DR("DESCRIPTION_RS") = IIf(txtDescription_RS.Text <> "", txtDescription_RS.Text, DBNull.Value)
@@ -812,7 +812,7 @@ Public Class Manage_Product_Info
                     DR("SPEC_ID") = DT_Spec.Rows(i).Item("SPEC_ID")
                     DR("DESCRIPTION_TH") = IIf(DT_Spec.Rows(i).Item("DESCRIPTION_TH").ToString.Trim <> "", DT_Spec.Rows(i).Item("DESCRIPTION_TH").ToString.Trim, DBNull.Value)
                     DR("DESCRIPTION_EN") = IIf(DT_Spec.Rows(i).Item("DESCRIPTION_EN").ToString.Trim <> "", DT_Spec.Rows(i).Item("DESCRIPTION_EN").ToString.Trim, DBNull.Value)
-                    DR("DESCRIPTION_CH") = IIf(DT_Spec.Rows(i).Item("DESCRIPTION_CH").ToString.Trim <> "", DT_Spec.Rows(i).Item("DESCRIPTION_CH").ToString.Trim, DBNull.Value)
+                    DR("DESCRIPTION_CN") = IIf(DT_Spec.Rows(i).Item("DESCRIPTION_CN").ToString.Trim <> "", DT_Spec.Rows(i).Item("DESCRIPTION_CN").ToString.Trim, DBNull.Value)
                     DR("DESCRIPTION_JP") = IIf(DT_Spec.Rows(i).Item("DESCRIPTION_JP").ToString.Trim <> "", DT_Spec.Rows(i).Item("DESCRIPTION_JP").ToString.Trim, DBNull.Value)
                     DR("DESCRIPTION_KR") = IIf(DT_Spec.Rows(i).Item("DESCRIPTION_KR").ToString.Trim <> "", DT_Spec.Rows(i).Item("DESCRIPTION_KR").ToString.Trim, DBNull.Value)
                     DR("DESCRIPTION_RS") = IIf(DT_Spec.Rows(i).Item("DESCRIPTION_RS").ToString.Trim <> "", DT_Spec.Rows(i).Item("DESCRIPTION_RS").ToString.Trim, DBNull.Value)

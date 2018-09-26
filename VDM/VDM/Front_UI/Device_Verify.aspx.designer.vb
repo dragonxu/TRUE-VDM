@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Device_Product_Detail
+Partial Public Class Device_Verify
     
     '''<summary>
     '''form1 control.
@@ -23,103 +23,13 @@ Partial Public Class Device_Product_Detail
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
     
     '''<summary>
-    '''lblCode control.
+    '''formStep control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblCode As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''img control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents img As Global.System.Web.UI.WebControls.Image
-    
-    '''<summary>
-    '''lblDISPLAY_NAME control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblDISPLAY_NAME As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''rptCapacity control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rptCapacity As Global.System.Web.UI.WebControls.Repeater
-    
-    '''<summary>
-    '''rptSpec control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rptSpec As Global.System.Web.UI.WebControls.Repeater
-    
-    '''<summary>
-    '''pnlSPEC_Warranty control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnlSPEC_Warranty As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
-    '''lblSPEC_Warranty control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblSPEC_Warranty As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblDESCRIPTION_Warranty control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblDESCRIPTION_Warranty As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''rptColor control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rptColor As Global.System.Web.UI.WebControls.Repeater
-    
-    '''<summary>
-    '''lblDescription_Header control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblDescription_Header As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblDescription_Detail control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblDescription_Detail As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents formStep As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''lblPrice_str control.
@@ -149,11 +59,74 @@ Partial Public Class Device_Product_Detail
     Protected WithEvents lblCurrency_Str As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''btnSelect_str control.
+    '''pnlScanIDCard control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnSelect_str As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents pnlScanIDCard As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''UC_Scan_IDCart control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UC_Scan_IDCart As Global.VDM.UC_Scan_IDCart
+    
+    '''<summary>
+    '''pnlFace_Recognition control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlFace_Recognition As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''UC_Scan_Face_Recognition control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UC_Scan_Face_Recognition As Global.VDM.UC_Scan_Face_Recognition
+    
+    '''<summary>
+    '''btnSkip_ScanIDCard control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSkip_ScanIDCard As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''pnlModul_IDCard_Success control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlModul_IDCard_Success As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''btnStart_Take_Photos control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnStart_Take_Photos As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''lnkClose control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkClose As Global.System.Web.UI.WebControls.LinkButton
 End Class

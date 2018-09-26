@@ -358,8 +358,8 @@ Public Class Manage_Sim_Info
                 SIM_DETAIL_Logo_EN = BL.Get_SIM_Detail_Picture(SIM_ID, VDM_BL.UILanguage.EN)
 
                 '==CHINESE==
-                txtDisplayName_CH.Text = DT.Rows(0).Item("DISPLAY_NAME_CH").ToString()
-                txtDescription_CH.Text = DT.Rows(0).Item("DESCRIPTION_CH").ToString()
+                txtDisplayName_CH.Text = DT.Rows(0).Item("DISPLAY_NAME_CN").ToString()
+                txtDESCRIPTION_CN.Text = DT.Rows(0).Item("DESCRIPTION_CN").ToString()
                 SIM_PACKAGE_Logo_CH = BL.Get_SIM_Package_Picture(SIM_ID, VDM_BL.UILanguage.CN)
                 SIM_DETAIL_Logo_CH = BL.Get_SIM_Detail_Picture(SIM_ID, VDM_BL.UILanguage.CN)
 
@@ -418,7 +418,7 @@ Public Class Manage_Sim_Info
 
         'CHINESE
         txtDisplayName_CH.Text = ""
-        txtDescription_CH.Text = ""
+        txtDESCRIPTION_CN.Text = ""
         SIM_PACKAGE_Logo_CH = Nothing
         SIM_DETAIL_Logo_CH = Nothing
 
@@ -683,13 +683,13 @@ Public Class Manage_Sim_Info
         DR("PRODUCT_CODE") = txtCode.Text
         DR("DISPLAY_NAME_TH") = IIf(txtDisplayName_TH.Text <> "", txtDisplayName_TH.Text, DBNull.Value)
         DR("DISPLAY_NAME_EN") = IIf(txtDisplayName_EN.Text <> "", txtDisplayName_EN.Text, DBNull.Value)
-        DR("DISPLAY_NAME_CH") = IIf(txtDisplayName_CH.Text <> "", txtDisplayName_CH.Text, DBNull.Value)
+        DR("DISPLAY_NAME_CN") = IIf(txtDisplayName_CH.Text <> "", txtDisplayName_CH.Text, DBNull.Value)
         DR("DISPLAY_NAME_JP") = IIf(txtDisplayName_JP.Text <> "", txtDisplayName_JP.Text, DBNull.Value)
         DR("DISPLAY_NAME_KR") = IIf(txtDisplayName_KR.Text <> "", txtDisplayName_KR.Text, DBNull.Value)
         DR("DISPLAY_NAME_RS") = IIf(txtDisplayName_RS.Text <> "", txtDisplayName_RS.Text, DBNull.Value)
         DR("DESCRIPTION_TH") = IIf(txtDescription_TH.Text <> "", txtDescription_TH.Text, DBNull.Value)
         DR("DESCRIPTION_EN") = IIf(txtDescription_EN.Text <> "", txtDescription_EN.Text, DBNull.Value)
-        DR("DESCRIPTION_CH") = IIf(txtDescription_CH.Text <> "", txtDescription_CH.Text, DBNull.Value)
+        DR("DESCRIPTION_CN") = IIf(txtDESCRIPTION_CN.Text <> "", txtDESCRIPTION_CN.Text, DBNull.Value)
         DR("DESCRIPTION_JP") = IIf(txtDescription_JP.Text <> "", txtDescription_JP.Text, DBNull.Value)
         DR("DESCRIPTION_KR") = IIf(txtDescription_KR.Text <> "", txtDescription_KR.Text, DBNull.Value)
         DR("DESCRIPTION_RS") = IIf(txtDescription_RS.Text <> "", txtDescription_RS.Text, DBNull.Value)

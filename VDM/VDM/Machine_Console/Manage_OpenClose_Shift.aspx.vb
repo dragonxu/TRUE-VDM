@@ -275,6 +275,8 @@ Public Class Manage_OpenClose_Shift
 
 
     Private Sub UPDATE_DEVICE_Qty()
+        '--รอเพิ่ม PREVIOUS_SHIFT กรณีเปิด Shift ว่าก่อนหน้า อยู่ Shift ไหน
+
         '----เงินทอน
         Dim Change As DataTable = UC_Shift_Change.Current_Data()
         Dim SQL As String = ""

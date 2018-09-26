@@ -56,7 +56,7 @@ Public Class UC_Product_Spec
 
         Dim txtDescription_TH As TextBox = e.Item.FindControl("txtDescription_TH")
         Dim txtDescription_EN As TextBox = e.Item.FindControl("txtDescription_EN")
-        Dim txtDescription_CH As TextBox = e.Item.FindControl("txtDescription_CH")
+        Dim txtDESCRIPTION_CN As TextBox = e.Item.FindControl("txtDESCRIPTION_CN")
         Dim txtDescription_JP As TextBox = e.Item.FindControl("txtDescription_JP")
         Dim txtDescription_KR As TextBox = e.Item.FindControl("txtDescription_KR")
         Dim txtDescription_RS As TextBox = e.Item.FindControl("txtDescription_RS")
@@ -84,7 +84,7 @@ Public Class UC_Product_Spec
 
         txtDescription_TH.Text = e.Item.DataItem("DESCRIPTION_TH").ToString
         txtDescription_EN.Text = e.Item.DataItem("DESCRIPTION_EN").ToString
-        txtDescription_CH.Text = e.Item.DataItem("DESCRIPTION_CH").ToString
+        txtDESCRIPTION_CN.Text = e.Item.DataItem("DESCRIPTION_CN").ToString
         txtDescription_JP.Text = e.Item.DataItem("DESCRIPTION_JP").ToString
         txtDescription_KR.Text = e.Item.DataItem("DESCRIPTION_KR").ToString
         txtDescription_RS.Text = e.Item.DataItem("DESCRIPTION_RS").ToString
@@ -97,7 +97,7 @@ Public Class UC_Product_Spec
         ddlSpec_RS.Visible = False
         txtDescription_TH.Visible = False
         txtDescription_EN.Visible = False
-        txtDescription_CH.Visible = False
+        txtDESCRIPTION_CN.Visible = False
         txtDescription_JP.Visible = False
         txtDescription_KR.Visible = False
         txtDescription_RS.Visible = False
@@ -113,7 +113,7 @@ Public Class UC_Product_Spec
 
             Case VDM_BL.UILanguage.CN
                 ddlSpec_CH.Visible = True
-                txtDescription_CH.Visible = True
+                txtDESCRIPTION_CN.Visible = True
 
             Case VDM_BL.UILanguage.JP
                 ddlSpec_JP.Visible = True
@@ -203,7 +203,7 @@ Public Class UC_Product_Spec
 
         DT.Columns.Add("DESCRIPTION_TH")
         DT.Columns.Add("DESCRIPTION_EN")
-        DT.Columns.Add("DESCRIPTION_CH")
+        DT.Columns.Add("DESCRIPTION_CN")
         DT.Columns.Add("DESCRIPTION_JP")
         DT.Columns.Add("DESCRIPTION_KR")
         DT.Columns.Add("DESCRIPTION_RS")
@@ -222,7 +222,7 @@ Public Class UC_Product_Spec
 
             Dim txtDescription_TH As TextBox = rpt.FindControl("txtDescription_TH")
             Dim txtDescription_EN As TextBox = rpt.FindControl("txtDescription_EN")
-            Dim txtDescription_CH As TextBox = rpt.FindControl("txtDescription_CH")
+            Dim txtDESCRIPTION_CN As TextBox = rpt.FindControl("txtDESCRIPTION_CN")
             Dim txtDescription_JP As TextBox = rpt.FindControl("txtDescription_JP")
             Dim txtDescription_KR As TextBox = rpt.FindControl("txtDescription_KR")
             Dim txtDescription_RS As TextBox = rpt.FindControl("txtDescription_RS")
@@ -240,7 +240,7 @@ Public Class UC_Product_Spec
             DR("SEQ") = rpt.ItemIndex + 1
             DR("DESCRIPTION_TH") = txtDescription_TH.Text
             DR("DESCRIPTION_EN") = txtDescription_EN.Text
-            DR("DESCRIPTION_CH") = txtDescription_CH.Text
+            DR("DESCRIPTION_CN") = txtDESCRIPTION_CN.Text
             DR("DESCRIPTION_JP") = txtDescription_JP.Text
             DR("DESCRIPTION_KR") = txtDescription_KR.Text
             DR("DESCRIPTION_RS") = txtDescription_RS.Text
@@ -268,7 +268,7 @@ Public Class UC_Product_Spec
 
         Dim txtDescription_TH As TextBox = DirectCast(rpt.FindControl("txtDescription_TH"), TextBox)
         Dim txtDescription_EN As TextBox = DirectCast(rpt.FindControl("txtDescription_EN"), TextBox)
-        Dim txtDescription_CH As TextBox = DirectCast(rpt.FindControl("txtDescription_CH"), TextBox)
+        Dim txtDESCRIPTION_CN As TextBox = DirectCast(rpt.FindControl("txtDESCRIPTION_CN"), TextBox)
         Dim txtDescription_JP As TextBox = DirectCast(rpt.FindControl("txtDescription_JP"), TextBox)
         Dim txtDescription_KR As TextBox = DirectCast(rpt.FindControl("txtDescription_KR"), TextBox)
         Dim txtDescription_RS As TextBox = DirectCast(rpt.FindControl("txtDescription_RS"), TextBox)
@@ -292,7 +292,7 @@ Public Class UC_Product_Spec
 
                     ModuleGlobal.ImplementJavaNumericText(txtDescription_TH)
                     ModuleGlobal.ImplementJavaNumericText(txtDescription_EN)
-                    ModuleGlobal.ImplementJavaNumericText(txtDescription_CH)
+                    ModuleGlobal.ImplementJavaNumericText(txtDESCRIPTION_CN)
                     ModuleGlobal.ImplementJavaNumericText(txtDescription_JP)
                     ModuleGlobal.ImplementJavaNumericText(txtDescription_KR)
                     ModuleGlobal.ImplementJavaNumericText(txtDescription_RS)
@@ -345,7 +345,7 @@ Public Class UC_Product_Spec
 
         Dim txtDescription_TH As TextBox = DirectCast(rpt.FindControl("txtDescription_TH"), TextBox)
         Dim txtDescription_EN As TextBox = DirectCast(rpt.FindControl("txtDescription_EN"), TextBox)
-        Dim txtDescription_CH As TextBox = DirectCast(rpt.FindControl("txtDescription_CH"), TextBox)
+        Dim txtDESCRIPTION_CN As TextBox = DirectCast(rpt.FindControl("txtDESCRIPTION_CN"), TextBox)
         Dim txtDescription_JP As TextBox = DirectCast(rpt.FindControl("txtDescription_JP"), TextBox)
         Dim txtDescription_KR As TextBox = DirectCast(rpt.FindControl("txtDescription_KR"), TextBox)
         Dim txtDescription_RS As TextBox = DirectCast(rpt.FindControl("txtDescription_RS"), TextBox)
@@ -359,7 +359,7 @@ Public Class UC_Product_Spec
             If DT.Rows.Count > 0 Then
                 txtDescription_TH.Text = txtDescription.Text
                 txtDescription_EN.Text = txtDescription.Text
-                txtDescription_CH.Text = txtDescription.Text
+                txtDESCRIPTION_CN.Text = txtDescription.Text
                 txtDescription_JP.Text = txtDescription.Text
                 txtDescription_KR.Text = txtDescription.Text
                 txtDescription_RS.Text = txtDescription.Text
@@ -444,7 +444,7 @@ Public Class UC_Product_Spec
         End If
         DR("SPEC_NAME_TH") = txtSpec_THAI.Text
         DR("SPEC_NAME_EN") = txtSpec_ENGLISH.Text
-        DR("SPEC_NAME_CH") = txtSpec_CHINESE.Text
+        DR("SPEC_NAME_CN") = txtSpec_CHINESE.Text
         DR("SPEC_NAME_JP") = txtSpec_JAPANESE.Text
         DR("SPEC_NAME_KR") = txtSpec_KOREAN.Text
         DR("SPEC_NAME_RS") = txtSpec_RUSSIAN.Text

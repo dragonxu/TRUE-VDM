@@ -23,33 +23,6 @@ Partial Public Class Product_List
     Protected WithEvents lblBrand_ID As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''pnlTable control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnlTable As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
-    '''rptList control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rptList As Global.System.Web.UI.WebControls.Repeater
-    
-    '''<summary>
-    '''Pager control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Pager As Global.VDM.PageNavigation
-    
-    '''<summary>
     '''rptBox control.
     '''</summary>
     '''<remarks>
