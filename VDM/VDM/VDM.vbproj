@@ -502,6 +502,9 @@
     <Content Include="Machine_Console\UC_Shift_Change.ascx" />
     <Content Include="Machine_Console\UC_Shift_Recieve.ascx" />
     <Content Include="Machine_Console\UC_Shift_StockPaper.ascx" />
+    <Content Include="Machine_Console\UC_SIM.ascx" />
+    <Content Include="Machine_Console\UC_SIM_Dispenser.ascx" />
+    <Content Include="Machine_Console\UC_SIM_Slot.ascx" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="SignIn.aspx" />
     <Content Include="Machine_Console\Login.aspx" />
@@ -583,6 +586,7 @@
     <Content Include="Styles\font-awesome.css" />
     <Content Include="Styles\jquery.dataTables.min.css" />
     <Content Include="Styles\product_shelf.css" />
+    <Content Include="Styles\sim.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="Styles\sli.css" />
     <Content Include="Styles\webfont.css" />
@@ -710,6 +714,27 @@
     </Compile>
     <Compile Include="Machine_Console\UC_Shift_StockPaper.ascx.vb">
       <DependentUpon>UC_Shift_StockPaper.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Machine_Console\UC_SIM.ascx.designer.vb">
+      <DependentUpon>UC_SIM.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Machine_Console\UC_SIM.ascx.vb">
+      <DependentUpon>UC_SIM.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Machine_Console\UC_SIM_Dispenser.ascx.designer.vb">
+      <DependentUpon>UC_SIM_Dispenser.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Machine_Console\UC_SIM_Dispenser.ascx.vb">
+      <DependentUpon>UC_SIM_Dispenser.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Machine_Console\UC_SIM_Slot.ascx.designer.vb">
+      <DependentUpon>UC_SIM_Slot.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Machine_Console\UC_SIM_Slot.ascx.vb">
+      <DependentUpon>UC_SIM_Slot.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SignIn.aspx.designer.vb">

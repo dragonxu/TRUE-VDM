@@ -14,11 +14,11 @@ Option Explicit On
 Partial Public Class TestSIM
     
     '''<summary>
-    '''UC_SIM_Dispenser control.
+    '''Dispenser control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UC_SIM_Dispenser As Global.VDM.UC_SIM_Dispenser
+    Protected WithEvents Dispenser As Global.VDM.UC_SIM_Dispenser
 End Class

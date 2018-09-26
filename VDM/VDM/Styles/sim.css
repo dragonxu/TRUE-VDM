@@ -28,7 +28,8 @@
 
 .sim_quantity_pointer {
     position:absolute; 
-            
-    right:-70px; 
-    width:80px;
+    font-weight:bold;
+    right: -82px;
+    width: 80px;
+    text-align:left;
 }

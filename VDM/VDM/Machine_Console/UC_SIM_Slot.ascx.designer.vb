@@ -14,13 +14,13 @@ Option Explicit On
 Partial Public Class UC_SIM_Slot
     
     '''<summary>
-    '''pnlContainer control.
+    '''aContainer control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlContainer As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents aContainer As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''lblID control.
@@ -30,6 +30,15 @@ Partial Public Class UC_SIM_Slot
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblID As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblMaxQuantity control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblMaxQuantity As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''pnlSlot control.
