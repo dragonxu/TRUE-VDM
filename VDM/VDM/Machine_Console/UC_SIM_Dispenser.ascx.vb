@@ -27,6 +27,12 @@
         End Set
     End Property
 
+    Public ReadOnly Property SLOT_CAPACITY As Integer
+        Get
+            Return lblProperty.Attributes("SLOT_CAPACITY")
+        End Get
+    End Property
+
     Public ReadOnly Property Slots As List(Of UC_SIM_Slot)
         Get
             Dim Result As New List(Of UC_SIM_Slot)

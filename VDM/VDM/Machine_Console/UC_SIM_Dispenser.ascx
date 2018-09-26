@@ -7,5 +7,5 @@
                 <uc1:UC_SIM_Slot runat="server" id="Slot" OnSelecting="Slot_Selecting" />
         </ItemTemplate>
     </asp:Repeater>
-    <asp:Label ID="lblProperty" runat="server" SIM_Height="2" KO_ID="0"></asp:Label>
+    <asp:Label ID="lblProperty" runat="server" SIM_Height="2" KO_ID="0" SLOT_CAPACITY="150"></asp:Label>
 </div>
