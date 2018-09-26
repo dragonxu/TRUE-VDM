@@ -1,0 +1,6 @@
+E:\GitHub\Repository\peripheral\Peripheral\Peripheral\bin\Debug\Peripheral.dll
+E:\GitHub\Repository\peripheral\Peripheral\Peripheral\bin\Debug\Peripheral.pdb
+E:\GitHub\Repository\peripheral\Peripheral\Peripheral\obj\Debug\Peripheral.csprojAssemblyReference.cache
+E:\GitHub\Repository\peripheral\Peripheral\Peripheral\obj\Debug\Peripheral.csproj.CoreCompileInputs.cache
+E:\GitHub\Repository\peripheral\Peripheral\Peripheral\obj\Debug\Peripheral.dll
+E:\GitHub\Repository\peripheral\Peripheral\Peripheral\obj\Debug\Peripheral.pdb

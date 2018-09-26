@@ -2,28 +2,53 @@
 Imports System.Data.SqlClient
 Imports VDM
 
-Public Class TestScan
-    Inherits System.Web.UI.Page
+Public Class UC_Product_Stock
+    Inherits System.Web.UI.UserControl
 
     Dim BL As New VDM_BL
 
     Public Property KO_ID As Integer
         Get
-            Return pnlScanProduct.Attributes("KO_ID")
+            Return pnlZoom.Attributes("KO_ID")
         End Get
         Set(value As Integer)
-            pnlScanProduct.Attributes("KO_ID") = value
+            pnlZoom.Attributes("KO_ID") = value
         End Set
     End Property
 
     Public Property SHOP_CODE As String
         Get
-            Return pnlScanProduct.Attributes("SHOP_CODE")
+            Return pnlZoom.Attributes("SHOP_CODE")
         End Get
         Set(value As String)
-            pnlScanProduct.Attributes("SHOP_CODE") = value
+            pnlZoom.Attributes("SHOP_CODE") = value
         End Set
     End Property
+
+    Public Property SHIFT_ID As Integer
+        Get
+            Return pnlZoom.Attributes("SHIFT_ID")
+        End Get
+        Set(value As Integer)
+            pnlZoom.Attributes("SHIFT_ID") = value
+        End Set
+    End Property
+
+    Public Property SHIFT_STATUS As VDM_BL.ShiftStatus
+        Get
+            Return pnlZoom.Attributes("SHIFT_STATUS")
+        End Get
+        Set(value As VDM_BL.ShiftStatus)
+            pnlZoom.Attributes("SHIFT_STATUS") = value
+        End Set
+    End Property
+
+    Public ReadOnly Property Product_Shelf As UC_Product_Shelf
+        Get
+            Return Shelf
+        End Get
+    End Property
+
 
     Public ReadOnly Property VW_ALL_PRODUCT As DataTable
         Get
@@ -49,10 +74,10 @@ Public Class TestScan
 
     Private ReadOnly Property MY_UNIQUE_ID() As String
         Get
-            If pnlScanProduct.Attributes("MY_UNIQUE_ID") = "" Then
-                pnlScanProduct.Attributes("MY_UNIQUE_ID") = GenerateNewUniqueID() '---- Needed ---------
+            If pnlZoom.Attributes("MY_UNIQUE_ID") = "" Then
+                pnlZoom.Attributes("MY_UNIQUE_ID") = GenerateNewUniqueID() '---- Needed ---------
             End If
-            Return pnlScanProduct.Attributes("MY_UNIQUE_ID")
+            Return pnlZoom.Attributes("MY_UNIQUE_ID")
         End Get
     End Property
 
@@ -77,8 +102,6 @@ Public Class TestScan
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Not IsPostBack Then
-            Session("USER_ID") = 1 '--------------- For Test ---------------
-            KO_ID = 1 '--------------- For Test ---------------
             BindData()
         Else
             initFormPlugin()
@@ -88,14 +111,16 @@ Public Class TestScan
 
     Public Sub BindData()
         'MY_UNIQUE_ID = GenerateNewUniqueID()
-        pnlScanProduct.Attributes("MY_UNIQUE_ID") = GenerateNewUniqueID()
-        BindShelfLayout()
+        pnlZoom.Attributes("MY_UNIQUE_ID") = GenerateNewUniqueID()
+
         SCAN_PRODUCT_ID = -1
         BindScanProduct()
         '-------- Left Side -------
+        BindShelfLayout()
         ResetProductSlot()
         BindShelfProduct()
     End Sub
+
 
 #Region "CheckButton"
 
@@ -135,19 +160,16 @@ Public Class TestScan
     End Sub
 
     Private Sub BindShelfLayout() '------------ เรียกครั้งแรกครั้งเดียว ---------------
+        BL.Bind_Product_Shelf_Layout(Shelf, KO_ID)
+        ConfigShelfLayout()
+    End Sub
 
-        BL.Bind_Product_Shelf(Shelf, KO_ID)
-
+    Private Sub ConfigShelfLayout()
         '-------------- Configure ------------
         Shelf.ShowAddFloor = False
         Shelf.ShowEditShelf = False
         Shelf.HideFloorName()
         Shelf.HideFloorMenu()
-
-        ConfigShelfLayout()
-    End Sub
-
-    Private Sub ConfigShelfLayout()
         '------------ Hide All Scale----------
         For i As Integer = 0 To Shelf.Slots.Count - 1
             With Shelf.Slots(i)
@@ -281,47 +303,9 @@ Public Class TestScan
     Private Sub BindShelfProduct()
 
         Dim DT As DataTable = STOCK_DATA.Copy
-        Dim Slots As List(Of UC_Product_Slot) = Shelf.Slots
-        For i As Integer = 0 To Shelf.Slots.Count - 1
-            DT.DefaultView.RowFilter = "CURRENT='" & Slots(i).SLOT_NAME & "'"
-            If DT.DefaultView.Count = 0 Then
-                Slots(i).PRODUCT_ID = 0
-                Slots(i).PRODUCT_CODE = ""
-                Slots(i).PRODUCT_QUANTITY = 0
-                Slots(i).ShowQuantity = False
-                Slots(i).ShowMask = True
-                Slots(i).MaskContent = "<b class='text-default'>EMPTY</b>"
-            Else
-                Slots(i).PRODUCT_ID = DT.DefaultView(0).Item("PRODUCT_ID")
-                Slots(i).PRODUCT_CODE = DT.DefaultView(0).Item("PRODUCT_CODE")
-                Slots(i).PRODUCT_QUANTITY = DT.DefaultView.Count
-                '----------- Calculate Percent -------------
-                VW_ALL_PRODUCT.DefaultView.RowFilter = "PRODUCT_ID=" & Slots(i).PRODUCT_ID
-                Dim DV As DataRowView = VW_ALL_PRODUCT.DefaultView(0)
+        DT.Columns("CURRENT").ColumnName = "SLOT_NAME"
+        BL.Bind_Product_Shelf_Stock(Shelf, DT, VW_ALL_PRODUCT)
 
-                If Not IsDBNull(DV("DEPTH")) AndAlso DV("DEPTH") > 0 Then
-                    Dim MaxQuantity As Integer = Math.Floor(Shelf.SHELF_DEPTH / DV("DEPTH"))
-                    Dim Percent As Integer = Math.Floor((Slots(i).PRODUCT_QUANTITY * 100) / MaxQuantity)
-                    Slots(i).PRODUCT_LEVEL_PERCENT = Percent & "%"
-                    If Percent <= BL.Product_Critical_Percent Then
-                        Slots(i).PRODUCT_LEVEL_COLOR = Drawing.Color.Red
-                    Else
-                        Slots(i).PRODUCT_LEVEL_COLOR = Drawing.Color.Green
-                    End If
-                    Slots(i).ShowQuantity = True
-                    Slots(i).ShowMask = False
-                    Slots(i).MaskContent = ""
-                Else
-                    Slots(i).ShowProductCode = True
-                    Slots(i).ShowQuantity = False
-                    Slots(i).ShowMask = True
-                    Slots(i).MaskContent = "<small class='text-warning'>Product dimension is not set</small>"
-                End If
-
-
-
-            End If
-        Next
     End Sub
 
     Private Property SLOT_PRODUCT_ID As Integer
@@ -892,7 +876,7 @@ Public Class TestScan
                     Dim cmd As New SqlCommandBuilder(DA)
                     DA.Update(DT)
                     '------------------ Keep Log ---------------
-                    BL.Save_Product_Movement_Log(PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.ChangeSlot, DR("RECENT"), DR("CURRENT"), "ย้าย Slot จาก " & DR("CURRENT") & " ไปยัง " & DR("CURRENT"), Session("USER_ID"), Now)
+                    BL.Save_Product_Movement_Log(SHIFT_ID, SHIFT_STATUS, PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.ChangeSlot, DR("RECENT"), SLOT_FROM, DR("CURRENT"), SLOT_TO, "ย้าย Slot จาก " & DR("CURRENT") & " ไปยัง " & DR("CURRENT"), Session("USER_ID"), Now)
                 End If
 
             ElseIf Not IsDBNull(DR("RECENT")) And IsDBNull(DR("CURRENT")) Then
@@ -908,7 +892,7 @@ Public Class TestScan
                     Dim cmd As New SqlCommandBuilder(DA)
                     DA.Update(DT)
                     '------------------ Keep Log ---------------
-                    BL.Save_Product_Movement_Log(PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.CheckOut, DR("RECENT"), "Stores หลัก", "ย้ายออกจาก " & KO_Code & " ช่อง " & DR("RECENT") & " ไปยัง Store หลัก", Session("USER_ID"), Now)
+                    BL.Save_Product_Movement_Log(SHIFT_ID, SHIFT_STATUS, PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.CheckOut, DR("RECENT"), SLOT_FROM, "Stores หลัก", 0, "ย้ายออกจาก " & KO_Code & " ช่อง " & DR("RECENT") & " ไปยัง Store หลัก", Session("USER_ID"), Now)
                 End If
 
             ElseIf IsDBNull(DR("RECENT")) And Not IsDBNull(DR("CURRENT")) Then
@@ -928,35 +912,19 @@ Public Class TestScan
                 Dim cmd As New SqlCommandBuilder(DA)
                 DA.Update(DT)
                 '------------------ Keep Log ---------------
-                BL.Save_Product_Movement_Log(PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.CheckIn, "Stores หลัก", DR("CURRENT"), "สแกนของเข้าตู้ช่อง " & DR("CURRENT"), Session("USER_ID"), Now)
+                BL.Save_Product_Movement_Log(SHIFT_ID, SHIFT_STATUS, PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.CheckIn, "Stores หลัก", 0, DR("CURRENT"), SLOT_TO, "สแกนของเข้าตู้ช่อง " & DR("CURRENT"), Session("USER_ID"), Now)
 
             Else 'If IsDBNull(DR("RECENT")) And IsDBNull(DR("CURRENT")) Then
                 '----------- Do Nothing / Scan But Unmanaged---------------
 
                 '------------------ Keep Log ---------------
-                BL.Save_Product_Movement_Log(PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.CheckIn, "Stores หลัก", KO_Code, "สแกนของแต่ไม่เอาเข้าตู้", Session("USER_ID"), Now)
+                BL.Save_Product_Movement_Log(SHIFT_ID, SHIFT_STATUS, PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.CheckIn, "Stores หลัก", 0, KO_Code, 0, "สแกนของแต่ไม่เอาเข้าตู้", Session("USER_ID"), Now)
             End If
         Next
 
         BindData()
         Return True
     End Function
-
-
-    Private Sub btnReset_Click(sender As Object, e As EventArgs) Handles btnReset.Click
-        BindData()
-    End Sub
-
-    Public Event Confirm(ByVal Sender As Object)
-    Private Sub btnConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
-        RaiseEvent Confirm(Me)
-    End Sub
-
-    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        Save()
-    End Sub
-
-
 
 #End Region
 

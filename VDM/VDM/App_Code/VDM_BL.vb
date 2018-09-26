@@ -118,8 +118,10 @@ Public Class VDM_BL
     End Enum
 
     Public Enum ShiftStatus
+        OnGoing = -1
         Close = 0
         Open = 1
+        Unknown = 99
     End Enum
 
 
@@ -545,20 +547,25 @@ Public Class VDM_BL
         End If
     End Function
 
-    Public Sub Save_Product_Movement_Log(ByVal PRODUCT_ID As Integer, ByVal SERIAL_NO As String, ByVal MOVE_ID As StockMovementType, ByVal MOVE_FROM As String, ByVal MOVE_TO As String, ByVal REMARK As String, ByVal MOVE_BY As Integer, ByVal MOVE_TIME As DateTime)
+    Public Sub Save_Product_Movement_Log(ByVal SHIFT_ID As Integer, ByVal SHIFT_STATUS As ShiftStatus, ByVal PRODUCT_ID As Integer, ByVal SERIAL_NO As String, ByVal MOVE_ID As StockMovementType, ByVal MOVE_FROM As String, ByVal MOVE_FROM_SLOT As Integer, ByVal MOVE_TO As String, ByVal MOVE_TO_SLOT As Integer, ByVal REMARK As String, ByVal MOVE_BY As Integer, ByVal MOVE_TIME As DateTime)
         Dim SQL As String = "Select TOP 0 * FROM TB_PRODUCT_MOVEMENT"
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, LogConnectionString)
         DA.Fill(DT)
         Dim DR As DataRow = DT.NewRow
 
-
         DR("HIS_ID") = GetNewPrimaryLogID("TB_PRODUCT_MOVEMENT", "HIS_ID")
+
+        If SHIFT_ID <> 0 Then DR("SHIFT_ID") = SHIFT_ID
+        If SHIFT_STATUS <> ShiftStatus.Unknown Then DR("SHIFT_STATUS") = SHIFT_STATUS
+
         DR("PRODUCT_ID") = PRODUCT_ID
         DR("SERIAL_NO") = SERIAL_NO
         DR("MOVE_ID") = MOVE_ID
         DR("MOVE_FROM") = MOVE_FROM
+        If MOVE_FROM_SLOT <> 0 Then DR("MOVE_FROM_SLOT") = MOVE_FROM_SLOT
         DR("MOVE_TO") = MOVE_TO
+        If MOVE_TO_SLOT <> 0 Then DR("MOVE_TO_SLOT") = MOVE_TO_SLOT
         DR("REMARK") = REMARK
         DR("MOVE_BY") = MOVE_BY
         DR("MOVE_TIME") = MOVE_TIME
@@ -580,7 +587,7 @@ Public Class VDM_BL
 
 #Region "Kiosk Management"
 
-    Public Sub Bind_Product_Shelf(ByRef Shelf As UC_Product_Shelf, ByVal KO_ID As Integer)
+    Public Sub Bind_Product_Shelf_Layout(ByRef Shelf As UC_Product_Shelf, ByVal KO_ID As Integer)
 
         Shelf.ResetDimension()
         Shelf.ClearAllFloor()
@@ -627,18 +634,75 @@ Public Class VDM_BL
                 Dim POS_X As Integer = ST.Rows(s).Item("POS_X")
                 Dim SLOT_WIDTH As Integer = ST.Rows(s).Item("WIDTH")
                 Floor.AddSlot(SLOT_ID, Chr(Asc("A") + f) & "-" & s + 1, POS_X, SLOT_WIDTH, 0, "", 0, "", Drawing.Color.White, Drawing.Color.White, False)
-                Dim Slot As UC_Product_Slot = Floor.Slots(s)
-                '------------------- Bind Product----------------
-                'Slot.PRODUCT_ID = xxxxxxxxxxxxx
-                'Slot.PRODUCT_CODE = xxxxxxxxxxxxxxx
-                'Slot.PRODUCT_QUANTITY = xxxxxxxxxxxxxxxxx
-                'Slot.PRODUCT_LEVEL_PERCENT = xxxxxxxxxxxxxxxxxx
-                'Slot.PRODUCT_LEVEL_COLOR = xxxxxxxxxxxxxxxxxx
-                'Slot.QUANTITY_BAR_COLOR = xxxxxxxxxxxxxxxx
             Next
 
         Next
     End Sub
+
+    Public Sub Bind_Product_Shelf_Stock(ByRef Shelf As UC_Product_Shelf, ByVal KO_ID As Integer)
+        Dim SQL As String = "SELECT PRODUCT_ID,PRODUCT_CODE,PRODUCT_NAME,SERIAL_NO,SLOT_NAME" & vbLf
+        SQL &= "FROM VW_CURRENT_PRODUCT_STOCK" & vbLf
+        SQL &= "WHERE KO_ID=" & KO_ID
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Bind_Product_Shelf_Stock(Shelf, DT)
+    End Sub
+
+
+    Public Sub Bind_Product_Shelf_Stock(ByRef Shelf As UC_Product_Shelf, ByVal STOCK_DATA As DataTable, Optional ByVal VW_ALL_PRODUCT As DataTable = Nothing)
+
+        If IsNothing(VW_ALL_PRODUCT) Then
+            Dim SQL As String = "SELECT * FROM VW_ALL_PRODUCT"
+            Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+            VW_ALL_PRODUCT = New DataTable
+            DA.Fill(VW_ALL_PRODUCT)
+        End If
+
+
+        Dim DT As DataTable = STOCK_DATA.Copy
+        Dim Slots As List(Of UC_Product_Slot) = Shelf.Slots
+        For i As Integer = 0 To Shelf.Slots.Count - 1
+            DT.DefaultView.RowFilter = "SLOT_NAME='" & Slots(i).SLOT_NAME & "'"
+            If DT.DefaultView.Count = 0 Then
+                Slots(i).PRODUCT_ID = 0
+                Slots(i).PRODUCT_CODE = ""
+                Slots(i).PRODUCT_QUANTITY = 0
+                Slots(i).ShowQuantity = False
+                Slots(i).ShowMask = True
+                Slots(i).MaskContent = "<b class='text-default'>EMPTY</b>"
+            Else
+                Slots(i).PRODUCT_ID = DT.DefaultView(0).Item("PRODUCT_ID")
+                Slots(i).PRODUCT_CODE = DT.DefaultView(0).Item("PRODUCT_CODE")
+                Slots(i).PRODUCT_QUANTITY = DT.DefaultView.Count
+                '----------- Calculate Percent -------------
+                VW_ALL_PRODUCT.DefaultView.RowFilter = "PRODUCT_ID=" & Slots(i).PRODUCT_ID
+                Dim DV As DataRowView = VW_ALL_PRODUCT.DefaultView(0)
+
+                If Not IsDBNull(DV("DEPTH")) AndAlso DV("DEPTH") > 0 Then
+                    Dim MaxQuantity As Integer = Math.Floor(Shelf.SHELF_DEPTH / DV("DEPTH"))
+                    Dim Percent As Integer = Math.Floor((Slots(i).PRODUCT_QUANTITY * 100) / MaxQuantity)
+                    Slots(i).PRODUCT_LEVEL_PERCENT = Percent & "%"
+                    If Percent <= Product_Critical_Percent Then
+                        Slots(i).PRODUCT_LEVEL_COLOR = Drawing.Color.Red
+                    Else
+                        Slots(i).PRODUCT_LEVEL_COLOR = Drawing.Color.Green
+                    End If
+                    Slots(i).QUANTITY_BAR_COLOR = Drawing.Color.FromKnownColor(Drawing.KnownColor.Silver)
+                    Slots(i).ShowQuantity = True
+                    Slots(i).ShowMask = False
+                    Slots(i).MaskContent = ""
+                Else
+                    Slots(i).ShowProductCode = True
+                    Slots(i).ShowQuantity = False
+                    Slots(i).ShowMask = True
+                    Slots(i).MaskContent = "<small class='text-warning'> Dimension is not set</small>"
+                End If
+            End If
+        Next
+    End Sub
+
+
 
     Public Function GetList_Kiosk(Optional ByVal KO_ID As Integer = 0) As DataTable
         Dim SQL As String = ""
@@ -832,7 +896,7 @@ Public Class VDM_BL
 
 #Region "Shift"
 
-    Public Function GetShift_Kiosk(Optional ByVal KO_ID As Integer = 0) As DataTable
+    Public Function Get_Kiosk_Current_Shift(Optional ByVal KO_ID As Integer = 0) As DataTable
         Dim SQL As String = ""
         SQL &= "   Select TOP 1 SHIFT_ID" & vbLf
         SQL &= "  ,KO_ID" & vbLf
@@ -851,13 +915,6 @@ Public Class VDM_BL
         DT.TableName = "Data"
         DA.Fill(DT)
         Return DT
-    End Function
-
-    Public Function CheckShift_Open(ByRef DT As DataTable) As Boolean
-        If DT.Rows.Count > 0 AndAlso IsDBNull(DT.Rows(0).Item("Close_Time")) Then
-            Return True
-        End If
-        Return False
     End Function
 
     Public Function GetKiosk_Current_OTY(ByRef KO_ID As Integer, ByRef D_ID As Integer, ByRef Unit_Value As Integer) As Integer

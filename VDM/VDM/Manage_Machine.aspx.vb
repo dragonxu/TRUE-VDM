@@ -116,7 +116,8 @@ Public Class Manage_Machine
 
         Select Case e.CommandName
             Case "Console"
-
+                Session("KO_ID") = e.CommandArgument
+                Response.Redirect("Machine_Console/Machine_Overview.aspx")
             Case "Setting"
 
                 Dim DT As DataTable = BL.GetList_Kiosk(e.CommandArgument)

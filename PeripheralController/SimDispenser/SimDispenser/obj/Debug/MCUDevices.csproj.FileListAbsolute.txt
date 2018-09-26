@@ -1,0 +1,7 @@
+E:\GitHub\Repository\peripheral\Peripheral\Peripheral\bin\Debug\MCUDevices.xml
+E:\GitHub\Repository\peripheral\Peripheral\Peripheral\bin\Debug\MCUDevices.dll
+E:\GitHub\Repository\peripheral\Peripheral\Peripheral\bin\Debug\MCUDevices.pdb
+E:\GitHub\Repository\peripheral\Peripheral\Peripheral\obj\Debug\MCUDevices.csproj.CoreCompileInputs.cache
+E:\GitHub\Repository\peripheral\Peripheral\Peripheral\obj\Debug\MCUDevices.dll
+E:\GitHub\Repository\peripheral\Peripheral\Peripheral\obj\Debug\MCUDevices.pdb
+E:\GitHub\Repository\peripheral\Peripheral\Peripheral\obj\Debug\MCUDevices.csprojAssemblyReference.cache

@@ -6,8 +6,6 @@
 
     Dim BL As New VDM_BL
 
-
-
     Public ReadOnly Property PixelPerMM As Double
         Get
             Return ParentShelf.PixelPerMM
@@ -139,6 +137,28 @@
         End Get
         Set(value As Boolean)
             pnlScale.Visible = value
+        End Set
+    End Property
+
+    Public Property ShowRemoveSlot As Boolean
+        Get
+            Return liRemoveSlot.Visible
+        End Get
+        Set(value As Boolean)
+            liRemoveSlot.Visible = value
+            '----------------- Divider ----------------
+            mnuDivider.Visible = ShowRemoveFloor Or value
+        End Set
+    End Property
+
+    Public Property ShowRemoveFloor As Boolean
+        Get
+            Return liRemoveFloor.Visible
+        End Get
+        Set(value As Boolean)
+            liRemoveFloor.Visible = value
+            '----------------- Divider ----------------
+            mnuDivider.Visible = ShowRemoveSlot Or value
         End Set
     End Property
 

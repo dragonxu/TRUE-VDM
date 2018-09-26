@@ -230,6 +230,96 @@ Partial Public Class UC_Kiosk_Shelf
     Protected WithEvents txtSlotY As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''pnlProduct control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlProduct As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''lblProductName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblProductName As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblSlot_ProductCode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSlot_ProductCode As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblSlotQuantity control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSlotQuantity As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''pnlSlotCapacity control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlSlotCapacity As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''levelProduct control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents levelProduct As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''lblFreeSpace control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblFreeSpace As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblMaxSpace control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblMaxSpace As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''pnlEmpty control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlEmpty As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''tagSlot_Empty control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents tagSlot_Empty As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''btnRemoveSlot control.
     '''</summary>
     '''<remarks>

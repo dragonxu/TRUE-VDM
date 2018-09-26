@@ -286,6 +286,13 @@ Module ModuleGlobal
         Return T.Ticks / 10000
     End Function
 
+    Public Function ExistingCssClass(ByVal CurrentClass As String, ByVal SearchClass As String) As Boolean
+        While CurrentClass.IndexOf("  ") > -1
+            CurrentClass = CurrentClass.Replace("  ", " ")
+        End While
+        Return Array.IndexOf(Split(CurrentClass, " "), SearchClass) > -1
+    End Function
+
     Public Function RemoveTagCssClass(ByVal CurrentClass As String, ByVal ClassToRemove As String) As String
         Dim Result As String = CurrentClass
         While Result.IndexOf(ClassToRemove) > -1

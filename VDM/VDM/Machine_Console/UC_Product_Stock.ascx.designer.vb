@@ -11,25 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class TestScan
-    
-    '''<summary>
-    '''UDP control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents UDP As Global.System.Web.UI.UpdatePanel
-    
-    '''<summary>
-    '''pnlScanProduct control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnlScanProduct As Global.System.Web.UI.WebControls.Panel
+Partial Public Class UC_Product_Stock
     
     '''<summary>
     '''pnlZoom control.
@@ -293,6 +275,15 @@ Partial Public Class TestScan
     Protected WithEvents btnMoveRight As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
+    '''pnlBarcode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlBarcode As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
     '''lblTotalScan control.
     '''</summary>
     '''<remarks>
@@ -435,31 +426,4 @@ Partial Public Class TestScan
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnMoveLeft As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''btnReset control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnReset As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''btnConfirm control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnConfirm As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''btnSave control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnSave As Global.System.Web.UI.WebControls.Button
 End Class

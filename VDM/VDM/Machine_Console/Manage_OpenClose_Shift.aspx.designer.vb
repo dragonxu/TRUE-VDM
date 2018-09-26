@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class Manage_OpenClose_Shift
-    
+
     '''<summary>
     '''udpList control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents udpList As Global.System.Web.UI.UpdatePanel
-    
+
     '''<summary>
     '''MenuChange control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents MenuChange As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''lnkChange control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkChange As Global.System.Web.UI.HtmlControls.HtmlAnchor
-    
+
     '''<summary>
     '''divMenuChange control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents divMenuChange As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''lbl_Change_Amount control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbl_Change_Amount As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''MenuRecieve control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents MenuRecieve As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''lnkRecieve control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkRecieve As Global.System.Web.UI.HtmlControls.HtmlAnchor
-    
+
     '''<summary>
     '''divMenuRecieve control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents divMenuRecieve As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''lbl_Recieve_Amount control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbl_Recieve_Amount As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''MenuStockProduct control.
     '''</summary>
@@ -102,7 +102,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents MenuStockProduct As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''lnkStockProduct control.
     '''</summary>
@@ -111,7 +111,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkStockProduct As Global.System.Web.UI.HtmlControls.HtmlAnchor
-    
+
     '''<summary>
     '''divMenuStockProduct control.
     '''</summary>
@@ -120,7 +120,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents divMenuStockProduct As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''lbl_Product_Count control.
     '''</summary>
@@ -129,7 +129,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbl_Product_Count As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''MenuStockSIM control.
     '''</summary>
@@ -138,7 +138,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents MenuStockSIM As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''lnkStockSIM control.
     '''</summary>
@@ -147,7 +147,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkStockSIM As Global.System.Web.UI.HtmlControls.HtmlAnchor
-    
+
     '''<summary>
     '''divMenuStockSIM control.
     '''</summary>
@@ -156,7 +156,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents divMenuStockSIM As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''lbl_SIM_Count control.
     '''</summary>
@@ -165,7 +165,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbl_SIM_Count As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''MenuStockPaper control.
     '''</summary>
@@ -174,7 +174,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents MenuStockPaper As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''lnkStockPaper control.
     '''</summary>
@@ -183,7 +183,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkStockPaper As Global.System.Web.UI.HtmlControls.HtmlAnchor
-    
+
     '''<summary>
     '''divMenuStockPaper control.
     '''</summary>
@@ -192,7 +192,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents divMenuStockPaper As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''lbl_Paper_Count control.
     '''</summary>
@@ -201,7 +201,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbl_Paper_Count As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lnkBack control.
     '''</summary>
@@ -210,7 +210,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkBack As Global.System.Web.UI.HtmlControls.HtmlAnchor
-    
+
     '''<summary>
     '''pnlChange control.
     '''</summary>
@@ -219,7 +219,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlChange As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''UC_Shift_Change control.
     '''</summary>
@@ -228,7 +228,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents UC_Shift_Change As Global.VDM.UC_Shift_Change
-    
+
     '''<summary>
     '''pnlRecieve control.
     '''</summary>
@@ -237,7 +237,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlRecieve As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''UC_Shift_Recieve control.
     '''</summary>
@@ -246,7 +246,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents UC_Shift_Recieve As Global.VDM.UC_Shift_Recieve
-    
+
     '''<summary>
     '''pnlStockProduct control.
     '''</summary>
@@ -255,16 +255,70 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlStockProduct As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
-    '''UC_Shift_StockProduct control.
+    '''btnManageProductStock control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UC_Shift_StockProduct As Global.VDM.UC_Shift_StockProduct
-    
+    Protected WithEvents btnManageProductStock As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''Kiosk_Shelf control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Kiosk_Shelf As Global.VDM.UC_Product_Shelf
+
+    '''<summary>
+    '''lbl_Product_Total control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbl_Product_Total As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lbl_Product_Empty control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbl_Product_Empty As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lbl_Product_In control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbl_Product_In As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lbl_Product_Out control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbl_Product_Out As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lbl_Product_Move control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbl_Product_Move As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
     '''pnlStockSIM control.
     '''</summary>
@@ -273,16 +327,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlStockSIM As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
-    '''UC_Shift_StockSIM control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents UC_Shift_StockSIM As Global.VDM.UC_Shift_StockSIM
-    
+
     '''<summary>
     '''pnlStockPaper control.
     '''</summary>
@@ -291,7 +336,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlStockPaper As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''UC_Shift_StockPaper control.
     '''</summary>
@@ -300,7 +345,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents UC_Shift_StockPaper As Global.VDM.UC_Shift_StockPaper
-    
+
     '''<summary>
     '''pnlbtn control.
     '''</summary>
@@ -309,7 +354,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlbtn As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''lnkConfirm control.
     '''</summary>
@@ -318,7 +363,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkConfirm As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''lblConfirm control.
     '''</summary>
@@ -327,7 +372,7 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblConfirm As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lnkOK control.
     '''</summary>
@@ -336,13 +381,49 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkOK As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
-    '''pnlTemp control.
+    '''pnlScanProduct control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlTemp As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents pnlScanProduct As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''lnkCloseScanProduct control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkCloseScanProduct As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''Product_Stock control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Product_Stock As Global.VDM.UC_Product_Stock
+
+    '''<summary>
+    '''btnResetScanProduct control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnResetScanProduct As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''btnCloseScanProduct control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnCloseScanProduct As Global.System.Web.UI.WebControls.Button
 End Class

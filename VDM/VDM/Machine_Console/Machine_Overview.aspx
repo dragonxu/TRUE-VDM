@@ -32,7 +32,7 @@
 
             <div class="card-block">
                 <div class="row ">
-                    <h3 class="row m-a-0 text-uppercase bold mobile_group_head">
+                    <h3 class="row m-a-0 m-b text-uppercase bold mobile_group_head">
                         Product Stock
                     </h3>
                 </div>
@@ -55,7 +55,7 @@
             <div class="card-block">
                 <div class="row ">
                     <h3>
-                        <div class="row m-a-0 text-uppercase bold mobile_group_head">
+                        <div class="row m-a-0 m-b text-uppercase bold mobile_group_head">
                             SIM Stock
                         </div>
                     </h3>

@@ -36,8 +36,9 @@
   <link rel="stylesheet" href="styles/app.css" />
   <link rel="stylesheet" href="styles/app.skins.css" />
   <!------VDM Extent------>
-  <link rel="stylesheet" href="styles/product_shelf.css">
-  <link rel="stylesheet" href="styles/Extent.css">
+  <link rel="stylesheet" href="styles/product_shelf.css" />
+  <link rel="stylesheet" href="styles/sim.css" />
+  <link rel="stylesheet" href="styles/Extent.css" />
     <!-- end VDM Extent -->
   <!-- endbuild -->
   

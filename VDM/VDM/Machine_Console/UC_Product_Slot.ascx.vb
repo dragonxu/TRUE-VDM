@@ -167,8 +167,6 @@
         End Set
     End Property
 
-
-
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Slot.Attributes("onClick") = "document.getElementById('" & btnSelect.ClientID & "').click();"
     End Sub
@@ -223,6 +221,18 @@
                 Slot.Style.Remove("background-image")
             End If
             QuantityBar.Attributes("PRODUCT_ID") = value
+            '-------------- Update Floor Removable -------------
+            ParentFloor.ShowRemoveSlot = True
+            ParentFloor.ShowRemoveFloor = True
+            Dim Slots As List(Of UC_Product_Slot) = ParentFloor.Slots
+
+            For i As Integer = 0 To Slots.Count - 1
+                If Slots(i).PRODUCT_ID <> 0 Then
+                    ParentFloor.ShowRemoveSlot = False
+                    ParentFloor.ShowRemoveFloor = False
+                    Exit For
+                End If
+            Next
         End Set
     End Property
 

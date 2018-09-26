@@ -98,6 +98,9 @@ Public Class UC_Kiosk_Shelf
         txtSlotX.Text = ""
         txtSlotY.Text = ""
         '----------------- Containing Product --------------
+        pnlProduct.Visible = False
+        pnlSlotCapacity.Visible = False
+        pnlEmpty.Visible = True
 
         btnRemoveSlot.Visible = True
 
@@ -121,6 +124,14 @@ Public Class UC_Kiosk_Shelf
         Shelf.HighLight = UC_Product_Slot.HighLightMode.YellowDotted
 
         btnClearShelf.Visible = Shelf.Floors.Count > 0
+
+        For i As Integer = 0 To Sender.Slots.Count - 1
+            If Sender.Slots(i).PRODUCT_ID <> 0 Then
+                btnRemoveFloor.Visible = False
+                Exit For
+            End If
+        Next
+
         pnlShelf.Visible = True
     End Sub
 
@@ -192,6 +203,13 @@ Public Class UC_Kiosk_Shelf
         '-------- Set Floor Name -----------
         lblFloorName.Text = Sender.FLOOR_NAME
 
+        For i As Integer = 0 To Sender.Slots.Count - 1
+            If Sender.Slots(i).PRODUCT_ID <> 0 Then
+                btnRemoveFloor.Visible = False
+                Exit For
+            End If
+        Next
+
         Sender.HighLight = UC_Product_Slot.HighLightMode.YellowDotted
         pnlFloor.Visible = True
     End Sub
@@ -257,7 +275,32 @@ Public Class UC_Kiosk_Shelf
 
         lblSlotName.Text = Sender.SLOT_NAME
 
-        btnRemoveSlot.Visible = True
+        '--------------- Product --------------
+        If Sender.PRODUCT_ID <> 0 Then
+
+            Dim ProductImageURL As String = "../RenderImage.aspx?Mode=D&UID=" & Sender.PRODUCT_ID & "&Entity=Product&LANG=1&DI=images/TransparentDot.png"
+            'imgProduct.ImageUrl = ProductImageURL
+            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "updateImageProduct", "$('#imgProduct').attr('src','" & ProductImageURL & "');", True)
+
+
+            lblSlot_ProductCode.Text = Sender.PRODUCT_CODE
+            lblSlotQuantity.Text = "x " & Sender.PRODUCT_QUANTITY
+
+            Dim DT As DataTable = BL.Get_Product_Info_From_ID(Sender.PRODUCT_ID)
+            If DT.Rows.Count > 0 AndAlso Not IsDBNull(DT.Rows(0).Item("DEPTH")) AndAlso DT.Rows(0).Item("DEPTH") > 0 Then
+                pnlSlotCapacity.Visible = True
+                lblProductName.Text = DT.Rows(0).Item("DISPLAY_NAME_TH").ToString
+                Dim MaxQuantity As Integer = Math.Floor(Shelf.SHELF_DEPTH / DT.Rows(0).Item("DEPTH"))
+                lblMaxSpace.Text = MaxQuantity
+                lblFreeSpace.Text = MaxQuantity - Sender.PRODUCT_QUANTITY
+                levelProduct.Width = Unit.Percentage(Sender.PRODUCT_QUANTITY * 100 / MaxQuantity)
+            End If
+
+            pnlProduct.Visible = True
+            pnlEmpty.Visible = False
+        End If
+
+        btnRemoveSlot.Visible = Sender.PRODUCT_ID = 0
 
         Sender.HighLight = UC_Product_Slot.HighLightMode.YellowDotted '-------- Select Slot -----------
         pnlSlot.Visible = True
@@ -315,7 +358,8 @@ Public Class UC_Kiosk_Shelf
 
     Public Sub BindData()
 
-        BL.Bind_Product_Shelf(Shelf, KO_ID)
+        BL.Bind_Product_Shelf_Layout(Shelf, KO_ID)
+        BL.Bind_Product_Shelf_Stock(Shelf, KO_ID)
 
     End Sub
 
@@ -328,7 +372,6 @@ Public Class UC_Kiosk_Shelf
         If Not SaveShelf() Then Return False
         If Not SaveFloor() Then Return False
         If Not SaveSlot() Then Return False
-        If Not SaveProductSerial() Then Return False
 
         Return True
 
@@ -507,11 +550,6 @@ Public Class UC_Kiosk_Shelf
 
         Return True
 
-    End Function
-
-    Private Function SaveProductSerial() As Boolean
-
-        Return True
     End Function
 
 #End Region

@@ -15,11 +15,23 @@
     </div>
     <asp:UpdatePanel ID="udpList" runat="server">
         <ContentTemplate>
-            <asp:Panel ID="pnlList" runat="server" class="card bg-white">
-                <div class="card-header">
-                    Found :
-                    <asp:Label ID="lblTotalList" runat="server"></asp:Label>
-                    Product(s)
+            <asp:Panel ID="pnlList" runat="server" class="card bg-white" DefaultButton="btnSearch">
+                <div class="card-header form-horizontal p-b-0">
+                    <div class="form-group col-sm-6">
+                      <div class="input-group">
+                        <asp:TextBox CssClass="form-control br0" ID="txtSearch" runat="server"></asp:TextBox>
+                        <span class="input-group-btn">
+                            <asp:Button CssClass="btn btn-info" ID="btnSearch" runat="server" Text="Search!" />
+                        </span>
+                       </div>
+                    </div>
+                    <div class="col-sm-6 p-l">
+                        <label class="control-label">
+                            Found :
+                            <asp:Label ID="lblTotalList" runat="server"></asp:Label>
+                            Product(s)
+                        </label>
+                    </div>       
                 </div>
                 <div class="card-block">
                     <div class="no-more-tables">
