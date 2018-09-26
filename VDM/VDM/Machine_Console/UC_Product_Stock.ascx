@@ -22,6 +22,11 @@
             background-color:aliceblue;
             cursor:pointer;
         }
+
+        .nav > li > a:hover {
+            background-color:transparent;
+        }
+
     </style>
 
 <div class="row" >

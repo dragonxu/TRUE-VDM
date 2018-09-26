@@ -671,7 +671,7 @@ Public Class VDM_BL
                     Else
                         Slots(i).PRODUCT_LEVEL_COLOR = Drawing.Color.Green
                     End If
-                    Slots(i).QUANTITY_BAR_COLOR = Drawing.Color.FromArgb(245, 245, 245)
+                    Slots(i).QUANTITY_BAR_COLOR = Drawing.Color.FromKnownColor(Drawing.KnownColor.Silver)
                     Slots(i).ShowQuantity = True
                     Slots(i).ShowMask = False
                     Slots(i).MaskContent = ""

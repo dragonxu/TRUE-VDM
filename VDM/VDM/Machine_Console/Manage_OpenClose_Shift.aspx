@@ -4,7 +4,6 @@
 <%@ Register Src="~/Machine_Console/UC_Shift_StockPaper.ascx" TagPrefix="uc1" TagName="UC_Shift_StockPaper" %>
 <%@ Register Src="~/Machine_Console/UC_Shift_Recieve.ascx" TagPrefix="uc1" TagName="UC_Shift_Recieve" %>
 <%@ Register Src="~/Machine_Console/UC_Shift_StockProduct.ascx" TagPrefix="uc1" TagName="UC_Shift_StockProduct" %>
-<%@ Register Src="~/Machine_Console/UC_Shift_StockSIM.ascx" TagPrefix="uc1" TagName="UC_Shift_StockSIM" %>
 <%@ Register Src="~/Machine_Console/UC_Product_Stock.ascx" TagPrefix="uc1" TagName="UC_Product_Stock" %>
 <%@ Register Src="~/UC_Kiosk_Shelf.ascx" TagPrefix="uc1" TagName="UC_Kiosk_Shelf" %>
 <%@ Register Src="~/Machine_Console/UC_Product_Shelf.ascx" TagPrefix="uc1" TagName="UC_Product_Shelf" %>
@@ -155,14 +154,62 @@
                             <asp:Panel ID="pnlStockProduct" runat="server">
                                 <div class="p-a">
                                     <div class="overflow-hidden">
-                                        <h1><b>Stock สินค้า</b>  
-                                            <img id="imgProduct" src="../images/Icon/green/shelf.png" width="40">
+                                        
+                                        <h1 class="col-sm-8">  
+                                            <img id="imgProduct" src="../images/Icon/red/shelf.png" width="40">
+                                            <b>Stock สินค้า</b>  
                                         </h1>
-                                        <div class="col-sm-8">
+                                        <h2 class="col-sm-4 ">
+                                            <asp:LinkButton ID="btnManageProductStock" runat="server" CssClass="btn btn-danger btn-lg btn-block btn-shadow">
+                                                <i class="icon-settings"></i>
+                                                <span>จัดการ Stock</span>
+                                            </asp:LinkButton>
+                                        </h2>
+                                        <div class="col-sm-8">                                            
                                             <uc1:UC_Product_Shelf runat="server" ID="Kiosk_Shelf" />
                                         </div>
-                                        <div class="col-sm-4">
-                                            <h2>Stock Summary</h2>
+                                        <div class="col-sm-4 ">
+                                            
+
+                                            <div class="row bg-default-light height100pc m-t p-t m-b">
+                                              <div class="col-md-12">
+                                                <div class="card card-block b-a-0 bg-teal text-white">
+                                                  <div class="card-circle-bg-icon"> <i class="icon-handbag"></i> </div>
+                                                  <div class="h4 m-a-0"><asp:Label ID="lbl_Product_Total" runat="server"></asp:Label></div>
+                                                  <div>ทั้งหมด</div>
+                                                </div>
+                                              </div>
+                                              <div class="col-md-12">
+                                                <div class="card card-block b-a-0 bg-blue text-white">
+                                                  <div class="card-circle-bg-icon"> <i class="icon-frame"></i> </div>
+                                                  <div class="h4 m-a-0"><asp:Label ID="lbl_Product_Empty" runat="server"></asp:Label></div>
+                                                  <div>Slot ว่าง</div>
+                                                </div>
+                                              </div>
+                                              <div class="col-md-12">
+                                                <div class="card card-block b-a-0 bg-success text-white">
+                                                  <div class="card-circle-bg-icon"> <i class="icon-login"></i> </div>
+                                                  <div class="h4 m-a-0"><asp:Label ID="lbl_Product_In" runat="server"></asp:Label></div>
+                                                  <div>Scan สินค้าเข้า</div>
+                                                </div>
+                                              </div>
+                                             <div class="col-md-12">
+                                                <div class="card card-block b-a-0 bg-indigo text-white">
+                                                  <div class="card-circle-bg-icon"> <i class="icon-logout"></i> </div>
+                                                  <div class="h4 m-a-0"><asp:Label ID="lbl_Product_Out" runat="server"></asp:Label></div>
+                                                  <div>Check Out</div>
+                                                </div>
+                                              </div>
+                                              <div class="col-md-12">
+                                                <div class="card card-block b-a-0 bg-purple text-white">
+                                                  <div class="card-circle-bg-icon"> <i class="icon-refresh"></i> </div>
+                                                  <div class="h4 m-a-0"><asp:Label ID="lbl_Product_Move" runat="server"></asp:Label></div>
+                                                  <div>ย้าย Slot</div>
+                                                </div>
+                                              </div>
+
+                                            </div>
+                                            
 
                                         </div>
                                         
@@ -180,7 +227,7 @@
                                     </div>
                                 </div>
                                 <h4>
-                                    <uc1:UC_Shift_StockSIM runat="server" ID="UC_Shift_StockSIM" />
+                                    
                                 </h4>
                             </asp:Panel>
 
@@ -236,8 +283,8 @@
                 </div>
             </div>
 
-<asp:Panel CssClass="modal-dialog" style="width:90%; margin: 0px auto; position:absolute; top:20px; z-index:3;" ID="pnlScanProduct" runat="server"  Visible="false">
- <div class="modal-content">
+<asp:Panel CssClass="modal-dialog" style="width:90%; margin: 0px auto; position:absolute; top:-20px;" ID="pnlScanProduct" runat="server"  Visible="false">
+    <div class="modal-content" style="z-index:2;">
         <div class="modal-header">
           <asp:LinkButton CssClass="close" ID="lnkCloseScanProduct" runat="server" >×</asp:LinkButton>
           <h4 class="modal-title">Manage Product Stock</h4>
@@ -249,10 +296,13 @@
               เคลื่อนย้ายสินค้าที่อยู่ในตู้</p>
             <uc1:UC_Product_Stock runat="server" id="Product_Stock" />
         </div>
-    <div class="modal-footer no-border">
-        <asp:Button ID="btnResetScanProduct" runat="server" CssClass="btn btn-shadow btn-default" Text="Reset" />
-        <asp:Button ID="btnCloseScanProduct" runat="server" CssClass="btn btn-shadow btn-primary" Text="Close" />
+        <div class="modal-footer no-border">
+            <asp:Button ID="btnResetScanProduct" runat="server" CssClass="btn btn-shadow btn-default" Text="Reset" />
+            <asp:Button ID="btnCloseScanProduct" runat="server" CssClass="btn btn-shadow btn-primary" Text="Close" />
+        </div>
+
     </div>
+    <div div class="modal bs-modal-sm in" style="display: block; z-index:0;">
 
     </div>
 </asp:Panel>

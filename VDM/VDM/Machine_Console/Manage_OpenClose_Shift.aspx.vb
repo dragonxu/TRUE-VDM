@@ -422,7 +422,30 @@ Public Class Manage_OpenClose_Shift
         Kiosk_Shelf.HideFloorName()
         Kiosk_Shelf.ShowAddFloor = False
         Kiosk_Shelf.ShowEditShelf = False
+        Kiosk_Shelf.ShowScale = False
 
+        '----------Quantity--------------
+        lbl_Product_Total.Text = STOCK_DATA.Compute("COUNT(SERIAL_NO)", "")
+        lbl_Product_In.Text = STOCK_DATA.Compute("COUNT(SERIAL_NO)", "RECENT IS NULL AND SLOT_NAME IS NOT NULL")
+        lbl_Product_Out.Text = STOCK_DATA.Compute("COUNT(SERIAL_NO)", "RECENT IS NOT NULL AND SLOT_NAME IS NULL")
+        lbl_Product_Move.Text = STOCK_DATA.Compute("COUNT(SERIAL_NO)", "RECENT IS NOT NULL AND SLOT_NAME IS NOT NULL AND SLOT_NAME<>RECENT")
+        Dim EmptySlot As Integer = 0
+        For i As Integer = 0 To Product_Stock.Product_Shelf.Slots.Count - 1
+            If Product_Stock.Product_Shelf.Slots(i).PRODUCT_ID = 0 Then EmptySlot += 1
+        Next
+        lbl_Product_Empty.Text = EmptySlot
+
+        If lbl_Product_Total.Text = "0" Then lbl_Product_Total.Text = "-"
+        If lbl_Product_In.Text = "0" Then lbl_Product_In.Text = "-"
+        If lbl_Product_Out.Text = "0" Then lbl_Product_Out.Text = "-"
+        If lbl_Product_Move.Text = "0" Then lbl_Product_Move.Text = "-"
+        If lbl_Product_Empty.Text = "0" Then lbl_Product_Empty.Text = "-"
+
+    End Sub
+
+    Private Sub btnManageProductStock_Click(sender As Object, e As EventArgs) Handles btnManageProductStock.Click
+        pnlScanProduct.Visible = True
+        lnkCloseScanProduct.Focus()
     End Sub
 
     Private Sub CloseScanProduct_Click(sender As Object, e As EventArgs) Handles btnCloseScanProduct.Click, lnkCloseScanProduct.Click
@@ -433,6 +456,8 @@ Public Class Manage_OpenClose_Shift
     Private Sub btnResetScanProduct_Click(sender As Object, e As EventArgs) Handles btnResetScanProduct.Click
         ResetProductStock()
     End Sub
+
+
 
 #End Region
 

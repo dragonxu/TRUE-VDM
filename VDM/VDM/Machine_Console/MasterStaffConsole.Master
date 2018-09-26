@@ -31,15 +31,16 @@
     <link rel="stylesheet" href="../vendor/jquery-labelauty/source/jquery-labelauty.css">
     <!-- End Plug In -->
 
-    <link rel="stylesheet" href="../styles/font-awesome.css">
-    <link rel="stylesheet" href="../styles/card.css">
-    <link rel="stylesheet" href="../styles/sli.css">
-    <link rel="stylesheet" href="../styles/animate.css">
-    <link rel="stylesheet" href="../Styles/app.css">
-    <link rel="stylesheet" href="../styles/app.skins.css">    
+    <link rel="stylesheet" href="../styles/font-awesome.css" />
+    <link rel="stylesheet" href="../styles/card.css" />
+    <link rel="stylesheet" href="../styles/sli.css" />
+    <link rel="stylesheet" href="../styles/animate.css" />
+    <link rel="stylesheet" href="../Styles/app.css" />
+    <link rel="stylesheet" href="../styles/app.skins.css" />    
     <!------VDM Extent------>
-    <link rel="stylesheet" href="../styles/product_shelf.css">
-    <link rel="stylesheet" href="../styles/Extent.css">
+    <link rel="stylesheet" href="../styles/product_shelf.css" />
+    <link rel="stylesheet" href="../styles/sim.css" />
+    <link rel="stylesheet" href="../styles/Extent.css" />
     <!-- end VDM Extent -->
 </head>
 

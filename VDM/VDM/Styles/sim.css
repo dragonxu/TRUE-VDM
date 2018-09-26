@@ -1,0 +1,34 @@
+﻿  .sim_container {
+    position:relative; 
+    height:auto; 
+    border:1px solid transparent; 
+    background-color:white;
+}
+
+.sim_box {
+    padding:10px;
+    text-align:center;
+    position:relative;
+}
+
+.sim_slot {
+        position:relative;
+        text-align: center;    
+        background-color:#fafafa;  
+        width:100px;
+}
+
+.sim_item {
+    position:absolute;
+    width:100%;
+    height:2px;
+    background-color:red;
+    font-size:0px;
+}
+
+.sim_quantity_pointer {
+    position:absolute; 
+            
+    right:-70px; 
+    width:80px;
+}

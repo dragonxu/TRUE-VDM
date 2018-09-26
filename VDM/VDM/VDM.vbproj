@@ -497,13 +497,11 @@
     <Content Include="images\WhiteDot.png" />
     <Content Include="Machine_Console\PrintBarcode.aspx" />
     <Content Include="Machine_Console\Styles\app.min.725970e8.css" />
-    <Content Include="Machine_Console\TestScan.aspx" />
+    <Content Include="Machine_Console\TestSIM.aspx" />
     <Content Include="Machine_Console\UC_Product_Stock.ascx" />
     <Content Include="Machine_Console\UC_Shift_Change.ascx" />
     <Content Include="Machine_Console\UC_Shift_Recieve.ascx" />
     <Content Include="Machine_Console\UC_Shift_StockPaper.ascx" />
-    <Content Include="Machine_Console\UC_Shift_StockProduct.ascx" />
-    <Content Include="Machine_Console\UC_Shift_StockSIM.ascx" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="SignIn.aspx" />
     <Content Include="Machine_Console\Login.aspx" />
@@ -679,11 +677,11 @@
       <DependentUpon>PrintBarcode.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Machine_Console\TestScan.aspx.designer.vb">
-      <DependentUpon>TestScan.aspx</DependentUpon>
+    <Compile Include="Machine_Console\TestSIM.aspx.designer.vb">
+      <DependentUpon>TestSIM.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Machine_Console\TestScan.aspx.vb">
-      <DependentUpon>TestScan.aspx</DependentUpon>
+    <Compile Include="Machine_Console\TestSIM.aspx.vb">
+      <DependentUpon>TestSIM.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Machine_Console\UC_Product_Stock.ascx.designer.vb">
@@ -712,20 +710,6 @@
     </Compile>
     <Compile Include="Machine_Console\UC_Shift_StockPaper.ascx.vb">
       <DependentUpon>UC_Shift_StockPaper.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Machine_Console\UC_Shift_StockProduct.ascx.designer.vb">
-      <DependentUpon>UC_Shift_StockProduct.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Machine_Console\UC_Shift_StockProduct.ascx.vb">
-      <DependentUpon>UC_Shift_StockProduct.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Machine_Console\UC_Shift_StockSIM.ascx.designer.vb">
-      <DependentUpon>UC_Shift_StockSIM.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Machine_Console\UC_Shift_StockSIM.ascx.vb">
-      <DependentUpon>UC_Shift_StockSIM.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SignIn.aspx.designer.vb">
