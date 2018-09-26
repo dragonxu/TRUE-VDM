@@ -43,10 +43,56 @@ Public Class UC_SIM_Stock
         End Set
     End Property
 
+    Public ReadOnly Property SLOT_CAPACITY As Integer
+        Get
+            Return Dispenser.SLOT_CAPACITY
+        End Get
+    End Property
+
     Public ReadOnly Property SIMDispenser As UC_SIM_Dispenser
         Get
             Return Dispenser
         End Get
     End Property
+
+    Public ReadOnly Property VW_ALL_SIM As DataTable
+        Get
+            If IsNothing(Session("VW_ALL_SIM" & MY_UNIQUE_ID)) Then
+                Dim SQL As String = "SELECT * FROM VW_ALL_SIM"
+                Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+                Dim DT As New DataTable
+                DA.Fill(DT)
+                Session("VW_ALL_SIM_" & MY_UNIQUE_ID) = DT
+            End If
+            Return Session("VW_ALL_SIM_" & MY_UNIQUE_ID)
+        End Get
+    End Property
+
+    Private ReadOnly Property MY_UNIQUE_ID() As String
+        Get
+            If btnSeeShelf.Attributes("MY_UNIQUE_ID") = "" Then
+                btnSeeShelf.Attributes("MY_UNIQUE_ID") = GenerateNewUniqueID() '---- Needed ---------
+            End If
+            Return btnSeeShelf.Attributes("MY_UNIQUE_ID")
+        End Get
+    End Property
+
+    'Public Property STOCK_DATA As DataTable
+    '    Get
+    '        If IsNothing(Session("STOCK_DATA_" & MY_UNIQUE_ID)) Then
+    '            Dim SQL As String = "SELECT PRODUCT_ID,PRODUCT_CODE,PRODUCT_NAME,SERIAL_NO,SLOT_NAME RECENT,SLOT_NAME [CURRENT]" & vbLf
+    '            SQL &= "FROM VW_CURRENT_PRODUCT_STOCK" & vbLf
+    '            SQL &= "WHERE KO_ID=" & KO_ID
+    '            Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+    '            Dim DT As New DataTable
+    '            DA.Fill(DT)
+    '            Session("STOCK_DATA_" & MY_UNIQUE_ID) = DT
+    '        End If
+    '        Return Session("STOCK_DATA_" & MY_UNIQUE_ID)
+    '    End Get
+    '    Set(value As DataTable)
+    '        Session("STOCK_DATA_" & MY_UNIQUE_ID) = value
+    '    End Set
+    'End Property
 
 End Class
