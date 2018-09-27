@@ -514,7 +514,8 @@
     <Content Include="Machine_Console\UC_SIM.ascx" />
     <Content Include="Machine_Console\UC_SIM_Dispenser.ascx" />
     <Content Include="Machine_Console\UC_SIM_Slot.ascx" />
-    <Content Include="Machine_Console\UC_SIM_Stock.ascx" />
+    <Content Include="Scripts\DragDrop.js" />
+    <Content Include="Scripts\extent.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="SignIn.aspx" />
     <Content Include="Machine_Console\Login.aspx" />
@@ -601,6 +602,8 @@
     <Content Include="Styles\sli.css" />
     <Content Include="Styles\webfont.css" />
     <Content Include="Test_API\Test_API_Interface.aspx" />
+    <Content Include="Test_API\Test_BBL.aspx" />
+    <Content Include="Test_API\Test_TMN_Payment.aspx" />
     <Content Include="Test_API\UC_Activity_End.ascx" />
     <Content Include="Test_API\UC_Activity_Start.ascx" />
     <Content Include="Test_API\UC_Delete_File.ascx" />
@@ -906,6 +909,20 @@
     <Compile Include="Test_API\Test_API_Interface.aspx.vb">
       <DependentUpon>Test_API_Interface.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Test_API\Test_BBL.aspx.designer.vb">
+      <DependentUpon>Test_BBL.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_API\Test_BBL.aspx.vb">
+      <DependentUpon>Test_BBL.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Test_API\Test_TMN_Payment.aspx.designer.vb">
+      <DependentUpon>Test_TMN_Payment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_API\Test_TMN_Payment.aspx.vb">
+      <DependentUpon>Test_TMN_Payment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Test_API\UC_Activity_End.ascx.designer.vb">
       <DependentUpon>UC_Activity_End.ascx</DependentUpon>

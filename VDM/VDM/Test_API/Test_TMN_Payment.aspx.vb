@@ -12,14 +12,18 @@ Public Class Test_TMN_Payment
             GenerateInvoice()
             CustomerQRCode.Focus()
         End If
-
+        GenerateInvoice()
         lblError.Text = ""
     End Sub
 
     Private Sub GenerateInvoice()
-        Invoice_NO.Text = Now.ToString("yyMMddhhmmss")
-        PaymentDescription.Text = "VDMTestPay"
+        Invoice_NO.Text = GenerateInvoiceNo(shopCode.Text)
+        PaymentDescription.Text = "TRUEVDM-" & Invoice_NO.Text
     End Sub
+
+    Private Function GenerateInvoiceNo(ByVal ShopCode As String) As String ' Confirm จาก True
+        Return ShopCode & "-" & Now.ToString("yyMMddhhmmssfff")
+    End Function
 
     Private Sub btnGen_Click(sender As Object, e As EventArgs) Handles btnGen.Click
         GenerateInvoice()
