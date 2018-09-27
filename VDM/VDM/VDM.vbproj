@@ -599,6 +599,8 @@
     <Content Include="Styles\sli.css" />
     <Content Include="Styles\webfont.css" />
     <Content Include="Test_API\Test_API_Interface.aspx" />
+    <Content Include="Test_API\Test_BBL.aspx" />
+    <Content Include="Test_API\Test_TMN_Payment.aspx" />
     <Content Include="Test_API\UC_Activity_End.ascx" />
     <Content Include="Test_API\UC_Activity_Start.ascx" />
     <Content Include="Test_API\UC_Delete_File.ascx" />
@@ -877,6 +879,20 @@
     <Compile Include="Test_API\Test_API_Interface.aspx.vb">
       <DependentUpon>Test_API_Interface.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Test_API\Test_BBL.aspx.designer.vb">
+      <DependentUpon>Test_BBL.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_API\Test_BBL.aspx.vb">
+      <DependentUpon>Test_BBL.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Test_API\Test_TMN_Payment.aspx.designer.vb">
+      <DependentUpon>Test_TMN_Payment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_API\Test_TMN_Payment.aspx.vb">
+      <DependentUpon>Test_TMN_Payment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Test_API\UC_Activity_End.ascx.designer.vb">
       <DependentUpon>UC_Activity_End.ascx</DependentUpon>
