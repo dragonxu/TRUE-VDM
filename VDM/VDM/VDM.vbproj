@@ -511,6 +511,7 @@
     <Content Include="Machine_Console\UC_SIM.ascx" />
     <Content Include="Machine_Console\UC_SIM_Dispenser.ascx" />
     <Content Include="Machine_Console\UC_SIM_Slot.ascx" />
+    <Content Include="Scripts\DragDrop.js" />
     <Content Include="Scripts\extent.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="SignIn.aspx" />
