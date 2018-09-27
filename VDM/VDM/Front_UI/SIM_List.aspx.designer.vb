@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Thank_You
+Partial Public Class SIM_List
     
     '''<summary>
     '''form1 control.
@@ -21,6 +21,15 @@ Partial Public Class Thank_You
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+    
+    '''<summary>
+    '''rptList control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rptList As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
     '''lnkHome control.

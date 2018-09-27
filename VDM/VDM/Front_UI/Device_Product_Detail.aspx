@@ -4,6 +4,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+
+    <meta http-equiv="Page-Enter" content="revealTrans(Duration=2.0,Transition=12)">
+
     <title>Kiosk</title>
     <link href="css/true.css" rel="stylesheet" type="text/css" />
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
@@ -39,16 +42,16 @@
 </head>
 <body class="bg2">
     <form id="form1" runat="server">
-       <%-- <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <asp:UpdatePanel ID="udpList" runat="server">
-            <ContentTemplate>--%>
+            <ContentTemplate>
                 <div class="warp">
                     <header>
                         <img src="images/bg-top.png" />
                     </header>
                     <main>
                         <div class="priceplan">
-                            <asp:Label ID="lblCode" runat="server" Style="display: none;"></asp:Label>
+                            <asp:Label ID="lblCode" runat="server" Style="display: none;" CAPACITY=""></asp:Label>
                             <div class="main3">
                                 <div class="detail-slider">
                                      
@@ -70,7 +73,7 @@
 
                                                                     <span><i class="current" style="padding: 0 10px;">
                                                                         <asp:LinkButton ID="lnkColor" runat="server">
-                                                                            <a id="btnColor" runat="server" class ="btn-active ">
+                                                                            <a id="btnColor" runat="server" >
                                                                                 <asp:Image ID="img"  runat="server" Style="height: 70px; width: unset;"></asp:Image>
                                                                             </a>
                                                                         </asp:LinkButton>
@@ -235,8 +238,8 @@
 
 
 
-            <%--</ContentTemplate>
-        </asp:UpdatePanel>--%>
+            </ContentTemplate>
+        </asp:UpdatePanel>
     </form>
 </body>
 <script type="text/javascript" src="js/slick.js"></script>

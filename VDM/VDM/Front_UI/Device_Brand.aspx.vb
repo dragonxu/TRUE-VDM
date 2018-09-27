@@ -44,15 +44,15 @@ Public Class Device_Brand
     End Property
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        If Not IsPostBack Then
+        If Not IsNumeric(Session("LANGUAGE")) Then
+            Response.Redirect("Select_Language.aspx")
+        End If
 
+        If Not IsPostBack Then
             BindList()
         Else
             initFormPlugin()
         End If
-
-
-
 
     End Sub
 
@@ -133,7 +133,7 @@ Public Class Device_Brand
         Dim btnBrand As HtmlAnchor = e.Item.FindControl("btnBrand")
         Dim btnSelect As Button = e.Item.FindControl("btnSelect")
 
-        img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=Brand&UID=" & e.Item.DataItem("BRAND_ID") & "&t=" & Now.ToOADate.ToString.Replace(".", "")
+        img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=Brand&UID=" & e.Item.DataItem("BRAND_ID")
         lblBrand.Text = e.Item.DataItem("BRAND_NAME").ToString()
         btnBrand.Attributes("onclick") = "$('#" & btnSelect.ClientID & "').click();"
         btnSelect.CommandArgument = e.Item.DataItem("BRAND_ID")
@@ -152,6 +152,11 @@ Public Class Device_Brand
         End Select
     End Sub
 
+
+
+#End Region
+
+
     Private Sub lnkHome_Click(sender As Object, e As ImageClickEventArgs) Handles lnkHome.Click
         Response.Redirect("Home.aspx")
     End Sub
@@ -159,10 +164,5 @@ Public Class Device_Brand
     Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click
         Response.Redirect("Home.aspx")
     End Sub
-
-
-
-#End Region
-
 
 End Class

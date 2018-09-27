@@ -5,6 +5,12 @@ Public Class Product_List
     Inherits System.Web.UI.Page
     Dim BL As New VDM_BL
 
+    Private ReadOnly Property LANGUAGE As Integer
+        Get
+            Return Session("LANGUAGE")
+        End Get
+    End Property
+
     Private ReadOnly Property KO_ID As Integer
         Get
             Return Session("KO_ID")
@@ -57,6 +63,9 @@ Public Class Product_List
 
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        If Not IsNumeric(Session("LANGUAGE")) Then
+            Response.Redirect("Select_Language.aspx")
+        End If
 
         If Not IsPostBack Then
             BRAND_ID = Request.QueryString("BRAND_ID")
@@ -105,47 +114,6 @@ Public Class Product_List
 
     End Sub
 
-    'Private Sub rptBox_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles rptBox.ItemDataBound
-    '    If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
-
-    '    Dim img As Image = e.Item.FindControl("img")
-    '    Dim lblProduct As Label = e.Item.FindControl("lblProduct")
-    '    Dim btnBrand As HtmlAnchor = e.Item.FindControl("btnBrand")
-    '    Dim btnSelect As Button = e.Item.FindControl("btnSelect")
-    '    Dim Product_Default As DataTable = BL.Get_Show_Default_Product(e.Item.DataItem("MODEL").ToString())
-    '    Dim Product_ID_Default As Integer = 0
-    '    If Product_Default.Rows.Count > 0 Then
-    '        Product_ID_Default = Val(Product_Default.Rows(0).Item("PRODUCT_ID"))
-    '    End If
-    '    img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & Product_ID_Default & "&LANG=" & VDM_BL.UILanguage.TH & "&t=" & Now.ToOADate.ToString.Replace(".", "")
-
-    '    'img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=Brand&UID=" & e.Item.DataItem("BRAND_ID") & "&t=" & Now.ToOADate.ToString.Replace(".", "")
-    '    lblProduct.Text = e.Item.DataItem("MODEL").ToString()
-    '    lblProduct.Attributes("PRODUCT_ID") = Product_ID_Default
-    '    btnBrand.Attributes("onclick") = "$('#" & btnSelect.ClientID & "').click();"
-    '    btnSelect.CommandArgument = Product_ID_Default
-
-
-    '    img.Style("box-shadow") = "8px 0px 8px 0px rgba(0,0,0,0.30);"
-    'End Sub
-
-    'Private Sub rptBox_ItemCommand(source As Object, e As RepeaterCommandEventArgs) Handles rptBox.ItemCommand
-    '    If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
-    '    Dim btnSelect As Button = e.Item.FindControl("btnSelect")
-    '    Select Case e.CommandName
-    '        Case "Select"
-    '            Dim SQL As String = ""
-    '            SQL &= " SELECT * FROM VW_ALL_PRODUCT WHERE PRODUCT_ID=" & btnSelect.CommandArgument
-    '            Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
-    '            Dim DT As New DataTable
-    '            DA.Fill(DT)
-
-    '            If DT.Rows.Count > 0 Then
-    '                Response.Redirect("Device_Product_Detail.aspx?PRODUCT_ID=" & btnSelect.CommandArgument & "&BRAND_ID=" & BRAND_ID & "&MODEL=" & DT.Rows(0).Item("MODEL").ToString)
-    '            End If
-
-    '    End Select
-    'End Sub
 
     Private Sub rptPage_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles rptPage.ItemDataBound
 
@@ -194,7 +162,7 @@ Public Class Product_List
         End If
 
         'ภาพแบรนด์
-        img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=Brand&UID=" & BRAND_ID & "&t=" & Now.ToOADate.ToString.Replace(".", "")
+        img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=Brand&UID=" & BRAND_ID
 
         rptList.DataSource = DT
         rptList.DataBind()
@@ -208,7 +176,7 @@ Public Class Product_List
         Dim lblProduct As Label = e.Item.FindControl("lblProduct")
         Dim btnProduct As HtmlAnchor = e.Item.FindControl("btnProduct")
         Dim btnSelect As Button = e.Item.FindControl("btnSelect")
-        img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & e.Item.DataItem("PRODUCT_ID") & "&LANG=" & VDM_BL.UILanguage.TH & "&t=" & Now.ToOADate.ToString.Replace(".", "")
+        img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & e.Item.DataItem("PRODUCT_ID") & "&LANG=" & LANGUAGE
 
         lblProduct.Text = e.Item.DataItem("MODEL").ToString()
         btnProduct.Attributes("onclick") = "$('#" & btnSelect.ClientID & "').click();"

@@ -46,6 +46,7 @@
                                         <div class="description">
                                              <div class="pic-devices" style ="margin-top :-200px;">
                                                 <h3 class="true-l">Brands</h3>
+                                                  
                                                 <img src="images/pic-top_catalog.png" style="width: unset; padding-top: 120px;width :400px;" />
                                             </div>
                                             <ul>

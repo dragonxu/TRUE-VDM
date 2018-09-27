@@ -140,7 +140,7 @@ Public Class VDM_BL
             Case UILanguage.RS
                 Return "RS"
             Case Else
-                Return ""
+                Return "TH"
         End Select
     End Function
 
@@ -998,7 +998,7 @@ Public Class VDM_BL
 #End Region
 
 
-#Region "Kiosk"
+#Region "Kiosk Product"
 
     Public Function GetList_Current_Brand_Kiosk(Optional ByVal KO_ID As Integer = 0) As DataTable
         Dim SQL As String = ""
@@ -1179,4 +1179,17 @@ Public Class VDM_BL
 
 #End Region
 
+#Region "Kiosk SIM"
+
+    Public Function GetList_Current_SIM_Kiosk(Optional ByVal KO_ID As Integer = 0) As DataTable
+        Dim SQL As String = ""
+        SQL &= "   Select * FROM MS_SIM" & vbLf
+        'SQL &= "   WHERE KO_ID =" & KO_ID & " And Active_Status = 1" & vbLf
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT
+    End Function
+
+#End Region
 End Class

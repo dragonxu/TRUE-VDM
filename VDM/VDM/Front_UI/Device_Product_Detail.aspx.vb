@@ -28,7 +28,11 @@ Public Class Device_Product_Detail
 
     Protected Property PRODUCT_ID As Integer
         Get
-            Return Val(lblCode.Attributes("PRODUCT_ID"))
+            Try
+                Return lblCode.Attributes("PRODUCT_ID")
+            Catch ex As Exception
+                Return 0
+            End Try
         End Get
         Set(value As Integer)
             lblCode.Attributes("PRODUCT_ID") = value
@@ -37,7 +41,11 @@ Public Class Device_Product_Detail
 
     Protected Property MODEL As String
         Get
-            Return lblCode.Attributes("MODEL").ToString
+            Try
+                Return lblCode.Attributes("MODEL")
+            Catch ex As Exception
+                Return ""
+            End Try
         End Get
         Set(value As String)
             lblCode.Attributes("MODEL") = value
@@ -46,7 +54,11 @@ Public Class Device_Product_Detail
 
     Protected Property CAPACITY As String
         Get
-            Return lblCode.Attributes("CAPACITY").ToString
+            Try
+                Return lblCode.Attributes("CAPACITY")
+            Catch ex As Exception
+                Return ""
+            End Try
         End Get
         Set(value As String)
             lblCode.Attributes("CAPACITY") = value
@@ -63,10 +75,15 @@ Public Class Device_Product_Detail
     End Property
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        If Not IsNumeric(Session("LANGUAGE")) Then
+            Response.Redirect("Select_Language.aspx")
+        End If
+
         If Not IsPostBack Then
+            PRODUCT_ID = Request.QueryString("PRODUCT_ID")
             If Request.QueryString("MODEL") = Nothing Then
                 Dim SQL As String = ""
-                SQL &= "  SELECT  FROM VW_CURRENT_PRODUCT_DETAIL WHERE PRODUCT_ID=" & PRODUCT_ID
+                SQL &= "  SELECT * FROM VW_CURRENT_PRODUCT_DETAIL WHERE PRODUCT_ID=" & PRODUCT_ID
                 Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
                 Dim DT_Para As New DataTable
                 DA.Fill(DT_Para)
@@ -79,7 +96,7 @@ Public Class Device_Product_Detail
                 BRAND_ID = Request.QueryString("BRAND_ID")
                 MODEL = Request.QueryString("MODEL").ToString
             End If
-            PRODUCT_ID = Request.QueryString("PRODUCT_ID")
+
             CAPACITY = ""
             COLOR = ""
 
@@ -88,10 +105,6 @@ Public Class Device_Product_Detail
         Else
             initFormPlugin()
         End If
-
-
-
-
     End Sub
 
     Private Sub initFormPlugin()
@@ -110,7 +123,7 @@ Public Class Device_Product_Detail
             DT_Product_Model = DT   ' Product ที่จัดกลุ่ม Model  เดียวกัน
 
             'แสดง Product Default ครั้งแรก
-            img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & PRODUCT_ID & "&LANG=" & LANGUAGE & "&t=" & Now.ToOADate.ToString.Replace(".", "")
+            img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & PRODUCT_ID & "&LANG=" & LANGUAGE
             lblDISPLAY_NAME.Text = DT.Rows(0).Item("DISPLAY_NAME_" & BL.Get_Language_Code(LANGUAGE)).ToString()
 
             'Warranty
@@ -225,7 +238,7 @@ Public Class Device_Product_Detail
         Dim btnSelect As Button = e.Item.FindControl("btnSelect")
         btnColor.Attributes("onclick") = "$('#" & btnSelect.ClientID & "').click();"
 
-        img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & e.Item.DataItem("PRODUCT_ID") & "&LANG=" & LANGUAGE & "&t=" & Now.ToOADate.ToString.Replace(".", "")
+        img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & e.Item.DataItem("PRODUCT_ID") & "&LANG=" & LANGUAGE
 
         lblColor.Text = e.Item.DataItem("DESCRIPTION").ToString
         'If e.Item.DataItem("DESCRIPTION").ToString = COLOR Then

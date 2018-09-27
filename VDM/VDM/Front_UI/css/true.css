@@ -295,7 +295,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', end
 .brand .slick-prev{left:-60px; }
 .brand .slick-initialized .slick-slide{padding: unset ;}
  
-.brand .description{width:100%; margin:60px 0; display:inline-block;}
+.brand .description{width:100%; margin:100px 0; display:inline-block;}
 .brand .description .pic{width:370px; padding:0 40px; display:inline-block; float:left;}
 .brand .description .pic img{width:100%;}
 .brand .description figure{margin-top:-10px; padding:0 0 0 40px; color:#434748; display:inline-block;}

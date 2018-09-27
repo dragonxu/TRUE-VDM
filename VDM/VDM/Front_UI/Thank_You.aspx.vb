@@ -29,11 +29,9 @@
 
 
     Private Sub lnkHome_Click(sender As Object, e As ImageClickEventArgs) Handles lnkHome.Click
-        Response.Redirect("Home.aspx")
+        Response.Redirect("Select_Language.aspx")
     End Sub
 
-    Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click
-        Response.Redirect("Complete_Order.aspx?PRODUCT_ID=" & PRODUCT_ID)
-    End Sub
+
 
 End Class

@@ -46,7 +46,9 @@
     End Sub
 
     Private Sub btnConfirm_str_Click(sender As Object, e As EventArgs) Handles btnConfirm_str.Click
-        Response.Redirect("Device_Verify.aspx?PRODUCT_ID=" & PRODUCT_ID)
+        'Response.Redirect("Device_Verify.aspx?PRODUCT_ID=" & PRODUCT_ID)  ข้ามหน้า Scan ไปก่อน
+
+        Response.Redirect("Device_Payment.aspx?PRODUCT_ID=" & PRODUCT_ID)
     End Sub
 
 

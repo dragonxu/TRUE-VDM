@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Front_UI/MasterFront.Master" CodeBehind="Home.aspx.vb" Inherits="VDM.Home" %>
 
+<%@ Register Src="~/Front_UI/UC_Machine_Console.ascx" TagPrefix="uc1" TagName="UC_Machine_Console" %>
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -19,7 +22,7 @@
             <%--</a>--%>
         </div>
         <div class="frame">
-            <a href="sim.html">
+            <asp:LinkButton  ID="lnkSim" runat ="server" >
                 <div class="image-cropper">
                     <span>
                         <h3 class="true-l">Sim&<br />
@@ -28,7 +31,7 @@
                     </span>
                     <img src="images/pic-sim.jpg" />
                 </div>
-            </a>
+            </asp:LinkButton>
         </div>
 
 
@@ -50,6 +53,7 @@
                     </div>
                 </nav>
             </footer>
-
-
+         <footer style="bottom: 0px ; width :100%;padding :20px 0;">                 
+                        <uc1:UC_Machine_Console runat="server" id="UC_Machine_Console1" />                 
+            </footer> 
 </asp:Content>

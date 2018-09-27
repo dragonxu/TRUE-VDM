@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
-    <meta http-equiv="Page-Exit" content="revealTrans(Duration=2.0,Transition=0)">
-    <%--<meta http-equiv="Page-Enter" content="revealTrans(Duration=2.0,Transition=8)">--%>
+    <meta http-equiv="Page-Exit" content="revealTrans(Duration=5.0,Transition=0)">
+    <meta http-equiv="Page-Enter" content="revealTrans(Duration=5.0,Transition=8)">
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">

@@ -11,41 +11,41 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Home
-
+Partial Public Class UC_Machine_Console
+    
     '''<summary>
-    '''lnkDevice control.
+    '''Left control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkDevice As Global.System.Web.UI.WebControls.LinkButton
-
+    Protected WithEvents Left As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
     '''<summary>
-    '''lnkSim control.
+    '''btnLeft control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkSim As Global.System.Web.UI.WebControls.LinkButton
-
+    Protected WithEvents btnLeft As Global.System.Web.UI.WebControls.ImageButton
+    
     '''<summary>
-    '''lnkBack control.
+    '''Right control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkBack As Global.System.Web.UI.WebControls.ImageButton
-
+    Protected WithEvents Right As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
     '''<summary>
-    '''UC_Machine_Console1 control.
+    '''btnRight control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UC_Machine_Console1 As Global.VDM.UC_Machine_Console
+    Protected WithEvents btnRight As Global.System.Web.UI.WebControls.ImageButton
 End Class

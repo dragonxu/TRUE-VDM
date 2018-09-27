@@ -71,8 +71,8 @@
                                         <div class="description">
                                              <div class="pic-devices">
                                                 <h3 class="true-l">Devices</h3>
-                                                <%--<img src="images/pic-top_catalog.png" style="width: unset; padding-top: 100px;" />--%>
-                                                 <asp:Image ID="img" runat="server"  style="width: unset; padding-top: -200px;padding-right:10px;" ></asp:Image>
+                                                  <asp:Image ID="img" runat="server"  style="width: unset;  width :350px;" />
+                                               
                                             </div>
                                             <ul>
                                                 <asp:Repeater ID="rptList" runat="server" OnItemCommand="rptList_ItemCommand">

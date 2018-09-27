@@ -266,7 +266,9 @@
     <Content Include="Front_UI\Device_Payment.aspx" />
     <Content Include="Front_UI\Select_Language.aspx" />
     <Content Include="Front_UI\Device_Brand.aspx" />
+    <Content Include="Front_UI\SIM_List.aspx" />
     <Content Include="Front_UI\Thank_You.aspx" />
+    <Content Include="Front_UI\UC_Machine_Console.ascx" />
     <Content Include="Front_UI\UC_Scan_Face_Recognition.ascx" />
     <Content Include="Front_UI\UC_Scan_IDCart.ascx" />
     <Content Include="Global.asax" />
@@ -514,6 +516,7 @@
     <Content Include="Machine_Console\UC_SIM.ascx" />
     <Content Include="Machine_Console\UC_SIM_Dispenser.ascx" />
     <Content Include="Machine_Console\UC_SIM_Slot.ascx" />
+    <Content Include="Machine_Console\UC_SIM_Stock.ascx" />
     <Content Include="Scripts\DragDrop.js" />
     <Content Include="Scripts\extent.js" />
     <Content Include="Scripts\toastr.js" />
@@ -602,7 +605,6 @@
     <Content Include="Styles\sli.css" />
     <Content Include="Styles\webfont.css" />
     <Content Include="Test_API\Test_API_Interface.aspx" />
-    <Content Include="Test_API\Test_BBL.aspx" />
     <Content Include="Test_API\Test_TMN_Payment.aspx" />
     <Content Include="Test_API\UC_Activity_End.ascx" />
     <Content Include="Test_API\UC_Activity_Start.ascx" />
@@ -707,12 +709,26 @@
       <DependentUpon>Device_Brand.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Front_UI\SIM_List.aspx.designer.vb">
+      <DependentUpon>SIM_List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\SIM_List.aspx.vb">
+      <DependentUpon>SIM_List.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Front_UI\Thank_You.aspx.designer.vb">
       <DependentUpon>Thank_You.aspx</DependentUpon>
     </Compile>
     <Compile Include="Front_UI\Thank_You.aspx.vb">
       <DependentUpon>Thank_You.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Front_UI\UC_Machine_Console.ascx.designer.vb">
+      <DependentUpon>UC_Machine_Console.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\UC_Machine_Console.ascx.vb">
+      <DependentUpon>UC_Machine_Console.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Front_UI\UC_Scan_Face_Recognition.ascx.designer.vb">
       <DependentUpon>UC_Scan_Face_Recognition.ascx</DependentUpon>
@@ -908,13 +924,6 @@
     </Compile>
     <Compile Include="Test_API\Test_API_Interface.aspx.vb">
       <DependentUpon>Test_API_Interface.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="Test_API\Test_BBL.aspx.designer.vb">
-      <DependentUpon>Test_BBL.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Test_API\Test_BBL.aspx.vb">
-      <DependentUpon>Test_BBL.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Test_API\Test_TMN_Payment.aspx.designer.vb">
