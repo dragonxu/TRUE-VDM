@@ -1034,7 +1034,7 @@ Public Class VDM_BL
     Public Function Get_Show_Default_Product(Optional ByVal MODEL As String = "") As DataTable
         Dim SQL As String = ""
         SQL &= "   Select * " & vbLf
-        SQL &= "   From VW_ALL_PRODUCT" & vbLf
+        SQL &= "   From VW_CURRENT_PRODUCT_DETAIL" & vbLf
         If MODEL <> "" Then
             SQL &= "  WHERE MODEL='" & MODEL & "'" & vbLf
         End If
@@ -1049,6 +1049,9 @@ Public Class VDM_BL
         Dim SQL As String = ""
         SQL &= "  Select * FROM VW_CURRENT_PRODUCT_DETAIL " & vbLf
         SQL &= "  WHERE MODEL='" & MODEL.ToString() & "' AND KO_ID=" & KO_ID
+        If PRODUCT_ID > 0 Then
+            SQL &= "  AND PRODUCT_ID=" & PRODUCT_ID
+        End If
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)
@@ -1139,7 +1142,39 @@ Public Class VDM_BL
     End Function
 
 
+    Public Function GetProduct_ID_Select(ByVal MODEL As String, ByVal COLOR As String, ByVal CAPACITY As String, Optional ByVal KO_ID As Integer = 0, Optional ByRef LANGUAGE As Integer = UILanguage.TH) As Integer
+        Dim PRODUCT_ID As Integer = 0
+        Dim SQL As String = ""
+        SQL &= "  SELECT * FROM ( " & vbLf
+        SQL &= "    SELECT DISTINCT " & vbLf
+        SQL &= "           PRODUCT_ID, PRODUCT_CODE, PRODUCT_NAME, KO_ID, MODEL " & vbLf
+        SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Color & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) COLOR " & vbLf
+        SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Capacity & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) CAPACITY_Mobile " & vbLf
+        SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.CapacityAccessories & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) CAPACITY_Assessory " & vbLf
+        SQL &= "      From VDM.dbo.VW_CURRENT_PRODUCT_SPEC " & vbLf
+        SQL &= "      Where SPEC_ID In (" & Spec.Color & "," & Spec.Capacity & "," & Spec.CapacityAccessories & ")  AND KO_ID=" & KO_ID
+        SQL &= "      Group BY   PRODUCT_ID, PRODUCT_CODE, PRODUCT_NAME, KO_ID, MODEL, DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " " & vbLf
+        SQL &= "  ) TB  " & vbLf
+        SQL &= "  WHERE MODEL='" & MODEL & "' "
+        If COLOR <> "" Then
+            SQL &= "   AND COLOR='" & COLOR & "' " & vbLf
+        Else
+            SQL &= "   AND COLOR IS NULL " & vbLf
+        End If
+        If CAPACITY <> "" Then
+            SQL &= "   And ( CAPACITY_Mobile='" & CAPACITY & "' Or CAPACITY_Assessory='" & CAPACITY & "')" & vbLf
+        Else
+            SQL &= "   AND ( CAPACITY_Mobile Is NULL Or CAPACITY_Assessory Is NULL)" & vbLf
+        End If
 
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        If DT.Rows.Count > 0 Then
+            PRODUCT_ID = DT.Rows(0).Item("PRODUCT_ID")
+        End If
+        Return PRODUCT_ID
+    End Function
 
 
 #End Region

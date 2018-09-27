@@ -42,12 +42,11 @@
                 <nav>
                     <div class="main">
                         <span class="col-md-6">
-                            <asp:ImageButton ID="lnkHome" runat="server" ImageUrl="images/btu-home.png" />
-                            
-
+                           <%-- <asp:ImageButton ID="lnkHome" runat="server" ImageUrl="images/btu-home.png" />--%>
                         </span>
-                        <span class="col-md-6"><a href="javascript:history.back();">
-                            <img src="images/btu-prev.png" /></a></span>
+                        <span class="col-md-6">
+                            <asp:ImageButton ID="lnkBack" runat="server" ImageUrl="images/btu-prev.png" />
+                        </span>
                     </div>
                 </nav>
             </footer>

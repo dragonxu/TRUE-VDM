@@ -21,4 +21,31 @@ Partial Public Class Complete_Order
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+    
+    '''<summary>
+    '''btnSkip control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSkip As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''lnkHome control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkHome As Global.System.Web.UI.WebControls.ImageButton
+    
+    '''<summary>
+    '''lnkBack control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkBack As Global.System.Web.UI.WebControls.ImageButton
 End Class

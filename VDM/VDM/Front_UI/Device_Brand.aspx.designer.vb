@@ -14,13 +14,31 @@ Option Explicit On
 Partial Public Class Device_Brand
     
     '''<summary>
-    '''rptList control.
+    '''form1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents rptList As Global.System.Web.UI.WebControls.Repeater
+    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+    
+    '''<summary>
+    '''lblCode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblCode As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''rptPage control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rptPage As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
     '''lnkHome control.
@@ -30,4 +48,13 @@ Partial Public Class Device_Brand
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkHome As Global.System.Web.UI.WebControls.ImageButton
+    
+    '''<summary>
+    '''lnkBack control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkBack As Global.System.Web.UI.WebControls.ImageButton
 End Class

@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Product_List
+Partial Public Class Thank_You
     
     '''<summary>
     '''form1 control.
@@ -21,24 +21,6 @@ Partial Public Class Product_List
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-    
-    '''<summary>
-    '''lblCode control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblCode As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''rptPage control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rptPage As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
     '''lnkHome control.

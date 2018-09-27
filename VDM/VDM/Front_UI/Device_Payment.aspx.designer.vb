@@ -23,6 +23,24 @@ Partial Public Class Device_Payment
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
     
     '''<summary>
+    '''ScriptManager1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ScriptManager1 As Global.System.Web.UI.ScriptManager
+    
+    '''<summary>
+    '''udpList control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents udpList As Global.System.Web.UI.UpdatePanel
+    
+    '''<summary>
     '''formStep control.
     '''</summary>
     '''<remarks>
@@ -57,6 +75,33 @@ Partial Public Class Device_Payment
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCurrency_Str As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lnkCash control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkCash As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''lnkCredit control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkCredit As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''lnkTruemoney control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkTruemoney As Global.System.Web.UI.HtmlControls.HtmlAnchor
     
     '''<summary>
     '''pnlCash control.
@@ -102,4 +147,31 @@ Partial Public Class Device_Payment
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlTruemoney As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''btnSkip control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSkip As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''lnkHome control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkHome As Global.System.Web.UI.WebControls.ImageButton
+    
+    '''<summary>
+    '''lnkBack control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkBack As Global.System.Web.UI.WebControls.ImageButton
 End Class

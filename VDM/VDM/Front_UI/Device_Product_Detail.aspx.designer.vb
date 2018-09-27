@@ -41,6 +41,15 @@ Partial Public Class Device_Product_Detail
     Protected WithEvents img As Global.System.Web.UI.WebControls.Image
     
     '''<summary>
+    '''rptColor control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rptColor As Global.System.Web.UI.WebControls.Repeater
+    
+    '''<summary>
     '''lblDISPLAY_NAME control.
     '''</summary>
     '''<remarks>
@@ -95,15 +104,6 @@ Partial Public Class Device_Product_Detail
     Protected WithEvents lblDESCRIPTION_Warranty As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''rptColor control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rptColor As Global.System.Web.UI.WebControls.Repeater
-    
-    '''<summary>
     '''lblDescription_Header control.
     '''</summary>
     '''<remarks>
@@ -156,4 +156,22 @@ Partial Public Class Device_Product_Detail
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnSelect_str As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''lnkHome control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkHome As Global.System.Web.UI.WebControls.ImageButton
+    
+    '''<summary>
+    '''lnkBack control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkBack As Global.System.Web.UI.WebControls.ImageButton
 End Class

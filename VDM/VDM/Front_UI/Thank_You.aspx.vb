@@ -1,5 +1,6 @@
-﻿Public Class Complete_Order
+﻿Public Class Thank_You
     Inherits System.Web.UI.Page
+
 
     Private ReadOnly Property LANGUAGE As Integer
         Get
@@ -32,10 +33,7 @@
     End Sub
 
     Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click
-        Response.Redirect("Device_Payment.aspx?PRODUCT_ID=" & PRODUCT_ID)
+        Response.Redirect("Complete_Order.aspx?PRODUCT_ID=" & PRODUCT_ID)
     End Sub
 
-    Private Sub btnSkip_Click(sender As Object, e As EventArgs) Handles btnSkip.Click
-        Response.Redirect("Thank_You.aspx?PRODUCT_ID=" & PRODUCT_ID)
-    End Sub
 End Class

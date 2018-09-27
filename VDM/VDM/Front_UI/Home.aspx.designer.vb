@@ -23,11 +23,11 @@ Partial Public Class Home
     Protected WithEvents lnkDevice As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''lnkHome control.
+    '''lnkBack control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkHome As Global.System.Web.UI.WebControls.ImageButton
+    Protected WithEvents lnkBack As Global.System.Web.UI.WebControls.ImageButton
 End Class

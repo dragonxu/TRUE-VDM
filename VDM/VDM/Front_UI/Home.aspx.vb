@@ -5,8 +5,11 @@
 
     End Sub
 
-    Private Sub lnkDevice_Click(sender As Object, e As EventArgs) Handles lnkDevice.Click
+    Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click
+        Response.Redirect("Select_Language.aspx")
+    End Sub
 
+    Private Sub lnkDevice_Click(sender As Object, e As EventArgs) Handles lnkDevice.Click
         Response.Redirect("Device_Brand.aspx")
     End Sub
 End Class

@@ -36,7 +36,9 @@
 </head>
 <body class="bg2">
     <form id="form1" runat="server">
-
+           <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <asp:UpdatePanel ID="udpList" runat="server">
+            <ContentTemplate>
         <div class="warp">
             <header>
                 <img src="images/bg-top.png" />
@@ -59,18 +61,19 @@
                                     <asp:Label ID="lblCurrency_Str" runat="server" Text="บาท"></asp:Label></h3>
                                 <div class="btu-payment" style="margin: 60px 0 0 0;">
                                     <div class="row" style="margin-left: 100px;">
-                                        <a class="current" href="cart-step3-cash.html">
+<%--                                        <a class="current" id="lnkCash" runat ="server" >--%>
+                                        <a  id="lnkCash" runat ="server" >
                                             <dt class="icon-cash">
                                                 <span class="true-l">เงินสด<span>
                                             </dt>
                                         </a>
-                                        <a href="cart-step3-credit.html">
+                                        <a  id="lnkCredit" runat ="server" >
                                             <dt class="icon-credit">
                                                 <span class="true-l">บัตรเครดิต
                                                     <p class="text">บัตรเดบิต บัตรเงินสด</p>
                                                     <span></dt>
                                         </a>
-                                        <a href="cart-step3-truemoney.html">
+                                        <a  id="lnkTruemoney" runat ="server" >
                                             <dt class="icon-truemoney">
                                                 <span class="true-l">ทรูมันนี่<span>
                                             </dt>
@@ -201,7 +204,9 @@
                                                 <input class="true-l bg-field" name="" placeholder="YY" type="text">
                                             </div>
                                         </fieldset>
+                                         <div class="col-md-12" style ="text-align :center ;">
                                         <input class="order true-m" name="" type="submit" value="ส่ง" />
+                                             </div>
                                     </div>
 
                                 </div>
@@ -238,7 +243,9 @@
                         </asp:Panel>
 
 
-
+                        <div class="col-md-12">
+                                    <asp:Button ID="btnSkip" runat="server" class="btu true-bs" Style="background: #635b5b; padding: 0 50px 0 50px; float: right; margin-top: 100px;" Text="ต่อไป" />
+                                </div>
 
 
 
@@ -257,13 +264,15 @@
             </main>
 
 
-            <footer>
+               <footer style="bottom: 0px">
                 <nav>
                     <div class="main">
-                        <span class="col-md-6"><a href="home.html">
-                            <img src="images/btu-home.png" /></a></span>
-                        <span class="col-md-6"><a href="javascript:history.back();">
-                            <img src="images/btu-prev.png" /></a></span>
+                        <span class="col-md-6">
+                            <asp:ImageButton ID="lnkHome" runat="server" ImageUrl="images/btu-home.png" />
+                        </span>
+                        <span class="col-md-6">
+                            <asp:ImageButton ID="lnkBack" runat="server" ImageUrl="images/btu-prev.png" />
+                        </span>
                     </div>
                 </nav>
             </footer>
@@ -272,6 +281,9 @@
 
 
         </div>
+
+                </ContentTemplate>
+            </asp:UpdatePanel>
     </form>
 </body>
 </html>

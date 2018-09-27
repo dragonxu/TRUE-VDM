@@ -217,16 +217,28 @@ main{ width:100%; display:inline-block !important;}
 .pic-sim{width:100%; padding-top:100px; position:relative; display:inline-block; vertical-align:bottom;}
 .pic-sim h3{width:auto; line-height:75px; margin:0; color:#313035; font-size:125px; font-weight:normal; letter-spacing:10px; position:absolute; bottom:15px; left:0; }
 .pic-sim img{float:right;}
-.devices ul{width:100%; margin-bottom:100px; display:inline-block;
+/*.devices ul{
+    width:100%; 
+    margin-bottom:100px; 
+    display:inline-block;
+
 -webkit-box-shadow: 8px 10px 8px 0px rgba(0,0,0,0.30);
 -moz-box-shadow: 8px 10px 8px 0px rgba(0,0,0,0.30);
 box-shadow: 8px 10px 8px 0px rgba(0,0,0,0.30);
-}
+}*/
 .devices ul li{padding:0; display:inline-block; float:left;}
 .devices ul li a{width:100%; display:block; position:relative;}
 .devices ul li a p{width:100%; color:#777E80; font-size:30px; text-align:center; display:block; position:absolute; top:10px; left:0; }
 .devices ul li a img{width:100%;}
 
+.Last{
+    /*width:100%;*/    
+    display:inline-block;
+
+-webkit-box-shadow: 8px 10px 8px 0px rgba(0,0,0,0.30);
+-moz-box-shadow: 8px 10px 8px 0px rgba(0,0,0,0.30);
+box-shadow: 8px 10px 8px 0px rgba(0,0,0,0.30);
+}
 
 .list-devices{
     width:100%; 
@@ -276,10 +288,41 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', end
   -moz-box-shadow: 10px 10px 19px 0px rgba(0,0,0,0.55);
   box-shadow: 10px 10px 19px 0px rgba(0,0,0,0.55);
 }
+/*brand*/
+.brand .slick-initialized .slick-slide{padding:0; }
+.brand .slick-prev, .brand .slick-next{top:380px;}
+.brand .slick-next{right:-60px; }
+.brand .slick-prev{left:-60px; }
+.brand .slick-initialized .slick-slide{padding: unset ;}
+ 
+.brand .description{width:100%; margin:60px 0; display:inline-block;}
+.brand .description .pic{width:370px; padding:0 40px; display:inline-block; float:left;}
+.brand .description .pic img{width:100%;}
+.brand .description figure{margin-top:-10px; padding:0 0 0 40px; color:#434748; display:inline-block;}
+.brand .description .top{width:100%; padding:0; margin:0 0 30px 0; color:#424146; font-size:48px; display:inline-block;}
+.brand .description .topic{width:100%; padding:0; margin:0 0 30px 0; color:#4D4D4D; display:inline-block;}
+.brand .description .topic-cart{min-height:135px; padding-left:410px; position:relative;}
+.brand .description .topic-cart h3{position:absolute; top:0; left:0; color:#4D4D4D; font-size:60px;}
+.brand .description .topic h1{width:auto; line-height:80px; margin:0; font-size:110px; font-weight:normal; }
+.brand .description .topic h5{width:auto; line-height:38px; margin:0; font-size:42px; font-weight:normal; }
+
+.brand .detail li{width:100%; line-height:26px; margin:0; padding:0; color:#000; font-size:32px; display:inline-block;}
+.brand .detail li::before{content:"• "; font-size:20px; line-height:26px; padding-right:3px; }
+
+.brand .detail{width:100%; padding-left:60px; margin:20px 0 40px 0; color:#000; position:relative; display:inline-block;}
+.brand .detail em{ display:inline-block; position:absolute; left:0; top:0;
+}
+.brand .detail h4{width:100%; margin:0; font-size:55px; display:inline-block;}
+ 
+/*priceplan*/
+
+
+
 .priceplan .slick-initialized .slick-slide{padding:0; }
-.priceplan .slick-prev, .priceplan .slick-next{top:380px;}
-.priceplan .slick-next{right:-60px; }
-.priceplan .slick-prev{left:-60px; }
+
+.priceplan .slick-prev, .priceplan .slick-next{top:70px;}
+.priceplan .slick-next{right:-10px; }
+.priceplan .slick-prev{left:10px; }
 .priceplan .description{width:100%; margin:60px 0; display:inline-block;}
 .priceplan .description .pic{width:370px; padding:0 40px; display:inline-block; float:left;}
 .priceplan .description .pic img{width:100%;}
@@ -328,7 +371,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', end
 .priceplan .detail li::before{content:"• "; font-size:20px; line-height:26px; padding-right:3px; }
 .priceplan .detail-sim{width:86%; margin:0 auto 60px auto; display:block;}
 .priceplan .detail-sim img{width:100%; }
-.priceplan .list{width:100%; color:#000; margin-bottom:50px; display:inline-block;}
+.priceplan .list{width:100%; color:#000; margin-bottom:50px; display:inline-block; padding-top :50px;}
 .priceplan .list h3{width:350px; line-height:50px; padding:0; margin:0; color:#424146; font-size:78px; display:inline-block;}
 .priceplan .list h3.w100{width:100%;}
 .priceplan .list h2{width:270px; line-height:50px; padding:0; margin:0; color:#424146; font-size:80px; display:inline-block; position:relative;}
