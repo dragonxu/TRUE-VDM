@@ -26,12 +26,12 @@
   <div class="lang">
     <div class="main">
       <h2 class="true-m">Please Select Language</h2>
-      <span class="col-md-4"><a id="TH" runat ="server" href="home.aspx"><img class="img-100" src="images/flag-th.png"/></a></span>
-      <span class="col-md-4"><a id="EN" runat ="server" href="home.aspx"><img class="img-100" src="images/flag-en.png"/></a></span>
-      <span class="col-md-4"><a id="CN" runat ="server" href="home.aspx"><img class="img-100" src="images/flag-cn.png"/></a></span>
-      <span class="col-md-4"><a id="JP" runat ="server" href="home.aspx"><img class="img-100" src="images/flag-jp.png"/></a></span>
-      <span class="col-md-4"><a id="KR" runat ="server" href="home.aspx"><img class="img-100" src="images/flag-kr.png"/></a></span>
-      <span class="col-md-4"><a id="RU" runat ="server" href="home.aspx"><img class="img-100" src="images/flag-ru.png"/></a></span>
+      <span class="col-md-4"><a id="TH" runat ="server" ><img class="img-100" src="images/flag-th.png"/></a></span>
+      <span class="col-md-4"><a id="EN" runat ="server" ><img class="img-100" src="images/flag-en.png"/></a></span>
+      <span class="col-md-4"><a id="CN" runat ="server" ><img class="img-100" src="images/flag-cn.png"/></a></span>
+      <span class="col-md-4"><a id="JP" runat ="server" ><img class="img-100" src="images/flag-jp.png"/></a></span>
+      <span class="col-md-4"><a id="KR" runat ="server" ><img class="img-100" src="images/flag-kr.png"/></a></span>
+      <span class="col-md-4"><a id="RU" runat ="server" ><img class="img-100" src="images/flag-ru.png"/></a></span>
     </div>
   </div>
 </main>
