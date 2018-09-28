@@ -1,10 +1,19 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Device_Product_Detail.aspx.vb" Inherits="VDM.Device_Product_Detail" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Device_Product_Detail.aspx.vb" Inherits="VDM.Device_Product_Detail"  ResponseEncoding="UTF-8"  %>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv=Content-Type content="text/html; charset=tis-620">
+
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-     <meta http-equiv="Page-Enter" content="revealTrans(Duration=2.0,Transition=12)">
+    <meta http-equiv="Page-Enter" content="revealTrans(Duration=2.0,Transition=12)">
+     
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=gb18030" />
+<meta http-equiv="Content-Type" content="text/html; charset=big5" />
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+
+
 
     <title>Kiosk</title>
     <link href="css/true.css" rel="stylesheet" type="text/css" />
@@ -41,9 +50,9 @@
 </head>
 <body class="bg2">
     <form id="form1" runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <%--<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <asp:UpdatePanel ID="udpList" runat="server">
-            <ContentTemplate>
+            <ContentTemplate>--%>
                 <div class="warp">
                     <header>
                         <img src="images/bg-top.png" />
@@ -237,8 +246,8 @@
 
 
 
-            </ContentTemplate>
-        </asp:UpdatePanel>
+<%--            </ContentTemplate>
+        </asp:UpdatePanel>--%>
     </form>
 </body>
 <script type="text/javascript" src="js/slick.js"></script>

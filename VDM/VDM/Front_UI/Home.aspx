@@ -53,7 +53,7 @@
                     </div>
                 </nav>
             </footer>
-         <footer style="bottom: 0px ; width :100%;padding :20px 0;">                 
+         <%--<footer style="bottom: 0px ; width :100%;padding :20px 0;">                 
                         <uc1:UC_Machine_Console runat="server" id="UC_Machine_Console1" />                 
-            </footer> 
+            </footer> --%>
 </asp:Content>

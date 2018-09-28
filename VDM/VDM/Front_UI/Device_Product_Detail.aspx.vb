@@ -122,8 +122,16 @@ Public Class Device_Product_Detail
         If DT.Rows.Count > 0 Then
             DT_Product_Model = DT   ' Product ที่จัดกลุ่ม Model  เดียวกัน
 
+
             'แสดง Product Default ครั้งแรก
-            img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & PRODUCT_ID & "&LANG=" & LANGUAGE
+
+            'chack pic
+            Dim Path As String = BL.Get_Product_Picture_Path(PRODUCT_ID, LANGUAGE)
+            If IO.File.Exists(Path) Then
+                img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & PRODUCT_ID & "&LANG=" & LANGUAGE
+            Else
+                img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & PRODUCT_ID & "&LANG=" & VDM_BL.UILanguage.TH
+            End If
             lblDISPLAY_NAME.Text = DT.Rows(0).Item("DISPLAY_NAME_" & BL.Get_Language_Code(LANGUAGE)).ToString()
 
             'Warranty
@@ -149,7 +157,7 @@ Public Class Device_Product_Detail
             SQL_Active &= "        ,SPEC_ID,SEQ " & vbLf
             SQL_Active &= "        ,SPEC_NAME_" & BL.Get_Language_Code(LANGUAGE).ToString() & ",DESCRIPTION_" & BL.Get_Language_Code(LANGUAGE).ToString()
             SQL_Active &= "        ,CAT_ID,MODEL       " & vbLf
-            SQL_Active &= "    From VDM.dbo.VW_CURRENT_PRODUCT_SPEC " & vbLf
+            SQL_Active &= "    From VW_CURRENT_PRODUCT_SPEC " & vbLf
             SQL_Active &= "    Where PRODUCT_ID =" & PRODUCT_ID & " And SPEC_ID In (" & VDM_BL.Spec.Capacity & "," & VDM_BL.Spec.Color & ") " & vbLf
 
             Dim DA As New SqlDataAdapter(SQL_Active, BL.ConnectionString)
@@ -238,8 +246,12 @@ Public Class Device_Product_Detail
         Dim btnSelect As Button = e.Item.FindControl("btnSelect")
         btnColor.Attributes("onclick") = "$('#" & btnSelect.ClientID & "').click();"
 
-        img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & e.Item.DataItem("PRODUCT_ID") & "&LANG=" & LANGUAGE
-
+        Dim Path As String = BL.Get_Product_Picture_Path(PRODUCT_ID, LANGUAGE)
+        If IO.File.Exists(Path) Then
+            img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & e.Item.DataItem("PRODUCT_ID") & "&LANG=" & LANGUAGE
+        Else
+            img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & e.Item.DataItem("PRODUCT_ID") & "&LANG=" & VDM_BL.UILanguage.TH
+        End If
         lblColor.Text = e.Item.DataItem("DESCRIPTION").ToString
         'If e.Item.DataItem("DESCRIPTION").ToString = COLOR Then
         '    lnkColor.Attributes("class") = "btu active true-bs"
