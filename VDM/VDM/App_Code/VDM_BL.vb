@@ -1151,7 +1151,7 @@ Public Class VDM_BL
         SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Color & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) COLOR " & vbLf
         SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Capacity & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) CAPACITY_Mobile " & vbLf
         SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.CapacityAccessories & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) CAPACITY_Assessory " & vbLf
-        SQL &= "      From VDM.dbo.VW_CURRENT_PRODUCT_SPEC " & vbLf
+        SQL &= "      From VW_CURRENT_PRODUCT_SPEC " & vbLf
         SQL &= "      Where SPEC_ID In (" & Spec.Color & "," & Spec.Capacity & "," & Spec.CapacityAccessories & ")  AND KO_ID=" & KO_ID
         SQL &= "      Group BY   PRODUCT_ID, PRODUCT_CODE, PRODUCT_NAME, KO_ID, MODEL, DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " " & vbLf
         SQL &= "  ) TB  " & vbLf

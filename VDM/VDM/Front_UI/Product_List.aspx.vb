@@ -176,7 +176,13 @@ Public Class Product_List
         Dim lblProduct As Label = e.Item.FindControl("lblProduct")
         Dim btnProduct As HtmlAnchor = e.Item.FindControl("btnProduct")
         Dim btnSelect As Button = e.Item.FindControl("btnSelect")
-        img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & e.Item.DataItem("PRODUCT_ID") & "&LANG=" & LANGUAGE
+
+        Dim Path As String = BL.Get_Product_Picture_Path(e.Item.DataItem("PRODUCT_ID"), LANGUAGE)
+        If IO.File.Exists(Path) Then
+            img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & e.Item.DataItem("PRODUCT_ID") & "&LANG=" & LANGUAGE
+        Else
+            img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & e.Item.DataItem("PRODUCT_ID") & "&LANG=" & VDM_BL.UILanguage.TH
+        End If
 
         lblProduct.Text = e.Item.DataItem("MODEL").ToString()
         btnProduct.Attributes("onclick") = "$('#" & btnSelect.ClientID & "').click();"
