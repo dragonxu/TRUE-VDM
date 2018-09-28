@@ -51,14 +51,14 @@ Public Class UC_Product_Stock
 
     Public ReadOnly Property VW_ALL_PRODUCT As DataTable
         Get
-            If IsNothing(Session("VW_ALL_PRODUCT_" & MY_UNIQUE_ID)) Then
+            If IsNothing(Session("VW_ALL_PRODUCT")) Then
                 Dim SQL As String = "SELECT * FROM VW_ALL_PRODUCT"
                 Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
                 Dim DT As New DataTable
                 DA.Fill(DT)
-                Session("VW_ALL_PRODUCT_" & MY_UNIQUE_ID) = DT
+                Session("VW_ALL_PRODUCT") = DT
             End If
-            Return Session("VW_ALL_PRODUCT_" & MY_UNIQUE_ID)
+            Return Session("VW_ALL_PRODUCT")
         End Get
     End Property
 
