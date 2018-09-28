@@ -28,7 +28,11 @@ Public Class Device_Product_Detail
 
     Protected Property PRODUCT_ID As Integer
         Get
-            Return Val(lblCode.Attributes("PRODUCT_ID"))
+            Try
+                Return lblCode.Attributes("PRODUCT_ID")
+            Catch ex As Exception
+                Return 0
+            End Try
         End Get
         Set(value As Integer)
             lblCode.Attributes("PRODUCT_ID") = value
@@ -37,7 +41,11 @@ Public Class Device_Product_Detail
 
     Protected Property MODEL As String
         Get
-            Return lblCode.Attributes("MODEL").ToString
+            Try
+                Return lblCode.Attributes("MODEL")
+            Catch ex As Exception
+                Return ""
+            End Try
         End Get
         Set(value As String)
             lblCode.Attributes("MODEL") = value
@@ -46,7 +54,11 @@ Public Class Device_Product_Detail
 
     Protected Property CAPACITY As String
         Get
-            Return lblCode.Attributes("CAPACITY").ToString
+            Try
+                Return lblCode.Attributes("CAPACITY")
+            Catch ex As Exception
+                Return ""
+            End Try
         End Get
         Set(value As String)
             lblCode.Attributes("CAPACITY") = value
@@ -63,19 +75,36 @@ Public Class Device_Product_Detail
     End Property
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        If Not IsNumeric(Session("LANGUAGE")) Then
+            Response.Redirect("Select_Language.aspx")
+        End If
+
         If Not IsPostBack Then
-            BRAND_ID = Request.QueryString("BRAND_ID")
             PRODUCT_ID = Request.QueryString("PRODUCT_ID")
-            MODEL = Request.QueryString("MODEL").ToString
+            If Request.QueryString("MODEL") = Nothing Then
+                Dim SQL As String = ""
+                SQL &= "  SELECT * FROM VW_CURRENT_PRODUCT_DETAIL WHERE PRODUCT_ID=" & PRODUCT_ID
+                Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+                Dim DT_Para As New DataTable
+                DA.Fill(DT_Para)
+                If DT_Para.Rows.Count > 0 Then
+                    MODEL = DT_Para.Rows(0).Item("MODEL")
+                    BRAND_ID = DT_Para.Rows(0).Item("BRAND_ID")
+                End If
+
+            Else
+                BRAND_ID = Request.QueryString("BRAND_ID")
+                MODEL = Request.QueryString("MODEL").ToString
+            End If
+
+            CAPACITY = ""
+            COLOR = ""
+
 
             BindList()
         Else
             initFormPlugin()
         End If
-
-
-
-
     End Sub
 
     Private Sub initFormPlugin()
@@ -94,13 +123,13 @@ Public Class Device_Product_Detail
             DT_Product_Model = DT   ' Product ที่จัดกลุ่ม Model  เดียวกัน
 
             'แสดง Product Default ครั้งแรก
-            img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & PRODUCT_ID & "&LANG=" & LANGUAGE & "&t=" & Now.ToOADate.ToString.Replace(".", "")
+            img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & PRODUCT_ID & "&LANG=" & LANGUAGE
             lblDISPLAY_NAME.Text = DT.Rows(0).Item("DISPLAY_NAME_" & BL.Get_Language_Code(LANGUAGE)).ToString()
 
             'Warranty
             'pnlSPEC_Warranty.
             Dim DT_Warranty As DataTable = BL.GetList_Product_Spec_Warranty(PRODUCT_ID, KO_ID, LANGUAGE)
-            If DT_Product_Model.Rows.Count > 0 Then
+            If DT_Warranty.Rows.Count > 0 Then
                 lblSPEC_Warranty.Text = DT_Warranty.Rows(0).Item("SPEC_NAME").ToString()
                 lblDESCRIPTION_Warranty.Text = DT_Warranty.Rows(0).Item("DESCRIPTION").ToString()
             End If
@@ -157,74 +186,6 @@ Public Class Device_Product_Detail
 
 
 
-    'Private Sub rptProductList_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles rptProductList.ItemDataBound
-    '    If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
-
-    '    Dim img As Image = e.Item.FindControl("img")
-
-    '    Dim lblDISPLAY_NAME As Label = e.Item.FindControl("lblDISPLAY_NAME")
-
-    '    'Warranty
-    '    Dim pnlSPEC_Warranty As Panel = e.Item.FindControl("pnlSPEC_Warranty")          'ถ้าไม่มี Warranty pnlSPEC_Warranty=false
-    '    Dim lblSPEC_Warranty As Label = e.Item.FindControl("lblSPEC_Warranty")
-    '    Dim lblDESCRIPTION_Warranty As Label = e.Item.FindControl("lblDESCRIPTION_Warranty")
-
-    '    'Description
-    '    Dim lblDescription_Header As Label = e.Item.FindControl("lblDescription_Header")
-    '    Dim lblDescription_Detail As Label = e.Item.FindControl("lblDescription_Detail")
-
-    '    'Price
-    '    Dim lblPrice_str As Label = e.Item.FindControl("lblPrice_str")
-    '    Dim lblPrice_Money As Label = e.Item.FindControl("lblPrice_Money")
-    '    Dim lblCurrency_Str As Label = e.Item.FindControl("lblCurrency_Str")
-
-    '    Dim btnSelect_str As LinkButton = e.Item.FindControl("btnSelect_str")
-
-    '    lblDISPLAY_NAME.Text = e.Item.DataItem("DISPLAY_NAME_" & BL.Get_Language_Code(LANGUAGE)).ToString()
-    '    img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & e.Item.DataItem("PRODUCT_ID") & "&LANG=" & LANGUAGE & "&t=" & Now.ToOADate.ToString.Replace(".", "")
-
-    '    'Warranty
-    '    'pnlSPEC_Warranty.
-    '    Dim DT_Warranty As DataTable = BL.GetList_Product_Spec_Warranty(PRODUCT_ID, KO_ID, LANGUAGE)
-    '    If DT_Product_Model.Rows.Count > 0 Then
-    '        lblSPEC_Warranty.Text = DT_Warranty.Rows(0).Item("SPEC_NAME").ToString()
-    '        lblDESCRIPTION_Warranty.Text = DT_Warranty.Rows(0).Item("DESCRIPTION").ToString()
-    '    End If
-
-    '    'lblDescription_Header.Text = ""  ' จาก Master แปล
-    '    lblDescription_Detail.Text = e.Item.DataItem("DESCRIPTION_" & BL.Get_Language_Code(LANGUAGE)).ToString()
-
-    '    'lblPrice_str.Text = ""
-    '    If Not IsDBNull(e.Item.DataItem("PRICE")) Then
-    '        lblPrice_Money.Text = FormatNumber(Val(e.Item.DataItem("PRICE")), 2)
-    '        'lblCurrency_Str.Text = ""
-
-    '    End If
-
-
-    '    '--------
-    '    Dim rptCapacity As Repeater = e.Item.FindControl("rptCapacity")
-    '    AddHandler rptCapacity.ItemDataBound, AddressOf rptCapacity_ItemDataBound
-
-    '    Dim rptSpec As Repeater = e.Item.FindControl("rptSpec")
-    '    AddHandler rptSpec.ItemDataBound, AddressOf rptSpec_ItemDataBound
-    '    Dim rptColor As Repeater = e.Item.FindControl("rptColor")
-    '    AddHandler rptColor.ItemDataBound, AddressOf rptColor_ItemDataBound
-
-    '    Dim DT_Capacity As DataTable = BL.GetList_Product_Spec_Capacity(MODEL, KO_ID, Val(e.Item.DataItem("CAT_ID").ToString()), LANGUAGE)
-    '    rptCapacity.DataSource = DT_Capacity
-    '    rptCapacity.DataBind()
-
-    '    Dim DT_Spec As DataTable = BL.GetList_Product_Spec_Other(e.Item.DataItem("PRODUCT_ID"), KO_ID, LANGUAGE)
-    '    rptSpec.DataSource = DT_Spec
-    '    rptSpec.DataBind()
-
-    '    Dim DT_Color As DataTable = BL.GetList_Product_Spec_Color(MODEL, KO_ID, LANGUAGE)
-    '    rptColor.DataSource = DT_Color
-    '    rptColor.DataBind()
-    'End Sub
-
-
 #End Region
 
 #Region "rptCapacity"
@@ -234,11 +195,14 @@ Public Class Device_Product_Detail
         lnkCapacity.Text = e.Item.DataItem("DESCRIPTION").ToString + e.Item.DataItem("Unit").ToString
         'btnCapacity.CommandArgument = e.Item.DataItem("CAT_ID")
 
-        If e.Item.DataItem("DESCRIPTION").ToString = CAPACITY Then
-            lnkCapacity.Attributes("class") = "btu active true-bs"
-        Else
-            lnkCapacity.Attributes("class") = "btu true-bs"
-        End If
+        'If e.Item.DataItem("DESCRIPTION").ToString = CAPACITY Then
+        '    lnkCapacity.Attributes("class") = "btu active true-bs"
+        'Else
+        '    lnkCapacity.Attributes("class") = "btu true-bs"
+        'End If
+
+        'lnkCapacity.Style("color") = "#FFF"
+        'lnkCapacity.Style("background") = "##47464B"
 
 
     End Sub
@@ -270,26 +234,51 @@ Public Class Device_Product_Detail
         Dim lblColor As Label = e.Item.FindControl("lblColor")
         Dim lnkColor As LinkButton = e.Item.FindControl("lnkColor")
 
-        img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & e.Item.DataItem("PRODUCT_ID") & "&LANG=" & LANGUAGE & "&t=" & Now.ToOADate.ToString.Replace(".", "")
+        Dim btnColor As HtmlAnchor = e.Item.FindControl("btnColor")
+        Dim btnSelect As Button = e.Item.FindControl("btnSelect")
+        btnColor.Attributes("onclick") = "$('#" & btnSelect.ClientID & "').click();"
+
+        img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & e.Item.DataItem("PRODUCT_ID") & "&LANG=" & LANGUAGE
 
         lblColor.Text = e.Item.DataItem("DESCRIPTION").ToString
-        If e.Item.DataItem("DESCRIPTION").ToString = CAPACITY Then
-            lnkColor.Attributes("class") = "btu active true-bs"
-        Else
-            lnkColor.Attributes("class") = "btu true-bs"
-        End If
+        'If e.Item.DataItem("DESCRIPTION").ToString = COLOR Then
+        '    lnkColor.Attributes("class") = "btu active true-bs"
+        '    'img.Attributes("CssClass") = "btn-active"
+        'Else
+        '    lnkColor.Attributes("class") = "btu true-bs"
+        'End If
 
+        lnkColor.CommandArgument = e.Item.DataItem("DESCRIPTION").ToString()
     End Sub
+
     Protected Sub rptColor_ItemCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.RepeaterCommandEventArgs)
-
+        If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
+        Dim lblColor As Label = e.Item.FindControl("lblColor")
+        Dim img As Image = e.Item.FindControl("img")
+        Select Case e.CommandName
+            Case "Select"
+                COLOR = lblColor.Text
+                'MODEL COLOR CAPACITY
+                'img.Attributes("class") = "btn-active "
+                PRODUCT_ID = BL.GetProduct_ID_Select(MODEL, COLOR, CAPACITY, KO_ID, LANGUAGE)
+                BindList()
+        End Select
     End Sub
 
+    Private Sub btnSelect_str_Click(sender As Object, e As EventArgs) Handles btnSelect_str.Click
+        Response.Redirect("Device_Shoping_Cart.aspx?PRODUCT_ID=" & PRODUCT_ID & "&MODEL=" & MODEL & "&BRAND_ID=" & BRAND_ID)
+    End Sub
 
 #End Region
 
 
-    'Private Sub btnSelect_str_Click(sender As Object, e As EventArgs) Handles btnSelect_str.Click
-    '    Response.Redirect("Device_Shoping_Cart.aspx")
-    'End Sub
+
+    Private Sub lnkHome_Click(sender As Object, e As ImageClickEventArgs) Handles lnkHome.Click
+        Response.Redirect("Home.aspx")
+    End Sub
+
+    Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click
+        Response.Redirect("Product_List.aspx?BRAND_ID=" & BRAND_ID)
+    End Sub
 
 End Class

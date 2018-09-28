@@ -2,7 +2,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Page-Exit" content="revealTrans(Duration=2.0,Transition=0)">
+    <meta http-equiv="Page-Exit" content="revealTrans(Duration=5.0,Transition=0)">
+    <meta http-equiv="Page-Enter" content="revealTrans(Duration=5.0,Transition=8)">
+     
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -137,13 +139,25 @@
                     </div>
                 </div>
             </main>
-            <footer>
+      <%--      <footer>
                 <nav>
                     <div class="main">
                         <span class="col-md-6"><a href="home.html">
                             <img src="images/btu-home.png" /></a></span>
                         <span class="col-md-6"><a href="javascript:history.back();">
                             <img src="images/btu-prev.png" /></a></span>
+                    </div>
+                </nav>
+            </footer>--%>
+               <footer style="bottom: 0px">
+                <nav>
+                    <div class="main">
+                        <span class="col-md-6">
+                            <asp:ImageButton ID="lnkHome" runat="server" ImageUrl="images/btu-home.png" />
+                        </span>
+                        <span class="col-md-6">
+                            <asp:ImageButton ID="lnkBack" runat="server" ImageUrl="images/btu-prev.png" />
+                        </span>
                     </div>
                 </nav>
             </footer>

@@ -11,41 +11,32 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Home
-
+Partial Public Class SIM_List
+    
     '''<summary>
-    '''lnkDevice control.
+    '''form1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkDevice As Global.System.Web.UI.WebControls.LinkButton
-
+    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+    
     '''<summary>
-    '''lnkSim control.
+    '''rptList control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkSim As Global.System.Web.UI.WebControls.LinkButton
-
+    Protected WithEvents rptList As Global.System.Web.UI.WebControls.Repeater
+    
     '''<summary>
-    '''lnkBack control.
+    '''lnkHome control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkBack As Global.System.Web.UI.WebControls.ImageButton
-
-    '''<summary>
-    '''UC_Machine_Console1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents UC_Machine_Console1 As Global.VDM.UC_Machine_Console
+    Protected WithEvents lnkHome As Global.System.Web.UI.WebControls.ImageButton
 End Class

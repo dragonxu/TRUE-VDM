@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Select_Language.aspx.vb" Inherits="VDM.Select_Language" %>
 
+<%@ Register Src="~/Front_UI/UC_Machine_Console.ascx" TagPrefix="uc1" TagName="UC_Machine_Console" %>
+
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -15,6 +18,7 @@
 <script type="text/javascript" src="js/bootstrap.js"></script>
 </head>
 <body>
+    <form id="form" runat ="server" >
 <div class="warp bg">
 <!-- <header><img src="images/bg-top.png"/></header> -->
 <main>
@@ -22,16 +26,27 @@
   <div class="lang">
     <div class="main">
       <h2 class="true-m">Please Select Language</h2>
-      <span class="col-md-4"><a id="TH" runat ="server" href="home.aspx"><img class="img-100" src="images/flag-th.png"/></a></span>
-      <span class="col-md-4"><a id="EN" runat ="server" href="home.aspx"><img class="img-100" src="images/flag-en.png"/></a></span>
-      <span class="col-md-4"><a id="CN" runat ="server" href="home.aspx"><img class="img-100" src="images/flag-cn.png"/></a></span>
-      <span class="col-md-4"><a id="JP" runat ="server" href="home.aspx"><img class="img-100" src="images/flag-jp.png"/></a></span>
-      <span class="col-md-4"><a id="KR" runat ="server" href="home.aspx"><img class="img-100" src="images/flag-kr.png"/></a></span>
-      <span class="col-md-4"><a id="RU" runat ="server" href="home.aspx"><img class="img-100" src="images/flag-ru.png"/></a></span>
+      <span class="col-md-4"><a id="TH" runat ="server" ><img class="img-100" src="images/flag-th.png"/></a></span>
+      <span class="col-md-4"><a id="EN" runat ="server" ><img class="img-100" src="images/flag-en.png"/></a></span>
+      <span class="col-md-4"><a id="CN" runat ="server" ><img class="img-100" src="images/flag-cn.png"/></a></span>
+      <span class="col-md-4"><a id="JP" runat ="server" ><img class="img-100" src="images/flag-jp.png"/></a></span>
+      <span class="col-md-4"><a id="KR" runat ="server" ><img class="img-100" src="images/flag-kr.png"/></a></span>
+      <span class="col-md-4"><a id="RU" runat ="server" ><img class="img-100" src="images/flag-ru.png"/></a></span>
     </div>
   </div>
 </main>
-<footer><div class="bottom-logo"><img src="images/bg-bottom.png"/></div></footer>
+<footer><div class="bottom-logo"><img src="images/bg-bottom.png"/>
 </div>
+
+     <footer style="bottom: 0px ; width :100%;padding :20px 0;">
+                 
+                        <uc1:UC_Machine_Console runat="server" id="UC_Machine_Console" />
+
+                 
+            </footer>
+
+</footer>
+</div>
+        </form>
 </body>
 </html>

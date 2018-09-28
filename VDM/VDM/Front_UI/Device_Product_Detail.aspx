@@ -4,6 +4,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+     <meta http-equiv="Page-Enter" content="revealTrans(Duration=2.0,Transition=12)">
+
     <title>Kiosk</title>
     <link href="css/true.css" rel="stylesheet" type="text/css" />
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
@@ -17,9 +19,18 @@
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/jquery.fancybox.js"></script>
     <script type="text/javascript" src="js/lightslider.js"></script>
+
+    <link href="css/slick.css" rel="stylesheet" type="text/css" />
+    <link href="css/slick-theme.css" rel="stylesheet" type="text/css" />
+
     <style>
         header {
             position: relative;
+        }
+
+        .btn-active {
+        height: 80px;width: unset;margin-top: 30px;background: #827b7b;border-radius: 10px;
+        /* border: 10px; */
         }
     </style>
     <script>
@@ -30,24 +41,54 @@
 </head>
 <body class="bg2">
     <form id="form1" runat="server">
-        <div class="warp">
-            <header>
-                <img src="images/bg-top.png" />
-            </header>
-            <main>
-                <div class="priceplan">
-                    <asp:Label ID="lblCode" runat="server" Style="display: none;"></asp:Label>
-                    <div class="main3">
-                        <div class="detail-slider">
-
-                            <%--<asp:Repeater ID="rptProductList" runat="server">
-                                <ItemTemplate>--%>
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <asp:UpdatePanel ID="udpList" runat="server">
+            <ContentTemplate>
+                <div class="warp">
+                    <header>
+                        <img src="images/bg-top.png" />
+                    </header>
+                    <main>
+                        <div class="priceplan">
+                            <asp:Label ID="lblCode" runat="server" Style="display: none;" CAPACITY=""></asp:Label>
+                            <div class="main3">
+                                <div class="detail-slider">
+                                     
                                     <div>
                                         <div class="description">
                                             <div class="col-md-5">
-                                                <div class="pic" style="padding: unset;">
-                                                    <%-- <img src="images/iphonex-white.png" />    Width="250px"--%>
-                                                    <asp:Image ID="img" runat="server"></asp:Image>
+                                                <div class="row">
+                                                    <div class="pic" style="padding: unset;">
+                                                        <%-- <img src="images/iphonex-white.png" />    Width="250px"--%>
+                                                        <asp:Image ID="img" runat="server"></asp:Image>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="card-slider" style="padding: unset; padding-left: 80px;">
+                                                        <asp:Repeater ID="rptColor" runat="server" OnItemCommand="rptColor_ItemCommand">
+                                                            <ItemTemplate>
+                                                                <div>
+
+                                                                    <span><i class="current" style="padding: 0 10px;">
+                                                                        <asp:LinkButton ID="lnkColor" runat="server">
+                                                                            <a id="btnColor" runat="server" >
+                                                                                <asp:Image ID="img"  runat="server" Style="height: 70px; width: unset;"></asp:Image>
+                                                                            </a>
+                                                                        </asp:LinkButton>
+                                                                        <asp:Button ID="btnSelect" runat="server" Style="display: none;" CommandName="Select" />
+                                                                    </i>
+                                                                        <p class="true-m">
+                                                                            <asp:Label ID="lblColor" runat="server"></asp:Label>
+                                                                        </p>
+                                                                    </span>
+
+                                                                </div>
+                                                            </ItemTemplate>
+                                                        </asp:Repeater>
+
+                                                    </div>
+
                                                 </div>
 
                                             </div>
@@ -62,12 +103,12 @@
                                                             </h3>
                                                         </div>
                                                         <div class="capacity" style="padding-top: 20px;">
-                                                            <asp:Repeater ID="rptCapacity" runat="server" >
+                                                            <asp:Repeater ID="rptCapacity" runat="server">
                                                                 <ItemTemplate>
-                                                                   <%-- <asp:Button ID="btnCapacity" runat="server" class="active true-l" CommandName="Capacity" value="64GB" Visible="false" />
+                                                                    <%-- <asp:Button ID="btnCapacity" runat="server" class="active true-l" CommandName="Capacity" value="64GB" Visible="false" />
                                                                     --%>
-                                                                    <asp:LinkButton ID="lnkCapacity" runat="server" class="btu true-bs" Text="เลือก"></asp:LinkButton>
-                                                                    
+                                                                    <asp:LinkButton ID="lnkCapacity" runat="server" class="btu active true-bs" Text="เลือก"></asp:LinkButton>
+
                                                                 </ItemTemplate>
                                                             </asp:Repeater>
                                                             <%--<input class="button active true-l" name="sliver64GB" type="button" value="64GB" />
@@ -97,15 +138,18 @@
                                                     <asp:Panel ID="pnlSPEC_Warranty" runat="server">
                                                         <span>
                                                             <p class="bottom true-m">
-                                                                <asp:Label ID="lblSPEC_Warranty" runat="server"></asp:Label>
-                                                                &nbsp;
-                                                            <asp:Label ID="lblDESCRIPTION_Warranty" runat="server"></asp:Label>
+                                                                <div style="float: left; padding-right: 10px;">
+                                                                    <asp:Label ID="lblSPEC_Warranty" runat="server"></asp:Label>
+                                                                </div>
+                                                                <div style="float: left;">
+                                                                    <asp:Label ID="lblDESCRIPTION_Warranty" runat="server"></asp:Label>
+                                                                </div>
                                                             </p>
                                                         </span>
                                                     </asp:Panel>
 
                                                     <div class="thumb">
-                                                        <asp:Repeater ID="rptColor" runat="server" >
+                                                        <%--<asp:Repeater ID="rptColor" runat="server" >
                                                             <ItemTemplate>
                                                                 <span><i class="current" style ="padding :20px 30px;">
                                                                     <asp:LinkButton ID="lnkColor" runat ="server" >
@@ -118,10 +162,10 @@
                                                                         </p>
                                                                 </span>
                                                             </ItemTemplate>
-                                                        </asp:Repeater>
+                                                        </asp:Repeater>--%>
 
-                                                        
-     
+
+
 
 
 
@@ -143,7 +187,7 @@
                                                 <asp:Label ID="lblDescription_Header" runat="server" Text="รายละเอียดสินค้า"></asp:Label></h4>
                                             <li class="true-l">
                                                 <asp:Label ID="lblDescription_Detail" runat="server"></asp:Label></li>
-                                             
+
                                         </ul>
                                         <div class="list">
                                             <li class="no-border">
@@ -168,27 +212,33 @@
 
                                         </div>
                                     </div>
-                                <%--</ItemTemplate>
-                            </asp:Repeater>--%>
-
-
+                                    
+                                </div>
+                            </div>
                         </div>
+                    </main>
+
+
+                </div>
+
+   <footer style="bottom: 0px">
+                <nav>
+                    <div class="main">
+                        <span class="col-md-6">
+                            <asp:ImageButton ID="lnkHome" runat="server" ImageUrl="images/btu-home.png" />
+                        </span>
+                        <span class="col-md-6">
+                            <asp:ImageButton ID="lnkBack" runat="server" ImageUrl="images/btu-prev.png" />
+                        </span>
                     </div>
-                </div>
-            </main>
+                </nav>
+            </footer>
 
 
-        </div>
-        <footer style="bottom: 0px">
-            <nav>
-                <div class="main">
-                    <span class="col-md-6"><a href="home.html">
-                        <img src="images/btu-home.png" /></a></span>
-                    <span class="col-md-6"><a href="javascript:history.back();">
-                        <img src="images/btu-prev.png" /></a></span>
-                </div>
-            </nav>
-        </footer>
+
+
+            </ContentTemplate>
+        </asp:UpdatePanel>
     </form>
 </body>
 <script type="text/javascript" src="js/slick.js"></script>
@@ -203,6 +253,13 @@
         $('.detail-slider').slick({
             infinite: true,
             slidesToShow: 1,
+            slidesToScroll: 1,
+
+        });
+
+        $('.card-slider').slick({
+            infinite: true,
+            slidesToShow: 3,
             slidesToScroll: 1,
 
         });

@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class Select_Language
     
     '''<summary>
+    '''form control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents form As Global.System.Web.UI.HtmlControls.HtmlForm
+    
+    '''<summary>
     '''TH control.
     '''</summary>
     '''<remarks>
@@ -66,4 +75,13 @@ Partial Public Class Select_Language
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RU As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''UC_Machine_Console control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UC_Machine_Console As Global.VDM.UC_Machine_Console
 End Class
