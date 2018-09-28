@@ -448,6 +448,8 @@ Public Class Manage_OpenClose_Shift
         Dim Script As String = "txtBarcode='" & Product_Stock.BarcodeClientID & "';" & vbLf
         Script &= "startFocusBarcode();"
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "focusBarcodeReader", Script, True)
+        '---------------- DragDropEvent-----------
+        Product_Stock.ImplementDragDrop()
     End Sub
 
     Private Sub CloseScanProduct_Click(sender As Object, e As EventArgs) Handles btnCloseScanProduct.Click, lnkCloseScanProduct.Click

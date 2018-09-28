@@ -238,6 +238,7 @@
             .SLOT_HEIGHT = FLOOR_HEIGHT
             .POS_Y = POS_Y
         End With
+
     End Sub
 
     Public Sub DeselectAllSlot()

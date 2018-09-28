@@ -6,6 +6,12 @@
 
     Dim BL As New VDM_BL
 
+    Public ReadOnly Property TAG As Panel
+        Get
+            Return Slot
+        End Get
+    End Property
+
     Public Enum HighLightMode
         None = 0
         YellowDotted = 1
