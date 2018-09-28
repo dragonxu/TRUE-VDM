@@ -351,7 +351,7 @@
         </div>
 
     </div>
-    <div div class="modal bs-modal-sm in" style="display: block; z-index:0;">
+    <div div class="modal bs-modal-sm in" style="display: block; z-index:1;">
 
     </div>
 </asp:Panel>

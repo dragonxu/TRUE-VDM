@@ -49,7 +49,6 @@ Public Class UC_Product_Stock
         End Get
     End Property
 
-
     Public ReadOnly Property VW_ALL_PRODUCT As DataTable
         Get
             If IsNothing(Session("VW_ALL_PRODUCT_" & MY_UNIQUE_ID)) Then
@@ -254,6 +253,8 @@ Public Class UC_Product_Stock
                     End If
                 End If
             End If
+
+            ImplementDragDrop()
         End Set
     End Property
 
@@ -267,13 +268,22 @@ Public Class UC_Product_Stock
         End Set
     End Property
 
+    Public Property SLOT_NAME As String
+        Get
+            Return lblSlotName.Text
+        End Get
+        Set(value As String)
+            lblSlotName.Text = value
+        End Set
+    End Property
+
     Private Sub ResetProductSlot()
 
         Shelf.Deselect_All()
         SLOT_ID = 0
         SLOT_PRODUCT_ID = 0
 
-        lblSlotName.Text = ""
+        SLOT_NAME = ""
         imgSlot_Product.ImageUrl = "../images/TransparentDot.png" '"../RenderImage.aspx?Mode=D&UID=0&Entity=Product&LANG=1"
         lblSlot_ProductCode.Text = "-"
         lblSlot_ProductName.Text = ""
@@ -301,9 +311,10 @@ Public Class UC_Product_Stock
         rptSlot.DataBind()
         btnMoveRight.Visible = False
 
-        pnlSlot.Visible = False
+        pnlSlotProduct.Visible = False
         Shelf.Visible = True
         pnlZoom.Visible = True
+
     End Sub
 
     Private Sub BindShelfProduct()
@@ -312,14 +323,15 @@ Public Class UC_Product_Stock
         DT.Columns("CURRENT").ColumnName = "SLOT_NAME"
         BL.Bind_Product_Shelf_Stock(Shelf, DT, VW_ALL_PRODUCT)
 
+        ImplementDragDrop()
     End Sub
 
     Private Property SLOT_PRODUCT_ID As Integer
         Get
-            Return pnlSlot.Attributes("PRODUCT_ID")
+            Return pnlSlotProduct.Attributes("PRODUCT_ID")
         End Get
         Set(value As Integer)
-            pnlSlot.Attributes("PRODUCT_ID") = value
+            pnlSlotProduct.Attributes("PRODUCT_ID") = value
         End Set
     End Property
 
@@ -357,7 +369,7 @@ Public Class UC_Product_Stock
         ResetProductSlot()
 
         SLOT_ID = Sender.SLOT_ID
-        lblSlotName.Text = Sender.SLOT_NAME
+        SLOT_NAME = Sender.SLOT_NAME
         lblSlot_Width.Text = Sender.SLOT_WIDTH
         lblSlot_Height.Text = Sender.SLOT_HEIGHT
         lblSlot_Depth.Text = Shelf.SHELF_DEPTH
@@ -401,7 +413,7 @@ Public Class UC_Product_Stock
         SetSlotCheck(chkSlot, False)
 
         Dim DT As DataTable = STOCK_DATA.Copy
-        DT.DefaultView.RowFilter = "CURRENT='" & lblSlotName.Text & "'"
+        DT.DefaultView.RowFilter = "CURRENT='" & SLOT_NAME & "'"
         DT = DT.DefaultView.ToTable
 
         rptSlot.DataSource = DT
@@ -410,9 +422,11 @@ Public Class UC_Product_Stock
         btnMoveRight.Visible = DT.Rows.Count > 0
         chkSlot.Visible = DT.Rows.Count > 0
 
-        pnlSlot.Visible = True
+        pnlSlotProduct.Visible = True
         Shelf.Visible = False
         pnlZoom.Visible = False
+
+        ImplementDragDrop()
     End Sub
 
     Private Sub chkSlot_Click(sender As Object, e As EventArgs) Handles chkSlot.Click
@@ -421,6 +435,15 @@ Public Class UC_Product_Stock
             If Item.ItemType <> ListItemType.Item And Item.ItemType <> ListItemType.AlternatingItem Then Continue For
             Dim chk As LinkButton = Item.FindControl("chk")
             SetSlotCheck(chk, Not Checked)
+
+            '------------- HighLight All Row-------------
+            Dim tr As HtmlTableRow = Item.FindControl("tr")
+            If Not Checked Then
+                tr.Attributes("class") = "bg-info text-white"
+            Else
+                tr.Attributes("class") = ""
+            End If
+
         Next
         SetSlotCheck(chkSlot, Not Checked)
     End Sub
@@ -493,9 +516,38 @@ Public Class UC_Product_Stock
 
     Private Function SLOT_CAN_RECIEVE_PRODUCT(ByRef SLOT As UC_Product_Slot, ByVal PRODUCT_ID As Integer) As Boolean
 
+        ''------------- Get Product Info -----------
+        'VW_ALL_PRODUCT.DefaultView.RowFilter = "PRODUCT_ID=" & PRODUCT_ID
+        'If VW_ALL_PRODUCT.DefaultView.Count = 0 Then Return False
+
+        'Dim PRODUCT_WIDTH As Integer = 0
+        'Dim PRODUCT_HEIGHT As Integer = 0
+        'Dim PRODUCT_DEPTH As Integer = 0
+
+        'Dim DV As DataRowView = VW_ALL_PRODUCT.DefaultView(0)
+        'If Not IsDBNull(DV("WIDTH")) Then PRODUCT_WIDTH = DV("WIDTH")
+        'If Not IsDBNull(DV("HEIGHT")) Then PRODUCT_HEIGHT = DV("HEIGHT")
+        'If Not IsDBNull(DV("DEPTH")) Then PRODUCT_DEPTH = DV("DEPTH")
+
+        'If SLOT.PRODUCT_QUANTITY <= 0 Then '---- Slot ว่าง -----
+        '    Return PRODUCT_WIDTH <= SLOT.SLOT_WIDTH And PRODUCT_HEIGHT <= SLOT.FLOOR_HEIGHT
+        'ElseIf SLOT.PRODUCT_ID = PRODUCT_ID And PRODUCT_DEPTH > 0 Then  '----------- Contained Same Product --------------
+        '    Dim MaxQuantity As Integer = Math.Floor(Shelf.SHELF_DEPTH / PRODUCT_DEPTH)
+        '    Return SLOT.PRODUCT_QUANTITY < MaxQuantity
+        'ElseIf SLOT.PRODUCT_ID = PRODUCT_ID Then
+        '    Return True
+        'Else '----------- Contained Other Product --------------
+        '    Return False
+        'End If
+
+        Return CALCULATE_SLOT_FREE_SPACE_FOR_PRODUCT(SLOT, PRODUCT_ID) > 0
+
+    End Function
+
+    Private Function CALCULATE_SLOT_FREE_SPACE_FOR_PRODUCT(ByRef SLOT As UC_Product_Slot, ByVal PRODUCT_ID As Integer) As Integer
         '------------- Get Product Info -----------
         VW_ALL_PRODUCT.DefaultView.RowFilter = "PRODUCT_ID=" & PRODUCT_ID
-        If VW_ALL_PRODUCT.DefaultView.Count = 0 Then Return False
+        If VW_ALL_PRODUCT.DefaultView.Count = 0 Then Return 0
 
         Dim PRODUCT_WIDTH As Integer = 0
         Dim PRODUCT_HEIGHT As Integer = 0
@@ -506,17 +558,19 @@ Public Class UC_Product_Stock
         If Not IsDBNull(DV("HEIGHT")) Then PRODUCT_HEIGHT = DV("HEIGHT")
         If Not IsDBNull(DV("DEPTH")) Then PRODUCT_DEPTH = DV("DEPTH")
 
-        If SLOT.PRODUCT_QUANTITY <= 0 Then '---- Slot ว่าง -----
-            Return PRODUCT_WIDTH <= SLOT.SLOT_WIDTH And PRODUCT_HEIGHT <= SLOT.FLOOR_HEIGHT
-        ElseIf SLOT.PRODUCT_ID = PRODUCT_ID And PRODUCT_DEPTH > 0 Then  '----------- Contained Same Product --------------
+        If SLOT.PRODUCT_ID = 0 And PRODUCT_DEPTH = 0 Then
+            Return 999
+        ElseIf SLOT.PRODUCT_ID = 0 And PRODUCT_DEPTH > 0 Then
             Dim MaxQuantity As Integer = Math.Floor(Shelf.SHELF_DEPTH / PRODUCT_DEPTH)
-            Return SLOT.PRODUCT_QUANTITY < MaxQuantity
+            Return MaxQuantity - SLOT.PRODUCT_QUANTITY
+        ElseIf SLOT.PRODUCT_ID = PRODUCT_ID And PRODUCT_DEPTH = 0 Then
+            Return 999
         ElseIf SLOT.PRODUCT_ID = PRODUCT_ID Then
-            Return True
+            Dim MaxQuantity As Integer = Math.Floor(Shelf.SHELF_DEPTH / PRODUCT_DEPTH)
+            Return MaxQuantity - SLOT.PRODUCT_QUANTITY
         Else '----------- Contained Other Product --------------
-            Return False
+            Return 0
         End If
-
     End Function
 
 #End Region
@@ -559,6 +613,9 @@ Public Class UC_Product_Stock
             del.Visible = False
         End If
 
+        Dim tr As HtmlTableRow = e.Item.FindControl("tr")
+        tr.Attributes("onclick") = "document.getElementById('" & chk.ClientID & "').click();"
+
     End Sub
 
     Private Sub rptScan_ItemCommand(source As Object, e As RepeaterCommandEventArgs) Handles rptScan.ItemCommand
@@ -566,6 +623,15 @@ Public Class UC_Product_Stock
             Case "Check"
                 Dim chk As LinkButton = e.Item.FindControl("chk")
                 SetScanCheck(chk, Not IsButtonCheck(chk))
+
+                '------------- HighLight All Row-------------
+                Dim tr As HtmlTableRow = e.Item.FindControl("tr")
+                If IsButtonCheck(chk) Then
+                    tr.Attributes("class") = "bg-success text-whte"
+                Else
+                    tr.Attributes("class") = ""
+                End If
+
                 '------------ Update Header------------
                 SetScanCheck(chkScan, False)
                 For Each Item As RepeaterItem In rptScan.Items
@@ -574,6 +640,8 @@ Public Class UC_Product_Stock
                     If Not IsButtonCheck(_chk) Then Exit Sub
                 Next
                 SetScanCheck(chkScan, True)
+
+
             Case "Delete"
                 Dim lblSerial As Label = e.Item.FindControl("lblSerial")
                 STOCK_DATA.DefaultView.RowFilter = "SERIAL_NO='" & lblSerial.Attributes("SERIAL_NO").Replace("'", "''") & "'"
@@ -591,6 +659,15 @@ Public Class UC_Product_Stock
             Case "Check"
                 Dim chk As LinkButton = e.Item.FindControl("chk")
                 SetSlotCheck(chk, Not IsButtonCheck(chk))
+
+                '------------- HighLight All Row-------------
+                Dim tr As HtmlTableRow = e.Item.FindControl("tr")
+                If IsButtonCheck(chk) Then
+                    tr.Attributes("class") = "bg-info text-whte"
+                Else
+                    tr.Attributes("class") = ""
+                End If
+
                 '------------ Update Header------------
                 SetSlotCheck(chkSlot, False)
                 For Each Item As RepeaterItem In rptSlot.Items
@@ -613,11 +690,10 @@ Public Class UC_Product_Stock
 
 #Region "Scan"
 
-
     Private Sub ResetScanProductTab() '------------- Reset เฉพาะ pnlProduct ที่เลือก ----------
 
         txtBarcode.Text = ""
-        pnlScan.Visible = False
+        pnlScanProduct.Visible = False
         imgScan_Product.ImageUrl = "../images/TransparentDot.png" ' "../RenderImage.aspx?Mode=D&UID=0&Entity=Product&LANG=1"
         lblScan_ProductCode.Text = "-"
         lblScan_ProductName.Text = ""
@@ -640,6 +716,15 @@ Public Class UC_Product_Stock
             If Item.ItemType <> ListItemType.Item And Item.ItemType <> ListItemType.AlternatingItem Then Continue For
             Dim chk As LinkButton = Item.FindControl("chk")
             SetScanCheck(chk, Not Checked)
+
+            '------------- HighLight All Row-------------
+            Dim tr As HtmlTableRow = Item.FindControl("tr")
+            If Not Checked Then
+                tr.Attributes("class") = "bg-success text-white"
+            Else
+                tr.Attributes("class") = ""
+            End If
+
         Next
         SetScanCheck(chkScan, Not Checked)
     End Sub
@@ -667,6 +752,7 @@ Public Class UC_Product_Stock
         DT.Dispose()
 
         lblName.Text = e.Item.DataItem("PRODUCT_NAME").ToString & " <b>(" & Total & ")</b>"
+
     End Sub
 
     Private Sub rptProductTab_ItemCommand(source As Object, e As RepeaterCommandEventArgs) Handles rptProductTab.ItemCommand
@@ -695,7 +781,7 @@ Public Class UC_Product_Stock
             Exit Sub
         End If
 
-        pnlScan.Visible = True
+        pnlScanProduct.Visible = True
         imgScan_Product.ImageUrl = "../RenderImage.aspx?Mode=D&UID=" & PRODUCT_ID & "&Entity=Product&LANG=1&DI=images/TransparentDot.png"
         lblScan_ProductCode.Text = DT.Rows(0).Item("PRODUCT_CODE").ToString
         lblScan_ProductName.Text = DT.Rows(0).Item("DISPLAY_NAME_TH").ToString
@@ -721,6 +807,7 @@ Public Class UC_Product_Stock
 
         btnMoveLeft.Visible = DT.Rows.Count > 0
 
+        ImplementDragDrop()
     End Sub
 
     Private Sub btnBarcode_Click(sender As Object, e As EventArgs) Handles btnBarcode.Click
@@ -818,17 +905,15 @@ Public Class UC_Product_Stock
         End If
 
         ''----------  Check Available Quantity ------------
-        Dim PRODUCT_DEPTH As Integer = lblScan_Product_Depth.Text
-        If PRODUCT_DEPTH > 0 Then
-
-            Dim MaxQuantity As Integer = Math.Floor(Shelf.SHELF_DEPTH / PRODUCT_DEPTH)
-            Dim AvailableQuantity As Integer = MaxQuantity - SLOT.PRODUCT_QUANTITY
-
-            If MoveList.Count > AvailableQuantity Then
-                Message_Toastr("Slot นี้สามารถใส่สินค้าได้ " & AvailableQuantity & " ชิ้นเท่านั้น", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page)
-                Exit Sub
-            End If
+        Dim FreeSpace As Integer = CALCULATE_SLOT_FREE_SPACE_FOR_PRODUCT(SLOT, SCAN_PRODUCT_ID)
+        If FreeSpace = 0 Then
+            Message_Toastr("Slot ไม่สามารถรับสินค้าได้", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page)
+            Exit Sub
+        ElseIf MoveList.Count > FreeSpace Then
+            Message_Toastr("Slot นี้สามารถใส่สินค้าได้ " & FreeSpace & " ชิ้นเท่านั้น", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page)
+            Exit Sub
         End If
+
 
         '------------ Update Data -------------
         For i As Integer = 0 To MoveList.Count - 1
@@ -931,6 +1016,210 @@ Public Class UC_Product_Stock
         BindData()
         Return True
     End Function
+
+#End Region
+
+#Region "DragDrop"
+
+    '---------------- ทุกครั้งที่ View เปลี่ยน ----------------
+    Public Sub ImplementDragDrop()
+        ConfigDragDropListener(btnDropListener, txtDragType, txtDragArg, txtDropType, txtDropArg, Me.Page)
+
+        Dim Slots As List(Of UC_Product_Slot) = Shelf.Slots
+
+        '--------------------------- Drag from Event --------------------------
+        '------------ Drag SCAN GROUP --------------
+        For Each Item As RepeaterItem In rptProductTab.Items
+            If Item.ItemType <> ListItemType.Item And Item.ItemType <> ListItemType.AlternatingItem Then Continue For
+            Dim lnk As LinkButton = Item.FindControl("lnk")
+            ImplementObjectDragable(lnk, "SCAN_PRODUCT", lnk.CommandArgument)
+        Next
+        ImplementObjectDragable(imgScan_Product, "SCAN_PRODUCT", SCAN_PRODUCT_ID)
+
+        '------------ Drag SCAN ITEM ---------------
+        For Each Item As RepeaterItem In rptScan.Items
+            If Item.ItemType <> ListItemType.Item And Item.ItemType <> ListItemType.AlternatingItem Then Continue For
+            Dim lblSerial As Label = Item.FindControl("lblSerial")
+            Dim tr As HtmlTableRow = Item.FindControl("tr")
+            ImplementObjectDragable(tr, "SCAN_SERIAL", lblSerial.Attributes("SERIAL_NO"))
+        Next
+
+        '------------ Drag SLOT PRODUCT SERIAL-------
+        For Each Item As RepeaterItem In rptSlot.Items
+            If Item.ItemType <> ListItemType.Item And Item.ItemType <> ListItemType.AlternatingItem Then Continue For
+            Dim lblSerial As Label = Item.FindControl("lblSerial")
+            Dim tr As HtmlTableRow = Item.FindControl("tr")
+            ImplementObjectDragable(tr, "SLOT_SERIAL", lblSerial.Attributes("SERIAL_NO"))
+        Next
+
+        '------------ Drag SLOT---------------------
+        For i As Integer = 0 To Slots.Count - 1
+            ImplementObjectDragable(Slots(i).TAG, "SLOT", Slots(i).SLOT_NAME)
+        Next
+        ImplementObjectDragable(imgSlot_Product, "SLOT", SLOT_NAME)
+
+        '--------------------------- Drop to Event ---------------------------
+        '------------ DROP TO SCAN -------------
+        ImplementObjectDropable(pnlScan, "SCAN", "")
+
+        '------------ DROP TO SLOT -------------
+        ImplementObjectDropable(pnlSlotProduct, "SLOT", SLOT_NAME)
+        For i As Integer = 0 To Slots.Count - 1
+            ImplementObjectDropable(Slots(i).TAG, "SLOT", Slots(i).SLOT_NAME)
+        Next
+
+    End Sub
+
+    Private ReadOnly Property DragType As String
+        Get
+            Return txtDragType.Text
+        End Get
+    End Property
+
+    Private ReadOnly Property DragArg As String
+        Get
+            Return txtDragArg.Text
+        End Get
+    End Property
+
+    Private ReadOnly Property DropType As String
+        Get
+            Return txtDropType.Text
+        End Get
+    End Property
+
+    Private ReadOnly Property DropArg As String
+        Get
+            Return txtDropArg.Text
+        End Get
+    End Property
+
+    Private Sub btnDropListener_Click(sender As Object, e As EventArgs) Handles btnDropListener.Click
+        Select Case DropType
+            Case "SCAN"
+                Select Case DragType
+                    Case "SLOT"
+                        '--------ลากมาจากหน้า Shelf ------------
+
+                        Dim slot_name As String = DragArg
+                        STOCK_DATA.DefaultView.RowFilter = "CURRENT='" & slot_name & "'"
+                        For i As Integer = STOCK_DATA.DefaultView.Count - 1 To 0 Step -1
+                            STOCK_DATA.DefaultView(i).Row.Item("CURRENT") = DBNull.Value
+                        Next
+
+                        STOCK_DATA.DefaultView.RowFilter = ""
+                        SCAN_PRODUCT_ID = SCAN_PRODUCT_ID
+                        BindScanProduct()
+                        If SLOT_ID > 0 Then
+                            BindSlotProduct(SLOT_ID) '----------- ถ้า Show หน้า SLOT PRODUCT ก็ Update
+                        Else
+                            BindShelfProduct() '----------- ถ้า Show หน้า LAYOUT ก็ Update
+                        End If
+
+                    Case "SLOT_SERIAL"
+                        '--------ลากมาจากหน้าเลือก Repeater Slot ------------
+                        Dim serial_no As String = DragArg
+                        STOCK_DATA.DefaultView.RowFilter = "SERIAL_NO='" & serial_no.Replace("'", "''") & "'"
+                        Dim targetRow As DataRow = STOCK_DATA.DefaultView(0).Row
+                        Dim SelectedList As List(Of DataRow) = LeftSelectedList()
+
+                        If SelectedList.IndexOf(targetRow) = -1 Then
+                            '------------ ย้าย Row เดียว ----------
+                            targetRow.Item("CURRENT") = DBNull.Value
+                        Else
+                            '------------ ย้าย ทั้ง Set ----------
+                            For i As Integer = 0 To SelectedList.Count - 1
+                                SelectedList(i).Item("CURRENT") = DBNull.Value
+                            Next
+                        End If
+
+                        STOCK_DATA.DefaultView.RowFilter = ""
+                        SCAN_PRODUCT_ID = SCAN_PRODUCT_ID
+                        BindScanProduct()
+                        BindShelfProduct()
+                        If SLOT_ID > 0 Then
+                            BindSlotProduct(SLOT_ID) '----------- ถ้า Show หน้า SLOT PRODUCT ก็ Update
+                        Else
+                            BindShelfProduct() '----------- ถ้า Show หน้า LAYOUT ก็ Update
+                        End If
+
+                End Select
+            Case "SLOT"
+
+                Dim Target As UC_Product_Slot = Shelf.AccessSlotFromName(DropArg)
+
+                Select Case DragType
+                    Case "SLOT"
+                        Dim source As UC_Product_Slot = Shelf.AccessSlotFromName(DragArg)
+                        If Equals(Target, source) Then Exit Sub
+                        If source.PRODUCT_ID = 0 Then Exit Sub
+
+                        If Not SLOT_CAN_RECIEVE_PRODUCT(Target, source.PRODUCT_ID) Then
+                            Message_Toastr("Slot จะต้องบรรจุสินค้าชนิดเดียวกัน<br>และต้องมีพื้นที่เพียงพอ<br>กรุณาตรวจสอบอีกครั้ง", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page, 8000)
+                            Exit Sub
+                        End If
+                        STOCK_DATA.DefaultView.RowFilter = "CURRENT='" & source.SLOT_NAME & "'"
+                        For i As Integer = STOCK_DATA.DefaultView.Count - 1 To 0 Step -1
+                            STOCK_DATA.DefaultView(i).Row.Item("CURRENT") = Target.SLOT_NAME
+                        Next
+
+                        STOCK_DATA.DefaultView.RowFilter = ""
+                        SCAN_PRODUCT_ID = SCAN_PRODUCT_ID
+                        BindScanProduct()
+                        BindShelfProduct()
+
+                    Case "SCAN_PRODUCT"
+
+                        Dim PRODUCT_ID As Integer = DragArg
+                        If Not SLOT_CAN_RECIEVE_PRODUCT(Target, PRODUCT_ID) Then
+                            Message_Toastr("Slot จะต้องบรรจุสินค้าชนิดเดียวกัน<br>และต้องมีพื้นที่เพียงพอ<br>กรุณาตรวจสอบอีกครั้ง", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page, 8000)
+                            Exit Sub
+                        End If
+                        STOCK_DATA.DefaultView.RowFilter = "PRODUCT_ID =" & PRODUCT_ID & " AND CURRENT IS NULL"
+                        For i As Integer = STOCK_DATA.DefaultView.Count - 1 To 0 Step -1
+                            STOCK_DATA.DefaultView(i).Row.Item("CURRENT") = Target.SLOT_NAME
+                        Next
+
+                        STOCK_DATA.DefaultView.RowFilter = ""
+                        SCAN_PRODUCT_ID = SCAN_PRODUCT_ID
+                        BindScanProduct()
+                        BindShelfProduct()
+                        If SLOT_ID > 0 Then
+                            BindSlotProduct(SLOT_ID) '----------- ถ้า Show หน้า SLOT PRODUCT ก็ Update
+                        Else
+                            BindShelfProduct() '----------- ถ้า Show หน้า LAYOUT ก็ Update
+                        End If
+
+                    Case "SCAN_SERIAL"
+                        Dim serial_no As String = DragArg
+                        Dim slot_name As String = DropArg
+
+                        STOCK_DATA.DefaultView.RowFilter = "SERIAL_NO='" & serial_no.Replace("'", "''") & "'"
+                        Dim targetRow As DataRow = STOCK_DATA.DefaultView(0).Row
+                        Dim SelectedList As List(Of DataRow) = RightSelectedList()
+                        If SelectedList.IndexOf(targetRow) = -1 Then
+                            '------------ ย้าย Row เดียว ----------
+                            targetRow.Item("CURRENT") = slot_name
+                        Else
+                            '------------ ย้าย ทั้ง Set ----------
+                            For i As Integer = 0 To SelectedList.Count - 1
+                                SelectedList(i).Item("CURRENT") = slot_name
+                            Next
+                        End If
+
+                        STOCK_DATA.DefaultView.RowFilter = ""
+                        SCAN_PRODUCT_ID = SCAN_PRODUCT_ID
+                        BindScanProduct()
+                        BindShelfProduct()
+                        If SLOT_ID > 0 Then
+                            BindSlotProduct(SLOT_ID) '----------- ถ้า Show หน้า SLOT PRODUCT ก็ Update
+                        Else
+                            BindShelfProduct() '----------- ถ้า Show หน้า LAYOUT ก็ Update
+                        End If
+
+                End Select
+        End Select
+    End Sub
 
 #End Region
 

@@ -24,20 +24,21 @@
         }
 
         .nav > li > a:hover {
-            background-color:transparent;
+            background-color:transparent !important;
         }
 
     </style>
 
 <div class="row" >
-    <div class="col-sm-6" >
+    <div class="col-sm-6" ondragover="draggedOver(event)" >
         <asp:Panel ID="pnlZoom" runat="server" CssClass="row m-b-md btn-group" KO_ID="0" SHOP_CODE="" MY_UNIQUE_ID="" SHIFT_ID="0" SHIFT_STATUS="99">                     
             <asp:LinkButton ID="btnZoomOut" runat="server" CssClass="btn btn-warning">-</asp:LinkButton>
             <asp:LinkButton ID="btnZoomReset" runat="server" CssClass="btn btn-info">x</asp:LinkButton>
             <asp:LinkButton ID="btnZoomIn" runat="server" CssClass="btn btn-success">+</asp:LinkButton>                                  
         </asp:Panel>
         <uc1:uc_product_shelf runat="server" ID="Shelf" />
-        <asp:Panel ID="pnlSlot" runat="server" CssClass="card bg-white m-b m-t-md" PRODUCT_ID="0">
+        
+        <asp:Panel ID="pnlSlotProduct" runat="server" CssClass="card bg-white m-b m-t-md" PRODUCT_ID="0">
             <div class="card-header">
             <h3 class="m-t-0 m-b-0 pull-left">
                 <img src="../images/Icon/green/shelf.png" height="30"> Slot : <asp:Label ID="lblSlotName" runat="server" SLOT_ID="0"></asp:Label>
@@ -116,23 +117,23 @@
                             <table class="table m-b-0 checkbo">
                                 <thead>
                                     <tr>
-                                        <th><asp:LinkButton ID="chkSlot" runat="server"></asp:LinkButton></th>
+                                        <th style="position:relative;"><asp:LinkButton ID="chkSlot" runat="server" style="position: absolute; top: 5px; left: 10px;"></asp:LinkButton></th>
                                         <th>Serial</th>
                                         <th>Recent</th>
                                         <th>Remove</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+
                                     <asp:Repeater ID="rptSlot" runat="server">
                                         <ItemTemplate>                                                
-                                            <tr>
-                                                <td>
-                                                    <asp:LinkButton CssClass="btn btn-primary btn-sm btn-icon" ID="chk" runat="server" CommandName="Check">
-                                                        <i class="icon-check"></i>
-                                                    </asp:LinkButton>
-                                                </td>
-                                                <td><asp:Label ID="lblSerial" runat="server"></asp:Label></td>
-                                                <td><asp:Label ID="lblRecent" runat="server"></asp:Label></td>
+                                            <tr id="tr" runat="server">
+                                                <td colspan="2" style="cursor:pointer; text-align:left;">
+                                                        <asp:LinkButton CssClass="btn btn-primary btn-sm btn-icon" style="display:none;" ID="chk" runat="server" CommandName="Check">
+                                                            <i class="icon-check"></i>
+                                                        </asp:LinkButton>
+                                                        <asp:Label ID="lblSerial" runat="server"></asp:Label></td>
+                                                <td style="cursor:pointer;"><asp:Label ID="lblRecent" runat="server"></asp:Label></td>
                                                 <td>
                                                     <asp:LinkButton CssClass="btn btn-danger btn-icon-icon btn-sm" ID="del" runat="server" CommandName="Delete">
                                                         <i class="fa fa-remove"></i>
@@ -160,7 +161,7 @@
 
     </div>
            
-        <div class="col-sm-6">
+        <div class="col-sm-6" id="pnlScan" runat="server">
             <div class="card bg-white m-b">
                 <asp:Panel CssClass="card-header" ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" > 
                 <h3 class="m-t-0 m-b-0">
@@ -182,7 +183,7 @@
                     </asp:Repeater>
                     </ul>
                         
-                <asp:Panel ID="pnlScan" runat="server" CssClass="card-block">
+                <asp:Panel ID="pnlScanProduct" runat="server" CssClass="card-block">
                 <div class="row">
                     <div class="row">
                     <div class="m-t-n m-b">
@@ -225,8 +226,8 @@
                                 <table class="table m-b-0">
                                     <thead>
                                         <tr>
-                                            <th>
-                                                <asp:LinkButton CssClass="btn btn-primary btn-sm btn-icon" ID="chkScan" runat="server">
+                                            <th style="position:relative;">
+                                                <asp:LinkButton CssClass="btn btn-primary btn-sm btn-icon" ID="chkScan" runat="server" style="position: absolute; top: 5px; left: 10px;">
                                                     <i class="icon-check"></i>
                                                 </asp:LinkButton>
                                             </th>
@@ -238,20 +239,19 @@
                                     <tbody>
                                         <asp:Repeater ID="rptScan" runat="server">
                                             <ItemTemplate>
-                                                <tr>
-                                                    <td>
-                                                        <asp:LinkButton CssClass="btn btn-primary btn-sm btn-icon" ID="chk" runat="server" CommandName="Check">
+                                                <tr id="tr" runat="server">
+                                                    <td colspan="2" style="cursor:pointer; text-align:left;">
+                                                        <asp:LinkButton CssClass="btn btn-primary btn-sm btn-icon" style="display:none;" ID="chk" runat="server" CommandName="Check">
                                                             <i class="icon-check"></i>
                                                         </asp:LinkButton>
-                                                    </td>
-                                                    <td><asp:Label ID="lblSerial" runat="server"></asp:Label></td>
-                                                    <td><asp:Label ID="lblRecent" runat="server"></asp:Label></td>  
-                                                    <td>
+                                                        <asp:Label ID="lblSerial" runat="server"></asp:Label></td>
+                                                    <td ><asp:Label ID="lblRecent" runat="server"></asp:Label></td>  
+                                                    <td id="td3" runat="server">
                                                         <asp:LinkButton CssClass="btn btn-danger btn-icon-icon btn-sm" ID="del" runat="server" CommandName="Delete">
                                                             <i class="fa fa-remove"></i>
                                                         </asp:LinkButton>
                                                     </td>                                                
-                                                    </tr>
+                                                </tr>
                                             </ItemTemplate>
                                         </asp:Repeater>
                                     </tbody>
@@ -271,3 +271,12 @@
             </div>
         </div>
 </div>
+
+
+<!-----DragDrop Listener------->
+<asp:TextBox ID="txtDragType" runat="server" style="display:none;"></asp:TextBox>
+<asp:TextBox ID="txtDragArg" runat="server" style="display:none;"></asp:TextBox>
+<asp:TextBox ID="txtDropType" runat="server" style="display:none;"></asp:TextBox>
+<asp:TextBox ID="txtDropArg" runat="server" style="display:none;"></asp:TextBox>
+<asp:Button ID="btnDropListener" runat="server" style="display:none;" />
+<!-----DragDrop Listener------->

@@ -162,12 +162,13 @@ Module ModuleGlobal
 #End Region
 
 #Region "DragDrop"
-    'Public Enum DropEffect
-    '    None = 0
-    '    Move = 1
-    '    Copy = 2
-    '    Link = 3
-    'End Enum
+
+    Public Sub ImplementObjectDragable(ByRef Obj As UserControl, ByVal DragDataType As String, ByVal DragDataArg As String)
+        Obj.Attributes("draggable") = "true"
+        Obj.Attributes("ondragstart") = "dragged(event)"
+        Obj.Attributes("dragdatatype") = DragDataType '---------- เก็บข้อมูลเกี่ยวกับ Source -----------
+        Obj.Attributes("dragdataarg") = DragDataArg '---------- เก็บข้อมูลเสริม-----------
+    End Sub
 
     Public Sub ImplementObjectDragable(ByRef Obj As HtmlControl, ByVal DragDataType As String, ByVal DragDataArg As String)
         Obj.Attributes("draggable") = "true"
@@ -181,6 +182,14 @@ Module ModuleGlobal
         Obj.Attributes("ondragstart") = "dragged(event)"
         Obj.Attributes("dragdatatype") = DragDataType '---------- เก็บข้อมูลเกี่ยวกับ Source -----------
         Obj.Attributes("dragdataarg") = DragDataArg '---------- เก็บข้อมูลเสริม-----------
+    End Sub
+
+    '------- เลิกรับ Event --------
+    Public Sub CeaseObjectDragable(ByRef Obj As UserControl)
+        Obj.Attributes.Remove("draggable") '------Remove Event Listener
+        Obj.Attributes.Remove("ondragstart") '------Remove Event Listener
+        Obj.Attributes.Remove("dragdatatype") '---------- Remove Param
+        Obj.Attributes.Remove("dragdataarg") '---------- Remove Param
     End Sub
 
     '------- เลิกรับ Event --------
@@ -199,26 +208,42 @@ Module ModuleGlobal
         Obj.Attributes.Remove("dragdataarg") '---------- Remove Param
     End Sub
 
-    Public Sub ImplementObjectDropable(ByRef Obj As HtmlControl, ByVal DropDataType As String, ByVal DropDataArg As String)
-        Obj.Attributes("ondragover") = "allowDrop(event)"
+    Public Sub ImplementObjectDropable(ByRef Obj As UserControl, ByVal DropDataType As String, ByVal dropdataarg As String)
+        Obj.Attributes("ondragover") = "draggedOver(event)"
         Obj.Attributes("ondrop") = "dropped(event)"
         Obj.Attributes("dropdatatype") = DropDataType
-        Obj.Attributes("dropdataArg") = DropDataArg
+        Obj.Attributes("dropdataarg") = dropdataarg
     End Sub
 
-    Public Sub ImplementObjectDropable(ByRef Obj As WebControl, ByVal DropDataType As String, ByVal DropDataArg As String)
-        Obj.Attributes("ondragover") = "allowDrop(event)"
+    Public Sub ImplementObjectDropable(ByRef Obj As HtmlControl, ByVal DropDataType As String, ByVal dropdataarg As String)
+        Obj.Attributes("ondragover") = "draggedOver(event)"
         Obj.Attributes("ondrop") = "dropped(event)"
         Obj.Attributes("dropdatatype") = DropDataType
-        Obj.Attributes("dropdataArg") = DropDataArg
+        Obj.Attributes("dropdataarg") = dropdataarg
     End Sub
+
+    Public Sub ImplementObjectDropable(ByRef Obj As WebControl, ByVal DropDataType As String, ByVal dropdataarg As String)
+        Obj.Attributes("ondragover") = "draggedOver(event)"
+        Obj.Attributes("ondrop") = "dropped(event)"
+        Obj.Attributes("dropdatatype") = DropDataType
+        Obj.Attributes("dropdataarg") = dropdataarg
+    End Sub
+
+    '------- เลิกรับ Event --------
+    Public Sub CeaseObjectDropable(ByRef Obj As UserControl)
+        Obj.Attributes.Remove("ondragover") '------Remove Event Listener
+        Obj.Attributes.Remove("ondrop") '------Remove Event Listener
+        Obj.Attributes.Remove("dropdatatype") '------Remove Param
+        Obj.Attributes.Remove("dropdataarg")  '------Remove Param
+    End Sub
+
 
     '------- เลิกรับ Event --------
     Public Sub CeaseObjectDropable(ByRef Obj As HtmlControl)
         Obj.Attributes.Remove("ondragover") '------Remove Event Listener
         Obj.Attributes.Remove("ondrop") '------Remove Event Listener
         Obj.Attributes.Remove("dropdatatype") '------Remove Param
-        Obj.Attributes.Remove("dropdataArg")  '------Remove Param
+        Obj.Attributes.Remove("dropdataarg")  '------Remove Param
     End Sub
 
     '------- เลิกรับ Event --------
@@ -226,16 +251,16 @@ Module ModuleGlobal
         Obj.Attributes.Remove("ondragover") '------Remove Event Listener
         Obj.Attributes.Remove("ondrop") '------Remove Event Listener
         Obj.Attributes.Remove("dropdatatype") '------Remove Param
-        Obj.Attributes.Remove("dropdataArg")  '------Remove Param
+        Obj.Attributes.Remove("dropdataarg")  '------Remove Param
     End Sub
 
-    Public Sub ConfigDragDropListener(ByVal ListenerButton As WebControl, ByVal TextDragDataType As TextBox, ByVal TextDragDataArg As TextBox, ByVal TextDropDataType As TextBox, ByVal TextDropDataArg As TextBox, ByRef Page As Page)
+    Public Sub ConfigDragDropListener(ByVal ListenerButton As WebControl, ByVal TextDragDataType As TextBox, ByVal TextDragDataArg As TextBox, ByVal TextDropDataType As TextBox, ByVal Textdropdataarg As TextBox, ByRef Page As Page)
         Dim Script As String = ""
         If Not IsNothing(ListenerButton) Then Script &= "DropActionButton='" & ListenerButton.ClientID & "';" & vbLf
         If Not IsNothing(TextDragDataType) Then Script &= "DragTypeTextbox='" & TextDragDataType.ClientID & "';" & vbLf
         If Not IsNothing(TextDragDataArg) Then Script &= "DragArgTextbox='" & TextDragDataArg.ClientID & "';" & vbLf
         If Not IsNothing(TextDropDataType) Then Script &= "DropTypeTextbox='" & TextDropDataType.ClientID & "';" & vbLf
-        If Not IsNothing(TextDropDataArg) Then Script &= "DropArgTextbox='" & TextDropDataArg.ClientID & "';" & vbLf
+        If Not IsNothing(Textdropdataarg) Then Script &= "DropArgTextbox='" & Textdropdataarg.ClientID & "';" & vbLf
         ScriptManager.RegisterStartupScript(Page, GetType(String), "DragDropConfig", Script, True)
     End Sub
 
