@@ -116,7 +116,7 @@
                                                                 <ItemTemplate>
                                                                     <%-- <asp:Button ID="btnCapacity" runat="server" class="active true-l" CommandName="Capacity" value="64GB" Visible="false" />
                                                                     --%>
-                                                                    <asp:LinkButton ID="lnkCapacity" runat="server" class="btu active true-bs" Text="เลือก"></asp:LinkButton>
+                                                                    <asp:LinkButton ID="lnkCapacity" runat="server" class="btu active true-bs" Text="เลือก" CommandName ="Select"></asp:LinkButton>
 
                                                                 </ItemTemplate>
                                                             </asp:Repeater>
