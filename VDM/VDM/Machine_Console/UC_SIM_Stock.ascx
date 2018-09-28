@@ -2,7 +2,7 @@
 <%@ Register Src="~/Machine_Console/UC_SIM_Dispenser.ascx" TagPrefix="uc1" TagName="UC_SIM_Dispenser" %>
 
 <div class="row" >
-    <div class="col-sm-6" >
+    <div class="col-sm-7" >
         <uc1:UC_SIM_Dispenser runat="server" ID="Dispenser" />
         <asp:Panel ID="pnlSlot" runat="server" CssClass="card bg-white m-b m-t-md" SIM_ID="0">
             <div class="card-header">
@@ -20,7 +20,7 @@
                 <div class="m-t-n m-b">
                     <div class="row ">
                         <div class="col col-md-4 m-t text-center">
-                            <asp:Image ID="imgSlot_Product" runat="server" CssClass="product-Image" ImageUrl="../RenderImage.aspx?Mode=D&UID=1&Entity=Product&LANG=1" />
+                            <asp:Image ID="imgSlot" runat="server" CssClass="product-Image" ImageUrl="../RenderImage.aspx?Mode=D&UID=1&Entity=SIM_Package&LANG=1" />
                             <small>CODE : <asp:Label ID="lblSlot_SIMCode" runat="server"></asp:Label></small><br/>
                             <asp:Label ID="lblSlotQuantity" runat="server" Font-Bold="true" ForeColor="SteelBlue" CssClass="h2"></asp:Label>                                    
                         </div>
@@ -88,7 +88,7 @@
             </div>
         </asp:Panel>
     </div>
-    <div class="col-sm-6" >
+    <div class="col-sm-5" >
         <div class="card bg-white m-b">
             <asp:Panel CssClass="card-header" ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" > 
                 <h3 class="m-t-0 m-b-0">
@@ -117,7 +117,7 @@
                         <div class="row ">
                             <div class="col col-xs-4 m-t text-center">
                                 <div CssClass="profile-avatar" style="padding:0; margin:0;">
-                                    <asp:Image ID="imgScan_SIM" runat="server" CssClass="product-Image" ImageUrl="../RenderImage.aspx?Mode=D&UID=1&Entity=Product&LANG=1" />
+                                    <asp:Image ID="imgScan" runat="server" CssClass="product-Image" ImageUrl="../RenderImage.aspx?Mode=D&UID=1&Entity=SIM_Package&LANG=1" />
                                 </div>                                         
                                 <small>CODE : <asp:Label ID="lblScan_SIMCode" runat="server"></asp:Label></small>                                        
                             </div>

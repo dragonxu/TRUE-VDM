@@ -50,13 +50,13 @@ Partial Public Class UC_SIM_Stock
     Protected WithEvents btnSeeShelf As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''imgSlot_Product control.
+    '''imgSlot control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents imgSlot_Product As Global.System.Web.UI.WebControls.Image
+    Protected WithEvents imgSlot As Global.System.Web.UI.WebControls.Image
     
     '''<summary>
     '''lblSlot_SIMCode control.
@@ -212,13 +212,13 @@ Partial Public Class UC_SIM_Stock
     Protected WithEvents pnlScan As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''imgScan_SIM control.
+    '''imgScan control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents imgScan_SIM As Global.System.Web.UI.WebControls.Image
+    Protected WithEvents imgScan As Global.System.Web.UI.WebControls.Image
     
     '''<summary>
     '''lblScan_SIMCode control.
