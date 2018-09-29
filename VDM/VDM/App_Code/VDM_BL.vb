@@ -1061,7 +1061,7 @@ Public Class VDM_BL
     Public Function GetList_Product_Spec_Capacity(ByVal MODEL As String, Optional ByVal KO_ID As Integer = 0, Optional ByVal CAT_ID As Integer = 0, Optional ByRef LANGUAGE As Integer = UILanguage.TH) As DataTable
         Dim SQL As String = " SELECT * FROM ("
         SQL &= "  SELECT DISTINCT SPEC_ID  "
-        SQL &= "  , dbo.UDF_Clean_Line_ITem(SPEC_NAME_" & Get_Language_Code(LANGUAGE) & ") SPEC_NAME"
+        SQL &= "  , SPEC_NAME_" & Get_Language_Code(LANGUAGE) & " SPEC_NAME"
         SQL &= "  , dbo.UDF_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION_CAPACITY"
         Select Case CAT_ID
             Case Category.Accessories
@@ -1091,7 +1091,7 @@ Public Class VDM_BL
     Public Function GetList_Product_Spec_Warranty(ByVal PRODUCT_ID As Integer, Optional ByVal KO_ID As Integer = 0, Optional ByRef LANGUAGE As Integer = UILanguage.TH) As DataTable
         Dim SQL As String = ""
         SQL &= "  SELECT SEQ ,PRODUCT_ID ,SPEC_ID  "
-        SQL &= "  , dbo.UDF_Clean_Line_ITem(SPEC_NAME_" & Get_Language_Code(LANGUAGE) & ") SPEC_NAME"
+        SQL &= "  , SPEC_NAME_" & Get_Language_Code(LANGUAGE) & " SPEC_NAME"
         SQL &= "  , dbo.UDF_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION"
 
         SQL &= "  FROM VW_CURRENT_PRODUCT_SPEC " & vbLf
@@ -1109,7 +1109,7 @@ Public Class VDM_BL
     Public Function GetList_Product_Spec_Color(ByVal MODEL As  String , Optional ByVal KO_ID As Integer = 0, Optional ByRef LANGUAGE As Integer = UILanguage.TH) As DataTable
         Dim SQL As String = ""
         SQL &= "  SELECT SEQ ,PRODUCT_ID ,SPEC_ID  "
-        SQL &= "  , dbo.UDF_Clean_Line_ITem(SPEC_NAME_" & Get_Language_Code(LANGUAGE) & ") SPEC_NAME"
+        SQL &= "  , SPEC_NAME_" & Get_Language_Code(LANGUAGE) & " SPEC_NAME"
         SQL &= "  , dbo.UDF_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION_COLOR"
 
         SQL &= "  FROM VW_CURRENT_PRODUCT_SPEC " & vbLf
@@ -1127,8 +1127,9 @@ Public Class VDM_BL
     Public Function GetList_Product_Spec_Other(ByVal PRODUCT_ID As Integer, Optional ByVal KO_ID As Integer = 0, Optional ByRef LANGUAGE As Integer = UILanguage.TH) As DataTable
         Dim SQL As String = ""
         SQL &= "  SELECT SEQ  "
-        SQL &= "  , dbo.UDF_Clean_Line_ITem(SPEC_NAME_" & Get_Language_Code(LANGUAGE) & ") SPEC_NAME"
-        SQL &= "  , dbo.UDF_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION"
+        SQL &= "  , SPEC_NAME_" & Get_Language_Code(LANGUAGE) & " SPEC_NAME "
+        'SQL &= "  , dbo.UDF_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION"
+        SQL &= "  , DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " DESCRIPTION"
 
         SQL &= "  FROM VW_CURRENT_PRODUCT_SPEC " & vbLf
         SQL &= "  WHERE KO_ID=" & KO_ID

@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Page-Exit" content="revealTrans(Duration=5.0,Transition=0)">
     <meta http-equiv="Page-Enter" content="revealTrans(Duration=5.0,Transition=8)">
-     
+
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,6 +22,10 @@
     <style>
         header {
             position: relative;
+        }
+
+        .default {
+            background: #5a5454 url(images/icon-cart.png) no-repeat left 40px top 10px;
         }
     </style>
 </head>
@@ -41,29 +45,33 @@
                             <img src="images/pic-step1.png" />
                         </div>
                         <div class="description">
-                            <div class="pic">
-                                <img src="images/iphonex-white.png" style="width: 70%;">
+                            <div class="pic" style="padding: unset; text-align: center;">
+                                <asp:Image ID="img" runat="server" Style="width: 70%;"></asp:Image>
                             </div>
                             <figure class="col-md-6">
                                 <div class="topic true-l">
                                     <h1 class="true-l" style="padding-bottom: 30px;">
-                                        <asp:Label ID="lblDISPLAY_NAME" runat="server" Text="iPhone X" Style="font-size: 78pt;"></asp:Label>
+                                        <asp:Label ID="lblDISPLAY_NAME" runat="server" Style="font-size: 78pt; line-height: 70px;"></asp:Label>
 
                                     </h1>
-                                    <asp:Panel ID="pnlCapacity" runat="server">
+                                    
                                         <div class="capacity">
-                                            <p>
-                                                <asp:Label ID="lblCapacity" runat="server" Text="64GB"></asp:Label>
-                                            </p>
-                                            <div class="color true-m">
-                                                <asp:Label ID="lblColor" runat="server" Text="SILVER"></asp:Label>
+
+                                            <div style ="float :left;"><asp:Panel ID="pnlCapacity" runat="server"><p>
+                                                <asp:Label ID="lblCapacity" runat="server" Text=""></asp:Label>
+                                            </p></asp:Panel></div>
+
+                                            <div class="color true-m" style ="float :left;">
+                                                <asp:Label ID="lblColor" runat="server" Text=""></asp:Label>
                                             </div>
                                         </div>
-                                    </asp:Panel>
+                                    
 
 
                                 </div>
-                                <span class="cart1 true-l">
+
+                                <%--Phase 2--%>
+                                <%--<span class="cart1 true-l">
                                     <p class="true-m">
                                         <asp:Label ID="lblHeader_Package" runat="server" Text="พร้อมสมัครแพ็กเกจ"></asp:Label>
                                     </p>
@@ -77,7 +85,7 @@
                                     <br />
                                     <asp:Label ID="lblDetail_Promotion" runat="server" Text="ทรูแบลคการ์ด ซื้อเคส UAG ในราคา 500.-"></asp:Label>
 
-                                </span>
+                                </span>--%>
                             </figure>
                         </div>
 
@@ -86,19 +94,20 @@
                                 <h4 class="true-b t-red">
                                     <asp:Label ID="lblPrice_str" runat="server" Text="ยอดชำระ"></asp:Label>
                                     <i title="฿">
-                                        <asp:Label ID="lblPrice_Money" runat="server" Text="39,000"></asp:Label></i>
+                                        <asp:Label ID="lblPrice_Money" runat="server" Text=""></asp:Label></i>
                                     <asp:Label ID="lblCurrency_Str" runat="server" Text="บาท"></asp:Label></h4>
                             </div>
 
                             <%--cart-step2.html--%>
                         </div>
 
+
                         <div class="term" style="margin: unset;">
                             <h2 class="true-m">Term & Condition</h2>
-                            <div class="frame" >
+                            <div class="frame">
                                 <span id="content-d3" class="light">
                                     <p class="true-l">
-                                       <%-- <asp:Label  class="true-l" ID="lblTerm_Condition" runat="server" Text=""></asp:Label>--%>
+                                        <%-- <asp:Label  class="true-l" ID="lblTerm_Condition" runat="server" Text=""></asp:Label>--%>
                                         ข้อกำหนดและเงื่อนไขรายการส่งเสริมการขาย 4G+ FUN Unlimited 299, 4G+ FUN Unlimited 399, 4G+ FUN Unlimited 499, 4G+ FUN Unlimited 599, 4G+ FUN Unlimited 699, 4G+ FUN Unlimited 899, 4G+ FUN Unlimited 1099, 4G+ FUN Unlimited 1299, 4G+ FUN Unlimited 1499, และ 4G+ FUN Unlimited 1899
                                         <br />
                                         <br />
@@ -123,33 +132,32 @@
                                 </span>
                             </div>
                         </div>
-                        <label class="check true-l">
-                            ข้าพเจ้าได้อ่านข้อกำหนดและเงื่อนไขทุกข้อแล้ว
-          <input type="checkbox" checked="checked">
-                            <span class="checkmark"></span>
-                        </label>
+                        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                        <asp:UpdatePanel ID="udpList" runat="server">
+                            <ContentTemplate>
+                                <label class="check true-l">
+                                    ข้าพเจ้าได้อ่านข้อกำหนดและเงื่อนไขทุกข้อแล้ว
+                                    <%--<input type="checkbox" checked="checked">--%>
+                                    <asp:CheckBox ID="chkActive" runat="server" Checked="false" AutoPostBack="true" />
+                                    <span class="checkmark"></span>
+                                </label>
 
 
-                        <div class="col-md-12" style="text-align: center;">
-                            <asp:Button ID="btnConfirm_str" runat="server" class="order true-m" Text="ชำระเงิน" />
-                        </div>
+                                <div class="col-md-12" style="text-align: center;">
+                                    <asp:Panel  id="pnlConfirm" runat ="server" >
+                                    <%--<asp:Button ID="btnConfirm_str" runat="server" class="order true-m " Text="ชำระเงิน" />--%>
+                                      <asp:Button ID="btnConfirm_str" runat="server" class="order true-m btn-default " Text="ชำระเงิน" />
 
+                                    </asp:Panel>
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
 
 
                     </div>
                 </div>
             </main>
-      <%--      <footer>
-                <nav>
-                    <div class="main">
-                        <span class="col-md-6"><a href="home.html">
-                            <img src="images/btu-home.png" /></a></span>
-                        <span class="col-md-6"><a href="javascript:history.back();">
-                            <img src="images/btu-prev.png" /></a></span>
-                    </div>
-                </nav>
-            </footer>--%>
-               <footer style="bottom: 0px">
+            <footer style="bottom: 0px">
                 <nav>
                     <div class="main">
                         <span class="col-md-6">
