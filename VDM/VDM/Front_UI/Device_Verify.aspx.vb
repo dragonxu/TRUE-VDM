@@ -13,12 +13,31 @@
         End Get
     End Property
 
+
+
     Protected Property PRODUCT_ID As Integer
         Get
-            Return Val(Request.QueryString("PRODUCT_ID"))
+            Try
+                Return Request.QueryString("PRODUCT_ID")
+            Catch ex As Exception
+                Return 0
+            End Try
         End Get
         Set(value As Integer)
             Request.QueryString("PRODUCT_ID") = value
+        End Set
+    End Property
+
+    Protected Property SIM_ID As Integer
+        Get
+            Try
+                Return Request.QueryString("SIM_ID")
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+        Set(value As Integer)
+            Request.QueryString("SIM_ID") = value
         End Set
     End Property
 

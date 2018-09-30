@@ -1369,7 +1369,9 @@ Public Class VDM_BL
         SQL &= "  SELECT * FROM ( " & vbLf
         SQL &= "    SELECT DISTINCT " & vbLf
         SQL &= "           PRODUCT_ID, PRODUCT_CODE, PRODUCT_NAME, KO_ID, MODEL,CAT_ID  " & vbLf
-        SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Color & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) COLOR " & vbLf
+        'SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Color & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) COLOR " & vbLf
+        SQL &= "    	  ,(SELECT DESCRIPTION_TH FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Color & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) COLOR " & vbLf        '--ค้นหาสีใช้ชื่อ Field ภาษาไทยในการค้นหาเพื่อแก้ปัญหา where ด้วยภาษาอื่นๆแล้ว ไม่เจอ  TH บังคับกรอก
+
         SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Capacity & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) CAPACITY_Mobile " & vbLf
         SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.CapacityAccessories & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) CAPACITY_Assessory " & vbLf
         SQL &= "      From VW_CURRENT_PRODUCT_SPEC " & vbLf
@@ -1403,6 +1405,7 @@ Public Class VDM_BL
         SQL &= "    SELECT DISTINCT " & vbLf
         SQL &= "           PRODUCT_ID, PRODUCT_CODE, PRODUCT_NAME, KO_ID, MODEL,CAT_ID  " & vbLf
         SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Color & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) DESCRIPTION_COLOR " & vbLf
+        SQL &= "    	  ,(SELECT DESCRIPTION_TH COLOR_TH FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Color & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) COLOR_TH " & vbLf
 
         If CAT_ID = Category.Accessories Then
             SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.CapacityAccessories & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) DESCRIPTION_CAPACITY " & vbLf
@@ -1422,7 +1425,7 @@ Public Class VDM_BL
 
 
         If COLOR <> "" Then
-            SQL &= "   AND DESCRIPTION_COLOR='" & COLOR & "' " & vbLf
+            SQL &= "   AND COLOR_TH='" & COLOR & "' " & vbLf
         End If
 
         If CAPACITY <> "" Then
@@ -1440,10 +1443,13 @@ Public Class VDM_BL
 
 #Region "Kiosk SIM"
 
-    Public Function GetList_Current_SIM_Kiosk(Optional ByVal KO_ID As Integer = 0) As DataTable
+    Public Function GetList_Current_SIM_Kiosk(Optional ByVal KO_ID As Integer = 0, Optional ByVal SIM_ID As Integer = 0) As DataTable
         Dim SQL As String = ""
-        SQL &= "   Select * FROM MS_SIM" & vbLf
-        'SQL &= "   WHERE KO_ID =" & KO_ID & " And Active_Status = 1" & vbLf
+        SQL &= "   Select * FROM VW_CURRENT_SIM_DETAIL " & vbLf
+        SQL &= "   WHERE KO_ID =" & KO_ID & " And Active_Status = 1" & vbLf
+        If SIM_ID > 0 Then
+            SQL &= " And SIM_ID = " & SIM_ID & "" & vbLf
+        End If
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)

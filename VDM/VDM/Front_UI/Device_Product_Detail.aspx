@@ -31,6 +31,8 @@
     <link href="css/slick.css" rel="stylesheet" type="text/css" />
     <link href="css/slick-theme.css" rel="stylesheet" type="text/css" />
 
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
+
     <style>
         header {
             position: relative;
@@ -90,7 +92,6 @@
                                     <div class="col-md-5">
                                         <div class="row">
                                             <div class="pic" style="padding: unset;">
-                                                <%-- <img src="images/iphonex-white.png" />    Width="250px"--%>
                                                 <asp:Image ID="img" runat="server"></asp:Image>
                                             </div>
                                         </div>
@@ -110,11 +111,12 @@
 
                                                                         <span>
                                                                             <asp:LinkButton ID="lnkColor" runat="server"> </asp:LinkButton>
-                                                                            <a id="btnColor" runat="server" >
-                                                                                <asp:panel class ="select-color" style="padding: 10px 0; width: 90%;" id="pnlSelect" runat="server">
-                                                                                    <asp:Image ID="img" runat="server" Style="height: 80px; width: unset;"></asp:Image></asp:panel>
+                                                                            <a id="btnColor" runat="server">
+                                                                                <asp:Panel class="select-color" Style="padding: 10px 0; width: 90%;" ID="pnlSelect" runat="server">
+                                                                                    <asp:Image ID="img" runat="server" Style="height: 80px; width: unset;"></asp:Image>
+                                                                                </asp:Panel>
                                                                                 <p class="true-m" style="width: unset;">
-                                                                                    <asp:Label ID="lblColor" runat="server" Style="width: unset; text-align: center;"></asp:Label>
+                                                                                    <asp:Label ID="lblColor" runat="server" Style="width: unset; text-align: center;font-size :25px;"></asp:Label>
                                                                                 </p>
                                                                             </a>
                                                                             <asp:Button ID="btnSelect" runat="server" Style="display: none;" CommandName="Select" />
@@ -129,17 +131,6 @@
 
                                                                         <%--<span><i class="current"><img src="images/iphonex-black.png"></i><p class="true-m">SPACEGREY</p></span>--%>
                                                                     </div>
-
-
-
-                                                                    <%-- <span><i class="current">
-                                                                        <asp:LinkButton ID="lnkColor" runat="server">
-                                                                            <a id="btnColor" runat="server"></a>
-                                                                        </asp:LinkButton>
-                                                                        <asp:Button ID="btnSelect" runat="server" Style="display: none;" CommandName="Select" />
-                                                                    </i>
-
-                                                                    </span>--%>
                                                                 </div>
                                                             </div>
                                                         </ItemTemplate>
@@ -171,7 +162,7 @@
                                             </div>
                                             <asp:Repeater ID="rptSpec" runat="server">
                                                 <ItemTemplate>
-                                                    <span class="true-l">
+                                                    <%--<span class="true-l">
                                                         <div style="float: left;">
                                                             <p class="true-m">
                                                                 <asp:Label ID="lblSPEC_NAME" runat="server"></asp:Label>
@@ -182,16 +173,36 @@
                                                             :
                                                         </div>
                                                         <div style="float: left;">
-                                                            <asp:Label ID="lblDESCRIPTION" runat="server" Style="float: left;" Visible="false"></asp:Label>
-                                                            <asp:TextBox ID="txtDescription_TH" runat="server" TextMode="MultiLine" Visible="false" ReadOnly="true" class="form-control"></asp:TextBox>
-                                                            <textarea id="txtarea" runat="server" readonly style="width: 100%; line-height: 26px;"></textarea>
+                                                            <asp:Label ID="lblDESCRIPTION" runat="server" Style="float: left;" Visible="false"></asp:Label>                                                            
+                                                            <textarea id="txtarea" runat="server" readonly style="width: 100%; line-height: 26px;" visible ="false" ></textarea>
+                                                            <div style="width: 100%; max-height: 300px; overflow:auto; font-size:16px;">
+                                                                <asp:Label ID="lblDesc" runat="server"></asp:Label>
+                                                            </div>
                                                         </div>
-                                                    </span>
+                                                    </span>--%>
+
+                                                    <div class="true-l col-sm-12" style="font-size: 20px;">
+
+                                                        <div style="float: left;">
+                                                            <h6 class="true-m">
+                                                                <asp:Label ID="lblSPEC_NAME" runat="server" Text="รายละเอียดสินค้า"></asp:Label></h6>
+                                                        </div>
+                                                        <div style="float: left; margin-top: 10px;">
+                                                            <b>:</b>
+                                                        </div>
+                                                        <div style="float: left;">
+                                                            <div style="width: 100%; max-height: 400px; overflow: auto; font-size: 20px; min-height: 40px; padding-left: 10px; margin-top: 10px;">
+                                                                <asp:Label ID="lblDesc" runat="server" Style="font-size: 25px;"></asp:Label>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
                                                 </ItemTemplate>
                                             </asp:Repeater>
 
                                             <%--<span class="true-l"><p class="true-m">ความสูง:</p>143.6 มม. (5.65 นิ้ว)</span>--%>
-                                            <asp:Panel ID="pnlSPEC_Warranty" runat="server">
+                                            <asp:Panel ID="pnlSPEC_Warranty" runat="server" Style="margin-top: 20px;">
                                                 <span>
                                                     <p class="bottom true-m">
                                                         <div style="float: left; padding-right: 10px;">
@@ -205,48 +216,37 @@
                                             </asp:Panel>
 
                                             <div class="thumb">
-                                                <%--<asp:Repeater ID="rptColor" runat="server" >
-                                                            <ItemTemplate>
-                                                                <span><i class="current" style ="padding :20px 30px;">
-                                                                    <asp:LinkButton ID="lnkColor" runat ="server" >
-                                                                        <a id="btnColor" runat="server">
-                                                                            <asp:Image ID="img" runat="server" Style ="height: 70px;width: unset;" ></asp:Image>
-                                                                        </a>
-                                                                    </asp:LinkButton>
-                                                                      </i><p class="true-m">
-                                                                            <asp:Label ID="lblColor" runat="server"></asp:Label>
-                                                                        </p>
-                                                                </span>
-                                                            </ItemTemplate>
-                                                        </asp:Repeater>--%>
-
-
-
-
-
-
-                                                <%-- <span><i class="current">
-                                            <img src="images/iphonex-white.png" /></i><p class="true-m">SILVER</p>
-                                        </span>
-                                        <span><i>
-                                            <img src="images/iphonex-black.png" /></i><p class="true-m">SPACEGREY</p>
-                                        </span>--%>
                                             </div>
                                         </figure>
 
                                     </div>
 
                                 </div>
-                                <div class="detail">
+                                <div class="detail true-l">
 
                                     <h4 class="true-l">
                                         <asp:Label ID="lblDescription_Header" runat="server" Text="รายละเอียดสินค้า"></asp:Label></h4>
                                     <%--<li class="true-l"> </li>--%>
                                     <div>
                                         <asp:Label ID="lblDescription_Detail" runat="server"></asp:Label>
-                                        <textarea id="txtarea" runat="server" readonly style="width: 100%; line-height: 26px;" class="true-l"></textarea>
+
+                                        <div style="width: 100%; max-height: 300px; overflow: auto; font-size: 25px;">
+                                            <%-- <asp:Label ID="lblDesc" runat="server"></asp:Label>--%>
+                                        </div>
                                     </div>
 
+                                    <div class="term" style="margin: unset;">
+
+                                        <div class="frame" style="border: unset; background-color: transparent;">
+                                            <span id="content-d3" class="light" style="max-height: 250px;">
+                                                <p class="true-l">
+                                                    <div style="width: 100%;   font-size: 25px; margin-top: 20px;">
+                                                        <asp:Label ID="lblDesc" runat="server"  ></asp:Label>
+                                                    </div>
+                                                </p>
+                                            </span>
+                                        </div>
+                                    </div>
 
                                 </div>
                                 <div class="list" style="margin-bottom: unset;">
@@ -276,7 +276,7 @@
                         </div>
                     </div>
                 </div>
-            </main>
+        </main>
 
 
         </div>
@@ -362,11 +362,25 @@
 </script>
 
 
+<script src="js/jquery.mCustomScrollbar.js"></script>
+
+<script>
+    (function ($) {
+        $(window).on("load", function () {
+
+            $.mCustomScrollbar.defaults.scrollButtons.enable = true; //enable scrolling buttons by default
+            $.mCustomScrollbar.defaults.axis = "yx"; //enable 2 axis scrollbars by default
+
+            $("#content-d3").mCustomScrollbar({ theme: "dark-3" });
+
+        });
+    })(jQuery);
+</script>
 
 <script src="js/Autosize_textarea/autosize.js" type="text/javascript"></script>
 <script>
     autosize(document.querySelectorAll('textarea'));
-	</script>
+</script>
 
 
 </html>

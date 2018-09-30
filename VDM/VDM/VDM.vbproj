@@ -267,6 +267,7 @@
     <Content Include="Front_UI\Device_Payment.aspx" />
     <Content Include="Front_UI\Select_Language.aspx" />
     <Content Include="Front_UI\Device_Brand.aspx" />
+    <Content Include="Front_UI\SIM_Detail.aspx" />
     <Content Include="Front_UI\SIM_List.aspx" />
     <Content Include="Front_UI\Thank_You.aspx" />
     <Content Include="Front_UI\UC_Machine_Console.ascx" />
@@ -724,6 +725,13 @@
     </Compile>
     <Compile Include="Front_UI\Device_Brand.aspx.vb">
       <DependentUpon>Device_Brand.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Front_UI\SIM_Detail.aspx.designer.vb">
+      <DependentUpon>SIM_Detail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\SIM_Detail.aspx.vb">
+      <DependentUpon>SIM_Detail.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Front_UI\SIM_List.aspx.designer.vb">

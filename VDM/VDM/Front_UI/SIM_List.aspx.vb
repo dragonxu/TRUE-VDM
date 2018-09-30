@@ -41,19 +41,32 @@ Public Class SIM_List
         If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
 
         Dim img As Image = e.Item.FindControl("img")
+        Dim btnSIM As HtmlAnchor = e.Item.FindControl("btnSIM")
+        Dim btnSelect As Button = e.Item.FindControl("btnSelect")
+
         Dim Path As String = BL.Get_SIM_Package_Picture_Path(e.Item.DataItem("SIM_ID"), LANGUAGE)
         If IO.File.Exists(Path) Then
             img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=SIM_PACKAGE&UID=" & e.Item.DataItem("SIM_ID") & "&LANG=" & LANGUAGE
         Else
             img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=SIM_PACKAGE&UID=" & e.Item.DataItem("SIM_ID") & "&LANG=" & VDM_BL.UILanguage.TH
         End If
+
+        btnSIM.Attributes("onclick") = "$('#" & btnSelect.ClientID & "').click();"
+        btnSelect.CommandArgument = e.Item.DataItem("SIM_ID")
     End Sub
+    Private Sub rptList_ItemCommand(source As Object, e As RepeaterCommandEventArgs) Handles rptList.ItemCommand
+        If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
+        Dim btnSelect As Button = e.Item.FindControl("btnSelect")
+        Select Case e.CommandName
+            Case "Select"
+                Response.Redirect("SIM_Detail.aspx?SIM_ID=" & btnSelect.CommandArgument)
 
+        End Select
 
+    End Sub
     Private Sub lnkHome_Click(sender As Object, e As ImageClickEventArgs) Handles lnkHome.Click
         Response.Redirect("Home.aspx")
     End Sub
-
 
 
 End Class

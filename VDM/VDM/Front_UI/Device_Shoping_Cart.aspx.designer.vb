@@ -41,6 +41,15 @@ Partial Public Class Device_Shoping_Cart
     Protected WithEvents lblDISPLAY_NAME As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''pnlProduct control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlProduct As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
     '''pnlCapacity control.
     '''</summary>
     '''<remarks>

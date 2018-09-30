@@ -17,6 +17,7 @@ Public Class Device_Shoping_Cart
         End Get
     End Property
 
+#Region "PRODUCT"
     Protected Property PRODUCT_ID As Integer
         Get
             Try
@@ -29,6 +30,37 @@ Public Class Device_Shoping_Cart
             Request.QueryString("PRODUCT_ID") = value
         End Set
     End Property
+#End Region
+
+#Region "SIM"
+
+    Protected Property SIM_ID As Integer
+        Get
+            Try
+                Return Request.QueryString("SIM_ID")
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+        Set(value As Integer)
+            Request.QueryString("SIM_ID") = value
+        End Set
+    End Property
+    Protected Property D_ID As Integer
+        Get
+            Try
+                Return Request.QueryString("D_ID")
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+        Set(value As Integer)
+            Request.QueryString("D_ID") = value
+        End Set
+    End Property
+
+
+#End Region
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsNumeric(Session("LANGUAGE")) Then
@@ -37,7 +69,12 @@ Public Class Device_Shoping_Cart
 
         If Not IsPostBack Then
             ClearForm()
-            BindDetail()
+            If PRODUCT_ID <> 0 Then
+                BindProduct()
+            Else
+                BindSIM()
+            End If
+
         Else
             initFormPlugin()
         End If
@@ -48,14 +85,23 @@ Public Class Device_Shoping_Cart
     End Sub
 
     Private Sub ClearForm()
+
+        If PRODUCT_ID <> 0 Then
+            pnlProduct.Visible = True
+        Else
+            pnlProduct.Visible = False
+        End If
+
         chkActive.Checked = False
         pnlConfirm.Enabled = False
-        'btnConfirm_str.Attributes("class") = "order true-m btn-default"
         btnConfirm_str.Style("background") = "#5a5454 url(images/icon-cart.png) no-repeat left 40px top 10px"
     End Sub
-    Private Sub BindDetail()
+
+#Region "PRODUCT"
+
+    Private Sub BindProduct()
         Dim SQL As String = ""
-        SQL &= "  SELECT * FROM VW_CURRENT_PRODUCT_DETAIL WHERE PRODUCT_ID=" & PRODUCT_ID
+        SQL &= "  SELECT * FROM VW_CURRENT_PRODUCT_DETAIL WHERE PRODUCT_ID=" & PRODUCT_ID & " AND KO_ID=" & KO_ID
         Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)
@@ -83,6 +129,7 @@ Public Class Device_Shoping_Cart
         SQL_Active &= "        ,CAT_ID,MODEL       " & vbLf
         SQL_Active &= "    From VW_CURRENT_PRODUCT_SPEC " & vbLf
         SQL_Active &= "    Where PRODUCT_ID =" & PRODUCT_ID & " And SPEC_ID In (" & VDM_BL.Spec.Capacity & "," & VDM_BL.Spec.Color & ") " & vbLf
+        SQL_Active &= "    AND KO_ID=" & KO_ID
 
         DA = New SqlDataAdapter(SQL_Active, BL.ConnectionString)
         Dim DT_Active As New DataTable
@@ -108,9 +155,42 @@ Public Class Device_Shoping_Cart
         End If
     End Sub
 
+#End Region
+
+#Region "SIM"
+    Private Sub BindSIM()
+        Dim DT As DataTable = BL.GetList_Current_SIM_Kiosk(KO_ID, SIM_ID)
+        If DT.Rows.Count > 0 Then
+            Dim Path As String = BL.Get_Product_Picture_Path(PRODUCT_ID, LANGUAGE)
+            If IO.File.Exists(Path) Then
+                img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=SIM_PACKAGE&UID=" & SIM_ID & "&LANG=" & LANGUAGE
+            Else
+                img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=SIM_PACKAGE&UID=" & SIM_ID & "&LANG=" & VDM_BL.UILanguage.TH
+            End If
+            lblDISPLAY_NAME.Text = DT.Rows(0).Item("DISPLAY_NAME_" & BL.Get_Language_Code(LANGUAGE)).ToString()
+
+            'lblPrice_str.Text = "ยอดชำระ"
+            If Not IsDBNull(DT.Rows(0).Item("PRICE")) Then
+                lblPrice_Money.Text = FormatNumber(Val(DT.Rows(0).Item("PRICE")), 2)
+                'lblCurrency_Str.Text = ""
+            End If
+
+        End If
+
+    End Sub
+#End Region
+
+
+
     Private Sub btnConfirm_str_Click(sender As Object, e As EventArgs) Handles btnConfirm_str.Click
         'Response.Redirect("Device_Verify.aspx?PRODUCT_ID=" & PRODUCT_ID)  ข้ามหน้า Scan ไปก่อน
-        Response.Redirect("Device_Payment.aspx?PRODUCT_ID=" & PRODUCT_ID)
+
+        If PRODUCT_ID <> 0 Then
+            Response.Redirect("Device_Payment.aspx?PRODUCT_ID=" & PRODUCT_ID)
+        Else
+            Response.Redirect("Device_Verify.aspx?SIM_ID=" & SIM_ID)
+        End If
+
     End Sub
 
 
@@ -119,8 +199,12 @@ Public Class Device_Shoping_Cart
     End Sub
 
     Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click
-        'Response.Redirect("Device_Product_Detail.aspx?PRODUCT_ID=" & PRODUCT_ID & "&MODEL=" & MODEL & "&BRAND_ID=" & BRAND_ID)
-        Response.Redirect("Device_Product_Detail.aspx?PRODUCT_ID=" & PRODUCT_ID)
+ 
+        If PRODUCT_ID <> 0 Then
+            Response.Redirect("Device_Product_Detail.aspx?PRODUCT_ID=" & PRODUCT_ID)
+        Else
+            Response.Redirect("SIM_Detail.aspx?SIM_ID=" & SIM_ID)
+        End If
     End Sub
 
     Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged

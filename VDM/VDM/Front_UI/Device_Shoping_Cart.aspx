@@ -54,21 +54,28 @@
                                         <asp:Label ID="lblDISPLAY_NAME" runat="server" Style="font-size: 78pt; line-height: 70px;"></asp:Label>
 
                                     </h1>
-                                    
+                                    <asp:Panel ID="pnlProduct" runat="server">
+
                                         <div class="capacity">
 
-                                            <div style ="float :left;"><asp:Panel ID="pnlCapacity" runat="server"><p>
-                                                <asp:Label ID="lblCapacity" runat="server" Text=""></asp:Label>
-                                            </p></asp:Panel></div>
+                                            <div style="float: left;">
+                                                <asp:Panel ID="pnlCapacity" runat="server">
+                                                    <p>
+                                                        <asp:Label ID="lblCapacity" runat="server" Text=""></asp:Label>
+                                                    </p>
+                                                </asp:Panel>
+                                            </div>
 
-                                            <div class="color true-m" style ="float :left;">
+                                            <div class="color true-m" style="float: left;">
                                                 <asp:Label ID="lblColor" runat="server" Text=""></asp:Label>
                                             </div>
                                         </div>
-                                    
+                                    </asp:Panel>
 
 
                                 </div>
+
+
 
                                 <%--Phase 2--%>
                                 <%--<span class="cart1 true-l">
@@ -95,7 +102,9 @@
                                     <asp:Label ID="lblPrice_str" runat="server" Text="ยอดชำระ"></asp:Label>
                                     <i title="฿">
                                         <asp:Label ID="lblPrice_Money" runat="server" Text=""></asp:Label></i>
-                                    <asp:Label ID="lblCurrency_Str" runat="server" Text="บาท"></asp:Label></h4>
+                                    <asp:Label ID="lblCurrency_Str" runat="server" Text="บาท"></asp:Label>
+
+                                </h4>
                             </div>
 
                             <%--cart-step2.html--%>
@@ -137,16 +146,14 @@
                             <ContentTemplate>
                                 <label class="check true-l">
                                     ข้าพเจ้าได้อ่านข้อกำหนดและเงื่อนไขทุกข้อแล้ว
-                                    <%--<input type="checkbox" checked="checked">--%>
                                     <asp:CheckBox ID="chkActive" runat="server" Checked="false" AutoPostBack="true" />
                                     <span class="checkmark"></span>
                                 </label>
 
 
                                 <div class="col-md-12" style="text-align: center;">
-                                    <asp:Panel  id="pnlConfirm" runat ="server" >
-                                    <%--<asp:Button ID="btnConfirm_str" runat="server" class="order true-m " Text="ชำระเงิน" />--%>
-                                      <asp:Button ID="btnConfirm_str" runat="server" class="order true-m btn-default " Text="ชำระเงิน" />
+                                    <asp:Panel ID="pnlConfirm" runat="server">
+                                        <asp:Button ID="btnConfirm_str" runat="server" class="order true-m btn-default " Text="ชำระเงิน" />
 
                                     </asp:Panel>
                                 </div>
