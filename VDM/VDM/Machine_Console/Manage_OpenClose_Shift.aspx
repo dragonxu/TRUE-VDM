@@ -9,9 +9,6 @@
 <%@ Register Src="~/Machine_Console/UC_SIM_Dispenser.ascx" TagPrefix="uc1" TagName="UC_SIM_Dispenser" %>
 
 
-
-
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style  type="text/css">
         .nav-pills > li.active > a, 

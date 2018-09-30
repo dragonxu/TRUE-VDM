@@ -6,13 +6,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=tis-620">
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-    <meta http-equiv="Page-Enter" content="revealTrans(Duration=2.0,Transition=12)">
+    
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=gb18030" />
     <meta http-equiv="Content-Type" content="text/html; charset=big5" />
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-
 
 
     <title>Kiosk</title>

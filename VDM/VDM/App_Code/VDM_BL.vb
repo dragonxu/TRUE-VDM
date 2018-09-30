@@ -1281,7 +1281,7 @@ Public Class VDM_BL
         Dim SQL As String = " SELECT * FROM ("
         SQL &= "  SELECT DISTINCT SPEC_ID  "
         SQL &= "  , SPEC_NAME_" & Get_Language_Code(LANGUAGE) & " SPEC_NAME"
-        SQL &= "  , dbo.UDF_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION_CAPACITY"
+        SQL &= "  , dbo.FN_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION_CAPACITY"
         Select Case CAT_ID
             Case Category.Accessories
                 SQL &= " , 'mbps' Unit "
@@ -1311,7 +1311,7 @@ Public Class VDM_BL
         Dim SQL As String = ""
         SQL &= "  SELECT SEQ ,PRODUCT_ID ,SPEC_ID  "
         SQL &= "  , SPEC_NAME_" & Get_Language_Code(LANGUAGE) & " SPEC_NAME"
-        SQL &= "  , dbo.UDF_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION"
+        SQL &= "  , dbo.FN_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION"
 
         SQL &= "  FROM VW_CURRENT_PRODUCT_SPEC " & vbLf
         SQL &= "  WHERE KO_ID=" & KO_ID
@@ -1325,11 +1325,11 @@ Public Class VDM_BL
         Return DT
     End Function
 
-    Public Function GetList_Product_Spec_Color(ByVal MODEL As  String , Optional ByVal KO_ID As Integer = 0, Optional ByRef LANGUAGE As Integer = UILanguage.TH) As DataTable
+    Public Function GetList_Product_Spec_Color(ByVal MODEL As String, Optional ByVal KO_ID As Integer = 0, Optional ByRef LANGUAGE As Integer = UILanguage.TH) As DataTable
         Dim SQL As String = ""
         SQL &= "  SELECT SEQ ,PRODUCT_ID ,SPEC_ID  "
         SQL &= "  , SPEC_NAME_" & Get_Language_Code(LANGUAGE) & " SPEC_NAME"
-        SQL &= "  , dbo.UDF_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION_COLOR"
+        SQL &= "  , dbo.FN_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION_COLOR"
 
         SQL &= "  FROM VW_CURRENT_PRODUCT_SPEC " & vbLf
         SQL &= "  WHERE KO_ID=" & KO_ID
@@ -1347,7 +1347,7 @@ Public Class VDM_BL
         Dim SQL As String = ""
         SQL &= "  SELECT SEQ  "
         SQL &= "  , SPEC_NAME_" & Get_Language_Code(LANGUAGE) & " SPEC_NAME "
-        'SQL &= "  , dbo.UDF_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION"
+        'SQL &= "  , dbo.FN_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION"
         SQL &= "  , DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " DESCRIPTION"
 
         SQL &= "  FROM VW_CURRENT_PRODUCT_SPEC " & vbLf
