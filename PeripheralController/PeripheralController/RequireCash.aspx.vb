@@ -26,17 +26,24 @@ Public Class RequireCash
         Result.Columns.Add("status", GetType(Boolean))
         Result.Columns.Add("message", GetType(String))
 
-        If Required > 0 Then
-            WaitForRecieve()
-        Else
-            Dim DR As DataRow = Result.NewRow
-            DR("amount") = 0
-            DR("status") = True
-            DR("message") = "success"
-            Result.Rows.Add(DR)
-            Response.Write(SingleRowDataTableToJSON(Result))
-        End If
+        '--------------------- รอ Test-------------
+        'If Required > 0 Then
+        '    WaitForRecieve()
+        'Else
+        '    Dim DR As DataRow = Result.NewRow
+        '    DR("amount") = 0
+        '    DR("status") = True
+        '    DR("message") = "success"
+        '    Result.Rows.Add(DR)
+        '    Response.Write(SingleRowDataTableToJSON(Result))
+        'End If
 
+        Dim DR As DataRow = Result.NewRow
+        DR("amount") = 500
+        DR("status") = True
+        DR("message") = "success"
+        Result.Rows.Add(DR)
+        Response.Write(SingleRowDataTableToJSON(Result))
     End Sub
 
     Public Sub WaitForRecieve()

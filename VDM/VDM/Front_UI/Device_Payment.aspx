@@ -118,7 +118,6 @@
                                             <h3>
                                                 <p style="border: unset; padding-right: 30px; text-align: right;">
                                                     <asp:Label class="true-b " ID="Label1" runat="server" Text="900.00"></asp:Label>
-
                                                 </p>
                                             </h3>
                                         </div>
@@ -131,8 +130,6 @@
                                             <h3 class="true-b t-red">เหลือ</h3>
                                         </div>
                                         <div class="col-md-6" style="text-align: center;">
-
-
                                             <h3>
                                                 <p style="text-align: right; padding-right: 30px;">
                                                     <asp:Label class="true-b  t-red" ID="lblRemain" runat="server" Text="30,000.00"></asp:Label>
@@ -142,10 +139,47 @@
                                         <div class="col-md-2" style="text-align: center;">
                                             <h3 class="true-b t-red">บาท</h3>
                                         </div>
-
-
                                     </div>
                                     <p class="time true-l">เวลาชำระเงินสดคงเหลือ 2:00:00 นาที</p>
+                                </div>
+
+                                <div style="position:absolute; top:100px;" class="row">
+                                    <div style="display:block;" class="col-lg-3">
+                                        1 : <asp:TextBox ID="txt1" runat="server" Text="0"></asp:TextBox>
+                                    </div>
+                                    <div style="display:block;" class="col-lg-3">
+                                        2 : <asp:TextBox ID="txt2" runat="server" Text="0"></asp:TextBox>
+                                    </div>
+                                    <div style="display:block;" class="col-lg-3">
+                                        5 : <asp:TextBox ID="txt5" runat="server" Text="0"></asp:TextBox>
+                                    </div>
+                                    <div style="display:block;" class="col-lg-3">
+                                        10 : <asp:TextBox ID="txt10" runat="server" Text="0"></asp:TextBox>
+                                    </div>
+                                    <div style="display:block;" class="col-lg-3">
+                                        20 : <asp:TextBox ID="txt20" runat="server" Text="0"></asp:TextBox>
+                                    </div>
+                                    <div style="display:block;" class="col-lg-3">
+                                        50 : <asp:TextBox ID="txt50" runat="server" Text="0"></asp:TextBox>
+                                    </div>
+                                    <div style="display:block;" class="col-lg-3">
+                                        100 : <asp:TextBox ID="txt100" runat="server" Text="0"></asp:TextBox>
+                                    </div>
+                                    <div style="display:block;" class="col-lg-3">
+                                        500 : <asp:TextBox ID="txt500" runat="server" Text="0"></asp:TextBox>
+                                    </div>
+                                    <div style="display:block;" class="col-lg-3">
+                                        1000 : <asp:TextBox ID="txt1000" runat="server" Text="0"></asp:TextBox>
+                                    </div> 
+                                    <div style="display:block;" class="col-lg-3">
+                                        รวมยอด : <asp:TextBox ID="txtCost" runat="server" Text="0"></asp:TextBox>
+                                    </div>  
+                                    <div style="display:block;" class="col-lg-3">
+                                        จ่าย : <asp:TextBox ID="txtPaid" runat="server" Text="0"></asp:TextBox>
+                                    </div>
+                                    <div style="display:block;" class="col-lg-3">
+                                        เหลือ : <asp:TextBox ID="txtRequire" runat="server" Text="0"></asp:TextBox>
+                                    </div>  
                                 </div>
                             </form>
                         </asp:Panel>
@@ -236,34 +270,15 @@
                                             </p>
                                         </div>
                                     </div>
-
-
                                 </div>
                             </form>
                         </asp:Panel>
-
-
                         <div class="col-md-12">
                                     <asp:Button ID="btnSkip" runat="server" class="btu true-bs" Style="background: #635b5b; padding: 0 50px 0 50px; float: right; margin-top: 100px;" Text="ต่อไป" />
                                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
                     </div>
                 </div>
             </main>
-
-
                <footer style="bottom: 0px">
                 <nav>
                     <div class="main">
@@ -276,15 +291,69 @@
                     </div>
                 </nav>
             </footer>
-
-
-
-
         </div>
 
                 </ContentTemplate>
             </asp:UpdatePanel>
+
+           <script type="text/javascript">
+
+                function RequireCash()
+                {
+                    calculateTotal();
+                    var required = parseInt($('#txtRequire').val());
+                    if (required > 0) {
+                        // Call Payment
+                        var url = "http://localhost/RequireCash.aspx?REQ=" + required;
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', url + '&callback=updatePayment', true);
+                        xhr.send();
+                    } else {
+                        // จ่ายครบ
+                    }
+                }
+                
+                
+                var tryReq = 1;
+                updatePayment = function (data)
+                {
+                    var status = data.data.status;
+                    var message = data.data.message;
+                    var amount = data.data.amount;
+                    if (status) {
+                        tryReq = 0;
+                        /*---------Update Payment--------*/
+                        $('#txt' + amount).val(parseInt($('#txt' + amount).val()) + 1);
+                        RequireCash();
+                    } else {
+                        tryReq += 1;
+                        ////Toastr Problem Message
+                        if (tryReq > 3)
+                        {
+                            //  Error เกิน 3 ครั้ง
+                        }
+                    }
+                }
+
+                function calculateTotal()
+                {
+                    var money = [1, 2, 5, 10, 20, 50, 100, 500, 1000];
+                    var paid = 0;
+                    for (i = 0; i < money.length; i++)
+                    {
+                        paid += parseInt($('#txt' + money[i]).val()) * money[i];
+                    }
+                    $('#txtPaid').val(paid);
+                    var cost = parseInt($('#txtCost').val());
+                    var required = cost - paid;
+                    $('#txtRequire').val(required);
+                }        
+                RequireCash(); // เริ่มจ่าย
+
+            </script>
+
     </form>
+    
 </body>
 </html>
 

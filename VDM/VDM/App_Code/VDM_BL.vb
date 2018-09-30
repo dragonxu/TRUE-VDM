@@ -1325,7 +1325,7 @@ Public Class VDM_BL
         Return DT
     End Function
 
-    Public Function GetList_Product_Spec_Color(ByVal MODEL As  String , Optional ByVal KO_ID As Integer = 0, Optional ByRef LANGUAGE As Integer = UILanguage.TH) As DataTable
+    Public Function GetList_Product_Spec_Color(ByVal MODEL As String, Optional ByVal KO_ID As Integer = 0, Optional ByRef LANGUAGE As Integer = UILanguage.TH) As DataTable
         Dim SQL As String = ""
         SQL &= "  SELECT SEQ ,PRODUCT_ID ,SPEC_ID  "
         SQL &= "  , SPEC_NAME_" & Get_Language_Code(LANGUAGE) & " SPEC_NAME"
