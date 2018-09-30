@@ -111,34 +111,34 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Arm.aspx.designer.vb">
-      <DependentUpon>Arm.aspx</DependentUpon>
+    <Compile Include="RequireCash.aspx.designer.vb">
+      <DependentUpon>RequireCash.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Arm.aspx.vb">
-      <DependentUpon>Arm.aspx</DependentUpon>
+    <Compile Include="RequireCash.aspx.vb">
+      <DependentUpon>RequireCash.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Cash.aspx.designer.vb">
-      <DependentUpon>Cash.aspx</DependentUpon>
+    <Compile Include="CashDispense.aspx.designer.vb">
+      <DependentUpon>CashDispense.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Cash.aspx.vb">
-      <DependentUpon>Cash.aspx</DependentUpon>
+    <Compile Include="CashDispense.aspx.vb">
+      <DependentUpon>CashDispense.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Content Include="Arm.aspx" />
-    <Content Include="Cash.aspx" />
-    <Content Include="Coin.aspx" />
+    <Content Include="RequireCash.aspx" />
+    <Content Include="CashDispense.aspx" />
+    <Content Include="CoinDispense.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\Core_BL.vb" />
     <Compile Include="App_Code\ModuleGlobal.vb" />
-    <Compile Include="Coin.aspx.designer.vb">
-      <DependentUpon>Coin.aspx</DependentUpon>
+    <Compile Include="CoinDispense.aspx.designer.vb">
+      <DependentUpon>CoinDispense.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Coin.aspx.vb">
-      <DependentUpon>Coin.aspx</DependentUpon>
+    <Compile Include="CoinDispense.aspx.vb">
+      <DependentUpon>CoinDispense.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.designer.vb">

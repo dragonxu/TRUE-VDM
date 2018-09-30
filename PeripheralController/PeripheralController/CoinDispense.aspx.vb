@@ -1,6 +1,6 @@
 ﻿Imports CoinDispenser
 
-Public Class Coin
+Public Class CoinDispense
     Inherits System.Web.UI.Page
 
     Dim BL As New Core_BL
@@ -27,7 +27,7 @@ Public Class Coin
         DT.Rows.Add(DR)
         Try
             Dim Coin As New CoinDispenser.CoinDispenser
-            Coin.SetPort(BL.CoinIn_Port)
+            Coin.SetPort(BL.CoinReciever_Port)
 
             Select Case Coin.CurrentStatus
                 Case Status.Insufficient_Coin
@@ -64,7 +64,7 @@ Public Class Coin
                     DR("status") = False
                     DR("message") = "Dedects_coin_dispensing_activity_after_suspending_the_dispene_signal"
                 Case Status.Ready, Status.Enable
-                    Coin.Dispense(Quantity)
+                    Coin.Dispense(Quantity) '------------ Do Actoin------------
                     DR("status") = True
                     DR("message") = "success"
             End Select

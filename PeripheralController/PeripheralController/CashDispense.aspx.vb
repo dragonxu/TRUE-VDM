@@ -1,10 +1,21 @@
 ﻿
 Imports CashDispenser
 
-Public Class Cash
+Public Class CashDispense
     Inherits System.Web.UI.Page
 
     Dim BL As New Core_BL
+
+    Public ReadOnly Property NoteType As Integer
+        Get
+            Try
+                Return Request.QueryString("NOTE")
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+    End Property
+
     Public ReadOnly Property Quantity As Integer
         Get
             Try
@@ -27,7 +38,16 @@ Public Class Cash
         DT.Rows.Add(DR)
         Try
             Dim Cash As New CashDispenser.CashDispenser
-            Cash.SetPort(BL.CashIn_Port)
+            Select Case NoteType
+                Case 20
+                    Cash.SetPort(BL.CashDispense20_Port)
+                Case 50
+                    Cash.SetPort(BL.CashDispense50_Port)
+                Case 100
+                    Cash.SetPort(BL.CashDispense100_Port)
+                Case 500
+                    Cash.SetPort(BL.CashDispense500_Port)
+            End Select
 
             Select Case Cash.CurrentStatus
                 Case Status.Unknown
@@ -82,7 +102,7 @@ Public Class Cash
                     DR("status") = False
                     DR("message") = "Checksum_Error"
                 Case Status.Payout_successful, Status.Ready
-                    Cash.Dispense(Quantity)
+                    Cash.Dispense(Quantity) '------------ Do Actoin------------
                     DR("status") = True
                     DR("message") = "success"
             End Select

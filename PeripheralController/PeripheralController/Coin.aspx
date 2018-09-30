@@ -1,1 +1,0 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Coin.aspx.vb" Inherits="PeripheralController.Coin" %>

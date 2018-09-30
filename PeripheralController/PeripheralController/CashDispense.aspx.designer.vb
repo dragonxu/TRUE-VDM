@@ -11,5 +11,5 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Arm
+Partial Public Class CashDispense
 End Class
