@@ -89,6 +89,9 @@ Public Class Manage_Machine
         lblTotalProduct.Text = FormatNumber(e.Item.DataItem("Total_Product"), 0)
 
         '--------------- SIM Slot Level---------------------
+        Dim SIM_STOCK As DataTable = BL.Get_Current_SIM_Stock(KO_ID)
+        SIM_STOCK.Columns("CURRENT").ColumnName = "SLOT_NAME"
+        BL.Bind_SIMDispenser_Stock(Dispenser, SIM_STOCK)
 
         '--------------- Peripheral UI ---------------
         DeviceList.DefaultView.RowFilter = "KO_ID=" & e.Item.DataItem("KO_ID")
@@ -142,6 +145,13 @@ Public Class Manage_Machine
                 Shelf.KO_ID = KO_ID
                 Shelf.BindData()
 
+                '------------ Bind SIM Stock --------------
+                Dispenser.KO_ID = KO_ID
+                Dim STOCK As DataTable = BL.Get_Current_SIM_Stock(KO_ID)
+                STOCK.Columns("CURRENT").ColumnName = "SLOT_NAME"
+                BL.Bind_SIMDispenser_Stock(Dispenser, STOCK)
+
+
             Case "Delete"
                 BL.Drop_Kiosk(e.CommandArgument)
                 BindList()
@@ -164,14 +174,10 @@ Public Class Manage_Machine
         '---------------- Manage Shelf -------------------
         Shelf.PixelPerMM = 0.25
         Shelf.KO_ID = KO_ID
-        Shelf.BindData()
+        Shelf.BindDefaultTemplateLayout()
 
-        ''------------------ Manage Bundled Product -----------------
-        'ProductData = BL.GetList_BundledProduct(0)
-        'BindBundledProduct()
-
-        ''------------------ Manage SIM Slot -----------------
-        'BindSIMSlot()
+        '------------------ Manage SIM Slot -----------------
+        BindDefaultSIM()
 
         ''------- Manage Material Stock Control Level --------
         'BindMaterialStock()
@@ -184,6 +190,33 @@ Public Class Manage_Machine
 
         pnlList.Visible = True
         pnlEdit.Visible = False
+    End Sub
+
+
+    Private Sub BindDefaultSIM()
+        Dispenser.ClearAllSlot()
+
+        '--------------- Bind Layout ------------
+        Dim SQL As String = "SELECT D.D_ID DEVICE_ID,D_Name SLOT_NAME,D.Max_Qty MAX_CAPACITY" & vbLf
+        SQL &= " FROM MS_DEVICE D" & vbLf
+        SQL &= " WHERE D.D_ID In (11,12,13) " & vbLf
+        SQL &= " ORDER BY DEVICE_ID" & vbLf
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        DA.Fill(DT)
+
+        If DT.Rows.Count = 0 Then Exit Sub
+
+        For i As Integer = 0 To DT.Rows.Count - 1
+            Dispenser.AddSlot(DT.Rows(i).Item("SLOT_NAME"), DT.Rows(i).Item("DEVICE_ID"), DT.Rows(i).Item("MAX_CAPACITY"), 0, "", 0, False, True,
+                              Drawing.Color.Green, UC_Product_Slot.HighLightMode.None, 3)
+        Next
+
+        '----------- Bind Stock ------------
+        DT = BL.Get_Current_SIM_Stock(KO_ID)
+        DT.Columns("CURRENT").ColumnName = "SLOT_NAME"
+        BL.Bind_SIMDispenser_Stock(Dispenser, DT)
+
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
@@ -251,6 +284,25 @@ Public Class Manage_Machine
             Message_Toastr("ไม่สามารถบันทึก Layout ของ Product Shelf", ToastrMode.Danger, ToastrPositon.TopRight, Me.Page)
             Exit Sub
         End If
+
+        '-------------- Save SIM Slot-------------
+        Sql = "SELECT * FROM TB_KIOSK_DEVICE WHERE KO_ID=" & KO_ID
+        DT = New DataTable
+        DA = New SqlDataAdapter(Sql, BL.ConnectionString)
+        DA.Fill(DT)
+        For i As Integer = 0 To Dispenser.Slots.Count - 1
+            DT.DefaultView.RowFilter = "D_ID=" & Dispenser.Slots(i).DEVICE_ID
+            DR = DT.NewRow
+            DR("KO_ID") = KO_ID
+            DR("D_ID") = Dispenser.Slots(i).DEVICE_ID
+            DR("Current_Qty") = 0
+            DR("DT_ID") = 8
+            DR("DS_ID") = 2
+            DR("Update_Time") = Now
+            DT.Rows.Add(DR)
+            cmd = New SqlCommandBuilder(DA)
+            DA.Update(DT)
+        Next
 
         Message_Toastr("บันทึกสำเร็จ", ToastrMode.Success, ToastrPositon.TopRight, Me.Page)
         ResetPage(Nothing, Nothing)

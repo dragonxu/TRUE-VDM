@@ -140,6 +140,15 @@ Partial Public Class Manage_Machine
     Protected WithEvents Shelf As Global.VDM.UC_Kiosk_Shelf
     
     '''<summary>
+    '''Dispenser control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Dispenser As Global.VDM.UC_SIM_Dispenser
+    
+    '''<summary>
     '''chkActive control.
     '''</summary>
     '''<remarks>

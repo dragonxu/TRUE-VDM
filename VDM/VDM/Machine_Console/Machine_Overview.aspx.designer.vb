@@ -68,6 +68,15 @@ Partial Public Class Machine_Overview
     Protected WithEvents btnResetProduct As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
+    '''Dispenser control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Dispenser As Global.VDM.UC_SIM_Dispenser
+    
+    '''<summary>
     '''lnkShift control.
     '''</summary>
     '''<remarks>

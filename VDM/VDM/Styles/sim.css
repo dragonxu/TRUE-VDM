@@ -34,3 +34,33 @@
     width: 80px;
     text-align:left;
 }
+
+@keyframes blinkYellowDotted {
+    50% {
+        border: 2px dashed #ffd800;
+    }
+}
+
+@keyframes blinkGreenSolid {
+    50% {
+        border: 2px dashed green;
+    }
+}
+
+@keyframes blinkRedSolid {
+    50% {
+        border: 2px dashed red;
+    }
+}
+
+.sim_container.highlightYellow {
+    animation: blinkYellowDotted .5s step-end infinite alternate;
+}
+
+.sim_container.highlightGreen {
+    animation: blinkGreenSolid .5s step-end infinite alternate;
+}
+
+.sim_container.highlightRed {
+    animation: blinkRedSolid .5s step-end infinite alternate;
+}

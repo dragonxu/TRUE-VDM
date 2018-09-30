@@ -3,6 +3,8 @@
 <%@ Register Src="~/UC_MoneyStock_UI.ascx" TagPrefix="uc" TagName="UC_MoneyStock_UI" %>
 <%@ Register Src="~/UC_Peripheral_UI.ascx" TagPrefix="uc" TagName="UC_Peripheral_UI" %>
 <%@ Register Src="~/UC_Kiosk_Shelf.ascx" TagPrefix="uc" TagName="UC_Kiosk_Shelf" %>
+<%@ Register Src="~/Machine_Console/UC_SIM_Dispenser.ascx" TagPrefix="uc" TagName="UC_SIM_Dispenser" %>
+
 
 
 <asp:Content ID="HeaderContainer" ContentPlaceHolderID="HeaderContainer" runat="server"></asp:Content>
@@ -117,13 +119,17 @@
 
 
                  <div class="form-group" style="margin-left:-5px; border-top:1px solid #ccc;">
-                        <h4 class="card-title col-sm-12 control-label m-t m-b p-t" style="text-align:left;">Shelf Physical Setting</h4>
-                            
+                     <h4 class="card-title col-sm-12 control-label m-t m-b p-t bold" style="text-align:left;">Shelf Physical Setting</h4>
                      <div class="row">
                         <uc:UC_Kiosk_Shelf runat="server" ID="Shelf" />
                      </div>  
-                     
-                </div>
+                  </div>
+                  <div class="form-group" style="margin-left:-5px; border-top:1px solid #ccc;">
+                      <h4 class="card-title col-sm-12 control-label m-t m-b p-t bold" style="text-align:left;">SIM Slot Monitoring</h4>
+                     <div class="row">
+                         <uc:UC_SIM_Dispenser runat="server" ID="Dispenser" />
+                     </div> 
+                  </div>
                       
                       <div class="form-group m-t" style="text-align:left;">
                             <h4 class="card-title col-sm-2 control-label" style="text-align:left; margin-top:0px;">Active Status </h4>  

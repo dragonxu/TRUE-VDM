@@ -175,7 +175,7 @@
                         <ItemTemplate>
                             <li id="li" runat="server">
                                 <asp:LinkButton id="lnk" runat="server" CommandName="Select">
-                                    <asp:Image ID="img" runat="server" width="30px" />  
+                                    <asp:Image ID="img" runat="server" width="30px" />  &nbsp;
                                     <asp:Label ID="lblName" runat="server"></asp:Label> 
                                 </asp:LinkButton>
                             </li>                                    

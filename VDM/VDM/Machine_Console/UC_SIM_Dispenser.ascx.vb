@@ -10,6 +10,16 @@
         End Set
     End Property
 
+    Public Property SHOP_CODE As String
+        Get
+            Return lblProperty.Attributes("SHOP_CODE")
+        End Get
+        Set(value As String)
+            lblProperty.Attributes("SHOP_CODE") = value
+        End Set
+    End Property
+
+
     Public Property SIM_Height As Integer
         Get
             Return lblProperty.Attributes("SIM_Height")
@@ -64,7 +74,7 @@
     Private Function SlotDatas() As DataTable
         Dim DT As New DataTable
         '---------------- Config ----------------
-        DT.Columns.Add("SLOT_ID", GetType(Integer))
+        DT.Columns.Add("SLOT_NAME", GetType(String))
         DT.Columns.Add("DEVICE_ID", GetType(Integer))
         DT.Columns.Add("MAX_CAPACITY", GetType(Integer))
         '---------------- Data-------------------
@@ -82,7 +92,7 @@
 
             Dim Slot As UC_SIM_Slot = Item.FindControl("Slot")
             Dim DR As DataRow = DT.NewRow
-            DR("SLOT_ID") = Slot.SLOT_ID
+            DR("SLOT_NAME") = Slot.SLOT_NAME
             DR("DEVICE_ID") = Slot.DEVICE_ID
             DR("MAX_CAPACITY") = Slot.MAX_CAPACITY
             DR("SIM_ID") = Slot.SIM_ID
@@ -134,7 +144,7 @@
 
         Dim Slot As UC_SIM_Slot = e.Item.FindControl("Slot")
 
-        Slot.SLOT_ID = e.Item.DataItem("SLOT_ID")
+        Slot.SLOT_NAME = e.Item.DataItem("SLOT_NAME")
         Slot.DEVICE_ID = e.Item.DataItem("DEVICE_ID")
         Slot.MAX_CAPACITY = e.Item.DataItem("MAX_CAPACITY")
         Slot.SIM_ID = e.Item.DataItem("SIM_ID")
@@ -146,18 +156,16 @@
         Slot.HighLight = e.Item.DataItem("HighLight")
         Slot.Column12Style = e.Item.DataItem("Column12Style")
 
-        Slot.UpdateSIMQuantity()
-
     End Sub
 
-    Public Sub AddSlot(ByVal SLOT_ID As Integer, ByVal DEVICE_ID As Integer, ByVal MAX_CAPACITY As Integer,
+    Public Sub AddSlot(ByVal SLOT_NAME As String, ByVal DEVICE_ID As Integer, ByVal MAX_CAPACITY As Integer,
                        ByVal SIM_ID As Integer, ByVal SIM_CODE As String, ByVal SIM_PRICE As String,
                        ByVal ShowSIMProfile As Boolean, ByVal ShowPointer As Boolean, ByVal PointerColor As Drawing.Color,
                        ByVal HighLight As UC_Product_Slot.HighLightMode, ByVal Column12Style As Integer)
 
         Dim DT As DataTable = SlotDatas()
         Dim DR As DataRow = DT.NewRow
-        DR("SLOT_ID") = SLOT_ID
+        DR("SLOT_NAME") = SLOT_NAME
         DR("DEVICE_ID") = DEVICE_ID
         DR("MAX_CAPACITY") = MAX_CAPACITY
         DR("SIM_ID") = SIM_ID
@@ -208,6 +216,14 @@
         End Get
     End Property
 
+    Public Function GET_DEVICE_ID_FROM_SLOT_NAME(ByVal SLOT_NAME As String) As Integer
+        For i As Integer = 0 To Slots.Count - 1
+            If Slots(i).SLOT_NAME = SLOT_NAME Then
+                Return Slots(i).DEVICE_ID
+            End If
+        Next
+        Return -1
+    End Function
 
 #Region "Event"
     Public Event Selecting(ByRef Sender As UC_SIM_Slot)

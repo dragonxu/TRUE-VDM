@@ -121,6 +121,7 @@ Public Class UC_Product_Stock
         SCAN_PRODUCT_ID = -1
         BindScanProduct()
         '-------- Left Side -------
+        STOCK_DATA = Nothing
         BindShelfLayout()
         ResetProductSlot()
         BindShelfProduct()
@@ -166,10 +167,10 @@ Public Class UC_Product_Stock
 
     Private Sub BindShelfLayout() '------------ เรียกครั้งแรกครั้งเดียว ---------------
         BL.Bind_Product_Shelf_Layout(Shelf, KO_ID)
-        ConfigShelfLayout()
+        setDefautShelfFeature()
     End Sub
 
-    Private Sub ConfigShelfLayout()
+    Public Sub setDefautShelfFeature()
         '-------------- Configure ------------
         Shelf.ShowAddFloor = False
         Shelf.ShowEditShelf = False
@@ -178,8 +179,8 @@ Public Class UC_Product_Stock
         '------------ Hide All Scale----------
         For i As Integer = 0 To Shelf.Slots.Count - 1
             With Shelf.Slots(i)
-                .ShowScale = False
-                .ShowProductCode = False
+                .ShowScale = True
+                .ShowProductCode = True
             End With
         Next
         For i As Integer = 0 To Shelf.Floors.Count - 1
@@ -190,20 +191,20 @@ Public Class UC_Product_Stock
 
     Private Sub btnZoomIn_Click(sender As Object, e As EventArgs) Handles btnZoomIn.Click
         PixelPerMM += 0.05
-        ConfigShelfLayout()
+        Shelf.setDefautShelfFeature()
         BindShelfProduct()
     End Sub
 
     Private Sub btnZoomOut_Click(sender As Object, e As EventArgs) Handles btnZoomOut.Click
         If PixelPerMM <= 0.1 Then Exit Sub
         PixelPerMM -= 0.05
-        ConfigShelfLayout()
+        Shelf.setDefautShelfFeature()
         BindShelfProduct()
     End Sub
 
     Private Sub btnZoomReset_Click(sender As Object, e As EventArgs) Handles btnZoomReset.Click
         PixelPerMM = 0.25
-        ConfigShelfLayout()
+        Shelf.setDefautShelfFeature()
         BindShelfProduct()
     End Sub
 
@@ -349,14 +350,16 @@ Public Class UC_Product_Stock
 
     Private Sub btnSeeShelf_Click(sender As Object, e As EventArgs) Handles btnSeeShelf.Click
         ResetProductSlot()
+        BindShelfProduct()
         SuggessProductSlot()
+
     End Sub
 
     Private Sub BindSlotProduct(ByVal SLOT_ID As Integer)
         Dim SLOTS As List(Of UC_Product_Slot) = Shelf.Slots
         Dim SLOT As UC_Product_Slot = Nothing
         For s As Integer = 0 To SLOTS.Count - 1
-            If SLOTS(s).SLOT_ID = Me.SLOT_ID Then
+            If SLOTS(s).SLOT_ID = SLOT_ID Then
                 SLOT = SLOTS(s)
                 Exit For
             End If
@@ -515,33 +518,7 @@ Public Class UC_Product_Stock
     End Sub
 
     Private Function SLOT_CAN_RECIEVE_PRODUCT(ByRef SLOT As UC_Product_Slot, ByVal PRODUCT_ID As Integer) As Boolean
-
-        ''------------- Get Product Info -----------
-        'VW_ALL_PRODUCT.DefaultView.RowFilter = "PRODUCT_ID=" & PRODUCT_ID
-        'If VW_ALL_PRODUCT.DefaultView.Count = 0 Then Return False
-
-        'Dim PRODUCT_WIDTH As Integer = 0
-        'Dim PRODUCT_HEIGHT As Integer = 0
-        'Dim PRODUCT_DEPTH As Integer = 0
-
-        'Dim DV As DataRowView = VW_ALL_PRODUCT.DefaultView(0)
-        'If Not IsDBNull(DV("WIDTH")) Then PRODUCT_WIDTH = DV("WIDTH")
-        'If Not IsDBNull(DV("HEIGHT")) Then PRODUCT_HEIGHT = DV("HEIGHT")
-        'If Not IsDBNull(DV("DEPTH")) Then PRODUCT_DEPTH = DV("DEPTH")
-
-        'If SLOT.PRODUCT_QUANTITY <= 0 Then '---- Slot ว่าง -----
-        '    Return PRODUCT_WIDTH <= SLOT.SLOT_WIDTH And PRODUCT_HEIGHT <= SLOT.FLOOR_HEIGHT
-        'ElseIf SLOT.PRODUCT_ID = PRODUCT_ID And PRODUCT_DEPTH > 0 Then  '----------- Contained Same Product --------------
-        '    Dim MaxQuantity As Integer = Math.Floor(Shelf.SHELF_DEPTH / PRODUCT_DEPTH)
-        '    Return SLOT.PRODUCT_QUANTITY < MaxQuantity
-        'ElseIf SLOT.PRODUCT_ID = PRODUCT_ID Then
-        '    Return True
-        'Else '----------- Contained Other Product --------------
-        '    Return False
-        'End If
-
         Return CALCULATE_SLOT_FREE_SPACE_FOR_PRODUCT(SLOT, PRODUCT_ID) > 0
-
     End Function
 
     Private Function CALCULATE_SLOT_FREE_SPACE_FOR_PRODUCT(ByRef SLOT As UC_Product_Slot, ByVal PRODUCT_ID As Integer) As Integer
@@ -584,7 +561,6 @@ Public Class UC_Product_Stock
         Dim scriptMan As ScriptManager = ScriptManager.GetCurrent(Page)
         scriptMan.RegisterAsyncPostBackControl(chk)
         scriptMan.RegisterAsyncPostBackControl(del)
-
     End Sub
 
     Private Sub rptProduct_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles rptScan.ItemDataBound, rptSlot.ItemDataBound
@@ -627,7 +603,7 @@ Public Class UC_Product_Stock
                 '------------- HighLight All Row-------------
                 Dim tr As HtmlTableRow = e.Item.FindControl("tr")
                 If IsButtonCheck(chk) Then
-                    tr.Attributes("class") = "bg-success text-whte"
+                    tr.Attributes("class") = "bg-success text-white"
                 Else
                     tr.Attributes("class") = ""
                 End If
@@ -650,6 +626,7 @@ Public Class UC_Product_Stock
                 End If
                 STOCK_DATA.DefaultView.RowFilter = ""
                 '-------------- Refresh -----------
+                SCAN_PRODUCT_ID = SCAN_PRODUCT_ID
                 BindScanProduct()
         End Select
     End Sub
@@ -663,7 +640,7 @@ Public Class UC_Product_Stock
                 '------------- HighLight All Row-------------
                 Dim tr As HtmlTableRow = e.Item.FindControl("tr")
                 If IsButtonCheck(chk) Then
-                    tr.Attributes("class") = "bg-info text-whte"
+                    tr.Attributes("class") = "bg-info text-white"
                 Else
                     tr.Attributes("class") = ""
                 End If
@@ -998,6 +975,7 @@ Public Class UC_Product_Stock
                 R("PRODUCT_ID") = PRODUCT_ID
                 R("SERIAL_NO") = SERIAL_NO
                 R("CheckIn_Time") = Now
+                R("CheckIn_By") = Session("USER_ID")
                 DT.Rows.Add(R)
                 '------------------ Save Stock ---------------
                 Dim cmd As New SqlCommandBuilder(DA)

@@ -20,6 +20,7 @@ Public Class Machine_Overview
         If Not IsPostBack Then
             SetMachineInfo()
             SetProductShelf()
+            BindSIM()
         Else
 
         End If
@@ -47,6 +48,14 @@ Public Class Machine_Overview
             Shelf.ResetProperty()
             SetProductShelf()
         End If
+    End Sub
+
+    Private Sub BindSIM()
+        Dispenser.KO_ID = KO_ID
+        BL.Bind_SIMDispenser_Layout(Dispenser, KO_ID, 4)
+        Dim STOCK_Data As DataTable = BL.Get_Current_SIM_Stock(KO_ID)
+        STOCK_Data.Columns("CURRENT").ColumnName = "SLOT_NAME"
+        BL.Bind_SIMDispenser_Stock(Dispenser, STOCK_Data)
     End Sub
 
     Private Sub SetMachineInfo()

@@ -109,6 +109,59 @@ Public Class UC_Kiosk_Shelf
         pnlSlot.Visible = False
     End Sub
 
+    Public Sub BindDefaultTemplateLayout()
+        Shelf.ClearAllFloor()
+        '--------------- BindShelf ----------------
+        Dim SQL As String = "Select * FROM MS_SHELF_TEMPLATE"
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        DA.Fill(DT)
+        If DT.Rows.Count = 0 Then Exit Sub
+
+        Shelf.SHELF_ID = 0
+        Shelf.SHELF_DEPTH = DT.Rows(0).Item("DEPTH")
+        Shelf.SHELF_WIDTH = DT.Rows(0).Item("WIDTH")
+        Shelf.SHELF_HEIGHT = DT.Rows(0).Item("HEIGHT")
+
+        '------------ Bind Floor -----------------
+        SQL = "Select FLOOR_ORDER, HEIGHT, POS_Y, " & vbLf
+        SQL &= "0 HighLight, CAST(1 As BIT) ShowFloorName, CAST(1 As BIT) ShowMenu, NULL SlotDatas " & vbLf
+        SQL &= "FROM MS_FLOOR_TEMPLATE" & vbLf
+        SQL &= " ORDER BY FLOOR_ORDER" & vbLf
+        DT = New DataTable
+        DA = New SqlDataAdapter(SQL, BL.ConnectionString)
+        DA.Fill(DT)
+
+        For f As Integer = 0 To DT.Rows.Count - 1
+
+            Dim FLOOR_HEIGHT As Integer = DT.Rows(f).Item("HEIGHT")
+            Dim POS_Y As Integer = DT.Rows(f).Item("POS_Y")
+            Dim FLOOR_ORDER As Integer = DT.Rows(0).Item("FLOOR_ORDER")
+
+            Shelf.AddFloor(0, FLOOR_HEIGHT, POS_Y, False, True, Nothing, True, f)
+            Dim Floor As UC_Product_Floor = Shelf.Floors(f)
+            '-------------- Bind Slot --------------
+            SQL = "Select * FROM MS_SLOT_TEMPLATE " & vbLf
+            SQL &= "WHERE FLOOR_ORDER=" & FLOOR_ORDER & vbLf
+            SQL &= "ORDER BY SLOT_ORDER"
+            Dim ST = New DataTable
+            DA = New SqlDataAdapter(SQL, BL.ConnectionString)
+            DA.Fill(ST)
+
+            For s As Integer = 0 To ST.Rows.Count - 1
+                Dim POS_X As Integer = ST.Rows(s).Item("POS_X")
+                Dim SLOT_WIDTH As Integer = ST.Rows(s).Item("WIDTH")
+                Floor.AddSlot(0, Chr(Asc("A") + f) & "-" & s + 1, POS_X, SLOT_WIDTH, 0, "", 0, "", Drawing.Color.White, Drawing.Color.White, False)
+            Next
+
+        Next
+        setDefautShelfFeature()
+    End Sub
+
+    Public Sub setDefautShelfFeature()
+        Shelf.setDefautShelfFeature()
+    End Sub
+
 
 #Region "Event"
 
@@ -304,6 +357,15 @@ Public Class UC_Kiosk_Shelf
 
         Sender.HighLight = UC_Product_Slot.HighLightMode.YellowDotted '-------- Select Slot -----------
         pnlSlot.Visible = True
+
+        '----------------- Request Arm Position ----------------
+        Dim Script = "$('#toastrMessage').val('ส่งคำสั่งไปแล้ว');" & vbLf
+        Script &= "$('#toastrType').val('success');" & vbLf
+        Script &= "$('#toastrPosition').val('topRight');" & vbLf
+        Script &= "$('#toastrTimeout').val('3000');" & vbLf
+        Script &= " $('.showToastr').click();" & vbLf
+
+        btnMoveToSlot.Attributes("onClick") = "moveArmPosition(" & BL.Get_Arm_Position_From_SlotName(Sender.SLOT_NAME) & "); " & Script
     End Sub
 
     Private Sub btnRemoveSlot_Click(sender As Object, e As EventArgs) Handles btnRemoveSlot.Click
@@ -347,14 +409,16 @@ Public Class UC_Kiosk_Shelf
 
     End Sub
 
-    Private Sub btnMoveToSlot_Click(sender As Object, e As EventArgs) Handles btnMoveToSlot.Click
 
-    End Sub
 
 #End Region
 #End Region
 
 #Region "DataManagement"
+
+    Public Sub ClearAllFloor()
+        Shelf.ClearAllFloor()
+    End Sub
 
     Public Sub BindData()
 
@@ -365,9 +429,7 @@ Public Class UC_Kiosk_Shelf
 
     Public Function SaveData() As Boolean
 
-        If KO_ID = 0 Then
-            Return False
-        End If
+        If KO_ID = 0 Then Return False
 
         If Not SaveShelf() Then Return False
         If Not SaveFloor() Then Return False
@@ -450,13 +512,15 @@ Public Class UC_Kiosk_Shelf
             DR("POS_Y") = Floors(i).POS_Y
             DR("HEIGHT") = Floors(i).FLOOR_HEIGHT
             DR("FLOOR_ORDER") = i + 1
+
+            Dim cmd As New SqlCommandBuilder(DA)
+            Try
+                DA.Update(DT)
+            Catch ex As Exception
+                Return False
+            End Try
         Next
-        Dim cmd As New SqlCommandBuilder(DA)
-        Try
-            DA.Update(DT)
-        Catch ex As Exception
-            Return False
-        End Try
+
         Return True
     End Function
 
@@ -519,22 +583,7 @@ Public Class UC_Kiosk_Shelf
                 End If
                 DR("POS_X") = Slots(s).POS_X
                 DR("WIDTH") = Slots(s).SLOT_WIDTH
-                DR("Update_Time") = Now
                 DR("SLOT_ORDER") = s + 1
-
-                Dim Product As DataTable = BL.Get_Product_Info_From_ID(Slots(s).PRODUCT_ID)
-                '----------- Product Containing---------------
-                If Product.Rows.Count = 0 Or Slots(s).PRODUCT_QUANTITY < 1 Then
-                    DR("PRODUCT_ID") = DBNull.Value
-                    DR("QUANTITY") = DBNull.Value
-                    BL.Drop_PRODUCT_STOCK_SERIAL(Slots(s).SLOT_ID)
-                Else
-                    DR("PRODUCT_ID") = Slots(s).PRODUCT_ID
-                    DR("QUANTITY") = Slots(s).PRODUCT_QUANTITY
-                    If Not Product.Rows(0).Item("IS_SERIAL") Then
-                        BL.Drop_PRODUCT_STOCK_SERIAL(Slots(s).SLOT_ID)
-                    End If
-                End If
 
                 Dim cmd As New SqlCommandBuilder(DA)
                 Try

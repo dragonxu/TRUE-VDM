@@ -23,13 +23,13 @@ Partial Public Class UC_SIM_Slot
     Protected WithEvents pnlContainer As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''lblID control.
+    '''lblName control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblID As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblName As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''lblMaxQuantity control.
