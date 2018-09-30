@@ -335,7 +335,7 @@ Partial Public Class UC_Kiosk_Shelf
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnMoveToSlot As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnMoveToSlot As Global.System.Web.UI.HtmlControls.HtmlAnchor
     
     '''<summary>
     '''btnApplySlot control.

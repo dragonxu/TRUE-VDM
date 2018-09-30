@@ -41,13 +41,13 @@ Partial Public Class UC_SIM_Stock
     Protected WithEvents lblSlotID As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''btnSeeShelf control.
+    '''btnSeeDispenser control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnSeeShelf As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnSeeDispenser As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''imgSlot control.
@@ -68,15 +68,6 @@ Partial Public Class UC_SIM_Stock
     Protected WithEvents lblSlot_SIMCode As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblSlotQuantity control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblSlotQuantity As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
     '''lblSlot_SIMName control.
     '''</summary>
     '''<remarks>
@@ -84,6 +75,15 @@ Partial Public Class UC_SIM_Stock
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblSlot_SIMName As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblSlot_Quantity control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSlot_Quantity As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''tagSlot_Empty control.
@@ -194,13 +194,13 @@ Partial Public Class UC_SIM_Stock
     Protected WithEvents btnBarcode As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''rptProductTab control.
+    '''rptSIMType control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents rptProductTab As Global.System.Web.UI.WebControls.Repeater
+    Protected WithEvents rptSIMType As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
     '''pnlScan control.

@@ -4,12 +4,12 @@
 
 <div class="row">
         <div class="col-lg-1"></div> 
-        <div class="col-lg-6">
+        <div class="col-lg-7">
             
             <uc1:UC_Product_Shelf runat="server" ID="Shelf"/>
 
         </div>
-        <div class="col-lg-5 p-l-lg">
+        <div class="col-lg-4 p-l-lg">
             <asp:Panel ID="pnlShelf" runat="server" CssClass="card bg-white panel_property" BorderWidth="2px" KO_ID="0">
                 <div class="card-header">Shelf Properties</div>
                 <div class="card-block">
@@ -131,42 +131,40 @@
                                 </div>
                                 <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-4 control-label">Containing</label>
-                                <div class="col-sm-6">
-                                      <asp:Panel CssClass="col-xs-12 text-center m-b" ID="pnlProduct" runat="server">
-                                        <asp:Label ID="lblProductName" runat="server" CssClass="h5"></asp:Label>
-                                        <%--<asp:Image ID="imgProduct" runat="server" style="width:100%" />--%>
-                                          <img id="imgProduct" style="width:100%;" />
+                           
+                                                       
+                            <asp:Panel CssClass="col-xs-12 text-center m-b" ID="pnlProduct" runat="server">
+                                <h4 class="row text-center bold m-t">Containing</h4>
+                                <asp:Label ID="lblProductName" runat="server" CssClass="h5"></asp:Label>
+                                    <img id="imgProduct" style="width:100%;" />
                                                                    
-                                        <small>CODE : <asp:Label ID="lblSlot_ProductCode" runat="server"></asp:Label></small>
-                                        <asp:Label ID="lblSlotQuantity" runat="server" Font-Bold="true" ForeColor="SteelBlue" CssClass="h5"></asp:Label>
-                                        <asp:Panel ID="pnlSlotCapacity" runat="server" CssClass="row bg-default left h6" Height="10px">
-                                                <asp:Panel CssClass="bg-success" style="height:100%;" ID="levelProduct" runat="server" ></asp:Panel>  
-                                                <div style="position:absolute; bottom:-15px;" class="text-grey">
-                                                    Available Space : <b class="text-blue"><asp:Label ID="lblFreeSpace" runat="server"></asp:Label></b>
-                                                </div>
-                                                <div style="position:absolute; right:0px; bottom:-15px;" class="text-grey">
-                                                    Max : <b class="text-danger"><asp:Label ID="lblMaxSpace" runat="server"></asp:Label></b>
-                                                </div>                                                
-                                         </asp:Panel>
-                                      </asp:Panel>
-
-                                      <asp:Panel CssClass="col-xs-12" ID="pnlEmpty" runat="server">
-                                        <h3 class="bold text-default m-t-0" id="tagSlot_Empty" runat="server">Empty</h3>
-                                     </asp:Panel>
-
+                                <small>CODE : <asp:Label ID="lblSlot_ProductCode" runat="server"></asp:Label></small>
+                                <asp:Label ID="lblSlotQuantity" runat="server" Font-Bold="true" ForeColor="SteelBlue" CssClass="h5"></asp:Label>
+                                <asp:Panel ID="pnlSlotCapacity" runat="server" CssClass="row bg-default left h6" Height="10px">
+                                        <asp:Panel CssClass="bg-success" style="height:100%;" ID="levelProduct" runat="server" ></asp:Panel>  
+                                        <div style="position:absolute; bottom:-15px;" class="text-grey">
+                                            Available Space : <b class="text-blue"><asp:Label ID="lblFreeSpace" runat="server"></asp:Label></b>
+                                        </div>
+                                        <div style="position:absolute; right:0px; bottom:-15px;" class="text-grey">
+                                            Max : <b class="text-danger"><asp:Label ID="lblMaxSpace" runat="server"></asp:Label></b>
+                                        </div>                                                
+                                    </asp:Panel>
+                                </asp:Panel>
+                                <asp:Panel CssClass="col-xs-12" ID="pnlEmpty" runat="server">
+                                <h3 class="bold text-default m-t-0 text-center" id="tagSlot_Empty" runat="server">Empty</h3>
+                            </asp:Panel>
+                            <div class="row ">
+                                <div class="btn-group btn-group-justified">
+                                        <asp:LinkButton CssClass="btn btn-danger btn-shadow" ID="btnRemoveSlot" runat="server">Remove this</asp:LinkButton>
+                                        <a href="javascript:;" class="btn btn-warning btn-shadow" ID="btnMoveToSlot" runat="server">Move robot to</a>
+                                        
+                                 </div>
+                                <div class="btn-group btn-group-justified">
+                                        <asp:LinkButton CssClass="btn btn-primary btn-shadow" ID="btnApplySlot" runat="server">Apply</asp:LinkButton>
+                                        <asp:LinkButton CssClass="btn btn-default btn-shadow" ID="btnCloseSlot" runat="server">Close</asp:LinkButton>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="btn-group btn-group-justified">
-                                    <asp:LinkButton CssClass="btn btn-danger btn-shadow" ID="btnRemoveSlot" runat="server">Remove this</asp:LinkButton>
-                                    <asp:LinkButton CssClass="btn btn-warning btn-shadow" ID="btnMoveToSlot" runat="server">Move robot to</asp:LinkButton>
-                                    <asp:LinkButton CssClass="btn btn-primary btn-shadow" ID="btnApplySlot" runat="server">Apply</asp:LinkButton>
-                                    <asp:LinkButton CssClass="btn btn-default btn-shadow" ID="btnCloseSlot" runat="server">Close</asp:LinkButton>
-                                </div>
-                                
-                             </div>
+                            
                         </div>
                     </div>
                 </div>

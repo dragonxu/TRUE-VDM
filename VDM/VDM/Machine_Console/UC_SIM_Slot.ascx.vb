@@ -52,21 +52,21 @@
         End Get
     End Property
 
+    Public Property SLOT_NAME As String
+        Get
+            Return lblName.Text
+        End Get
+        Set(value As String)
+            lblName.Text = value
+        End Set
+    End Property
+
     Public Property DEVICE_ID As Integer
         Get
             Return pnlContainer.Attributes("DEVICE_ID")
         End Get
         Set(value As Integer)
             pnlContainer.Attributes("DEVICE_ID") = value
-        End Set
-    End Property
-
-    Public Property SLOT_ID As Integer
-        Get
-            Return lblID.Text
-        End Get
-        Set(value As Integer)
-            lblID.Text = value
         End Set
     End Property
 
@@ -128,7 +128,7 @@
     Public ReadOnly Property SIM_QUANTITY As Integer
         Get
             Try
-                Return Val(lblQuanity.Text.Replace("items", "").Replace("item", "").Replace(" ", ""))
+                Return Val(lblQuanity.Text.Replace("items", "").Replace("item", "").Replace(" ", "").Replace("<", ""))
             Catch ex As Exception
                 Return 0
             End Try
@@ -136,7 +136,7 @@
     End Property
 
     Public Sub UpdateSIMQuantity()
-        Dim QTY As Integer = rptSIM.Items.Count
+        Dim QTY As Integer = SIMS.Count
         If QTY = 0 Then
             lblQuanity.Text = "< empty"
         ElseIf QTY = 1 Then
@@ -232,10 +232,8 @@
         Dim SIM As UC_SIM = e.Item.FindControl("SIM")
         With SIM
             .SERIAL_NO = e.Item.DataItem("SERIAL_NO")
-            .DISPLAY_COLOR = e.Item.DataItem("DISPLAY_COLOR")
-            .Update_Display()
         End With
-        UpdateSIMQuantity()
+
     End Sub
 
     Public Sub AddSIM(ByVal SERIAL_NO As String, ByVal DISPLAY_COLOR As Drawing.Color)
@@ -246,6 +244,14 @@
         DT.Rows.Add(DR)
         rptSIM.DataSource = DT
         rptSIM.DataBind()
+
+        Dim SIMS As List(Of UC_SIM) = Me.SIMS
+        For i As Integer = 0 To SIMS.Count - 1
+            With SIMS(i)
+                .Update_Display()
+            End With
+        Next
+        UpdateSIMQuantity()
     End Sub
 
     Public Sub AddSIM(ByVal SIMDataRow As DataRow)

@@ -3,6 +3,8 @@
 <%@ Register Src="~/UC_Peripheral_UI.ascx" TagPrefix="uc1" TagName="UC_Peripheral_UI" %>
 <%@ Register Src="~/UC_MoneyStock_UI.ascx" TagPrefix="uc1" TagName="UC_MoneyStock_UI" %>
 <%@ Register Src="~/UC_Kiosk_Shelf.ascx" TagPrefix="uc1" TagName="UC_Kiosk_Shelf" %>
+<%@ Register Src="~/Machine_Console/UC_SIM_Dispenser.ascx" TagPrefix="uc1" TagName="UC_SIM_Dispenser" %>
+
 
 
 
@@ -59,6 +61,10 @@
                             SIM Stock
                         </div>
                     </h3>
+                </div>
+                <div class="row ">
+                    <uc1:UC_SIM_Dispenser runat="server" ID="Dispenser" />
+                    
                 </div>
             </div>
 

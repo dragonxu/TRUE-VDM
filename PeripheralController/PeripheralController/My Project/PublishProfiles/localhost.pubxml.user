@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\inetpub\wwwroot</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="Arm.aspx">
+      <publishTime>09/28/2018 18:45:52</publishTime>
+    </File>
+    <File Include="bin/CashDispenser.dll">
+      <publishTime>09/28/2018 13:27:35</publishTime>
+    </File>
+    <File Include="bin/CashReceiver.dll">
+      <publishTime>09/28/2018 13:28:14</publishTime>
+    </File>
+    <File Include="bin/CoinDispenser.dll">
+      <publishTime>09/28/2018 13:09:46</publishTime>
+    </File>
+    <File Include="bin/CoinReciever.dll">
+      <publishTime>09/28/2018 13:30:39</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>06/15/2015 02:06:24</publishTime>
+    </File>
+    <File Include="bin/PeripheralController.dll">
+      <publishTime>09/28/2018 18:57:18</publishTime>
+    </File>
+    <File Include="bin/PeripheralController.xml">
+      <publishTime>09/28/2018 18:57:18</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>06/18/2015 20:19:44</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/SimDispenser.dll">
+      <publishTime>09/26/2018 19:49:57</publishTime>
+    </File>
+    <File Include="Cash.aspx">
+      <publishTime>09/28/2018 15:54:30</publishTime>
+    </File>
+    <File Include="Coin.aspx">
+      <publishTime>09/28/2018 18:29:14</publishTime>
+    </File>
+    <File Include="Default.aspx">
+      <publishTime>09/28/2018 17:55:36</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>09/28/2018 18:33:22</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>09/28/2018 18:49:08</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

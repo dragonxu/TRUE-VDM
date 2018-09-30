@@ -39,6 +39,17 @@
                     </tr>
                 </ItemTemplate>
             </asp:Repeater>
+
+             <asp:Repeater ID="rptSIM" runat="server">
+                <ItemTemplate>
+                    <tr>
+                        <td><asp:Label ID="lblCode" runat="server"></asp:Label></td>
+                        <td><asp:Label ID="lblName" runat="server"></asp:Label></td>
+                        <td><asp:Image ID="img" runat="server" Width="200px" Height="80px"/></td>
+                        <td><asp:Label ID="lblSerial" runat="server"></asp:Label></td>
+                    </tr>
+                </ItemTemplate>
+            </asp:Repeater>
         </table>
     </div>
     </form>

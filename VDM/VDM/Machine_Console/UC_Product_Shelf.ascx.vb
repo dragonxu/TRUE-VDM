@@ -130,6 +130,25 @@
         End If
     End Sub
 
+    Public Sub setDefautShelfFeature()
+        '-------------- Configure ------------
+        ShowAddFloor = True
+        ShowEditShelf = True
+        ShowFloorName()
+        ShowFloorMenu()
+        '------------ Hide All Scale----------
+        For i As Integer = 0 To Slots.Count - 1
+            With Slots(i)
+                .ShowScale = True
+                .ShowProductCode = True
+            End With
+        Next
+        For i As Integer = 0 To Floors.Count - 1
+            Floors(i).ShowScale = True
+        Next
+        ShowScale = True
+    End Sub
+
     Public Function Floors() As List(Of UC_Product_Floor)
         Dim Result As New List(Of UC_Product_Floor)
         For Each Item In rptFloor.Items
@@ -187,9 +206,22 @@
         Return DT
     End Function
 
+    Public Sub ShowFloorName()
+        For i As Integer = 0 To Floors.Count - 1
+            Floors(i).ShowFloorName = True
+        Next
+    End Sub
+
+
     Public Sub HideFloorName()
         For i As Integer = 0 To Floors.Count - 1
             Floors(i).ShowFloorName = False
+        Next
+    End Sub
+
+    Public Sub ShowFloorMenu()
+        For i As Integer = 0 To Floors.Count - 1
+            Floors(i).ShowMenu = True
         Next
     End Sub
 

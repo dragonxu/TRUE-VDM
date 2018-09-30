@@ -452,7 +452,7 @@ Public Class VDM_BL
 
     End Class
 
-    Public Function Get_Product_Barcode_scan_Result(ByVal Shop_Code As String, ByVal Search As String) As BarcodeScanResult
+    Public Function Get_Product_Barcode_Scan_Result(ByVal Shop_Code As String, ByVal Search As String) As BarcodeScanResult
         Dim Result As New BarcodeScanResult
 
         Dim SQL As String = "SELECT PRODUCT_ID,PRODUCT_CODE,DISPLAY_NAME,ISNULL(IS_SERIAL,0) IS_SERIAL,GS1,TYPE" & vbLf
@@ -531,6 +531,63 @@ Public Class VDM_BL
 
     End Function
 
+    Public Function Get_SIM_Barcode_Scan_Result(ByVal Shop_Code As String, ByVal Search As String) As BarcodeScanResult
+        Dim Result As New BarcodeScanResult
+        Result.IS_SERIAL = True
+        Result.TYPE = "SIM"
+
+        Dim SQL As String = "SELECT * FROM MS_SIM " & vbLf
+        SQL &= " WHERE PRODUCT_CODE='" & Search.Replace("'", "''") & "'"
+
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        DA.Fill(DT)
+        If DT.Rows.Count > 0 Then
+            Result.PRODUCT_ID = DT.Rows(0).Item("SIM_ID")
+            Result.PRODUCT_CODE = DT.Rows(0).Item("PRODUCT_CODE").ToString
+            Result.DISPLAY_NAME = DT.Rows(0).Item("DISPLAY_NAME").ToString
+            Result.Result = False
+            Result.Message = "Product นี้ต้องยิง Serial"
+            Return Result
+        End If
+
+        '----------- Get mat Code From TSM----------
+        SQL = "SELECT * " & vbLf
+        SQL &= "FROM TMP_SIM" & vbLf
+        SQL &= "WHERE SERIAL_NO='" & Search.Replace("'", "''") & "'"
+        DT = New DataTable
+        DA = New SqlDataAdapter(SQL, ConnectionString)
+        DA.Fill(DT)
+
+        If DT.Rows.Count = 0 Then
+            Result.Result = False
+            Result.Message = "ไม่พบ Product Code"
+            Return Result
+        Else
+            Result.PRODUCT_CODE = DT.Rows(0).Item("PRODUCT_CODE")
+            Result.SERIAL_NO = Search
+
+            SQL = "SELECT * " & vbLf
+            SQL &= "From VW_SIM_FOR_SCAN" & vbLf
+            SQL &= "WHERE PRODUCT_CODE='" & Result.PRODUCT_CODE.Replace("'", "''") & "'"
+            DT = New DataTable
+            DA = New SqlDataAdapter(SQL, ConnectionString)
+            DA.Fill(DT)
+            Result.PRODUCT_ID = DT.Rows(0).Item("SIM_ID")
+            Result.DISPLAY_NAME = DT.Rows(0).Item("DISPLAY_NAME")
+            DT.DefaultView.RowFilter = "SERIAL_NO='" & Search.Replace("'", "''") & "'"
+            If DT.DefaultView.Count > 0 Then
+                Result.Result = False
+                Result.Message = "สินค้านี้มีอยู่ใน Stock แล้ว (ซ้ำ)"
+                Return Result
+            Else
+                Result.Result = True
+                Result.Message = "Success"
+                Return Result
+            End If
+        End If
+    End Function
+
     Public Function Get_TSM_Product_Code_From_Serial(ByVal Shop_Code As String, ByVal SERIAL_NO As String) As String
         '----------- Get From TSM : Hardcode For Test--------------
         Dim SQL As String = "SELECT PRODUCT_CODE,SERIAL_NO FROM TMP_Serial" & vbLf
@@ -575,6 +632,34 @@ Public Class VDM_BL
         DA.Update(DT)
     End Sub
 
+    Public Sub Save_SIM_Movement_Log(ByVal SHIFT_ID As Integer, ByVal SHIFT_STATUS As ShiftStatus, ByVal SIM_ID As Integer, ByVal SERIAL_NO As String, ByVal MOVE_ID As StockMovementType, ByVal MOVE_FROM As String, ByVal MOVE_FROM_SLOT As Integer, ByVal MOVE_TO As String, ByVal MOVE_TO_SLOT As Integer, ByVal REMARK As String, ByVal MOVE_BY As Integer, ByVal MOVE_TIME As DateTime)
+        Dim SQL As String = "Select TOP 0 * FROM TB_SIM_MOVEMENT"
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, LogConnectionString)
+        DA.Fill(DT)
+        Dim DR As DataRow = DT.NewRow
+        DR("HIS_ID") = GetNewPrimaryLogID("TB_SIM_MOVEMENT", "HIS_ID")
+
+        If SHIFT_ID <> 0 Then DR("SHIFT_ID") = SHIFT_ID
+        If SHIFT_STATUS <> ShiftStatus.Unknown Then DR("SHIFT_STATUS") = SHIFT_STATUS
+
+        DR("SIM_ID") = SIM_ID
+        DR("SERIAL_NO") = SERIAL_NO
+        DR("MOVE_ID") = MOVE_ID
+        DR("MOVE_FROM") = MOVE_FROM
+        If MOVE_FROM_SLOT <> 0 Then DR("MOVE_FROM_SLOT") = MOVE_FROM_SLOT
+        DR("MOVE_TO") = MOVE_TO
+        If MOVE_TO_SLOT <> 0 Then DR("MOVE_TO_SLOT") = MOVE_TO_SLOT
+        DR("REMARK") = REMARK
+        DR("MOVE_BY") = MOVE_BY
+        DR("MOVE_TIME") = MOVE_TIME
+
+        DT.Rows.Add(DR)
+        Dim cmd As New SqlCommandBuilder(DA)
+        DA.Update(DT)
+
+    End Sub
+
     Public Function GetNewPrimaryLogID(ByVal TableName As String, ByVal PrimaryKeyName As String) As Integer
         Dim SQL As String = "SELECT IsNull(MAX(" & PrimaryKeyName & "),0)+1 FROM " & TableName
         Dim DA As New SqlDataAdapter(SQL, LogConnectionString)
@@ -586,6 +671,8 @@ Public Class VDM_BL
 #End Region
 
 #Region "Kiosk Management"
+
+
 
     Public Sub Bind_Product_Shelf_Layout(ByRef Shelf As UC_Product_Shelf, ByVal KO_ID As Integer)
 
@@ -649,7 +736,6 @@ Public Class VDM_BL
         Bind_Product_Shelf_Stock(Shelf, DT)
     End Sub
 
-
     Public Sub Bind_Product_Shelf_Stock(ByRef Shelf As UC_Product_Shelf, ByVal STOCK_DATA As DataTable, Optional ByVal VW_ALL_PRODUCT As DataTable = Nothing)
 
         If IsNothing(VW_ALL_PRODUCT) Then
@@ -662,7 +748,7 @@ Public Class VDM_BL
 
         Dim DT As DataTable = STOCK_DATA.Copy
         Dim Slots As List(Of UC_Product_Slot) = Shelf.Slots
-        For i As Integer = 0 To Shelf.Slots.Count - 1
+        For i As Integer = 0 To Slots.Count - 1
             DT.DefaultView.RowFilter = "SLOT_NAME='" & Slots(i).SLOT_NAME & "'"
             If DT.DefaultView.Count = 0 Then
                 Slots(i).PRODUCT_ID = 0
@@ -702,7 +788,95 @@ Public Class VDM_BL
         Next
     End Sub
 
+    Public Sub Bind_SIMDispenser_Layout(ByRef Dispenser As UC_SIM_Dispenser, ByVal KO_ID As Integer, Optional ByVal Column12Style As Integer = 3)
+        Dispenser.ClearAllSlot()
+        Dispenser.KO_ID = KO_ID
 
+        Dim SQL As String = "SELECT KO_ID,D.D_ID DEVICE_ID,D_Name SLOT_NAME,D.Max_Qty MAX_CAPACITY" & vbLf
+        SQL &= "FROM TB_KIOSK_DEVICE KD" & vbLf
+        SQL &= "INNER JOIN MS_DEVICE D On KD.D_ID=D.D_ID" & vbLf
+        SQL &= "WHERE D.D_ID In (11,12,13) And KO_ID=" & KO_ID
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        DA.Fill(DT)
+
+        If DT.Rows.Count = 0 Then Exit Sub
+
+        For i As Integer = 0 To DT.Rows.Count - 1
+            Dispenser.AddSlot(DT.Rows(i).Item("SLOT_NAME"), DT.Rows(i).Item("DEVICE_ID"), DT.Rows(i).Item("MAX_CAPACITY"), 0, "", 0, False, True,
+                              Drawing.Color.Green, UC_Product_Slot.HighLightMode.None, Column12Style)
+        Next
+
+    End Sub
+
+    Public Function Get_Current_SIM_Stock(ByVal KO_ID As Integer) As DataTable
+        Dim SQL As String = "SELECT SIM_ID,PRODUCT_CODE,PRODUCT_NAME,SERIAL_NO,SLOT_NAME RECENT,SLOT_NAME [CURRENT]" & vbLf
+        SQL &= " FROM VW_CURRENT_SIM_STOCK" & vbLf
+        SQL &= "WHERE KO_ID=" & KO_ID
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT
+    End Function
+
+    Public Sub Bind_SIMDispenser_Stock(ByRef Dispenser As UC_SIM_Dispenser, ByVal STOCK_DATA As DataTable, Optional ByVal VW_ALL_SIM As DataTable = Nothing)
+        If IsNothing(VW_ALL_SIM) Then
+            Dim SQL As String = "SELECT * FROM VW_ALL_SIM"
+            Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+            VW_ALL_SIM = New DataTable
+            DA.Fill(VW_ALL_SIM)
+        End If
+
+        Dim DT As DataTable = STOCK_DATA.Copy
+        Dim Slots As List(Of UC_SIM_Slot) = Dispenser.Slots
+        For i As Integer = 0 To Slots.Count - 1
+            DT.DefaultView.RowFilter = "SLOT_NAME='" & Slots(i).SLOT_NAME & "'"
+
+            Slots(i).ClearAllSIM()
+            If DT.DefaultView.Count = 0 Then
+                Slots(i).SIM_ID = 0
+                Slots(i).SIM_CODE = ""
+                Slots(i).SIM_PRICE = "-"
+                Slots(i).ShowPointer = False
+                Slots(i).ShowSIMProfile = False
+            Else
+                Slots(i).SIM_ID = DT.DefaultView(0).Item("SIM_ID")
+                Slots(i).SIM_CODE = DT.DefaultView(0).Item("PRODUCT_CODE")
+                VW_ALL_SIM.DefaultView.RowFilter = "SIM_ID=" & Slots(i).SIM_ID
+                Slots(i).SIM_PRICE = CInt(VW_ALL_SIM.DefaultView(0)("PRICE"))
+
+                Slots(i).ShowPointer = True
+                Slots(i).ShowSIMProfile = True
+
+                Dim Quantity As Integer = DT.DefaultView.Count
+                Dim Display_Color As Drawing.Color = Drawing.Color.White
+                If (Quantity * 100 / Slots(i).MAX_CAPACITY) < 20 Then
+                    Display_Color = Drawing.Color.Red
+                ElseIf (Quantity * 100 / Slots(i).MAX_CAPACITY) < 40 Then
+                    Display_Color = Drawing.Color.Orange
+                Else
+                    Display_Color = Drawing.Color.Green
+                End If
+                Dim Col() As String = {"SERIAL_NO"}
+                Dim SIMSData As DataTable = DT.DefaultView.ToTable(True, Col)
+                SIMSData.Columns.Add("DISPLAY_COLOR", GetType(Drawing.Color))
+                For j As Integer = 0 To SIMSData.Rows.Count - 1
+                    SIMSData.Rows(j).Item("DISPLAY_COLOR") = Display_Color
+                Next
+                Slots(i).AddSIM(SIMSData)
+            End If
+        Next
+    End Sub
+
+    Public Function Get_Arm_Position_From_SlotName(ByVal SLOT_NAME As String) As Integer
+        Dim SQL As String = "Select * FROM MS_SLOT_ARM_POSITION WHERE SLOT_NAME='" & SLOT_NAME.Replace("'", "''") & "'"
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        DA.Fill(DT)
+
+        If DT.Rows.Count = 0 Then Return 0
+        Return DT.Rows(0)("POS_ID")
+    End Function
 
     Public Function GetList_Kiosk(Optional ByVal KO_ID As Integer = 0) As DataTable
         Dim SQL As String = ""
@@ -774,9 +948,12 @@ Public Class VDM_BL
         Return DT
     End Function
 
+
+
     Public Sub Drop_Kiosk(ByVal KO_ID As Integer)
         '--------- Delete Relation---------
         Drop_PRODUCT_SHELF(KO_ID)
+        Drop_SIM_SLOT(KO_ID)
         Drop_KIOSK_DEVICE(KO_ID)
         Drop_SHIFT(KO_ID)
 
@@ -854,6 +1031,48 @@ Public Class VDM_BL
 
         Dim SQL As String = "DELETE FROM TB_PRODUCT_SHELF" & vbLf
         SQL &= "WHERE KO_ID=" & KO_ID
+        ExecuteNonQuery(SQL)
+    End Sub
+
+    Public Sub Drop_SIM_SLOT(ByVal KO_ID As Integer)
+        Drop_SIM_Serial(KO_ID)
+
+        Dim SQL As String = "DELETE FROM TB_KIOSK_DEVICE" & vbLf
+        SQL &= "WHERE KO_ID=" & KO_ID
+        ExecuteNonQuery(SQL)
+    End Sub
+
+    Public Sub Drop_SIM_SLOT(ByVal KO_ID As Integer, ByVal D_ID As Integer)
+        Drop_SIM_Serial(KO_ID)
+
+        Dim SQL As String = "DELETE FROM TB_KIOSK_DEVICE" & vbLf
+        SQL &= "WHERE KO_ID=" & KO_ID & " AND D_ID=" & D_ID
+        ExecuteNonQuery(SQL)
+    End Sub
+
+    Public Sub Drop_SIM_Serial(ByVal KO_ID As Integer)
+        Dim SQL As String = "SELECT D_ID FROM TB_SIM_SERIAL WHERE KO_ID=" & KO_ID
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        DA.Fill(DT)
+        For i As Integer = 0 To DT.Rows.Count - 1
+            Drop_SIM_Serial(KO_ID, DT.Rows(i).Item("D_ID"))
+        Next
+    End Sub
+
+    Public Sub Drop_SIM_Serial(ByVal KO_ID As Integer, ByVal D_ID As Integer)
+        Dim SQL As String = "SELECT SERIAL_NO FROM TB_SIM_SERIAL WHERE KO_ID=" & KO_ID & " AND D_ID=" & D_ID
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        DA.Fill(DT)
+        For i As Integer = 0 To DT.Rows.Count - 1
+            Drop_SIM_Serial(KO_ID, D_ID, DT.Rows(i).Item("SERIAL_NO"))
+        Next
+    End Sub
+
+    Public Sub Drop_SIM_Serial(ByVal KO_ID As Integer, ByVal D_ID As Integer, ByVal SERIAL_NO As String)
+        Dim SQL As String = "DELETE FROM TB_SIM_SERIAL" & vbLf
+        SQL &= "WHERE KO_ID=" & KO_ID & " AND D_ID=" & D_ID & " AND SERIAL_NO='" & SERIAL_NO.Replace("'", "''") & "'"
         ExecuteNonQuery(SQL)
     End Sub
 
