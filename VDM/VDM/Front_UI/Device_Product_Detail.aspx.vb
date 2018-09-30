@@ -123,6 +123,10 @@ Public Class Device_Product_Detail
 
     Private Sub initFormPlugin()
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Scoll", "$(document).ready(function () {$('.card-slider').slick({infinite: true,slidesToShow: 3,slidesToScroll: 1,}); });", True)
+
+
+
     End Sub
 
     Dim DT_Product_Model As New DataTable
@@ -341,7 +345,7 @@ Public Class Device_Product_Detail
                         ElseIf i < selectIndex Then
                             DT_Color.Rows(i).Item("Order") = i + DT_Color.Rows.Count
                         Else
-                            DT_Color.Rows(i).Item("Order") = i - DT_Color.Rows.Count
+                            DT_Color.Rows(i).Item("Order") = DT_Color.Rows.Count - i
                         End If
 
                     Next

@@ -75,9 +75,9 @@
 </head>
 <body class="bg2">
     <form id="form1" runat="server">
-        <%--<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <asp:UpdatePanel ID="udpList" runat="server">
-            <ContentTemplate>--%>
+            <ContentTemplate>
         <div class="warp">
             <header>
                 <img src="images/bg-top.png" />
@@ -105,9 +105,7 @@
                                                     <asp:Repeater ID="rptColor" runat="server" OnItemCommand="rptColor_ItemCommand">
                                                         <ItemTemplate>
                                                             <div id="BoxIndex" runat="server" style="float: left; width: 110px;">
-                                                                <div class="priceplan">
-                                                                    <%--                                                        <div  class="priceplan" style="margin-right :10px;width:unset ;" >--%>
-
+                                                                <div class="priceplan"> 
                                                                     <div class="thumb">
 
                                                                         <span>
@@ -298,10 +296,11 @@
 
 
 
-        <%--            </ContentTemplate>
-        </asp:UpdatePanel>--%>
-    </form>
-</body>
+        
+
+
+
+   
 <script type="text/javascript" src="js/slick.js"></script>
 
 <script>
@@ -384,4 +383,8 @@
 </script>
 
 
+                    </ContentTemplate>
+        </asp:UpdatePanel>
+     </form>
+</body>
 </html>
