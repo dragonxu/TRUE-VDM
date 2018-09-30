@@ -284,9 +284,9 @@ Module ModuleGlobal
         End If
 
         'Make Parent Folder if not existed
-        Dim p As String() = Path.Split(" \ ")
+        Dim p As String() = Path.Split("\")
         Array.Resize(p, p.Length - 1)
-        Dim ParentFolder As String = String.Join(" \ ", p)
+        Dim ParentFolder As String = String.Join("\", p)
         If Not Directory.Exists(ParentFolder) Then
             Directory.CreateDirectory(ParentFolder)
         End If
@@ -297,7 +297,7 @@ Module ModuleGlobal
     End Sub
 
     Public Function OriginalFileName(ByVal FullPath As String) As String
-        Return FullPath.Substring(FullPath.LastIndexOf(" \ ") + 1)
+        Return FullPath.Substring(FullPath.LastIndexOf("\") + 1)
     End Function
 
     Public Function OriginalFileType(ByVal FullPath As String) As String

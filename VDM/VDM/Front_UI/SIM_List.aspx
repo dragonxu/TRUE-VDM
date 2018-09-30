@@ -26,12 +26,12 @@
                         <h3 class="true-l">SIM&<br />
                             Package</h3>
                         <img src="images/pic-top_sim.png" /></div>
-                    <ul>
+                    <ul  class="col-md-12" style ="text-align :center ;">
                         <h3 class="true-l">เติมเงิน</h3>
 
                         <asp:Repeater ID="rptList" runat="server" >
                             <ItemTemplate>
-                                <li class="col-md-3">
+                                <li class="col-md-4">
                                     <a id="btnSIM" runat="server">
                                         <asp:Image ID="img" runat="server"></asp:Image>
                                     </a>
