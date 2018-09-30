@@ -122,6 +122,15 @@ Partial Public Class Device_Product_Detail
     Protected WithEvents lblDescription_Detail As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''txtarea control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtarea As Global.System.Web.UI.HtmlControls.HtmlTextArea
+    
+    '''<summary>
     '''lblPrice_str control.
     '''</summary>
     '''<remarks>

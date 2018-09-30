@@ -1,27 +1,7 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" CodeBehind="Product_List.aspx.vb" Inherits="VDM.Product_List" %>
 
 <%@ Register Src="~/PageNavigation.ascx" TagName="PageNavigation" TagPrefix="uc1" %>
-
-<%--<asp:Label ID="lblBrand_ID" runat="server" Style="display: none;"></asp:Label>
-<asp:Repeater ID="rptBox" runat="server">
-    <ItemTemplate>
-        <li class="col-md-4">
-            <a id="btnBrand" runat="server">
-                <p class="true-m">
-                    <asp:Label ID="lblProduct" runat="server"></asp:Label>
-                </p>
-
-
-                <asp:Image ID="img" runat="server" Width="311px"></asp:Image></a>
-
-
-
-
-        </li>
-
-        <asp:Button ID="btnSelect" runat="server" Style="display: none;" CommandName="Select" />
-    </ItemTemplate>
-</asp:Repeater>--%>
+ 
 
  
 

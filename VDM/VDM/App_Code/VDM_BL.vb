@@ -1278,10 +1278,10 @@ Public Class VDM_BL
     End Function
 
     Public Function GetList_Product_Spec_Capacity(ByVal MODEL As String, Optional ByVal KO_ID As Integer = 0, Optional ByVal CAT_ID As Integer = 0, Optional ByRef LANGUAGE As Integer = UILanguage.TH) As DataTable
-        Dim SQL As String = ""
+        Dim SQL As String = " SELECT * FROM ("
         SQL &= "  SELECT DISTINCT SPEC_ID  "
-        SQL &= "  , dbo.UDF_Clean_Line_ITem(SPEC_NAME_" & Get_Language_Code(LANGUAGE) & ") SPEC_NAME"
-        SQL &= "  , dbo.UDF_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION"
+        SQL &= "  , SPEC_NAME_" & Get_Language_Code(LANGUAGE) & " SPEC_NAME"
+        SQL &= "  , dbo.UDF_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION_CAPACITY"
         Select Case CAT_ID
             Case Category.Accessories
                 SQL &= " , 'mbps' Unit "
@@ -1299,6 +1299,7 @@ Public Class VDM_BL
             Case Else
                 SQL &= "        AND SPEC_ID IN (" & Spec.Capacity & ") "
         End Select
+        SQL &= "   )TB ORDER BY DESCRIPTION_CAPACITY desc "
 
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         Dim DT As New DataTable
@@ -1309,7 +1310,7 @@ Public Class VDM_BL
     Public Function GetList_Product_Spec_Warranty(ByVal PRODUCT_ID As Integer, Optional ByVal KO_ID As Integer = 0, Optional ByRef LANGUAGE As Integer = UILanguage.TH) As DataTable
         Dim SQL As String = ""
         SQL &= "  SELECT SEQ ,PRODUCT_ID ,SPEC_ID  "
-        SQL &= "  , dbo.UDF_Clean_Line_ITem(SPEC_NAME_" & Get_Language_Code(LANGUAGE) & ") SPEC_NAME"
+        SQL &= "  , SPEC_NAME_" & Get_Language_Code(LANGUAGE) & " SPEC_NAME"
         SQL &= "  , dbo.UDF_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION"
 
         SQL &= "  FROM VW_CURRENT_PRODUCT_SPEC " & vbLf
@@ -1327,8 +1328,8 @@ Public Class VDM_BL
     Public Function GetList_Product_Spec_Color(ByVal MODEL As  String , Optional ByVal KO_ID As Integer = 0, Optional ByRef LANGUAGE As Integer = UILanguage.TH) As DataTable
         Dim SQL As String = ""
         SQL &= "  SELECT SEQ ,PRODUCT_ID ,SPEC_ID  "
-        SQL &= "  , dbo.UDF_Clean_Line_ITem(SPEC_NAME_" & Get_Language_Code(LANGUAGE) & ") SPEC_NAME"
-        SQL &= "  , dbo.UDF_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION"
+        SQL &= "  , SPEC_NAME_" & Get_Language_Code(LANGUAGE) & " SPEC_NAME"
+        SQL &= "  , dbo.UDF_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION_COLOR"
 
         SQL &= "  FROM VW_CURRENT_PRODUCT_SPEC " & vbLf
         SQL &= "  WHERE KO_ID=" & KO_ID
@@ -1345,8 +1346,9 @@ Public Class VDM_BL
     Public Function GetList_Product_Spec_Other(ByVal PRODUCT_ID As Integer, Optional ByVal KO_ID As Integer = 0, Optional ByRef LANGUAGE As Integer = UILanguage.TH) As DataTable
         Dim SQL As String = ""
         SQL &= "  SELECT SEQ  "
-        SQL &= "  , dbo.UDF_Clean_Line_ITem(SPEC_NAME_" & Get_Language_Code(LANGUAGE) & ") SPEC_NAME"
-        SQL &= "  , dbo.UDF_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION"
+        SQL &= "  , SPEC_NAME_" & Get_Language_Code(LANGUAGE) & " SPEC_NAME "
+        'SQL &= "  , dbo.UDF_Clean_Line_ITem(DESCRIPTION_" & Get_Language_Code(LANGUAGE) & ") DESCRIPTION"
+        SQL &= "  , DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " DESCRIPTION"
 
         SQL &= "  FROM VW_CURRENT_PRODUCT_SPEC " & vbLf
         SQL &= "  WHERE KO_ID=" & KO_ID
@@ -1366,13 +1368,13 @@ Public Class VDM_BL
         Dim SQL As String = ""
         SQL &= "  SELECT * FROM ( " & vbLf
         SQL &= "    SELECT DISTINCT " & vbLf
-        SQL &= "           PRODUCT_ID, PRODUCT_CODE, PRODUCT_NAME, KO_ID, MODEL " & vbLf
+        SQL &= "           PRODUCT_ID, PRODUCT_CODE, PRODUCT_NAME, KO_ID, MODEL,CAT_ID  " & vbLf
         SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Color & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) COLOR " & vbLf
         SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Capacity & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) CAPACITY_Mobile " & vbLf
         SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.CapacityAccessories & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) CAPACITY_Assessory " & vbLf
         SQL &= "      From VW_CURRENT_PRODUCT_SPEC " & vbLf
         SQL &= "      Where SPEC_ID In (" & Spec.Color & "," & Spec.Capacity & "," & Spec.CapacityAccessories & ")  AND KO_ID=" & KO_ID
-        SQL &= "      Group BY   PRODUCT_ID, PRODUCT_CODE, PRODUCT_NAME, KO_ID, MODEL, DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " " & vbLf
+        SQL &= "      Group BY   PRODUCT_ID, PRODUCT_CODE, PRODUCT_NAME, KO_ID,CAT_ID , MODEL, DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " " & vbLf
         SQL &= "  ) TB  " & vbLf
         SQL &= "  WHERE MODEL='" & MODEL & "' "
         If COLOR <> "" Then
@@ -1395,6 +1397,44 @@ Public Class VDM_BL
         Return PRODUCT_ID
     End Function
 
+    Public Function GetProduct_Choice(ByVal MODEL As String, Optional ByVal COLOR As String = "", Optional ByVal CAPACITY As String = "", Optional ByVal CAT_ID As Integer = 0, Optional ByVal KO_ID As Integer = 0, Optional ByRef LANGUAGE As Integer = UILanguage.TH) As DataTable
+        Dim SQL As String = ""
+        SQL &= "  SELECT *   FROM ( " & vbLf
+        SQL &= "    SELECT DISTINCT " & vbLf
+        SQL &= "           PRODUCT_ID, PRODUCT_CODE, PRODUCT_NAME, KO_ID, MODEL,CAT_ID  " & vbLf
+        SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Color & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) DESCRIPTION_COLOR " & vbLf
+
+        If CAT_ID = Category.Accessories Then
+            SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.CapacityAccessories & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) DESCRIPTION_CAPACITY " & vbLf
+            SQL &= " , 'mbps' Unit "
+        Else
+            SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Capacity & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) DESCRIPTION_CAPACITY " & vbLf
+            SQL &= " , 'GB' Unit "
+        End If
+
+
+        SQL &= "      From VW_CURRENT_PRODUCT_SPEC " & vbLf
+        SQL &= "      Where SPEC_ID In (" & Spec.Color & "," & Spec.Capacity & "," & Spec.CapacityAccessories & ")  AND KO_ID=" & KO_ID
+        SQL &= "      Group BY   PRODUCT_ID, PRODUCT_CODE, PRODUCT_NAME, KO_ID, MODEL,CAT_ID , DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " " & vbLf
+        SQL &= "  ) TB  " & vbLf
+        SQL &= "  WHERE MODEL='" & MODEL & "' "
+
+
+
+        If COLOR <> "" Then
+            SQL &= "   AND DESCRIPTION_COLOR='" & COLOR & "' " & vbLf
+        End If
+
+        If CAPACITY <> "" Then
+            SQL &= "   And ( DESCRIPTION_CAPACITY='" & CAPACITY & "')" & vbLf
+        End If
+
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+
+        Return DT
+    End Function
 
 #End Region
 

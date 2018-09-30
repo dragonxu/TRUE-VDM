@@ -23,6 +23,15 @@ Partial Public Class Device_Shoping_Cart
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
     
     '''<summary>
+    '''img control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents img As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
     '''lblDISPLAY_NAME control.
     '''</summary>
     '''<remarks>
@@ -59,42 +68,6 @@ Partial Public Class Device_Shoping_Cart
     Protected WithEvents lblColor As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblHeader_Package control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblHeader_Package As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblDetail_Package control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblDetail_Package As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblHeader_Promotion control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblHeader_Promotion As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblDetail_Promotion control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblDetail_Promotion As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
     '''lblPrice_str control.
     '''</summary>
     '''<remarks>
@@ -120,6 +93,42 @@ Partial Public Class Device_Shoping_Cart
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCurrency_Str As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''ScriptManager1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ScriptManager1 As Global.System.Web.UI.ScriptManager
+    
+    '''<summary>
+    '''udpList control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents udpList As Global.System.Web.UI.UpdatePanel
+    
+    '''<summary>
+    '''chkActive control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents chkActive As Global.System.Web.UI.WebControls.CheckBox
+    
+    '''<summary>
+    '''pnlConfirm control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlConfirm As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''btnConfirm_str control.

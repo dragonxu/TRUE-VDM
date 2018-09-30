@@ -39,6 +39,19 @@ Public Class Device_Product_Detail
         End Set
     End Property
 
+    Protected Property CAT_ID As Integer
+        Get
+            Try
+                Return lblCode.Attributes("CAT_ID")
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+        Set(value As Integer)
+            lblCode.Attributes("CAT_ID") = value
+        End Set
+    End Property
+
     Protected Property MODEL As String
         Get
             Try
@@ -99,9 +112,10 @@ Public Class Device_Product_Detail
 
             CAPACITY = ""
             COLOR = ""
+            BindDetail()
+            '--เข้ามาครั้งแรก Default สี ความจุ--
+            BindFirst(CAT_ID)
 
-
-            BindList()
         Else
             initFormPlugin()
         End If
@@ -115,16 +129,14 @@ Public Class Device_Product_Detail
 
 #Region "rptProductList"
 
-    Private Sub BindList()
+    Private Sub BindDetail()
 
         Dim DT As DataTable = BL.GetList_Product_Model(MODEL, KO_ID, PRODUCT_ID)
 
         If DT.Rows.Count > 0 Then
             DT_Product_Model = DT   ' Product ที่จัดกลุ่ม Model  เดียวกัน
 
-
             'แสดง Product Default ครั้งแรก
-
             'chack pic
             Dim Path As String = BL.Get_Product_Picture_Path(PRODUCT_ID, LANGUAGE)
             If IO.File.Exists(Path) Then
@@ -143,7 +155,8 @@ Public Class Device_Product_Detail
             End If
 
             'lblDescription_Header.Text = ""  ' จาก Master แปล
-            lblDescription_Detail.Text = DT.Rows(0).Item("DESCRIPTION_" & BL.Get_Language_Code(LANGUAGE)).ToString()
+            'lblDescription_Detail.Text = DT.Rows(0).Item("DESCRIPTION_" & BL.Get_Language_Code(LANGUAGE)).ToString()
+            txtarea.InnerText = DT.Rows(0).Item("DESCRIPTION_" & BL.Get_Language_Code(LANGUAGE)).ToString()
 
             'lblPrice_str.Text = ""
             If Not IsDBNull(DT.Rows(0).Item("PRICE")) Then
@@ -151,40 +164,12 @@ Public Class Device_Product_Detail
                 'lblCurrency_Str.Text = ""
             End If
 
-            '--Set Current Select
-            Dim SQL_Active As String = ""
-            SQL_Active &= "  Select DISTINCT PRODUCT_ID,PRODUCT_CODE,PRODUCT_NAME,KO_ID " & vbLf
-            SQL_Active &= "        ,SPEC_ID,SEQ " & vbLf
-            SQL_Active &= "        ,SPEC_NAME_" & BL.Get_Language_Code(LANGUAGE).ToString() & ",DESCRIPTION_" & BL.Get_Language_Code(LANGUAGE).ToString()
-            SQL_Active &= "        ,CAT_ID,MODEL       " & vbLf
-            SQL_Active &= "    From VW_CURRENT_PRODUCT_SPEC " & vbLf
-            SQL_Active &= "    Where PRODUCT_ID =" & PRODUCT_ID & " And SPEC_ID In (" & VDM_BL.Spec.Capacity & "," & VDM_BL.Spec.Color & ") " & vbLf
-
-            Dim DA As New SqlDataAdapter(SQL_Active, BL.ConnectionString)
-            Dim DT_Active As New DataTable
-            DA.Fill(DT_Active)
-            If DT_Active.Rows.Count > 0 Then
-                For i As Integer = 0 To DT_Active.Rows.Count - 1
-                    If DT_Active.Rows(i).Item("SPEC_ID") = VDM_BL.Spec.Color Then
-                        COLOR = DT_Active.Rows(i).Item("DESCRIPTION_" & BL.Get_Language_Code(LANGUAGE)).ToString()
-                    End If
-                    If DT_Active.Rows(i).Item("SPEC_ID") = VDM_BL.Spec.Capacity Then
-                        CAPACITY = DT_Active.Rows(i).Item("DESCRIPTION_" & BL.Get_Language_Code(LANGUAGE)).ToString()
-                    End If
-                Next
-            End If
-
-            Dim DT_Capacity As DataTable = BL.GetList_Product_Spec_Capacity(MODEL, KO_ID, Val(DT.Rows(0).Item("CAT_ID").ToString()), LANGUAGE)
-            rptCapacity.DataSource = DT_Capacity
-            rptCapacity.DataBind()
+            ''--เข้ามาครั้งแรก Default สี ความจุ-- 
+            CAT_ID = IIf(Not IsDBNull(DT.Rows(0).Item("CAT_ID")), DT.Rows(0).Item("CAT_ID"), 0)
 
             Dim DT_Spec As DataTable = BL.GetList_Product_Spec_Other(DT.Rows(0).Item("PRODUCT_ID"), KO_ID, LANGUAGE)
             rptSpec.DataSource = DT_Spec
             rptSpec.DataBind()
-
-            Dim DT_Color As DataTable = BL.GetList_Product_Spec_Color(MODEL, KO_ID, LANGUAGE)
-            rptColor.DataSource = DT_Color
-            rptColor.DataBind()
 
 
 
@@ -192,7 +177,45 @@ Public Class Device_Product_Detail
 
     End Sub
 
+    Private Sub BindFirst(ByRef Catagory As Integer)
+        CAT_ID = Catagory
+        '--เข้ามาครั้งแรก--
+        '--Set Current Select
+        Dim SQL_Active As String = ""
+        SQL_Active &= "  Select DISTINCT PRODUCT_ID,PRODUCT_CODE,PRODUCT_NAME,KO_ID " & vbLf
+        SQL_Active &= "        ,SPEC_ID,SEQ " & vbLf
+        SQL_Active &= "        ,SPEC_NAME_" & BL.Get_Language_Code(LANGUAGE).ToString() & ",DESCRIPTION_" & BL.Get_Language_Code(LANGUAGE).ToString()
+        SQL_Active &= "        ,CAT_ID,MODEL       " & vbLf
+        SQL_Active &= "    From VW_CURRENT_PRODUCT_SPEC " & vbLf
+        SQL_Active &= "    Where PRODUCT_ID =" & PRODUCT_ID & " And SPEC_ID In (" & VDM_BL.Spec.Capacity & "," & VDM_BL.Spec.Color & ") " & vbLf
 
+        Dim DA As New SqlDataAdapter(SQL_Active, BL.ConnectionString)
+        Dim DT_Active As New DataTable
+        DA.Fill(DT_Active)
+        If DT_Active.Rows.Count > 0 Then
+            For i As Integer = 0 To DT_Active.Rows.Count - 1
+                If DT_Active.Rows(i).Item("SPEC_ID") = VDM_BL.Spec.Color Then
+                    COLOR = DT_Active.Rows(i).Item("DESCRIPTION_" & BL.Get_Language_Code(LANGUAGE)).ToString()
+                End If
+                If DT_Active.Rows(i).Item("SPEC_ID") = VDM_BL.Spec.Capacity Then
+                    CAPACITY = DT_Active.Rows(i).Item("DESCRIPTION_" & BL.Get_Language_Code(LANGUAGE)).ToString()
+                End If
+            Next
+        End If
+
+        'ทั้งหมด
+        Dim DT_Capacity As DataTable = BL.GetList_Product_Spec_Capacity(MODEL, KO_ID, CAT_ID, LANGUAGE)
+        rptCapacity.DataSource = DT_Capacity
+        rptCapacity.DataBind()
+
+        'ทั้งหมด
+        Dim DT_Color As DataTable = BL.GetProduct_Choice(MODEL, "", CAPACITY, CAT_ID, KO_ID, LANGUAGE)
+
+        'Dim DT_Color As DataTable = BL.GetList_Product_Spec_Color(MODEL, KO_ID, LANGUAGE)
+        rptColor.DataSource = DT_Color
+        rptColor.DataBind()
+
+    End Sub
 
 #End Region
 
@@ -200,21 +223,47 @@ Public Class Device_Product_Detail
     Private Sub rptCapacity_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles rptCapacity.ItemDataBound
         If e.Item.ItemType <> ListItemType.AlternatingItem And e.Item.ItemType <> ListItemType.Item Then Exit Sub
         Dim lnkCapacity As LinkButton = e.Item.FindControl("lnkCapacity")
-        lnkCapacity.Text = e.Item.DataItem("DESCRIPTION").ToString + e.Item.DataItem("Unit").ToString
-        'btnCapacity.CommandArgument = e.Item.DataItem("CAT_ID")
+        lnkCapacity.Text = e.Item.DataItem("DESCRIPTION_CAPACITY").ToString + e.Item.DataItem("Unit").ToString
+        lnkCapacity.Attributes("DESCRIPTION_CAPACITY") = e.Item.DataItem("DESCRIPTION_CAPACITY").ToString()
 
-        'If e.Item.DataItem("DESCRIPTION").ToString = CAPACITY Then
-        '    lnkCapacity.Attributes("class") = "btu active true-bs"
-        'Else
-        '    lnkCapacity.Attributes("class") = "btu true-bs"
-        'End If
-
-        'lnkCapacity.Style("color") = "#FFF"
-        'lnkCapacity.Style("background") = "##47464B"
+        If e.Item.DataItem("DESCRIPTION_CAPACITY").ToString = CAPACITY Then
+            lnkCapacity.Style("color") = "#FFF"
+            lnkCapacity.Style("background") = "#47464B"
+        Else
+            lnkCapacity.Style("color") = "#47464B"
+            lnkCapacity.Style("background") = "#FFF"
+        End If
 
 
     End Sub
 
+    Private Sub rptCapacity_ItemCommand(source As Object, e As RepeaterCommandEventArgs) Handles rptCapacity.ItemCommand
+        If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
+        Dim lnkCapacity As LinkButton = e.Item.FindControl("lnkCapacity")
+        Select Case e.CommandName
+            Case "Select"
+                CAPACITY = lnkCapacity.Attributes("DESCRIPTION_CAPACITY").ToString
+                'MODEL COLOR CAPACITY
+
+                PRODUCT_ID = BL.GetProduct_ID_Select(MODEL, COLOR, CAPACITY, KO_ID, LANGUAGE)
+                If PRODUCT_ID = 0 Then
+                    'ทั้งหมด
+                    Dim DT_Color As DataTable = BL.GetProduct_Choice(MODEL, "", CAPACITY, CAT_ID, KO_ID, LANGUAGE)
+                    If DT_Color.Rows.Count > 0 Then
+                        COLOR = DT_Color.Rows(0).Item("DESCRIPTION_COLOR").ToString()
+                    End If
+                    rptColor.DataSource = DT_Color
+                    rptColor.DataBind()
+                End If
+                PRODUCT_ID = BL.GetProduct_ID_Select(MODEL, COLOR, CAPACITY, KO_ID, LANGUAGE)
+
+                BindDetail()
+
+                Dim DT_Capacity As DataTable = BL.GetList_Product_Spec_Capacity(MODEL, KO_ID, CAT_ID, LANGUAGE)
+                rptCapacity.DataSource = DT_Capacity
+                rptCapacity.DataBind()
+        End Select
+    End Sub
 
 #End Region
 
@@ -224,10 +273,16 @@ Public Class Device_Product_Detail
 
         Dim lblSPEC_NAME As Label = e.Item.FindControl("lblSPEC_NAME")
         Dim lblDESCRIPTION As Label = e.Item.FindControl("lblDESCRIPTION")
+        Dim txtDescription_TH As TextBox = e.Item.FindControl("txtDescription_TH")
+        Dim txtarea As HtmlTextArea = e.Item.FindControl("txtarea")
 
         lblSPEC_NAME.Text = e.Item.DataItem("SPEC_NAME").ToString
         lblDESCRIPTION.Text = e.Item.DataItem("DESCRIPTION").ToString
 
+        'txtDescription_TH.Text = e.Item.DataItem("DESCRIPTION").ToString
+        'txtDescription_TH.Attributes("Rows") = ModuleGlobal.GetJavaResizeTextboxByContent(txtDescription_TH, txtDescription_TH.Text.Length)
+
+        txtarea.InnerText = e.Item.DataItem("DESCRIPTION").ToString
 
     End Sub
 
@@ -245,22 +300,22 @@ Public Class Device_Product_Detail
         Dim btnColor As HtmlAnchor = e.Item.FindControl("btnColor")
         Dim btnSelect As Button = e.Item.FindControl("btnSelect")
         btnColor.Attributes("onclick") = "$('#" & btnSelect.ClientID & "').click();"
-
         Dim Path As String = BL.Get_Product_Picture_Path(PRODUCT_ID, LANGUAGE)
         If IO.File.Exists(Path) Then
             img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & e.Item.DataItem("PRODUCT_ID") & "&LANG=" & LANGUAGE
         Else
             img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & e.Item.DataItem("PRODUCT_ID") & "&LANG=" & VDM_BL.UILanguage.TH
         End If
-        lblColor.Text = e.Item.DataItem("DESCRIPTION").ToString
-        'If e.Item.DataItem("DESCRIPTION").ToString = COLOR Then
-        '    lnkColor.Attributes("class") = "btu active true-bs"
-        '    'img.Attributes("CssClass") = "btn-active"
-        'Else
-        '    lnkColor.Attributes("class") = "btu true-bs"
-        'End If
+        lblColor.Text = e.Item.DataItem("DESCRIPTION_COLOR").ToString
 
-        lnkColor.CommandArgument = e.Item.DataItem("DESCRIPTION").ToString()
+        Dim pnlSelect As Panel = e.Item.FindControl("pnlSelect")
+        Dim BoxIndex As HtmlGenericControl = e.Item.FindControl("BoxIndex")
+        If e.Item.DataItem("DESCRIPTION_COLOR").ToString = COLOR Then
+            pnlSelect.Attributes("class") = "select-color-active"
+        Else
+            pnlSelect.Attributes("class") = "select-color"
+        End If
+        lnkColor.CommandArgument = e.Item.DataItem("DESCRIPTION_COLOR").ToString()
     End Sub
 
     Protected Sub rptColor_ItemCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.RepeaterCommandEventArgs)
@@ -273,12 +328,46 @@ Public Class Device_Product_Detail
                 'MODEL COLOR CAPACITY
                 'img.Attributes("class") = "btn-active "
                 PRODUCT_ID = BL.GetProduct_ID_Select(MODEL, COLOR, CAPACITY, KO_ID, LANGUAGE)
-                BindList()
+                If PRODUCT_ID = 0 Then
+                    'ทั้งหมด
+                    Dim DT_Capacity As DataTable = BL.GetProduct_Choice(MODEL, COLOR, "", CAT_ID, KO_ID, LANGUAGE)
+                    If DT_Capacity.Rows.Count > 0 Then
+                        CAPACITY = IIf(Not IsDBNull(DT_Capacity.Rows(0).Item("DESCRIPTION_CAPACITY")), DT_Capacity.Rows(0).Item("DESCRIPTION_CAPACITY"), "")
+                    End If
+
+                End If
+                PRODUCT_ID = BL.GetProduct_ID_Select(MODEL, COLOR, CAPACITY, KO_ID, LANGUAGE)
+
+                BindDetail()
+                Dim DT_Color As DataTable = BL.GetProduct_Choice(MODEL, "", CAPACITY, CAT_ID, KO_ID, LANGUAGE)
+                DT_Color.Columns.Add("Order")
+                If DT_Color.Rows.Count > 3 Then
+                    Dim selectIndex As Integer = e.Item.ItemIndex
+                    For i As Integer = 0 To DT_Color.Rows.Count - 1
+                        If selectIndex = i Then
+                            DT_Color.Rows(i).Item("Order") = 0
+                        ElseIf i < selectIndex Then
+                            DT_Color.Rows(i).Item("Order") = i + DT_Color.Rows.Count
+                        Else
+                            DT_Color.Rows(i).Item("Order") = i - DT_Color.Rows.Count
+                        End If
+
+                    Next
+                    DT_Color.DefaultView.Sort = "Order ASC"
+                    rptColor.DataSource = DT_Color.DefaultView.ToTable
+                    rptColor.DataBind()
+                Else
+                    rptColor.DataSource = DT_Color
+                    rptColor.DataBind()
+                End If
+
+
+
         End Select
     End Sub
 
     Private Sub btnSelect_str_Click(sender As Object, e As EventArgs) Handles btnSelect_str.Click
-        Response.Redirect("Device_Shoping_Cart.aspx?PRODUCT_ID=" & PRODUCT_ID & "&MODEL=" & MODEL & "&BRAND_ID=" & BRAND_ID)
+        Response.Redirect("Device_Shoping_Cart.aspx?PRODUCT_ID=" & PRODUCT_ID)
     End Sub
 
 #End Region
@@ -292,5 +381,6 @@ Public Class Device_Product_Detail
     Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click
         Response.Redirect("Product_List.aspx?BRAND_ID=" & BRAND_ID)
     End Sub
+
 
 End Class

@@ -79,7 +79,7 @@
     End Sub
 
     Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click
-        Response.Redirect("Device_Verify.aspx?PRODUCT_ID=" & PRODUCT_ID)
+        Response.Redirect("Device_Shoping_Cart.aspx?PRODUCT_ID=" & PRODUCT_ID)
     End Sub
 
 End Class
