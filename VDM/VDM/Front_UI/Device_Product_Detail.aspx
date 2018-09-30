@@ -238,7 +238,7 @@
                                         <div class="frame" style="border: unset; background-color: transparent;">
                                             <span id="content-d3" class="light" style="max-height: 250px;">
                                                 <p class="true-l">
-                                                    <div style="width: 100%;   font-size: 25px; margin-top: 20px;">
+                                                    <div style="width: 100%;   font-size: 30px; margin-top: 10px;">
                                                         <asp:Label ID="lblDesc" runat="server"  ></asp:Label>
                                                     </div>
                                                 </p>
