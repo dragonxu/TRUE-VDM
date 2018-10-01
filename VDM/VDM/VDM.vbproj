@@ -637,6 +637,7 @@
     <Content Include="Test_API\UC_Save_File.ascx" />
     <Content Include="Test_API\UC_Service_Flow_Create.ascx" />
     <Content Include="Test_API\UC_Service_Flow_Finish.ascx" />
+    <Content Include="Test_API\UC_Validate_Serial.ascx" />
     <Content Include="UC_MoneyStock_UI.ascx" />
     <Content Include="UC_Peripheral_UI.ascx" />
     <Content Include="Machine_Console\UC_Product_Floor.ascx" />
@@ -652,7 +653,6 @@
   <ItemGroup>
     <Compile Include="App_Code\BackEndInterface.vb" />
     <Compile Include="App_Code\ModuleGlobal.vb" />
-    <Content Include="App_Code\Payment_BL.vb" />
     <Compile Include="Front_UI\Complete_Order.aspx.designer.vb">
       <DependentUpon>Complete_Order.aspx</DependentUpon>
     </Compile>
@@ -1069,6 +1069,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Test_API\UC_Validate_Serial.ascx.designer.vb">
+      <DependentUpon>UC_Validate_Serial.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_API\UC_Validate_Serial.ascx.vb">
+      <DependentUpon>UC_Validate_Serial.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UC_MoneyStock_UI.ascx.designer.vb">
       <DependentUpon>UC_MoneyStock_UI.ascx</DependentUpon>

@@ -6,6 +6,13 @@ Imports System.IO
 Public Class BackEndInterface
 
     Public Class General
+
+        Public ReadOnly Property ValidateSerialURL As String
+            Get
+                Return AppSettings("ValidateSerialURL").ToString
+            End Get
+        End Property
+
         Public ReadOnly Property GetProductURL As String
             Get
                 Return AppSettings("GetProductURL").ToString
@@ -165,6 +172,31 @@ Public Class BackEndInterface
             Return Result
         End Function
 
+    End Class
+
+    Public Class Validate_Serial
+        Public JSONString As String = ""
+
+        Public Class Response
+
+            Public Property JSONString As String
+            Public Property ReturnValues As List(Of Object)
+            Public Property IsError As String
+            Public Property ErrorMessage As String
+            Public Property IsNotTransaction As String
+
+        End Class
+
+        Public Function Get_Result(ByVal shopCode As String, ByVal Serial As String) As Response
+
+            Dim URL As String = (New BackEndInterface.General).ValidateSerialURL & "?Shop=" & shopCode & "&Serial=" & Serial
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+
+            JSONString = (New BackEndInterface.General).SendGetURL(WebRequest)
+            Dim Result As Response = JsonConvert.DeserializeObject(Of Response)(JSONString)
+            Result.JSONString = JSONString
+            Return Result
+        End Function
     End Class
 
     Public Class Face_Recognition
