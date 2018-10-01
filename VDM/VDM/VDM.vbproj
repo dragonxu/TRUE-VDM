@@ -527,6 +527,7 @@
     <Content Include="Machine_Console\Styles\app.css" />
     <Content Include="Machine_Console\Styles\app.min.725970e8.css" />
     <Content Include="Machine_Console\Styles\app.skins.css" />
+    <Content Include="Machine_Console\TestSIM.aspx" />
     <Content Include="Machine_Console\TestSlide.aspx" />
     <Content Include="Machine_Console\UC_Product_Stock.ascx" />
     <Content Include="Machine_Console\UC_Shift_Change.ascx" />
@@ -535,6 +536,7 @@
     <Content Include="Machine_Console\UC_SIM.ascx" />
     <Content Include="Machine_Console\UC_SIM_Dispenser.ascx" />
     <Content Include="Machine_Console\UC_SIM_Slot.ascx" />
+    <Content Include="Machine_Console\UC_SIM_Stock.ascx" />
     <Content Include="Scripts\DragDrop.js" />
     <Content Include="Scripts\extent.js" />
     <Content Include="Scripts\toastr.js" />
@@ -650,6 +652,7 @@
   <ItemGroup>
     <Compile Include="App_Code\BackEndInterface.vb" />
     <Compile Include="App_Code\ModuleGlobal.vb" />
+    <Content Include="App_Code\Payment_BL.vb" />
     <Compile Include="Front_UI\Complete_Order.aspx.designer.vb">
       <DependentUpon>Complete_Order.aspx</DependentUpon>
     </Compile>
@@ -783,6 +786,13 @@
       <DependentUpon>PrintBarcode.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Machine_Console\TestSIM.aspx.designer.vb">
+      <DependentUpon>TestSIM.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Machine_Console\TestSIM.aspx.vb">
+      <DependentUpon>TestSIM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Machine_Console\TestSlide.aspx.designer.vb">
       <DependentUpon>TestSlide.aspx</DependentUpon>
     </Compile>
@@ -837,6 +847,13 @@
     </Compile>
     <Compile Include="Machine_Console\UC_SIM_Slot.ascx.vb">
       <DependentUpon>UC_SIM_Slot.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Machine_Console\UC_SIM_Stock.ascx.designer.vb">
+      <DependentUpon>UC_SIM_Stock.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Machine_Console\UC_SIM_Stock.ascx.vb">
+      <DependentUpon>UC_SIM_Stock.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SignIn.aspx.designer.vb">

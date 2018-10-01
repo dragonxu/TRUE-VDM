@@ -30,9 +30,9 @@
     </style>
 
 <div class="row" >
-    <div class="col-sm-7" >
+    <div class="col-sm-7" ondragover="draggedOver(event)">
         <uc1:UC_SIM_Dispenser runat="server" ID="Dispenser" />
-        <asp:Panel ID="pnlSlot" runat="server" CssClass="card bg-white m-b m-t-md" SIM_ID="0">
+        <asp:Panel ID="pnlSlotSIM" runat="server" CssClass="card bg-white m-b m-t-md" SIM_ID="0">
             <div class="card-header">
             <h3 class="m-t-0 m-b-0 pull-left">
                 <img src="../images/Icon/green/shelf.png" height="30"> SIM Slot <asp:Label ID="lblSlotID" runat="server"></asp:Label>
@@ -118,7 +118,8 @@
             </div>
         </asp:Panel>
     </div>
-    <div class="col-sm-5" >
+
+    <asp:Panel ID="pnlScan" runat="server" CssClass="col-sm-5" >
         <div class="card bg-white m-b">
             <asp:Panel CssClass="card-header" ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" > 
                 <h3 class="m-t-0 m-b-0">
@@ -140,7 +141,7 @@
                 </asp:Repeater>
             </ul>
                         
-            <asp:Panel ID="pnlScan" runat="server" CssClass="card-block">
+            <asp:Panel ID="pnlScanSIM" runat="server" CssClass="card-block">
                 <div class="row">
                     <div class="row">
                     <div class="m-t-n m-b">
@@ -205,5 +206,13 @@
             </div>
             </asp:Panel>
         </div>
-    </div>
+    </asp:Panel>
 </div>
+
+<!-----DragDrop Listener------->
+<asp:TextBox ID="txtDragType" runat="server" style="display:none;"></asp:TextBox>
+<asp:TextBox ID="txtDragArg" runat="server" style="display:none;"></asp:TextBox>
+<asp:TextBox ID="txtDropType" runat="server" style="display:none;"></asp:TextBox>
+<asp:TextBox ID="txtDropArg" runat="server" style="display:none;"></asp:TextBox>
+<asp:Button ID="btnDropListener" runat="server" style="display:none;" />
+<!-----DragDrop Listener------->

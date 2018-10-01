@@ -28,6 +28,22 @@
         End Get
     End Property
 
+#Region "For DragDrop"
+    Public ReadOnly Property TAG As Panel
+        Get
+            Return pnlContainer
+        End Get
+    End Property
+
+    Public ReadOnly Property ICON As Image
+        Get
+            Return imgSIM
+        End Get
+    End Property
+#End Region
+
+
+
     Public ReadOnly Property SIMS As List(Of UC_SIM)
         Get
             Dim Result As New List(Of UC_SIM)
@@ -193,6 +209,7 @@
     Public Sub ClearAllSIM()
         rptSIM.DataSource = Nothing
         rptSIM.DataBind()
+        UpdateSIMQuantity()
     End Sub
 
     Public Sub RemoveSIM(ByVal SIMIndex As Integer)

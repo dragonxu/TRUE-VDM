@@ -8,7 +8,7 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <link rel="stylesheet" href="../Styles/app.css">
-    <link rel="stylesheet" href="Styles/app.min.725970e8.css">
+    <link rel="stylesheet" href="Styles/app.min.css">
 
 
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">

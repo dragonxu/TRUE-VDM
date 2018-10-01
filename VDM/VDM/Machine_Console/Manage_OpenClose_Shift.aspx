@@ -7,6 +7,8 @@
 <%@ Register Src="~/UC_Kiosk_Shelf.ascx" TagPrefix="uc1" TagName="UC_Kiosk_Shelf" %>
 <%@ Register Src="~/Machine_Console/UC_Product_Shelf.ascx" TagPrefix="uc1" TagName="UC_Product_Shelf" %>
 <%@ Register Src="~/Machine_Console/UC_SIM_Dispenser.ascx" TagPrefix="uc1" TagName="UC_SIM_Dispenser" %>
+<%@ Register Src="~/Machine_Console/UC_SIM_Stock.ascx" TagPrefix="uc1" TagName="UC_SIM_Stock" %>
+
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -217,53 +219,53 @@
                             <asp:Panel ID="pnlStockSIM" runat="server">
                                 <div class="p-a">
                                     <div class="overflow-hidden">
-                                        <h1> 
+                                        <h1 class="col-sm-8 "> 
                                             <img id="imgSIM" src="../images/Icon/green/simcard.png" width="40">
-                                            <b>Stock SIM</b> 
+                                            <b>SIM Stock</b> 
                                         </h1>
                                         <h2 class="col-sm-4 ">
-                                            <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-danger btn-lg btn-block btn-shadow">
+                                            <asp:LinkButton ID="btnManageSIMStock" runat="server" CssClass="btn btn-danger btn-lg btn-block btn-shadow">
                                                 <i class="icon-settings"></i>
                                                 <span>จัดการ Stock</span>
                                             </asp:LinkButton>
                                         </h2>
                                         <div class="col-sm-8">                                            
-                                            <uc1:UC_SIM_Dispenser runat="server" ID="Dispenser" />
+                                            <uc1:UC_SIM_Dispenser runat="server" ID="SIMDispenser" />
                                         </div>
                                         <div class="col-sm-4 ">
                                             <div class="row bg-default-light height100pc m-t p-t m-b">
                                               <div class="col-md-12">
                                                 <div class="card card-block b-a-0 bg-teal text-white">
                                                   <div class="card-circle-bg-icon"> <i class="icon-handbag"></i> </div>
-                                                  <div class="h4 m-a-0"><asp:Label ID="Label1" runat="server"></asp:Label></div>
+                                                  <div class="h4 m-a-0"><asp:Label ID="lbl_SIM_Total" runat="server"></asp:Label></div>
                                                   <div>ทั้งหมด</div>
                                                 </div>
                                               </div>
                                               <div class="col-md-12">
                                                 <div class="card card-block b-a-0 bg-blue text-white">
                                                   <div class="card-circle-bg-icon"> <i class="icon-frame"></i> </div>
-                                                  <div class="h4 m-a-0"><asp:Label ID="Label2" runat="server"></asp:Label></div>
+                                                  <div class="h4 m-a-0"><asp:Label ID="lbl_SIM_Empty" runat="server"></asp:Label></div>
                                                   <div>Slot ว่าง</div>
                                                 </div>
                                               </div>
                                               <div class="col-md-12">
                                                 <div class="card card-block b-a-0 bg-success text-white">
                                                   <div class="card-circle-bg-icon"> <i class="icon-login"></i> </div>
-                                                  <div class="h4 m-a-0"><asp:Label ID="Label3" runat="server"></asp:Label></div>
+                                                  <div class="h4 m-a-0"><asp:Label ID="lbl_SIM_In" runat="server"></asp:Label></div>
                                                   <div>Scan สินค้าเข้า</div>
                                                 </div>
                                               </div>
                                              <div class="col-md-12">
                                                 <div class="card card-block b-a-0 bg-indigo text-white">
                                                   <div class="card-circle-bg-icon"> <i class="icon-logout"></i> </div>
-                                                  <div class="h4 m-a-0"><asp:Label ID="Label4" runat="server"></asp:Label></div>
+                                                  <div class="h4 m-a-0"><asp:Label ID="lbl_SIM_Out" runat="server"></asp:Label></div>
                                                   <div>Check Out</div>
                                                 </div>
                                               </div>
                                               <div class="col-md-12">
                                                 <div class="card card-block b-a-0 bg-purple text-white">
                                                   <div class="card-circle-bg-icon"> <i class="icon-refresh"></i> </div>
-                                                  <div class="h4 m-a-0"><asp:Label ID="Label5" runat="server"></asp:Label></div>
+                                                  <div class="h4 m-a-0"><asp:Label ID="lbl_SIM_Move" runat="server"></asp:Label></div>
                                                   <div>ย้าย Slot</div>
                                                 </div>
                                               </div>
@@ -312,12 +314,8 @@
                                             <asp:LinkButton ID="lnkOK" runat="server" class="btn btn-success btn-lg btn-block">
                                                 <i class="fa fa-save"></i>
                                                     <span>Next / ถัดไป</span>
-
                                             </asp:LinkButton>
-
-                                        </div>
-                                         
-
+                                        </div>                                         
                                     </div>
                                 </div>
                             </asp:Panel>
@@ -345,6 +343,30 @@
         <div class="modal-footer no-border">
             <asp:Button ID="btnResetScanProduct" runat="server" CssClass="btn btn-shadow btn-default" Text="Reset" />
             <asp:Button ID="btnCloseScanProduct" runat="server" CssClass="btn btn-shadow btn-primary" Text="Close" />
+        </div>
+
+    </div>
+    <div div class="modal bs-modal-sm in" style="display: block; z-index:1;">
+
+    </div>
+</asp:Panel>
+
+<asp:Panel CssClass="modal-dialog" style="width:90%; margin: 0px auto; position:absolute; top:-20px;" ID="pnlScanSIM" runat="server"  Visible="false">
+    <div class="modal-content" style="z-index:2;">
+        <div class="modal-header">
+          <asp:LinkButton CssClass="close" ID="lnkCloseScanSIM" runat="server" >×</asp:LinkButton>
+          <h4 class="modal-title">Manage SIM Stock</h4>
+        </div>
+        <div class="modal-body">
+          <p>จัดการสินค้าที่อยู่ใน SIM Slot ด้วยการ 
+              <img src="../images/Icon/green/signal_wifi_3.png" height="30" /> Scan Barcode หรือ 
+              <img src="../images/Icon/green/repeat.png" height="30" />              
+              เคลื่อนย้าย SIM ใน Slot</p>
+                <uc1:UC_SIM_Stock runat="server" ID="SIMStock" />
+        </div>
+        <div class="modal-footer no-border">
+            <asp:Button ID="btnResetScanSIM" runat="server" CssClass="btn btn-shadow btn-default" Text="Reset" />
+            <asp:Button ID="btnCloseScanSIM" runat="server" CssClass="btn btn-shadow btn-primary" Text="Close" />
         </div>
 
     </div>

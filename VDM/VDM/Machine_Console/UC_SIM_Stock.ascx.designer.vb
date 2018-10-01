@@ -23,13 +23,13 @@ Partial Public Class UC_SIM_Stock
     Protected WithEvents Dispenser As Global.VDM.UC_SIM_Dispenser
     
     '''<summary>
-    '''pnlSlot control.
+    '''pnlSlotSIM control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlSlot As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents pnlSlotSIM As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''lblSlotID control.
@@ -158,6 +158,15 @@ Partial Public Class UC_SIM_Stock
     Protected WithEvents btnMoveRight As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
+    '''pnlScan control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlScan As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
     '''pnlBarcode control.
     '''</summary>
     '''<remarks>
@@ -203,13 +212,13 @@ Partial Public Class UC_SIM_Stock
     Protected WithEvents rptSIMType As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
-    '''pnlScan control.
+    '''pnlScanSIM control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlScan As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents pnlScanSIM As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''imgScan control.
@@ -264,4 +273,49 @@ Partial Public Class UC_SIM_Stock
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnMoveLeft As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''txtDragType control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtDragType As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''txtDragArg control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtDragArg As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''txtDropType control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtDropType As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''txtDropArg control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtDropArg As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''btnDropListener control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnDropListener As Global.System.Web.UI.WebControls.Button
 End Class

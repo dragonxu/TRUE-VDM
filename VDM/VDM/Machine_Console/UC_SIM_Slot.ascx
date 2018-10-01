@@ -16,10 +16,9 @@
                        <small><asp:Label ID="lblQuanity" runat="server" ForeColor="DimGray"></asp:Label></small>
                     </asp:Panel>
                 </asp:Panel>
-
             </div>
-            <h3 class="bold text-default-darker m-t-0" ID="pnlEmpty" runat="server" visible="false">Empty</h3>
-            <asp:Panel CssClass="profile-avatar" ID="pnlProfile" runat="server" Visible="false" style="padding:5px; margin:0;">
+            <h4 class="bold text-default m-t-0" ID="pnlEmpty" runat="server" visible="false">Empty</h4>
+            <asp:Panel CssClass="profile-avatar" ID="pnlProfile" runat="server" Visible="false" style="padding:5px; margin:0; max-width:400px;">
                 <asp:Image CssClass="product-Image btn-shadow m-b" ID="imgSIM" runat="server" />
              <span class="bold text-default-darker h5"></span><asp:Label CssClass="bold text-deeppurple h5" ID="lblSIMCode" runat="server">3000065137</asp:Label>
                 <h5 class="bold">ราคา <asp:Label ID="lblPrice" runat="server" CssClass="text-blue"></asp:Label> ฿</h5>
