@@ -5,7 +5,7 @@ var focusDelegate = function () {
 }
 
 function startFocusBarcode() {
-    setInterval(focusDelegate, 700);
+    setInterval(focusDelegate, 600);
 }
 
 function stopFocusBarcode() {

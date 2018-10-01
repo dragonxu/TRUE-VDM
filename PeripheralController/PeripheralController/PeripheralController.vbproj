@@ -66,6 +66,10 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Printer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Printer.dll</HintPath>
+    </Reference>
     <Reference Include="SimDispenser, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\SimDispenser.dll</HintPath>
@@ -110,8 +114,8 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Printer.asmx.vb">
-      <DependentUpon>Printer.asmx</DependentUpon>
+    <Compile Include="Print.asmx.vb">
+      <DependentUpon>Print.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="RequireCash.aspx.designer.vb">
@@ -128,7 +132,7 @@
       <DependentUpon>CashDispense.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Content Include="Printer.asmx" />
+    <Content Include="Print.asmx" />
     <Content Include="RequireCash.aspx" />
     <Content Include="CashDispense.aspx" />
     <Content Include="CoinDispense.aspx" />

@@ -25,9 +25,7 @@
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Not IsPostBack Then
-            pnlCash.Visible = False
-            pnlCredit.Visible = False
-            pnlTruemoney.Visible = False
+            ClearForm()
         Else
             initFormPlugin()
         End If
@@ -36,7 +34,7 @@
 
 
     Private Sub initFormPlugin()
-        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
+        'ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
     End Sub
 
     Private Sub ClearForm()
@@ -47,6 +45,11 @@
         lnkCash.Attributes("class") = ""
         lnkCredit.Attributes("class") = ""
         lnkTruemoney.Attributes("class") = ""
+
+        '----------------------- Set Alway Focus Barcode ----------------------
+        Dim Script As String = "stopFocusBarcode();" & vbLf
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "clearBarcode", Script, True)
+
     End Sub
 
     Private Sub lnkCash_ServerClick(sender As Object, e As EventArgs) Handles lnkCash.ServerClick
@@ -70,11 +73,32 @@
         pnlTruemoney.Visible = True
         lnkTruemoney.Attributes("class") = "current"
 
+        '----------------------- Set Alway Focus Barcode ----------------------
+        Dim Script As String = "txtBarcode='" & txtBarcode.ClientID & "';" & vbLf
+        Script &= "startFocusBarcode();"
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "focusBarcodeReader", Script, True)
+    End Sub
+
+    Private Sub btnBarcode_Click(sender As Object, e As EventArgs) Handles btnBarcode.Click
+        ' Call True Money
+        If txtBarcode.Text = "" Then Exit Sub
+        Dim Barcode As String = txtBarcode.Text
+        txtBarcode.Text = ""
+
+        Dim TMN As New TrueMoney
+        '---------------- Insert Log ก่อน เรียก -----------------
+
+        '---------------- เรียก และ Update Response Log---------
+
+        '---------------- ตรวจสอบผลลัพธ์ ------------------------
+
+
+
+
     End Sub
 
     Private Sub btnSkip_Click(sender As Object, e As EventArgs) Handles btnSkip.Click
         Response.Redirect("Complete_Order.aspx?PRODUCT_ID=" & PRODUCT_ID)
-
     End Sub
 
 
@@ -85,5 +109,6 @@
     Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click
         Response.Redirect("Device_Shoping_Cart.aspx?PRODUCT_ID=" & PRODUCT_ID)
     End Sub
+
 
 End Class

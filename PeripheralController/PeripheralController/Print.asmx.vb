@@ -12,15 +12,11 @@ Public Class Print
     Inherits System.Web.Services.WebService
 
     <WebMethod()>
-    Public Function HelloWorld() As String
-        Return "Hello World"
-    End Function
-
-    <WebMethod()>
     Public Function Print_Confirmation_Slip(ByVal TXN_CODE As String) As Boolean
         Dim _Printer As New Printer.Printer
 
 
+        Return True
     End Function
 
 

@@ -7,7 +7,6 @@
             Response.Redirect("Select_Language.aspx")
         End If
 
-
     End Sub
 
     Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click

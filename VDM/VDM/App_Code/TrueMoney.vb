@@ -24,7 +24,7 @@ Public Class TrueMoney
 
         '---------- For Tracking And Debuging ---------
         Public Property Request As RequestData
-        Public Property ResponseString As String
+        Public Property JSONString As String
         Public Property ConnectionMessage As String
 
         Public Class ResponseStatus
@@ -58,14 +58,14 @@ Public Class TrueMoney
 
     End Class
 
-    Public Function GetResult(ByVal SLIP_No As String, ByVal Amount As Integer, ByVal CustomerQRCode As String, ByVal PaymentDescription As String, ByVal shopCode As String) As Response
+    Public Function GetResult(ByVal ISV As String, ByVal Amount As Integer, ByVal CustomerQRCode As String, ByVal PaymentDescription As String, ByVal shopCode As String) As Response
 
 
         '--------------- Create Request Body -----------
         Dim PostData As New Dictionary(Of String, String)
         PostData.Add("currency", "THB")
         PostData.Add("payment_code", CustomerQRCode)
-        PostData.Add("isv_payment_ref", SLIP_No)
+        PostData.Add("isv_payment_ref", ISV)
         PostData.Add("description", PaymentDescription)
         PostData.Add("payment_method", "BALANCE")
         PostData.Add("merchant_id", TrueMoneyMerchantID)
@@ -128,7 +128,7 @@ Public Class TrueMoney
             .PostString = PostString
         End With
         '-----------------------------
-        Result.ResponseString = JSONString
+        Result.JSONString = JSONString
 
         Return Result
 
@@ -136,6 +136,10 @@ Public Class TrueMoney
 
     Private Function CreateSignature(ByVal TimeStamp As String, ByVal RequestBody As String) As String
         Return "digest-alg=RSA-SHA; key-id=KEY:RSA:rsf.org; data=" & Sign(TimeStamp & RequestBody)
+    End Function
+
+    Public Function Generate_ISV(ByVal ShopCode As String) As String ' Confirm จาก True
+        Return ShopCode & "-" & Now.ToString("yyMMddhhmmssfff")
     End Function
 
 #Region "Crypto And Key"
