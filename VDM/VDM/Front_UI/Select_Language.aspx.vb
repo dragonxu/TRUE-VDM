@@ -36,5 +36,14 @@
         Response.Redirect("home.aspx")
     End Sub
 
+    Private Sub Check_SHIFT()
+        '--update Transaction
+
+
+        '--ตรวจสอบ SHIFT_ID ปิด ? ถ้าปิด ให้ response ไปยังหน้า Manage_Console
+
+
+
+    End Sub
 
 End Class

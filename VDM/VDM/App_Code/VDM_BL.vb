@@ -1457,4 +1457,103 @@ Public Class VDM_BL
     End Function
 
 #End Region
+
+#Region "transaction Log Kiosk"
+    'TB_SERVICE_TRANSACTION
+
+    '--TXN Create
+    Public Function Save_TXN_Log(ByVal TXN_ID As Integer, ByVal KO_ID As Integer, ByVal LANG_CODE As Integer, Optional ByVal CUSTOMER_CARD As String = "", Optional ByVal CUS_IMAGE As Image = Nothing)
+        Dim SQL As String = "SELECT * FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Dim DR As DataRow
+
+        If DT.Rows.Count = 0 Then
+
+            TXN_ID = Get_NewID("TB_SERVICE_TRANSACTION", "TXN_ID")
+            DR = DT.NewRow
+            DR("TXN_ID") = TXN_ID
+            DR("LANG_CODE") = LANG_CODE
+            DR("TXN_START") = Now
+            DR("KO_ID") = KO_ID
+            DR("TXN_Y") = Now.Year
+            DR("TXN_M") = Now.Month
+            DR("TXN_D") = Now.Day
+            DR("TXN_N") = Get_TXN_N(TXN_ID)
+        Else
+            DR = DT.Rows(0)
+            DR("TXN_END") = Now
+
+            If CUSTOMER_CARD <> "" Then
+                Dim CUS_ID As Integer
+                Dim DT_Customer As DataTable = GET_CUSTOMER(CUSTOMER_CARD, Nothing)
+                If DT_Customer.Rows.Count > 0 Then
+                    CUS_ID = DT.Rows(0).Item("CUS_ID")
+                End If
+
+            End If
+
+        End If
+
+        DR("CUS_ID") = ""
+        DR("CUS_IMAGE") = ""
+
+
+
+        DR("SHIFT_ID") = ""
+        DR("SHIFT_CODE") = ""
+        'DR("SLIP_YEAR") = ""
+        'DR("SLIP_MONTH") = ""
+        'DR("SLIP_DAY") = ""
+        'DR("SLIP_NO") = ""
+        'DR("SLIP_CONTENT") = ""
+        'DR("METHOD_ID") = ""
+        DR("TMN_REQ_ID") = ""
+        'End If
+
+        Return 0
+    End Function
+
+    'GET_CUS_Info
+    Public Function GET_CUSTOMER(ByVal CUSTOMER_CARD As String, Optional ByVal CUS_ID As Integer = 0) As DataTable
+        Dim SQL As String = "SELECT * FROM TB_CUSTOMER WHERE CUS_PID=" & CUSTOMER_CARD & " OR CUS_PASSPORT_ID=" & CUSTOMER_CARD
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT
+    End Function
+
+    Public Function Save_CUSTOMER()
+
+        Return True
+    End Function
+
+
+    'Update_Print_Slip_Log
+    'DR("SLIP_YEAR") = ""
+    '   DR("SLIP_MONTH") = ""
+    '   DR("SLIP_DAY") = ""
+    '   DR("SLIP_NO") = ""
+    '   DR("SLIP_CONTENT") = ""
+    '   DR("METHOD_ID") = ""
+
+    Private Function Get_NewID(ByRef Table_Name As String, ByRef Field_ID As String) As Integer
+        Dim SQL As String = "SELECT IsNull(MAX(" & Field_ID & "),0)+1 FROM " & Table_Name & " "
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT.Rows(0).Item(0)
+    End Function
+
+    Private Function Get_TXN_N(ByRef TXN_ID As String) As Integer
+        Dim SQL As String = "SELECT IsNull(MAX(TXN_N),0)+1 FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT.Rows(0).Item(0)
+    End Function
+#End Region
+
+
 End Class
