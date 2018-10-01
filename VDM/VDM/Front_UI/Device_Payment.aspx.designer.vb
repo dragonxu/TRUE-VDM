@@ -59,13 +59,13 @@ Partial Public Class Device_Payment
     Protected WithEvents lblPrice_str As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblPrice_Money control.
+    '''txtCost control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblPrice_Money As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents txtCost As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''lblCurrency_Str control.
@@ -113,22 +113,22 @@ Partial Public Class Device_Payment
     Protected WithEvents pnlCash As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''Label1 control.
+    '''txtPaid control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents txtPaid As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''lblRemain control.
+    '''txtRequire control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblRemain As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents txtRequire As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''txt1 control.
@@ -210,33 +210,6 @@ Partial Public Class Device_Payment
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txt1000 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtCost control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtCost As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtPaid control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtPaid As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtRequire control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtRequire As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''pnlCredit control.

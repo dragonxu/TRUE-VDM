@@ -57,7 +57,9 @@
                                 <h3 class="true-b t-red">
                                     <asp:Label ID="lblPrice_str" runat="server" Text="ยอดชำระ"></asp:Label>
                                     <i title="฿">
-                                        <asp:Label ID="lblPrice_Money" runat="server" Text="39,000"></asp:Label></i>
+                                        <asp:TextBox ID="txtCost" runat="server" Text="0" style="text-align: center;width: 300px;background-color: transparent;border: none;margin-top: -15px;" ReadOnly ="true"></asp:TextBox>
+
+                                    </i>
                                     <asp:Label ID="lblCurrency_Str" runat="server" Text="บาท"></asp:Label></h3>
                                 <div class="btu-payment" style="margin: 60px 0 0 0;">
                                     <div class="row" style="margin-left: 100px;">
@@ -91,9 +93,7 @@
                                 </asp:Panel>--%>
                             </div>
                         </div>
-
-
-
+                        
                         <asp:Panel ID="pnlCash" runat="server">
                             <form class="step">
                                 <div class="step-payment">
@@ -116,8 +116,8 @@
                                         </div>
                                         <div class="col-md-6" style="text-align: center;">
                                             <h3>
-                                                <p style="border: unset; padding-right: 30px; text-align: right;">
-                                                    <asp:Label class="true-b " ID="Label1" runat="server" Text="900.00"></asp:Label>
+                                                <p style="border: unset; padding-right: 30px; text-align: right;"> 
+                                                    <asp:TextBox  class="true-b " ID="txtPaid" runat="server" Text="0" style="text-align: right;width: 300px;float: right;background-color: transparent;border: none;margin-top: -15px;"></asp:TextBox>
                                                 </p>
                                             </h3>
                                         </div>
@@ -131,8 +131,8 @@
                                         </div>
                                         <div class="col-md-6" style="text-align: center;">
                                             <h3>
-                                                <p style="text-align: right; padding-right: 30px;">
-                                                    <asp:Label class="true-b  t-red" ID="lblRemain" runat="server" Text="30,000.00"></asp:Label>
+                                                <p style="text-align: right; padding-right: 30px;"> 
+                                                    <asp:TextBox   class="true-b  t-red" ID="txtRequire" runat="server" Text="0" style="text-align: right;width: 300px;float: right;background-color: transparent;border: none;margin-top: -5px;"></asp:TextBox>
                                                 </p>
                                             </h3>
                                         </div>
@@ -172,13 +172,13 @@
                                         1000 : <asp:TextBox ID="txt1000" runat="server" Text="0"></asp:TextBox>
                                     </div> 
                                     <div style="display:block;" class="col-lg-3">
-                                        รวมยอด : <asp:TextBox ID="txtCost" runat="server" Text="0"></asp:TextBox>
+                                        รวมยอด : <%--<asp:TextBox ID="txtCost" runat="server" Text="0"></asp:TextBox>--%>
                                     </div>  
                                     <div style="display:block;" class="col-lg-3">
-                                        จ่าย : <asp:TextBox ID="txtPaid" runat="server" Text="0"></asp:TextBox>
+                                        จ่าย : <%--<asp:TextBox ID="txtPaid" runat="server" Text="0"></asp:TextBox>--%>
                                     </div>
                                     <div style="display:block;" class="col-lg-3">
-                                        เหลือ : <asp:TextBox ID="txtRequire" runat="server" Text="0"></asp:TextBox>
+                                        เหลือ : <%--<asp:TextBox ID="txtRequire" runat="server" Text="0"></asp:TextBox>--%>
                                     </div>  
                                 </div>
                             </form>
