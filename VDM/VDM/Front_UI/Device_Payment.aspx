@@ -143,7 +143,7 @@
                                     <p class="time true-l">เวลาชำระเงินสดคงเหลือ 2:00:00 นาที</p>
                                 </div>
 
-                                <div style="position:absolute; top:100px;" class="row">
+                                <div style="position:absolute; top:100px;right:100px;" class="row">
                                     <div style="display:block;" class="col-lg-3">
                                         1 : <asp:TextBox ID="txt1" runat="server" Text="0"></asp:TextBox>
                                     </div>

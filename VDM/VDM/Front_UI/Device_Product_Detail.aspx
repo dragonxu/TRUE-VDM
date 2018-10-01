@@ -74,9 +74,9 @@
 </head>
 <body class="bg2">
     <form id="form1" runat="server">
-        <%--<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <asp:UpdatePanel ID="udpList" runat="server">
-            <ContentTemplate>--%>
+            <ContentTemplate>
         <div class="warp">
             <header>
                 <img src="images/bg-top.png" />
@@ -104,9 +104,7 @@
                                                     <asp:Repeater ID="rptColor" runat="server" OnItemCommand="rptColor_ItemCommand">
                                                         <ItemTemplate>
                                                             <div id="BoxIndex" runat="server" style="float: left; width: 110px;">
-                                                                <div class="priceplan">
-                                                                    <%--                                                        <div  class="priceplan" style="margin-right :10px;width:unset ;" >--%>
-
+                                                                <div class="priceplan"> 
                                                                     <div class="thumb">
 
                                                                         <span>
@@ -240,7 +238,7 @@
                                         <div class="frame" style="border: unset; background-color: transparent;">
                                             <span id="content-d3" class="light" style="max-height: 250px;">
                                                 <p class="true-l">
-                                                    <div style="width: 100%;   font-size: 25px; margin-top: 20px;">
+                                                    <div style="width: 100%;   font-size: 30px; margin-top: 10px;">
                                                         <asp:Label ID="lblDesc" runat="server"  ></asp:Label>
                                                     </div>
                                                 </p>
@@ -297,10 +295,11 @@
 
 
 
-        <%--            </ContentTemplate>
-        </asp:UpdatePanel>--%>
-    </form>
-</body>
+        
+
+
+
+   
 <script type="text/javascript" src="js/slick.js"></script>
 
 <script>
@@ -383,4 +382,8 @@
 </script>
 
 
+                    </ContentTemplate>
+        </asp:UpdatePanel>
+     </form>
+</body>
 </html>

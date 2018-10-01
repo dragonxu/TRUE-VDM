@@ -16,6 +16,9 @@
 </head>
 <body class="bg">
      <form id="form1" runat="server">
+          <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <asp:UpdatePanel ID="udpList" runat="server">
+            <ContentTemplate>
     <div class="warp">
         <header>
             <img src="images/bg-top.png" /></header>
@@ -66,6 +69,9 @@
         </main>
  
     </div>
+
+                </ContentTemplate>
+            </asp:UpdatePanel>
          </form>
     <script type="text/javascript" src="js/slick.js"></script>
     <script>

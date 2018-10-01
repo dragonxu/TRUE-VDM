@@ -123,6 +123,10 @@ Public Class Device_Product_Detail
 
     Private Sub initFormPlugin()
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Scoll", "$(document).ready(function () {$('.card-slider').slick({infinite: true,slidesToShow: 3,slidesToScroll: 1,}); });", True)
+
+
+
     End Sub
 
     Dim DT_Product_Model As New DataTable
@@ -332,27 +336,28 @@ Public Class Device_Product_Detail
                 End If
 
                 Dim DT_Color As DataTable = BL.GetProduct_Choice(MODEL, "", CAPACITY, CAT_ID, KO_ID, LANGUAGE)
-                DT_Color.Columns.Add("Order")
-                If DT_Color.Rows.Count > 3 Then
-                    Dim selectIndex As Integer = e.Item.ItemIndex
-                    For i As Integer = 0 To DT_Color.Rows.Count - 1
-                        If selectIndex = i Then
-                            DT_Color.Rows(i).Item("Order") = 0
-                        ElseIf i < selectIndex Then
-                            DT_Color.Rows(i).Item("Order") = i + DT_Color.Rows.Count
-                        Else
-                            DT_Color.Rows(i).Item("Order") = i - DT_Color.Rows.Count
-                        End If
+                'DT_Color.Columns.Add("Order")
+                'If DT_Color.Rows.Count > 3 Then
+                '    Dim selectIndex As Integer = e.Item.ItemIndex
+                '    For i As Integer = 0 To DT_Color.Rows.Count - 1
+                '        If selectIndex = i Then
+                '            DT_Color.Rows(i).Item("Order") = 0
+                '        ElseIf i < selectIndex Then
+                '            DT_Color.Rows(i).Item("Order") = i + DT_Color.Rows.Count
+                '        Else
+                '            DT_Color.Rows(i).Item("Order") = DT_Color.Rows.Count - i
+                '        End If
 
-                    Next
-                    DT_Color.DefaultView.Sort = "Order ASC"
-                    rptColor.DataSource = DT_Color.DefaultView.ToTable
-                    rptColor.DataBind()
-                Else
-                    rptColor.DataSource = DT_Color
-                    rptColor.DataBind()
-                End If
-
+                '    Next
+                '    DT_Color.DefaultView.Sort = "Order ASC"
+                '    rptColor.DataSource = DT_Color.DefaultView.ToTable
+                '    rptColor.DataBind()
+                'Else
+                '    rptColor.DataSource = DT_Color
+                '    rptColor.DataBind()
+                'End If
+                'rptColor.DataSource = DT_Color
+                'rptColor.DataBind()
                 PRODUCT_ID = BL.GetProduct_ID_Select(MODEL, COLOR, CAPACITY, KO_ID, LANGUAGE)
 
                 BindDetail()
