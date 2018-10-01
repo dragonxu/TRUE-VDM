@@ -7,7 +7,7 @@
     <title>TRUE-VSM</title>
 </head>
 <body>
-<form name="payFormCcard" method="post" action=" https://ipay.bangkokbank.com/b2c/eng/payment/payForm.jsp">
+<%--<form name="payFormCcard" method="post" action=" https://ipay.bangkokbank.com/b2c/eng/payment/payForm.jsp">
 <input type="hidden" name="merchantId" value="1">
 <input type="hidden" name="amount" value="1.0" >
 <input type="hidden" name="orderRef" value="000000000014">
@@ -47,7 +47,7 @@
 <input type="hidden" name="lang" value="E">
 <input type="hidden" name="remark" value="-">
 <input type="submit" value="Sathit" />
-</form>
+</form>--%>
 
     
 <form name="payForm" method="post" action="https://psipay.bangkokbank.com/b2c/eng/dPayment/payComp.jsp">
@@ -73,8 +73,8 @@
 <input type="hidden" name="orderRef3" value="">
 <input type="hidden" name="orderRef4" value="">
 <input type="hidden" name="orderRef5" value="">
-<input type="hidden" name="holderEmail" value="Testing">
-<input type="hidden" name="issueCountry" value="764"> -->
+<input type="hidden" name="holderEmail" value="tsathit40@hotmail.com">
+<input type="hidden" name="issueCountry" value="764">
 <input type="submit" value="Integrate">
 </form>
 

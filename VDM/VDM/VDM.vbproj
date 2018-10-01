@@ -527,7 +527,6 @@
     <Content Include="Machine_Console\Styles\app.css" />
     <Content Include="Machine_Console\Styles\app.min.725970e8.css" />
     <Content Include="Machine_Console\Styles\app.skins.css" />
-    <Content Include="Machine_Console\TestSIM.aspx" />
     <Content Include="Machine_Console\TestSlide.aspx" />
     <Content Include="Machine_Console\UC_Product_Stock.ascx" />
     <Content Include="Machine_Console\UC_Shift_Change.ascx" />
@@ -625,6 +624,7 @@
     <Content Include="Styles\sli.css" />
     <Content Include="Styles\webfont.css" />
     <Content Include="Test_API\Test_API_Interface.aspx" />
+    <Content Include="Test_API\Test_BBL.aspx" />
     <Content Include="Test_API\Test_TMN_Payment.aspx" />
     <Content Include="Test_API\UC_Activity_End.ascx" />
     <Content Include="Test_API\UC_Activity_Start.ascx" />
@@ -637,6 +637,7 @@
     <Content Include="Test_API\UC_Save_File.ascx" />
     <Content Include="Test_API\UC_Service_Flow_Create.ascx" />
     <Content Include="Test_API\UC_Service_Flow_Finish.ascx" />
+    <Content Include="Test_API\UC_Validate_Serial.ascx" />
     <Content Include="UC_MoneyStock_UI.ascx" />
     <Content Include="UC_Peripheral_UI.ascx" />
     <Content Include="Machine_Console\UC_Product_Floor.ascx" />
@@ -652,7 +653,6 @@
   <ItemGroup>
     <Compile Include="App_Code\BackEndInterface.vb" />
     <Compile Include="App_Code\ModuleGlobal.vb" />
-    <Content Include="App_Code\Payment_BL.vb" />
     <Compile Include="Front_UI\Complete_Order.aspx.designer.vb">
       <DependentUpon>Complete_Order.aspx</DependentUpon>
     </Compile>
@@ -785,13 +785,6 @@
     <Compile Include="Machine_Console\PrintBarcode.aspx.vb">
       <DependentUpon>PrintBarcode.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="Machine_Console\TestSIM.aspx.designer.vb">
-      <DependentUpon>TestSIM.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Machine_Console\TestSIM.aspx.vb">
-      <DependentUpon>TestSIM.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Machine_Console\TestSlide.aspx.designer.vb">
       <DependentUpon>TestSlide.aspx</DependentUpon>
@@ -954,6 +947,13 @@
       <DependentUpon>Test_API_Interface.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Test_API\Test_BBL.aspx.designer.vb">
+      <DependentUpon>Test_BBL.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_API\Test_BBL.aspx.vb">
+      <DependentUpon>Test_BBL.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Test_API\Test_TMN_Payment.aspx.designer.vb">
       <DependentUpon>Test_TMN_Payment.aspx</DependentUpon>
     </Compile>
@@ -1069,6 +1069,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Test_API\UC_Validate_Serial.ascx.designer.vb">
+      <DependentUpon>UC_Validate_Serial.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_API\UC_Validate_Serial.ascx.vb">
+      <DependentUpon>UC_Validate_Serial.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UC_MoneyStock_UI.ascx.designer.vb">
       <DependentUpon>UC_MoneyStock_UI.ascx</DependentUpon>

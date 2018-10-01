@@ -122,6 +122,15 @@ Partial Public Class Test_API_Interface
     Protected WithEvents btn_Get_Product_Info As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
+    '''btn_Validate_Serial control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btn_Validate_Serial As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
     '''btn_Prepaid_Register control.
     '''</summary>
     '''<remarks>
@@ -327,4 +336,22 @@ Partial Public Class Test_API_Interface
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents UC_Prepaid_Register As Global.VDM.UC_Prepaid_Register
+    
+    '''<summary>
+    '''pnl_Validate_Serial control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnl_Validate_Serial As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''UC_Validate_Serial control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UC_Validate_Serial As Global.VDM.UC_Validate_Serial
 End Class
