@@ -179,6 +179,7 @@ Public Class BackEndInterface
 
         Public Class Response
 
+            Public Property JSONString As String
             Public Property ReturnValues As List(Of Object)
             Public Property IsError As String
             Public Property ErrorMessage As String
@@ -193,6 +194,7 @@ Public Class BackEndInterface
 
             JSONString = (New BackEndInterface.General).SendGetURL(WebRequest)
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)(JSONString)
+            Result.JSONString = JSONString
             Return Result
         End Function
     End Class
