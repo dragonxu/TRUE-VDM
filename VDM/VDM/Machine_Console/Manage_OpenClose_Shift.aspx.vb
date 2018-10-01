@@ -27,6 +27,7 @@ Public Class Manage_OpenClose_Shift
             ClearForm()
             ClearMenu()
             ResetProductStock()
+            ResetSIMStock()
         Else
             initFormPlugin()
             pnlbtn.Visible = True
@@ -117,20 +118,20 @@ Public Class Manage_OpenClose_Shift
         Else
             divMenuRecieve.Visible = False
         End If
-        ''----Product 
-        'If Val(UC_Shift_StockProduct.Total) > 0 Then
-        '    divMenuStockProduct.Visible = True
-        '    lbl_Product_Count.Text = ""
-        'Else
-        '    divMenuStockProduct.Visible = False
-        'End If
-        ''----SIM 
-        'If Val(UC_Shift_StockSIM.Total) > 0 Then
-        '    divMenuStockSIM.Visible = True
-        '    lbl_SIM_Count.Text = ""
-        'Else
-        '    divMenuStockSIM.Visible = False
-        'End If
+        '----Product 
+        If Val(lbl_Product_Total.Text) > 0 Then
+            divMenuStockProduct.Visible = True
+            lbl_Product_Count.Text = lbl_Product_Total.Text & " รายการ"
+        Else
+            divMenuStockProduct.Visible = False
+        End If
+        '----SIM 
+        If Val(lbl_SIM_Total.Text) > 0 Then
+            divMenuStockSIM.Visible = True
+            lbl_SIM_Count.Text = lbl_SIM_Total.Text & " รายการ"
+        Else
+            divMenuStockSIM.Visible = False
+        End If
         '----Paper 
         If Val(UC_Shift_StockPaper.Total) > 0 Then
             divMenuStockPaper.Visible = True
@@ -230,9 +231,13 @@ Public Class Manage_OpenClose_Shift
                 Exit Sub
             End If
             '----Product
-
+            If Product_Stock.Save Then
+                Validate = True
+            End If
             '----SIM
-
+            If SIMStock.Save Then
+                Validate = True
+            End If
             '----Paper
             If UC_Shift_StockPaper.Validate Then
                 Validate = True
@@ -409,7 +414,6 @@ Public Class Manage_OpenClose_Shift
         Product_Stock.KO_ID = KO_ID
         Product_Stock.SHOP_CODE = SHOP_CODE
         Product_Stock.BindData()
-
         UpdateProductSummary()
     End Sub
 
@@ -465,15 +469,52 @@ Public Class Manage_OpenClose_Shift
 #Region "SIM Stock"
 
     Private Sub ResetSIMStock() '--------- Call First Time -------------
-        'Dispenser.KO_ID = KO_ID
-        'Product_Stock.SHOP_CODE = SHOP_CODE
-        ''Dispenser.BindData()
-
-        UpdateProductSummary()
+        SIMStock.KO_ID = KO_ID
+        SIMStock.SHOP_CODE = SHOP_CODE
+        SIMStock.BindData()
+        UpdateSIMSummary()
     End Sub
 
     Private Sub UpdateSIMSummary()
+        Dim STOCK_DATA As DataTable = SIMStock.STOCK_DATA.Copy
+        STOCK_DATA.Columns("CURRENT").ColumnName = "SLOT_NAME"
+        BL.Bind_SIMDispenser_Layout(SIMDispenser, KO_ID)
+        BL.Bind_SIMDispenser_Stock(SIMDispenser, STOCK_DATA)
 
+        '----------Quantity--------------
+        lbl_SIM_Total.Text = STOCK_DATA.Compute("COUNT(SERIAL_NO)", "")
+        lbl_SIM_In.Text = STOCK_DATA.Compute("COUNT(SERIAL_NO)", "RECENT IS NULL AND SLOT_NAME IS NOT NULL")
+        lbl_SIM_Out.Text = STOCK_DATA.Compute("COUNT(SERIAL_NO)", "RECENT IS NOT NULL AND SLOT_NAME IS NULL")
+        lbl_SIM_Move.Text = STOCK_DATA.Compute("COUNT(SERIAL_NO)", "RECENT IS NOT NULL AND SLOT_NAME IS NOT NULL AND SLOT_NAME<>RECENT")
+        Dim EmptySlot As Integer = 0
+        For i As Integer = 0 To SIMStock.SIMDispenser.Slots.Count - 1
+            If SIMStock.SIMDispenser.Slots(i).SIM_ID = 0 Then EmptySlot += 1
+        Next
+        lbl_SIM_Empty.Text = EmptySlot
+
+        If lbl_SIM_Total.Text = "0" Then lbl_SIM_Total.Text = "-"
+        If lbl_SIM_In.Text = "0" Then lbl_SIM_In.Text = "-"
+        If lbl_SIM_Out.Text = "0" Then lbl_SIM_Out.Text = "-"
+        If lbl_SIM_Move.Text = "0" Then lbl_SIM_Move.Text = "-"
+        If lbl_SIM_Empty.Text = "0" Then lbl_SIM_Empty.Text = "-"
+    End Sub
+
+    Private Sub btnManageSIMStock_Click(sender As Object, e As EventArgs) Handles btnManageSIMStock.Click
+        pnlScanSIM.Visible = True
+        Dim Script As String = "txtBarcode='" & SIMStock.BarcodeClientID & "';" & vbLf
+        Script &= "startFocusBarcode();"
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "focusBarcodeReader", Script, True)
+        '---------------- DragDropEvent-----------
+        SIMStock.ImplementDragDrop()
+    End Sub
+
+    Private Sub btnCloseScanSIM_Click(sender As Object, e As EventArgs) Handles btnCloseScanSIM.Click, lnkCloseScanProduct.Click
+        pnlScanSIM.Visible = False
+        UpdateSIMSummary()
+    End Sub
+
+    Private Sub btnResetScanSIM_Click(sender As Object, e As EventArgs) Handles btnResetScanSIM.Click
+        ResetSIMStock()
     End Sub
 
 #End Region

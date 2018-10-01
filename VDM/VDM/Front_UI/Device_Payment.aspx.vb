@@ -55,7 +55,7 @@
         lnkCash.Attributes("class") = "current"
         '----------------เริ่มรับชำระ --------------
         txtCost.Text = 1000
-        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "CashPayment", "RequireCash();", True);
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "CashPayment", "RequireCash();", True)
 
     End Sub
 

@@ -329,67 +329,67 @@ Partial Public Class Manage_OpenClose_Shift
     Protected WithEvents pnlStockSIM As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''LinkButton1 control.
+    '''btnManageSIMStock control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents LinkButton1 As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnManageSIMStock As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''Dispenser control.
+    '''SIMDispenser control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Dispenser As Global.VDM.UC_SIM_Dispenser
+    Protected WithEvents SIMDispenser As Global.VDM.UC_SIM_Dispenser
     
     '''<summary>
-    '''Label1 control.
+    '''lbl_SIM_Total control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lbl_SIM_Total As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''Label2 control.
+    '''lbl_SIM_Empty control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Label2 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lbl_SIM_Empty As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''Label3 control.
+    '''lbl_SIM_In control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Label3 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lbl_SIM_In As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''Label4 control.
+    '''lbl_SIM_Out control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Label4 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lbl_SIM_Out As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''Label5 control.
+    '''lbl_SIM_Move control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Label5 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lbl_SIM_Move As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''pnlStockPaper control.
@@ -489,4 +489,49 @@ Partial Public Class Manage_OpenClose_Shift
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCloseScanProduct As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''pnlScanSIM control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlScanSIM As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''lnkCloseScanSIM control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkCloseScanSIM As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''SIMStock control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SIMStock As Global.VDM.UC_SIM_Stock
+    
+    '''<summary>
+    '''btnResetScanSIM control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnResetScanSIM As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''btnCloseScanSIM control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnCloseScanSIM As Global.System.Web.UI.WebControls.Button
 End Class

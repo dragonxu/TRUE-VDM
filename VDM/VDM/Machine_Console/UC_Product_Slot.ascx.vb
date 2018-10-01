@@ -6,11 +6,14 @@
 
     Dim BL As New VDM_BL
 
+#Region "For DragDrop"
     Public ReadOnly Property TAG As Panel
         Get
             Return Slot
         End Get
     End Property
+#End Region
+
 
     Public Enum HighLightMode
         None = 0

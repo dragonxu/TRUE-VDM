@@ -116,11 +116,11 @@ Public Class UC_SIM_Stock
 
     Public Sub BindData()
         'MY_UNIQUE_ID = GenerateNewUniqueID()
+        STOCK_DATA = Nothing
 
         SCAN_SIM_ID = -1
         BindScanSIM()
         '-------- Left Side -------
-        STOCK_DATA = Nothing
         BindDispenserLayout()
         ResetSIMSlot()
         BindDispenserSIM()
@@ -219,7 +219,7 @@ Public Class UC_SIM_Stock
             End If
 
 
-
+            ImplementDragDrop()
         End Set
     End Property
 
@@ -268,7 +268,7 @@ Public Class UC_SIM_Stock
         rptSlot.DataBind()
         btnMoveRight.Visible = False
 
-        pnlSlot.Visible = False
+        pnlSlotSIM.Visible = False
         Dispenser.Visible = True
 
     End Sub
@@ -279,14 +279,15 @@ Public Class UC_SIM_Stock
         DT.Columns("CURRENT").ColumnName = "SLOT_NAME"
         BL.Bind_SIMDispenser_Stock(Dispenser, DT, VW_ALL_SIM)
 
+        ImplementDragDrop()
     End Sub
 
     Private Property SLOT_SIM_ID As Integer
         Get
-            Return pnlSlot.Attributes("SIM_ID")
+            Return pnlSlotSIM.Attributes("SIM_ID")
         End Get
         Set(value As Integer)
-            pnlSlot.Attributes("SIM_ID") = value
+            pnlSlotSIM.Attributes("SIM_ID") = value
         End Set
     End Property
 
@@ -356,8 +357,10 @@ Public Class UC_SIM_Stock
         btnMoveRight.Visible = DT.Rows.Count > 0
         chkSlot.Visible = DT.Rows.Count > 0
 
-        pnlSlot.Visible = True
+        pnlSlotSIM.Visible = True
         Dispenser.Visible = False
+
+        ImplementDragDrop()
     End Sub
 
     Private Sub chkSlot_Click(sender As Object, e As EventArgs) Handles chkSlot.Click
@@ -570,7 +573,7 @@ Public Class UC_SIM_Stock
 
     Private Sub ResetScanSIMTab() '------------- Reset เฉพาะ pnlProduct ที่เลือก ----------
         txtBarcode.Text = ""
-        pnlScan.Visible = False
+        pnlScanSIM.Visible = False
         imgScan.ImageUrl = "../images/TransparentDot.png" ' "../RenderImage.aspx?Mode=D&UID=0&Entity=Product&LANG=1"
         lblScan_SIMCode.Text = "-"
         lblScan_SIMName.Text = ""
@@ -659,7 +662,7 @@ Public Class UC_SIM_Stock
             Exit Sub
         End If
 
-        pnlScan.Visible = True
+        pnlScanSIM.Visible = True
         imgScan.ImageUrl = "../RenderImage.aspx?Mode=D&UID=" & SIM_ID & "&Entity=SIM_Package&LANG=1" '&DI=images/TransparentDot.png"
         lblScan_SIMCode.Text = DT.Rows(0).Item("PRODUCT_CODE").ToString
         lblScan_SIMName.Text = DT.Rows(0).Item("DISPLAY_NAME_TH").ToString
@@ -672,6 +675,8 @@ Public Class UC_SIM_Stock
         rptScan.DataBind()
 
         btnMoveLeft.Visible = DT.Rows.Count > 0
+
+        ImplementDragDrop()
     End Sub
 
     Private Sub btnBarcode_Click(sender As Object, e As EventArgs) Handles btnBarcode.Click
@@ -881,11 +886,203 @@ Public Class UC_SIM_Stock
 #End Region
 
 #Region "DragDrop"
+
     '---------------- ทุกครั้งที่ View เปลี่ยน ----------------
     Public Sub ImplementDragDrop()
 
+        ConfigDragDropListener(btnDropListener, txtDragType, txtDragArg, txtDropType, txtDropArg, Me.Page)
+
+        Dim Slots As List(Of UC_SIM_Slot) = Dispenser.Slots
+
+        '--------------------------- Drag from Event --------------------------
+        '------------ Drag SCAN GROUP --------------
+        For Each Item As RepeaterItem In rptSIMType.Items
+            If Item.ItemType <> ListItemType.Item And Item.ItemType <> ListItemType.AlternatingItem Then Continue For
+            Dim lnk As LinkButton = Item.FindControl("lnk")
+            ImplementObjectDragable(lnk, "SCAN_SIM", lnk.CommandArgument)
+        Next
+        ImplementObjectDragable(imgScan, "SCAN_SIM", SCAN_SIM_ID)
+
+        '------------ Drag SCAN ITEM ---------------
+        For Each Item As RepeaterItem In rptScan.Items
+            If Item.ItemType <> ListItemType.Item And Item.ItemType <> ListItemType.AlternatingItem Then Continue For
+            Dim lblSerial As Label = Item.FindControl("lblSerial")
+            Dim tr As HtmlTableRow = Item.FindControl("tr")
+            ImplementObjectDragable(tr, "SCAN_SERIAL", lblSerial.Attributes("SERIAL_NO"))
+        Next
+
+        '------------ Drag SLOT SIM SERIAL-------
+        For Each Item As RepeaterItem In rptSlot.Items
+            If Item.ItemType <> ListItemType.Item And Item.ItemType <> ListItemType.AlternatingItem Then Continue For
+            Dim lblSerial As Label = Item.FindControl("lblSerial")
+            Dim tr As HtmlTableRow = Item.FindControl("tr")
+            ImplementObjectDragable(tr, "SLOT_SERIAL", lblSerial.Attributes("SERIAL_NO"))
+        Next
+
+        '------------ Drag SLOT---------------------
+        For i As Integer = 0 To Slots.Count - 1
+            ImplementObjectDragable(Slots(i).TAG, "SLOT", Slots(i).SLOT_NAME)
+            ImplementObjectDragable(Slots(i).ICON, "SLOT", Slots(i).SLOT_NAME)
+        Next
+        ImplementObjectDragable(imgSlot, "SLOT", SLOT_NAME)
+
+        '--------------------------- Drop to Event ---------------------------
+        '------------ DROP TO SCAN -------------
+        ImplementObjectDropable(pnlScan, "SCAN", "")
+
+        '------------ DROP TO SLOT -------------
+        ImplementObjectDropable(pnlSlotSIM, "SLOT", SLOT_NAME)
+        For i As Integer = 0 To Slots.Count - 1
+            ImplementObjectDropable(Slots(i).TAG, "SLOT", Slots(i).SLOT_NAME)
+        Next
+
     End Sub
 
+    Private ReadOnly Property DragType As String
+        Get
+            Return txtDragType.Text
+        End Get
+    End Property
+
+    Private ReadOnly Property DragArg As String
+        Get
+            Return txtDragArg.Text
+        End Get
+    End Property
+
+    Private ReadOnly Property DropType As String
+        Get
+            Return txtDropType.Text
+        End Get
+    End Property
+
+    Private ReadOnly Property DropArg As String
+        Get
+            Return txtDropArg.Text
+        End Get
+    End Property
+
+    Private Sub btnDropListener_Click(sender As Object, e As EventArgs) Handles btnDropListener.Click
+        Select Case DropType
+            Case "SCAN"
+                Select Case DragType
+                    Case "SLOT"
+                        '----------- ลากมาจาก
+                        Dim slot_name As String = DragArg
+                        STOCK_DATA.DefaultView.RowFilter = "CURRENT='" & slot_name & "'"
+                        For i As Integer = STOCK_DATA.DefaultView.Count - 1 To 0 Step -1
+                            STOCK_DATA.DefaultView(i).Row.Item("CURRENT") = DBNull.Value
+                        Next
+                        STOCK_DATA.DefaultView.RowFilter = ""
+                        SCAN_SIM_ID = SCAN_SIM_ID
+                        BindScanSIM()
+                        If DEVICE_ID > 0 Then
+                            BindSlotSIM(DEVICE_ID) '----------- ถ้า Show หน้า SLOT Info ก็ Update
+                        Else
+                            BindDispenserSIM() '----------- ถ้า Show หน้า SLOT Layout ก็ Update
+                        End If
+
+                    Case "SIM_SERIAL"
+                        '--------ลากมาจากหน้าเลือก Repeater Slot ------------
+                        Dim serial_no As String = DragArg
+                        STOCK_DATA.DefaultView.RowFilter = "SERIAL_NO='" & serial_no.Replace("'", "''") & "'"
+                        Dim targetRow As DataRow = STOCK_DATA.DefaultView(0).Row
+                        Dim SelectedList As List(Of DataRow) = LeftSelectedList()
+
+                        If SelectedList.IndexOf(targetRow) = -1 Then
+                            '------------ ย้าย Row เดียว ----------
+                            targetRow.Item("CURRENT") = DBNull.Value
+                        Else
+                            '------------ ย้าย ทั้ง Set ----------
+                            For i As Integer = 0 To SelectedList.Count - 1
+                                SelectedList(i).Item("CURRENT") = DBNull.Value
+                            Next
+                        End If
+
+                        STOCK_DATA.DefaultView.RowFilter = ""
+                        SCAN_SIM_ID = SCAN_SIM_ID
+                        BindScanSIM()
+                        BindDispenserSIM()
+                        If DEVICE_ID > 0 Then
+                            BindSlotSIM(DEVICE_ID) '----------- ถ้า Show หน้า SLOT Info ก็ Update
+                        Else
+                            BindDispenserSIM() '----------- ถ้า Show หน้า SLOT Layout ก็ Update
+                        End If
+                End Select
+            Case "SLOT"
+
+                Dim Target As UC_SIM_Slot = Dispenser.GET_SLOT_FROM_SLOT_NAME(DropArg)
+
+                Select Case DragType
+                    Case "SLOT"
+                        Dim source As UC_SIM_Slot = Dispenser.GET_SLOT_FROM_SLOT_NAME(DragArg)
+                        If Equals(Target, source) Then Exit Sub
+                        If source.SIM_ID = 0 Then Exit Sub
+
+                        If Not SLOT_CAN_RECIEVE_SIM(Target, source.SIM_ID) Then
+                            Message_Toastr("Slot จะต้องบรรจุสินค้าชนิดเดียวกัน<br>และต้องมีพื้นที่เพียงพอ<br>กรุณาตรวจสอบอีกครั้ง", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page, 8000)
+                            Exit Sub
+                        End If
+                        STOCK_DATA.DefaultView.RowFilter = "CURRENT='" & source.SLOT_NAME & "'"
+                        For i As Integer = STOCK_DATA.DefaultView.Count - 1 To 0 Step -1
+                            STOCK_DATA.DefaultView(i).Row.Item("CURRENT") = Target.SLOT_NAME
+                        Next
+
+                        STOCK_DATA.DefaultView.RowFilter = ""
+                        SCAN_SIM_ID = SCAN_SIM_ID
+                        BindScanSIM()
+                        BindDispenserSIM()
+
+                    Case "SCAN_SIM"
+                        Dim SIM_ID As Integer = DragArg
+                        If Not SLOT_CAN_RECIEVE_SIM(Target, SIM_ID) Then
+                            Message_Toastr("Slot จะต้องบรรจุสินค้าชนิดเดียวกัน<br>และต้องมีพื้นที่เพียงพอ<br>กรุณาตรวจสอบอีกครั้ง", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page, 8000)
+                            Exit Sub
+                        End If
+                        STOCK_DATA.DefaultView.RowFilter = "SIM_ID =" & SIM_ID & " AND CURRENT IS NULL"
+                        For i As Integer = STOCK_DATA.DefaultView.Count - 1 To 0 Step -1
+                            STOCK_DATA.DefaultView(i).Row.Item("CURRENT") = Target.SLOT_NAME
+                        Next
+
+                        STOCK_DATA.DefaultView.RowFilter = ""
+                        SCAN_SIM_ID = SCAN_SIM_ID
+                        BindScanSIM()
+                        BindDispenserSIM()
+                        If DEVICE_ID > 0 Then
+                            BindSlotSIM(DEVICE_ID) '----------- ถ้า Show หน้า SLOT Info ก็ Update
+                        Else
+                            BindDispenserSIM() '----------- ถ้า Show หน้า SLOT Layout ก็ Update
+                        End If
+
+                    Case "SCAN_SERIAL"
+                        Dim serial_no As String = DragArg
+                        Dim slot_name As String = DropArg
+
+                        STOCK_DATA.DefaultView.RowFilter = "SERIAL_NO='" & serial_no.Replace("'", "''") & "'"
+                        Dim targetRow As DataRow = STOCK_DATA.DefaultView(0).Row
+                        Dim SelectedList As List(Of DataRow) = RightSelectedList()
+                        If SelectedList.IndexOf(targetRow) = -1 Then
+                            '------------ ย้าย Row เดียว ----------
+                            targetRow.Item("CURRENT") = slot_name
+                        Else
+                            '------------ ย้าย ทั้ง Set ----------
+                            For i As Integer = 0 To SelectedList.Count - 1
+                                SelectedList(i).Item("CURRENT") = slot_name
+                            Next
+                        End If
+
+                        STOCK_DATA.DefaultView.RowFilter = ""
+                        SCAN_SIM_ID = SCAN_SIM_ID
+                        BindScanSIM()
+                        BindDispenserSIM()
+                        If DEVICE_ID > 0 Then
+                            BindSlotSIM(DEVICE_ID) '----------- ถ้า Show หน้า SLOT Info ก็ Update
+                        Else
+                            BindDispenserSIM() '----------- ถ้า Show หน้า SLOT Layout ก็ Update
+                        End If
+                End Select
+        End Select
+    End Sub
 #End Region
 
 

@@ -56,6 +56,9 @@ Public Class Machine_Overview
         Dim STOCK_Data As DataTable = BL.Get_Current_SIM_Stock(KO_ID)
         STOCK_Data.Columns("CURRENT").ColumnName = "SLOT_NAME"
         BL.Bind_SIMDispenser_Stock(Dispenser, STOCK_Data)
+        For i As Integer = 0 To Dispenser.Slots.Count - 1
+            Dispenser.Slots(i).Column12Style = 2
+        Next
     End Sub
 
     Private Sub SetMachineInfo()

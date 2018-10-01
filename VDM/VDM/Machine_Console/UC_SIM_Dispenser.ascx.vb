@@ -225,6 +225,15 @@
         Return -1
     End Function
 
+    Public Function GET_SLOT_FROM_SLOT_NAME(ByVal SLOT_NAME As String) As UC_SIM_Slot
+        For i As Integer = 0 To Slots.Count - 1
+            If Slots(i).SLOT_NAME = SLOT_NAME Then
+                Return Slots(i)
+            End If
+        Next
+        Return Nothing
+    End Function
+
 #Region "Event"
     Public Event Selecting(ByRef Sender As UC_SIM_Slot)
     Protected Sub Slot_Selecting(ByRef Sender As UC_SIM_Slot)
