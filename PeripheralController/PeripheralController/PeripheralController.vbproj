@@ -86,7 +86,6 @@
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
@@ -111,6 +110,10 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Printer.asmx.vb">
+      <DependentUpon>Printer.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="RequireCash.aspx.designer.vb">
       <DependentUpon>RequireCash.aspx</DependentUpon>
     </Compile>
@@ -125,6 +128,7 @@
       <DependentUpon>CashDispense.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Content Include="Printer.asmx" />
     <Content Include="RequireCash.aspx" />
     <Content Include="CashDispense.aspx" />
     <Content Include="CoinDispense.aspx" />
@@ -194,6 +198,17 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="PrinterClassDll">
+      <Guid>{429E4CBE-98AC-4513-AF5E-47DE18C0B4F5}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

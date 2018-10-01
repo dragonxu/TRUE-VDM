@@ -17,7 +17,7 @@
 
                     <tr>
                         <td>shopCode</td>
-                        <td><asp:TextBox ID="shopCode" runat="server" ></asp:TextBox></td>
+                        <td><asp:TextBox ID="Shop" runat="server" ></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td>Serial</td>

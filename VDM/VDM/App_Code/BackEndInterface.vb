@@ -187,9 +187,9 @@ Public Class BackEndInterface
 
         End Class
 
-        Public Function Get_Result(ByVal shopCode As String, ByVal Serial As String) As Response
+        Public Function Get_Result(ByVal Shop As String, ByVal Serial As String) As Response
 
-            Dim URL As String = (New BackEndInterface.General).ValidateSerialURL & "?Shop=" & shopCode & "&Serial=" & Serial
+            Dim URL As String = (New BackEndInterface.General).ValidateSerialURL & "?Shop=" & Shop & "&Serial=" & Serial
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
             JSONString = (New BackEndInterface.General).SendGetURL(WebRequest)

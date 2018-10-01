@@ -12,7 +12,7 @@
         ClearResponse()
         Try
             Dim Response As New BackEndInterface.Validate_Serial.Response
-            Response = BackEndInterface.Get_Result(shopCode.Text, Serial.Text)
+            Response = BackEndInterface.Get_Result(Shop.Text, Serial.Text)
             If Not IsNothing(Response) Then
                 If Response.ReturnValues.Count = 2 Then
                     CODE.Text = Response.ReturnValues(0).ToString
