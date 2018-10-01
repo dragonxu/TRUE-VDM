@@ -58,14 +58,14 @@ Public Class TrueMoney
 
     End Class
 
-    Public Function GetResult(ByVal Invoice_NO As String, ByVal Amount As Integer, ByVal CustomerQRCode As String, ByVal PaymentDescription As String, ByVal shopCode As String) As Response
+    Public Function GetResult(ByVal SLIP_No As String, ByVal Amount As Integer, ByVal CustomerQRCode As String, ByVal PaymentDescription As String, ByVal shopCode As String) As Response
 
 
         '--------------- Create Request Body -----------
         Dim PostData As New Dictionary(Of String, String)
         PostData.Add("currency", "THB")
         PostData.Add("payment_code", CustomerQRCode)
-        PostData.Add("isv_payment_ref", Invoice_NO)
+        PostData.Add("isv_payment_ref", SLIP_No)
         PostData.Add("description", PaymentDescription)
         PostData.Add("payment_method", "BALANCE")
         PostData.Add("merchant_id", TrueMoneyMerchantID)

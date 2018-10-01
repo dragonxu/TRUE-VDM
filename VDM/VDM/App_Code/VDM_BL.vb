@@ -1555,5 +1555,83 @@ Public Class VDM_BL
     End Function
 #End Region
 
+#Region "Service_Transaction"
+    Public Function Gen_New_Service_Transaction(ByVal KO_ID As Integer, ByVal LANG As UILanguage) As Integer
+        Dim SQL As String = "SELECT ISNULL(MAX(TXN_ID),0)+1 FROM TB_SERVICE_TRANSACTION"
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Dim TXN_ID As Integer = DT.Rows(0)(0)
+        Dim TXN_Y As String = Now.Year
+        Dim TXN_M As String = Now.Month.ToString.PadLeft(2, "0")
+        Dim TXN_D As String = Now.Day.ToString.PadLeft(2, "0")
+
+        SQL = "SELECT SITE_CODE" & vbLf
+        SQL &= " FROM MS_KIOSK KO INNER JOIN MS_SITE ST On KO.SITE_ID=ST.SITE_ID" & vbLf
+        SQL &= " WHERE KO.KO_ID=" & KO_ID
+        DA = New SqlDataAdapter(SQL, ConnectionString)
+        DT = New DataTable
+        DA.Fill(DT)
+        Dim SITE_CODE As String = DT.Rows(0)(0).ToString
+
+        SQL = "SELECT ISNULL(MAX(CAST(TXN_N AS INT)),0)+1 FROM TB_SERVICE_TRANSACTION " & vbLf
+        SQL &= "WHERE TXN_Y='" & TXN_Y & "' AND TXN_M='" & TXN_M & "' AND TXN_D='" & TXN_D & "'"
+        DA = New SqlDataAdapter(SQL, ConnectionString)
+        DT = New DataTable
+        DA.Fill(DT)
+        Dim TXN_N As String = DT.Rows(0)(0).ToString.PadLeft(3, "0")
+        Dim LANG_CODE As String = Get_Language_Code(LANG)
+
+        SQL = "EXEC dbo.SP_CURRENT_OPEN_SHIFT " & KO_ID
+        DA = New SqlDataAdapter(SQL, ConnectionString)
+        DT = New DataTable
+        DA.Fill(DT)
+        If DT.Rows.Count = 0 Then Return 0 '----------- Shift Current Closed ------------
+        Dim SHIFT_ID As Integer = DT.Rows(0).Item("SHIFT_ID")
+        Dim SHIFT_CODE As Integer = DT.Rows(0).Item("SHIFT_CODE")
+
+
+        SQL = "SELECT TOP 0 * FROM TB_SERVICE_TRANSACTION"
+        DA = New SqlDataAdapter(SQL, ConnectionString)
+        DT = New DataTable
+        DA.Fill(DT)
+        Dim DR As DataRow = DT.NewRow
+        DT.Rows.Add(DR)
+        DR("TXN_ID") = TXN_ID
+        DR("KO_ID") = KO_ID
+        DR("SITE_CODE") = SITE_CODE
+        DR("TXN_Y") = TXN_Y
+        DR("TXN_M") = TXN_M
+        DR("TXN_D") = TXN_D
+        DR("TXN_N") = TXN_N
+        DR("LANG_CODE") = LANG_CODE
+        DR("CUS_ID") = DBNull.Value
+        DR("CUS_IMAGE") = DBNull.Value
+        DR("TXN_START") = Now
+        DR("TXN_END") = Now
+        DR("SHIFT_ID") = SHIFT_ID
+        DR("SHIFT_CODE") = SHIFT_CODE
+        DR("SLIP_YEAR") = DBNull.Value
+        DR("SLIP_MONTH") = DBNull.Value
+        DR("SLIP_DAY") = DBNull.Value
+        DR("SLIP_NO") = DBNull.Value
+        DR("SLIP_CONTENT") = DBNull.Value
+        DR("METHOD_ID") = DBNull.Value
+        DR("TMN_REQ_ID") = DBNull.Value
+
+        Dim cmd As New SqlCommandBuilder(DA)
+        DA.Update(DT)
+
+        Return TXN_ID
+    End Function
+
+    Private Function Gen_New_Slip_Code(ByVal TXN_ID As Integer) As String
+        Dim SQL As String = "SELECT dbo.FN_GEN_CONFIRMATION_SLIP_CODE " & TXN_ID
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT.Rows(0)(0)
+    End Function
+#End Region
 
 End Class
