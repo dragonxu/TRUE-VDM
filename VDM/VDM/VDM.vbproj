@@ -144,7 +144,7 @@
     <Content Include="Front_UI\fonts\tboldspecial.svg" />
     <Content Include="Front_UI\fonts\tlight.svg" />
     <Content Include="Front_UI\fonts\tmedium.svg" />
-    <Content Include="Front_UI\Home.aspx" />
+    <Content Include="Front_UI\Select_Menu.aspx" />
     <Content Include="Front_UI\images\bg-bottom.png" />
     <Content Include="Front_UI\images\bg-slide_card-.png" />
     <Content Include="Front_UI\images\bg-slide_card.png" />
@@ -688,11 +688,11 @@
       <DependentUpon>Device_Shoping_Cart.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Front_UI\Home.aspx.designer.vb">
-      <DependentUpon>Home.aspx</DependentUpon>
+    <Compile Include="Front_UI\Select_Menu.aspx.designer.vb">
+      <DependentUpon>Select_Menu.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Front_UI\Home.aspx.vb">
-      <DependentUpon>Home.aspx</DependentUpon>
+    <Compile Include="Front_UI\Select_Menu.aspx.vb">
+      <DependentUpon>Select_Menu.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Front_UI\MasterFront.Master.designer.vb">

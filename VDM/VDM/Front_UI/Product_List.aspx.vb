@@ -5,21 +5,47 @@ Public Class Product_List
     Inherits System.Web.UI.Page
     Dim BL As New VDM_BL
 
-    Private ReadOnly Property LANGUAGE As Integer
+#Region "ส่วนที่เหมือนกันหมดทุกหน้า"
+    Private ReadOnly Property KO_ID As Integer '------------- เอาไว้เรียกใช้ง่ายๆ ----------
         Get
-            Return Session("LANGUAGE")
+            Try
+                Return Request.Cookies("KO_ID").Value
+            Catch ex As Exception
+                Return 0
+            End Try
         End Get
     End Property
 
-    Private ReadOnly Property KO_ID As Integer
+    Private ReadOnly Property LANGUAGE As VDM_BL.UILanguage '------- ต้องเป็น ReadOnly --------
         Get
-            Return Session("KO_ID")
+            Try
+                Return Session("LANGUAGE")
+            Catch ex As Exception
+                Return 0
+            End Try
+
         End Get
     End Property
+
+    Private ReadOnly Property TXN_ID As Integer
+        Get
+            Try
+                Return Session("TXN_ID")
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+    End Property
+
+#End Region
 
     Protected Property BRAND_ID As Integer
         Get
-            Return Val(lblCode.Attributes("BRAND_ID"))
+            Try
+                Return lblCode.Attributes("BRAND_ID")
+            Catch ex As Exception
+                Return 0
+            End Try
         End Get
         Set(value As Integer)
             lblCode.Attributes("BRAND_ID") = value
@@ -28,7 +54,11 @@ Public Class Product_List
 
     Protected Property CAT_ID As Integer
         Get
-            Return Val(lblCode.Attributes("CAT_ID"))
+            Try
+                Return lblCode.Attributes("CAT_ID")
+            Catch ex As Exception
+                Return 0
+            End Try
         End Get
         Set(value As Integer)
             lblCode.Attributes("CAT_ID") = value
@@ -38,7 +68,11 @@ Public Class Product_List
 
     Protected Property Row_Total As Integer
         Get
-            Return Val(lblCode.Attributes("Row_Total"))
+            Try
+                Return lblCode.Attributes("Row_Total")
+            Catch ex As Exception
+                Return 0
+            End Try
         End Get
         Set(value As Integer)
             lblCode.Attributes("Row_Total") = value
@@ -46,7 +80,11 @@ Public Class Product_List
     End Property
     Protected Property PageCount As Integer
         Get
-            Return Val(lblCode.Attributes("PageCount"))
+            Try
+                Return lblCode.Attributes("PageCount")
+            Catch ex As Exception
+                Return 0
+            End Try
         End Get
         Set(value As Integer)
             lblCode.Attributes("PageCount") = value
@@ -54,7 +92,11 @@ Public Class Product_List
     End Property
     Protected Property Row_Remain As Integer
         Get
-            Return Val(lblCode.Attributes("Row_Remain"))
+            Try
+                Return lblCode.Attributes("Row_Remain")
+            Catch ex As Exception
+                Return 0
+            End Try
         End Get
         Set(value As Integer)
             lblCode.Attributes("Row_Remain") = value
@@ -208,7 +250,7 @@ Public Class Product_List
 
 
     Private Sub lnkHome_Click(sender As Object, e As ImageClickEventArgs) Handles lnkHome.Click
-        Response.Redirect("Home.aspx")
+        Response.Redirect("Select_Menu.aspx")
     End Sub
 
     Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click

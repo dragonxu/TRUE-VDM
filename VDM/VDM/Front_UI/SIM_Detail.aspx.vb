@@ -5,17 +5,40 @@ Public Class SIM_Detail
 
     Dim BL As New VDM_BL
 
-    Private ReadOnly Property LANGUAGE As Integer
+#Region "ส่วนที่เหมือนกันหมดทุกหน้า"
+    Private ReadOnly Property KO_ID As Integer '------------- เอาไว้เรียกใช้ง่ายๆ ----------
         Get
-            Return Session("LANGUAGE")
+            Try
+                Return Request.Cookies("KO_ID").Value
+            Catch ex As Exception
+                Return 0
+            End Try
         End Get
     End Property
 
-    Private ReadOnly Property KO_ID As Integer
+    Private ReadOnly Property LANGUAGE As VDM_BL.UILanguage '------- ต้องเป็น ReadOnly --------
         Get
-            Return Session("KO_ID")
+            Try
+                Return Session("LANGUAGE")
+            Catch ex As Exception
+                Return 0
+            End Try
+
         End Get
     End Property
+
+    Private ReadOnly Property TXN_ID As Integer
+        Get
+            Try
+                Return Session("TXN_ID")
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+    End Property
+
+#End Region
+
     Protected Property SIM_ID As Integer
         Get
             Try
@@ -161,7 +184,7 @@ Public Class SIM_Detail
     End Sub
 
     Private Sub lnkHome_Click(sender As Object, e As ImageClickEventArgs) Handles lnkHome.Click
-        Response.Redirect("Home.aspx")
+        Response.Redirect("Select_Menu.aspx")
     End Sub
 
     Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click

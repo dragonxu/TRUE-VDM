@@ -11,8 +11,8 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Home
-
+Partial Public Class Select_Menu
+    
     '''<summary>
     '''lnkDevice control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class Home
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkDevice As Global.System.Web.UI.WebControls.LinkButton
-
+    
     '''<summary>
     '''lnkSim control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class Home
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkSim As Global.System.Web.UI.WebControls.LinkButton
-
+    
     '''<summary>
     '''lnkBack control.
     '''</summary>
@@ -39,13 +39,4 @@ Partial Public Class Home
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkBack As Global.System.Web.UI.WebControls.ImageButton
-
-    '''<summary>
-    '''UC_Machine_Console1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents UC_Machine_Console1 As Global.VDM.UC_Machine_Console
 End Class

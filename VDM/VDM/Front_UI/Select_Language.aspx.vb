@@ -5,7 +5,7 @@
     Private ReadOnly Property KO_ID As Integer '------------- เอาไว้เรียกใช้ง่ายๆ ----------
         Get
             Try
-                Return Response.Cookies("KO_ID").Value
+                Return Request.Cookies("KO_ID").Value
             Catch ex As Exception
                 Return 0
             End Try
@@ -69,7 +69,7 @@
         Dim BL As New VDM_BL
         TXN_ID = BL.Gen_New_Service_Transaction(KO_ID, SelectedLanguage)
         LANGUAGE = SelectedLanguage
-        Response.Redirect("Select_Menu.aspx") '------------- เปลี่ยนหน้า Home.aspx เป็น Select_Menu.aspx
+        Response.Redirect("Select_Menu.aspx")
     End Sub
 
 End Class
