@@ -40,6 +40,9 @@
             '-------- ตัวแปรที่ใช้ Cookies เก็บคือพวกที่ Lock กับเครื่องนั้นๆ เช่น Kiosk, USB Port, Hardware ต่างๆ
         End If
 
+        '--------------- Check Shift Open ---------------
+
+
     End Sub
 
     Private Sub TH_ServerClick(sender As Object, e As EventArgs) Handles TH.ServerClick

@@ -4,6 +4,16 @@ Public Class Login
     Inherits System.Web.UI.Page
 
     Dim BL As New VDM_BL
+    Private ReadOnly Property KO_ID As Integer
+        Get
+            Try
+                Return Request.QueryString("KO_ID")
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+    End Property
+
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         lblError.Visible = False
@@ -28,10 +38,9 @@ Public Class Login
             Session("LOGIN_NAME") = DT.Rows(0).Item("LOGIN_NAME").ToString
             Session("FULL_NAME") = DT.Rows(0).Item("FIRST_NAME").ToString & " " & DT.Rows(0).Item("LAST_NAME").ToString
 
-            '------------- Fixed For Test-------------
-            Session("KO_ID") = 1
-            Session("SHOP_CODE") = "784"
-            '------------- Fixed For Test-------------
+            Session("KO_ID") = KO_ID
+            DT = BL.GetList_Kiosk(KO_ID)
+            Session("SHOP_CODE") = DT.Rows(0).Item("SITE_CODE")
 
             Response.Redirect("Machine_Overview.aspx")
         End If

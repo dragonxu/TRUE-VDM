@@ -118,6 +118,13 @@
       <DependentUpon>Print.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ProductDispense.aspx.designer.vb">
+      <DependentUpon>ProductDispense.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProductDispense.aspx.vb">
+      <DependentUpon>ProductDispense.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="RequireCash.aspx.designer.vb">
       <DependentUpon>RequireCash.aspx</DependentUpon>
     </Compile>
@@ -133,6 +140,7 @@
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Content Include="Print.asmx" />
+    <Content Include="ProductDispense.aspx" />
     <Content Include="RequireCash.aspx" />
     <Content Include="CashDispense.aspx" />
     <Content Include="CoinDispense.aspx" />
