@@ -7,6 +7,7 @@ Imports Org.BouncyCastle.OpenSsl
 Imports Org.BouncyCastle.Security
 Imports Org.BouncyCastle.Crypto.Parameters
 Imports System.Security.Cryptography
+Imports System.Data.SqlClient
 
 Public Class TrueMoney
 
@@ -24,8 +25,9 @@ Public Class TrueMoney
 
         '---------- For Tracking And Debuging ---------
         Public Property Request As RequestData
-        Public Property ResponseString As String
+        Public Property JSONString As String
         Public Property ConnectionMessage As String
+        Public Property REQ_ID As Integer
 
         Public Class ResponseStatus
             Public Property code As String
@@ -36,6 +38,7 @@ Public Class TrueMoney
             Public Property payment_id As String
         End Class
 
+        '------------- ส่วนนี้ัตัดได้ -------------
         Public Class RequestData
             '--------------Header----------------------
             Public Property X_API_Key As String
@@ -58,34 +61,68 @@ Public Class TrueMoney
 
     End Class
 
-    Public Function GetResult(ByVal Invoice_NO As String, ByVal Amount As Integer, ByVal CustomerQRCode As String, ByVal PaymentDescription As String, ByVal shopCode As String) As Response
+    Public Function GetResult(ByVal ISV As String, ByVal Amount As Integer, ByVal CustomerQRCode As String, ByVal PaymentDescription As String, ByVal shopCode As String) As Response
 
 
+        Dim request_amount As String = FormatNumber(Amount).Replace(".", "").Replace("-", "").Replace(",", "")
+        Dim X_API_Version As String = "1.0"
+        Dim payment_method As String = "BALANCE"
         '--------------- Create Request Body -----------
         Dim PostData As New Dictionary(Of String, String)
         PostData.Add("currency", "THB")
         PostData.Add("payment_code", CustomerQRCode)
-        PostData.Add("isv_payment_ref", Invoice_NO)
+        PostData.Add("isv_payment_ref", ISV)
         PostData.Add("description", PaymentDescription)
-        PostData.Add("payment_method", "BALANCE")
+        PostData.Add("payment_method", payment_method)
         PostData.Add("merchant_id", TrueMoneyMerchantID)
-        PostData.Add("request_amount", FormatNumber(Amount).Replace(".", "").Replace("-", "").Replace(",", ""))
+        PostData.Add("request_amount", request_amount)
 
         Dim PostString As String = JsonConvert.SerializeObject(PostData, Formatting.Indented)
 
         Dim Req As WebRequest = WebRequest.Create(TrueMoneyURL)
         '--------------- Config Web Request ------------
         Dim TimeStamp As String = C.DateToEpoch(Now).ToString
+        Dim Signature As String = CreateSignature(TimeStamp, PostString)
         Dim WaitMinutes As Integer = 11 '-------- รอกี่นาที ---------
+
 
         Req.Method = "POST"
         Req.Timeout = WaitMinutes * (60000)
         ''--------------- Config Header -----------------
         Req.Headers.Add("X-API-Key", XAPIKey)
-        Req.Headers.Add("X-API-Version", "1.0")
-        Req.Headers.Add("Content-Signature", CreateSignature(TimeStamp, PostString))
+        Req.Headers.Add("X-API-Version", X_API_Version)
+        Req.Headers.Add("Content-Signature", Signature)
         Req.Headers.Add("TIMESTAMP", TimeStamp)
         Req.ContentType = "applicaton/json"
+
+        '------------------- Save Log ----------------
+        Dim BL As New VDM_BL
+        '---------------- Save REQ Log ---------------
+        Dim DR As DataRow
+        Dim REQ_ID As Integer = BL.Get_NewID_Log("TrueMoney_Payment_REQ", "REQ_ID")
+        Dim SQL As String = "SELECT TOP 0 * FROM TrueMoney_Payment_REQ"
+        Dim DA As New SqlDataAdapter(SQL, BL.LogConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        DR = DT.NewRow : DT.Rows.Add(DR)
+        DR("REQ_ID") = REQ_ID
+        DR("X_API_Key") = XAPIKey
+        DR("X_API_Version") = Req.Headers.Item(X_API_Version)
+        DR("Content_Signature") = Signature
+        DR("TIMESTAMP") = TimeStamp
+        DR("Content_type") = Req.ContentType
+        DR("currency") = "THB"
+        DR("payment_code") = CustomerQRCode
+        DR("isv_payment_ref") = ISV
+        DR("description") = PaymentDescription
+        DR("payment_method") = payment_method
+        DR("merchant_id") = TrueMoneyMerchantID
+        DR("request_amount") = request_amount
+        DR("PostString") = PostString
+        DR("REQ_Time") = Now
+        Dim cmd As New SqlCommandBuilder(DA)
+        DA.Update(DT)
+        '---------------------------------------
 
         Dim Data As Byte() = C.StringToByte(PostString, Converter.EncodeType._UTF8)
         Req.ContentLength = Data.Length
@@ -107,6 +144,9 @@ Public Class TrueMoney
         Catch ex As Exception
             Result = New Response
             Result.ConnectionMessage = ex.Message
+            '----------------- Save Error Log -------------
+            Dim BackEnd As New BackEndInterface.General
+            BackEnd.UPDATE_LOG_ERROR_MESSAGE("TrueMoney_Payment_REQ", REQ_ID, ex.Message)
         End Try
 
         Result.Request = New Response.RequestData
@@ -128,7 +168,23 @@ Public Class TrueMoney
             .PostString = PostString
         End With
         '-----------------------------
-        Result.ResponseString = JSONString
+        Result.JSONString = JSONString
+
+        '---------------- Save RESP Log ---------------
+        SQL = "SELECT TOP 0 * FROM TrueMoney_Payment_RESP"
+        DA = New SqlDataAdapter(SQL, BL.LogConnectionString)
+        DT = New DataTable
+        DA.Fill(DT)
+        DR("REQ_ID") = REQ_ID
+        DR("code") = Result.status.code
+        DR("message") = Result.status.message
+        DR("payment_id") = Result.data.payment_id
+        DR("JSONString") = Result.JSONString
+        DR("ConnectionMessage") = Result.ConnectionMessage
+        DR("RESP_TIME") = Now
+        cmd = New SqlCommandBuilder(DA)
+        DA.Update(DT)
+        '----------------------------------------------
 
         Return Result
 
@@ -136,6 +192,10 @@ Public Class TrueMoney
 
     Private Function CreateSignature(ByVal TimeStamp As String, ByVal RequestBody As String) As String
         Return "digest-alg=RSA-SHA; key-id=KEY:RSA:rsf.org; data=" & Sign(TimeStamp & RequestBody)
+    End Function
+
+    Public Function Generate_ISV(ByVal ShopCode As String) As String ' Confirm จาก True
+        Return ShopCode & "-" & Now.ToString("yyMMddhhmmssfff")
     End Function
 
 #Region "Crypto And Key"

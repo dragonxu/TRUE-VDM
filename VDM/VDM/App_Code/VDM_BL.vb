@@ -43,9 +43,17 @@ Public Class VDM_BL
         Conn.Dispose()
     End Sub
 
-    Public Function GetNewPrimaryID(ByVal TableName As String, ByVal PrimaryKeyName As String) As Integer
-        Dim SQL As String = "SELECT IsNull(MAX(" & PrimaryKeyName & "),0)+1 FROM " & TableName
+    Public Function Get_NewID(ByRef Table_Name As String, ByRef Field_ID As String) As Integer
+        Dim SQL As String = "SELECT IsNull(MAX(" & Field_ID & "),0)+1 FROM " & Table_Name & " "
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT.Rows(0).Item(0)
+    End Function
+
+    Public Function Get_NewID_Log(ByRef Table_Name As String, ByRef Field_ID As String) As Integer
+        Dim SQL As String = "SELECT IsNull(MAX(" & Field_ID & "),0)+1 FROM " & Table_Name & " "
+        Dim DA As New SqlDataAdapter(SQL, LogConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)
         Return DT.Rows(0).Item(0)
@@ -124,6 +132,11 @@ Public Class VDM_BL
         Unknown = 99
     End Enum
 
+    Public Enum PaymentMethod
+        CASH = 1
+        TRUE_MONEY = 2
+        CREDIT_CARD = 3
+    End Enum
 
     Public Function Get_Language_Code(ByVal Language As UILanguage) As String
         Select Case Language
@@ -464,7 +477,7 @@ Public Class VDM_BL
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         DA.Fill(DT)
 
-        If DT.Rows.Count > 0 Then
+        If DT.Rows.Count > 0 Then '---------- ยิง MAT CODE มา-------------
             Result.PRODUCT_ID = DT.Rows(0).Item("PRODUCT_ID")
             Result.PRODUCT_CODE = DT.Rows(0).Item("PRODUCT_CODE").ToString
             Result.DISPLAY_NAME = DT.Rows(0).Item("DISPLAY_NAME").ToString
@@ -488,7 +501,16 @@ Public Class VDM_BL
             '----------- Get From TSM : Hardcode For Test--------------
             Result.IS_SERIAL = True
             Result.SERIAL_NO = Search
-            Result.PRODUCT_CODE = Get_TSM_Product_Code_From_Serial("", Search) '---------------  ตรวจสอบเลข Serial กับ TSM ---------
+            Dim TSM As BackEndInterface.Validate_Serial.Response = Get_TSM_Product_Code_From_Serial(Shop_Code, Search)
+
+            If Not IsNothing(TSM) AndAlso
+                 Not IsNothing(TSM.ReturnValues) AndAlso
+                 Not IsNothing(TSM.ReturnValues(0)) AndAlso
+                 Not IsNothing(TSM.ReturnValues(1)) AndAlso
+                 Not CBool(TSM.ReturnValues(1)) AndAlso
+                TSM.ReturnValues(0) <> "" Then
+                Result.PRODUCT_CODE = TSM.ReturnValues(0)
+            End If
 
             If Result.PRODUCT_CODE = "" Then
                 Result.Result = False
@@ -528,7 +550,6 @@ Public Class VDM_BL
                 End If
             End If
         End If
-
     End Function
 
     Public Function Get_SIM_Barcode_Scan_Result(ByVal Shop_Code As String, ByVal Search As String) As BarcodeScanResult
@@ -552,6 +573,7 @@ Public Class VDM_BL
         End If
 
         '----------- Get mat Code From TSM----------
+
         SQL = "SELECT * " & vbLf
         SQL &= "FROM TMP_SIM" & vbLf
         SQL &= "WHERE SERIAL_NO='" & Search.Replace("'", "''") & "'"
@@ -588,20 +610,26 @@ Public Class VDM_BL
         End If
     End Function
 
-    Public Function Get_TSM_Product_Code_From_Serial(ByVal Shop_Code As String, ByVal SERIAL_NO As String) As String
-        '----------- Get From TSM : Hardcode For Test--------------
-        Dim SQL As String = "SELECT PRODUCT_CODE,SERIAL_NO FROM TMP_Serial" & vbLf
-        SQL &= "WHERE SERIAL_NO='" & SERIAL_NO.Replace("'", "''") & "'"
+    Public Function Get_TSM_Product_Code_From_Serial(ByVal SHOP As String, ByVal SERIAL As String) As BackEndInterface.Validate_Serial.Response
+        ''----------- Get From TSM : Hardcode For Test--------------
+        'Dim SQL As String = "SELECT PRODUCT_CODE,SERIAL_NO FROM TMP_Serial" & vbLf
+        'SQL &= "WHERE SERIAL_NO='" & SERIAL_NO.Replace("'", "''") & "'"
 
-        Dim DT As New DataTable
-        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
-        DA.Fill(DT)
+        'Dim DT As New DataTable
+        'Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        'DA.Fill(DT)
 
-        If DT.Rows.Count = 0 Then
-            Return ""
-        Else
-            Return DT.Rows(0).Item("PRODUCT_CODE").ToString
-        End If
+        'If DT.Rows.Count = 0 Then
+        '    Return ""
+        'Else
+        '    Return DT.Rows(0).Item("PRODUCT_CODE").ToString
+        'End If
+        '---------------------------- Get From TSM -------------------------------
+        Dim TSM As New BackEndInterface.Validate_Serial
+        Dim Resp As BackEndInterface.Validate_Serial.Response = TSM.Get_Result(SHOP, SERIAL)
+
+        Return Resp
+
     End Function
 
     Public Sub Save_Product_Movement_Log(ByVal SHIFT_ID As Integer, ByVal SHIFT_STATUS As ShiftStatus, ByVal PRODUCT_ID As Integer, ByVal SERIAL_NO As String, ByVal MOVE_ID As StockMovementType, ByVal MOVE_FROM As String, ByVal MOVE_FROM_SLOT As Integer, ByVal MOVE_TO As String, ByVal MOVE_TO_SLOT As Integer, ByVal REMARK As String, ByVal MOVE_BY As Integer, ByVal MOVE_TIME As DateTime)
@@ -611,7 +639,7 @@ Public Class VDM_BL
         DA.Fill(DT)
         Dim DR As DataRow = DT.NewRow
 
-        DR("HIS_ID") = GetNewPrimaryLogID("TB_PRODUCT_MOVEMENT", "HIS_ID")
+        DR("HIS_ID") = Get_NewID_Log("TB_PRODUCT_MOVEMENT", "HIS_ID")
 
         If SHIFT_ID <> 0 Then DR("SHIFT_ID") = SHIFT_ID
         If SHIFT_STATUS <> ShiftStatus.Unknown Then DR("SHIFT_STATUS") = SHIFT_STATUS
@@ -638,7 +666,7 @@ Public Class VDM_BL
         Dim DA As New SqlDataAdapter(SQL, LogConnectionString)
         DA.Fill(DT)
         Dim DR As DataRow = DT.NewRow
-        DR("HIS_ID") = GetNewPrimaryLogID("TB_SIM_MOVEMENT", "HIS_ID")
+        DR("HIS_ID") = Get_NewID_Log("TB_SIM_MOVEMENT", "HIS_ID")
 
         If SHIFT_ID <> 0 Then DR("SHIFT_ID") = SHIFT_ID
         If SHIFT_STATUS <> ShiftStatus.Unknown Then DR("SHIFT_STATUS") = SHIFT_STATUS
@@ -660,13 +688,6 @@ Public Class VDM_BL
 
     End Sub
 
-    Public Function GetNewPrimaryLogID(ByVal TableName As String, ByVal PrimaryKeyName As String) As Integer
-        Dim SQL As String = "SELECT IsNull(MAX(" & PrimaryKeyName & "),0)+1 FROM " & TableName
-        Dim DA As New SqlDataAdapter(SQL, LogConnectionString)
-        Dim DT As New DataTable
-        DA.Fill(DT)
-        Return DT.Rows(0).Item(0)
-    End Function
 
 #End Region
 
@@ -1136,7 +1157,7 @@ Public Class VDM_BL
         Return DT
     End Function
 
-    Public Function GetKiosk_Current_OTY(ByRef KO_ID As Integer, ByRef D_ID As Integer, ByRef Unit_Value As Integer) As Integer
+    Public Function GetKiosk_Current_QTY(ByRef KO_ID As Integer, ByRef D_ID As Integer, ByRef Unit_Value As Integer) As Integer
         Dim Current_QTY As Integer = 0
         Dim SQL As String = ""
 
@@ -1462,58 +1483,58 @@ Public Class VDM_BL
     'TB_SERVICE_TRANSACTION
 
     '--TXN Create
-    Public Function Save_TXN_Log(ByVal TXN_ID As Integer, ByVal KO_ID As Integer, ByVal LANG_CODE As Integer, Optional ByVal CUSTOMER_CARD As String = "", Optional ByVal CUS_IMAGE As Image = Nothing)
-        Dim SQL As String = "SELECT * FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
-        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
-        Dim DT As New DataTable
-        DA.Fill(DT)
-        Dim DR As DataRow
+    'Public Function Save_TXN_Log(ByVal TXN_ID As Integer, ByVal KO_ID As Integer, ByVal LANG_CODE As Integer, Optional ByVal CUSTOMER_CARD As String = "", Optional ByVal CUS_IMAGE As Image = Nothing)
+    '    Dim SQL As String = "SELECT * FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
+    '    Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+    '    Dim DT As New DataTable
+    '    DA.Fill(DT)
+    '    Dim DR As DataRow
 
-        If DT.Rows.Count = 0 Then
+    '    If DT.Rows.Count = 0 Then
 
-            TXN_ID = Get_NewID("TB_SERVICE_TRANSACTION", "TXN_ID")
-            DR = DT.NewRow
-            DR("TXN_ID") = TXN_ID
-            DR("LANG_CODE") = LANG_CODE
-            DR("TXN_START") = Now
-            DR("KO_ID") = KO_ID
-            DR("TXN_Y") = Now.Year
-            DR("TXN_M") = Now.Month
-            DR("TXN_D") = Now.Day
-            DR("TXN_N") = Get_TXN_N(TXN_ID)
-        Else
-            DR = DT.Rows(0)
-            DR("TXN_END") = Now
+    '        TXN_ID = Get_NewID("TB_SERVICE_TRANSACTION", "TXN_ID")
+    '        DR = DT.NewRow
+    '        DR("TXN_ID") = TXN_ID
+    '        DR("LANG_CODE") = LANG_CODE
+    '        DR("TXN_START") = Now
+    '        DR("KO_ID") = KO_ID
+    '        DR("TXN_Y") = Now.Year
+    '        DR("TXN_M") = Now.Month
+    '        DR("TXN_D") = Now.Day
+    '        DR("TXN_N") = Get_TXN_N(TXN_ID)
+    '    Else
+    '        DR = DT.Rows(0)
+    '        DR("TXN_END") = Now
 
-            If CUSTOMER_CARD <> "" Then
-                Dim CUS_ID As Integer
-                Dim DT_Customer As DataTable = GET_CUSTOMER(CUSTOMER_CARD, Nothing)
-                If DT_Customer.Rows.Count > 0 Then
-                    CUS_ID = DT.Rows(0).Item("CUS_ID")
-                End If
+    '        If CUSTOMER_CARD <> "" Then
+    '            Dim CUS_ID As Integer
+    '            Dim DT_Customer As DataTable = GET_CUSTOMER(CUSTOMER_CARD, Nothing)
+    '            If DT_Customer.Rows.Count > 0 Then
+    '                CUS_ID = DT.Rows(0).Item("CUS_ID")
+    '            End If
 
-            End If
+    '        End If
 
-        End If
+    '    End If
 
-        DR("CUS_ID") = ""
-        DR("CUS_IMAGE") = ""
+    '    DR("CUS_ID") = ""
+    '    DR("CUS_IMAGE") = ""
 
 
 
-        DR("SHIFT_ID") = ""
-        DR("SHIFT_CODE") = ""
-        'DR("SLIP_YEAR") = ""
-        'DR("SLIP_MONTH") = ""
-        'DR("SLIP_DAY") = ""
-        'DR("SLIP_NO") = ""
-        'DR("SLIP_CONTENT") = ""
-        'DR("METHOD_ID") = ""
-        DR("TMN_REQ_ID") = ""
-        'End If
+    '    DR("SHIFT_ID") = ""
+    '    DR("SHIFT_CODE") = ""
+    '    'DR("SLIP_YEAR") = ""
+    '    'DR("SLIP_MONTH") = ""
+    '    'DR("SLIP_DAY") = ""
+    '    'DR("SLIP_NO") = ""
+    '    'DR("SLIP_CONTENT") = ""
+    '    'DR("METHOD_ID") = ""
+    '    DR("TMN_REQ_ID") = ""
+    '    'End If
 
-        Return 0
-    End Function
+    '    Return 0
+    'End Function
 
     'GET_CUS_Info
     Public Function GET_CUSTOMER(ByVal CUSTOMER_CARD As String, Optional ByVal CUS_ID As Integer = 0) As DataTable
@@ -1538,22 +1559,107 @@ Public Class VDM_BL
     '   DR("SLIP_CONTENT") = ""
     '   DR("METHOD_ID") = ""
 
-    Private Function Get_NewID(ByRef Table_Name As String, ByRef Field_ID As String) As Integer
-        Dim SQL As String = "SELECT IsNull(MAX(" & Field_ID & "),0)+1 FROM " & Table_Name & " "
-        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
-        Dim DT As New DataTable
-        DA.Fill(DT)
-        Return DT.Rows(0).Item(0)
-    End Function
 
-    Private Function Get_TXN_N(ByRef TXN_ID As String) As Integer
-        Dim SQL As String = "SELECT IsNull(MAX(TXN_N),0)+1 FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
-        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
-        Dim DT As New DataTable
-        DA.Fill(DT)
-        Return DT.Rows(0).Item(0)
-    End Function
+
+    'Private Function Get_TXN_N(ByRef TXN_ID As String) As Integer
+    '    Dim SQL As String = "SELECT IsNull(MAX(TXN_N),0)+1 FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
+    '    Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+    '    Dim DT As New DataTable
+    '    DA.Fill(DT)
+    '    Return DT.Rows(0).Item(0)
+    'End Function
 #End Region
 
+#Region "Service_Transaction"
+
+    Public Sub Update_Service_Transaction(ByVal TXN_ID As Integer, ByRef Page As Page)
+        Dim SQL As String = "UPDATE TB_SERVICE_TRANSACTION SET TXN_END=GETDATE() WHERE TXN_ID=" & TXN_ID
+        ExecuteNonQuery(SQL)
+    End Sub
+
+    Public Function Gen_New_Service_Transaction(ByVal KO_ID As Integer, ByVal LANG As UILanguage) As Integer
+        Dim SQL As String = "SELECT ISNULL(MAX(TXN_ID),0)+1 FROM TB_SERVICE_TRANSACTION"
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Dim TXN_ID As Integer = DT.Rows(0)(0)
+        Dim TXN_Y As String = Now.Year
+        Dim TXN_M As String = Now.Month.ToString.PadLeft(2, "0")
+        Dim TXN_D As String = Now.Day.ToString.PadLeft(2, "0")
+
+        SQL = "SELECT SITE_CODE" & vbLf
+        SQL &= " FROM MS_KIOSK KO INNER JOIN MS_SITE ST On KO.SITE_ID=ST.SITE_ID" & vbLf
+        SQL &= " WHERE KO.KO_ID=" & KO_ID
+        DA = New SqlDataAdapter(SQL, ConnectionString)
+        DT = New DataTable
+        DA.Fill(DT)
+        Dim SITE_CODE As String = DT.Rows(0)(0).ToString
+
+        SQL = "SELECT ISNULL(MAX(CAST(TXN_N AS INT)),0)+1 FROM TB_SERVICE_TRANSACTION " & vbLf
+        SQL &= "WHERE TXN_Y='" & TXN_Y & "' AND TXN_M='" & TXN_M & "' AND TXN_D='" & TXN_D & "'"
+        DA = New SqlDataAdapter(SQL, ConnectionString)
+        DT = New DataTable
+        DA.Fill(DT)
+        Dim TXN_N As String = DT.Rows(0)(0).ToString.PadLeft(3, "0")
+        Dim LANG_CODE As String = Get_Language_Code(LANG)
+
+        SQL = "EXEC dbo.SP_CURRENT_OPEN_SHIFT " & KO_ID
+        DA = New SqlDataAdapter(SQL, ConnectionString)
+        DT = New DataTable
+        DA.Fill(DT)
+        If DT.Rows.Count = 0 Then Return 0 '----------- Shift Current Closed ------------
+        Dim SHIFT_ID As Integer = DT.Rows(0).Item("SHIFT_ID")
+        Dim SHIFT_CODE As Integer = DT.Rows(0).Item("SHIFT_CODE")
+
+
+        SQL = "SELECT TOP 0 * FROM TB_SERVICE_TRANSACTION"
+        DA = New SqlDataAdapter(SQL, ConnectionString)
+        DT = New DataTable
+        DA.Fill(DT)
+        Dim DR As DataRow = DT.NewRow
+        DT.Rows.Add(DR)
+        DR("TXN_ID") = TXN_ID
+        DR("KO_ID") = KO_ID
+        DR("SITE_CODE") = SITE_CODE
+        DR("TXN_Y") = TXN_Y
+        DR("TXN_M") = TXN_M
+        DR("TXN_D") = TXN_D
+        DR("TXN_N") = TXN_N
+        DR("LANG_CODE") = LANG_CODE
+        DR("CUS_ID") = DBNull.Value
+        DR("CUS_IMAGE") = DBNull.Value
+        DR("TXN_START") = Now
+        DR("TXN_END") = Now
+        DR("SHIFT_ID") = SHIFT_ID
+        DR("SHIFT_CODE") = SHIFT_CODE
+        DR("SLIP_YEAR") = DBNull.Value
+        DR("SLIP_MONTH") = DBNull.Value
+        DR("SLIP_DAY") = DBNull.Value
+        DR("SLIP_NO") = DBNull.Value
+        DR("SLIP_CONTENT") = DBNull.Value
+        DR("METHOD_ID") = DBNull.Value
+        '--------------- True Money -----------------------
+        DR("TMN_REQ_ID") = DBNull.Value
+        DR("TMN_ISV") = DBNull.Value
+        DR("TMN_REQUEST_AMOUNT") = DBNull.Value
+        DR("TMN_STATUS_CODE") = DBNull.Value
+        DR("TMN_PAYMENT_ID") = DBNull.Value
+        DR("TMN_RESP_TIME") = DBNull.Value
+        '-------------- Credit Card/Debit Card -------------
+
+        Dim cmd As New SqlCommandBuilder(DA)
+        DA.Update(DT)
+
+        Return TXN_ID
+    End Function
+
+    Private Function Gen_New_Slip_Code(ByVal TXN_ID As Integer) As String
+        Dim SQL As String = "SELECT dbo.FN_GEN_CONFIRMATION_SLIP_CODE " & TXN_ID
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT.Rows(0)(0)
+    End Function
+#End Region
 
 End Class

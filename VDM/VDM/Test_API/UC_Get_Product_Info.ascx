@@ -1,13 +1,13 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="UC_Get_Product_Info.ascx.vb" Inherits="VDM.UC_Get_Product_Info" %>
 <table>
       <tr>
-                        <td colspan ="3"><h3 style="text-align :center ;"> Get_Product_Info</h3></td>
+            <td colspan ="3"><h3 style="text-align :center ;"> Get_Product_Info</h3></td>
                          
    </tr>
     <tr>
-                        <td><h4 style="text-align :center ;">Request</h4></td>
-                        <td>&nbsp;</td>
-                        <td><h4 style="text-align :center ;">Response</h4></td>
+            <td><h4 style="text-align :center ;">Request</h4></td>
+            <td>&nbsp;</td>
+            <td><h4 style="text-align :center ;">Response</h4></td>
    </tr>
 
     <tr style ="vertical-align :top;">

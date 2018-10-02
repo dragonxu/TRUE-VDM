@@ -230,6 +230,33 @@ Partial Public Class Device_Payment
     Protected WithEvents pnlTruemoney As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
+    '''pnlBarcode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlBarcode As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''txtBarcode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtBarcode As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''btnBarcode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnBarcode As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
     '''btnSkip control.
     '''</summary>
     '''<remarks>

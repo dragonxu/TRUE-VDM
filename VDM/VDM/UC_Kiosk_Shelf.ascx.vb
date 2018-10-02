@@ -450,7 +450,7 @@ Public Class UC_Kiosk_Shelf
         If DT.Rows.Count = 0 Then
             DR = DT.NewRow
             DT.Rows.Add(DR)
-            Shelf.SHELF_ID = BL.GetNewPrimaryID("TB_PRODUCT_SHELF", "SHELF_ID")
+            Shelf.SHELF_ID = BL.Get_NewID("TB_PRODUCT_SHELF", "SHELF_ID")
             DR("SHELF_ID") = Shelf.SHELF_ID
             DR("KO_ID") = KO_ID
         Else
@@ -502,7 +502,7 @@ Public Class UC_Kiosk_Shelf
             Dim DR As DataRow
             If DT.DefaultView.Count = 0 Then
                 DR = DT.NewRow
-                Floors(i).FLOOR_ID = BL.GetNewPrimaryID("TB_PRODUCT_FLOOR", "FLOOR_ID") '----------- Update Floor ID-------
+                Floors(i).FLOOR_ID = BL.Get_NewID("TB_PRODUCT_FLOOR", "FLOOR_ID") '----------- Update Floor ID-------
                 DR("FLOOR_ID") = Floors(i).FLOOR_ID
                 DR("SHELF_ID") = Shelf.SHELF_ID
                 DT.Rows.Add(DR)
@@ -574,7 +574,7 @@ Public Class UC_Kiosk_Shelf
                 Dim DR As DataRow
                 If DT.DefaultView.Count = 0 Then
                     DR = DT.NewRow
-                    Slots(s).SLOT_ID = BL.GetNewPrimaryID("TB_PRODUCT_SLOT", "SLOT_ID") '----------- Update Slot ID-------
+                    Slots(s).SLOT_ID = BL.Get_NewID("TB_PRODUCT_SLOT", "SLOT_ID") '----------- Update Slot ID-------
                     DR("SLOT_ID") = Slots(s).SLOT_ID
                     DR("FLOOR_ID") = Floors(f).FLOOR_ID
                     DT.Rows.Add(DR)

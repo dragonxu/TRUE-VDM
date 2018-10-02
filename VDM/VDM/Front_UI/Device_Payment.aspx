@@ -27,6 +27,8 @@
     <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
 
+    <!---------VDM----------->
+    <script src="../Scripts/extent.js" type="text/javascript"></script>
 
     <style>
         header {
@@ -36,7 +38,7 @@
 </head>
 <body class="bg2">
     <form id="form1" runat="server">
-           <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+      <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <asp:UpdatePanel ID="udpList" runat="server">
             <ContentTemplate>
         <div class="warp">
@@ -63,7 +65,6 @@
                                     <asp:Label ID="lblCurrency_Str" runat="server" Text="บาท"></asp:Label></h3>
                                 <div class="btu-payment" style="margin: 60px 0 0 0;">
                                     <div class="row" style="margin-left: 100px;">
-<%--                                        <a class="current" id="lnkCash" runat ="server" >--%>
                                         <a  id="lnkCash" runat ="server" >
                                             <dt class="icon-cash">
                                                 <span class="true-l">เงินสด<span>
@@ -143,7 +144,7 @@
                                     <p class="time true-l">เวลาชำระเงินสดคงเหลือ 2:00:00 นาที</p>
                                 </div>
 
-                                <div style="position:absolute; top:100px;right:100px;" class="row">
+                                <div style="position:absolute; top:300px;right:100px;" class="row">
                                     <div style="display:block;" class="col-lg-3">
                                         1 : <asp:TextBox ID="txt1" runat="server" Text="0"></asp:TextBox>
                                     </div>
@@ -170,16 +171,7 @@
                                     </div>
                                     <div style="display:block;" class="col-lg-3">
                                         1000 : <asp:TextBox ID="txt1000" runat="server" Text="0"></asp:TextBox>
-                                    </div> 
-                                    <div style="display:block;" class="col-lg-3">
-                                        รวมยอด : <%--<asp:TextBox ID="txtCost" runat="server" Text="0"></asp:TextBox>--%>
-                                    </div>  
-                                    <div style="display:block;" class="col-lg-3">
-                                        จ่าย : <%--<asp:TextBox ID="txtPaid" runat="server" Text="0"></asp:TextBox>--%>
-                                    </div>
-                                    <div style="display:block;" class="col-lg-3">
-                                        เหลือ : <%--<asp:TextBox ID="txtRequire" runat="server" Text="0"></asp:TextBox>--%>
-                                    </div>  
+                                    </div>                                   
                                 </div>
                             </form>
                         </asp:Panel>
@@ -242,11 +234,8 @@
                                         <input class="order true-m" name="" type="submit" value="ส่ง" />
                                              </div>
                                     </div>
-
                                 </div>
                             </form>
-
-
                         </asp:Panel>
 
                         <asp:Panel ID="pnlTruemoney" runat="server">
@@ -272,6 +261,12 @@
                                     </div>
                                 </div>
                             </form>
+
+                            <asp:Panel ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" style="position:fixed; left:-500px; top:0px;">
+                                <asp:TextBox ID="txtBarcode" runat="server"></asp:TextBox>
+                                <asp:Button ID="btnBarcode" runat="server" style="display:none;"/>
+                            </asp:Panel>
+                             
                         </asp:Panel>
                         <div class="col-md-12">
                                     <asp:Button ID="btnSkip" runat="server" class="btu true-bs" Style="background: #635b5b; padding: 0 50px 0 50px; float: right; margin-top: 100px;" Text="ต่อไป" />
@@ -312,8 +307,7 @@
                         // จ่ายครบ
                     }
                 }
-                
-                
+                                
                 var tryReq = 1;
                 updatePayment = function (data)
                 {
@@ -348,7 +342,7 @@
                     var required = cost - paid;
                     $('#txtRequire').val(required);
                 }        
-                RequireCash(); // เริ่มจ่าย
+                //RequireCash(); // เริ่มจ่าย
 
             </script>
 

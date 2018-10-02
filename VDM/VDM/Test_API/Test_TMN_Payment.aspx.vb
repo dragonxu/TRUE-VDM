@@ -1,5 +1,4 @@
-﻿Imports VDM.TrueMoney
-
+﻿
 Public Class Test_TMN_Payment
     Inherits System.Web.UI.Page
 
@@ -9,24 +8,14 @@ Public Class Test_TMN_Payment
         If Not IsPostBack Then
             ImplementJavaIntegerText(Amount, False,, "left")
             Amount.Text = 10
-            GenerateInvoice()
+            Invoice_NO.Text = TMN.Generate_ISV(shopCode.Text)
             CustomerQRCode.Focus()
         End If
-        GenerateInvoice()
         lblError.Text = ""
     End Sub
 
-    Private Sub GenerateInvoice()
-        Invoice_NO.Text = GenerateInvoiceNo(shopCode.Text)
-        PaymentDescription.Text = "TRUEVDM-" & Invoice_NO.Text
-    End Sub
-
-    Private Function GenerateInvoiceNo(ByVal ShopCode As String) As String ' Confirm จาก True
-        Return ShopCode & "-" & Now.ToString("yyMMddhhmmssfff")
-    End Function
-
     Private Sub btnGen_Click(sender As Object, e As EventArgs) Handles btnGen.Click
-        GenerateInvoice()
+        Invoice_NO.Text = TMN.Generate_ISV(shopCode.Text)
     End Sub
 
     Private Sub btnTest_Click(sender As Object, e As EventArgs) Handles btnTest.Click
@@ -39,7 +28,7 @@ Public Class Test_TMN_Payment
         TIMESTAMP.Text = Resp.Request.TIMESTAMP
         Content_type.Text = Resp.Request.Content_type
 
-        ResponseString.Text = Resp.ResponseString
+        ResponseString.Text = Resp.JSONString
         '-------------- Connection Message ------------
         If Resp.ConnectionMessage = "Success" Then
             lblError.ForeColor = Drawing.Color.Green
