@@ -98,7 +98,7 @@ Public Class UC_Shift_Recieve
         img.Attributes("Src") = "../" & e.Item.DataItem("Icon_Green").ToString
 
         If Not IsDBNull(e.Item.DataItem("Unit_Value")) Then
-            Dim Before As Integer = Val(BL.GetKiosk_Current_OTY(KO_ID, VDM_BL.Device.CoinIn, e.Item.DataItem("Unit_Value")))
+            Dim Before As Integer = Val(BL.GetKiosk_Current_QTY(KO_ID, VDM_BL.Device.CoinIn, e.Item.DataItem("Unit_Value")))
             If Before > 0 Then
                 lbl_Before.Text = FormatNumber(Before, 0)
             End If
@@ -260,7 +260,7 @@ Public Class UC_Shift_Recieve
         img.Attributes("Src") = "../" & e.Item.DataItem("Icon_Green").ToString
 
         If Not IsDBNull(e.Item.DataItem("Unit_Value")) Then
-            Dim Before As Integer = Val(BL.GetKiosk_Current_OTY(KO_ID, VDM_BL.Device.CashIn, e.Item.DataItem("Unit_Value")))
+            Dim Before As Integer = Val(BL.GetKiosk_Current_QTY(KO_ID, VDM_BL.Device.CashIn, e.Item.DataItem("Unit_Value")))
             If Before > 0 Then
                 lbl_Before.Text = FormatNumber(Before, 0)
             End If

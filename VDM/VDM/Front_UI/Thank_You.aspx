@@ -36,12 +36,23 @@
                             <asp:ImageButton ID="lnkHome" runat="server" ImageUrl="images/btu-home.png" />
                         </span>
                         <span class="col-md-6">
-                           <%-- <asp:ImageButton ID="lnkBack" runat="server" ImageUrl="images/btu-prev.png" />--%>
+                      
                         </span>
                     </div>
                 </nav>
             </footer>
 </div>
+
+         <script type="text/javascript">
+
+             var redirectDelegate = function () {
+                 $('#lnkHome').click();
+             }
+             var waitSeconds = 7;// รอ 7 วินาที
+             setInterval(redirectDelegate, waitSeconds * 1000);
+            
+         </script>
+
          </form>
     </body>
 </html>

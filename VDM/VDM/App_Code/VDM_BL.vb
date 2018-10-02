@@ -43,6 +43,21 @@ Public Class VDM_BL
         Conn.Dispose()
     End Sub
 
+    Public Function Get_NewID(ByRef Table_Name As String, ByRef Field_ID As String) As Integer
+        Dim SQL As String = "SELECT IsNull(MAX(" & Field_ID & "),0)+1 FROM " & Table_Name & " "
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT.Rows(0).Item(0)
+    End Function
+
+    Public Function Get_NewID_Log(ByRef Table_Name As String, ByRef Field_ID As String) As Integer
+        Dim SQL As String = "SELECT IsNull(MAX(" & Field_ID & "),0)+1 FROM " & Table_Name & " "
+        Dim DA As New SqlDataAdapter(SQL, LogConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT.Rows(0).Item(0)
+    End Function
 
     Public Enum UILanguage
         TH = 1
@@ -117,6 +132,11 @@ Public Class VDM_BL
         Unknown = 99
     End Enum
 
+    Public Enum PaymentMethod
+        CASH = 1
+        TRUE_MONEY = 2
+        CREDIT_CARD = 3
+    End Enum
 
     Public Function Get_Language_Code(ByVal Language As UILanguage) As String
         Select Case Language
@@ -605,43 +625,8 @@ Public Class VDM_BL
         '    Return DT.Rows(0).Item("PRODUCT_CODE").ToString
         'End If
         '---------------------------- Get From TSM -------------------------------
-        On Error Resume Next
-
-        Dim DR As DataRow
-        '---------------- Save REQ Log ---------------
-        Dim REQ_ID As Integer = Get_NewID_Log("Backend_Validate_Serial_REQ", "REQ_ID")
-        Dim SQL As String = "SELECT TOP 0 * FROM Backend_Validate_Serial_REQ"
-        Dim DA As New SqlDataAdapter(SQL, LogConnectionString)
-        Dim DT As New DataTable
-        DA.Fill(DT)
-        DR = DT.NewRow : DT.Rows.Add(DR)
-        DR("REQ_ID") = REQ_ID
-        DR("Shop") = SHOP
-        DR("Serial") = SERIAL
-        DR("REQ_Time") = Now
-        Dim cmd As New SqlCommandBuilder(DA)
-        DA.Update(DT)
-
         Dim TSM As New BackEndInterface.Validate_Serial
         Dim Resp As BackEndInterface.Validate_Serial.Response = TSM.Get_Result(SHOP, SERIAL)
-
-        SQL = "SELECT TOP 0 * FROM Backend_Validate_Serial_RESP"
-        DA = New SqlDataAdapter(SQL, LogConnectionString)
-        DT = New DataTable
-        DA.Fill(DT)
-        DR = DT.NewRow : DT.Rows.Add(DR)
-        DR("REQ_ID") = REQ_ID
-        DR("JSONString") = Resp.JSONString
-        DR("CODE") = Resp.ReturnValues(0)
-        DR("IS_SIM") = Resp.ReturnValues(1)
-        DR("IsError") = Resp.IsError
-        DR("ErrorMessage") = Resp.ErrorMessage
-        DR("IsNotTransaction") = Resp.IsNotTransaction
-        DR("RESP_Time") = Now
-
-        If Err.Number <> 0 Then DR("ErrorMessage") = Err.Description
-        cmd = New SqlCommandBuilder(DA)
-        DA.Update(DT)
 
         Return Resp
 
@@ -1172,7 +1157,7 @@ Public Class VDM_BL
         Return DT
     End Function
 
-    Public Function GetKiosk_Current_OTY(ByRef KO_ID As Integer, ByRef D_ID As Integer, ByRef Unit_Value As Integer) As Integer
+    Public Function GetKiosk_Current_QTY(ByRef KO_ID As Integer, ByRef D_ID As Integer, ByRef Unit_Value As Integer) As Integer
         Dim Current_QTY As Integer = 0
         Dim SQL As String = ""
 
@@ -1574,32 +1559,24 @@ Public Class VDM_BL
     '   DR("SLIP_CONTENT") = ""
     '   DR("METHOD_ID") = ""
 
-    Public Function Get_NewID(ByRef Table_Name As String, ByRef Field_ID As String) As Integer
-        Dim SQL As String = "SELECT IsNull(MAX(" & Field_ID & "),0)+1 FROM " & Table_Name & " "
-        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
-        Dim DT As New DataTable
-        DA.Fill(DT)
-        Return DT.Rows(0).Item(0)
-    End Function
 
-    Public Function Get_NewID_Log(ByRef Table_Name As String, ByRef Field_ID As String) As Integer
-        Dim SQL As String = "SELECT IsNull(MAX(" & Field_ID & "),0)+1 FROM " & Table_Name & " "
-        Dim DA As New SqlDataAdapter(SQL, LogConnectionString)
-        Dim DT As New DataTable
-        DA.Fill(DT)
-        Return DT.Rows(0).Item(0)
-    End Function
 
-    Private Function Get_TXN_N(ByRef TXN_ID As String) As Integer
-        Dim SQL As String = "SELECT IsNull(MAX(TXN_N),0)+1 FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
-        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
-        Dim DT As New DataTable
-        DA.Fill(DT)
-        Return DT.Rows(0).Item(0)
-    End Function
+    'Private Function Get_TXN_N(ByRef TXN_ID As String) As Integer
+    '    Dim SQL As String = "SELECT IsNull(MAX(TXN_N),0)+1 FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
+    '    Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+    '    Dim DT As New DataTable
+    '    DA.Fill(DT)
+    '    Return DT.Rows(0).Item(0)
+    'End Function
 #End Region
 
 #Region "Service_Transaction"
+
+    Public Sub Update_Service_Transaction(ByVal TXN_ID As Integer, ByRef Page As Page)
+        Dim SQL As String = "UPDATE TB_SERVICE_TRANSACTION SET TXN_END=GETDATE() WHERE TXN_ID=" & TXN_ID
+        ExecuteNonQuery(SQL)
+    End Sub
+
     Public Function Gen_New_Service_Transaction(ByVal KO_ID As Integer, ByVal LANG As UILanguage) As Integer
         Dim SQL As String = "SELECT ISNULL(MAX(TXN_ID),0)+1 FROM TB_SERVICE_TRANSACTION"
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
@@ -1661,7 +1638,14 @@ Public Class VDM_BL
         DR("SLIP_NO") = DBNull.Value
         DR("SLIP_CONTENT") = DBNull.Value
         DR("METHOD_ID") = DBNull.Value
+        '--------------- True Money -----------------------
         DR("TMN_REQ_ID") = DBNull.Value
+        DR("TMN_ISV") = DBNull.Value
+        DR("TMN_REQUEST_AMOUNT") = DBNull.Value
+        DR("TMN_STATUS_CODE") = DBNull.Value
+        DR("TMN_PAYMENT_ID") = DBNull.Value
+        DR("TMN_RESP_TIME") = DBNull.Value
+        '-------------- Credit Card/Debit Card -------------
 
         Dim cmd As New SqlCommandBuilder(DA)
         DA.Update(DT)

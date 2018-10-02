@@ -2,6 +2,7 @@
 Imports System.Configuration.ConfigurationManager
 Imports System.Net
 Imports System.IO
+Imports System.Data.SqlClient
 
 Public Class BackEndInterface
 
@@ -104,6 +105,12 @@ Public Class BackEndInterface
             Return JSONString
         End Function
 
+
+        Public Sub UPDATE_LOG_ERROR_MESSAGE(ByVal TableName As String, ByVal REQ_ID As Integer, ByVal ErrorMessage As String)
+            Dim SQL As String = "UPDATE " & TableName & " SET ErrorMessage='" & Replace(ErrorMessage, "'", "''") & "' WHERE REQ_ID=" & REQ_ID
+            Dim BL As New VDM_BL
+            BL.ExecuteNonQuery_Log(SQL)
+        End Sub
     End Class
 
     Public Class Get_Product_Info
@@ -184,17 +191,56 @@ Public Class BackEndInterface
             Public Property IsError As String
             Public Property ErrorMessage As String
             Public Property IsNotTransaction As String
+            Public Property REQ_ID As Integer
 
         End Class
 
         Public Function Get_Result(ByVal Shop As String, ByVal Serial As String) As Response
 
+            '------------------- Save Log ----------------
+            Dim BL As New VDM_BL
+            '---------------- Save REQ Log ---------------
+            Dim DR As DataRow
+            Dim REQ_ID As Integer = BL.Get_NewID_Log("Backend_Validate_Serial_REQ", "REQ_ID")
+            Dim SQL As String = "SELECT TOP 0 * FROM Backend_Validate_Serial_REQ"
+            Dim DA As New SqlDataAdapter(SQL, BL.LogConnectionString)
+            Dim DT As New DataTable
+            DA.Fill(DT)
+            DR = DT.NewRow : DT.Rows.Add(DR)
+            DR("REQ_ID") = REQ_ID
+            DR("Shop") = Shop
+            DR("Serial") = Serial
+            DR("REQ_Time") = Now
+            Dim cmd As New SqlCommandBuilder(DA)
+            DA.Update(DT)
+
+            '---------------- Call ---------------
             Dim URL As String = (New BackEndInterface.General).ValidateSerialURL & "?Shop=" & Shop & "&Serial=" & Serial
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
             JSONString = (New BackEndInterface.General).SendGetURL(WebRequest)
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)(JSONString)
             Result.JSONString = JSONString
+            Result.REQ_ID = REQ_ID
+
+            '------------- Save RESP Log -------------
+            SQL = "SELECT TOP 0 * FROM Backend_Validate_Serial_RESP"
+            DA = New SqlDataAdapter(SQL, BL.LogConnectionString)
+            DT = New DataTable
+            DA.Fill(DT)
+            DR = DT.NewRow : DT.Rows.Add(DR)
+            DR("REQ_ID") = REQ_ID
+            DR("JSONString") = Result.JSONString
+            DR("CODE") = Result.ReturnValues(0)
+            DR("IS_SIM") = Result.ReturnValues(1)
+            DR("IsError") = Result.IsError
+            DR("ErrorMessage") = Result.ErrorMessage
+            DR("IsNotTransaction") = Result.IsNotTransaction
+            DR("RESP_Time") = Now
+
+            cmd = New SqlCommandBuilder(DA)
+            DA.Update(DT)
+
             Return Result
         End Function
     End Class
