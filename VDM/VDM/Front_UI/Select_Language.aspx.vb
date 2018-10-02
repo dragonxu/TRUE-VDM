@@ -5,7 +5,7 @@
     Private ReadOnly Property KO_ID As Integer '------------- เอาไว้เรียกใช้ง่ายๆ ----------
         Get
             Try
-                Return Response.Cookies("KO_ID").Value
+                Return Request.Cookies("KO_ID").Value
             Catch ex As Exception
                 Return 0
             End Try
@@ -39,6 +39,9 @@
             Response.Cookies("KO_ID").Expires = DateAdd(DateInterval.Year, 1, Now)
             '-------- ตัวแปรที่ใช้ Cookies เก็บคือพวกที่ Lock กับเครื่องนั้นๆ เช่น Kiosk, USB Port, Hardware ต่างๆ
         End If
+
+        '--------------- Check Shift Open ---------------
+
 
     End Sub
 

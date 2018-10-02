@@ -135,6 +135,7 @@
     <Content Include="Front_UI\css\slick.css" />
     <Content Include="Front_UI\css\style.css" />
     <Content Include="Front_UI\css\true.css" />
+    <Content Include="Front_UI\Default.aspx" />
     <Content Include="Front_UI\Device_Category.aspx" />
     <Content Include="Front_UI\Device_Verify.aspx" />
     <Content Include="Front_UI\Device_Product_Detail.aspx" />
@@ -270,6 +271,7 @@
     <Content Include="Front_UI\SIM_Detail.aspx" />
     <Content Include="Front_UI\SIM_List.aspx" />
     <Content Include="Front_UI\Thank_You.aspx" />
+    <Content Include="Front_UI\UC_CommonUI.ascx" />
     <Content Include="Front_UI\UC_Machine_Console.ascx" />
     <Content Include="Front_UI\UC_Scan_Face_Recognition.ascx" />
     <Content Include="Front_UI\UC_Scan_IDCart.ascx" />
@@ -660,6 +662,13 @@
       <DependentUpon>Complete_Order.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Front_UI\Default.aspx.designer.vb">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\Default.aspx.vb">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Front_UI\Device_Category.aspx.designer.vb">
       <DependentUpon>Device_Category.aspx</DependentUpon>
     </Compile>
@@ -750,6 +759,13 @@
     <Compile Include="Front_UI\Thank_You.aspx.vb">
       <DependentUpon>Thank_You.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Front_UI\UC_CommonUI.ascx.designer.vb">
+      <DependentUpon>UC_CommonUI.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\UC_CommonUI.ascx.vb">
+      <DependentUpon>UC_CommonUI.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Front_UI\UC_Machine_Console.ascx.designer.vb">
       <DependentUpon>UC_Machine_Console.ascx</DependentUpon>

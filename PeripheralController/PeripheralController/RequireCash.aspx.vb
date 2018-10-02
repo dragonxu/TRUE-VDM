@@ -1,5 +1,7 @@
 ﻿Imports CashReceiver
 Imports CoinReciever
+Imports System.Data
+
 Public Class RequireCash
     Inherits System.Web.UI.Page
 
@@ -19,6 +21,7 @@ Public Class RequireCash
         End Get
     End Property
 
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         Result = New DataTable
@@ -26,24 +29,20 @@ Public Class RequireCash
         Result.Columns.Add("status", GetType(Boolean))
         Result.Columns.Add("message", GetType(String))
 
-        '--------------------- รอ Test-------------
-        'If Required > 0 Then
-        '    WaitForRecieve()
-        'Else
-        '    Dim DR As DataRow = Result.NewRow
-        '    DR("amount") = 0
-        '    DR("status") = True
-        '    DR("message") = "success"
-        '    Result.Rows.Add(DR)
-        '    Response.Write(SingleRowDataTableToJSON(Result))
-        'End If
 
-        Dim DR As DataRow = Result.NewRow
-        DR("amount") = 500
-        DR("status") = True
-        DR("message") = "success"
-        Result.Rows.Add(DR)
-        Response.Write(SingleRowDataTableToJSON(Result))
+        '--------------------- รอ Test-------------
+        If Required > 0 Then
+            WaitForRecieve()
+        Else
+            Dim DR As DataRow = Result.NewRow
+            Result.Rows.Add(DR)
+            DR("amount") = 0
+            DR("status") = False
+            DR("message") = "no requirement"
+            Response.Write(SingleRowDataTableToJSON(Result))
+            Response.End()
+        End If
+
     End Sub
 
     Public Sub WaitForRecieve()
@@ -140,7 +139,27 @@ Public Class RequireCash
         AddHandler Cash.Received, AddressOf Cash_Received
         AddHandler Coin.Recieved, AddressOf Coin_Received
 
+        '------------- รอจนกว่าจะหยอด
+        While Recieved = 0 And StartWait < EndWait
+            Threading.Thread.Sleep(200)
+        End While
+        '------------- ไม่หยอดสักที -------------
+        Try : Cash.Close() : Catch : End Try
+        Try : Coin.Close() : Catch : End Try
+
+        DR("amount") = Recieved
+        DR("status") = Recieved > 0
+        If Recieved = 0 Then
+            DR("message") = "timeout"
+        Else
+            DR("message") = "success"
+        End If
+        Response.Write(SingleRowDataTableToJSON(Result))
     End Sub
+
+    Dim Recieved As Integer = 0
+    Dim StartWait As DateTime = Now
+    Dim EndWait As DateTime = DateAdd(DateInterval.Minute, 2, Now)
 
     Public Sub Cash_Received(Sender As Object, e As CashReceiver.CashEvent)
 
@@ -148,16 +167,18 @@ Public Class RequireCash
 
         Select Case e.Message
             Case "20", "50", "100", "500", "1000"
-                DR("amount") = CInt(e.Message)
-                DR("status") = True
-                DR("message") = "success"
-            Case Else
-                DR("amount") = 0
-                DR("status") = False
-                DR("message") = e.State.ToString
+                Recieved = e.Message
+                'DR("amount") = Recieved
+                'DR("status") = True
+                'DR("message") = "success"
+                'Case Else
+                '    DR("amount") = 0
+                '    DR("status") = False
+                '    DR("message") = e.State.ToString
         End Select
-        Cash.Close()
-        Response.Write(SingleRowDataTableToJSON(Result))
+        'Cash.Close()
+        'Response.Write(SingleRowDataTableToJSON(Result))
+        'Response.End() '--------- ออกจาก Wait Loop
     End Sub
 
     Public Sub Coin_Received(Sender As Object, e As CoinReciever.CoinEvent)
@@ -166,16 +187,18 @@ Public Class RequireCash
 
         Select Case e.Message
             Case "1", "2", "5", "10"
-                DR("amount") = CInt(e.Message)
-                DR("status") = True
-                DR("message") = "success"
-            Case Else
-                DR("amount") = 0
-                DR("status") = False
-                DR("message") = e.State.ToString
+                Recieved = e.Message
+                '        DR("amount") = Recieved
+                '        DR("status") = True
+                '        DR("message") = "success"
+                '    Case Else
+                '        DR("amount") = 0
+                '        DR("status") = False
+                '        DR("message") = e.State.ToString
         End Select
-        Coin.Close()
-        Response.Write(SingleRowDataTableToJSON(Result))
+        'Coin.Close()
+        'Response.Write(SingleRowDataTableToJSON(Result))
+        'Response.End() '--------- ออกจาก Wait Loop
     End Sub
 
 End Class

@@ -8,6 +8,7 @@ Imports Org.BouncyCastle.Security
 Imports Org.BouncyCastle.Crypto.Parameters
 Imports System.Security.Cryptography
 Imports System.Data.SqlClient
+Imports System.Data
 
 Public Class TrueMoney
 

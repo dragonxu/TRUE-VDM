@@ -49,7 +49,7 @@ Public Class Device_Payment
         Else
             initFormPlugin()
         End If
-        BL.Update_Service_Transaction(TXN_ID, Me.Page) '-------------- Update ทุกหน้า ------------
+
 
     End Sub
 
