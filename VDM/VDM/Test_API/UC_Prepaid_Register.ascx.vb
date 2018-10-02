@@ -32,9 +32,8 @@
                 sddress_sub_district.Text,
                 address_zip.Text,
                 shopCode.Text,
-                sale_partner_code.Text,
-                sale_partner_name.Text,
-                sale_code.Text,
+            shopName.Text,
+            sale_code.Text,
                 mat_code.Text,
                 mat_desc.Text,
                 sim_serial.Text,
@@ -42,7 +41,8 @@
                 price_plan.Text,
                 subscriber.Text,
                 is_registered.SelectedValue,
-                sub_activity.SelectedValue)
+                sub_activity.SelectedValue,
+                company_code.Text)
 
 
             If Not IsNothing(Response) Then

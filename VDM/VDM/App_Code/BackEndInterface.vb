@@ -902,8 +902,8 @@ Public Class BackEndInterface
                                     ByVal confident_ratio As String) As Response
 
             Dim GetString As String = ""
-            GetString &= "orderId=" & orderId & "&"
-            GetString &= "flowName=Mobile"
+            GetString &= "flow-id=" & orderId & "&"
+            GetString &= "flow-name=Mobile"
 
             Dim PostData As New Dictionary(Of String, String)
             PostData.Add("orderId", orderId)
@@ -913,9 +913,11 @@ Public Class BackEndInterface
             PostData.Add("PRODUCT-ID-NUMBER", subscriber)
             PostData.Add("PARTNER-CODE", shopCode)
             PostData.Add("CUST-NAME", customerName)
-            PostData.Add("CAMPAIGN-CODE", "")
-            PostData.Add("CAMPAIGN-NAME", "")
-            PostData.Add("SERVICE-CODE", "TMV")
+            'PostData.Add("CAMPAIGN-CODE", "")
+            'PostData.Add("CAMPAIGN-NAME", "")
+            'PostData.Add("SERVICE-CODE", "TMV")
+            PostData.Add("SERVICE-CODE", "Mobile")
+
             PostData.Add("PRODUCT-NAME", pricePlan)
             PostData.Add("SERIAL-NUMBER", simSerial)
             PostData.Add("SALE-CODE", staffOpenShift)
@@ -927,7 +929,7 @@ Public Class BackEndInterface
             PostData.Add("CONFIDENT_RATIO", confident_ratio)
             PostData.Add("FACE_RECOG_CUST_CERTIFICATE_SOURCE", "READ_CARD")
             PostData.Add("FACE_RECOG_CUST_CAPTURE_SOURCE", "CAPTURE")
-            PostData.Add("CUST_CERTIFICATE_LASER_ID", "")
+            'PostData.Add("CUST_CERTIFICATE_LASER_ID", "")
             PostData.Add("OS", "VENDING")
 
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString

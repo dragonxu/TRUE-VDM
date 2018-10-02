@@ -112,13 +112,14 @@
                         <td>shopCode</td>
                         <td><asp:TextBox ID="shopCode" runat="server" ></asp:TextBox></td>
                     </tr>
-                    <tr>
+                    <%--<tr>
                         <td>sale_partner_code</td>
                         <td><asp:TextBox ID="sale_partner_code" runat="server" ></asp:TextBox></td>
-                    </tr>
+                    </tr>--%>
+
                     <tr>
-                        <td>sale_partner_name</td>
-                        <td><asp:TextBox ID="sale_partner_name" runat="server" ></asp:TextBox></td>
+                        <td>shopName</td>
+                        <td><asp:TextBox ID="shopName" runat="server" ></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td>sale_code</td>
@@ -173,7 +174,10 @@
 
                         </td>
                     </tr>
-                   
+                   <tr>
+                        <td>company_code</td>
+                        <td><asp:TextBox ID="company_code" runat="server" ></asp:TextBox></td>
+                    </tr>
 
 
                     <tr>

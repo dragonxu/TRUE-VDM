@@ -221,22 +221,13 @@ Partial Public Class UC_Prepaid_Register
     Protected WithEvents shopCode As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''sale_partner_code control.
+    '''shopName control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents sale_partner_code As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''sale_partner_name control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents sale_partner_name As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents shopName As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''sale_code control.
@@ -318,6 +309,15 @@ Partial Public Class UC_Prepaid_Register
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents sub_activity As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''company_code control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents company_code As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''btn_Request control.
