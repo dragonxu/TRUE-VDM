@@ -32,6 +32,33 @@ Partial Public Class Complete_Order
     Protected WithEvents txtSlotName As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''txtPosID control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtPosID As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''txtStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtStatus As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''txtMessage control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtMessage As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''btnNext control.
     '''</summary>
     '''<remarks>

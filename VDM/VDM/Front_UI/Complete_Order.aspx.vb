@@ -26,13 +26,18 @@ Public Class Complete_Order
         End Set
     End Property
 
-    Public ReadOnly Property TXN_ID As Integer
+    Private ReadOnly Property TXN_ID As Integer
         Get
             Return Session("TXN_ID")
         End Get
     End Property
 
-    Public Property SLOT_NAME As String
+#End Region
+
+#Region "Page Property"
+
+
+    Private Property SLOT_NAME As String
         Get
             Return txtSlotName.Text
         End Get
@@ -41,6 +46,32 @@ Public Class Complete_Order
         End Set
     End Property
 
+    Private Property POS_ID As String
+        Get
+            Return txtPosID.Text
+        End Get
+        Set(value As String)
+            txtPosID.Text = value
+        End Set
+    End Property
+
+    Private Property Result_Status As String
+        Get
+            Return txtStatus.Text
+        End Get
+        Set(value As String)
+            txtStatus.Text = value
+        End Set
+    End Property
+
+    Private Property Result_Message As String
+        Get
+            Return txtMessage.Text
+        End Get
+        Set(value As String)
+            txtMessage.Text = value
+        End Set
+    End Property
 #End Region
 
     Public ReadOnly Property PRODUCT_ID As Integer
@@ -60,15 +91,15 @@ Public Class Complete_Order
 
     Private Sub PickUp()
 
+        '--------------- Get All Product Slot------------
         Dim SQL As String = ""
-        SQL &= " SELECT RND,SLOT_NAME,TOTAL" & vbLf
+        SQL &= " SELECT PRODUCT.SLOT_NAME,POS_ID,TOTAL" & vbLf
         SQL &= " FROM" & vbLf
-        SQL &= " (SELECT RAND() RND,SLOT_NAME ,COUNT(1) TOTAL" & vbLf
+        SQL &= " (SELECT SLOT_NAME ,COUNT(1) TOTAL" & vbLf
         SQL &= " FROM VW_CURRENT_PRODUCT_STOCK" & vbLf
-        SQL &= " WHERE PRODUCT_ID=" & PRODUCT_ID & " AND KO_ID=" & KO_ID & vbLf
-        SQL &= " GROUP BY SLOT_NAME) PRODCUT" & vbLf
-        SQL &= " ORDER BY TOTAL DESC,RND" & vbLf
-
+        SQL &= " WHERE KO_ID=" & KO_ID & " AND PRODUCT_ID=" & PRODUCT_ID & vbLf
+        SQL &= " GROUP BY SLOT_NAME) PRODUCT" & vbLf
+        SQL &= " LEFT JOIN MS_SLOT_ARM_POSITION ARM ON PRODUCT.SLOT_NAME=ARM.SLOT_NAME" & vbLf
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
         DA.Fill(DT)
@@ -77,8 +108,16 @@ Public Class Complete_Order
             Alert(Me.Page, "PRODUCT NOT FOUND")
             Exit Sub
         End If
+        '---------------- Random Selction -------------
+        DT.Columns.Add("RND")
+        For i As Integer = 0 To DT.Rows.Count - 1
+            DT.Rows(i).Item("RND") = GenerateNewUniqueID()
+        Next
+        DT.DefaultView.Sort = "TOTAL DESC,RND ASC"
 
-        SLOT_NAME = DT.Rows(0).Item("SLOT_NAME")
+        SLOT_NAME = DT.DefaultView(0).Item("SLOT_NAME")
+        POS_ID = DT.DefaultView(0).Item("POS_ID")
+
         '----------------- Call LocalController -----------------------
 
     End Sub
