@@ -23,13 +23,22 @@ Partial Public Class Complete_Order
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
     
     '''<summary>
-    '''btnSkip control.
+    '''txtSlotName control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnSkip As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents txtSlotName As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''btnNext control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnNext As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
     '''lnkHome control.

@@ -72,7 +72,8 @@
 
                         
                         <div class="col-md-12">
-                            <asp:Button ID="btnSkip" runat="server" Style="display:none; /*background: #635b5b; padding: 0 50px 0 50px; float: right; margin-top: 100px;*/" Text="ข้าม" />
+                            <asp:TextBox ID="txtSlotName" runat="server"  Style="display:none;"></asp:TextBox>
+                            <asp:Button ID="btnNext" runat="server" Style="display:none; /*background: #635b5b; padding: 0 50px 0 50px; float: right; margin-top: 100px;*/" Text="ข้าม" />
                         </div>
 
                     </div>
