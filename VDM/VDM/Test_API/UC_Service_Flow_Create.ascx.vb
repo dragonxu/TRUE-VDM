@@ -36,8 +36,8 @@
                 process_instance.Text = Response.process_instance
 
                 'response_data
-                THAI_ID.Text = Response.response_data.data.THAI_ID
-                LANG.Text = Response.response_data.data.LANG
+                'THAI_ID.Text = Response.response_data.data.THAI_ID
+                'LANG.Text = Response.response_data.data.LANG
 
                 flow_id.Text = Response.response_data.flow_id
                 flow_name.Text = Response.response_data.flow_name

@@ -1,6 +1,9 @@
-﻿Public Class Select_Menu
+﻿Imports System.Data
+Imports System.Data.SqlClient
+Public Class Select_Menu
     Inherits System.Web.UI.Page
 
+    Dim BL As New VDM_BL
 #Region "ส่วนที่เหมือนกันหมดทุกหน้า"
     Private ReadOnly Property KO_ID As Integer '------------- เอาไว้เรียกใช้ง่ายๆ ----------
         Get
@@ -41,6 +44,7 @@
             Response.Redirect("Select_Language.aspx")
         End If
 
+        BL.Update_Service_Transaction(TXN_ID, Page.TemplateControl)
     End Sub
 
     Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click

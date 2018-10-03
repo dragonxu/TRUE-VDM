@@ -95,24 +95,6 @@ Partial Public Class UC_Service_Flow_Finish
     Protected WithEvents process_instance As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''THAI_ID control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents THAI_ID As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''LANG control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents LANG As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
     '''flow_id control.
     '''</summary>
     '''<remarks>

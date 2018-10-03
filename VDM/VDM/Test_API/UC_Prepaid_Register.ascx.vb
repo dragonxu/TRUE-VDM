@@ -50,23 +50,34 @@
                 status.Text = Response.status
                 trx_id.Text = Response.trx_id
                 process_instance.Text = Response.process_instance
-                response_data.Text = Response.response_data
+                'response_data.Text = Response.response_data
 
                 '------------------------------------------------------------
                 'display_messages
                 message.Text = Response.display_messages(0).message
-                message_code.Text = Response.display_messages(0).message_code
+                'message_code.Text = Response.display_messages(0).message_code
                 message_type.Text = Response.display_messages(0).message_type
                 en_message.Text = Response.display_messages(0).en_message
                 th_message.Text = Response.display_messages(0).th_message
-                technical_message.Text = Response.display_messages(0).technical_message
+                'technical_message.Text = Response.display_messages(0).technical_message
                 'fault
-                name.Text = Response.fault.name
-                code.Text = Response.fault.code
-                messagefault.Text = Response.fault.message
-                detailed_message.Text = Response.fault.detailed_message
+                'name.Text = Response.fault.name
+                'code.Text = Response.fault.code
+                'messagefault.Text = Response.fault.message
+                'detailed_message.Text = Response.fault.detailed_message
 
-
+                ''Respobse ที่ได้
+                '{
+                '  "status" : "SUCCESSFUL",
+                '  "display-messages" : [ {
+                '    "message" : "Order 18100200TLR030020021 successful submitted.",
+                '    "message-type" : "INFORMATION",
+                '    "en-message" : "Order 18100200TLR030020021 successful submitted.",
+                '    "th-message" : "รายการคำขอเลขที่ 18100200TLR030020021 ได้รับข้อมูลเรียบร้อยแล้ว"
+                '  } ],
+                '  "trx-id" : "4370IPDCBVCJL",
+                '  "process-instance" : "tmsapnpr1 (instance: SFF_node3)"
+                '}
             End If
         Catch ex As Exception
             lblErr_Msg.Text = ex.Message.ToString()

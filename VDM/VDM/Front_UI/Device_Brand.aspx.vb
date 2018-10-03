@@ -87,6 +87,7 @@ Public Class Device_Brand
         Else
             initFormPlugin()
         End If
+        BL.Update_Service_Transaction(TXN_ID, Page.TemplateControl)
 
     End Sub
 

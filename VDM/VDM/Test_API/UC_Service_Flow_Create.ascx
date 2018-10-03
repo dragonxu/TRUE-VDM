@@ -93,10 +93,10 @@
                 <br />  "trx-id" : <asp:TextBox ID="trx_id" runat="server"></asp:TextBox>,
                 <br />  "process-instance" : <asp:TextBox ID="process_instance" runat="server"></asp:TextBox>,
                 <br />  "response-data" : {
-                <br />    "data" : {
+            <%--    <br />    "data" : {
                 <br />      "THAI-ID" : <asp:TextBox ID="THAI_ID" runat="server"></asp:TextBox>,
                 <br />      "LANG" : <asp:TextBox ID="LANG" runat="server"></asp:TextBox>
-                <br />    },
+                <br />    },--%>
                 <br />    "flow-id" : <asp:TextBox ID="flow_id" runat="server"></asp:TextBox>,
                 <br />    "flow-name" : <asp:TextBox ID="flow_name" runat="server"></asp:TextBox>,
                 <br />    "create-date" : <asp:TextBox ID="create_date" runat="server"></asp:TextBox>,

@@ -114,7 +114,9 @@ Public Class Product_List
             BindList()
         Else
             initFormPlugin()
+
         End If
+        BL.Update_Service_Transaction(TXN_ID, Page.TemplateControl)
     End Sub
     Private Sub initFormPlugin()
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
