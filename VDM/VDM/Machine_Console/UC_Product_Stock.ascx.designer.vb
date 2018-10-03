@@ -68,6 +68,15 @@ Partial Public Class UC_Product_Stock
     Protected WithEvents pnlSlotProduct As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
+    '''divSlotInfoHeader control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents divSlotInfoHeader As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''lblSlotName control.
     '''</summary>
     '''<remarks>
@@ -84,6 +93,15 @@ Partial Public Class UC_Product_Stock
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnSeeShelf As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''divSlotInfo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents divSlotInfo As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''imgSlot_Product control.
@@ -246,6 +264,15 @@ Partial Public Class UC_Product_Stock
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblMaxSpace As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''tHeadSlotRepeater control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents tHeadSlotRepeater As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''chkSlot control.

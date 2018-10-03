@@ -24,6 +24,12 @@ Public Class Login
     End Sub
 
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
+
+        If KO_ID = 0 Then
+            Alert(Me.Page, "คุณต้อง Login จากหน้าเครื่อง Vending หรือ Management Console")
+            Exit Sub
+        End If
+
         Dim SQL As String = "SELECT * FROM MS_USER WHERE LOGIN_NAME='" & txtUser.Text.Replace("'", "''") & "' AND PASSWORD='" & txtPass.Text.Replace("'", "''") & "'"
         Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
         Dim DT As New DataTable
@@ -38,7 +44,7 @@ Public Class Login
             Session("LOGIN_NAME") = DT.Rows(0).Item("LOGIN_NAME").ToString
             Session("FULL_NAME") = DT.Rows(0).Item("FIRST_NAME").ToString & " " & DT.Rows(0).Item("LAST_NAME").ToString
 
-            Session("KO_ID") = KO_ID
+            Response.Cookies("KO_ID").Value = KO_ID
             DT = BL.GetList_Kiosk(KO_ID)
             Session("SHOP_CODE") = DT.Rows(0).Item("SITE_CODE")
 

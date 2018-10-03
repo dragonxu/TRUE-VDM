@@ -6,10 +6,10 @@ Public Class PrintBarcode
     Dim BL As New VDM_BL
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'BindProductSerial()
+        BindProductSerial()
         'BindProdcutNon()
         'BindProductAll()
-        BindSIMSerial()
+        'BindSIMSerial()
     End Sub
 
 
@@ -29,6 +29,7 @@ Public Class PrintBarcode
         SQL &= " ,SERIAL_NO,PD.DISPLAY_NAME_TH" & vbLf
         SQL &= " FROM TMP_Serial TMP" & vbLf
         SQL &= " INNER JOIN MS_Product PD ON TMP.Product_Code=PD.Product_Code" & vbLf
+        SQL &= " WHERE TMP.PRODUCT_CODE='3000066334'"
         Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)

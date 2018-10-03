@@ -7,7 +7,7 @@ Public Class Manage_OpenClose_Shift
 
     Private ReadOnly Property KO_ID As Integer
         Get
-            Return Session("KO_ID")
+            Return Request.Cookies("KO_ID").Value
         End Get
     End Property
 
@@ -263,10 +263,10 @@ Public Class Manage_OpenClose_Shift
 
             '--Update TB_KIOSK_DEVICE
             UPDATE_DEVICE_Qty()
-
             '--สั่ง Open/Close Shift
 
             Alert(Me.Page, "บันทึกสำเร็จ")
+            Redirect(Me.Page, "Machine_Overview.aspx")
 
 
         Catch ex As Exception

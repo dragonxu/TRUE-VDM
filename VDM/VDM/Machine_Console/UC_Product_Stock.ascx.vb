@@ -85,7 +85,8 @@ Public Class UC_Product_Stock
             If IsNothing(Session("STOCK_DATA_" & MY_UNIQUE_ID)) Then
                 Dim SQL As String = "SELECT PRODUCT_ID,PRODUCT_CODE,PRODUCT_NAME,SERIAL_NO,SLOT_NAME RECENT,SLOT_NAME [CURRENT]" & vbLf
                 SQL &= "FROM VW_CURRENT_PRODUCT_STOCK" & vbLf
-                SQL &= "WHERE KO_ID=" & KO_ID
+                SQL &= "WHERE KO_ID=" & KO_ID & vbLf
+                SQL &= "ORDER BY PRODUCT_ID,SLOT_NAME,ORDER_NO"
                 Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
                 Dim DT As New DataTable
                 DA.Fill(DT)
@@ -179,7 +180,7 @@ Public Class UC_Product_Stock
         '------------ Hide All Scale----------
         For i As Integer = 0 To Shelf.Slots.Count - 1
             With Shelf.Slots(i)
-                .ShowScale = True
+                .ShowScale = False
                 .ShowProductCode = True
             End With
         Next
@@ -364,7 +365,7 @@ Public Class UC_Product_Stock
                 Exit For
             End If
         Next
-        BindSlotProduct(SLOT)
+        If Not IsNothing(SLOT) Then BindSlotProduct(SLOT)
     End Sub
 
     Private Sub BindSlotProduct(ByRef Sender As UC_Product_Slot)
@@ -566,10 +567,16 @@ Public Class UC_Product_Stock
     Private Sub rptProduct_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles rptScan.ItemDataBound, rptSlot.ItemDataBound
         If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
 
+
         Dim chk As LinkButton = e.Item.FindControl("chk")
         Dim lblSerial As Label = e.Item.FindControl("lblSerial")
         Dim lblRecent As Label = e.Item.FindControl("lblRecent")
         Dim del As LinkButton = e.Item.FindControl("del")
+
+        If Equals(sender, rptSlot) Then
+            Dim lblNo As Label = e.Item.FindControl("lblNo")
+            lblNo.Text = e.Item.ItemIndex + 1 & "."
+        End If
 
         SetScanCheck(chk, False) '---------- Default Uncheck--------
         If IsFormatGUID(e.Item.DataItem("SERIAL_NO").ToString) Then
@@ -917,6 +924,19 @@ Public Class UC_Product_Stock
 
         Dim SQL As String = ""
 
+        '--------- Set Order ----------
+        STOCK_DATA.Columns.Add("ORDER_NO", GetType(Integer))
+        Dim col() As String = {"CURRENT"}
+        STOCK_DATA.DefaultView.RowFilter = "CURRENT IS NOT NULL"
+        STOCK_DATA.DefaultView.Sort = ""
+        Dim lst As DataTable = STOCK_DATA.DefaultView.ToTable(True,col)
+        For i As Integer = 0 To lst.Rows.Count - 1 '-------- Run Slot-----------
+            STOCK_DATA.DefaultView.RowFilter = "CURRENT='" & lst.Rows(i).Item("CURRENT") & "'"
+            For j As Integer = 0 To STOCK_DATA.DefaultView.Count - 1 '-------- Run Item-----------
+                STOCK_DATA.DefaultView(j).Item("ORDER_NO") = j + 1
+            Next
+        Next
+
         For i As Integer = 0 To STOCK_DATA.Rows.Count - 1
             Dim DR As DataRow = STOCK_DATA.Rows(i)
 
@@ -925,11 +945,10 @@ Public Class UC_Product_Stock
             Dim PRODUCT_NAME As String = DR("PRODUCT_NAME")
             Dim SERIAL_NO As String = DR("SERIAL_NO")
 
-
             If Not IsDBNull(DR("RECENT")) And Not IsDBNull(DR("CURRENT")) Then
 
                 '-------------------- Not Changed------------------
-                If DR("RECENT") = DR("CURRENT") Then Continue For
+                'If DR("RECENT") = DR("CURRENT") Then Continue For
 
                 '------------------ Move Other Slot ---------------
                 Dim SLOT_FROM As Integer = Shelf.AccessSlotFromName(DR("RECENT")).SLOT_ID
@@ -940,6 +959,7 @@ Public Class UC_Product_Stock
                 DA.Fill(DT)
                 If DT.Rows.Count > 0 Then
                     DT.Rows(0).Item("SLOT_ID") = SLOT_TO
+                    DT.Rows(0).Item("ORDER_NO") = STOCK_DATA.Rows(i).Item("ORDER_NO")
                     '------------------ Save Stock ---------------
                     Dim cmd As New SqlCommandBuilder(DA)
                     DA.Update(DT)
@@ -974,6 +994,7 @@ Public Class UC_Product_Stock
                 R("SLOT_ID") = SLOT_TO
                 R("PRODUCT_ID") = PRODUCT_ID
                 R("SERIAL_NO") = SERIAL_NO
+                R("ORDER_NO") = STOCK_DATA.Rows(i).Item("ORDER_NO")
                 R("CheckIn_Time") = Now
                 R("CheckIn_By") = Session("USER_ID")
                 DT.Rows.Add(R)
@@ -1036,14 +1057,26 @@ Public Class UC_Product_Stock
         Next
         ImplementObjectDragable(imgSlot_Product, "SLOT", SLOT_NAME)
 
+
         '--------------------------- Drop to Event ---------------------------
         '------------ DROP TO SCAN -------------
         ImplementObjectDropable(pnlScan, "SCAN", "")
 
         '------------ DROP TO SLOT -------------
-        ImplementObjectDropable(pnlSlotProduct, "SLOT", SLOT_NAME)
+        'ImplementObjectDropable(pnlSlotProduct, "SLOT", SLOT_NAME)
+        ImplementObjectDropable(divSlotInfoHeader, "SLOT", SLOT_NAME)
+        ImplementObjectDropable(divSlotInfo, "SLOT", SLOT_NAME)
+        ImplementObjectDropable(tHeadSlotRepeater, "SLOT", SLOT_NAME)
+
         For i As Integer = 0 To Slots.Count - 1
             ImplementObjectDropable(Slots(i).TAG, "SLOT", Slots(i).SLOT_NAME)
+        Next
+        '------------ DROP TO SLOT SERIAL (SortOrder)-------------
+        For Each Item As RepeaterItem In rptSlot.Items
+            If Item.ItemType <> ListItemType.Item And Item.ItemType <> ListItemType.AlternatingItem Then Continue For
+            Dim lblSerial As Label = Item.FindControl("lblSerial")
+            Dim tr As HtmlTableRow = Item.FindControl("tr")
+            ImplementObjectDropable(tr, "SLOT_SERIAL", lblSerial.Attributes("SERIAL_NO"))
         Next
 
     End Sub
@@ -1072,7 +1105,9 @@ Public Class UC_Product_Stock
         End Get
     End Property
 
+
     Private Sub btnDropListener_Click(sender As Object, e As EventArgs) Handles btnDropListener.Click
+
         Select Case DropType
             Case "SCAN"
                 Select Case DragType
@@ -1112,14 +1147,11 @@ Public Class UC_Product_Stock
                         End If
 
                         STOCK_DATA.DefaultView.RowFilter = ""
-                        SCAN_PRODUCT_ID = SCAN_PRODUCT_ID
+
+                        SCAN_PRODUCT_ID = SLOT_PRODUCT_ID
                         BindScanProduct()
                         BindShelfProduct()
-                        If SLOT_ID > 0 Then
-                            BindSlotProduct(SLOT_ID) '----------- ถ้า Show หน้า SLOT PRODUCT ก็ Update
-                        Else
-                            BindShelfProduct() '----------- ถ้า Show หน้า LAYOUT ก็ Update
-                        End If
+                        BindSlotProduct(SLOT_ID)
 
                 End Select
             Case "SLOT"
@@ -1195,6 +1227,69 @@ Public Class UC_Product_Stock
                             BindShelfProduct() '----------- ถ้า Show หน้า LAYOUT ก็ Update
                         End If
 
+                End Select
+            Case "SLOT_SERIAL"
+
+                Select Case DragType
+                    Case "SCAN_PRODUCT"
+
+                        Dim DT As DataTable = STOCK_DATA.Copy
+                        DT.DefaultView.RowFilter = "SERIAL_NO='" & DropArg & "'"
+                        Dim SLOT_NAME As String = DT.DefaultView(0).Item("CURRENT")
+                        Dim Target As UC_Product_Slot = Shelf.AccessSlotFromName(SLOT_NAME)
+                        DT.Dispose()
+
+                        Dim PRODUCT_ID As Integer = DragArg
+                        If Not SLOT_CAN_RECIEVE_PRODUCT(Target, PRODUCT_ID) Then
+                            Message_Toastr("Slot จะต้องบรรจุสินค้าชนิดเดียวกัน<br>และต้องมีพื้นที่เพียงพอ<br>กรุณาตรวจสอบอีกครั้ง", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page, 8000)
+                            Exit Sub
+                        End If
+                        STOCK_DATA.DefaultView.RowFilter = "PRODUCT_ID =" & PRODUCT_ID & " AND CURRENT IS NULL"
+                        For i As Integer = STOCK_DATA.DefaultView.Count - 1 To 0 Step -1
+                            STOCK_DATA.DefaultView(i).Row.Item("CURRENT") = Target.SLOT_NAME
+                        Next
+
+                        STOCK_DATA.DefaultView.RowFilter = ""
+                        SCAN_PRODUCT_ID = SCAN_PRODUCT_ID
+                        BindScanProduct()
+                        BindShelfProduct()
+                        If SLOT_ID > 0 Then
+                            BindSlotProduct(SLOT_ID) '----------- ถ้า Show หน้า SLOT PRODUCT ก็ Update
+                        Else
+                            BindShelfProduct() '----------- ถ้า Show หน้า LAYOUT ก็ Update
+                        End If
+
+                    Case "SLOT_SERIAL"
+                        '----------- สลับใน Slot เดียวกัน----------
+                        STOCK_DATA.DefaultView.RowFilter = "SERIAL_NO='" & DragArg & "'"
+                        Dim FROM_ITEM As DataRow = STOCK_DATA.DefaultView(0).Row
+
+                        STOCK_DATA.DefaultView.RowFilter = "SERIAL_NO='" & DropArg & "'"
+                        Dim TO_ITEM As DataRow = STOCK_DATA.DefaultView(0).Row
+
+                        Dim TMP As DataRow = STOCK_DATA.NewRow
+                        TMP.ItemArray = FROM_ITEM.ItemArray
+                        FROM_ITEM.ItemArray = TO_ITEM.ItemArray
+                        TO_ITEM.ItemArray = TMP.ItemArray
+
+                        STOCK_DATA.DefaultView.RowFilter = ""
+                        BindSlotProduct(SLOT_ID)
+
+                    Case "SCAN_SERIAL"
+                        '----------- ลากมาจาก Scan วางที่ Item ใน Slot เดียวกัน----------
+                        STOCK_DATA.DefaultView.RowFilter = "SERIAL_NO='" & DragArg & "'"
+                        STOCK_DATA.DefaultView(0).Item("CURRENT") = SLOT_NAME
+                        Dim FROM_ITEM As DataRow = STOCK_DATA.DefaultView(0).Row
+
+                        STOCK_DATA.DefaultView.RowFilter = "SERIAL_NO='" & DropArg & "'"
+                        Dim TO_ITEM As DataRow = STOCK_DATA.DefaultView(0).Row
+
+
+                        STOCK_DATA.DefaultView.RowFilter = ""
+                        SCAN_PRODUCT_ID = SLOT_PRODUCT_ID
+                        BindScanProduct()
+                        BindShelfProduct()
+                        BindSlotProduct(SLOT_ID)
                 End Select
         End Select
     End Sub

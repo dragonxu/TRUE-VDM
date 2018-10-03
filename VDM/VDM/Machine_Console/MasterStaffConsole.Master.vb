@@ -6,7 +6,7 @@ Public Class MasterStaffConsole
 
     Private ReadOnly Property KO_ID As Integer
         Get
-            Return Session("KO_ID")
+            Return Request.Cookies("KO_ID").Value
         End Get
     End Property
 
