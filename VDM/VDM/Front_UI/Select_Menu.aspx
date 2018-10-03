@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Front_UI/MasterFront.Master" CodeBehind="Home.aspx.vb" Inherits="VDM.Home" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Front_UI/MasterFront.Master" CodeBehind="Select_Menu.aspx.vb" Inherits="VDM.Select_Menu" %>
 
 <%@ Register Src="~/Front_UI/UC_Machine_Console.ascx" TagPrefix="uc1" TagName="UC_Machine_Console" %>
 

@@ -8,6 +8,6 @@
 
     'Private Sub lnkHome_Click(sender As Object, e As ImageClickEventArgs) Handles lnkHome.Click
 
-    '    Response.Redirect("Home.aspx")
+    '    Response.Redirect("Select_Menu.aspx")
     'End Sub
 End Class

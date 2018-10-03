@@ -10,7 +10,7 @@ Public Class Complete_Order
     Private ReadOnly Property KO_ID As Integer '------------- เอาไว้เรียกใช้ง่ายๆ ----------
         Get
             Try
-                Return Response.Cookies("KO_ID").Value
+                Return Request.Cookies("KO_ID").Value
             Catch ex As Exception
                 Return 0
             End Try
@@ -124,7 +124,7 @@ Public Class Complete_Order
 
 
     Private Sub lnkHome_Click(sender As Object, e As ImageClickEventArgs) Handles lnkHome.Click
-        Response.Redirect("Home.aspx")
+        Response.Redirect("Select_Menu.aspx")
     End Sub
 
     Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click

@@ -33,8 +33,14 @@ Public Class BackEndInterface
             '--------------- Config Web Request ------------
             webReq.Method = "POST"
             webReq.Timeout = 10000
+
             webReq.Headers.Add("WEB_METHOD_CHANNEL", "VENDING")
-            webReq.Headers.Add("E2E_REFID", "")
+            webReq.Headers.Add("E2E_REFID", "1939900150601")
+            webReq.Headers.Add("LOGINNAME", "0011234")          'User ที่ Login เข้าระบบ User_Name
+            webReq.Headers.Add("EMPLOYEEID", "0011234")         'User ที่ Login เข้าระบบ Sale_Code
+            webReq.Headers.Add("ENGLISHNAME", "0011234")        'User ที่ Login เข้าระบบ Name + LastName
+            webReq.Headers.Add("THAINAME", "0011234")           'User ที่ Login เข้าระบบ Name + LastName
+
             Return webReq
         End Function
 
@@ -82,6 +88,8 @@ Public Class BackEndInterface
             Dim C As New Converter
 
             WebRequest.ContentType = "application/json"
+            'WebRequest.ContentType = "application/x-www-form-urlencoded"
+
             Dim Data As Byte() = C.StringToByte(JSONString, Converter.EncodeType._UTF8)
             WebRequest.ContentLength = Data.Length
 
@@ -434,7 +442,7 @@ Public Class BackEndInterface
 
         Public Enum Gender
             MALE = 1
-            FEMAIL = 2
+            FEMALE = 2
         End Enum
 
         Public Enum IsRegistered
@@ -532,10 +540,10 @@ Public Class BackEndInterface
             PostString &= "    ""order"": {	" & vbLf
             PostString &= "        ""order-id"": """ & OrderID & """,	" & vbLf
             PostString &= "        ""customer"": {	" & vbLf
-            PostString &= "            ""gender"": """ & IIf(customer_gender = Gender.MALE, "MALE", "FEMAIL") & """,	" & vbLf
+            PostString &= "            ""gender"": """ & IIf(customer_gender = Gender.MALE, "MALE", "FEMALE") & """,	" & vbLf
             PostString &= "            ""title"": """ & customer_title & """,	" & vbLf
             PostString &= "            ""language"": """ & customer_language & """,	" & vbLf
-            PostString &= "            ""title-code"": """ & customer_title_code & """,	" & vbLf
+            PostString &= "            ""title-code"": ""T5"",	" & vbLf            '---Fix T5
             PostString &= "            ""firstname"": """ & customer_firstname & """,	" & vbLf
             PostString &= "            ""lastname"": """ & customer_lastname & """,	" & vbLf
             PostString &= "            ""birthdate"": """ & customer_birthdate & """,	" & vbLf
@@ -579,13 +587,16 @@ Public Class BackEndInterface
             PostString &= "                ""product-name"": """ & mat_desc & """,	" & vbLf
             PostString &= "                ""product-id-number"": """ & mat_code & """,	" & vbLf
             PostString &= "                ""product-id-name"": ""MATERIAL_CODE"",	" & vbLf
-            PostString &= "                ""order-data"": {},	" & vbLf
-            PostString &= "                ""primary-order-data"": {	" & vbLf
-            PostString &= "                    ""IS-SIM"": ""1"",	" & vbLf
-            PostString &= "                    ""SERIAL-NO"": """ & sim_serial & """,	" & vbLf
-            PostString &= "                    ""REQUIRE_PRINTFORM"": """ & IIf(require_print_form, "true", "false") & """,	" & vbLf
-            PostString &= "                    ""STOCK-TYPE"": ""TRANSFER""	" & vbLf
-            PostString &= "                }	" & vbLf
+            PostString &= "                ""order-data"": { " & vbLf
+            PostString &= "                    ""CURRENT-FLOW-ACTIVITY"": ""CONFIRM_ORDER""	" & vbLf        '--Add เพิ่ม
+            PostString &= "                     },	" & vbLf
+
+            PostString &= "                         ""primary-order-data"": {	" & vbLf
+            PostString &= "                             ""IS-SIM"": ""1"",	" & vbLf
+            PostString &= "                             ""SERIAL-NO"": """ & sim_serial & """,	" & vbLf
+            PostString &= "                             ""REQUIRE_PRINTFORM"": """ & IIf(require_print_form, "true", "false") & """,	" & vbLf
+            PostString &= "                             ""STOCK-TYPE"": ""TRANSFER""	" & vbLf
+            PostString &= "                     }	" & vbLf
             PostString &= "            },	" & vbLf
             PostString &= "            {	" & vbLf
             PostString &= "                ""product-category"": ""TMV"",	" & vbLf
@@ -594,7 +605,9 @@ Public Class BackEndInterface
             PostString &= "                ""product-name"": ""PRICEPLAN"",	" & vbLf
             PostString &= "                ""product-id-number"": ""0000000005"",	" & vbLf
             PostString &= "                ""product-id-name"": ""MSISDN_PARENT"",	" & vbLf
-            PostString &= "                ""order-data"": {}	" & vbLf
+            PostString &= "                ""order-data"": {	" & vbLf
+            PostString &= "                                     ""CURRENT-FLOW-ACTIVITY"": ""CONFIRM_ORDER""	" & vbLf        '--Add
+            PostString &= "                                }	" & vbLf
             PostString &= "            },	" & vbLf
             PostString &= "	" & vbLf
             PostString &= "            {	" & vbLf
@@ -605,6 +618,9 @@ Public Class BackEndInterface
             PostString &= "                ""product-id-number"": """ & subscriber & """,	" & vbLf
             PostString &= "                ""product-id-name"": ""MSISDN"",	" & vbLf
             PostString &= "                ""order-data"": {	" & vbLf
+            PostString &= "                    ""REQUIRE-STOCK-ISSUE"": ""N"",	" & vbLf        '--Add
+            PostString &= "                    ""CURRENT-FLOW-ACTIVITY"": ""CONFIRM_ORDER"",	" & vbLf        '--Add
+
             PostString &= "                    ""REF-PARENT-PRODUCT-IDNUMBER"": ""0000000005"",	" & vbLf
             PostString &= "                    ""IS-REGISTERED"": """ & IIf(is_registered = IsRegistered.Y, "Y", "N") & """,	" & vbLf
             PostString &= "                    ""SIM"": """ & sim_serial & """,	" & vbLf
@@ -625,12 +641,71 @@ Public Class BackEndInterface
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
+            'WebRequest.Headers.Add("WEB_METHOD_CHANNEL", "VENDING")
+            'WebRequest.Headers.Add("E2E_REFID", customer_id_number)
+            'WebRequest.Headers.Add("LOGINNAME", "0011234")          'User ที่ Login เข้าระบบ Sale_Code
+            'WebRequest.Headers.Add("EMPLOYEEID", "0011234")
+
+            'WebRequest.Headers.Add("ENGLISHNAME", "0011234")
+            'WebRequest.Headers.Add("THAINAME", "0011234")
+
+            WebRequest.Method = "POST"
+            Dim PostData As New Dictionary(Of String, String)
             Dim JSONString As String = (New BackEndInterface.General).SendPostJSON(WebRequest, PostString)
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
             Result.JSONString = JSONString
             Return Result
+
         End Function
     End Class
+
+
+    Private Function PostJSON_Prepaid(ByVal JsonData As String, ByVal URL As String) As HttpWebRequest
+        Dim objhttpWebRequest As HttpWebRequest
+        Try
+            Dim httpWebRequest = DirectCast(WebRequest.Create((New BackEndInterface.General).BackEndURL & URL), HttpWebRequest)
+            httpWebRequest.ContentType = "application/json"
+            httpWebRequest.Method = "POST"
+
+            Using streamWriter = New StreamWriter(httpWebRequest.GetRequestStream())
+
+
+                streamWriter.Write(JsonData)
+                streamWriter.Flush()
+                streamWriter.Close()
+            End Using
+
+            objhttpWebRequest = httpWebRequest
+
+        Catch ex As Exception
+            Console.WriteLine("Send Request Error[{0}]", ex.Message)
+
+            Return Nothing
+        End Try
+
+        Return objhttpWebRequest
+
+    End Function
+
+    Private Function GetResponse(ByVal httpWebRequest As HttpWebRequest) As String
+        Dim strResponse As String = "Bad Request:400"
+        Try
+            Dim httpResponse = DirectCast(httpWebRequest.GetResponse(), HttpWebResponse)
+            Using streamReader = New StreamReader(httpResponse.GetResponseStream())
+                Dim result = streamReader.ReadToEnd()
+
+                strResponse = result.ToString()
+            End Using
+        Catch ex As Exception
+            Console.WriteLine("GetResponse Error[{0}]", ex.Message)
+
+            Return ex.Message
+        End Try
+
+        Return strResponse
+
+    End Function
+
 
     Public Class Generate_Order_Id
 
@@ -744,7 +819,7 @@ Public Class BackEndInterface
 
             Dim GetString As String = ""
             GetString &= "order-id=" & order_id & "&"
-            GetString &= "form-type=FACE_RECOG_CUST_CERTIFICATE"
+            GetString &= "form-type=CUST_ID_CARD"
 
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
@@ -816,7 +891,7 @@ Public Class BackEndInterface
             PostData.Add("orderId", order_id)
             PostData.Add("fileType", fileType)
             PostData.Add("b64File", b64File)
-            PostData.Add("formType", "FACE_RECOG_CUST_CERTIFICATE")
+            PostData.Add("formType", "CUST_ID_CARD")
 
             Dim JSONString As String = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
@@ -1162,5 +1237,6 @@ Public Class BackEndInterface
         End Function
 
     End Class
+
 
 End Class

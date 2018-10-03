@@ -1609,7 +1609,7 @@ Public Class VDM_BL
         DA.Fill(DT)
         If DT.Rows.Count = 0 Then Return 0 '----------- Shift Current Closed ------------
         Dim SHIFT_ID As Integer = DT.Rows(0).Item("SHIFT_ID")
-        Dim SHIFT_CODE As Integer = DT.Rows(0).Item("SHIFT_CODE")
+        Dim SHIFT_CODE As String = DT.Rows(0).Item("SHIFT_CODE")
 
 
         SQL = "SELECT TOP 0 * FROM TB_SERVICE_TRANSACTION"

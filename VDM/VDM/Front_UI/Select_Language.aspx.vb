@@ -72,7 +72,7 @@
         Dim BL As New VDM_BL
         TXN_ID = BL.Gen_New_Service_Transaction(KO_ID, SelectedLanguage)
         LANGUAGE = SelectedLanguage
-        Response.Redirect("Select_Menu.aspx") '------------- เปลี่ยนหน้า Home.aspx เป็น Select_Menu.aspx
+        Response.Redirect("Select_Menu.aspx")
     End Sub
 
 End Class

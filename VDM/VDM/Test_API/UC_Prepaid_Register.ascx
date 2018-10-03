@@ -24,7 +24,7 @@
                             <asp:DropDownList ID="customer_gender" runat="server" >
                             <asp:ListItem Text="" Value="-1" Selected></asp:ListItem>
                             <asp:ListItem Text="MALE" Value="1" ></asp:ListItem>
-                            <asp:ListItem Text="FEMAIL" Value="2"   ></asp:ListItem>
+                            <asp:ListItem Text="FEMALE" Value="2"   ></asp:ListItem>
                             </asp:DropDownList> 
                         </td>
                     </tr>
@@ -38,7 +38,7 @@
                     </tr>
                     <tr>
                         <td>customer_title_code</td>
-                        <td><asp:TextBox ID="customer_title_code" runat="server" ></asp:TextBox></td>
+                        <td><asp:TextBox ID="customer_title_code" runat="server" Text ="T5" ></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td>customer_firstname</td>
@@ -119,7 +119,7 @@
 
                     <tr>
                         <td>shopName</td>
-                        <td><asp:TextBox ID="shopName" runat="server" ></asp:TextBox></td>
+                        <td><asp:TextBox ID="shopName" runat="server" Text="-"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td>sale_code</td>
