@@ -81,13 +81,16 @@
 
                             </h1>
                             <h3><asp:Label ID="lblHeader_Shift" runat ="server" style="padding:3px 6px 3px 6px;" Font-Bold="true" BorderStyle="Solid" BorderWidth="5px" ></asp:Label> 
-                                <asp:Label ID="lblHeader_Shift_Time" runat ="server"  class ="text-grey"  ></asp:Label></h3>
+                                <asp:Label ID="lblHeader_Shift_Time" runat ="server"  class ="text-grey"  ></asp:Label>
+                                 <asp:LinkButton ID="lnkShift" CssClass="text-danger" runat="server">--> Click เพื่อสั่ง Close</asp:LinkButton>
+                            </h3>
                            
                         </div>
                     </div>
                     <div class="col-xs-4" style ="text-align :right ;"  >
                         <div class="fa-hover text-danger   ">
-                           <a id="lnkLogout" runat ="server"  title ="Logout / ออกจากระบบ"  > <h2> <i class="fa fa-power-off"></i>  <span class ="h3" style ="vertical-align :middle ;">  <asp:Label ID="lblLoginName" runat ="server" ></asp:Label></span>     </h2></a>
+                           <a id="lnkLogout" runat ="server"  title ="Logout / ออกจากระบบ"  > <h2> <i class="fa fa-power-off"></i>  <span class ="h3" style ="vertical-align :middle ;">  </span>     </h2></a>
+                            <asp:Label ID="lblLoginName" runat ="server" ></asp:Label>
                         </div>
                     </div>
 

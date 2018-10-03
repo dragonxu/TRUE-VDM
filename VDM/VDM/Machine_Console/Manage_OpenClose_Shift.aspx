@@ -40,7 +40,7 @@
 
                                             <li style="margin-top: -5px;">
 
-                                                <h2><b>สิ่งที่ทำ</b></h2>
+                                                <h2 class="bold">สั่ง <asp:Label ID="lblMode" runat="server"></asp:Label> Shift</h2>
                                             </li>
                                             <li id="MenuChange" runat="server">
 
@@ -299,21 +299,18 @@
                             <asp:Panel ID="pnlbtn" runat="server">
                                 <div class="card-block">
                                     <div class="row ">
-                                        <div class="col-xs-9">
-                                            <p></p>
-                                            <asp:LinkButton ID="lnkConfirm" runat="server" class="btn btn-info btn-lg btn-block">
-                                            <i class="fa fa-legal"></i>
+                                        <div class="col-xs-9 p-t">
+                                            
+                                            <asp:LinkButton ID="lnkConfirm" runat="server" CssClass="btn btn-info btn-lg btn-block">
+                                                <i class="fa fa-legal"></i>
                                                 <span><asp:Label ID="lblConfirm" runat ="server" ></asp:Label></span>
-                                                <%--Open Shift / ยืนยัน Open Shift
-                                                Close Shift / ยืนยัน Close Shift--%>
                                             </asp:LinkButton>
 
                                         </div>
-                                        <div class="col-xs-3">
-                                            <p></p>
-                                            <asp:LinkButton ID="lnkOK" runat="server" class="btn btn-success btn-lg btn-block">
+                                        <div class="col-xs-3 p-t">                                            
+                                            <asp:LinkButton ID="lnkOK" runat="server" CssClass="btn btn-success btn-lg btn-block">
                                                 <i class="fa fa-save"></i>
-                                                    <span>Next / ถัดไป</span>
+                                                <span>Next / ถัดไป</span>
                                             </asp:LinkButton>
                                         </div>                                         
                                     </div>

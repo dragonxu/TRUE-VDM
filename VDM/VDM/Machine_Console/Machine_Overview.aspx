@@ -68,11 +68,8 @@
                 <div class="col-xs-12">
                     <p></p>
                     <asp:LinkButton ID="lnkShift" runat="server" class="btn btn-info btn-lg btn-block">
-                    <i class="icon-settings"></i>
-                        <span>Open/Close Shift check in stock</span>
-
+                    <i class='icon-settings'></i><span>Click เพื่อสั่ง<asp:Label ID="lnkShiftAction" runat="server"></asp:Label> SHIFT</span>
                     </asp:LinkButton>
-
                 </div>
                 
 

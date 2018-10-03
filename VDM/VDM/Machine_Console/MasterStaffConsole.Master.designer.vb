@@ -95,6 +95,15 @@ Partial Public Class MasterStaffConsole
     Protected WithEvents lblHeader_Shift_Time As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''lnkShift control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkShift As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''lnkLogout control.
     '''</summary>
     '''<remarks>

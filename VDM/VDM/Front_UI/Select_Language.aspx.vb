@@ -32,17 +32,6 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        If Not IsPostBack Then
-            '-------- ตรงนี้ Hard Code เอาไว้ Test -------------------------------
-            Response.Cookies("KO_ID").Value = 1
-            '-------- เมื่อเริ่มใช้ Cookies ให้ Set Expire Date เอาไว้ด้วย--------------
-            Response.Cookies("KO_ID").Expires = DateAdd(DateInterval.Year, 1, Now)
-            '-------- ตัวแปรที่ใช้ Cookies เก็บคือพวกที่ Lock กับเครื่องนั้นๆ เช่น Kiosk, USB Port, Hardware ต่างๆ
-        End If
-
-        '--------------- Check Shift Open ---------------
-
-
     End Sub
 
     Private Sub TH_ServerClick(sender As Object, e As EventArgs) Handles TH.ServerClick
