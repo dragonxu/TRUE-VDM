@@ -33,7 +33,6 @@ Public Class RequireCash
         Result.Columns.Add("status", GetType(Boolean))
         Result.Columns.Add("message", GetType(String))
 
-
         '--------------------- รอ Test-------------
         If Required > 0 Then
             WaitForRecieve()
