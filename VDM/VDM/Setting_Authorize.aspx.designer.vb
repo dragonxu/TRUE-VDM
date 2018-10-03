@@ -113,6 +113,15 @@ Partial Public Class Setting_Authorize
     Protected WithEvents lblUser_ID As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''txtEmployee_ID control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtEmployee_ID As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''txtLoginName control.
     '''</summary>
     '''<remarks>

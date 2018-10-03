@@ -23,9 +23,10 @@
                     <thead>
                         <tr>
                             <th width="50">ID</th>
+                            <th>Employee ID</th>
                             <th>Login Name</th>
                             <th>Password</th>
-                            <th>Name</th>
+                            <th>Name</th>                            
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -34,14 +35,17 @@
                         <asp:Repeater ID="rptList" runat="server">
                             <ItemTemplate>
                                 <tr>
-                                    <td data-title="User ID" id="td" runat="server" style="text-align: center;">
+                                    <td data-title="User ID" id="td" runat="server" style="text-align: center;color:green ;">
                                         <asp:Label ID="lblUserID" runat="server"></asp:Label></td>
+                                    <td data-title="Name" style="text-align: center;">
+                                        <asp:Label ID="lblEmployee_ID" runat="server"></asp:Label></td>
                                     <td data-title="Login Name">
                                         <b><asp:Label ID="lblLoginName" runat="server"></asp:Label></b></td>
                                     <td data-title="Password">
                                         <asp:Label ID="lblPassword" runat="server"></asp:Label></td>                            
                                     <td data-title="Name">
                                         <asp:Label ID="lblFullName" runat="server"></asp:Label></td>
+                                    
                                     <td data-title="Status">
 
                                         <asp:Panel ID="pnlChk" runat="server" Enabled="false" Style="text-align: center;">
@@ -103,6 +107,12 @@
                 <div class="col-lg-12 form-horizontal">
                     <h4 class="card-title">User Info</h4>
                     <div class="form-group">
+                        <label class="col-sm-2 control-label" for="phone">Employee ID <span style="color: red">*</span></label>
+                        <div class="col-sm-4">
+                            <asp:TextBox ID="txtEmployee_ID" runat="server" CssClass="form-control"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-sm-2 control-label">Login Name <span style="color: red">*</span></label>
                         <div class="col-sm-4">
                             <asp:TextBox ID="txtLoginName" runat="server" CssClass="form-control"></asp:TextBox>
@@ -126,7 +136,7 @@
                             <asp:TextBox ID="txtLastName" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>
                     </div>
-
+                    
                     <div class="form-group" style="margin-left: -5px;">
                         <h4 class="card-title col-sm-2 control-label" style="text-align: left;">Active Status </h4>
 

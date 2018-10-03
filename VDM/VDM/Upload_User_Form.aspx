@@ -82,26 +82,29 @@
                             <thead>
                                 <tr>
                                     <th>User ID</th>
+                                    <th>Employee ID</th>
                                     <th>Password</th>
                                     <th>Login Name</th>
                                     <th>First Name</th>
-                                    <th>Lasr Name</th>
+                                    <th>Last Name</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <asp:Repeater ID="rptList" runat="server">
                                     <ItemTemplate>
                                         <tr>
-                                            <td data-title="User ID" id="td" runat="server" style ="text-align :center ;">
+                                            <td data-title="User ID" id="td" runat="server" style ="text-align :center ; color:green ;">
                                                 <asp:Label ID="lblUserID" runat="server"></asp:Label></td>
+                                            <td data-title="Employee ID" style ="text-align :center ;">
+                                                <asp:Label ID="lblEmployee_ID" runat="server"></asp:Label></td>
                                             <td data-title="Password">
                                                 <asp:Label ID="lblPassword" runat="server"></asp:Label></td>
                                             <td data-title="Login Name">
                                                 <asp:Label ID="lblLoginName" runat="server"></asp:Label></td>
                                             <td data-title="First Name" >
                                                 <asp:Label ID="lblFirstName" runat="server"></asp:Label></td>
-                                             <td data-title="Lasr Name" >
-                                                <asp:Label ID="lblLasrName" runat="server"></asp:Label></td>
+                                             <td data-title="Last Name" >
+                                                <asp:Label ID="lblLastName" runat="server"></asp:Label></td>
                                         </tr>
                                     </ItemTemplate>
                                 </asp:Repeater>

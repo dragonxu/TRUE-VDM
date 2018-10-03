@@ -70,7 +70,7 @@ Public Class Upload_User_Form
             Dim DA As New OleDbDataAdapter("SELECT * FROM `Authorize$`", Conn)
             DA.Fill(DT)
 
-            DT.DefaultView.RowFilter = " USER_ID <> '' AND  LOGIN_NAME <> '' AND  PASSWORD <>'' AND  FIRST_NAME <>'' AND LAST_NAME<>'' "
+            DT.DefaultView.RowFilter = " USER_ID <> '' AND EMPLOYEE_ID <> '' AND  LOGIN_NAME <> '' AND  PASSWORD <>'' AND  FIRST_NAME <>'' AND LAST_NAME<>'' "
             For i As Integer = 0 To DT.DefaultView.Count - 1
                 Try
                     If Convert.ToInt32(DT.DefaultView(i).Item("USER_ID")) <= 0 Then
@@ -109,16 +109,18 @@ Public Class Upload_User_Form
         If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
 
         Dim lblUserID As Label = e.Item.FindControl("lblUserID")
+        Dim lblEmployee_ID As Label = e.Item.FindControl("lblEmployee_ID")
         Dim lblLoginName As Label = e.Item.FindControl("lblLoginName")
         Dim lblPassword As Label = e.Item.FindControl("lblPassword")
         Dim lblFirstName As Label = e.Item.FindControl("lblFirstName")
-        Dim lblLasrName As Label = e.Item.FindControl("lblLasrName")
+        Dim lblLastName As Label = e.Item.FindControl("lblLastName")
 
         lblUserID.Text = e.Item.DataItem("USER_ID").ToString
+        lblEmployee_ID.Text = e.Item.DataItem("EMPLOYEE_ID").ToString
         lblLoginName.Text = e.Item.DataItem("LOGIN_NAME").ToString
         lblPassword.Text = e.Item.DataItem("PASSWORD").ToString
         lblFirstName.Text = e.Item.DataItem("FIRST_NAME").ToString
-        lblLasrName.Text = e.Item.DataItem("LAST_NAME").ToString
+        lblLastName.Text = e.Item.DataItem("LAST_NAME").ToString
 
     End Sub
 
@@ -145,6 +147,7 @@ Public Class Upload_User_Form
                     DR = DT.Rows(0)
                 End If
                 DR("USER_ID") = DT_User.Rows(i).Item("USER_ID")
+                DR("EMPLOYEE_ID") = DT_User.Rows(i).Item("EMPLOYEE_ID")
                 DR("LOGIN_NAME") = DT_User.Rows(i).Item("LOGIN_NAME")
                 DR("PASSWORD") = DT_User.Rows(i).Item("PASSWORD")
                 'DR("LDAP_USER") = DT_User.Rows(i).Item("LDAP_USER")
@@ -179,6 +182,7 @@ Public Class Upload_User_Form
 
         Dim DT As New DataTable
         DT.Columns.Add("USER_ID")
+        DT.Columns.Add("EMPLOYEE_ID")
         DT.Columns.Add("LOGIN_NAME")
         DT.Columns.Add("PASSWORD")
         DT.Columns.Add("FIRST_NAME")
@@ -188,19 +192,21 @@ Public Class Upload_User_Form
             If rpt.ItemType <> ListItemType.AlternatingItem And rpt.ItemType <> ListItemType.Item Then Continue For
 
             Dim lblUserID As Label = rpt.FindControl("lblUserID")
+            Dim lblEmployee_ID As Label = rpt.FindControl("lblEmployee_ID")
             Dim lblLoginName As Label = rpt.FindControl("lblLoginName")
             Dim lblPassword As Label = rpt.FindControl("lblPassword")
             Dim lblFirstName As Label = rpt.FindControl("lblFirstName")
-            Dim lblLasrName As Label = rpt.FindControl("lblLasrName")
+            Dim lblLastName As Label = rpt.FindControl("lblLastName")
 
 
             Dim DR As DataRow = DT.NewRow
 
             DR("USER_ID") = lblUserID.Text
+            DR("EMPLOYEE_ID") = lblEmployee_ID.Text
             DR("LOGIN_NAME") = lblLoginName.Text
             DR("PASSWORD") = lblPassword.Text
             DR("FIRST_NAME") = lblFirstName.Text
-            DR("LAST_NAME") = lblLasrName.Text
+            DR("LAST_NAME") = lblLastName.Text
 
 
             DT.Rows.Add(DR)

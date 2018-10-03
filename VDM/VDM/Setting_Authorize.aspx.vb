@@ -54,6 +54,7 @@ Public Class Setting_Authorize
         txtPassword.Text = ""
         txtFirstName.Text = ""
         txtLastName.Text = ""
+        txtEmployee_ID.Text = ""
         chkActive.Checked = True
 
     End Sub
@@ -78,37 +79,41 @@ Public Class Setting_Authorize
             shXL = wbXl.ActiveSheet
 
             shXL.Name = "Authorize"
-            Dim SQL As String = "SELECT USER_ID,LOGIN_NAME,PASSWORD,FIRST_NAME,LAST_NAME  FROM MS_USER ORDER BY USER_ID "
+            Dim SQL As String = "SELECT USER_ID,EMPLOYEE_ID,LOGIN_NAME,PASSWORD,FIRST_NAME,LAST_NAME  FROM MS_USER ORDER BY USER_ID "
             Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
             Dim DT As New DataTable
             DA.Fill(DT)
             ' Add table headers going cell by cell.
             shXL.Cells(1, 1).Value = "USER_ID"
-            shXL.Cells(1, 2).Value = "LOGIN_NAME"
-            shXL.Cells(1, 3).Value = "PASSWORD"
-            shXL.Cells(1, 4).Value = "FIRST_NAME"
-            shXL.Cells(1, 5).Value = "LAST_NAME"
+            shXL.Cells(1, 2).Value = "EMPLOYEE_ID"
+            shXL.Cells(1, 3).Value = "LOGIN_NAME"
+            shXL.Cells(1, 4).Value = "PASSWORD"
+            shXL.Cells(1, 5).Value = "FIRST_NAME"
+            shXL.Cells(1, 6).Value = "LAST_NAME"
+
 
             ' Format as bold, vertical alignment = center.
-            With shXL.Range("A1", "E1")
+            With shXL.Range("A1", "F1")
                 .Font.Bold = True
                 .VerticalAlignment = Excel.XlVAlign.xlVAlignCenter
             End With
 
-            Dim cell(DT.Rows.Count - 1, 5) As String
+            Dim cell(DT.Rows.Count - 1, 6) As String
             For i As Integer = 0 To DT.Rows.Count - 1
                 cell(i, 0) = DT.Rows(i).Item("USER_ID")
-                cell(i, 1) = DT.Rows(i).Item("LOGIN_NAME")
-                cell(i, 2) = DT.Rows(i).Item("PASSWORD")
-                cell(i, 3) = DT.Rows(i).Item("FIRST_NAME")
-                cell(i, 4) = DT.Rows(i).Item("LAST_NAME")
+                cell(i, 1) = DT.Rows(i).Item("EMPLOYEE_ID").ToString()
+                cell(i, 2) = DT.Rows(i).Item("LOGIN_NAME").ToString()
+                cell(i, 3) = DT.Rows(i).Item("PASSWORD").ToString()
+                cell(i, 4) = DT.Rows(i).Item("FIRST_NAME").ToString()
+                cell(i, 5) = DT.Rows(i).Item("LAST_NAME").ToString()
+
             Next
 
             '' Fill A2:B6 with an array of values (First and Last Names).
-            shXL.Range("A2", "E" & DT.Rows.Count + 1).Value = cell
+            shXL.Range("A2", "F" & DT.Rows.Count + 1).Value = cell
 
             ' AutoFit columns A:D.
-            raXL = shXL.Range("A1", "E1")
+            raXL = shXL.Range("A1", "F1")
             raXL.EntireColumn.AutoFit()
 
             ' Make sure Excel is visible and give the user control
@@ -162,6 +167,7 @@ Public Class Setting_Authorize
         'Dim lblLastName As Label = e.Item.FindControl("lblLastName")
 
         Dim lblFullName As Label = e.Item.FindControl("lblFullName")
+        Dim lblEmployee_ID As Label = e.Item.FindControl("lblEmployee_ID")
 
         Dim chkAvailable As CheckBox = e.Item.FindControl("chkAvailable")
         Dim btnToggle As Button = e.Item.FindControl("btnToggle")
@@ -174,7 +180,7 @@ Public Class Setting_Authorize
         'lblFirstName.Text = e.Item.DataItem("FIRST_NAME").ToString
         'lblLastName.Text = e.Item.DataItem("LAST_NAME").ToString
         lblFullName.Text = e.Item.DataItem("FIRST_NAME").ToString & "  " & e.Item.DataItem("LAST_NAME").ToString
-
+        lblEmployee_ID.Text = e.Item.DataItem("EMPLOYEE_ID").ToString
 
         chkAvailable.Checked = e.Item.DataItem("Active_Status")
 
@@ -215,11 +221,12 @@ Public Class Setting_Authorize
 
                 lblEditMode.Text = "Edit"
                 '--Detail
-                txtLoginName.Text = DT.Rows(0).Item("LOGIN_NAME")
-                txtPassword.Text = DT.Rows(0).Item("PASSWORD")
-                txtFirstName.Text = DT.Rows(0).Item("FIRST_NAME")
-                txtLastName.Text = DT.Rows(0).Item("LAST_NAME")
-                chkActive.Checked = DT.Rows(0).Item("Active_Status")
+                txtLoginName.Text = DT.Rows(0).Item("LOGIN_NAME").ToString
+                txtPassword.Text = DT.Rows(0).Item("PASSWORD").ToString
+                txtFirstName.Text = DT.Rows(0).Item("FIRST_NAME").ToString
+                txtLastName.Text = DT.Rows(0).Item("LAST_NAME").ToString
+                txtEmployee_ID.Text = DT.Rows(0).Item("EMPLOYEE_ID").ToString
+                chkActive.Checked = IIf(Not IsDBNull(DT.Rows(0).Item("Active_Status")), DT.Rows(0).Item("Active_Status"), False)
 
             Case "ToggleStatus"
                 USER_ID = e.CommandArgument
@@ -287,6 +294,11 @@ Public Class Setting_Authorize
             Exit Sub
         End If
 
+        If txtEmployee_ID.Text = "" Then
+            Alert(Me.Page, "กรอก EMPLOYEE ID")
+            Exit Sub
+        End If
+
         Dim SQL As String = "SELECT * FROM MS_USER WHERE Login_Name='" & txtLoginName.Text.Replace("'", "''") & "' AND Password='" & txtPassword.Text.Replace("'", "''") & "' AND USER_ID<>" & USER_ID
         Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
         Dim DT As New DataTable
@@ -311,6 +323,7 @@ Public Class Setting_Authorize
         End If
 
         DR("USER_ID") = USER_ID
+        DR("EMPLOYEE_ID") = txtEmployee_ID.Text
         DR("LOGIN_NAME") = txtLoginName.Text.Trim
         DR("PASSWORD") = txtPassword.Text.Trim
         'DR("LDAP_USER") = ""

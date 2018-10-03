@@ -43,8 +43,6 @@ Public Class Select_Menu
         If Not IsNumeric(Session("LANGUAGE")) Then
             Response.Redirect("Select_Language.aspx")
         End If
-
-        BL.Update_Service_Transaction(TXN_ID, Page.TemplateControl)
     End Sub
 
     Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click

@@ -123,8 +123,8 @@ Public Class Manage_Machine
                 Dim lblSite As Label = e.Item.FindControl("lblSite")
                 Session("KO_ID") = e.CommandArgument
                 Session("SHOP_CODE") = lblSite.Text
-                Response.Redirect("Machine_Console/Machine_Overview.aspx")
-
+                'Response.Redirect("Machine_Console/Machine_Overview.aspx")
+                Response.Redirect("Front_UI/Default.aspx?KO_ID=" & Session("KO_ID"))
             Case "Setting"
 
                 Dim DT As DataTable = BL.GetList_Kiosk(e.CommandArgument)
