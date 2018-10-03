@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Device_Payment.aspx.vb" Inherits="VDM.Device_Payment" %>
 
+<%@ Register Src="~/Front_UI/UC_CommonUI.ascx" TagPrefix="uc1" TagName="UC_CommonUI" %>
+
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
@@ -171,7 +174,8 @@
                                     </div>
                                     <div style="display:block;" class="col-lg-3">
                                         1000 : <asp:TextBox ID="txt1000" runat="server" Text="0"></asp:TextBox>
-                                    </div>                                   
+                                    </div>   
+                                    <asp:Button ID="btnCashPaid" runat="server" />                                
                                 </div>
                             </form>
                         </asp:Panel>
@@ -269,8 +273,8 @@
                              
                         </asp:Panel>
                         <div class="col-md-12">
-                                    <asp:Button ID="btnSkip" runat="server" class="btu true-bs" Style="background: #635b5b; padding: 0 50px 0 50px; float: right; margin-top: 100px;" Text="ต่อไป" />
-                                </div>
+                            <asp:Button ID="btnSkip" runat="server" class="btu true-bs" Style="background: #635b5b; padding: 0 50px 0 50px; float: right; margin-top: 100px;" Text="ต่อไป" />
+                        </div>
                     </div>
                 </div>
             </main>
@@ -299,9 +303,9 @@
                     var required = parseInt($('#txtRequire').val());
                     if (required > 0) {
                         // Call Payment
-                        var url = "http://localhost/RequireCash.aspx?REQ=" + required;
+                        var url = "http://localhost/RequireCash.aspx?REQ=" + required + '&callback=updatePayment';
                         var xhr = new XMLHttpRequest();
-                        xhr.open('GET', url + '&callback=updatePayment', true);
+                        xhr.open('GET', url , true);
                         xhr.send();
                     } else {
                         // จ่ายครบ
@@ -311,9 +315,9 @@
                 var tryReq = 1;
                 updatePayment = function (data)
                 {
-                    var status = data.data.status;
-                    var message = data.data.message;
-                    var amount = data.data.amount;
+                    var status = data.status;
+                    var message = data.message;
+                    var amount = data.amount;
                     if (status) {
                         tryReq = 0;
                         /*---------Update Payment--------*/
@@ -345,6 +349,8 @@
                 //RequireCash(); // เริ่มจ่าย
 
             </script>
+
+        <uc1:UC_CommonUI runat="server" ID="CommonUI" />
 
     </form>
     

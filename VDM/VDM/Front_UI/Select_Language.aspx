@@ -2,9 +2,7 @@
 
 <%@ Register Src="~/Front_UI/UC_Machine_Console.ascx" TagPrefix="uc1" TagName="UC_Machine_Console" %>
 <%@ Register Src="~/Front_UI/UC_CommonUI.ascx" TagPrefix="uc1" TagName="UC_CommonUI" %>
-
-
-
+s
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">

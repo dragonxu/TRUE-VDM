@@ -12,7 +12,7 @@ Public Class Device_Payment
     Private ReadOnly Property KO_ID As Integer '------------- เอาไว้เรียกใช้ง่ายๆ ----------
         Get
             Try
-                Return Response.Cookies("KO_ID").Value
+                Return Request.Cookies("KO_ID").Value
             Catch ex As Exception
                 Return 0
             End Try
@@ -38,7 +38,11 @@ Public Class Device_Payment
 
     Public ReadOnly Property PRODUCT_ID As Integer
         Get
-            Return CInt(Request.QueryString("PRODUCT_ID"))
+            Try
+                Return CInt(Request.QueryString("PRODUCT_ID"))
+            Catch ex As Exception
+                Return 0
+            End Try
         End Get
     End Property
 
@@ -46,11 +50,14 @@ Public Class Device_Payment
 
         If Not IsPostBack Then
             ClearForm()
+            If PRODUCT_ID = 0 Then
+                Response.Redirect("Device_Brand.aspx")
+                Exit Sub
+            End If
+            BindProductInfo()
         Else
             initFormPlugin()
         End If
-
-
     End Sub
 
 
@@ -70,6 +77,15 @@ Public Class Device_Payment
         '----------------------- Set Alway Focus Barcode ----------------------
         Dim Script As String = "stopFocusBarcode();" & vbLf
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "clearBarcode", Script, True)
+
+    End Sub
+
+    Private Sub BindProductInfo()
+        Dim DT As DataTable = BL.Get_Product_Info_From_ID(PRODUCT_ID)
+
+        txtCost.Text = DT.Rows(0).Item("PRICE")
+        txtRequire.Text = DT.Rows(0).Item("PRICE")
+        txtPaid.Text = 0
 
     End Sub
 
