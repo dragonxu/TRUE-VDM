@@ -68,7 +68,7 @@
     </Reference>
     <Reference Include="Printer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Printer.dll</HintPath>
+      <HintPath>..\Printer\bin\Debug\Printer.dll</HintPath>
     </Reference>
     <Reference Include="SimDispenser, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
