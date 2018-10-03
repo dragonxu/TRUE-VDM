@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Front_UI/MasterFront.Master" CodeBehind="Select_Menu.aspx.vb" Inherits="VDM.Select_Menu" %>
 
-<%@ Register Src="~/Front_UI/UC_Machine_Console.ascx" TagPrefix="uc1" TagName="UC_Machine_Console" %>
-
+ 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -53,7 +52,5 @@
                     </div>
                 </nav>
             </footer>
-         <%--<footer style="bottom: 0px ; width :100%;padding :20px 0;">                 
-                        <uc1:UC_Machine_Console runat="server" id="UC_Machine_Console1" />                 
-            </footer> --%>
+
 </asp:Content>

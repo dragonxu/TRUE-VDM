@@ -1,8 +1,7 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Select_Language.aspx.vb" Inherits="VDM.Select_Language" %>
 
-<%@ Register Src="~/Front_UI/UC_Machine_Console.ascx" TagPrefix="uc1" TagName="UC_Machine_Console" %>
-<%@ Register Src="~/Front_UI/UC_CommonUI.ascx" TagPrefix="uc1" TagName="UC_CommonUI" %>
-s
+ <%@ Register Src="~/Front_UI/UC_CommonUI.ascx" TagPrefix="uc1" TagName="UC_CommonUI" %>
+ 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -37,13 +36,6 @@ s
 </main>
 <footer><div class="bottom-logo"><img src="images/bg-bottom.png"/>
 </div>
-
-     <footer style="bottom: 0px ; width :100%;padding :20px 0;">
-                 
-                        <uc1:UC_Machine_Console runat="server" id="UC_Machine_Console" />
-
-                 
-            </footer>
 
 </footer>
 </div>

@@ -77,15 +77,6 @@ Partial Public Class Select_Language
     Protected WithEvents RU As Global.System.Web.UI.HtmlControls.HtmlAnchor
     
     '''<summary>
-    '''UC_Machine_Console control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents UC_Machine_Console As Global.VDM.UC_Machine_Console
-    
-    '''<summary>
     '''CommonUI control.
     '''</summary>
     '''<remarks>
