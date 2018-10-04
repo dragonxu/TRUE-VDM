@@ -41,6 +41,60 @@ Partial Public Class Device_Payment
     Protected WithEvents udpList As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
+    '''img control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents img As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
+    '''lblDISPLAY_NAME control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblDISPLAY_NAME As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''pnlProduct control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlProduct As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''pnlCapacity control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlCapacity As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''lblCapacity control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblCapacity As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblColor control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblColor As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''formStep control.
     '''</summary>
     '''<remarks>
@@ -102,6 +156,15 @@ Partial Public Class Device_Payment
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkTruemoney As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''pnlSelectChoice control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlSelectChoice As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''pnlCash control.

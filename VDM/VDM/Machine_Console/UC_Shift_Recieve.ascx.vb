@@ -341,7 +341,7 @@ Public Class UC_Shift_Recieve
         Dim DT As New DataTable
         DA.Fill(DT)
         If DT.Rows.Count > 0 Then
-            If Val(lbl_Remain.Text.Replace(",", "")) > Val(DT.Rows(0).Item("Max_Qty")) Then
+            If Val(lbl_Remain.Text.Replace(",", "")) > Val(DT.Rows(0).Item("Max_Qty")) Or (Val(lbl_Remain.Text.Replace(",", "")) < 0) Then
                 lbl_Amount.Style("color") = "red"
                 imgAlert.Visible = True
             Else
@@ -395,7 +395,7 @@ Public Class UC_Shift_Recieve
         End Select
 
         If Max_Qty > 0 Then
-            If Val(lbl_Remain.Text.Replace(",", "")) > Val(Max_Qty) Then
+            If Val(lbl_Remain.Text.Replace(",", "")) > Val(Max_Qty) Or (Val(lbl_Remain.Text.Replace(",", "")) < 0) Then
                 lbl_Amount.Style("color") = "red"
                 imgAlert.Visible = True
             Else
@@ -426,7 +426,7 @@ Public Class UC_Shift_Recieve
         Dim DT As New DataTable
         DA.Fill(DT)
         If DT.Rows.Count > 0 Then
-            If Val(lbl_Remain.Text.Replace(",", "")) > Val(DT.Rows(0).Item("Max_Qty")) Then
+            If Val(lbl_Remain.Text.Replace(",", "")) > Val(DT.Rows(0).Item("Max_Qty")) Or (Val(lbl_Remain.Text.Replace(",", "")) < 0) Then
                 lbl_Amount.Style("color") = "red"
                 imgAlert.Visible = True
             Else

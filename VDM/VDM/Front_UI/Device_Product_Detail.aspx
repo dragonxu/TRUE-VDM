@@ -189,8 +189,8 @@
                                                             <b>:</b>
                                                         </div>
                                                         <div style="float: left;">
-                                                            <div style="width: 100%; max-height: 400px; overflow: auto; font-size: 20px; min-height: 40px; padding-left: 10px; margin-top: 10px;">
-                                                                <asp:Label ID="lblDesc" runat="server" Style="font-size: 25px;"></asp:Label>
+                                                            <div style="width: 100%; max-height: 500px; overflow: auto; font-size: 20px; min-height: 40px; padding-left: 10px; margin-top: 10px;">
+                                                                <asp:Label ID="lblDesc" runat="server" Style="font-size: 27px;"></asp:Label>
                                                             </div>
                                                         </div>
 

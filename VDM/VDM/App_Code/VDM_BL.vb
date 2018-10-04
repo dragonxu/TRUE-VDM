@@ -1374,9 +1374,9 @@ Public Class VDM_BL
         SQL &= "  FROM VW_CURRENT_PRODUCT_SPEC " & vbLf
         SQL &= "  WHERE KO_ID=" & KO_ID
         SQL &= "        AND PRODUCT_ID=" & PRODUCT_ID
-        SQL &= "        AND SPEC_ID NOT IN (" & Spec.Capacity & "," & Spec.Color & "," & Spec.CapacityAccessories & "," & Spec.Warranty & ") "
+        SQL &= "        AND SPEC_ID NOT IN (" & Spec.Capacity & "," & Spec.CapacityAccessories & "," & Spec.Warranty & ") "
         SQL &= " ORDER BY SEQ "
-
+        '"," & Spec.Color &
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)

@@ -334,11 +334,11 @@ Public Class Device_Product_Detail
 
         Dim pnlSelect As Panel = e.Item.FindControl("pnlSelect")
         Dim BoxIndex As HtmlGenericControl = e.Item.FindControl("BoxIndex")
-        If e.Item.DataItem("COLOR_TH").ToString = COLOR Then
-            pnlSelect.Attributes("class") = "select-color-active"
-        Else
-            pnlSelect.Attributes("class") = "select-color"
-        End If
+        'If e.Item.DataItem("COLOR_TH").ToString = COLOR Then
+        '    pnlSelect.Attributes("class") = "select-color-active"
+        'Else
+        '    pnlSelect.Attributes("class") = "select-color"
+        'End If
         lnkColor.CommandArgument = e.Item.DataItem("COLOR_TH").ToString()
     End Sub
 
