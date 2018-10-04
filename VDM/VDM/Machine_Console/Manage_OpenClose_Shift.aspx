@@ -40,7 +40,7 @@
 
                                             <li style="margin-top: -5px;">
 
-                                                <h2 class="bold">สั่ง <asp:Label ID="lblMode" runat="server"></asp:Label> Shift</h2>
+                                                <h2 class="bold"><asp:Label ID="lblMode" runat="server"></asp:Label></h2>
                                             </li>
                                             <li id="MenuChange" runat="server">
 

@@ -4,6 +4,16 @@ Public Class CoinDispense
     Inherits System.Web.UI.Page
 
     Dim BL As New Core_BL
+
+    Public ReadOnly Property CoinType As Integer
+        Get
+            Try
+                Return Request.QueryString("TYPE")
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+    End Property
     Public ReadOnly Property Quantity As Integer
         Get
             Try
@@ -27,7 +37,16 @@ Public Class CoinDispense
         DT.Rows.Add(DR)
         Try
             Dim Coin As New CoinDispenser.CoinDispenser
-            Coin.SetPort(BL.CoinReciever_Port)
+            Select Case CoinType
+                Case 1
+                    Coin.SetPort(BL.Dispense1_Port)
+                Case 2
+                    Coin.SetPort(BL.Dispense2_Port)
+                Case 5
+                    Coin.SetPort(BL.Dispense5_Port)
+                Case 10
+                    Coin.SetPort(BL.Dispense10_Port)
+            End Select
 
             Select Case Coin.CurrentStatus
                 Case Status.Insufficient_Coin
