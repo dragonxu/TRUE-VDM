@@ -112,7 +112,7 @@ Public Class UC_Shift_Change
         Dim DT As New DataTable
         DA.Fill(DT)
         If DT.Rows.Count > 0 Then
-            If Val(lbl_Remain.Text.Replace(",", "")) > Val(DT.Rows(0).Item("Max_Qty")) Then
+            If Val(lbl_Remain.Text.Replace(",", "")) > Val(DT.Rows(0).Item("Max_Qty")) Or (Val(lbl_Remain.Text.Replace(",", "")) < 0) Then
                 lbl_Amount.Style("color") = "red"
                 imgAlert.Visible = True
             Else
@@ -172,7 +172,7 @@ Public Class UC_Shift_Change
         End Select
 
         If Max_Qty > 0 Then
-            If Val(lbl_Remain.Text.Replace(",", "")) > Val(Max_Qty) Then
+            If Val(lbl_Remain.Text.Replace(",", "")) > Val(Max_Qty) Or (Val(lbl_Remain.Text.Replace(",", "")) < 0) Then
                 lbl_Amount.Style("color") = "red"
                 imgAlert.Visible = True
             Else
@@ -208,7 +208,7 @@ Public Class UC_Shift_Change
         Dim DT As New DataTable
         DA.Fill(DT)
         If DT.Rows.Count > 0 Then
-            If Val(lbl_Remain.Text.Replace(",", "")) > Val(DT.Rows(0).Item("Max_Qty")) Then
+            If Val(lbl_Remain.Text.Replace(",", "")) > Val(DT.Rows(0).Item("Max_Qty")) Or (Val(lbl_Remain.Text.Replace(",", "")) < 0) Then
                 lbl_Amount.Style("color") = "red"
                 imgAlert.Visible = True
             Else
@@ -269,7 +269,7 @@ Public Class UC_Shift_Change
         Dim DT As DataTable = Current_Data()
         If DT.Rows.Count > 0 Then
             For i As Integer = 0 To DT.Rows.Count - 1
-                If Val(DT.Rows(i).Item("Current_Qty")) < Val(DT.Rows(i).Item("Pick")) Then
+                If Val(DT.Rows(i).Item("Current_Qty")) < Val(DT.Rows(i).Item("Pick")) Or (Val(DT.Rows(i).Item("Remain")) < 0) Then
                     Alert(Me.Page, "ตรวจสอบจำนวนเงินเอาออก " & DT.Rows(i).Item("Unit_Value") & " บาท")
                     result = False
                 End If
