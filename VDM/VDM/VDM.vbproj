@@ -279,6 +279,7 @@
     <Content Include="images\avatar.png" />
     <Content Include="images\BlackDot.png" />
     <Content Include="images\default-avatar.png" />
+    <Content Include="images\Icon\alert.gif" />
     <Content Include="images\Icon\black\account.png" />
     <Content Include="images\Icon\black\barcode.png" />
     <Content Include="images\Icon\black\cam.png" />
