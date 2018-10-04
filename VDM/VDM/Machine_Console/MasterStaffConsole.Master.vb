@@ -99,7 +99,7 @@ Public Class MasterStaffConsole
 
     End Sub
 
-    Private Sub lnkLogout_ServerClick(sender As Object, e As EventArgs) Handles lnkLogout.ServerClick
+    Private Sub lnkLogout_ServerClick(sender As Object, e As EventArgs) Handles lnkLogout.Click
         Session.Abandon()
         Response.Redirect("Login.aspx")
     End Sub
