@@ -264,4 +264,18 @@ Public Class UC_Shift_Change
     End Function
 
 
+    Private Sub SavePREVIOUS_SHIFT()
+        'Dim SQL As String = "SELECT * FROM TB_SHIFT_STOCK "
+        'SQL &= " WHERE SHIFT_ID=" & Session("SHIFT_ID") & " AND D_ID=" & DT_Data.Rows(i).Item("D_ID")
+        'Dim DT As New DataTable
+        'Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        'DA.Fill(DT)
+        'Dim DR As DataRow
+
+        '      Select Case TOP 1 SHIFT_ID     
+        'From TB_SHIFT
+        'Where KO_ID = 1 And SHIFT_ID < 2 - -current shiftddd
+        'ORDER BY SHIFT_ID DESC
+    End Sub
+
 End Class
