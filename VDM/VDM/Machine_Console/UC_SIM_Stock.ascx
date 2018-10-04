@@ -124,7 +124,7 @@
             <asp:Panel CssClass="card-header" ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" > 
                 <h3 class="m-t-0 m-b-0">
                     <img src="../images/Icon/green/shelf.png" height="30"> SIM รอจัดการ <asp:Label ID="lblTotalScan" runat="server"></asp:Label>
-                    <asp:TextBox ID="txtBarcode" runat="server" style="position:fixed; left:500px; top:0px;"></asp:TextBox>
+                    <asp:TextBox ID="txtBarcode" runat="server" style="position:fixed; left:-500px; top:0px;"></asp:TextBox>
                     <asp:Button ID="btnBarcode" runat="server" style="display:none;"/>
                 </h3>
             </asp:Panel>

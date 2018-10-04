@@ -647,6 +647,7 @@
     <Content Include="UC_Kiosk_Shelf.ascx" />
     <Content Include="UC_Product_Spec.ascx" />
     <Content Include="Upload_User_Form.aspx" />
+    <None Include="Web References\Printer\Print.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1141,6 +1142,11 @@
       <DependentUpon>Upload_User_Form.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Web References\Printer\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -1415,6 +1421,11 @@
     <Content Include="Styles\scss\_plugins.scss" />
     <Content Include="Styles\scss\_utilities.scss" />
     <Content Include="Styles\scss\_variables.scss" />
+    <None Include="Web References\Printer\Print.wsdl" />
+    <Content Include="Web References\Printer\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1450,6 +1461,25 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://localhost/Print.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Printer\</RelPath>
+      <UpdateFromURL>http://localhost/Print.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>VDM_Printer_Print</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -23,6 +23,15 @@ Partial Public Class Manage_OpenClose_Shift
     Protected WithEvents udpList As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
+    '''lblMode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblMode As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''MenuChange control.
     '''</summary>
     '''<remarks>

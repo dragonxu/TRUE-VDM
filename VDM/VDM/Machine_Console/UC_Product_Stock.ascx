@@ -39,7 +39,7 @@
         <uc1:uc_product_shelf runat="server" ID="Shelf" />
         
         <asp:Panel ID="pnlSlotProduct" runat="server" CssClass="card bg-white m-b m-t-md" PRODUCT_ID="0">
-            <div class="card-header">
+            <div class="card-header" id="divSlotInfoHeader" runat="server">
             <h3 class="m-t-0 m-b-0 pull-left">
                 <img src="../images/Icon/green/shelf.png" height="30"> Slot : <asp:Label ID="lblSlotName" runat="server" SLOT_ID="0"></asp:Label>
             </h3>
@@ -49,10 +49,10 @@
             </asp:LinkButton>
 
             </div>
-            <div class="card-block">
+            <div class="card-block p-b-0">
             <div class="row">
                 <div class="m-t-n m-b">
-                    <div class="row ">
+                    <div class="row " id="divSlotInfo" runat="server">
                         <div class="col col-xs-4 m-t text-center">
                             <asp:Image ID="imgSlot_Product" runat="server" CssClass="product-Image" ImageUrl="../RenderImage.aspx?Mode=D&UID=1&Entity=Product&LANG=1" />
                                         
@@ -112,10 +112,15 @@
                         </div>
                     </div>
                     <div class="row m-t-md">
-                        <div class="card bg-white m-b" style="font-size:14px;">
+                        <div class="card bg-white m-b-0 p-b-0" style="font-size:14px;">
                                                                  
                             <table class="table m-b-0 checkbo">
-                                <thead>
+                                <thead id="tHeadSlotRepeater" runat="server">
+                                    <tr>
+                                        <th colspan="4">
+                                            สินค้าจะถูกหยิบออกไปจำหน่ายตามลำดับที่เรียงในหน้านี้
+                                        </th>
+                                    </tr>
                                     <tr>
                                         <th style="position:relative;"><asp:LinkButton ID="chkSlot" runat="server" style="position: absolute; top: 5px; left: 10px;"></asp:LinkButton></th>
                                         <th>Serial</th>
@@ -127,8 +132,9 @@
 
                                     <asp:Repeater ID="rptSlot" runat="server">
                                         <ItemTemplate>                                                
-                                            <tr id="tr" runat="server">
-                                                <td colspan="2" style="cursor:pointer; text-align:left;">
+                                            <tr id="tr" runat="server" class="slot_repeaterItem">
+                                                <td width="50"><asp:Label ID="lblNo" runat="server"></asp:Label></td>
+                                                <td style="cursor:pointer; text-align:left;">
                                                         <asp:LinkButton CssClass="btn btn-primary btn-sm btn-icon" style="display:none;" ID="chk" runat="server" CommandName="Check">
                                                             <i class="icon-check"></i>
                                                         </asp:LinkButton>
@@ -166,7 +172,7 @@
                 <asp:Panel CssClass="card-header" ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" > 
                 <h3 class="m-t-0 m-b-0">
                     <img src="../images/Icon/green/shelf.png" height="30"> สินค้ารอจัดการ <asp:Label ID="lblTotalScan" runat="server"></asp:Label>
-                    <asp:TextBox ID="txtBarcode" runat="server" style="position:fixed; left:500px; top:0px;"></asp:TextBox>
+                    <asp:TextBox ID="txtBarcode" runat="server" style="position:fixed; left:-500px; top:0px;"></asp:TextBox>
                     <asp:Button ID="btnBarcode" runat="server" style="display:none;"/>
                     </h3>
                 </asp:Panel>
@@ -272,6 +278,12 @@
         </div>
 </div>
 
+<style type="text/css">
+    tr.slot_repeaterItem:-moz-drag-over > td {
+        border-top:2px solid yellow;
+        border-bottom:2px solid yellow;
+    }
+</style>
 
 <!-----DragDrop Listener------->
 <asp:TextBox ID="txtDragType" runat="server" style="display:none;"></asp:TextBox>

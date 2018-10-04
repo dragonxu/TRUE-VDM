@@ -3,6 +3,9 @@ Imports System.Configuration.ConfigurationManager
 
 Public Class Core_BL
 
+    Public KO_ID As String = AppSettings("KO_ID").ToString
+    Public ServerRoot As String = AppSettings("ServerRoot").ToString
+
     Public CoinDispense1_Port As String = AppSettings("CoinDispense1_Port").ToString
     Public CoinDispense2_Port As String = AppSettings("CoinDispense2_Port").ToString
     Public CoinDispense5_Port As String = AppSettings("CoinDispense5_Port").ToString

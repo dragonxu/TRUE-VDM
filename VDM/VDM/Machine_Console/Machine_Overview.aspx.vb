@@ -7,8 +7,21 @@ Public Class Machine_Overview
 
     Private ReadOnly Property KO_ID As Integer
         Get
-            Return Session("KO_ID")
+            Return Request.Cookies("KO_ID").Value
         End Get
+    End Property
+
+    Private Property SHIFT_Status As VDM_BL.ShiftStatus
+        Get
+            Try
+                Return Session("SHIFT_Status")
+            Catch ex As Exception
+                Return VDM_BL.ShiftStatus.Unknown
+            End Try
+        End Get
+        Set(value As VDM_BL.ShiftStatus)
+            Session("SHIFT_Status") = value
+        End Set
     End Property
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -62,6 +75,19 @@ Public Class Machine_Overview
     End Sub
 
     Private Sub SetMachineInfo()
+
+        '--------Shift ------------
+        RemoveTagCssClass(lnkShift.CssClass, "btn-info")
+        RemoveTagCssClass(lnkShift.CssClass, "btn-success")
+        RemoveTagCssClass(lnkShift.CssClass, "btn-danger")
+        If SHIFT_Status = VDM_BL.ShiftStatus.Open Or SHIFT_Status = VDM_BL.ShiftStatus.OnGoing Then
+            lnkShiftAction.Text = "ปิด"
+            lnkShift.CssClass = InsertTagCssClass(lnkShift.CssClass, "btn-danger")
+        Else
+            lnkShiftAction.Text = "เปิด"
+            lnkShift.CssClass = InsertTagCssClass(lnkShift.CssClass, "btn-success")
+        End If
+
         '---Peripheral UI ---------------
         Dim DeviceList As DataTable
         Dim StatusList As DataTable

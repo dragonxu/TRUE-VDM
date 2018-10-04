@@ -43,7 +43,7 @@ Public Class Printer
         Return PrinterStatus.Unknow
     End Function
 
-    Public Function PrintImage(ByVal PrinterName As String, ByVal FileName As String) As Object
+    Private Function PrintImage(ByVal PrinterName As String, ByVal FileName As String) As Object
         Dim Result As Object = Nothing
         Try
             Dim prn As New PrinterClassDll.Win32Print
@@ -69,7 +69,7 @@ Public Class Printer
         Public ContentType As ContentType
     End Class
 
-    Public Function PrintText(ByVal PrinterName As String, ByVal Lines As List(Of ContentLine)) As Boolean
+    Public Function Print(ByVal PrinterName As String, ByVal Lines As List(Of ContentLine)) As Boolean
         Try
             Dim prn As New PrinterClassDll.Win32Print
             prn.SetPrinterName(PrinterName)
@@ -92,7 +92,7 @@ Public Class Printer
         Return False
     End Function
 
-    Public Sub PushArray_String(ByRef TheArray() As String, ByVal AppendedValue As String)
+    Private Sub PushArray_String(ByRef TheArray() As String, ByVal AppendedValue As String)
         Array.Resize(TheArray, TheArray.Length + 1)
         TheArray(TheArray.Length - 1) = AppendedValue
     End Sub

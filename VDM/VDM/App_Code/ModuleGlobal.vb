@@ -399,6 +399,14 @@ Module ModuleGlobal
         Return Array.IndexOf(Split(CurrentClass, " "), SearchClass) > -1
     End Function
 
+    Public Function InsertTagCssClass(ByVal CurrentClass As String, ByVal ClassToInsert As String) As String
+        Dim Result As String = (CurrentClass & " " & ClassToInsert)
+        While Result.IndexOf("  ") > -1
+            Result = Result.Replace("  ", " ")
+        End While
+        Return Result.Trim
+    End Function
+
     Public Function RemoveTagCssClass(ByVal CurrentClass As String, ByVal ClassToRemove As String) As String
         Dim Result As String = CurrentClass
         While Result.IndexOf(ClassToRemove) > -1
@@ -407,7 +415,7 @@ Module ModuleGlobal
         While Result.IndexOf("  ") > -1
             Result = Result.Replace("  ", " ")
         End While
-        Return Result
+        Return Result.Trim
     End Function
 
     Public Function ExcelContentType(ByVal ContentType As String) As Boolean

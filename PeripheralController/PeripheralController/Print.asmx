@@ -1,1 +1,1 @@
-﻿<%@ WebService Language="vb" CodeBehind="Print.asmx.vb" Class="PeripheralController.Printer" %>
+﻿<%@ WebService Language="vb" CodeBehind="Print.asmx.vb" Class="PeripheralController.Print" %>

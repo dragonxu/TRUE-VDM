@@ -7,7 +7,7 @@ Public Class Manage_OpenClose_Shift
 
     Private ReadOnly Property KO_ID As Integer
         Get
-            Return Session("KO_ID")
+            Return Request.Cookies("KO_ID").Value
         End Get
     End Property
 
@@ -15,6 +15,19 @@ Public Class Manage_OpenClose_Shift
         Get
             Return Session("SHOP_CODE")
         End Get
+    End Property
+
+    Private Property SHIFT_Status As VDM_BL.ShiftStatus
+        Get
+            Try
+                Return Session("SHIFT_Status")
+            Catch ex As Exception
+                Return VDM_BL.ShiftStatus.Unknown
+            End Try
+        End Get
+        Set(value As VDM_BL.ShiftStatus)
+            Session("SHIFT_Status") = value
+        End Set
     End Property
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -52,11 +65,17 @@ Public Class Manage_OpenClose_Shift
         divMenuStockPaper.Visible = False
         lblConfirm.Text = ""
 
-        Select Case Session("SHIFT_Status")
+        Select Case SHIFT_Status
             Case VDM_BL.ShiftStatus.Close
-                lblConfirm.Text = "Close Shift / ยืนยัน Close Shift"
+                lblMode.Text = "สั่ง Open Shift"
+                lblMode.CssClass = "text-success"
+                lnkConfirm.Text = "ยืนยัน Open Shift"
+                lnkConfirm.CssClass = "btn btn-success btn-lg btn-block"
             Case VDM_BL.ShiftStatus.Open
-                lblConfirm.Text = "Open Shift / ยืนยัน Open Shift"
+                lblMode.Text = "สั่ง Close Shift"
+                lblMode.CssClass = "text-danger"
+                lnkConfirm.Text = "ยืนยัน Close Shift"
+                lnkConfirm.CssClass = "btn btn-danger btn-lg btn-block"
         End Select
 
     End Sub
@@ -230,14 +249,6 @@ Public Class Manage_OpenClose_Shift
                 lnkRecieve_ServerClick(Nothing, Nothing)
                 Exit Sub
             End If
-            '----Product
-            If Product_Stock.Save Then
-                Validate = True
-            End If
-            '----SIM
-            If SIMStock.Save Then
-                Validate = True
-            End If
             '----Paper
             If UC_Shift_StockPaper.Validate Then
                 Validate = True
@@ -248,13 +259,79 @@ Public Class Manage_OpenClose_Shift
             End If
 
             Try
-                '--Save
-                If Validate Then
-                    ShiftChange_Success = UC_Shift_Change.Save
-                    ShiftRecieve_Success = UC_Shift_Recieve.Save
+                '----------- Get KO_CODE------------------
+                Dim DT As DataTable = BL.GetList_Kiosk(KO_ID)
+                Dim KO_CODE As String = DT.Rows(0).Item("KO_CODE")
+                '------------ get shift id first----------
+                Dim SQL As String = "EXEC dbo.SP_CURRENT_OPEN_SHIFT " & KO_ID
+                Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+                DT = New DataTable
+                DA.Fill(DT)
 
-                    ShiftStockPaper_Success = UC_Shift_StockPaper.Save
+                If DT.Rows.Count = 0 Then '------------- ปิดอยู่ ต้องเปิด
+
+                    '-------------- Get Shift CODE--------------
+                    Dim SHIFT_Y As String = Now.Year
+                    Dim SHIFT_M As String = Now.Month.ToString.PadLeft(2, "0")
+                    Dim SHIFT_D As String = Now.Day.ToString.PadLeft(2, "0")
+                    SQL = "SELECT ISNULL(MAX(SHIFT_N),0)+1 SHIFT_N FROM TB_SHIFT " & vbLf
+                    SQL &= "WHERE KO_ID = " & KO_ID & vbLf
+                    SQL &= " AND SHIFT_Y='" & SHIFT_Y & "'" & vbLf
+                    SQL &= " AND SHIFT_M='" & SHIFT_M & "'" & vbLf
+                    SQL &= " AND SHIFT_D='" & SHIFT_D & "'" & vbLf
+                    DT = New DataTable
+                    DA = New SqlDataAdapter(SQL, BL.ConnectionString)
+                    DA.Fill(DT)
+                    Dim SHIFT_N As Integer = DT.Rows(0)(0)
+
+                    '------------ Create New SHIFT--------------
+                    Session("SHIFT_ID") = BL.Get_NewID("TB_SHIFT", "SHIFT_ID")
+                    '------------ Set Stock-------------
+                    Product_Stock.SHIFT_STATUS = VDM_BL.ShiftStatus.Open
+                    SIMStock.SHIFT_STATUS = VDM_BL.ShiftStatus.Open
+
+                    DT = New DataTable
+                    DA = New SqlDataAdapter("SELECT TOP 0 * FROM TB_SHIFT", BL.ConnectionString)
+                    DA.Fill(DT)
+                    Dim DR As DataRow = DT.NewRow
+                    DT.Rows.Add(DR)
+                    DR("SHIFT_ID") = Session("SHIFT_ID")
+                    DR("KO_ID") = KO_ID
+                    DR("SHIFT_Y") = SHIFT_Y
+                    DR("SHIFT_M") = SHIFT_M
+                    DR("SHIFT_D") = SHIFT_D
+                    DR("KO_CODE") = KO_CODE
+                    DR("SHIFT_N") = SHIFT_N
+                    DR("Open_Time") = Now
+                    DR("Close_Time") = DBNull.Value
+                    DR("Open_By") = Session("USER_ID")
+                    DR("Close_By") = DBNull.Value
+
+                Else '------------- เปิดอยู่ ต้องปิด
+                    Session("SHIFT_ID") = DT.Rows(0)("SHIFT_ID")
+                    DT = New DataTable
+                    DA = New SqlDataAdapter("SELECT * FROM TB_SHIFT WHERE SHIFT_ID=" & Session("SHIFT_ID"), BL.ConnectionString)
+                    DA.Fill(DT)
+                    Dim DR As DataRow = DT.Rows(0)
+                    DR("Close_Time") = Now
+                    DR("Close_By") = Session("USER_ID")
+                    '------------ Set Stock-------------
+                    Product_Stock.SHIFT_STATUS = VDM_BL.ShiftStatus.Close
+                    SIMStock.SHIFT_STATUS = VDM_BL.ShiftStatus.Close
                 End If
+                Dim cmd As New SqlCommandBuilder(DA)
+                DA.Update(DT)
+                Product_Stock.SHIFT_ID = Session("SHIFT_ID")
+                SIMStock.SHIFT_ID = Session("SHIFT_ID")
+                Product_Stock.Save()
+                SIMStock.Save()
+
+                '----------- ไล่หาดูว่า Save ถูกมั้ย -----------
+                ShiftChange_Success = UC_Shift_Change.Save
+                ShiftRecieve_Success = UC_Shift_Recieve.Save
+                ShiftStockPaper_Success = UC_Shift_StockPaper.Save
+
+
             Catch ex As Exception
                 Alert(Me.Page, ex.Message)
                 Exit Sub
@@ -263,10 +340,12 @@ Public Class Manage_OpenClose_Shift
 
             '--Update TB_KIOSK_DEVICE
             UPDATE_DEVICE_Qty()
-
             '--สั่ง Open/Close Shift
 
-            Alert(Me.Page, "บันทึกสำเร็จ")
+
+
+            Alert(Me.Page, lblMode.Text & " แล้ว")
+            Redirect(Me.Page, "Machine_Overview.aspx")
 
 
         Catch ex As Exception
@@ -289,8 +368,8 @@ Public Class Manage_OpenClose_Shift
         Dim cmd As New SqlCommandBuilder
         If Change.Rows.Count > 0 Then
             For i As Integer = 0 To Change.Rows.Count - 1
-                SQL = "SELECT * FROM TB_KIOSK_DEVICE "
-                SQL &= " WHERE KO_ID=" & KO_ID & " AND D_ID=" & Change.Rows(i).Item("D_ID")
+                SQL = "Select * FROM TB_KIOSK_DEVICE "
+                SQL &= " WHERE KO_ID=" & KO_ID & " And D_ID=" & Change.Rows(i).Item("D_ID")
                 DT = New DataTable
                 DA = New SqlDataAdapter(SQL, BL.ConnectionString)
                 DA.Fill(DT)
@@ -314,8 +393,8 @@ Public Class Manage_OpenClose_Shift
 
         '----เงินรับ 
         '---------  CoinIn  
-        SQL = "SELECT * FROM TB_KIOSK_DEVICE "
-        SQL &= " WHERE KO_ID=" & KO_ID & " AND D_ID=" & VDM_BL.Device.CoinIn
+        SQL = "Select * FROM TB_KIOSK_DEVICE "
+        SQL &= " WHERE KO_ID=" & KO_ID & " And D_ID=" & VDM_BL.Device.CoinIn
         DT = New DataTable
         DA = New SqlDataAdapter(SQL, BL.ConnectionString)
         DA.Fill(DT)
@@ -338,8 +417,8 @@ Public Class Manage_OpenClose_Shift
         '----------------------------------------------------------
         '---------  CashIn
 
-        SQL = "SELECT * FROM TB_KIOSK_DEVICE "
-        SQL &= " WHERE KO_ID=" & KO_ID & " AND D_ID=" & VDM_BL.Device.CashIn
+        SQL = "Select * FROM TB_KIOSK_DEVICE "
+        SQL &= " WHERE KO_ID=" & KO_ID & " And D_ID=" & VDM_BL.Device.CashIn
         DT = New DataTable
         DA = New SqlDataAdapter(SQL, BL.ConnectionString)
         DA.Fill(DT)
@@ -364,8 +443,8 @@ Public Class Manage_OpenClose_Shift
 
 
         '----Paper
-        SQL = "SELECT * FROM TB_KIOSK_DEVICE "
-        SQL &= " WHERE KO_ID=" & KO_ID & " AND D_ID=" & VDM_BL.Device.Printer
+        SQL = "Select * FROM TB_KIOSK_DEVICE "
+        SQL &= " WHERE KO_ID=" & KO_ID & " And D_ID=" & VDM_BL.Device.Printer
         DT = New DataTable
         DA = New SqlDataAdapter(SQL, BL.ConnectionString)
         DA.Fill(DT)
@@ -427,12 +506,18 @@ Public Class Manage_OpenClose_Shift
         Kiosk_Shelf.ShowAddFloor = False
         Kiosk_Shelf.ShowEditShelf = False
         Kiosk_Shelf.ShowScale = False
+        For i As Integer = 0 To Kiosk_Shelf.Slots.Count - 1
+            Kiosk_Shelf.Slots(i).ShowScale = False
+        Next
+        For i As Integer = 0 To Kiosk_Shelf.Floors.Count - 1
+            Kiosk_Shelf.Floors(i).ShowScale = False
+        Next
 
         '----------Quantity--------------
         lbl_Product_Total.Text = STOCK_DATA.Compute("COUNT(SERIAL_NO)", "")
-        lbl_Product_In.Text = STOCK_DATA.Compute("COUNT(SERIAL_NO)", "RECENT IS NULL AND SLOT_NAME IS NOT NULL")
-        lbl_Product_Out.Text = STOCK_DATA.Compute("COUNT(SERIAL_NO)", "RECENT IS NOT NULL AND SLOT_NAME IS NULL")
-        lbl_Product_Move.Text = STOCK_DATA.Compute("COUNT(SERIAL_NO)", "RECENT IS NOT NULL AND SLOT_NAME IS NOT NULL AND SLOT_NAME<>RECENT")
+        lbl_Product_In.Text = STOCK_DATA.Compute("COUNT(SERIAL_NO)", "RECENT Is NULL And SLOT_NAME Is Not NULL")
+        lbl_Product_Out.Text = STOCK_DATA.Compute("COUNT(SERIAL_NO)", "RECENT Is Not NULL And SLOT_NAME Is NULL")
+        lbl_Product_Move.Text = STOCK_DATA.Compute("COUNT(SERIAL_NO)", "RECENT Is Not NULL And SLOT_NAME Is Not NULL And SLOT_NAME<>RECENT")
         Dim EmptySlot As Integer = 0
         For i As Integer = 0 To Product_Stock.Product_Shelf.Slots.Count - 1
             If Product_Stock.Product_Shelf.Slots(i).PRODUCT_ID = 0 Then EmptySlot += 1

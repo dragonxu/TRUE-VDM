@@ -1662,4 +1662,24 @@ Public Class VDM_BL
     End Function
 #End Region
 
+#Region "Printing"
+
+    Public Class PrintResult
+        Public Result As Boolean
+        Public Message As String
+    End Class
+
+    Public Function Print_Cash_ConfirmationSlip() As PrintResult
+
+    End Function
+
+    Public Function Print_TrueMoney_ConfirmationSlip() As PrintResult
+
+    End Function
+
+    Public Function Print_CreditCard_ConfirmationSlip() As PrintResult
+
+    End Function
+
+#End Region
 End Class
