@@ -14,21 +14,43 @@ Public Class Login
         End Get
     End Property
 
+    Private Property SHIFT_Status As VDM_BL.ShiftStatus
+        Get
+            Try
+                Return Session("SHIFT_Status")
+            Catch ex As Exception
+                Return VDM_BL.ShiftStatus.Unknown
+            End Try
+        End Get
+        Set(value As VDM_BL.ShiftStatus)
+            Session("SHIFT_Status") = value
+        End Set
+    End Property
+
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         lblError.Visible = False
 
         If Not IsPostBack Then
+            GetShiftStatus()
             SetButtonBack()
             txtUser.Focus()
         End If
     End Sub
 
-    Private Sub SetButtonBack()
+    Private Sub GetShiftStatus()
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter("EXEC dbo.SP_CURRENT_OPEN_SHIFT " & KO_ID, BL.ConnectionString)
         DA.Fill(DT)
-        btnBack.Visible = DT.Rows.Count > 0
+        If DT.Rows.Count > 0 Then
+            SHIFT_Status = VDM_BL.ShiftStatus.Open
+        Else
+            SHIFT_Status = VDM_BL.ShiftStatus.Close
+        End If
+    End Sub
+
+    Private Sub SetButtonBack()
+        btnBack.Visible = SHIFT_Status = VDM_BL.ShiftStatus.Open
         If Not btnBack.Visible Then
             btnLogin.Style("margin-top") = "30px"
         End If

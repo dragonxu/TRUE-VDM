@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="UC_CommonUI.ascx.vb" Inherits="VDM.UC_CommonUI" %>
 
-<input type="button" style="position:fixed; border:none; bottom:0; left:0; width:100px; height:100px; background-color:transparent; z-index:10;" onclick="inputPasscodeLeft();" />
-<input type="button" style="position:fixed; border:none; bottom:0; right:0; width:100px; height:100px; background-color:transparent; z-index:10;" onclick="inputPasscodeRight();" />
+<input type="button" style="position:fixed; border:none; bottom:0; left:0; width:10%; height:10%; background-color:transparent; z-index:10;" onclick="inputPasscodeLeft();" />
+<input type="button" style="position:fixed; border:none; bottom:0; right:0; width:10%; height:10%; background-color:transparent; z-index:10;" onclick="inputPasscodeRight();" />
 <script type="text/javascript">
 
     var userPasscode = "";
