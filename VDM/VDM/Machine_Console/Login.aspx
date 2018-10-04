@@ -34,7 +34,7 @@
       <div class="page-height-o row-equal align-middle">
         <div class="column">
           <div class="card bg-white no-border" style="max-width:500px;">
-            <div class="card-block">
+            <div class="card-block" style="height:480px;">
 
             
               <asp:Panel CssClass="form-layout h5" ID="pnlLogin" runat="server" DefaultButton="btnLogin">
@@ -51,7 +51,11 @@
                   <label class="text-uppercase">Password</label>
                   <asp:TextBox ID="txtPass" runat="server" CssClass="form-control input-lg m-b" TextMode="Password" placeholder="Password"></asp:TextBox>
                 </div>
-                <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-danger btn-block btn-lg " Text="Sign In" />
+                  <div class="col-xs-12 m-b">                      
+                      <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-danger btn-block btn-lg " Text="Sign In" />
+                      <asp:Button ID="btnBack" runat="server" CssClass="btn btn-info btn-block btn-lg " Text="To Vending Mode" />
+                  </div>
+                
                 <div style="text-align:center;">
                     <asp:Label ID="lblError" runat="server" CssClass="text-center m-b" style=" width:100%; color:red;">
                         Invalid admin username and password

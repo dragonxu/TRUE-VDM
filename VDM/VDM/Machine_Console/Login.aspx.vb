@@ -19,7 +19,18 @@ Public Class Login
         lblError.Visible = False
 
         If Not IsPostBack Then
+            SetButtonBack()
             txtUser.Focus()
+        End If
+    End Sub
+
+    Private Sub SetButtonBack()
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter("EXEC dbo.SP_CURRENT_OPEN_SHIFT " & KO_ID, BL.ConnectionString)
+        DA.Fill(DT)
+        btnBack.Visible = DT.Rows.Count > 0
+        If Not btnBack.Visible Then
+            btnLogin.Style("margin-top") = "30px"
         End If
     End Sub
 
@@ -53,5 +64,7 @@ Public Class Login
 
     End Sub
 
-
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Response.Redirect("../Front_UI/Default.aspx?KO_ID=" & KO_ID)
+    End Sub
 End Class

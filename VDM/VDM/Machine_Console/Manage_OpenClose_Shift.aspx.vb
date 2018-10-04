@@ -343,7 +343,7 @@ Public Class Manage_OpenClose_Shift
             UPDATE_DEVICE_Qty()
             '--สั่ง Open/Close Shift
 
-
+            SHIFT_Status = Product_Stock.SHIFT_STATUS
 
             Alert(Me.Page, lblMode.Text & " แล้ว")
             Redirect(Me.Page, "Machine_Overview.aspx")

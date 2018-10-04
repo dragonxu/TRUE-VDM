@@ -2,6 +2,7 @@
 Imports System.Text
 Imports System.Globalization
 Imports System.Drawing
+Imports System.Data
 
 Public Class Converter
     Public Enum EncodeType
@@ -83,7 +84,33 @@ Public Class Converter
         End Using
     End Function
 
+    Public Function XMLToDataset(ByVal XMLString As String) As DataSet
+        Dim Reader As New StringReader(XMLString)
+        Dim DS As New DataSet()
+        DS.ReadXml(Reader)
+        Return DS
+    End Function
 
+    Public Function XMLToDatatable(ByVal XMLString As String) As DataTable
+        Dim Reader As New StringReader(XMLString)
+        Dim DS As New DataSet()
+        DS.ReadXml(Reader)
+        Return DS.Tables(0)
+    End Function
+
+    Public Function DatasetToXML(ByVal DS As DataSet) As String
+        Using Writer As New StringWriter()
+            DS.WriteXml(Writer)
+            Return Writer.ToString()
+        End Using
+    End Function
+
+    Public Function DatatableToXML(ByVal DT As DataTable) As String
+        Using Writer As New StringWriter()
+            DT.WriteXml(Writer)
+            Return Writer.ToString()
+        End Using
+    End Function
 
     Public Function ImageToStream(ByVal IMG As Drawing.Image) As Stream
         Using ST As New MemoryStream()

@@ -1583,7 +1583,7 @@ Public Class VDM_BL
         Dim DT As New DataTable
         DA.Fill(DT)
         Dim TXN_ID As Integer = DT.Rows(0)(0)
-        Dim TXN_Y As String = Now.Year
+        Dim TXN_Y As String = Now.Year.ToString.Substring(2, 2)
         Dim TXN_M As String = Now.Month.ToString.PadLeft(2, "0")
         Dim TXN_D As String = Now.Day.ToString.PadLeft(2, "0")
 
@@ -1669,22 +1669,101 @@ Public Class VDM_BL
         Public Message As String
     End Class
 
-    Private Function Generate_ConfirmationSlip_Content() As DataTable
+    Public Enum PrintContentType
+        Text = 1
+        Image = 2
+    End Enum
+
+    '    เงินสด 
+    '1. Gen Slip No
+    '2. TB_Service_Transaction
+
+    '3. TB_Buy_Product
+    '4. TB_Buy_SIM
+
+    '5. Update Cash Stock
+    '6. TB_TRANSACTION_STOCK
+    '7. TB_KIOSK_DEVICE
+
+    '8. TB_PRODUCT_SERIAL
+    '9. TB_SIM_SERIAL
+
+    '10. TB_PRODUCT_MOVEMENT
+    '11. TB_SIM_MOVEMENT
+
+    '12. Archive Report Data
+
+    '-------------------------- เมื่อมีการจ่ายเงินให้ Gen เลข Confirmation Slip เอาไว้ก่อน หรือถ้ามีเลขอยู่แล้วก็ดึงเลขที่มีอยู่มาให้ ---------------------
+    '------เงินสด Gen เมื่อเริ่มหยอดเหรียญแรก 
+    '------True Money Gen หลังได้เลข Barcode และเตรียมส่งตัดเงิน 
+    '------Payment Gateway Gen ก่อนเรียก Service 
+    Public Function Get_Confirmation_Slip_Code(ByVal TXN_ID As Integer) As String
+        Dim SQL As String = "EXEC dbo.SP_GEN_CONFIRMATION_SLIP_CODE " & TXN_ID & ""
         Dim DT As New DataTable
-        DT.Columns.Add("Text", GetType(String))
+        Dim DA As New SqlDataAdapter(Sql, ConnectionString)
+        DA.Fill(DT)
+        Return DT.Rows(0)(1) '---------- Return TXN_ID,Confirmation Slip Code------------------------
     End Function
 
-    Public Function Print_Cash_ConfirmationSlip() As PrintResult
 
-    End Function
 
-    Public Function Print_TrueMoney_ConfirmationSlip() As PrintResult
+    'Private Function Get_ConfirmationSlip_Content(ByVal TXN_ID As Integer) As DataTable
 
-    End Function
+    '    Dim Result As New DataTable
+    '    Result.Columns.Add("Text", GetType(String))
+    '    Result.Columns.Add("ImagePath", GetType(String))
+    '    Result.Columns.Add("FontSize", GetType(Single))
+    '    Result.Columns.Add("FontName", GetType(String))
+    '    Result.Columns.Add("Bold", GetType(Boolean))
+    '    Result.Columns.Add("IsColor", GetType(Boolean))
+    '    Result.Columns.Add("ContentType", GetType(PrintContentType))
 
-    Public Function Print_CreditCard_ConfirmationSlip() As PrintResult
+    '    Dim SQL As String = ""
+    '    Dim DA As SqlDataAdapter = Nothing
+    '    Dim DT As DataTable = Nothing
+    '    Dim cmd As SqlCommandBuilder = Nothing
 
-    End Function
+    '    SQL =  "Select TXN_ID,KO_ID,SITE_CODE" & vbLf
+    '    SQL &= ",TXN_Y,TXN_M,TXN_D,TXN_N" & vbLf
+    '    SQL &= ",LANG_CODE,CUS_ID,TXN_END" & vbLf
+    '    SQL &= ",SLIP_YEAR,SLIP_MONTH,SLIP_DAY,SLIP_NO,SLIP_CONTENT" & vbLf
+    '    SQL &= ",METHOD_ID" & vbLf
+    '    SQL &= ",TMN_REQ_ID,TMN_ISV,TMN_REQUEST_AMOUNT,TMN_STATUS_CODE,TMN_PAYMENT_ID,TMN_RESP_TIME" & vbLf
+    '    SQL &= ",SLIP_CONTENT"
+    '    SQL &= "FROM TB_SERVICE_TRANSACTION TXN" & vbLf
+    '    SQL &= "WHERE TXN_ID =" & TXN_ID
+    '    Dim TXN As New DataTable
+    '    DA = New SqlDataAdapter(SQL, ConnectionString)
+    '    DA.Fill(TXN)
+
+    '    If TXN.Rows.Count = 0 Then '--------- ไม่พบ Transaction ID
+    '        Return Result
+    '    ElseIf Not IsDBNull(TXN.Rows(0).Item("SLIP_CONTENT")) AndAlso TXN.Rows(0).Item("SLIP_CONTENT").ToString.Length > 20 Then
+    '        '--------- Gen Slip เอาไว้แล้ว ----------
+    '        Dim C As New Converter
+    '        Try
+    '            Return C.XMLToDatatable(TXN.Rows(0).Item("SLIP_CONTENT"))
+    '        Catch ex As Exception
+    '            Return Result
+    '        End Try
+    '    End If
+
+    '    '--------------- Generate New Slip No---------------
+
+
+    'End Function
+
+    'Public Function Print_Cash_ConfirmationSlip() As PrintResult
+
+    'End Function
+
+    'Public Function Print_TrueMoney_ConfirmationSlip() As PrintResult
+
+    'End Function
+
+    'Public Function Print_CreditCard_ConfirmationSlip() As PrintResult
+
+    'End Function
 
 #End Region
 End Class

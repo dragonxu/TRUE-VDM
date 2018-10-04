@@ -101,7 +101,7 @@ Public Class MasterStaffConsole
 
     Private Sub lnkLogout_ServerClick(sender As Object, e As EventArgs) Handles lnkLogout.Click
         Session.Abandon()
-        Response.Redirect("Login.aspx")
+        Response.Redirect("../Front_UI/Default.aspx?KO_ID=" & KO_ID)
     End Sub
 
     Private Sub lnkShift_Click(sender As Object, e As EventArgs) Handles lnkShift.Click
