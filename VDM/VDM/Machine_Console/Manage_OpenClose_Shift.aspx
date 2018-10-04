@@ -71,7 +71,7 @@
                                                     <h3><span class="btn btn-info btn-outline btn-round" style="padding-right: 0.75rem; padding-left: 0.75rem; font-size: 20px;">3</span>
                                                         <span>Stock สินค้า</span>
                                                         <div id="divMenuStockProduct" runat ="server" class="message-sender" style="text-align: right;">
-                                                            <p><span class=" h5 text-info">สินค้า</span><span class=" h5"> <asp:Label ID="lbl_Product_Count" runat ="server" ></asp:Label> รายการ</span></p>
+                                                            <p><span class=" h5 text-info">สินค้า</span><span class=" h5"> <asp:Label ID="lbl_Product_Count" runat ="server" ></asp:Label></span></p>
                                                         </div>
                                                     </h3>
                                                 </a>
@@ -81,7 +81,7 @@
                                                     <h3><span class="btn btn-warning btn-outline btn-round" style="padding-right: 0.75rem; padding-left: 0.75rem; font-size: 20px;">4</span>
                                                         <span>Stock SIM</span>
                                                         <div id="divMenuStockSIM" runat ="server"  class="message-sender" style="text-align: right;">
-                                                            <p><span class=" h5 text-info">SIM</span><span class=" h5"> <asp:Label ID="lbl_SIM_Count" runat ="server" ></asp:Label> รายการ</span></p>
+                                                            <p><span class=" h5 text-info">SIM</span><span class=" h5"> <asp:Label ID="lbl_SIM_Count" runat ="server" ></asp:Label></span></p>
                                                         </div>
                                                     </h3>
                                                 </a>

@@ -64,6 +64,14 @@ Public Class UC_Shift_Recieve
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
     End Sub
 
+    Public Sub Start_Menu()
+        ClearEditForm()
+        BindListCoinIn()
+        Current_DataCoinIn()
+        BindListCashIn()
+        Current_DataCashIn()
+    End Sub
+
 #Region "CoinIn"
 
     Private Sub BindListCoinIn()
@@ -91,7 +99,7 @@ Public Class UC_Shift_Recieve
         Dim btn_Input_Full As Button = e.Item.FindControl("btn_Input_Full")
         Dim lbl_Remain As Label = e.Item.FindControl("lbl_Remain")
         Dim lbl_Amount As Label = e.Item.FindControl("lbl_Amount")
-
+        Dim imgAlert As Image = e.Item.FindControl("imgAlert")
         ModuleGlobal.ImplementJavaNumericText(txt_Pick, "Center")
         ModuleGlobal.ImplementJavaNumericText(txt_Input, "Center")
 
@@ -121,6 +129,22 @@ Public Class UC_Shift_Recieve
         btn_Pick_Full.CommandArgument = VDM_BL.Device.CoinIn
         btn_Input_Full.CommandArgument = VDM_BL.Device.CoinIn
 
+
+        Dim SQL As String = " SELECT * FROM MS_DEVICE WHERE D_ID=" & Val(btn_Input_Full.CommandArgument)
+        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        If DT.Rows.Count > 0 Then
+            If Val(lbl_Remain.Text.Replace(",", "")) > Val(DT.Rows(0).Item("Max_Qty")) Or (Val(lbl_Remain.Text.Replace(",", "")) < 0) Then
+                lbl_Amount.Style("color") = "red"
+                imgAlert.Visible = True
+            Else
+                lbl_Amount.Style("color") = "black"
+                imgAlert.Visible = False
+            End If
+
+        End If
+
     End Sub
     Private Sub rptListCoinIn_ItemCommand(source As Object, e As RepeaterCommandEventArgs) Handles rptListCoinIn.ItemCommand
         If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
@@ -132,7 +156,16 @@ Public Class UC_Shift_Recieve
         Dim btn_Input_Full As Button = e.Item.FindControl("btn_Input_Full")
         Dim lbl_Remain As Label = e.Item.FindControl("lbl_Remain")
         Dim lbl_Amount As Label = e.Item.FindControl("lbl_Amount")
+        Dim imgAlert As Image = e.Item.FindControl("imgAlert")
 
+        Dim Max_Qty As Integer = 0
+        Dim SQL As String = " SELECT * FROM MS_DEVICE WHERE D_ID=" & Val(btn_Input_Full.CommandArgument)
+        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        If DT.Rows.Count > 0 Then
+            Max_Qty = Val(DT.Rows(0).Item("Max_Qty"))
+        End If
         Select Case e.CommandName
             Case "Pick_Full"
                 txt_Pick.Text = FormatNumber(Val(lbl_Before.Text.Replace(",", "")), 0)
@@ -141,10 +174,7 @@ Public Class UC_Shift_Recieve
                 lbl_Amount.Text = FormatNumber(Val(lbl_Remain.Text.Replace(",", "")) * Val(lbl_Remain.Attributes("Unit_Value")), 0)
 
             Case "Input_Full"
-                Dim SQL As String = " SELECT * FROM MS_DEVICE WHERE D_ID=" & Val(btn_Input_Full.CommandArgument)
-                Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
-                Dim DT As New DataTable
-                DA.Fill(DT)
+
                 If DT.Rows.Count > 0 Then
                     txt_Input.Text = FormatNumber(Val(DT.Rows(0).Item("Max_Qty")), 0)
                 Else
@@ -158,6 +188,15 @@ Public Class UC_Shift_Recieve
 
         End Select
 
+        If Max_Qty > 0 Then
+            If Val(lbl_Remain.Text.Replace(",", "")) > Val(Max_Qty) Or (Val(lbl_Remain.Text.Replace(",", "")) < 0) Then
+                lbl_Amount.Style("color") = "red"
+                imgAlert.Visible = True
+            Else
+                lbl_Amount.Style("color") = "black"
+                imgAlert.Visible = False
+            End If
+        End If
         Current_DataCoinIn()
 
     End Sub
@@ -172,10 +211,24 @@ Public Class UC_Shift_Recieve
         Dim btn_Input_Full As Button = DirectCast(rpt.FindControl("btn_Input_Full"), Button)
         Dim lbl_Remain As Label = DirectCast(rpt.FindControl("lbl_Remain"), Label)
         Dim lbl_Amount As Label = DirectCast(rpt.FindControl("lbl_Amount"), Label)
-
+        Dim imgAlert As Image = DirectCast(rpt.FindControl("imgAlert"), Image)
         lbl_Remain.Text = FormatNumber((Val(lbl_Before.Text.Replace(",", "")) - Val(txt_Pick.Text.Replace(",", ""))) + Val(txt_Input.Text.Replace(",", "")), 0)
         lbl_Amount.Text = FormatNumber(Val(lbl_Remain.Text.Replace(",", "")) * Val(lbl_Remain.Attributes("Unit_Value")), 0)
 
+        Dim SQL As String = " SELECT * FROM MS_DEVICE WHERE D_ID=" & Val(btn_Input_Full.CommandArgument)
+        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        If DT.Rows.Count > 0 Then
+            If Val(lbl_Remain.Text.Replace(",", "")) > Val(DT.Rows(0).Item("Max_Qty")) Or (Val(lbl_Remain.Text.Replace(",", "")) < 0) Then
+                lbl_Amount.Style("color") = "red"
+                imgAlert.Visible = True
+            Else
+                lbl_Amount.Style("color") = "black"
+                imgAlert.Visible = False
+            End If
+
+        End If
         Current_DataCoinIn()
 
     End Sub
@@ -253,7 +306,7 @@ Public Class UC_Shift_Recieve
         Dim btn_Input_Full As Button = e.Item.FindControl("btn_Input_Full")
         Dim lbl_Remain As Label = e.Item.FindControl("lbl_Remain")
         Dim lbl_Amount As Label = e.Item.FindControl("lbl_Amount")
-
+        Dim imgAlert As Image = e.Item.FindControl("imgAlert")
         ModuleGlobal.ImplementJavaNumericText(txt_Pick, "Center")
         ModuleGlobal.ImplementJavaNumericText(txt_Input, "Center")
 
@@ -283,6 +336,20 @@ Public Class UC_Shift_Recieve
         btn_Pick_Full.CommandArgument = VDM_BL.Device.CashIn
         btn_Input_Full.CommandArgument = VDM_BL.Device.CashIn
 
+        Dim SQL As String = " SELECT * FROM MS_DEVICE WHERE D_ID=" & Val(btn_Input_Full.CommandArgument)
+        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        If DT.Rows.Count > 0 Then
+            If Val(lbl_Remain.Text.Replace(",", "")) > Val(DT.Rows(0).Item("Max_Qty")) Then
+                lbl_Amount.Style("color") = "red"
+                imgAlert.Visible = True
+            Else
+                lbl_Amount.Style("color") = "black"
+                imgAlert.Visible = False
+            End If
+
+        End If
     End Sub
     Private Sub rptListCashIn_ItemCommand(source As Object, e As RepeaterCommandEventArgs) Handles rptListCashIn.ItemCommand
         If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
@@ -294,6 +361,16 @@ Public Class UC_Shift_Recieve
         Dim btn_Input_Full As Button = e.Item.FindControl("btn_Input_Full")
         Dim lbl_Remain As Label = e.Item.FindControl("lbl_Remain")
         Dim lbl_Amount As Label = e.Item.FindControl("lbl_Amount")
+        Dim imgAlert As Image = e.Item.FindControl("imgAlert")
+        Dim Max_Qty As Integer = 0
+
+        Dim SQL As String = " SELECT * FROM MS_DEVICE WHERE D_ID=" & Val(btn_Input_Full.CommandArgument)
+        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        If DT.Rows.Count > 0 Then
+            Max_Qty = Val(DT.Rows(0).Item("Max_Qty"))
+        End If
 
         Select Case e.CommandName
             Case "Pick_Full"
@@ -303,10 +380,7 @@ Public Class UC_Shift_Recieve
                 lbl_Amount.Text = FormatNumber(Val(lbl_Remain.Text.Replace(",", "")) * Val(lbl_Remain.Attributes("Unit_Value")), 0)
 
             Case "Input_Full"
-                Dim SQL As String = " SELECT * FROM MS_DEVICE WHERE D_ID=" & Val(btn_Input_Full.CommandArgument)
-                Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
-                Dim DT As New DataTable
-                DA.Fill(DT)
+
                 If DT.Rows.Count > 0 Then
                     txt_Input.Text = FormatNumber(Val(DT.Rows(0).Item("Max_Qty")), 0)
                 Else
@@ -320,6 +394,15 @@ Public Class UC_Shift_Recieve
 
         End Select
 
+        If Max_Qty > 0 Then
+            If Val(lbl_Remain.Text.Replace(",", "")) > Val(Max_Qty) Then
+                lbl_Amount.Style("color") = "red"
+                imgAlert.Visible = True
+            Else
+                lbl_Amount.Style("color") = "black"
+                imgAlert.Visible = False
+            End If
+        End If
         Current_DataCashIn()
 
     End Sub
@@ -334,10 +417,24 @@ Public Class UC_Shift_Recieve
         Dim btn_Input_Full As Button = DirectCast(rpt.FindControl("btn_Input_Full"), Button)
         Dim lbl_Remain As Label = DirectCast(rpt.FindControl("lbl_Remain"), Label)
         Dim lbl_Amount As Label = DirectCast(rpt.FindControl("lbl_Amount"), Label)
-
+        Dim imgAlert As Image = DirectCast(rpt.FindControl("imgAlert"), Image)
         lbl_Remain.Text = FormatNumber((Val(lbl_Before.Text.Replace(",", "")) - Val(txt_Pick.Text.Replace(",", ""))) + Val(txt_Input.Text.Replace(",", "")), 0)
         lbl_Amount.Text = FormatNumber(Val(lbl_Remain.Text.Replace(",", "")) * Val(lbl_Remain.Attributes("Unit_Value")), 0)
 
+        Dim SQL As String = " SELECT * FROM MS_DEVICE WHERE D_ID=" & Val(btn_Input_Full.CommandArgument)
+        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        If DT.Rows.Count > 0 Then
+            If Val(lbl_Remain.Text.Replace(",", "")) > Val(DT.Rows(0).Item("Max_Qty")) Then
+                lbl_Amount.Style("color") = "red"
+                imgAlert.Visible = True
+            Else
+                lbl_Amount.Style("color") = "black"
+                imgAlert.Visible = False
+            End If
+
+        End If
         Current_DataCashIn()
 
     End Sub

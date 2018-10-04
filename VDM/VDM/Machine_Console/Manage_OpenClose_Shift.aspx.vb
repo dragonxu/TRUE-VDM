@@ -39,8 +39,12 @@ Public Class Manage_OpenClose_Shift
         If Not IsPostBack Then
             ClearForm()
             ClearMenu()
+
             ResetProductStock()
             ResetSIMStock()
+            BineDataMenu()
+            SetSummaryMenu()
+
         Else
             initFormPlugin()
             pnlbtn.Visible = True
@@ -118,6 +122,11 @@ Public Class Manage_OpenClose_Shift
             lnkStockPaper_ServerClick(Nothing, Nothing)
         End If
 
+    End Sub
+    Private Sub BineDataMenu()
+        UC_Shift_Change.Start_Menu()
+        UC_Shift_Recieve.Start_Menu()
+        UC_Shift_StockPaper.Start_Menu()
     End Sub
 
     Private Sub SetSummaryMenu()

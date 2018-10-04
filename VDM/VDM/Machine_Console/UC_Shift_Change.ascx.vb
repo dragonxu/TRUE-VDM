@@ -44,6 +44,11 @@ Public Class UC_Shift_Change
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
     End Sub
 
+    Public Sub Start_Menu()
+        BindList()
+        Current_Data()
+    End Sub
+
     Private Sub BindList()
         Dim SQL As String = " " & vbLf
         SQL &= " Select MS_DEVICE.D_ID " & vbLf
@@ -66,7 +71,7 @@ Public Class UC_Shift_Change
         DA.Fill(DT)
         rptList.DataSource = DT
         rptList.DataBind()
-
+        Current_Data()
     End Sub
     Private Sub rptList_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles rptList.ItemDataBound
         If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
@@ -79,6 +84,7 @@ Public Class UC_Shift_Change
         Dim btn_Input_Full As Button = e.Item.FindControl("btn_Input_Full")
         Dim lbl_Remain As Label = e.Item.FindControl("lbl_Remain")
         Dim lbl_Amount As Label = e.Item.FindControl("lbl_Amount")
+        Dim imgAlert As Image = e.Item.FindControl("imgAlert")
 
 
         ModuleGlobal.ImplementJavaNumericText(txt_Pick, "Center")
@@ -101,6 +107,22 @@ Public Class UC_Shift_Change
         lbl_Remain.Text = FormatNumber((Val(lbl_Before.Text.Replace(",", "")) - Val(txt_Pick.Text.Replace(",", ""))) + Val(txt_Input.Text.Replace(",", "")), 0)
         lbl_Amount.Text = FormatNumber(Val(lbl_Remain.Text.Replace(",", "")) * Val(e.Item.DataItem("Unit_Value")), 0)
 
+        Dim SQL As String = " SELECT * FROM MS_DEVICE WHERE D_ID=" & Val(btn_Input_Full.CommandArgument)
+        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        If DT.Rows.Count > 0 Then
+            If Val(lbl_Remain.Text.Replace(",", "")) > Val(DT.Rows(0).Item("Max_Qty")) Or (Val(lbl_Remain.Text.Replace(",", "")) < 0) Then
+                lbl_Amount.Style("color") = "red"
+                imgAlert.Visible = True
+            Else
+                lbl_Amount.Style("color") = "black"
+                imgAlert.Visible = False
+            End If
+
+        End If
+
+
         btn_Pick_Full.CommandArgument = e.Item.DataItem("D_ID")
         btn_Input_Full.CommandArgument = e.Item.DataItem("D_ID")
 
@@ -115,6 +137,16 @@ Public Class UC_Shift_Change
         Dim btn_Input_Full As Button = e.Item.FindControl("btn_Input_Full")
         Dim lbl_Remain As Label = e.Item.FindControl("lbl_Remain")
         Dim lbl_Amount As Label = e.Item.FindControl("lbl_Amount")
+        Dim imgAlert As Image = e.Item.FindControl("imgAlert")
+
+        Dim Max_Qty As Integer = 0
+        Dim SQL As String = " SELECT * FROM MS_DEVICE WHERE D_ID=" & Val(btn_Input_Full.CommandArgument)
+        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        If DT.Rows.Count > 0 Then
+            Max_Qty = Val(DT.Rows(0).Item("Max_Qty"))
+        End If
 
         Select Case e.CommandName
             Case "Pick_Full"
@@ -124,11 +156,9 @@ Public Class UC_Shift_Change
                 lbl_Amount.Text = FormatNumber(Val(lbl_Remain.Text.Replace(",", "")) * Val(lbl_Remain.Attributes("Unit_Value")), 0)
 
             Case "Input_Full"
-                Dim SQL As String = " SELECT * FROM MS_DEVICE WHERE D_ID=" & Val(btn_Input_Full.CommandArgument)
-                Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
-                Dim DT As New DataTable
-                DA.Fill(DT)
+
                 If DT.Rows.Count > 0 Then
+
                     txt_Input.Text = FormatNumber(Val(DT.Rows(0).Item("Max_Qty")), 0)
                 Else
                     Alert(Me.Page, "ตรวจสอบ Device " & Val(lbl_Remain.Attributes("Unit_Value")) & "")
@@ -140,6 +170,18 @@ Public Class UC_Shift_Change
 
 
         End Select
+
+        If Max_Qty > 0 Then
+            If Val(lbl_Remain.Text.Replace(",", "")) > Val(Max_Qty) Or (Val(lbl_Remain.Text.Replace(",", "")) < 0) Then
+                lbl_Amount.Style("color") = "red"
+                imgAlert.Visible = True
+            Else
+                lbl_Amount.Style("color") = "black"
+                imgAlert.Visible = False
+            End If
+        End If
+
+
 
         Current_Data()
 
@@ -156,9 +198,26 @@ Public Class UC_Shift_Change
         Dim btn_Input_Full As Button = DirectCast(rpt.FindControl("btn_Input_Full"), Button)
         Dim lbl_Remain As Label = DirectCast(rpt.FindControl("lbl_Remain"), Label)
         Dim lbl_Amount As Label = DirectCast(rpt.FindControl("lbl_Amount"), Label)
+        Dim imgAlert As Image = DirectCast(rpt.FindControl("imgAlert"), Image)
 
         lbl_Remain.Text = FormatNumber((Val(lbl_Before.Text.Replace(",", "")) - Val(txt_Pick.Text.Replace(",", ""))) + Val(txt_Input.Text.Replace(",", "")), 0)
         lbl_Amount.Text = FormatNumber(Val(lbl_Remain.Text.Replace(",", "")) * Val(lbl_Remain.Attributes("Unit_Value")), 0)
+
+        Dim SQL As String = " SELECT * FROM MS_DEVICE WHERE D_ID=" & Val(btn_Input_Full.CommandArgument)
+        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        If DT.Rows.Count > 0 Then
+            If Val(lbl_Remain.Text.Replace(",", "")) > Val(DT.Rows(0).Item("Max_Qty")) Or (Val(lbl_Remain.Text.Replace(",", "")) < 0) Then
+                lbl_Amount.Style("color") = "red"
+                imgAlert.Visible = True
+            Else
+                lbl_Amount.Style("color") = "black"
+                imgAlert.Visible = False
+            End If
+
+        End If
+
 
 
         Current_Data()
@@ -210,7 +269,7 @@ Public Class UC_Shift_Change
         Dim DT As DataTable = Current_Data()
         If DT.Rows.Count > 0 Then
             For i As Integer = 0 To DT.Rows.Count - 1
-                If Val(DT.Rows(i).Item("Current_Qty")) < Val(DT.Rows(i).Item("Pick")) Then
+                If Val(DT.Rows(i).Item("Current_Qty")) < Val(DT.Rows(i).Item("Pick")) Or (Val(DT.Rows(i).Item("Remain")) < 0) Then
                     Alert(Me.Page, "ตรวจสอบจำนวนเงินเอาออก " & DT.Rows(i).Item("Unit_Value") & " บาท")
                     result = False
                 End If
@@ -263,5 +322,19 @@ Public Class UC_Shift_Change
         Return result
     End Function
 
+
+    Private Sub SavePREVIOUS_SHIFT()
+        'Dim SQL As String = "SELECT * FROM TB_SHIFT_STOCK "
+        'SQL &= " WHERE SHIFT_ID=" & Session("SHIFT_ID") & " AND D_ID=" & DT_Data.Rows(i).Item("D_ID")
+        'Dim DT As New DataTable
+        'Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        'DA.Fill(DT)
+        'Dim DR As DataRow
+
+        '      Select Case TOP 1 SHIFT_ID     
+        'From TB_SHIFT
+        'Where KO_ID = 1 And SHIFT_ID < 2 - -current shiftddd
+        'ORDER BY SHIFT_ID DESC
+    End Sub
 
 End Class
