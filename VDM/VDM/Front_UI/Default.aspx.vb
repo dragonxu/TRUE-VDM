@@ -31,7 +31,7 @@ Public Class FrontUI_Default
         Dim DT As New DataTable
         DA.Fill(DT)
         If DT.Rows.Count = 0 Then
-            Response.Redirect("Machine_Console/Login.aspx?KO_ID=" & KO_ID)
+            Response.Redirect("../Machine_Console/Login.aspx?KO_ID=" & KO_ID)
         Else
             Response.Redirect("Select_Language.aspx")
         End If

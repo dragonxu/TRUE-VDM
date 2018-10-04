@@ -117,7 +117,7 @@
                             <table class="table m-b-0 checkbo">
                                 <thead id="tHeadSlotRepeater" runat="server">
                                     <tr>
-                                        <th colspan="4">
+                                        <th colspan="4" class="text-center bold text-white">
                                             สินค้าจะถูกหยิบออกไปจำหน่ายตามลำดับที่เรียงในหน้านี้
                                         </th>
                                     </tr>
