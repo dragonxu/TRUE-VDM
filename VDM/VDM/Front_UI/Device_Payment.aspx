@@ -29,8 +29,9 @@
 
     <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
-
+    
     <!---------VDM----------->
+    <script src="../Scripts/txtClientControl.js" type="text/javascript" ></script>
     <script src="../Scripts/extent.js" type="text/javascript"></script>
 
     <style>
@@ -51,22 +52,22 @@
                     <main>
                         <div class="priceplan">
                             <div class="main3">
-                                <div class="pic-step">
+                                <div class="pic-step" style="padding:100px 0 0px 0;">
                                     <p class="t-cart t-red true-b">SHOPING CART</p>
                                     <p class="t-payment t-red true-b">PAYMENT</p>
                                     <p class="t-complete true-b">COMPLETE ORDER</p>
                                     <img src="images/pic-step2.png" />
                                 </div>
-                        <div class="description" style ="margin :30px 0;">
+                        <div class="description" style ="margin :30px 0px 0px 0px;">
                             <div class="pic" style="padding: unset; text-align: center;">
-                                <asp:Image ID="img" runat="server" Style="width: 70%;"></asp:Image>
+                                <asp:Image ID="img" runat="server" Style="width: 60%;"></asp:Image>
                             </div>
-                            <figure class="col-md-6">
+                            <figure class="col-md-7">
                                 <div class="topic true-l">
-                                    <h1 class="true-l" style="padding-bottom: 30px;">
-                                        <asp:Label ID="lblDISPLAY_NAME" runat="server" Style="font-size: 78pt; line-height: 70px;"></asp:Label>
+                                    <h2 class="true-l" style="padding-bottom: 30px;">
+                                        <asp:Label ID="lblDISPLAY_NAME" runat="server" Style="font-size: 60pt; line-height: 70px;" Width="140%"></asp:Label>
 
-                                    </h1>
+                                    </h2>
                                     <asp:Panel ID="pnlProduct" runat="server">
 
                                         <div class="capacity">
@@ -90,7 +91,7 @@
 
                             </figure>
                         </div>                                
-                                <div class="step" id="formStep" runat="server" style ="padding :50px 0 20px 0;">
+                                <div class="step" id="formStep" runat="server" style ="padding :0px 0 20px 0;">
                                     <div class="step-payment">
                                         <h3 class="true-b t-red">
                                             <asp:Label ID="lblPrice_str" runat="server" Text="ยอดชำระ"></asp:Label>
@@ -135,17 +136,17 @@
                                     <form class="step">
                                         <div class="step-payment">
 
-                                            <h4 class="true-m" style ="margin :30px 0 20px 0">ชำระด้วยเงินสด</h4>
+                                            <h4 class="true-m" style ="margin :30px 0 20px 0; ">ชำระด้วยเงินสด</h4>
 
                                             <div class="f-remark">
-                                                <p class="true-m">
+                                                <p class="true-m" style="font-size:50px;">
                                                     กรุณาเตรียมเงินให้พร้อม<br />
                                                     เพราะเมื่อเริ่มชำระเงินแล้วจะ<u class="t-red">ไม่สามารถยกเลิกได้</u>
                                                 </p>
-                                                <p class="sub true-l">(หากจำเป็นต้องยกเลิก โปรดติดต่อพนักงาน)</p>
+                                                <p class="sub true-l" style="font-size:40px;">(หากจำเป็นต้องยกเลิก โปรดติดต่อพนักงาน)</p>
                                                 <em style ="margin-left: 90px;"></em>
-                                                <p class="true-m">โปรดสอดธนบัตรทางช่องด้านขวา</p>
-                                                <p class="sub true-l">(รับเฉพาะเงินบาทไทยเท่านั้น)</p>
+                                                <p class="true-m" style="font-size:50px;">โปรดสอดธนบัตรทางช่องด้านขวา</p>
+                                                <p class="sub true-l" style="font-size:40px;">(รับเฉพาะเงินบาทไทยเท่านั้น)</p>
                                             </div>
                                             <div class="f-cash" style ="padding :20px 0;">
                                                 <div class="col-md-4" style="text-align: center;">
@@ -179,7 +180,7 @@
                                             <p class="time true-l">เวลาชำระเงินสดคงเหลือ 2:00:00 นาที</p>
                                         </div>
 
-                                        <div style="position: absolute; top: 300px; right: 100px;" class="row">
+                                        <div style="position: absolute; top: 300px; right: 100px; display:none;" class="row">
                                             <div style="display: block;" class="col-lg-3">
                                                 1 :
                                                 <asp:TextBox ID="txt1" runat="server" Text="0"></asp:TextBox>
@@ -217,7 +218,7 @@
                                                 <asp:TextBox ID="txt1000" runat="server" Text="0"></asp:TextBox>
                                             </div>
                                             <asp:Button ID="btnCashPaid" runat="server" />
-                                        </div>
+                                        </div>                                      
                                     </form>
                                 </asp:Panel>
 
@@ -340,33 +341,37 @@
 
         <script type="text/javascript">
 
+            // เริ่มจ่าย 
             function RequireCash() {
                 calculateTotal();
-                var required = parseInt($('#txtRequire').val());
+                var required = parseInt($('#txtRequire').val().replace(',', ''));
                 if (required > 0) {
-                    // Call Payment
-                    var url = "http://localhost/RequireCash.aspx?REQ=" + required + '&callback=updatePayment';
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('GET', url, true);
-                    xhr.send();
+                    // Gen URL
+                    var url = '<% 
+            Dim BL As New VDM_BL
+            Response.Write(BL.LocalControllerURL)
+                    %>/RequireCash.aspx?REQ=' + required + '&callback=updatePayment';
+                    // 
+                    var script = document.createElement('script');
+                    script.src = url;
+                    var body = document.getElementsByTagName('body')[0];
+                    body.appendChild(script);
+
                 } else {
                     // จ่ายครบ
                 }
             }
-
-            var tryReq = 1;
-            updatePayment = function (data) {
-                var status = data.status;
-                var message = data.message;
-                var amount = data.amount;
-                if (status) {
+  
+            function updatePayment(amount,status,message) {
+               
+                if (status=='true') {
                     tryReq = 0;
                     /*---------Update Payment--------*/
                     $('#txt' + amount).val(parseInt($('#txt' + amount).val()) + 1);
                     RequireCash();
                 } else {
                     tryReq += 1;
-                    ////Toastr Problem Message
+                      //Toastr Problem Message
                     if (tryReq > 3) {
                         //  Error เกิน 3 ครั้ง
                     }
@@ -380,11 +385,11 @@
                     paid += parseInt($('#txt' + money[i]).val()) * money[i];
                 }
                 $('#txtPaid').val(paid);
-                var cost = parseInt($('#txtCost').val());
+                var cost = parseInt($('#txtCost').val().replace(',',''));
                 var required = cost - paid;
                 $('#txtRequire').val(required);
+                
             }
-            //RequireCash(); // เริ่มจ่าย
 
         </script>
 

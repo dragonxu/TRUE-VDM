@@ -13,6 +13,8 @@ Public Class VDM_BL
     Public Product_Critical_Percent As Integer = 30 '----------- Level ที่สีแดงใน Product Stock -----------
     Public SIM_Critical_Percent As Integer = 30 '----------- Level ที่สีแดงใน Product Stock -----------
 
+    Public LocalControllerURL As String = AppSettings("LocalControllerURL").ToString
+
     Public Sub ExecuteNonQuery(ByVal CommandText As String)
         Dim Command As New SqlCommand
         Dim Conn As New SqlConnection(ConnectionString)

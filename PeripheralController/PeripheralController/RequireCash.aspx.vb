@@ -25,13 +25,20 @@ Public Class RequireCash
         End Get
     End Property
 
+    Private ReadOnly Property callBackFunction As String
+        Get
+            Return Request.QueryString("callback")
+        End Get
+    End Property
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        Response.AddHeader("Content-Type", "application/json")
+
         Result = New DataTable
-        Result.Columns.Add("amount", GetType(Integer))
-        Result.Columns.Add("status", GetType(Boolean))
-        Result.Columns.Add("message", GetType(String))
+        Result.Columns.Add("amount")
+        Result.Columns.Add("status")
+        Result.Columns.Add("message")
 
         '--------------------- รอ Test-------------
         If Required > 0 Then
@@ -40,10 +47,9 @@ Public Class RequireCash
             Dim DR As DataRow = Result.NewRow
             Result.Rows.Add(DR)
             DR("amount") = 0
-            DR("status") = False
+            DR("status") = "false"
             DR("message") = "no requirement"
-            Response.Write(SingleRowDataTableToJSON(Result))
-            Response.End()
+            callBack()
         End If
 
     End Sub
@@ -52,7 +58,7 @@ Public Class RequireCash
 
         Dim DR As DataRow = Result.NewRow
         DR("amount") = 0
-        DR("status") = False
+        DR("status") = "false"
         DR("message") = ""
         Result.Rows.Add(DR)
 
@@ -104,7 +110,7 @@ Public Class RequireCash
             DR("message") = ex.Message
         End Try
         If DR("message") <> "" Then
-            Response.Write(SingleRowDataTableToJSON(Result))
+            callBack()
             Exit Sub
         End If
 
@@ -113,34 +119,34 @@ Public Class RequireCash
             Select Case Coin.CurrentStatus
                 Case CoinState.Unknown
                     DR("message") = "Coin Reciever is Unknown"
-                    Response.Write(SingleRowDataTableToJSON(Result))
+                    callBack()
                     Exit Sub
                 Case CoinState.Unavailable
                     DR("message") = "Coin Reciever is Unavailable"
-                    Response.Write(SingleRowDataTableToJSON(Result))
+                    callBack()
                     Exit Sub
                 Case CoinState.Sensor_1_problem
                     DR("message") = "Coin Reciever is Sensor_1_problem"
-                    Response.Write(SingleRowDataTableToJSON(Result))
+                    callBack()
                     Exit Sub
                 Case CoinState.Sensor_2_problem
                     DR("message") = "Coin Reciever is Sensor_2_problem"
-                    Response.Write(SingleRowDataTableToJSON(Result))
+                    callBack()
                     Exit Sub
                 Case CoinState.Sensor_3_problem
                     DR("message") = "Coin Reciever is Sensor_3_problem"
-                    Response.Write(SingleRowDataTableToJSON(Result))
+                    callBack()
                     Exit Sub
                 Case CoinState.Disconnected
                     DR("message") = "Coin Reciever is Disconnected"
-                    Response.Write(SingleRowDataTableToJSON(Result))
+                    callBack()
                     Exit Sub
                 Case CoinState.Ready
                     DR("message") = "" '---------------OK ------------------
             End Select
         Catch ex As Exception
             DR("message") = ex.Message
-            Response.Write(SingleRowDataTableToJSON(Result))
+            callBack()
             Exit Sub
         End Try
 
@@ -156,13 +162,13 @@ Public Class RequireCash
         Try : Coin.Close() : Catch : End Try
 
         DR("amount") = Recieved
-        DR("status") = Recieved > 0
+        DR("status") = (Recieved > 0).ToString.ToLower
         If Recieved = 0 Then
             DR("message") = "timeout"
         Else
             DR("message") = "success"
         End If
-        Response.Write(SingleRowDataTableToJSON(Result))
+        callBack()
     End Sub
 
     Public Sub Cash_Received(Sender As Object, e As CashReceiver.CashEvent)
@@ -177,6 +183,12 @@ Public Class RequireCash
             Case "1", "2", "5", "10"
                 Recieved = e.Message
         End Select
+    End Sub
+
+    Private Sub callBack()
+        Dim Script As String = callBackFunction & "('" & Result.Rows(0).Item("amount") & "','" & Result.Rows(0).Item("status") & "','" & Result.Rows(0).Item("message") & "');"
+        Response.Write(Script)
+        Response.End()
     End Sub
 
 End Class

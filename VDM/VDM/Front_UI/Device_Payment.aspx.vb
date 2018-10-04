@@ -60,19 +60,19 @@ Public Class Device_Payment
             Request.QueryString("SIM_ID") = value
         End Set
     End Property
-    Protected Property D_ID As Integer
-        Get
-            Try
-                Return Request.QueryString("D_ID")
-            Catch ex As Exception
-                Return 0
-            End Try
-        End Get
-        Set(value As Integer)
-            Request.QueryString("D_ID") = value
-        End Set
-    End Property
 
+    'Protected Property D_ID As Integer
+    '    Get
+    '        Try
+    '            Return Request.QueryString("D_ID")
+    '        Catch ex As Exception
+    '            Return 0
+    '        End Try
+    '    End Get
+    '    Set(value As Integer)
+    '        Request.QueryString("D_ID") = value
+    '    End Set
+    'End Property
 
 #End Region
 
@@ -97,7 +97,6 @@ Public Class Device_Payment
         End If
     End Sub
 
-
     Private Sub initFormPlugin()
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
     End Sub
@@ -121,8 +120,8 @@ Public Class Device_Payment
     Private Sub BindProductInfo()
         Dim DT As DataTable = BL.Get_Product_Info_From_ID(PRODUCT_ID)
 
-        txtCost.Text = DT.Rows(0).Item("PRICE")
-        txtRequire.Text = DT.Rows(0).Item("PRICE")
+        txtCost.Text = FormatNumber(DT.Rows(0).Item("PRICE"), 0)
+        txtRequire.Text = FormatNumber(DT.Rows(0).Item("PRICE"), 0)
         txtPaid.Text = 0
 
     End Sub
@@ -133,9 +132,8 @@ Public Class Device_Payment
         pnlCash.Visible = True
         lnkCash.Attributes("class") = "current"
         '----------------เริ่มรับชำระ --------------
-        txtCost.Text = 1000
-        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "CashPayment", "RequireCash();", True)
-
+        Dim Script As String = "RequireCash();"
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "CashPayment", Script, True)
     End Sub
 
     Private Sub lnkCredit_ServerClick(sender As Object, e As EventArgs) Handles lnkCredit.ServerClick

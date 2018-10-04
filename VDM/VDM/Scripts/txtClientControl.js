@@ -87,8 +87,8 @@ function formatfloat(input, minvalue, maxvalue, decimalplace) {
                 break;
         }
     }
-
-    var tmp = parseFloat(replaceComma(input).replace('-', '').replace('+', ''));
+    var tmp = replaceComma(input);
+    tmp = parseFloat(tmp.replace('-', '').replace('+', ''));
     if (tmp.toString().toUpperCase() == 'NAN') return '';
 
     //Check Min Max
