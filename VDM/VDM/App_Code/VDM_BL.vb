@@ -1148,7 +1148,7 @@ Public Class VDM_BL
         SQL &= "  Left Join MS_USER USER_Open On USER_Open.USER_ID=TB_SHIFT.Open_By" & vbLf
         SQL &= "  Left Join MS_USER USER_Close ON USER_Close.USER_ID=TB_SHIFT.Close_By" & vbLf
         SQL &= "  Where KO_ID=" & KO_ID & vbLf
-        SQL &= "  Order By SHIFT_ID" & vbLf
+        SQL &= "  Order By SHIFT_ID DESC" & vbLf
 
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         Dim DT As New DataTable
@@ -1668,6 +1668,11 @@ Public Class VDM_BL
         Public Result As Boolean
         Public Message As String
     End Class
+
+    Private Function Generate_ConfirmationSlip_Content() As DataTable
+        Dim DT As New DataTable
+        DT.Columns.Add("Text", GetType(String))
+    End Function
 
     Public Function Print_Cash_ConfirmationSlip() As PrintResult
 

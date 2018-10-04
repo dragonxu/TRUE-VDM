@@ -32,6 +32,24 @@ Partial Public Class MasterStaffConsole
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
     
     '''<summary>
+    '''lnkLogout control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkLogout As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''lblLoginName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblLoginName As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''scm control.
     '''</summary>
     '''<remarks>
@@ -102,24 +120,6 @@ Partial Public Class MasterStaffConsole
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkShift As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''lnkLogout control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lnkLogout As Global.System.Web.UI.HtmlControls.HtmlAnchor
-    
-    '''<summary>
-    '''lblLoginName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblLoginName As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''MainContent control.

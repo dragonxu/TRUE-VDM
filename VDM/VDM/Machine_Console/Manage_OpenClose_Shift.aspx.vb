@@ -313,6 +313,7 @@ Public Class Manage_OpenClose_Shift
                     DA = New SqlDataAdapter("SELECT * FROM TB_SHIFT WHERE SHIFT_ID=" & Session("SHIFT_ID"), BL.ConnectionString)
                     DA.Fill(DT)
                     Dim DR As DataRow = DT.Rows(0)
+                    DR("KO_CODE") = KO_CODE
                     DR("Close_Time") = Now
                     DR("Close_By") = Session("USER_ID")
                     '------------ Set Stock-------------

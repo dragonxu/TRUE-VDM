@@ -69,9 +69,24 @@
     <form id="form1" runat="server">
         <section id="how" class="content-section">
             <div class="container" style="padding-top: unset; width: 90%;">
+                    <%--<div class="btn btn-info btn-shadow" style ="position:absolute; right:10px; top:10px; width:auto; text-align:center;"  >
+                        <div class="fa-hover">
+                           <a  runat ="server"  title ="Logout / ออกจากระบบ"  ></a>
+                        </div
+                        <h4></h4>
+                    </div>--%>
+                    
+                    <asp:LinkButton id="lnkLogout" runat="server"  CssClass="btn btn-info btn-shadow text-center p-t-0" style="position:absolute; right:10px; top:10px; width:auto; text-align:center;">
+                         <h3><i class="fa fa-power-off"></i></h3>
+                             <span class ="h5" style ="vertical-align :middle; display:none;">
+                                <asp:Label ID="lblLoginName" runat ="server" ></asp:Label>
+                              </span>   
+                         
+                    </asp:LinkButton>
+
                 <asp:ScriptManager ID="scm" runat="server"></asp:ScriptManager>
-                <div class="row" style="padding-left: 20px;">
-                    <div class="col-xs-8">
+                <div class="row" style="padding-left: 20px; position:relative;">
+                    
                         <div>
                             <h1><b>
                                 <asp:Label ID="lblMachine_Name" runat="server"></asp:Label></b> &nbsp; <i class="fa fa-map-marker text-blue "></i><span></span>
@@ -86,13 +101,8 @@
                             </h3>
                            
                         </div>
-                    </div>
-                    <div class="col-xs-4" style ="text-align :right ;"  >
-                        <div class="fa-hover text-danger   ">
-                           <a id="lnkLogout" runat ="server"  title ="Logout / ออกจากระบบ"  > <h2> <i class="fa fa-power-off"></i>  <span class ="h3" style ="vertical-align :middle ;">  </span>     </h2></a>
-                            <asp:Label ID="lblLoginName" runat ="server" ></asp:Label>
-                        </div>
-                    </div>
+                   
+                    
 
 
                 </div>

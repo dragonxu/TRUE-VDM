@@ -29,25 +29,27 @@
     </div>
   </div>-->
   <!-- /page loading spinner -->
-  <div class="app signin usersession">
+  <div class="app signin usersession" style="    background-image: url(../images/signin/1.png); background-repeat: no-repeat; background-position: center; background-size: cover;">
     <div class="session-wrapper">
       <div class="page-height-o row-equal align-middle">
         <div class="column">
-          <div class="card bg-white no-border">
+          <div class="card bg-white no-border" style="max-width:500px;">
+            <div class="card-block">
+
             
-              <asp:Panel CssClass="form-layout" ID="pnlLogin" runat="server" DefaultButton="btnLogin">
+              <asp:Panel CssClass="form-layout h5" ID="pnlLogin" runat="server" DefaultButton="btnLogin">
                 <div class="text-center m-b">
-                  <h4 class="text-uppercase">VENDING Management CONSOLE</h4>
+                  <h4 class="text-uppercase bold">VENDING MANAGEMENT CONSOLE</h4>
                     <p>
                         <img id="imgLogo" src="../images/Icon/koisk_ab.png" style="width: 10%;">
                     </p>
-                  <p>Sign In to MACHINE CONSOLE</p>
+                  <p>SIGN IN</p>
                 </div>
                 <div class="form-inputs">
                   <label class="text-uppercase">User Name</label>
-                  <asp:TextBox ID="txtUser" runat="server" CssClass="form-control input-lg" placeholder="User Name"></asp:TextBox>
+                  <asp:TextBox ID="txtUser" runat="server" CssClass="form-control input-lg m-b" placeholder="User Name"></asp:TextBox>
                   <label class="text-uppercase">Password</label>
-                  <asp:TextBox ID="txtPass" runat="server" class="form-control input-lg" TextMode="Password" placeholder="Password"></asp:TextBox>
+                  <asp:TextBox ID="txtPass" runat="server" CssClass="form-control input-lg m-b" TextMode="Password" placeholder="Password"></asp:TextBox>
                 </div>
                 <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-danger btn-block btn-lg " Text="Sign In" />
                 <div style="text-align:center;">
@@ -57,11 +59,13 @@
                 </div>
                   
               </asp:Panel>
-        
+            </div>
           </div>
         </div>
       </div>
     </div>
+
+      
     <!-- bottom footer -->
     <footer class="session-footer">
       <nav class="footer-right">
