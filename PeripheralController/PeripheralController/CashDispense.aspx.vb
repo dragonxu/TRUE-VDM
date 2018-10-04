@@ -9,7 +9,7 @@ Public Class CashDispense
     Public ReadOnly Property NoteType As Integer
         Get
             Try
-                Return Request.QueryString("NOTE")
+                Return Request.QueryString("Type")
             Catch ex As Exception
                 Return 0
             End Try
@@ -40,13 +40,13 @@ Public Class CashDispense
             Dim Cash As New CashDispenser.CashDispenser
             Select Case NoteType
                 Case 20
-                    Cash.SetPort(BL.CashDispense20_Port)
+                    Cash.SetPort(BL.Dispense20_Port)
                 Case 50
-                    Cash.SetPort(BL.CashDispense50_Port)
+                    Cash.SetPort(BL.Dispense50_Port)
                 Case 100
-                    Cash.SetPort(BL.CashDispense100_Port)
+                    Cash.SetPort(BL.Dispense100_Port)
                 Case 500
-                    Cash.SetPort(BL.CashDispense500_Port)
+                    Cash.SetPort(BL.Dispense500_Port)
             End Select
 
             Select Case Cash.CurrentStatus
