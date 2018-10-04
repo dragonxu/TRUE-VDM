@@ -272,7 +272,6 @@
     <Content Include="Front_UI\SIM_List.aspx" />
     <Content Include="Front_UI\Thank_You.aspx" />
     <Content Include="Front_UI\UC_CommonUI.ascx" />
-    <Content Include="Front_UI\UC_Machine_Console.ascx" />
     <Content Include="Front_UI\UC_Scan_Face_Recognition.ascx" />
     <Content Include="Front_UI\UC_Scan_IDCart.ascx" />
     <Content Include="Global.asax" />
@@ -765,13 +764,6 @@
     </Compile>
     <Compile Include="Front_UI\UC_CommonUI.ascx.vb">
       <DependentUpon>UC_CommonUI.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Front_UI\UC_Machine_Console.ascx.designer.vb">
-      <DependentUpon>UC_Machine_Console.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Front_UI\UC_Machine_Console.ascx.vb">
-      <DependentUpon>UC_Machine_Console.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Front_UI\UC_Scan_Face_Recognition.ascx.designer.vb">
