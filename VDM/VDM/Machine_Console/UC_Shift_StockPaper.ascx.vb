@@ -39,6 +39,11 @@ Public Class UC_Shift_StockPaper
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
     End Sub
 
+    Public Sub Start_Menu()
+        ClearEditForm()
+        SetTextbox()
+        CurrentData()
+    End Sub
     Private Sub ClearEditForm()
         lblMaxPaper.Text = ""
         txtRemainPaper.Text = ""

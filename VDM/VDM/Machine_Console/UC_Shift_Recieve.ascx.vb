@@ -64,6 +64,14 @@ Public Class UC_Shift_Recieve
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
     End Sub
 
+    Public Sub Start_Menu()
+        ClearEditForm()
+        BindListCoinIn()
+        Current_DataCoinIn()
+        BindListCashIn()
+        Current_DataCashIn()
+    End Sub
+
 #Region "CoinIn"
 
     Private Sub BindListCoinIn()

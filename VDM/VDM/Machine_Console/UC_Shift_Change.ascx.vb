@@ -44,6 +44,11 @@ Public Class UC_Shift_Change
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
     End Sub
 
+    Public Sub Start_Menu()
+        BindList()
+        Current_Data()
+    End Sub
+
     Private Sub BindList()
         Dim SQL As String = " " & vbLf
         SQL &= " Select MS_DEVICE.D_ID " & vbLf
@@ -66,7 +71,7 @@ Public Class UC_Shift_Change
         DA.Fill(DT)
         rptList.DataSource = DT
         rptList.DataBind()
-
+        Current_Data()
     End Sub
     Private Sub rptList_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles rptList.ItemDataBound
         If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
