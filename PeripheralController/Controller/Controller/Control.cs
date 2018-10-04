@@ -196,7 +196,7 @@ namespace Controller
                 bool result = Omron.WriteRelay(Omron_Command_Header_State_Write.CIO_Write, 4640, 00, true);
                 do
                 {
-                    reply = Omron.ReadRelay(Omron_Command_Header_State_Read.CIO_Read, 4640, 01, ref readbit);
+                    reply = Omron.ReadRelay(Omron_Command_Header_State_Read.CIO_Read, 4659, 00, ref readbit);
                     if (!readbit)
                     {
                         Thread.Sleep(500);
@@ -224,7 +224,7 @@ namespace Controller
                 bool result = Omron.WriteRelay(Omron_Command_Header_State_Write.CIO_Write, 4660, 00, true);
                 do
                 {
-                    reply = Omron.ReadRelay(Omron_Command_Header_State_Read.CIO_Read, 4660, 01, ref readbit);
+                    reply = Omron.ReadRelay(Omron_Command_Header_State_Read.CIO_Read, 4679, 00, ref readbit);
                     if (!readbit)
                     {
                         Thread.Sleep(500);
