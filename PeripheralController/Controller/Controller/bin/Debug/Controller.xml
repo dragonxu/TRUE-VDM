@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Controller</name>
+    </assembly>
+    <members>
+        <member name="T:Controller.AxisHelper">
+            <summary>
+            AxisHelper class
+            </summary>
+        </member>
+        <member name="M:Controller.AxisHelper.AxisAccording(Controller.OmronTCP)">
+            <summary>
+            AxisAccording
+            </summary>
+            <param name="Omron">Omron lib</param>
+            <param name="axis">axis type [x,y]</param>
+            <returns></returns>
+        </member>
+        <member name="M:Controller.AxisHelper.HomeAccroding(Controller.OmronTCP)">
+            <summary>
+            initial device
+            </summary>
+            <param name="Omron">Omron component</param>
+            <returns>Axis State</returns>
+        </member>
+        <member name="M:Controller.AxisHelper.PostionAccording(Controller.OmronTCP)">
+            <summary>
+            Position According
+            </summary>
+            <param name="Omron">Omron Lib</param>
+            <returns>AxisState</returns>
+        </member>
+        <member name="T:Controller.AxisProperties">
+            <summary>
+            AxisProperties class
+            </summary>
+        </member>
+        <member name="P:Controller.AxisProperties.IPAddress">
+            <summary>
+            ip address connect PLC
+            </summary>
+        </member>
+        <member name="P:Controller.AxisProperties.Port">
+            <summary>
+            port connect PLC
+            </summary>
+        </member>
+        <member name="T:Controller.AxisState">
+            <summary>
+            Servo Motor result
+            </summary>
+        </member>
+        <member name="F:Controller.AxisState.Unknown">
+            <summary>
+            Initial
+            </summary>
+        </member>
+        <member name="F:Controller.AxisState.TimeoutAxisx">
+            <summary>
+            Axis x Move position timeout
+            </summary>
+        </member>
+        <member name="F:Controller.AxisState.TimeoutAxisy">
+            <summary>
+            Axis y Move position timeout
+            </summary>
+        </member>
+        <member name="F:Controller.AxisState.ErrorAxisx">
+            <summary>
+            Axis x move position error
+            </summary>
+        </member>
+        <member name="F:Controller.AxisState.ErrorAxisy">
+            <summary>
+            Axis y move position error
+            </summary>
+        </member>
+        <member name="F:Controller.AxisState.Success">
+            <summary>
+            Axis move position success
+            </summary>
+        </member>
+        <member name="F:Controller.AxisState.Error">
+            <summary>
+            error
+            </summary>
+        </member>
+        <member name="T:Controller.connected">
+            <summary>
+            connected
+            </summary>
+        </member>
+        <member name="T:Controller.Control">
+            <summary>
+            PLC Component
+            </summary>
+        </member>
+        <member name="E:Controller.Control.Connected">
+            <summary>
+            <para>Note : Declare the event using EventHandle for Coin Accept</para>
+            </summary>
+        </member>
+        <member name="M:Controller.Control.OnReveived(Controller.connected)">
+            <summary>
+            <para>Note : delegate method handle raise event</para>
+            </summary>
+        </member>
+        <member name="M:Controller.Control.#ctor">
+            <summary>
+            constructor
+            </summary>
+        </member>
+        <member name="M:Controller.Control.SetIP(System.String,System.Int32)">
+            <summary>
+            setting ip
+            </summary>
+            <param name="ip">ip address</param>
+            <param name="port">port</param>
+        </member>
+        <member name="M:Controller.Control.PositionMove(System.Int16)">
+            <summary>
+            move servo motor to position
+            </summary>
+            <param name="_positionx">position x</param>
+            <param name="_positiony">position y</param>
+            <returns>state</returns>
+        </member>
+        <member name="M:Controller.Control.HomePosition">
+            <summary>
+            Initial servo[x,y], carrier, basket, gate
+            </summary>
+        </member>
+        <member name="M:Controller.Control.Connect">
+            <summary>
+            Connect PLC
+            get return properties _connected
+            </summary>        
+        </member>
+        <member name="M:Controller.Control.CarrierPickUp">
+            <summary>
+            pick-up product --> basket --> open gate
+            </summary>
+            <returns>AxisState</returns>
+        </member>
+        <member name="M:Controller.Control.BasketPickUp">
+            <summary>
+            basket --> open gate
+            </summary>
+            <returns>AxisState</returns>
+        </member>
+        <member name="M:Controller.Control.CloseGate">
+            <summary>
+            close gate --> basket to home
+            </summary>
+            <returns>AxisState</returns>
+        </member>
+        <member name="M:Controller.Control.Process(System.Int16,System.Int32)">
+            <summary>
+            success process
+            </summary>
+            <param name="position">position product</param>
+            <param name="IntervalOpen">interval gate</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
