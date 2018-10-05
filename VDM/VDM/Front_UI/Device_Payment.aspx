@@ -218,6 +218,7 @@
                                                 <asp:TextBox ID="txt1000" runat="server" Text="0"></asp:TextBox>
                                             </div>
                                             <asp:Button ID="btnCashPaid" runat="server" />
+                                            <asp:Button ID="btnCashTimeout" runat="server" />
                                         </div>                                      
                                     </form>
                                 </asp:Panel>
@@ -371,9 +372,11 @@
                     RequireCash();
                 } else {
                     tryReq += 1;
+                    alert(message);
                       //Toastr Problem Message
                     if (tryReq > 3) {
                         //  Error เกิน 3 ครั้ง
+                        $('#btnCashTimeout').click();
                     }
                 }
             }

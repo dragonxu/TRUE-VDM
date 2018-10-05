@@ -39,6 +39,8 @@ namespace Controller
             Connected?.Invoke(this, e);
         }
 
+        private bool _connected;
+
         private OmronTCP Omron = new OmronTCP(System.Net.TransportType.Tcp);
         private AxisHelper accord = new AxisHelper();
         private AxisProperties props;
@@ -54,6 +56,7 @@ namespace Controller
         private void Omron_ConnectionChange(object sender, EventArgs e)
         {
             OnReveived(new connected(Omron.Connected));
+            _connected = Omron.Connected;
         }
         /// <summary>
         /// setting ip
@@ -140,7 +143,7 @@ namespace Controller
         /// Connect PLC
         /// get return properties _connected
         /// </summary>        
-        public void Connect()
+        public bool Connect()
         {
             try
             {
@@ -152,6 +155,8 @@ namespace Controller
                 Console.WriteLine("connect execption : " + e);
                 OnReveived(new connected(false));
             }
+
+            return _connected;
         }
         /// <summary>
         /// pick-up product --> basket --> open gate

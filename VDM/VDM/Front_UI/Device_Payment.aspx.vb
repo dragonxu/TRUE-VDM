@@ -173,10 +173,12 @@ Public Class Device_Payment
         Dim RESP As TrueMoney.Response = TMN.GetResult(ISV, Amount, Barcode, PaymentDescription, ShopCode)
         '---------------- ตรวจสอบผลลัพธ์ -------------------
         If RESP.status.code.ToLower <> "success" Then
-            'ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "TMN", Alert(Me.);)
             Alert(Me.Page, RESP.status.message)
             Exit Sub
         End If
+
+        '---------------- Gen SlipNo --------------------
+
         '---------------- Save Service Transaction-------
         Dim SQL As String = "SELECT * FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
         DT = New DataTable
@@ -191,6 +193,7 @@ Public Class Device_Payment
         DT.Rows(0).Item("TMN_RESP_TIME") = Now
         Dim cmd As New SqlCommandBuilder(DA)
         DA.Update(DT)
+
         '---------------- Goto Next Page ----------------
         Response.Redirect("Complete_Order.aspx?PRODUCT_ID=" & PRODUCT_ID)
 
@@ -279,6 +282,17 @@ Public Class Device_Payment
         End If
 
     End Sub
+
+    'จ่ายครบ
+    Private Sub btnCashPaid_Click(sender As Object, e As EventArgs) Handles btnCashPaid.Click
+
+    End Sub
+
+    'จ่ายครบ
+    Private Sub btnCashTimeout_Click(sender As Object, e As EventArgs) Handles btnCashTimeout.Click
+
+    End Sub
+
 #End Region
 
 End Class

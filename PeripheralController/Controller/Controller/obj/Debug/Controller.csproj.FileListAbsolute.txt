@@ -5,3 +5,9 @@ E:\GitHub\ProgrammableLogicControl\Controller\Controller\obj\Debug\Controller.cs
 E:\GitHub\ProgrammableLogicControl\Controller\Controller\obj\Debug\Controller.dll
 E:\GitHub\ProgrammableLogicControl\Controller\Controller\obj\Debug\Controller.pdb
 E:\GitHub\ProgrammableLogicControl\Controller\Controller\obj\Debug\Controller.csprojAssemblyReference.cache
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\bin\Debug\Controller.xml
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\bin\Debug\Controller.dll
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\bin\Debug\Controller.pdb
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\obj\Debug\Controller.csprojResolveAssemblyReference.cache
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\obj\Debug\Controller.dll
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\obj\Debug\Controller.pdb

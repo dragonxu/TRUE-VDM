@@ -18,5 +18,7 @@ Public Class Core_BL
     Public CashReciever_Port As String = AppSettings("CashReciever_Port").ToString
     Public CoinReciever_Port As String = AppSettings("CoinReciever_Port").ToString
     Public Printer_Name As String = AppSettings("Printer_Name").ToString
+    Public Product_Picker_IP As String = AppSettings("Product_Picker_IP").ToString
+    Public Product_Picker_Port As Integer = AppSettings("Product_Picker_Port").ToString
 
 End Class

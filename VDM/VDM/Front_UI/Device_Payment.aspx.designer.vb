@@ -284,6 +284,15 @@ Partial Public Class Device_Payment
     Protected WithEvents btnCashPaid As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
+    '''btnCashTimeout control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnCashTimeout As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
     '''pnlCredit control.
     '''</summary>
     '''<remarks>
