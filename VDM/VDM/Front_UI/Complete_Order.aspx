@@ -109,7 +109,7 @@
             Dim BL As New VDM_BL
             Response.Write(BL.LocalControllerURL)
                     %>/ProductPicker.aspx?Mode=GoPick&OpenTimeOut=10&POS_ID=' + $('#txtPosID').val() + '&callback=picked';
-                alert(url);
+              
                     var script = document.createElement('script');
                     script.src = url;
                     var body = document.getElementsByTagName('body')[0];

@@ -33,7 +33,6 @@ Public Class RequireCash
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        Response.AddHeader("Content-Type", "application/json")
 
         Result = New DataTable
         Result.Columns.Add("amount")
