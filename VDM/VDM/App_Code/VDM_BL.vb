@@ -1837,7 +1837,7 @@ Public Class VDM_BL
         DT.Rows.Add(" ")
         DT.Rows.Add(" ")
         DT.Rows.Add("สาขาที่ : " & SITE_CODE & "(" & SITE_NAME & ")")
-        DT.Rows.Add("ใบเสร็จรับเงิน")
+        DT.Rows.Add("ใบยืนยันการรับชำระ")
         DT.Rows.Add("" & SLIP_CODE & "		" & SLIP_DATE.ToString("dd/MM/yyyy hh:mm"))
         DT.Rows.Add("__________________________________________")
         DT.Rows.Add("รายการสินค้า")
@@ -1863,6 +1863,12 @@ Public Class VDM_BL
         DT.Rows.Add("__________________________________________")
 
         '------------ Set Default Parameter
+        Set_Default_Print_Content_Style(DT)
+
+        Return DT
+    End Function
+
+    Public Sub Set_Default_Print_Content_Style(ByRef DT As DataTable)
         For i As Integer = 0 To DT.Rows.Count - 1
             Dim DR As DataRow = DT.Rows(i)
             If IsDBNull(DR("Text")) Then
@@ -1887,9 +1893,7 @@ Public Class VDM_BL
                 DR("ContentType") = VDM_BL.PrintContentType.Text
             End If
         Next
-
-        Return DT
-    End Function
+    End Sub
 
     'Private Function Get_ConfirmationSlip_Content(ByVal TXN_ID As Integer) As DataTable
 

@@ -177,7 +177,7 @@
                                                     <h3 class="true-b t-red">บาท</h3>
                                                 </div>
                                             </div>
-                                            <p class="time true-l">เวลาชำระเงินสดคงเหลือ <span id="castTimeOut"></span> นาที</p>
+                                            <p class="time true-l">เวลาชำระเงินสดคงเหลือ <span id="castTimeOut"></span></p>
                                         </div>
 
                                         <div style="position: absolute; top: 300px; right: 100px; display:none;" class="row">
@@ -320,7 +320,7 @@
 
                                 </asp:Panel>
                                 <div class="col-md-12">
-                                    <asp:Button ID="btnSkip" runat="server" class="btu true-bs" Style="background: #635b5b; padding: 0 50px 0 50px; float: right; margin-top: 100px;" Text="ต่อไป" />
+                                    <asp:Button ID="btnSkip" runat="server" class="btu true-bs" Style="background: #635b5b; padding: 0 50px 0 50px; float: right; margin-top: 100px; display:none;" Text="ต่อไป" />
                                 </div>
                             </div>
                         </div>
@@ -355,6 +355,7 @@
             Response.Write(BL.LocalControllerURL)
                     %>/RequireCash.aspx?REQ=' + required + '&callback=updatePayment';
                     // 
+                    return;
                     var script = document.createElement('script');
                     script.src = url;
                     var body = document.getElementsByTagName('body')[0];
@@ -367,6 +368,7 @@
                 }
             }
   
+            var tryPay = 0;
             function updatePayment(amount,status,message) {
                
                 if (status == 'true') {
@@ -380,6 +382,11 @@
                     $('#txt' + amount).val(qty);
                     RequireCash();
                 } else {
+                    if (tryPay == 0) {
+                        tryPay += 1;
+                        RequireCash();
+                        return
+                    }
                     clearInterval(cashTimer);
                     $('#txtCashProblem').val(message);
                     $('#btnCashProblem').click();
@@ -410,14 +417,26 @@
                     clearInterval(cashTimer);
                 } else {
                     cashSec -= 1;
-                    $('#castTimeOut').html(cashSec);
-                    var min = Math.floor(cashSec / 60).toString().padStart(2, '0');
-                    var sec = (cashSec % 60).padStart(2, '0');
-                    // display
+                    //$('#castTimeOut').html(cashSec);
+                    //var min = Math.floor(cashSec / 60).toString().padStart(2, '0');
+                    var min = (cashSec - (cashSec % 60)) / 60;
+                    var displayMin = min.toString();                   
+                  
+                    if (displayMin.length < 2) {
+                        displayMin = '0' + displayMin;
+                    }
                     
+                    var sec = (cashSec % 60);
+                    var displaySec = sec.toString();
+                    if (displaySec.length < 2) {
+                        displaySec = '0' + displaySec;
+                    }
+                    // display
+                    $('#castTimeOut').html(displayMin + ':' + displaySec);
                 }
             }
             var cashTimer = setInterval(cashCounter, 1000);
+            
 
         </script>
 

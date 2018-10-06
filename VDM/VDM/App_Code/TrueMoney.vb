@@ -62,7 +62,7 @@ Public Class TrueMoney
 
     End Class
 
-    Public Function GetResult(ByVal ISV As String, ByVal Amount As Integer, ByVal CustomerQRCode As String, ByVal PaymentDescription As String, ByVal shopCode As String) As Response
+    Public Function GetResult(ByVal TXN_ID As Integer, ByVal ISV As String, ByVal Amount As Integer, ByVal CustomerQRCode As String, ByVal PaymentDescription As String, ByVal shopCode As String) As Response
 
 
         Dim request_amount As String = FormatNumber(Amount).Replace(".", "").Replace("-", "").Replace(",", "")
@@ -107,6 +107,7 @@ Public Class TrueMoney
         DA.Fill(DT)
         DR = DT.NewRow : DT.Rows.Add(DR)
         DR("REQ_ID") = REQ_ID
+        DR("TXN_ID") = TXN_ID
         DR("X_API_Key") = XAPIKey
         DR("X_API_Version") = Req.Headers.Item(X_API_Version)
         DR("Content_Signature") = Signature

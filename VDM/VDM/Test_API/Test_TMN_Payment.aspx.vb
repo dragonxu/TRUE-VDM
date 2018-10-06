@@ -20,7 +20,7 @@ Public Class Test_TMN_Payment
 
     Private Sub btnTest_Click(sender As Object, e As EventArgs) Handles btnTest.Click
 
-        Dim Resp As TrueMoney.Response = TMN.GetResult(Invoice_NO.Text, Amount.Text, CustomerQRCode.Text, PaymentDescription.Text, shopCode.Text)
+        Dim Resp As TrueMoney.Response = TMN.GetResult(0, Invoice_NO.Text, Amount.Text, CustomerQRCode.Text, PaymentDescription.Text, shopCode.Text)
         RequestString.Text = Resp.Request.PostString
         X_API_Key.Text = Resp.Request.X_API_Key
         X_API_Version.Text = Resp.Request.X_API_Version

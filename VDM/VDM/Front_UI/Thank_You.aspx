@@ -51,6 +51,31 @@
              var waitSeconds = 7;// รอ 7 วินาที
              setTimeout(redirectDelegate, waitSeconds * 1000);
             
+
+             function cashDispense(_type,qty) {
+                 var url = '<% 
+            Dim BL As New VDM_BL
+            Response.Write(BL.LocalControllerURL)
+                    %>/CashDispense.aspx?Type=' + _type + '&Q=' + qty + '&callback=';
+                    // 
+                    return;
+                    var script = document.createElement('script');
+                    script.src = url;
+                    var body = document.getElementsByTagName('body')[0];
+                    body.appendChild(script);
+             }
+
+             function coinDispense(_type,qty) {
+                 var url = '<% 
+             Response.Write(BL.LocalControllerURL)
+                    %>/CoinDispense.aspx?Type=' + _type + '&Q=' + qty + '&callback=';
+                    // 
+                    return;
+                    var script = document.createElement('script');
+                    script.src = url;
+                    var body = document.getElementsByTagName('body')[0];
+                    body.appendChild(script);
+             }
          </script>
 
          </form>

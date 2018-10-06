@@ -268,7 +268,7 @@ Public Class Device_Payment
         Dim ISV As String = TMN.Generate_ISV(ShopCode)
         Dim PaymentDescription As String = "TRUE-VDM-" & ISV
         '-------------------- เรียก------------------------
-        Dim RESP As TrueMoney.Response = TMN.GetResult(ISV, Amount, Barcode, PaymentDescription, ShopCode)
+        Dim RESP As TrueMoney.Response = TMN.GetResult(TXN_ID, ISV, Amount, Barcode, PaymentDescription, ShopCode)
         '---------------- ตรวจสอบผลลัพธ์ -------------------
         If RESP.status.code.ToLower <> "success" Then
             Alert(Me.Page, RESP.status.message)
@@ -395,6 +395,7 @@ Public Class Device_Payment
             UpdateCashProblem()
         End If
         Alert(Me.Page, txtCashProblem.Text)
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Refresh", "location.href=location.href;", True)
     End Sub
 
     Private Sub btnCashProblem_Click(sender As Object, e As EventArgs) Handles btnCashProblem.Click
