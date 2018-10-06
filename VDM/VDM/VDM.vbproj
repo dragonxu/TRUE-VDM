@@ -138,7 +138,7 @@
     <Content Include="Front_UI\Default.aspx" />
     <Content Include="Front_UI\Device_Category.aspx" />
     <Content Include="Front_UI\Device_Verify.aspx" />
-    <Content Include="Front_UI\Device_Product_Detail.aspx" />
+    <Content Include="Front_UI\Device_Product_Detail_Old.aspx" />
     <Content Include="Front_UI\Device_Shoping_Cart.aspx" />
     <Content Include="Front_UI\fonts\fontawesome-webfont.svg" />
     <Content Include="Front_UI\fonts\tbold.svg" />
@@ -270,6 +270,7 @@
     <Content Include="Front_UI\Device_Brand.aspx" />
     <Content Include="Front_UI\SIM_Detail.aspx" />
     <Content Include="Front_UI\SIM_List.aspx" />
+    <Content Include="Front_UI\Device_Product_Detail.aspx" />
     <Content Include="Front_UI\Thank_You.aspx" />
     <Content Include="Front_UI\UC_CommonUI.ascx" />
     <Content Include="Front_UI\UC_Scan_Face_Recognition.ascx" />
@@ -596,7 +597,6 @@
     <Content Include="Front_UI\fonts\tmedium.woff" />
     <Content Include="Front_UI\fonts\tmedium.woff2" />
     <Content Include="Front_UI\MasterFront.Master" />
-    <Content Include="WebForm1.aspx" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
@@ -685,11 +685,11 @@
       <DependentUpon>Device_Verify.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Front_UI\Device_Product_Detail.aspx.designer.vb">
-      <DependentUpon>Device_Product_Detail.aspx</DependentUpon>
+    <Compile Include="Front_UI\Device_Product_Detail_Old.aspx.designer.vb">
+      <DependentUpon>Device_Product_Detail_Old.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Front_UI\Device_Product_Detail.aspx.vb">
-      <DependentUpon>Device_Product_Detail.aspx</DependentUpon>
+    <Compile Include="Front_UI\Device_Product_Detail_Old.aspx.vb">
+      <DependentUpon>Device_Product_Detail_Old.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Front_UI\Device_Shoping_Cart.aspx.designer.vb">
@@ -754,6 +754,13 @@
     <Compile Include="Front_UI\SIM_List.aspx.vb">
       <DependentUpon>SIM_List.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Front_UI\Device_Product_Detail.aspx.designer.vb">
+      <DependentUpon>Device_Product_Detail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\Device_Product_Detail.aspx.vb">
+      <DependentUpon>Device_Product_Detail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Front_UI\Thank_You.aspx.designer.vb">
       <DependentUpon>Thank_You.aspx</DependentUpon>
@@ -1148,13 +1155,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.vb">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm1.aspx.vb">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
