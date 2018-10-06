@@ -20,8 +20,7 @@
 <body class="bg2">
     <form id="form1" runat="server">
         <div class="warp">
-            <header>
-                <img src="images/bg-top.png" /></header>
+            <header><img src="images/bg-top.png" /></header>
             <%--<main>
   <div class="priceplan">
     <div class="main3">
@@ -47,6 +46,10 @@
     </div>
   </div>
 </main>--%>
+            <asp:ScriptManager ID="scp" runat="server"></asp:ScriptManager>
+        <asp:UpdatePanel ID="UDP" runat="server">
+            <ContentTemplate>
+
 
 
             <main>
@@ -69,11 +72,9 @@
                                 <h4 class="margin-re true-m">กรุณารอสักครู่...</h4>
                             </div>
                         </div>
-
-                        
                         <div class="col-md-12">
                             <asp:TextBox ID="txtSlotName" runat="server"  Style="display:none;"></asp:TextBox>
-                            <asp:TextBox ID="txtPosID" runat="server"  Style="display:none;"></asp:TextBox>
+                            <asp:TextBox ID="txtPosID" runat="server"  Style="display:none;" Text="0"></asp:TextBox>
                             <asp:TextBox ID="txtStatus" runat="server"  Style="display:none;"></asp:TextBox>
                             <asp:TextBox ID="txtMessage" runat="server"  Style="display:none;"></asp:TextBox>
                             <asp:Button ID="btnNext" runat="server" Style="display:none; /*background: #635b5b; padding: 0 50px 0 50px; float: right; margin-top: 100px;*/" Text="ข้าม" />
@@ -96,7 +97,38 @@
                     </div>
                 </nav>
             </footer>
+        </ContentTemplate>
+        </asp:UpdatePanel>
         </div>
+
+        <script type="text/javascript">
+
+            function pickProduct() {
+                // Gen URL
+                var url = '<% 
+            Dim BL As New VDM_BL
+            Response.Write(BL.LocalControllerURL)
+                    %>/ProductPicker.aspx?Mode=GoPick&OpenTimeOut=10&POS_ID=' + $('#txtPosID').val() + '&callback=picked';
+                alert(url);
+                    var script = document.createElement('script');
+                    script.src = url;
+                    var body = document.getElementsByTagName('body')[0];
+                    body.appendChild(script);
+            }
+
+            function picked(status, message) {
+
+                $('#txtStatus').val(status);
+                $('#txtMessage').val(message);
+                if (status) {
+                    //$('#btnNext').click();
+                } else {
+                    // ไม่เจอ Product
+                }
+                $('#btnNext').click();
+            }
+        </script>
+
     </form>
 </body>
 </html>

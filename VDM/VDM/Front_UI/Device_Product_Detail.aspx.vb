@@ -39,17 +39,14 @@ Public Class Device_Product_Detail
 
 #End Region
 
-    Protected Property BRAND_ID As Integer
+    Protected ReadOnly Property BRAND_ID As Integer
         Get
             Try
-                Return lblCode.Attributes("BRAND_ID")
+                Return Request.QueryString("BRAND_ID")
             Catch ex As Exception
                 Return 0
             End Try
         End Get
-        Set(value As Integer)
-            lblCode.Attributes("BRAND_ID") = value
-        End Set
     End Property
 
     Protected Property PRODUCT_ID As Integer
@@ -120,21 +117,22 @@ Public Class Device_Product_Detail
 
         If Not IsPostBack Then
             PRODUCT_ID = Request.QueryString("PRODUCT_ID")
-            If Request.QueryString("MODEL") = Nothing Then
-                Dim SQL As String = ""
-                SQL &= "  SELECT * FROM VW_CURRENT_PRODUCT_DETAIL WHERE PRODUCT_ID=" & PRODUCT_ID
-                Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
-                Dim DT_Para As New DataTable
-                DA.Fill(DT_Para)
-                If DT_Para.Rows.Count > 0 Then
-                    MODEL = DT_Para.Rows(0).Item("MODEL")
-                    BRAND_ID = DT_Para.Rows(0).Item("BRAND_ID")
-                End If
+            'If Request.QueryString("MODEL") = Nothing Then
 
-            Else
-                BRAND_ID = Request.QueryString("BRAND_ID")
-                MODEL = Request.QueryString("MODEL").ToString
+            Dim SQL As String = ""
+            SQL &= "  SELECT * FROM VW_CURRENT_PRODUCT_DETAIL WHERE PRODUCT_ID=" & PRODUCT_ID
+            Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+            Dim DT_Para As New DataTable
+            DA.Fill(DT_Para)
+            If DT_Para.Rows.Count > 0 Then
+                MODEL = DT_Para.Rows(0).Item("MODEL")
+                'BRAND_ID = DT_Para.Rows(0).Item("BRAND_ID")
             End If
+
+            'Else
+            '    BRAND_ID = Request.QueryString("BRAND_ID")
+            '    MODEL = Request.QueryString("MODEL").ToString
+            'End If
 
             CAPACITY = ""
             COLOR = ""

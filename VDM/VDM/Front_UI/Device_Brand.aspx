@@ -47,25 +47,23 @@
                                         <ItemTemplate>
                                             <div>
                                                 <div class="description">
-                                                    <div class="pic-devices" style="margin-top: -200px;">
+                                                    <div class="pic-devices" style="margin-top: -200px; height:400px;">
                                                         <h3 class="true-l">Brands</h3>
 
-                                                        <img src="images/pic-top_catalog.png" style="width: unset; padding-top: 120px; width: 400px;" />
+                                                        <img src="images/pic-top_catalog.png" style="width: unset; padding-top: 120px; height:400px; width:400px;" />
                                                     </div>
                                                     <ul>
-                                                        <asp:Repeater ID="rptList" runat="server" OnItemCommand="rptList_ItemCommand">
+                                                        <asp:Repeater ID="rptList" runat="server" OnItemCreated="rptList_ItemCreated" OnItemCommand="rptList_ItemCommand">
                                                             <ItemTemplate>
                                                                 <li class="col-md-4">
 
-                                                                    <a id="btnBrand" runat="server">
+                                                                    <asp:LinkButton id="btnBrand" runat="server" CommandName="Select">
                                                                         <p class="true-m" style="text-align: center; font-size: 30px;">
                                                                             <asp:Label ID="lblBrand" runat="server"></asp:Label>
                                                                         </p>
-                                                                        <asp:Image ID="img" runat="server" Width="311px"></asp:Image>
-                                                                    </a>
+                                                                        <asp:Image ID="img" runat="server" Width="311px" Height="311px"></asp:Image>
+                                                                    </asp:LinkButton>
                                                                 </li>
-                                                                <asp:Button ID="btnSelect" runat="server" Style="display: none;" CommandName="Select" />
-
                                                             </ItemTemplate>
                                                         </asp:Repeater>
                                                     </ul>

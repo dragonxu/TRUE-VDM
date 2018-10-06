@@ -275,13 +275,22 @@ Partial Public Class Device_Payment
     Protected WithEvents txt1000 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''btnCashPaid control.
+    '''txtCashProblem control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnCashPaid As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents txtCashProblem As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''btnCashCompleted control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnCashCompleted As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
     '''btnCashTimeout control.
@@ -291,6 +300,15 @@ Partial Public Class Device_Payment
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCashTimeout As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''btnCashProblem control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnCashProblem As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
     '''pnlCredit control.

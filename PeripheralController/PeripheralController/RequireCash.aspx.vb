@@ -186,6 +186,14 @@ Public Class RequireCash
     End Sub
 
     Private Sub callBack()
+        Try
+            Cash.Close()
+        Catch : End Try
+        Try
+            Coin.Close()
+        Catch : End Try
+
+
         Dim Script As String = callBackFunction & "('" & Result.Rows(0).Item("amount") & "','" & Result.Rows(0).Item("status") & "','" & Result.Rows(0).Item("message") & "');"
         Response.Write(Script)
         Response.End()

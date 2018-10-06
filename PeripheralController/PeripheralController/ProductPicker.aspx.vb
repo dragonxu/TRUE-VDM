@@ -65,15 +65,17 @@ Public Class ProductPicker
     End Sub
 
     Private Sub SetHome()
-        callBack(Controller.HomePosition())
+        Dim Result As Boolean = Controller.HomePosition()
+        callBack(Result, "")
     End Sub
 
     Private Sub GoPick()
-        callBack(Controller.Process(POS_ID, OpenTimeOut * 1000))
+        Dim Result As Boolean = Controller.Process(POS_ID, OpenTimeOut * 1000)
+        callBack(Result, "")
     End Sub
 
-    Private Sub callBack(ByVal Result As Boolean)
-        Dim Script As String = callBackFunction & "(" & Result.ToString.ToLower & ");"
+    Private Sub callBack(ByVal Result As Boolean, ByVal Message As String)
+        Dim Script As String = callBackFunction & "(" & Result.ToString.ToLower & ",'" & Message.Replace("'", "") & "');"
         Response.Write(Script)
         Response.End()
     End Sub

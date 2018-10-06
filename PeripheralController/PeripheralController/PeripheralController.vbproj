@@ -122,11 +122,11 @@
       <DependentUpon>Print.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ProductDispense.aspx.designer.vb">
-      <DependentUpon>ProductDispense.aspx</DependentUpon>
+    <Compile Include="ProductPicker.aspx.designer.vb">
+      <DependentUpon>ProductPicker.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ProductDispense.aspx.vb">
-      <DependentUpon>ProductDispense.aspx</DependentUpon>
+    <Compile Include="ProductPicker.aspx.vb">
+      <DependentUpon>ProductPicker.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="RequireCash.aspx.designer.vb">
@@ -143,20 +143,12 @@
       <DependentUpon>CashDispense.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="TestController.aspx.designer.vb">
-      <DependentUpon>TestController.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="TestController.aspx.vb">
-      <DependentUpon>TestController.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Content Include="Print.asmx" />
-    <Content Include="ProductDispense.aspx" />
+    <Content Include="ProductPicker.aspx" />
     <Content Include="RequireCash.aspx" />
     <Content Include="CashDispense.aspx" />
     <Content Include="CoinDispense.aspx" />
     <Content Include="Default.aspx" />
-    <Content Include="TestController.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -32,6 +32,10 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        '---------- Start New Transaction After This Page----------
+        Session.Remove("TXN_ID")
+        Session.Remove("LANGUAGE")
+
     End Sub
 
     Private Sub TH_ServerClick(sender As Object, e As EventArgs) Handles TH.ServerClick

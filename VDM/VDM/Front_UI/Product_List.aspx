@@ -2,9 +2,6 @@
 
 <%@ Register Src="~/PageNavigation.ascx" TagName="PageNavigation" TagPrefix="uc1" %>
  
-
- 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -52,25 +49,22 @@
                                 <ItemTemplate>
                                     <div>
                                         <div class="description">
-                                             <div class="pic-devices">
+                                             <div class="pic-devices"  style="height:350px;"">
                                                 <h3 class="true-l">Devices</h3>
-                                                  <asp:Image ID="img" runat="server"  style="width: unset;  width :350px;" />
+                                                  <asp:Image ID="img" runat="server"  style="width: unset; height:350px; width:350px;" />
                                                
                                             </div>
                                             <ul>
-                                                <asp:Repeater ID="rptList" runat="server" OnItemCommand="rptList_ItemCommand">
+                                                <asp:Repeater ID="rptList" runat="server" OnItemCommand="rptList_ItemCommand" OnItemCreated="rptList_ItemCreated">
                                                     <ItemTemplate>
-                                                        <li class="col-md-4">
-                                                            
-                                                            <a id="btnProduct" runat="server">
+                                                        <li class="col-md-4">                                                            
+                                                            <asp:LinkButton id="btnProduct" runat="server" CommandName="Select">
                                                                 <p class="true-m" style ="text-align:center;font-size: 30px;">
                                                                     <asp:Label ID="lblProduct" runat="server"></asp:Label>
                                                                 </p>
-                                                                <asp:Image ID="img" runat="server" Width="311px"></asp:Image>
-                                                            </a>
+                                                                <asp:Image ID="img" runat="server" Width="311px" Height="311px"></asp:Image>
+                                                            </asp:LinkButton>
                                                         </li>
-                                                        <asp:Button ID="btnSelect" runat="server" Style="display: none;" CommandName="Select" />
-                                                        
                                                     </ItemTemplate>
                                                 </asp:Repeater>
                                             </ul>

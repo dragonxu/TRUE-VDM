@@ -627,7 +627,6 @@
     <Content Include="Styles\webfont.css" />
     <Content Include="Test_API\Test_API_Interface.aspx" />
     <Content Include="Test_API\Test_BBL.aspx" />
-    <Content Include="Test_API\Test_ConvertImage.aspx" />
     <Content Include="Test_API\Test_TMN_Payment.aspx" />
     <Content Include="Test_API\UC_Activity_End.ascx" />
     <Content Include="Test_API\UC_Activity_Start.ascx" />
@@ -963,13 +962,6 @@
     </Compile>
     <Compile Include="Test_API\Test_BBL.aspx.vb">
       <DependentUpon>Test_BBL.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Test_API\Test_ConvertImage.aspx.designer.vb">
-      <DependentUpon>Test_ConvertImage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Test_API\Test_ConvertImage.aspx.vb">
-      <DependentUpon>Test_ConvertImage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Test_API\Test_TMN_Payment.aspx.designer.vb">

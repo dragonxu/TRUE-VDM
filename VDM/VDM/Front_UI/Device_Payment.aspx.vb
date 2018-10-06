@@ -46,6 +46,100 @@ Public Class Device_Payment
         End Get
     End Property
 
+    Private Property PAYMENT_METHOD As VDM_BL.PaymentMethod
+        Get
+            Try
+                Return ViewState("PAYMENT_METHOD")
+            Catch ex As Exception
+                Return VDM_BL.PaymentMethod.UNKNOWN
+            End Try
+        End Get
+        Set(value As VDM_BL.PaymentMethod)
+            ViewState("PAYMENT_METHOD") = value
+        End Set
+    End Property
+    '    Get
+    '        Dim amount As String() = {"1", "2", "5", "10", "20", "50", "100", "500", "1000"}
+    '        Dim result As Integer = 0
+    '        For i As Integer = 0 To amount.Count - 1
+    '            result += CInt(CType(pnlCash.FindControl("txt" & amount(i)), TextBox).Text)
+    '        Next
+    '        Return result
+    '    End Get
+    'End Property
+
+    Private Property CASH_PAID As Integer
+        Get
+            Return txtPaid.Text
+        End Get
+        Set(value As Integer)
+            txtPaid.Text = value
+        End Set
+    End Property
+
+    Private Property PRODUCT_COST As Integer
+        Get
+            Return CInt(Replace(txtCost.Text, ",", ""))
+        End Get
+        Set(value As Integer)
+            txtCost.Text = FormatNumber(value, 0)
+        End Set
+    End Property
+
+    Private Property SLOT_NAME As String
+        Get
+            Try
+                Return ViewState("SLOT_NAME")
+            Catch ex As Exception
+                Return ""
+            End Try
+
+        End Get
+        Set(value As String)
+            ViewState("SLOT_NAME") = value
+        End Set
+    End Property
+
+    Private Property SLOT_ID As Integer
+        Get
+            Try
+                Return ViewState("SLOT_ID")
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+        Set(value As Integer)
+            ViewState("SLOT_ID") = value
+        End Set
+    End Property
+
+    Private Property POS_ID As Integer
+        Get
+            Try
+                Return ViewState("POS_ID")
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+        Set(value As Integer)
+            ViewState("POS_ID") = value
+        End Set
+    End Property
+
+    Private Property SERIAL_NO As String
+        Get
+            Try
+                Return ViewState("SERIAL_NO")
+            Catch ex As Exception
+                Return ""
+            End Try
+        End Get
+        Set(value As String)
+            ViewState("SERIAL_NO") = value
+        End Set
+    End Property
+
+
 #Region "SIM"
 
     Protected Property SIM_ID As Integer
@@ -79,7 +173,9 @@ Public Class Device_Payment
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Not IsPostBack Then
+
             ClearForm()
+
             If PRODUCT_ID = 0 Then
                 Response.Redirect("Device_Brand.aspx")
                 Exit Sub
@@ -91,7 +187,6 @@ Public Class Device_Payment
                 BindSIM()
             End If
 
-            BindProductInfo()
         Else
             initFormPlugin()
         End If
@@ -102,6 +197,9 @@ Public Class Device_Payment
     End Sub
 
     Private Sub ClearForm()
+
+        PAYMENT_METHOD = VDM_BL.PaymentMethod.UNKNOWN
+
         pnlCash.Visible = False
         pnlCredit.Visible = False
         pnlTruemoney.Visible = False
@@ -111,33 +209,30 @@ Public Class Device_Payment
         lnkCredit.Attributes("class") = ""
         lnkTruemoney.Attributes("class") = ""
 
-        '----------------------- Set Alway Focus Barcode ----------------------
+        '----------------------- Stop Focus Barcode ----------------------
         Dim Script As String = "stopFocusBarcode();" & vbLf
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "clearBarcode", Script, True)
 
     End Sub
 
-    Private Sub BindProductInfo()
-        Dim DT As DataTable = BL.Get_Product_Info_From_ID(PRODUCT_ID)
-
-        txtCost.Text = FormatNumber(DT.Rows(0).Item("PRICE"), 0)
-        txtRequire.Text = FormatNumber(DT.Rows(0).Item("PRICE"), 0)
-        txtPaid.Text = 0
-
-    End Sub
-
     Private Sub lnkCash_ServerClick(sender As Object, e As EventArgs) Handles lnkCash.ServerClick
         ClearForm()
+
+        PAYMENT_METHOD = VDM_BL.PaymentMethod.CASH
+
         pnlSelectChoice.Visible = False
         pnlCash.Visible = True
         lnkCash.Attributes("class") = "current"
         '----------------เริ่มรับชำระ --------------
-        Dim Script As String = "RequireCash();"
+        Dim Script As String = "RequireCash(); "
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "CashPayment", Script, True)
     End Sub
 
     Private Sub lnkCredit_ServerClick(sender As Object, e As EventArgs) Handles lnkCredit.ServerClick
         ClearForm()
+
+        PAYMENT_METHOD = VDM_BL.PaymentMethod.CREDIT_CARD
+
         pnlSelectChoice.Visible = False
         pnlCredit.Visible = True
         lnkCredit.Attributes("class") = "current"
@@ -145,6 +240,9 @@ Public Class Device_Payment
 
     Private Sub lnkTruemoney_ServerClick(sender As Object, e As EventArgs) Handles lnkTruemoney.ServerClick
         ClearForm()
+
+        PAYMENT_METHOD = VDM_BL.PaymentMethod.TRUE_MONEY
+
         pnlSelectChoice.Visible = False
         pnlTruemoney.Visible = True
         lnkTruemoney.Attributes("class") = "current"
@@ -228,8 +326,9 @@ Public Class Device_Payment
                 img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & PRODUCT_ID & "&LANG=" & VDM_BL.UILanguage.TH
             End If
             lblDISPLAY_NAME.Text = DT.Rows(0).Item("DISPLAY_NAME_" & BL.Get_Language_Code(LANGUAGE)).ToString()
-
-
+            PRODUCT_COST = DT.Rows(0).Item("PRICE")
+            txtRequire.Text = FormatNumber(DT.Rows(0).Item("PRICE"), 0)
+            txtPaid.Text = 0
         End If
 
         Dim SQL_Active As String = ""
@@ -265,6 +364,7 @@ Public Class Device_Payment
         End If
     End Sub
 
+
 #End Region
 
 #Region "SIM"
@@ -278,20 +378,77 @@ Public Class Device_Payment
                 img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=SIM_PACKAGE&UID=" & SIM_ID & "&LANG=" & VDM_BL.UILanguage.TH
             End If
             lblDISPLAY_NAME.Text = DT.Rows(0).Item("DISPLAY_NAME_" & BL.Get_Language_Code(LANGUAGE)).ToString()
+        End If
+    End Sub
+#End Region
 
+#Region "Cash"
+    'จ่ายครบ
+    Private Sub btnCashCompleted_Click(sender As Object, e As EventArgs) Handles btnCashCompleted.Click
+        '------------------- Update Information -----------------
+        UpdateCashCompleted()
+    End Sub
+
+    Private Sub btnCashTimeout_Click(sender As Object, e As EventArgs) Handles btnCashTimeout.Click
+        '------------If pay some amount
+        If CASH_PAID > 0 Then
+            UpdateCashProblem()
+        End If
+        Alert(Me.Page, txtCashProblem.Text)
+    End Sub
+
+    Private Sub btnCashProblem_Click(sender As Object, e As EventArgs) Handles btnCashProblem.Click
+        UpdateCashProblem()
+        Alert(Me.Page, txtCashProblem.Text)
+    End Sub
+
+    Private Sub UpdateCashCompleted()
+
+        Dim OrderInfo As DataTable = BL.Commit_Product_Order(TXN_ID, KO_ID, PRODUCT_ID)
+        If OrderInfo.Rows(0).Item("IsProblem") Then
+            txtCashProblem.Text = OrderInfo.Rows(0).Item("ProblemDetail").ToString
+            UpdateCashProblem()
+            Exit Sub
         End If
 
+        SERIAL_NO = OrderInfo.Rows(0).Item("SERIAL_NO").ToString
+        POS_ID = OrderInfo.Rows(0).Item("POS_ID")
+        SLOT_ID = OrderInfo.Rows(0).Item("SLOT_ID")
+
+        '------------------------- Update TB_SERVICE_TRANSACTION ------------------------
+        Dim SQL As String = "SELECT * FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
+        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        DT.Rows(0).Item("METHOD_ID") = PAYMENT_METHOD
+        DT.Rows(0).Item("CASH_PAID") = CASH_PAID
+        'DT.Rows(0).Item("CASH_CHANGE") = DBNull.Value
+        DT.Rows(0).Item("CASH_PROBLEM") = False
+        DT.Rows(0).Item("CASH_PROBLEM_DETAIL") = ""
+        Dim cmd As New SqlCommandBuilder(DA)
+        DA.Update(DT)
+        '--------------------------------
+        Response.Redirect("Complete_Order.aspx?PRODUCT_ID=" & PRODUCT_ID & "&POS_ID=" & POS_ID & "&SERIAL_NO=" & SERIAL_NO & "&SLOT_ID=" & SLOT_ID)
+
     End Sub
 
-    'จ่ายครบ
-    Private Sub btnCashPaid_Click(sender As Object, e As EventArgs) Handles btnCashPaid.Click
+    Private Sub UpdateCashProblem()
 
+        Dim OrderInfo As DataTable = BL.Commit_Product_Order(TXN_ID, KO_ID, PRODUCT_ID)
+
+        Dim SQL As String = "SELECT * FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
+        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        DT.Rows(0).Item("METHOD_ID") = PAYMENT_METHOD
+        DT.Rows(0).Item("CASH_PAID") = CASH_PAID
+        'DT.Rows(0).Item("CASH_CHANGE") = DBNull.Value
+        DT.Rows(0).Item("CASH_PROBLEM") = True
+        DT.Rows(0).Item("CASH_PROBLEM_DETAIL") = txtCashProblem.Text
+        Dim cmd As New SqlCommandBuilder(DA)
+        DA.Update(DT)
     End Sub
 
-    'จ่ายครบ
-    Private Sub btnCashTimeout_Click(sender As Object, e As EventArgs) Handles btnCashTimeout.Click
-
-    End Sub
 
 #End Region
 

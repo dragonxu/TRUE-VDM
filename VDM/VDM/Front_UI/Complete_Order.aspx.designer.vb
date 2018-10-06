@@ -23,6 +23,24 @@ Partial Public Class Complete_Order
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
     
     '''<summary>
+    '''scp control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents scp As Global.System.Web.UI.ScriptManager
+    
+    '''<summary>
+    '''UDP control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UDP As Global.System.Web.UI.UpdatePanel
+    
+    '''<summary>
     '''txtSlotName control.
     '''</summary>
     '''<remarks>

@@ -27,8 +27,6 @@ Public Class UC_CommonUI
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        Exit Sub
-
         If KO_ID = 0 Then
             Response.Redirect("../Machine_Console/Login.aspx")
             Response.End()

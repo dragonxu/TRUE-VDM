@@ -49,7 +49,7 @@
                  $('#lnkHome').click();
              }
              var waitSeconds = 7;// รอ 7 วินาที
-             setInterval(redirectDelegate, waitSeconds * 1000);
+             setTimeout(redirectDelegate, waitSeconds * 1000);
             
          </script>
 

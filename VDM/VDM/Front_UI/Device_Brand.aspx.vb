@@ -153,10 +153,18 @@ Public Class Device_Brand
             Next
         End If
 
-
         rptList.DataSource = DT
         rptList.DataBind()
 
+    End Sub
+
+    Protected Sub rptList_ItemCreated(sender As Object, e As RepeaterItemEventArgs)
+        If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
+
+        Dim btnBrand As LinkButton = e.Item.FindControl("btnBrand")
+
+        Dim scriptMan As ScriptManager = ScriptManager.GetCurrent(Page)
+        scriptMan.RegisterAsyncPostBackControl(btnBrand)
     End Sub
 
     Protected Sub rptList_ItemDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.RepeaterItemEventArgs)
@@ -164,29 +172,20 @@ Public Class Device_Brand
 
         Dim img As Image = e.Item.FindControl("img")
         Dim lblBrand As Label = e.Item.FindControl("lblBrand")
-        Dim btnBrand As HtmlAnchor = e.Item.FindControl("btnBrand")
-        Dim btnSelect As Button = e.Item.FindControl("btnSelect")
+        Dim btnBrand As LinkButton = e.Item.FindControl("btnBrand")
 
         img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=Brand&UID=" & e.Item.DataItem("BRAND_ID")
         lblBrand.Text = e.Item.DataItem("BRAND_NAME").ToString()
-        btnBrand.Attributes("onclick") = "$('#" & btnSelect.ClientID & "').click();"
-        btnSelect.CommandArgument = e.Item.DataItem("BRAND_ID")
+        btnBrand.CommandArgument = e.Item.DataItem("BRAND_ID")
 
-        'If (e.Item.ItemIndex + 1) Mod 3 = 0 Or CountRow = e.Item.ItemIndex + 1 Then
-        '    btnBrand.Attributes("class") = "Last"
-        'End If
     End Sub
     Protected Sub rptList_ItemCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.RepeaterCommandEventArgs)
         If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
-        Dim btnSelect As Button = e.Item.FindControl("btnSelect")
         Select Case e.CommandName
             Case "Select"
-                Response.Redirect("Product_List.aspx?BRAND_ID=" & btnSelect.CommandArgument)
-
+                Response.Redirect("Product_List.aspx?BRAND_ID=" & e.CommandArgument)
         End Select
     End Sub
-
-
 
 #End Region
 
@@ -194,7 +193,6 @@ Public Class Device_Brand
     Private Sub lnkHome_Click(sender As Object, e As ImageClickEventArgs) Handles lnkHome.Click
         Response.Redirect("Select_Menu.aspx")
     End Sub
-
 
 
 End Class

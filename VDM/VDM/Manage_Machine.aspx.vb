@@ -287,23 +287,34 @@ Public Class Manage_Machine
             Exit Sub
         End If
 
-        '-------------- Save SIM Slot-------------
+        '-------------- Save Default Device-------------
+        Dim Master As DataTable = BL.GetList_Device_Master
         Sql = "SELECT * FROM TB_KIOSK_DEVICE WHERE KO_ID=" & KO_ID
         DT = New DataTable
         DA = New SqlDataAdapter(Sql, BL.ConnectionString)
         DA.Fill(DT)
-        For i As Integer = 0 To Dispenser.Slots.Count - 1
-            DT.DefaultView.RowFilter = "D_ID=" & Dispenser.Slots(i).DEVICE_ID
-            DR = DT.NewRow
-            DR("KO_ID") = KO_ID
-            DR("D_ID") = Dispenser.Slots(i).DEVICE_ID
-            DR("Current_Qty") = 0
-            DR("DT_ID") = 8
-            DR("DS_ID") = 2
-            DR("Update_Time") = Now
-            DT.Rows.Add(DR)
-            cmd = New SqlCommandBuilder(DA)
-            DA.Update(DT)
+        For i As Integer = 0 To DT.Rows.Count - 1
+            Master.DefaultView.RowFilter = "D_ID=" & DT.Rows(i).Item("D_ID")
+            If Master.DefaultView.Count = 0 Then
+                If IsDBNull(DT.Rows(i).Item("Current_Qty")) OrElse DT.Rows(i).Item("Current_Qty") = 0 Then
+                    BL.Drop_KIOSK_DEVICE(KO_ID, DT.Rows(i).Item("D_ID"))
+                End If
+            End If
+        Next
+        For i As Integer = 0 To Master.Rows.Count - 1
+            DT.DefaultView.RowFilter = "D_ID=" & Master.Rows(i).Item("D_ID")
+            If DT.DefaultView.Count = 0 Then
+                DR = DT.NewRow
+                DR("KO_ID") = KO_ID
+                DR("D_ID") = Master.Rows(i).Item("D_ID")
+                DR("Current_Qty") = 0
+                DR("DT_ID") = Master.Rows(i).Item("DT_ID")
+                DR("DS_ID") = DBNull.Value
+                DR("Update_Time") = Now
+                DT.Rows.Add(DR)
+                cmd = New SqlCommandBuilder(DA)
+                DA.Update(DT)
+            End If
         Next
 
         Message_Toastr("บันทึกสำเร็จ", ToastrMode.Success, ToastrPositon.TopRight, Me.Page)

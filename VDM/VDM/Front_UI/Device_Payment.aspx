@@ -107,7 +107,7 @@
                                                         <span class="true-l">เงินสด<span>
                                                     </dt>
                                                 </a>
-                                                <a id="lnkCredit" runat="server">
+                                                <a id="lnkCredit" runat="server" visible="false">
                                                     <dt class="icon-credit">
                                                         <span class="true-l">บัตรเครดิต
                                                     <p class="text">บัตรเดบิต บัตรเงินสด</p>
@@ -126,7 +126,7 @@
                                         </a>--%>
                                             </div>
                                         </div>
-                                         <asp:Panel ID="pnlSelectChoice" runat="server">
+                                <asp:Panel ID="pnlSelectChoice" runat="server">
                                     <h4 class="margin true-m" style="margin-top: 60px;">เลือกวิธีชำระเงิน</h4>
                                 </asp:Panel>
                                     </div>
@@ -177,7 +177,7 @@
                                                     <h3 class="true-b t-red">บาท</h3>
                                                 </div>
                                             </div>
-                                            <p class="time true-l">เวลาชำระเงินสดคงเหลือ 2:00:00 นาที</p>
+                                            <p class="time true-l">เวลาชำระเงินสดคงเหลือ <span id="castTimeOut"></span> นาที</p>
                                         </div>
 
                                         <div style="position: absolute; top: 300px; right: 100px; display:none;" class="row">
@@ -217,8 +217,10 @@
                                                 1000 :
                                                 <asp:TextBox ID="txt1000" runat="server" Text="0"></asp:TextBox>
                                             </div>
-                                            <asp:Button ID="btnCashPaid" runat="server" />
+                                            <asp:TextBox ID="txtCashProblem" runat="server"></asp:TextBox>
+                                            <asp:Button ID="btnCashCompleted" runat="server" />
                                             <asp:Button ID="btnCashTimeout" runat="server" />
+                                            <asp:Button ID="btnCashProblem" runat="server" />
                                         </div>                                      
                                     </form>
                                 </asp:Panel>
@@ -360,24 +362,27 @@
 
                 } else {
                     // จ่ายครบ
+                    clearInterval(cashTimer);
+                    $('#btnCashCompleted').click();
                 }
             }
   
             function updatePayment(amount,status,message) {
                
-                if (status=='true') {
-                    tryReq = 0;
+                if (status == 'true') {
+                    /*-----------Lock Mode-----------*/
+                    $('footer').css("visibility", "hidden");                   
+                    $('#pnlSelectChoice').css("display", "none");
+                    $('.btu-payment').css("visibility", "hidden");
                     /*---------Update Payment--------*/
-                    $('#txt' + amount).val(parseInt($('#txt' + amount).val()) + 1);
+                    var qty = $('#txt' + amount).val().replace(',', '');
+                    qty = parseInt(qty) + 1;
+                    $('#txt' + amount).val(qty);
                     RequireCash();
                 } else {
-                    tryReq += 1;
-                    alert(message);
-                      //Toastr Problem Message
-                    if (tryReq > 3) {
-                        //  Error เกิน 3 ครั้ง
-                        $('#btnCashTimeout').click();
-                    }
+                    clearInterval(cashTimer);
+                    $('#txtCashProblem').val(message);
+                    $('#btnCashProblem').click();
                 }
             }
 
@@ -387,12 +392,32 @@
                 for (i = 0; i < money.length; i++) {
                     paid += parseInt($('#txt' + money[i]).val()) * money[i];
                 }
-                $('#txtPaid').val(paid);
+                var display = paid.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#txtPaid').val(display);
                 var cost = parseInt($('#txtCost').val().replace(',',''));
                 var required = cost - paid;
-                $('#txtRequire').val(required);
+                if (required < 0) required = 0;
+                display = required.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                $('#txtRequire').val(display);
                 
             }
+
+            var cashSec = 120;
+            var cashCounter = function () {
+                if (cashSec <= 0) {
+                    $('#txtCashProblem').val('ชำระเกินระยะเวลาที่กำหนด');
+                    $('#btnCashTimeout').click();
+                    clearInterval(cashTimer);
+                } else {
+                    cashSec -= 1;
+                    $('#castTimeOut').html(cashSec);
+                    var min = Math.floor(cashSec / 60).toString().padStart(2, '0');
+                    var sec = (cashSec % 60).padStart(2, '0');
+                    // display
+                    
+                }
+            }
+            var cashTimer = setInterval(cashCounter, 1000);
 
         </script>
 

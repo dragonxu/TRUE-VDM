@@ -39,30 +39,24 @@ Public Class Product_List
 
 #End Region
 
-    Protected Property BRAND_ID As Integer
+    Protected ReadOnly Property BRAND_ID As Integer
         Get
             Try
-                Return lblCode.Attributes("BRAND_ID")
+                Return Request.QueryString("BRAND_ID")
             Catch ex As Exception
                 Return 0
             End Try
         End Get
-        Set(value As Integer)
-            lblCode.Attributes("BRAND_ID") = value
-        End Set
     End Property
 
-    Protected Property CAT_ID As Integer
+    Protected ReadOnly Property CAT_ID As Integer
         Get
             Try
-                Return lblCode.Attributes("CAT_ID")
+                Return Request.QueryString("CAT_ID")
             Catch ex As Exception
                 Return 0
             End Try
         End Get
-        Set(value As Integer)
-            lblCode.Attributes("CAT_ID") = value
-        End Set
     End Property
 
 
@@ -110,11 +104,9 @@ Public Class Product_List
         End If
 
         If Not IsPostBack Then
-            BRAND_ID = Request.QueryString("BRAND_ID")
             BindList()
         Else
             initFormPlugin()
-
         End If
     End Sub
     Private Sub initFormPlugin()
@@ -212,13 +204,21 @@ Public Class Product_List
 
     End Sub
 
+    Protected Sub rptList_ItemCreated(sender As Object, e As RepeaterItemEventArgs)
+        If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
+
+        Dim btnProduct As LinkButton = e.Item.FindControl("btnProduct")
+
+        Dim scriptMan As ScriptManager = ScriptManager.GetCurrent(Page)
+        scriptMan.RegisterAsyncPostBackControl(btnProduct)
+    End Sub
+
     Protected Sub rptList_ItemDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.RepeaterItemEventArgs)
         If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
 
         Dim img As Image = e.Item.FindControl("img")
         Dim lblProduct As Label = e.Item.FindControl("lblProduct")
-        Dim btnProduct As HtmlAnchor = e.Item.FindControl("btnProduct")
-        Dim btnSelect As Button = e.Item.FindControl("btnSelect")
+        Dim btnProduct As LinkButton = e.Item.FindControl("btnProduct")
 
         Dim Path As String = BL.Get_Product_Picture_Path(e.Item.DataItem("PRODUCT_ID"), LANGUAGE)
         If IO.File.Exists(Path) Then
@@ -228,27 +228,19 @@ Public Class Product_List
         End If
 
         lblProduct.Text = e.Item.DataItem("MODEL").ToString()
-        btnProduct.Attributes("onclick") = "$('#" & btnSelect.ClientID & "').click();"
-        btnSelect.CommandArgument = e.Item.DataItem("PRODUCT_ID")
+        btnProduct.CommandArgument = e.Item.DataItem("PRODUCT_ID")
 
-        'If (e.Item.ItemIndex + 1) Mod 3 = 0 Or CountRow = e.Item.ItemIndex + 1 Then
-        '    btnBrand.Attributes("class") = "Last"
-        'End If
     End Sub
 
     Protected Sub rptList_ItemCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.RepeaterCommandEventArgs)
         If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
-        Dim btnSelect As Button = e.Item.FindControl("btnSelect")
-        Dim lblProduct As Label = e.Item.FindControl("lblProduct")
+
         Select Case e.CommandName
             Case "Select"
-                Response.Redirect("Device_Product_Detail.aspx?PRODUCT_ID=" & btnSelect.CommandArgument & "&BRAND_ID=" & BRAND_ID & "&MODEL=" & lblProduct.Text)
+                Response.Redirect("Device_Product_Detail.aspx?PRODUCT_ID=" & e.CommandArgument & "&BRAND_ID=" & BRAND_ID) '& "&MODEL=" & lblProduct.Text)
 
         End Select
     End Sub
-
-
-
 
     Private Sub lnkHome_Click(sender As Object, e As ImageClickEventArgs) Handles lnkHome.Click
         Response.Redirect("Select_Menu.aspx")

@@ -36,6 +36,18 @@ Public Class Complete_Order
 
 #Region "Page Property"
 
+    Public Property POS_ID As Integer
+        Get
+            Try
+                Return CInt(txtPosID.Text)
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+        Set(value As Integer)
+            txtPosID.Text = value
+        End Set
+    End Property
 
     Private Property SLOT_NAME As String
         Get
@@ -46,14 +58,6 @@ Public Class Complete_Order
         End Set
     End Property
 
-    Private Property POS_ID As String
-        Get
-            Return txtPosID.Text
-        End Get
-        Set(value As String)
-            txtPosID.Text = value
-        End Set
-    End Property
 
     Private Property Result_Status As String
         Get
@@ -72,7 +76,6 @@ Public Class Complete_Order
             txtMessage.Text = value
         End Set
     End Property
-#End Region
 
     Public ReadOnly Property PRODUCT_ID As Integer
         Get
@@ -80,45 +83,191 @@ Public Class Complete_Order
         End Get
     End Property
 
+    Public ReadOnly Property SIM_ID As Integer
+        Get
+            Return CInt(Request.QueryString("SIM_ID"))
+        End Get
+    End Property
+
+
+    Private Property PRODUCT_NAME As String
+        Get
+            Try
+                Return ViewState("PRODUCT_NAME")
+            Catch ex As Exception
+                Return ""
+            End Try
+        End Get
+        Set(value As String)
+            ViewState("PRODUCT_NAME") = value
+        End Set
+    End Property
+
+    Private Property PRODUCT_CODE As String
+        Get
+            Try
+                Return ViewState("PRODUCT_CODE")
+            Catch ex As Exception
+                Return ""
+            End Try
+        End Get
+        Set(value As String)
+            ViewState("PRODUCT_CODE") = value
+        End Set
+    End Property
+
+    Private Property PRICE As Integer
+        Get
+            Try
+                Return ViewState("PRICE")
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+        Set(value As Integer)
+            ViewState("PRICE") = value
+        End Set
+    End Property
+
+    Private Property KO_CODE As String
+        Get
+            Try
+                Return ViewState("KO_CODE")
+            Catch ex As Exception
+                Return ""
+            End Try
+        End Get
+        Set(value As String)
+            ViewState("KO_CODE") = value
+        End Set
+    End Property
+
+    Private Property SITE_ID As Integer
+        Get
+            Try
+                Return ViewState("SITE_ID")
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+        Set(value As Integer)
+            ViewState("SITE_ID") = value
+        End Set
+    End Property
+
+    Private Property SITE_CODE As String
+        Get
+            Try
+                Return ViewState("SITE_CODE")
+            Catch ex As Exception
+                Return ""
+            End Try
+        End Get
+        Set(value As String)
+            ViewState("SITE_CODE") = value
+        End Set
+    End Property
+
+    Private Property SITE_NAME As String
+        Get
+            Try
+                Return ViewState("SITE_NAME")
+            Catch ex As Exception
+                Return ""
+            End Try
+        End Get
+        Set(value As String)
+            ViewState("SITE_NAME") = value
+        End Set
+    End Property
+
+    Private Property SHIFT_ID As Integer
+        Get
+            Try
+                Return ViewState("SHIFT_ID")
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+        Set(value As Integer)
+            ViewState("SHIFT_ID") = value
+        End Set
+    End Property
+
+    Private Property METHOD_ID As VDM_BL.PaymentMethod
+        Get
+            Try
+                Return ViewState("METHOD_ID")
+            Catch ex As Exception
+                Return VDM_BL.PaymentMethod.UNKNOWN
+            End Try
+        End Get
+        Set(value As VDM_BL.PaymentMethod)
+            ViewState("METHOD_ID") = value
+        End Set
+    End Property
+
+    Private Property SLIP_CODE As String
+        Get
+            Try
+                Return ViewState("SLIP_CODE")
+            Catch ex As Exception
+                Return ""
+            End Try
+        End Get
+        Set(value As String)
+            ViewState("SLIP_CODE") = value
+        End Set
+    End Property
+
+#End Region
+
+    Public Property SLOT_ID As Integer
+        Get
+            Try
+                Return ViewState("SLOT_ID")
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+        Set(value As Integer)
+            ViewState("SLOT_ID") = value
+        End Set
+    End Property
+
+    Private Property SERIAL_NO As String
+        Get
+            Try
+                Return ViewState("SERIAL_NO")
+            Catch ex As Exception
+                Return ""
+            End Try
+        End Get
+        Set(value As String)
+            ViewState("SERIAL_NO") = value
+        End Set
+    End Property
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        BL.Update_Service_Transaction(TXN_ID, Me.Page) '-------------- Update ทุกหน้า ------------
         If Not IsPostBack Then
-            PickUp()
+            SLOT_ID = Request.QueryString("SLOT_ID")
+            POS_ID = Request.QueryString("POS_ID")
+            SERIAL_NO = Request.QueryString("SERIAL_NO")
+            If PRODUCT_ID <> 0 Then
+                PickUpProduct()
+            Else
+                PickUpSIM()
+            End If
         End If
 
     End Sub
 
-    Private Sub PickUp()
+    Private Sub PickUpProduct()
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "PickProduct", "pickProduct();", True)
+    End Sub
 
-        '--------------- Get All Product Slot------------
-        Dim SQL As String = ""
-        SQL &= " SELECT PRODUCT.SLOT_NAME,POS_ID,TOTAL" & vbLf
-        SQL &= " FROM" & vbLf
-        SQL &= " (SELECT SLOT_NAME ,COUNT(1) TOTAL" & vbLf
-        SQL &= " FROM VW_CURRENT_PRODUCT_STOCK" & vbLf
-        SQL &= " WHERE KO_ID=" & KO_ID & " AND PRODUCT_ID=" & PRODUCT_ID & vbLf
-        SQL &= " GROUP BY SLOT_NAME) PRODUCT" & vbLf
-        SQL &= " LEFT JOIN MS_SLOT_ARM_POSITION ARM ON PRODUCT.SLOT_NAME=ARM.SLOT_NAME" & vbLf
-        Dim DT As New DataTable
-        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
-        DA.Fill(DT)
-
-        If DT.Rows.Count = 0 Then
-            Alert(Me.Page, "PRODUCT NOT FOUND")
-            Exit Sub
-        End If
-        '---------------- Random Selction -------------
-        DT.Columns.Add("RND")
-        For i As Integer = 0 To DT.Rows.Count - 1
-            DT.Rows(i).Item("RND") = GenerateNewUniqueID()
-        Next
-        DT.DefaultView.Sort = "TOTAL DESC,RND ASC"
-
-        SLOT_NAME = DT.DefaultView(0).Item("SLOT_NAME")
-        POS_ID = DT.DefaultView(0).Item("POS_ID")
-
-        '----------------- Call LocalController -----------------------
+    Private Sub PickUpSIM()
 
     End Sub
 
@@ -132,43 +281,46 @@ Public Class Complete_Order
     End Sub
 
     Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
-        '------------------ Update Transaction ------
-        Dim SQL As String = "SELECT TOP 1 SERIAL_NO,SLOT_NAME,SLOT_ID" & vbLf
-        SQL &= " FROM VW_CURRENT_PRODUCT_STOCK" & vbLf
-        SQL &= " WHERE KO_ID=" & KO_ID & " AND PRODUCT_ID=" & PRODUCT_ID & " AND SLOT_NAME='" & SLOT_NAME.Replace("'", "") & "'" & vbLf
-        SQL &= " ORDER BY ORDER_NO ASC" & vbLf
-        Dim DT As New DataTable
-        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
-        DA.Fill(DT)
-        Dim SERIAL_NO As String = DT.Rows(0).Item("SERIAL_NO").ToString
-        Dim SLOT_ID As Integer = DT.Rows(0).Item("SLOT_ID")
+
+        Dim DT As DataTable
+
         '--------------- Get Product Price -------------
         DT = BL.Get_Product_Info_From_ID(PRODUCT_ID)
-        Dim PRICE As Integer = DT.Rows(0).Item("PRICE")
+        PRODUCT_CODE = DT.Rows(0).Item("PRODUCT_CODE")
+        PRODUCT_NAME = DT.Rows(0).Item("DISPLAY_NAME_TH")
+        PRICE = DT.Rows(0).Item("PRICE")
         '--------------- Get Koisk Detail-------------
         DT = BL.GetList_Kiosk(KO_ID)
-        Dim KO_CODE As String = DT.Rows(0).Item("KO_CODE")
-        Dim SITE_CODE As String = DT.Rows(0).Item("SITE_CODE")
+        KO_CODE = DT.Rows(0).Item("KO_CODE")
+        SITE_ID = DT.Rows(0).Item("SITE_ID")
+        SITE_CODE = DT.Rows(0).Item("SITE_CODE")
+        SITE_NAME = DT.Rows(0).Item("SITE_NAME")
         '--------------- Get Shift Detail---------------
         DT = BL.Get_Kiosk_Current_Shift(KO_ID)
-        Dim SHIFT_ID As Integer = DT.Rows(0).Item("SHIFT_ID")
+        SHIFT_ID = DT.Rows(0).Item("SHIFT_ID")
 
-        SQL = "SELECT TOP 0 * FROM TB_BUY_PRODUCT"
+        '------------------ Gen Reciept ---------
+        Dim SQL As String = "SELECT * FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
+        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
         DT = New DataTable
-        DA = New SqlDataAdapter(SQL, BL.ConnectionString)
         DA.Fill(DT)
-        Dim DR As DataRow = DT.NewRow
-        DR("TXN_ID") = TXN_ID
-        DR("ITEM_NO") = 1
-        DR("PRODUCT_ID") = PRODUCT_ID
-        DR("SERIAL_NO") = SERIAL_NO
-        DR("UNIT_PRICE") = PRICE
-        DR("QUANTITY") = 1
-        DR("VAT") = DBNull.Value
-        DR("TOTAL_PRICE") = PRICE
-        DT.Rows.Add(DR)
-        Dim cmd As New SqlCommandBuilder(DA)
-        DA.Update(DT)
+        METHOD_ID = DT.Rows(0).Item("METHOD_ID")
+        SLIP_CODE = BL.Get_Confirmation_Slip_Code(TXN_ID)
+
+        '---------------- Create Slip Content -----------
+        Select Case METHOD_ID
+            Case VDM_BL.PaymentMethod.CASH
+                Dim SLIP As DataTable = BL.Gen_Cash_Confirmation_Slip(TXN_ID, SITE_CODE, SITE_NAME, SLIP_CODE, DT.Rows(0).Item("TXN_END"), PRODUCT_CODE, PRODUCT_NAME, SERIAL_NO, PRICE, DT.Rows(0).Item("CASH_PAID"))
+                '----------- Save Slip Content ----------
+                Dim C As New Converter
+                DT.Rows(0).Item("SLIP_CONTENT") = C.DatatableToXML(SLIP)
+                DT.Rows(0).Item("CASH_CHANGE") = DT.Rows(0).Item("CASH_PAID") - PRICE
+                Dim cmd As New SqlCommandBuilder(DA)
+                DA.Update(DT)
+
+            Case VDM_BL.PaymentMethod.TRUE_MONEY
+
+        End Select
         '------------------ Save Log ----------------
         BL.Save_Product_Movement_Log(SHIFT_ID, VDM_BL.ShiftStatus.OnGoing, PRODUCT_ID, SERIAL_NO,
                                      VDM_BL.StockMovementType.Sell, SLOT_NAME, SLOT_ID, "Sell", 0, "ขายที่ " & SITE_CODE & " " & KO_CODE & " ไปเมื่อ " & Now.ToString("dd-MMM-yyyy hh:mm:ss"), 0, Now)
@@ -176,6 +328,10 @@ Public Class Complete_Order
         BL.Drop_PRODUCT_STOCK_SERIAL(SLOT_ID, SERIAL_NO)
 
         '------------------ ไปหน้า พิมพ์ใบเสร็จ----------
-        Response.Redirect("Thank_You.aspx?PRODUCT_ID=" & PRODUCT_ID)
+        Response.Redirect("Thank_You.aspx")
     End Sub
+
+
+
+
 End Class
