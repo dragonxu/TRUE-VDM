@@ -390,4 +390,31 @@ Partial Public Class Device_Payment
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents CommonUI As Global.VDM.UC_CommonUI
+    
+    '''<summary>
+    '''pnlModul control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlModul As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''btnStart_Take_Photos control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnStart_Take_Photos As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''lnkClose control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkClose As Global.System.Web.UI.WebControls.LinkButton
 End Class

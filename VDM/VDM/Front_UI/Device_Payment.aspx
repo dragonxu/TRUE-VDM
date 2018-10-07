@@ -443,6 +443,39 @@
 
         <uc1:UC_CommonUI runat="server" ID="CommonUI" />
 
+
+         <asp:Panel ID="pnlModul" runat="server" Visible ="false" >
+
+                <div class="fancybox-overlay fancybox-overlay-fixed" style="width: auto; height: auto; display: block;">
+                    <div class="fancybox-wrap fancybox-desktop fancybox-type-inline fancybox-opened" tabindex="-1" style="width: 818px; height: auto; position: absolute; top: 250px; left: 122px; opacity: 1; overflow: visible;">
+                        <div class="fancybox-skin" style="padding: 0px; width: auto; height: auto;">
+                            <div class="fancybox-outer">
+                                <div class="fancybox-inner" style="overflow: auto; width: 818px; height: auto;">
+                                    <div id="popup2" style="display: block;">
+
+                                        <div class="privilege">
+
+                                            <h3 class="true-m" style="margin: 20px 0 60px 0;">สำเร็จ</h3>
+                                            <div class="idcard">
+                                                <img src="images/pic-idcard2.png">
+                                            </div>
+
+                                            <%--<h4 class="true-m t-red">อย่าลืมเก็บบัตรของท่าน</h4>--%>
+                                            <div class="icon" style="margin: 0px 0 50px 0">
+                                                <asp:LinkButton ID="btnStart_Take_Photos" runat="server" class="btu true-l" Text="เริ่มแสกนใบหน้า"></asp:LinkButton>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%--<a title="Close" class="fancybox-item fancybox-close" href="javascript:;"></a>--%>
+                            <asp:LinkButton ID="lnkClose" runat="server" class="fancybox-item fancybox-close"></asp:LinkButton>
+                        </div>
+                    </div>
+                </div>
+
+            </asp:Panel>
     </form>
 
 </body>
