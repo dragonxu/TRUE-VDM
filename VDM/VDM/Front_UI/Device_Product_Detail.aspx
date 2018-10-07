@@ -79,7 +79,7 @@
         <%--   <asp:UpdatePanel ID="udpList" runat="server">
             <ContentTemplate>--%>
         <div class="warp">
-            <header>
+            <header style ="height :unset;">
                 <img src="images/bg-top.png" />
             </header>
             <main>
