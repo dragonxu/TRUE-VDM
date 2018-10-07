@@ -529,7 +529,6 @@
     <Content Include="Machine_Console\Slider\js\ion.rangeSlider.min.js" />
     <Content Include="Machine_Console\Slider\js\jQuery-2.1.3.min.js" />
     <Content Include="Machine_Console\Styles\app.css" />
-    <Content Include="Machine_Console\Styles\app.min.725970e8.css" />
     <Content Include="Machine_Console\Styles\app.skins.css" />
     <Content Include="Machine_Console\TestSlide.aspx" />
     <Content Include="Machine_Console\UC_Product_Stock.ascx" />
@@ -599,6 +598,7 @@
     <Content Include="Front_UI\fonts\tmedium.woff" />
     <Content Include="Front_UI\fonts\tmedium.woff2" />
     <Content Include="Front_UI\MasterFront.Master" />
+    <None Include="My Project\PublishProfiles\TempPublish.pubxml" />
     <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
@@ -628,7 +628,6 @@
     <Content Include="Styles\Site.css" />
     <Content Include="Styles\sli.css" />
     <Content Include="Styles\webfont.css" />
-    <Content Include="Test.aspx" />
     <Content Include="Test_API\Test_API_Interface.aspx" />
     <Content Include="Test_API\Test_BBL.aspx" />
     <Content Include="Test_API\Test_TMN_Payment.aspx" />
@@ -652,7 +651,6 @@
     <Content Include="UC_Kiosk_Shelf.ascx" />
     <Content Include="UC_Product_Spec.ascx" />
     <Content Include="Upload_User_Form.aspx" />
-    <None Include="Web References\Printer\Print.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -961,13 +959,6 @@
       <DependentUpon>Setting_Site.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Test.aspx.designer.vb">
-      <DependentUpon>Test.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Test.aspx.vb">
-      <DependentUpon>Test.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="Test_API\Test_API_Interface.aspx.designer.vb">
       <DependentUpon>Test_API_Interface.aspx</DependentUpon>
     </Compile>
@@ -1160,11 +1151,6 @@
     <Compile Include="Upload_User_Form.aspx.vb">
       <DependentUpon>Upload_User_Form.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="Web References\Printer\Reference.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -1440,11 +1426,6 @@
     <Content Include="Styles\scss\_plugins.scss" />
     <Content Include="Styles\scss\_utilities.scss" />
     <Content Include="Styles\scss\_variables.scss" />
-    <None Include="Web References\Printer\Print.wsdl" />
-    <Content Include="Web References\Printer\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.vb</LastGenOutput>
-    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1486,19 +1467,6 @@
   </ItemGroup>
   <ItemGroup>
     <WebReferences Include="Web References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferenceUrl Include="http://localhost:59807/Print.asmx">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\Printer\</RelPath>
-      <UpdateFromURL>http://localhost:59807/Print.asmx</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>VDM_Printer_Print</CachedSettingsPropName>
-    </WebReferenceUrl>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

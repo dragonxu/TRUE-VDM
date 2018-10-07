@@ -275,6 +275,15 @@ Partial Public Class Device_Payment
     Protected WithEvents txt1000 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''txtLocalControllerURL control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtLocalControllerURL As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''txtCashProblem control.
     '''</summary>
     '''<remarks>

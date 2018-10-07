@@ -42,7 +42,7 @@
                     <asp:ImageButton ID="lnkHome" runat="server" ImageUrl="images/btu-home.png" />
                 </span>
                 <span class="col-md-6">
-                      
+                      <asp:TextBox ID="txtLocalControllerURL" runat="server" Style="display:none;"></asp:TextBox>
                 </span>
             </div>
         </nav>
@@ -67,10 +67,7 @@
             
 
              function cashDispense(_type,qty) {
-                 var url = '<% 
-            Dim BL As New VDM_BL
-            Response.Write(BL.LocalControllerURL)
-                    %>/CashDispense.aspx?Type=' + _type + '&Q=' + qty + '&callback=';
+                 var url = $('#txtLocalControllerURL').val() + '/CashDispense.aspx?Type=' + _type + '&Q=' + qty + '&callback=';
                     // 
                     return;
                     var script = document.createElement('script');
@@ -80,9 +77,7 @@
              }
 
              function coinDispense(_type,qty) {
-                 var url = '<% 
-             Response.Write(BL.LocalControllerURL)
-                    %>/CoinDispense.aspx?Type=' + _type + '&Q=' + qty + '&callback=';
+                 var url = $('#txtLocalControllerURL').val() + '/CoinDispense.aspx?Type=' + _type + '&Q=' + qty + '&callback=';
                     // 
                     return;
                     var script = document.createElement('script');

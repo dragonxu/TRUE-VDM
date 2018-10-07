@@ -41,6 +41,15 @@ Partial Public Class Complete_Order
     Protected WithEvents UDP As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
+    '''txtLocalControllerURL control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtLocalControllerURL As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''txtSerial control.
     '''</summary>
     '''<remarks>

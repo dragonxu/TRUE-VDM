@@ -217,6 +217,7 @@
                                                 1000 :
                                                 <asp:TextBox ID="txt1000" runat="server" Text="0"></asp:TextBox>
                                             </div>
+                                            <asp:TextBox ID="txtLocalControllerURL" runat="server"></asp:TextBox>
                                             <asp:TextBox ID="txtCashProblem" runat="server"></asp:TextBox>
                                             <asp:Button ID="btnCashCompleted" runat="server" />
                                             <asp:Button ID="btnCashTimeout" runat="server" />
@@ -351,10 +352,7 @@
                 
                 if (required > 0) {
                     // Gen URL
-                    var url = '<% 
-            Dim BL As New VDM_BL
-            Response.Write(BL.LocalControllerURL)
-                    %>/RequireCash.aspx?REQ=' + required + '&callback=updatePayment';
+                    var url = $('#txtLocalControllerURL').val() + '/RequireCash.aspx?REQ=' + required + '&callback=updatePayment';
                     // 
                     var script = document.createElement('script');
                     script.src = url;

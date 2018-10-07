@@ -9,7 +9,6 @@ Public Class _Default
             ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('กรุณาเข้าสู่ระบบ'); window.location.href='SignIn.aspx';", True)
             Exit Sub
         End If
-
     End Sub
 
 End Class

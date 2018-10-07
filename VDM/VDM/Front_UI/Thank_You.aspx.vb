@@ -41,6 +41,9 @@ Public Class Thank_You
             '---------------- Change And Print Slip--------------
             WaitForPrintSlip()
             Change()
+
+            txtLocalControllerURL.Text = BL.LocalControllerURL
+
         End If
 
 

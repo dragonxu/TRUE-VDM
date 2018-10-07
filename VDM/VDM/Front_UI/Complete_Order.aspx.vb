@@ -329,6 +329,8 @@ Public Class Complete_Order
             Else
                 PickUpSIM()
             End If
+
+            txtLocalControllerURL.Text = BL.LocalControllerURL
         End If
 
     End Sub

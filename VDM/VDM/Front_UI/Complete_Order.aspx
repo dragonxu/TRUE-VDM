@@ -74,6 +74,7 @@
                             </div>
                         </div>
                         <div class="col-md-12">
+                            <asp:TextBox ID="txtLocalControllerURL" runat="server" Style="display:none;"></asp:TextBox>
                             <asp:TextBox ID="txtSerial" runat="server"  Style="display:none;"></asp:TextBox>
                             <asp:TextBox ID="txtSlotID" runat="server"  Style="display:none;"></asp:TextBox>
                             <asp:TextBox ID="txtSlotName" runat="server"  Style="display:none;"></asp:TextBox>
@@ -108,10 +109,7 @@
 
             function pickProduct() {
                 // Gen URL
-                var url = '<% 
-            Dim BL As New VDM_BL
-            Response.Write(BL.LocalControllerURL)
-                    %>/ProductPicker.aspx?Mode=GoPick&OpenTimeOut=10&POS_ID=' + $('#txtPosID').val() + '&callback=picked';
+                var url =  $('#txtLocalControllerURL').val() + '/ProductPicker.aspx?Mode=GoPick&OpenTimeOut=10&POS_ID=' + $('#txtPosID').val() + '&callback=picked';
               
                     var script = document.createElement('script');
                     script.src = url;

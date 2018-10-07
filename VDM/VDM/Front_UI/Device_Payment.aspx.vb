@@ -130,6 +130,7 @@ Public Class Device_Payment
 
     Private Sub initFormPlugin()
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
+        txtLocalControllerURL.Text = BL.LocalControllerURL
     End Sub
 
     Private Sub ClearForm()

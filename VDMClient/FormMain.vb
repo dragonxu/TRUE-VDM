@@ -12,17 +12,17 @@ Public Class FormMain
     End Sub
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles Me.Load
-        'Cursor.Hide()
+        Cursor.Hide()
         InitChromium()
 
         '------------- Start Product Controller------------
-        Dim ProductThred As New Threading.Thread(AddressOf StartProductController)
-        ProductThred.Priority = Threading.ThreadPriority.Normal
-        ProductThred.IsBackground = True
-        ProductThred.Start()
+        'Dim ProductThred As New Threading.Thread(AddressOf StartProductController)
+        'ProductThred.Priority = Threading.ThreadPriority.Normal
+        'ProductThred.IsBackground = True
+        'ProductThred.Start()
 
         '------------- Start SIM Dispenser------------
-
+        StartProductController()
     End Sub
 
     Private Sub InitChromium()
@@ -31,17 +31,19 @@ Public Class FormMain
         ChromeBrowser = New ChromiumWebBrowser("about:blank")
         Me.Controls.Add(ChromeBrowser)
         ChromeBrowser.Dock = DockStyle.Fill
-        ChromeBrowser.Load("http://localhost/Default.aspx")
+        ChromeBrowser.Load("http://localhost/Hardware/")
+
     End Sub
 
     Private Sub StartProductController()
-        Dim WebRequest As WebRequest = WebRequest.Create("http://localhost/ProductPicker.aspx?Mode=SetHome&callback=test")
-        WebRequest.Method = "POST"
-        WebRequest.Timeout = 5 * 60 * 1000 '5 นาที
-        Dim WebResponse = WebRequest.GetResponse().GetResponseStream()
-        Dim Reader As New StreamReader(WebResponse)
-        Dim Result = Reader.ReadToEnd()
-        Reader.Close()
-        WebResponse.Close()
+
+        Dim url As String = "http://localhost/Hardware/ProductPicker.aspx?Mode=SetHome&callback=test"
+        ' Using WebRequest
+        Dim request As WebRequest = WebRequest.Create(url)
+        Dim response As WebResponse = request.GetResponse()
+        Dim result As String = New StreamReader(response.GetResponseStream()).ReadToEnd()
+        ' Using WebClient
+        Dim result1 As String = New WebClient().DownloadString(url)
+
     End Sub
 End Class
