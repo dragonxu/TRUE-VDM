@@ -73,6 +73,8 @@
                             </div>
                         </div>
                         <div class="col-md-12">
+                            <asp:TextBox ID="txtSerial" runat="server"  Style="display:none;"></asp:TextBox>
+                            <asp:TextBox ID="txtSlotID" runat="server"  Style="display:none;"></asp:TextBox>
                             <asp:TextBox ID="txtSlotName" runat="server"  Style="display:none;"></asp:TextBox>
                             <asp:TextBox ID="txtPosID" runat="server"  Style="display:none;" Text="0"></asp:TextBox>
                             <asp:TextBox ID="txtStatus" runat="server"  Style="display:none;"></asp:TextBox>
@@ -120,11 +122,12 @@
 
                 $('#txtStatus').val(status);
                 $('#txtMessage').val(message);
+                /*
                 if (status) {
                     //$('#btnNext').click();
                 } else {
                     // ไม่เจอ Product
-                }
+                }*/
                 $('#btnNext').click();
             }
         </script>

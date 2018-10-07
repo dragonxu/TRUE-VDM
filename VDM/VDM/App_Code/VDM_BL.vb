@@ -79,6 +79,7 @@ Public Class VDM_BL
         Cash1000 = 20
         CoinIn = 4
         Coin1 = 5
+        Coin2 = 21
         Coin5 = 6
         Coin10 = 7
         Passport = 8
@@ -1647,25 +1648,8 @@ Public Class VDM_BL
         DR("TXN_END") = Now
         DR("SHIFT_ID") = SHIFT_ID
         DR("SHIFT_CODE") = SHIFT_CODE
-        DR("SLIP_YEAR") = DBNull.Value
-        DR("SLIP_MONTH") = DBNull.Value
-        DR("SLIP_DAY") = DBNull.Value
-        DR("SLIP_NO") = DBNull.Value
-        DR("SLIP_CONTENT") = DBNull.Value
         DR("METHOD_ID") = DBNull.Value
-        DR("CASH_PAID") = DBNull.Value
-        DR("CASH_CHANGE") = DBNull.Value
-        DR("CASH_PROBLEM") = DBNull.Value
-        DR("CASH_PROBLEM_DETAIL") = DBNull.Value
-        '--------------- True Money -----------------------
-        DR("TMN_REQ_ID") = DBNull.Value
-        DR("TMN_ISV") = DBNull.Value
-        DR("TMN_REQUEST_AMOUNT") = DBNull.Value
-        DR("TMN_STATUS_CODE") = DBNull.Value
-        DR("TMN_PAYMENT_ID") = DBNull.Value
-        DR("TMN_RESP_TIME") = DBNull.Value
 
-        '-------------- Credit Card/Debit Card -------------
 
         Dim cmd As New SqlCommandBuilder(DA)
         DA.Update(DT)
@@ -1680,6 +1664,60 @@ Public Class VDM_BL
         DA.Fill(DT)
         Return DT.Rows(0)(0)
     End Function
+
+    Public Function Get_Next_Product_To_Pick(ByVal KO_ID As Integer, ByVal PRODUCT_ID As Integer) As DataTable
+
+        Dim Result As New DataTable
+        Result.Columns.Add("POS_ID", GetType(Integer))
+        Result.Columns.Add("SLOT_ID", GetType(Integer))
+        Result.Columns.Add("SLOT_NAME", GetType(String))
+        Result.Columns.Add("SERIAL_NO", GetType(String))
+
+        Dim Sql As String = "" '-------------- คำนวนจำนวน ทั้งหมดในตู้
+        Sql &= " SELECT POS_ID,PRODUCT.SLOT_ID,PRODUCT.SLOT_NAME,TOTAL" & vbLf
+        Sql &= " FROM" & vbLf
+        Sql &= " (SELECT SLOT_ID,SLOT_NAME ,COUNT(1) TOTAL" & vbLf
+        Sql &= " FROM VW_CURRENT_PRODUCT_STOCK" & vbLf
+        Sql &= " WHERE KO_ID=" & KO_ID & " AND PRODUCT_ID=" & PRODUCT_ID & vbLf
+        Sql &= " GROUP BY SLOT_ID,SLOT_NAME) PRODUCT" & vbLf
+        Sql &= " LEFT JOIN MS_SLOT_ARM_POSITION ARM ON PRODUCT.SLOT_NAME=ARM.SLOT_NAME" & vbLf
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(Sql, ConnectionString)
+        DA.Fill(DT)
+
+        If DT.Rows.Count = 0 Then
+            Return Result
+        End If
+        '---------------- Random Selction -------------
+        DT.Columns.Add("RND")
+        For i As Integer = 0 To DT.Rows.Count - 1
+            DT.Rows(i).Item("RND") = GenerateNewUniqueID()
+        Next
+        DT.DefaultView.Sort = "TOTAL DESC,RND ASC"
+
+        Dim R As DataRow = Result.NewRow
+        Result.Rows.Add(R)
+
+        R("SLOT_ID") = DT.DefaultView(0).Item("SLOT_ID")
+        R("SLOT_NAME") = DT.DefaultView(0).Item("SLOT_NAME")
+        R("POS_ID") = DT.DefaultView(0).Item("POS_ID")
+
+        '--------------- Get SERIAL NO by Order------------
+        Sql = " SELECT TOP 1 SERIAL_NO FROM VW_CURRENT_PRODUCT_STOCK " & vbLf
+        Sql &= " WHERE KO_ID=" & KO_ID & " AND PRODUCT_ID=" & PRODUCT_ID & " AND SLOT_NAME='" & R("SLOT_NAME").Replace("'", "''") & "' " & vbLf
+        Sql &= " ORDER BY ORDER_NO ASC" & vbLf
+        DA = New SqlDataAdapter(Sql, ConnectionString)
+        DT = New DataTable
+        DA.Fill(DT)
+        R("SERIAL_NO") = DT.Rows(0).Item("SERIAL_NO") '--------- For Picker -----------
+
+        Return Result
+    End Function
+
+    Public Function Commit_Product_Problem_Slip() As Integer '--------------- Return ITEM_NO ------------
+
+    End Function
+
 #End Region
 
 #Region "Printing"
@@ -1694,95 +1732,75 @@ Public Class VDM_BL
         Image = 2
     End Enum
 
-
-    Public Function Commit_Product_Order(ByVal TXN_ID As Integer, ByVal KO_ID As Integer, ByVal PRODUCT_ID As Integer)
-
-        Dim SLIP_CODE As String = Gen_New_Slip_Code(TXN_ID)
-
-        Dim SQL As String = "SELECT PRICE FROM MS_PRODUCT WHERE PRODUCT_ID=" & PRODUCT_ID
-        Dim DT As New DataTable
+    Public Function Get_New_Confirmation_Slip_No() As String
+        Dim SQL As String = "SELECT TOP 1 SLIP_NO FROM"
+        SQL &= "(" & vbLf
+        SQL &= "	SELECT ISNULL(MAX(CAST(SLIP_NO AS INT)),0)+1 SLIP_NO" & vbLf
+        SQL &= "	FROM TB_TRANSACTION_CASH" & vbLf
+        SQL &= "	WHERE SLIP_YEAR=RIGHT(DATEPART(yyyy,GETDATE()),2) AND " & vbLf
+        SQL &= "	CAST(SLIP_MONTH AS INT)=DATEPART(MM,GETDATE()) AND" & vbLf
+        SQL &= "	CAST(SLIP_DAY AS INT)=DATEPART(dd,GETDATE())" & vbLf
+        SQL &= "" & vbLf
+        SQL &= "	UNION ALL " & vbLf
+        SQL &= "" & vbLf
+        SQL &= "	SELECT ISNULL(MAX(CAST(SLIP_NO AS INT)),0)+1 SLIP_NO" & vbLf
+        SQL &= "	FROM TB_TRANSACTION_TMN" & vbLf
+        SQL &= "	WHERE SLIP_YEAR=RIGHT(DATEPART(yyyy,GETDATE()),2) AND " & vbLf
+        SQL &= "	CAST(SLIP_MONTH AS INT)=DATEPART(MM,GETDATE()) AND" & vbLf
+        SQL &= "	CAST(SLIP_DAY AS INT)=DATEPART(dd,GETDATE())" & vbLf
+        SQL &= ") A ORDER BY SLIP_NO DESC" & vbLf
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
         DA.Fill(DT)
-        Dim PRICE As Integer = CInt(DT.Rows(0).Item("PRICE"))
-
-        Dim Result As New DataTable
-        Result.Columns.Add("IsProblem", GetType(Boolean))
-        Result.Columns.Add("ProblemDetail", GetType(String))
-        Result.Columns.Add("SLOT_ID", GetType(Integer))
-        Result.Columns.Add("SLOT_NAME", GetType(String))
-        Result.Columns.Add("POS_ID", GetType(Integer))
-        Result.Columns.Add("SERIAL_NO", GetType(String))
-        Result.Columns.Add("SLIP_CODE", GetType(String))
-
-        Dim R As DataRow = Result.NewRow
-        Result.Rows.Add(R)
-        R("IsProblem") = False
-        R("ProblemDetail") = ""
-        R("SLIP_CODE") = SLIP_CODE
-        '--------------- Get All Product Slot------------
-        SQL = ""
-        SQL &= " SELECT PRODUCT.SLOT_ID,PRODUCT.SLOT_NAME,POS_ID,TOTAL" & vbLf
-        SQL &= " FROM" & vbLf
-        SQL &= " (SELECT SLOT_ID,SLOT_NAME ,COUNT(1) TOTAL" & vbLf
-        SQL &= " FROM VW_CURRENT_PRODUCT_STOCK" & vbLf
-        SQL &= " WHERE KO_ID=" & KO_ID & " AND PRODUCT_ID=" & PRODUCT_ID & vbLf
-        SQL &= " GROUP BY SLOT_ID,SLOT_NAME) PRODUCT" & vbLf
-        SQL &= " LEFT JOIN MS_SLOT_ARM_POSITION ARM ON PRODUCT.SLOT_NAME=ARM.SLOT_NAME" & vbLf
-        DT = New DataTable
-        DA = New SqlDataAdapter(SQL, ConnectionString)
-        DA.Fill(DT)
-
-        If DT.Rows.Count = 0 Then
-            R("IsProblem") = True
-            R("ProblemDetail") = "PRODUCT NOT FOUND"
-            Return Result
-        End If
-        '---------------- Random Selction -------------
-        DT.Columns.Add("RND")
-        For i As Integer = 0 To DT.Rows.Count - 1
-            DT.Rows(i).Item("RND") = GenerateNewUniqueID()
-        Next
-        DT.DefaultView.Sort = "TOTAL DESC,RND ASC"
-
-        R("SLOT_ID") = DT.DefaultView(0).Item("SLOT_ID")
-        R("SLOT_NAME") = DT.DefaultView(0).Item("SLOT_NAME") '--------- For Picker -----------
-        R("POS_ID") = DT.DefaultView(0).Item("POS_ID") '--------- For Picker -----------
-
-        '--------------- Get SERIAL NO by Order------------
-        SQL = " SELECT TOP 1 SERIAL_NO FROM VW_CURRENT_PRODUCT_STOCK " & vbLf
-        SQL &= " WHERE KO_ID=" & KO_ID & " AND PRODUCT_ID=" & PRODUCT_ID & " AND SLOT_NAME='" & R("SLOT_NAME").Replace("'", "''") & "' " & vbLf
-        SQL &= " ORDER BY ORDER_NO ASC" & vbLf
-        DA = New SqlDataAdapter(SQL, ConnectionString)
-        DT = New DataTable
-        DA.Fill(DT)
-        R("SERIAL_NO") = DT.Rows(0).Item("SERIAL_NO") '--------- For Picker -----------
-
-        '----------------- Save Order --------------------
-        SQL = "SELECT * FROM TB_BUY_PRODUCT WHERE TXN_ID=" & TXN_ID & " AND PRODUCT_ID=" & PRODUCT_ID
-        DA = New SqlDataAdapter(SQL, ConnectionString)
-        DT = New DataTable
-        DA.Fill(DT)
-        Dim DR As DataRow
-        If DT.Rows.Count = 0 Then
-            DR = DT.NewRow
-            DT.Rows.Add(DR)
-            DR("TXN_ID") = TXN_ID
-            DR("ITEM_NO") = 1
-            DR("PRODUCT_ID") = PRODUCT_ID
-        Else
-            DR = DT.Rows(0)
-        End If
-        DR("SERIAL_NO") = R("SERIAL_NO") '------------------ Get From Next Step--------------
-        DR("SLOT_NAME") = R("SLOT_NAME")
-        DR("UNIT_PRICE") = PRICE
-        DR("QUANTITY") = 1
-        DR("VAT") = DBNull.Value
-        DR("TOTAL_PRICE") = PRICE
-        Dim cmd As New SqlCommandBuilder(DA)
-        DA.Update(DT)
-
-        Return Result
+        Return DT.Rows(0).Item(0).ToString.PadLeft(3, "0")
     End Function
+
+    'Public Sub Commit_Product_Order(ByVal TXN_ID As Integer, ByVal KO_ID As Integer, ByVal PRODUCT_ID As Integer)
+
+    '    Dim SLIP_CODE As String = Gen_New_Slip_Code(TXN_ID)
+
+    '    Dim SQL As String = "SELECT PRICE FROM MS_PRODUCT WHERE PRODUCT_ID=" & PRODUCT_ID
+    '    Dim DT As New DataTable
+    '    Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+    '    DA.Fill(DT)
+    '    Dim PRICE As Integer = CInt(DT.Rows(0).Item("PRICE"))
+
+    '    Dim Result As DataTable = Get_Next_Product_To_Pick(KO_ID, PRODUCT_ID)
+
+
+    '    If Result.Rows.Count = 0 Then
+    '        'R("IsProblem") = True
+    '        'R("ProblemDetail") = "PRODUCT NOT FOUND"
+    '        'Return Result
+    '        Exit Sub
+    '    End If
+
+    '    '----------------- Save Order --------------------
+    '    SQL = "SELECT * FROM TB_BUY_PRODUCT WHERE TXN_ID=" & TXN_ID & " AND PRODUCT_ID=" & PRODUCT_ID
+    '    DA = New SqlDataAdapter(SQL, ConnectionString)
+    '    DT = New DataTable
+    '    DA.Fill(DT)
+    '    Dim DR As DataRow
+    '    If DT.Rows.Count = 0 Then
+    '        DR = DT.NewRow
+    '        DT.Rows.Add(DR)
+    '        DR("TXN_ID") = TXN_ID
+    '        DR("ITEM_NO") = 1
+    '        DR("PRODUCT_ID") = PRODUCT_ID
+    '    Else
+    '        DR = DT.Rows(0)
+    '    End If
+    '    DR("SERIAL_NO") = R("SERIAL_NO") '------------------ Get From Next Step--------------
+    '    DR("SLOT_NAME") = R("SLOT_NAME")
+    '    DR("UNIT_PRICE") = PRICE
+    '    DR("QUANTITY") = 1
+    '    DR("VAT") = DBNull.Value
+    '    DR("TOTAL_PRICE") = PRICE
+    '    Dim cmd As New SqlCommandBuilder(DA)
+    '    DA.Update(DT)
+
+
+    'End Sub
 
     '    เงินสด 
     '1. Gen Slip No
@@ -1895,51 +1913,7 @@ Public Class VDM_BL
         Next
     End Sub
 
-    'Private Function Get_ConfirmationSlip_Content(ByVal TXN_ID As Integer) As DataTable
 
-    '    Dim Result As New DataTable
-    '    Result.Columns.Add("Text", GetType(String))
-    '    Result.Columns.Add("ImagePath", GetType(String))
-    '    Result.Columns.Add("FontSize", GetType(Single))
-    '    Result.Columns.Add("FontName", GetType(String))
-    '    Result.Columns.Add("Bold", GetType(Boolean))
-    '    Result.Columns.Add("IsColor", GetType(Boolean))
-    '    Result.Columns.Add("ContentType", GetType(PrintContentType))
-
-    '    Dim SQL As String = ""
-    '    Dim DA As SqlDataAdapter = Nothing
-    '    Dim DT As DataTable = Nothing
-    '    Dim cmd As SqlCommandBuilder = Nothing
-
-    '    SQL =  "Select TXN_ID,KO_ID,SITE_CODE" & vbLf
-    '    SQL &= ",TXN_Y,TXN_M,TXN_D,TXN_N" & vbLf
-    '    SQL &= ",LANG_CODE,CUS_ID,TXN_END" & vbLf
-    '    SQL &= ",SLIP_YEAR,SLIP_MONTH,SLIP_DAY,SLIP_NO,SLIP_CONTENT" & vbLf
-    '    SQL &= ",METHOD_ID" & vbLf
-    '    SQL &= ",TMN_REQ_ID,TMN_ISV,TMN_REQUEST_AMOUNT,TMN_STATUS_CODE,TMN_PAYMENT_ID,TMN_RESP_TIME" & vbLf
-    '    SQL &= ",SLIP_CONTENT"
-    '    SQL &= "FROM TB_SERVICE_TRANSACTION TXN" & vbLf
-    '    SQL &= "WHERE TXN_ID =" & TXN_ID
-    '    Dim TXN As New DataTable
-    '    DA = New SqlDataAdapter(SQL, ConnectionString)
-    '    DA.Fill(TXN)
-
-    '    If TXN.Rows.Count = 0 Then '--------- ไม่พบ Transaction ID
-    '        Return Result
-    '    ElseIf Not IsDBNull(TXN.Rows(0).Item("SLIP_CONTENT")) AndAlso TXN.Rows(0).Item("SLIP_CONTENT").ToString.Length > 20 Then
-    '        '--------- Gen Slip เอาไว้แล้ว ----------
-    '        Dim C As New Converter
-    '        Try
-    '            Return C.XMLToDatatable(TXN.Rows(0).Item("SLIP_CONTENT"))
-    '        Catch ex As Exception
-    '            Return Result
-    '        End Try
-    '    End If
-
-    '    '--------------- Generate New Slip No---------------
-
-
-    'End Function
 
     'Public Function Print_Cash_ConfirmationSlip() As PrintResult
 
@@ -1953,8 +1927,8 @@ Public Class VDM_BL
 
     'End Function
 
-    Public Sub UPDATE_KIOSK_DEVICE_STOCK(ByVal KO_ID As Integer, ByVal TXN_ID As Integer, ByVal D_ID As VDM_BL.Device, ByVal DIFF As Integer)
-        Dim Sql As String = "SELECT Current_Qty FROM TB_KIOSK_DEVICE WHERE KO_ID=" & KO_ID & " AND D_ID=" & VDM_BL.Device.Printer
+    Public Sub UPDATE_KIOSK_DEVICE_TRANSACTION_STOCK(ByVal KO_ID As Integer, ByVal TXN_ID As Integer, ByVal D_ID As VDM_BL.Device, ByVal DIFF As Integer)
+        Dim Sql As String = "SELECT Current_Qty FROM TB_KIOSK_DEVICE WHERE KO_ID=" & KO_ID & " AND D_ID=" & D_ID
         Dim DA As New SqlDataAdapter(Sql, ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)
@@ -1972,7 +1946,7 @@ Public Class VDM_BL
             DR = DT.NewRow
             DR("KO_ID") = KO_ID
             DR("D_ID") = D_ID
-            DR("Current_Qty") = 0
+            DR("Current_Qty") = IIf(DIFF > 0, DIFF, 0) '---------------- Update Current -------------
             DR("DT_ID") = D_ID
             DR("DS_ID") = DBNull.Value
             DR("Update_Time") = Now
@@ -1982,6 +1956,11 @@ Public Class VDM_BL
             BEFORE_QUANTITY = 0
         Else
             BEFORE_QUANTITY = DT.Rows(0).Item("Current_Qty")
+            '---------------- Update Current -------------
+            Dim NEW_QUANTITY As Integer = BEFORE_QUANTITY + DIFF
+            DR("Current_Qty") = IIf(NEW_QUANTITY > 0, NEW_QUANTITY, 0)
+            cmd = New SqlCommandBuilder(DA)
+            DA.Update(DT)
         End If
 
         'TB_TRANSACTION_STOCK

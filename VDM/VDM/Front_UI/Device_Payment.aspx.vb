@@ -58,15 +58,6 @@ Public Class Device_Payment
             ViewState("PAYMENT_METHOD") = value
         End Set
     End Property
-    '    Get
-    '        Dim amount As String() = {"1", "2", "5", "10", "20", "50", "100", "500", "1000"}
-    '        Dim result As Integer = 0
-    '        For i As Integer = 0 To amount.Count - 1
-    '            result += CInt(CType(pnlCash.FindControl("txt" & amount(i)), TextBox).Text)
-    '        Next
-    '        Return result
-    '    End Get
-    'End Property
 
     Private Property CASH_PAID As Integer
         Get
@@ -86,63 +77,23 @@ Public Class Device_Payment
         End Set
     End Property
 
-    Private Property SLOT_NAME As String
+    Private Property IS_SERIAL As Boolean
         Get
             Try
-                Return ViewState("SLOT_NAME")
+                Return ViewState("IS_SERIAL")
             Catch ex As Exception
-                Return ""
-            End Try
-
-        End Get
-        Set(value As String)
-            ViewState("SLOT_NAME") = value
-        End Set
-    End Property
-
-    Private Property SLOT_ID As Integer
-        Get
-            Try
-                Return ViewState("SLOT_ID")
-            Catch ex As Exception
-                Return 0
+                Return False
             End Try
         End Get
-        Set(value As Integer)
-            ViewState("SLOT_ID") = value
-        End Set
-    End Property
-
-    Private Property POS_ID As Integer
-        Get
-            Try
-                Return ViewState("POS_ID")
-            Catch ex As Exception
-                Return 0
-            End Try
-        End Get
-        Set(value As Integer)
-            ViewState("POS_ID") = value
-        End Set
-    End Property
-
-    Private Property SERIAL_NO As String
-        Get
-            Try
-                Return ViewState("SERIAL_NO")
-            Catch ex As Exception
-                Return ""
-            End Try
-        End Get
-        Set(value As String)
-            ViewState("SERIAL_NO") = value
+        Set(value As Boolean)
+            ViewState("IS_SERIAL") = value
         End Set
     End Property
 
 
 #Region "SIM"
 
-    Protected Property SIM_ID As Integer
+    Protected ReadOnly Property SIM_ID As Integer
         Get
             Try
                 Return Request.QueryString("SIM_ID")
@@ -150,23 +101,8 @@ Public Class Device_Payment
                 Return 0
             End Try
         End Get
-        Set(value As Integer)
-            Request.QueryString("SIM_ID") = value
-        End Set
     End Property
 
-    'Protected Property D_ID As Integer
-    '    Get
-    '        Try
-    '            Return Request.QueryString("D_ID")
-    '        Catch ex As Exception
-    '            Return 0
-    '        End Try
-    '    End Get
-    '    Set(value As Integer)
-    '        Request.QueryString("D_ID") = value
-    '    End Set
-    'End Property
 
 #End Region
 
@@ -328,7 +264,8 @@ Public Class Device_Payment
             lblDISPLAY_NAME.Text = DT.Rows(0).Item("DISPLAY_NAME_" & BL.Get_Language_Code(LANGUAGE)).ToString()
             PRODUCT_COST = DT.Rows(0).Item("PRICE")
             txtRequire.Text = FormatNumber(DT.Rows(0).Item("PRICE"), 0)
-            txtPaid.Text = 0
+            CASH_PAID = 0
+            IS_SERIAL = DT.Rows(0).Item("IS_SERIAL")
         End If
 
         Dim SQL_Active As String = ""
@@ -379,75 +316,105 @@ Public Class Device_Payment
             End If
             lblDISPLAY_NAME.Text = DT.Rows(0).Item("DISPLAY_NAME_" & BL.Get_Language_Code(LANGUAGE)).ToString()
         End If
+        IS_SERIAL = True
+        '---------------- Update Cost And Money --------------
     End Sub
 #End Region
 
 #Region "Cash"
+
     'จ่ายครบ
     Private Sub btnCashCompleted_Click(sender As Object, e As EventArgs) Handles btnCashCompleted.Click
-        '------------------- Update Information -----------------
         UpdateCashCompleted()
     End Sub
 
     Private Sub btnCashTimeout_Click(sender As Object, e As EventArgs) Handles btnCashTimeout.Click
         '------------If pay some amount
-        If CASH_PAID > 0 Then
-            UpdateCashProblem()
-        End If
-        Alert(Me.Page, txtCashProblem.Text)
-        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Refresh", "location.href=location.href;", True)
+        'If CASH_PAID > 0 Then UpdateCashProblem()
+        'Alert(Me.Page, txtCashProblem.Text)
+        'ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Refresh", "location.href=location.href;", True)
     End Sub
 
     Private Sub btnCashProblem_Click(sender As Object, e As EventArgs) Handles btnCashProblem.Click
-        UpdateCashProblem()
-        Alert(Me.Page, txtCashProblem.Text)
+        'UpdateCashProblem()
+        'Alert(Me.Page, txtCashProblem.Text)
     End Sub
 
     Private Sub UpdateCashCompleted()
 
-        Dim OrderInfo As DataTable = BL.Commit_Product_Order(TXN_ID, KO_ID, PRODUCT_ID)
-        If OrderInfo.Rows(0).Item("IsProblem") Then
-            txtCashProblem.Text = OrderInfo.Rows(0).Item("ProblemDetail").ToString
-            UpdateCashProblem()
-            Exit Sub
-        End If
+        '--------------- Update TB_SERVICE_TRANSACTION
+        Dim SQL As String = "UPDATE TB_SERVICE_TRANSACTION SET METHOD_ID=" & VDM_BL.PaymentMethod.CASH & vbLf
+        SQL &= " WHERE TXN_ID=" & TXN_ID
+        BL.ExecuteNonQuery(SQL)
 
-        SERIAL_NO = OrderInfo.Rows(0).Item("SERIAL_NO").ToString
-        POS_ID = OrderInfo.Rows(0).Item("POS_ID")
-        SLOT_ID = OrderInfo.Rows(0).Item("SLOT_ID")
-
-        '------------------------- Update TB_SERVICE_TRANSACTION ------------------------
-        Dim SQL As String = "SELECT * FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
-        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        '--------------- Insert TB_TRANSACTION_CASH
+        SQL = "SELECT TOP 1 * FROM TB_TRANSACTION_CASH" & vbLf
+        SQL &= " WHERE TXN_ID=" & TXN_ID
         Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
         DA.Fill(DT)
-        DT.Rows(0).Item("METHOD_ID") = PAYMENT_METHOD
-        DT.Rows(0).Item("CASH_PAID") = CASH_PAID
-        'DT.Rows(0).Item("CASH_CHANGE") = DBNull.Value
-        DT.Rows(0).Item("CASH_PROBLEM") = False
-        DT.Rows(0).Item("CASH_PROBLEM_DETAIL") = ""
+        Dim DR As DataRow
+        If DT.Rows.Count = 0 Then
+            DR = DT.NewRow
+            DR("TXN_ID") = TXN_ID
+            DR("ITEM_NO") = 1
+            DT.Rows.Add(DR)
+        Else
+            DR = DT.Rows(0)
+        End If
+        DR("SLIP_YEAR") = Now.Year.ToString.Substring(2, 2)
+        DR("SLIP_MONTH") = Now.Month.ToString.PadLeft(2, "0")
+        DR("SLIP_DAY") = Now.Day.ToString.PadLeft(2, "0")
+        DR("SLIP_NO") = BL.Get_New_Confirmation_Slip_No
+        DR("SLIP_CONTENT") = DBNull.Value
+        DR("PRODUCT_ID") = PRODUCT_ID
+        DR("IS_SERIAL") = IS_SERIAL
+        DR("UNIT_PRICE") = PRODUCT_COST
+        DR("QUANTITY") = 1
+        DR("TOTAL_PRICE") = PRODUCT_COST
+        DR("PAID") = CASH_PAID
+        DR("MUST_CHANGE") = CASH_PAID - PRODUCT_COST
+        DR("TXN_TIME") = Now
+
         Dim cmd As New SqlCommandBuilder(DA)
         DA.Update(DT)
-        '--------------------------------
-        Response.Redirect("Complete_Order.aspx?PRODUCT_ID=" & PRODUCT_ID & "&POS_ID=" & POS_ID & "&SERIAL_NO=" & SERIAL_NO & "&SLOT_ID=" & SLOT_ID)
+        '------------------- Update Money In Stock -------------
+        If CInt(txt1.Text) > 0 Then
+            BL.UPDATE_KIOSK_DEVICE_TRANSACTION_STOCK(KO_ID, TXN_ID, VDM_BL.Device.Coin1, CInt(txt1.Text))
+        End If
+        If CInt(txt2.Text) > 0 Then
+            BL.UPDATE_KIOSK_DEVICE_TRANSACTION_STOCK(KO_ID, TXN_ID, VDM_BL.Device.Coin2, CInt(txt2.Text))
+        End If
+        If CInt(txt5.Text) > 0 Then
+            BL.UPDATE_KIOSK_DEVICE_TRANSACTION_STOCK(KO_ID, TXN_ID, VDM_BL.Device.Coin5, CInt(txt5.Text))
+        End If
+        If CInt(txt10.Text) > 0 Then
+            BL.UPDATE_KIOSK_DEVICE_TRANSACTION_STOCK(KO_ID, TXN_ID, VDM_BL.Device.Coin10, CInt(txt10.Text))
+        End If
+        If CInt(txt20.Text) > 0 Then
+            BL.UPDATE_KIOSK_DEVICE_TRANSACTION_STOCK(KO_ID, TXN_ID, VDM_BL.Device.Cash20, CInt(txt20.Text))
+        End If
+        If CInt(txt50.Text) > 0 Then
+            BL.UPDATE_KIOSK_DEVICE_TRANSACTION_STOCK(KO_ID, TXN_ID, VDM_BL.Device.Cash50, CInt(txt50.Text))
+        End If
+        If CInt(txt100.Text) > 0 Then
+            BL.UPDATE_KIOSK_DEVICE_TRANSACTION_STOCK(KO_ID, TXN_ID, VDM_BL.Device.Cash100, CInt(txt100.Text))
+        End If
+        If CInt(txt500.Text) > 0 Then
+            BL.UPDATE_KIOSK_DEVICE_TRANSACTION_STOCK(KO_ID, TXN_ID, VDM_BL.Device.Cash500, CInt(txt500.Text))
+        End If
+        If CInt(txt1000.Text) > 0 Then
+            BL.UPDATE_KIOSK_DEVICE_TRANSACTION_STOCK(KO_ID, TXN_ID, VDM_BL.Device.Cash1000, CInt(txt1000.Text))
+        End If
+
+        ''--------------------------------
+        Response.Redirect("Complete_Order.aspx?PRODUCT_ID=" & PRODUCT_ID & "&METHOD_ID=" & VDM_BL.PaymentMethod.CASH)
 
     End Sub
 
     Private Sub UpdateCashProblem()
 
-        Dim OrderInfo As DataTable = BL.Commit_Product_Order(TXN_ID, KO_ID, PRODUCT_ID)
 
-        Dim SQL As String = "SELECT * FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
-        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
-        Dim DT As New DataTable
-        DA.Fill(DT)
-        DT.Rows(0).Item("METHOD_ID") = PAYMENT_METHOD
-        DT.Rows(0).Item("CASH_PAID") = CASH_PAID
-        'DT.Rows(0).Item("CASH_CHANGE") = DBNull.Value
-        DT.Rows(0).Item("CASH_PROBLEM") = True
-        DT.Rows(0).Item("CASH_PROBLEM_DETAIL") = txtCashProblem.Text
-        Dim cmd As New SqlCommandBuilder(DA)
-        DA.Update(DT)
     End Sub
 
 

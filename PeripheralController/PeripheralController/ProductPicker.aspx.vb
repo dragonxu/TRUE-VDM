@@ -1,4 +1,5 @@
 ﻿Imports Controller
+
 Public Class ProductPicker
     Inherits System.Web.UI.Page
 
@@ -56,6 +57,7 @@ Public Class ProductPicker
     End Property
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
         Select Case Mode.ToUpper
             Case "SetHome".ToUpper
                 SetHome()

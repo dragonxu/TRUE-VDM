@@ -41,6 +41,24 @@ Partial Public Class Complete_Order
     Protected WithEvents UDP As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
+    '''txtSerial control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtSerial As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''txtSlotID control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtSlotID As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''txtSlotName control.
     '''</summary>
     '''<remarks>

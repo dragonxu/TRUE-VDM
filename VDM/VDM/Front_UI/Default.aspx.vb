@@ -17,7 +17,7 @@ Public Class FrontUI_Default
     '-------------------- หน้า Portal เอาไว้เรียกเปิดโปรแกรมจาก Localhost ----------------
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If KO_ID = 0 Then
-            Response.Write("Invalid Kiosk ID")
+            Response.Write("Invalid Kiosk Info")
             Response.End()
             Exit Sub
         End If

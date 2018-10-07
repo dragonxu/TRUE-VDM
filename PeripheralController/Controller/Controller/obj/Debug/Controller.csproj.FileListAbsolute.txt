@@ -1,0 +1,16 @@
+E:\GitHub\ProgrammableLogicControl\Controller\Controller\bin\Debug\Controller.xml
+E:\GitHub\ProgrammableLogicControl\Controller\Controller\bin\Debug\Controller.dll
+E:\GitHub\ProgrammableLogicControl\Controller\Controller\bin\Debug\Controller.pdb
+E:\GitHub\ProgrammableLogicControl\Controller\Controller\obj\Debug\Controller.csproj.CoreCompileInputs.cache
+E:\GitHub\ProgrammableLogicControl\Controller\Controller\obj\Debug\Controller.dll
+E:\GitHub\ProgrammableLogicControl\Controller\Controller\obj\Debug\Controller.pdb
+E:\GitHub\ProgrammableLogicControl\Controller\Controller\obj\Debug\Controller.csprojAssemblyReference.cache
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\bin\Debug\controller.dll.config
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\bin\Debug\controller.dll
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\bin\Debug\controller.pdb
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\obj\Debug\controller.Properties.Resources.resources
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\obj\Debug\Controller.csproj.GenerateResource.Cache
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\obj\Debug\controller.dll
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\obj\Debug\controller.pdb
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\obj\Debug\Controller.csprojAssemblyReference.cache
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\obj\Debug\Controller.csproj.CoreCompileInputs.cache

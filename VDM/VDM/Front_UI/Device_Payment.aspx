@@ -371,7 +371,8 @@
   
             var tryPay = 0;
             function updatePayment(amount,status,message) {
-               
+                //---------Update Timeout ?
+
                 if (status == 'true') {
                     /*-----------Lock Mode-----------*/
                     $('footer').css("visibility", "hidden");                   
@@ -410,7 +411,7 @@
                 
             }
 
-            var cashSec = 120;
+            var cashSec = 150;
             var cashCounter = function () {
                 if (cashSec <= 0) {
                     $('#txtCashProblem').val('ชำระเกินระยะเวลาที่กำหนด');

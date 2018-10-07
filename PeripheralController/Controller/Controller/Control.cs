@@ -39,7 +39,9 @@ namespace Controller
             Connected?.Invoke(this, e);
         }
 
-        private OmronTCP Omron = new OmronTCP(System.Net.TransportType.Tcp);
+        private bool _connected;
+
+        public OmronTCP Omron = new OmronTCP(System.Net.TransportType.Tcp);
         private AxisHelper accord = new AxisHelper();
         private AxisProperties props;
         /// <summary>
@@ -54,6 +56,7 @@ namespace Controller
         private void Omron_ConnectionChange(object sender, EventArgs e)
         {
             OnReveived(new connected(Omron.Connected));
+            _connected = Omron.Connected;
         }
         /// <summary>
         /// setting ip
@@ -77,7 +80,6 @@ namespace Controller
             bool state = false;
             try
             {
-                Omron_Response_Code Response = Omron_Response_Code.Unknown;
                 Omron.Write(0, _position, 804, Omron_Command_Header_Write.CIO_Area_Write);
                 Omron.Write(0, _position, 904, Omron_Command_Header_Write.CIO_Area_Write);
                 Thread.Sleep(300);
@@ -85,7 +87,6 @@ namespace Controller
                 Thread.Sleep(200);
                 bool readbit = false;
                 bool reply;
-                //4206 word 1
                 do
                 {
                     reply = Omron.ReadRelay(Omron_Command_Header_State_Read.CIO_Read, 4619, 00, ref readbit);
@@ -94,14 +95,6 @@ namespace Controller
                     {
                         Thread.Sleep(500);
                         state = true;
-                        break;
-                    }
-                    Thread.Sleep(200);
-                    Array data = Omron.Read(Omron_Command_Header_Read.CIO_Area_Read, 4206, 1, ref Response, Omron_Data_Type.Integer);
-                    int[] d = (int[])data;
-                    if (d[0] != 0)
-                    {
-                        state = false;
                         break;
                     }
                 } while (reply);
@@ -150,7 +143,7 @@ namespace Controller
         /// Connect PLC
         /// get return properties _connected
         /// </summary>        
-        public void Connect()
+        public bool Connect()
         {
             try
             {
@@ -162,35 +155,21 @@ namespace Controller
                 Console.WriteLine("connect execption : " + e);
                 OnReveived(new connected(false));
             }
-        }
-        public bool RestSet()
-        {
-            bool state = false;
-            try
-            {
-                //4220.02 Omron.WriteRelay reset
-                bool result = Omron.WriteRelay(Omron_Command_Header_State_Write.CIO_Write, 4220, 02, true);
-                state = true;
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine("Reset : " + e);
-            }
-            return state;
+
+            return _connected;
         }
         /// <summary>
         /// pick-up product --> basket --> open gate
         /// </summary>
         /// <returns>AxisState</returns>
         public bool CarrierPickUp()
-        {            
+        {
             bool state = false;
             bool readbit = false;
             bool reply;
             try
             {
                 bool result = Omron.WriteRelay(Omron_Command_Header_State_Write.CIO_Write, 4620, 00, true);
-                Omron_Response_Code Response = Omron_Response_Code.Unknown;
                 do
                 {
                     reply = Omron.ReadRelay(Omron_Command_Header_State_Read.CIO_Read, 4639, 00, ref readbit);
@@ -200,15 +179,7 @@ namespace Controller
                         state = true;
                         break;
                     }
-                    Thread.Sleep(200);
-                    Array data = Omron.Read(Omron_Command_Header_Read.CIO_Area_Read, 4209, 1, ref Response, Omron_Data_Type.Integer);
-                    int[] d = (int[])data;
-                    if (d[0] != 0)
-                    {
-                        state = false;
-                        break;
-                    }
-                    } while (reply);
+                } while (reply);
             }
             catch(Exception e)
             {
@@ -288,9 +259,9 @@ namespace Controller
                 Console.WriteLine("move result : " + move);
                 if (move)
                 {
-                    Thread.Sleep(800);
+                    Thread.Sleep(1000);
                     bool carrier = CarrierPickUp();
-                    Thread.Sleep(800);
+                    Thread.Sleep(1000);
                     Console.WriteLine("move carrier : " + carrier);
                     if (carrier)
                     {
