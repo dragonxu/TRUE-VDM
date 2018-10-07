@@ -365,7 +365,7 @@ Public Class Manage_Product_Info
         UC_Product_Spec_JP.BindList(DT_SPEC, VDM_BL.UILanguage.JP)
         UC_Product_Spec_KR.BindList(DT_SPEC, VDM_BL.UILanguage.KR)
         UC_Product_Spec_RS.BindList(DT_SPEC, VDM_BL.UILanguage.RS)
-
+        txtPrice.Text = ""
         chkActive.Checked = True
 
         ClearTab()
@@ -665,10 +665,10 @@ Public Class Manage_Product_Info
             Exit Sub
         End If
 
-        If txtDescription_TH.Text = "" Then
-            Alert(Me.Page, Alert_Language & "กรอก Description")
-            Exit Sub
-        End If
+        'If txtDescription_TH.Text = "" Then
+        '    Alert(Me.Page, Alert_Language & "กรอก Description")
+        '    Exit Sub
+        'End If
 
         If IsNothing(PRODUCT_Logo_TH) Then
             Alert(Me.Page, Alert_Language & "เลือก Logo ")
