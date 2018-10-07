@@ -1657,14 +1657,6 @@ Public Class VDM_BL
         Return TXN_ID
     End Function
 
-    'Private Function Gen_New_Slip_Code(ByVal TXN_ID As Integer) As String
-    '    Dim SQL As String = "EXEC dbo.SP_GEN_CONFIRMATION_SLIP_CODE  " & TXN_ID
-    '    Dim DA As New SqlDataAdapter(SQL, ConnectionString)
-    '    Dim DT As New DataTable
-    '    DA.Fill(DT)
-    '    Return DT.Rows(0)(0)
-    'End Function
-
     Public Function Get_Next_Product_To_Pick(ByVal KO_ID As Integer, ByVal PRODUCT_ID As Integer) As DataTable
 
         Dim Result As New DataTable
@@ -1714,9 +1706,6 @@ Public Class VDM_BL
         Return Result
     End Function
 
-    Public Function Commit_Product_Problem_Slip() As Integer '--------------- Return ITEM_NO ------------
-
-    End Function
 
     Public Function Calculate_Change_Quantity(ByVal REMAIN As Integer, ByVal MoneyStock As DataTable) As DataTable
 
@@ -1776,7 +1765,7 @@ Public Class VDM_BL
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)
-        Return DT.Rows(0).Item(0).ToString.PadLeft(3, "0")
+        Return DT.Rows(0).Item(0).ToString.PadLeft(3, "0") '-------------ณ วันนี้จองไว้ 3 แต่ DB เผื่อไว้ 4
     End Function
 
     'Public Sub Commit_Product_Order(ByVal TXN_ID As Integer, ByVal KO_ID As Integer, ByVal PRODUCT_ID As Integer)
@@ -1826,38 +1815,7 @@ Public Class VDM_BL
 
     'End Sub
 
-    '    เงินสด 
-    '1. Gen Slip No
-    '2. TB_Service_Transaction
-
-    '3. TB_Buy_Product
-    '4. TB_Buy_SIM
-
-    '5. Update Cash Stock
-    '6. TB_TRANSACTION_STOCK
-    '7. TB_KIOSK_DEVICE
-
-    '8. TB_PRODUCT_SERIAL
-    '9. TB_SIM_SERIAL
-
-    '10. TB_PRODUCT_MOVEMENT
-    '11. TB_SIM_MOVEMENT
-
-    '12. Archive Report Data
-
-    '-------------------------- เมื่อมีการจ่ายเงินให้ Gen เลข Confirmation Slip เอาไว้ก่อน หรือถ้ามีเลขอยู่แล้วก็ดึงเลขที่มีอยู่มาให้ ---------------------
-    '------เงินสด Gen เมื่อเริ่มหยอดเหรียญแรก 
-    '------True Money Gen หลังได้เลข Barcode และเตรียมส่งตัดเงิน 
-    '------Payment Gateway Gen ก่อนเรียก Service 
-    Public Function Get_Confirmation_Slip_Code(ByVal TXN_ID As Integer) As String
-        Dim SQL As String = "EXEC dbo.SP_GEN_CONFIRMATION_SLIP_CODE " & TXN_ID & ""
-        Dim DT As New DataTable
-        Dim DA As New SqlDataAdapter(Sql, ConnectionString)
-        DA.Fill(DT)
-        Return DT.Rows(0)(1) '---------- Return TXN_ID,Confirmation Slip Code------------------------
-    End Function
-
-    Public Function Gen_Default_Print_Format() As DataTable
+    Public Function GEN_DEFAULT_PRINT_FORMAT() As DataTable
         Dim DT As New DataTable
         DT.Columns.Add("Text", GetType(String))
         DT.Columns.Add("ImagePath", GetType(String))
@@ -1870,44 +1828,107 @@ Public Class VDM_BL
         Return DT
     End Function
 
-    Public Function Gen_Cash_Confirmation_Slip(ByVal TXN_ID As Integer, ByVal SITE_CODE As String, ByVal SITE_NAME As String, ByVal SLIP_CODE As String, ByVal SLIP_DATE As DateTime, ByVal PRODUCT_CODE As String, ByVal PRODUCT_NAME As String, ByVal SERIAL_NO As String, ByVal PRICE As Integer, ByVal PAID As Integer) As DataTable
-        Dim DT As DataTable = Gen_Default_Print_Format()
+    Public Function GEN_DEFAULT_SLIP_HEADER() As DataTable
+        Dim Content As DataTable = GEN_DEFAULT_PRINT_FORMAT()
+        Content.Rows.Add("   บริษัท ทรู ดิสทริบิวชั่น แอนด์ เซลส์ จำกัด")
+        Content.Rows.Add("18 อาคารทรูทาวเวอร์ ถ.รัชดาภิเษก แขวงห้วยขวาง")
+        Content.Rows.Add("    เขตห้วยขวาง กรุงเทพมหานคร 10310")
+        Content.Rows.Add(" ")
+        Content.Rows.Add(" ")
+        Return Content
+    End Function
 
-        DT.Rows.Add("   บริษัท ทรู ดิสทริบิวชั่น แอนด์ เซลส์ จำกัด")
-        DT.Rows.Add("18 อาคารทรูทาวเวอร์ ถ.รัชดาภิเษก แขวงห้วยขวาง")
-        DT.Rows.Add("    เขตห้วยขวาง กรุงเทพมหานคร 10310")
-        DT.Rows.Add(" ")
-        DT.Rows.Add(" ")
-        DT.Rows.Add("สาขาที่ : " & SITE_CODE & "(" & SITE_NAME & ")")
-        DT.Rows.Add("ใบยืนยันการรับชำระ")
-        DT.Rows.Add("" & SLIP_CODE & "		" & SLIP_DATE.ToString("dd/MM/yyyy hh:mm"))
-        DT.Rows.Add("__________________________________________")
-        DT.Rows.Add("รายการสินค้า")
-        DT.Rows.Add(" ")
-        DT.Rows.Add("1. " & PRODUCT_CODE & "		" & FormatNumber(PRICE, 2))
-        DT.Rows.Add(PRODUCT_NAME)
-        DT.Rows.Add("S/N : " & SERIAL_NO)
-        DT.Rows.Add(" ")
-        DT.Rows.Add("__________________________________________")
-        DT.Rows.Add("CASH                                         " & FormatNumber(PAID, 2))
-        DT.Rows.Add("__________________________________________")
-        Dim Change As Integer = PAID - PRICE
-        If Change > 0 Then
-            DT.Rows.Add("CHANGE                                       " & FormatNumber(Change, 2))
+    '------------ ถ้ามี Ads เพิ่ม Ads ตรงนี้---------
+    Public Function GEN_SLIP_ADS() As DataTable
+        Dim Content As DataTable = GEN_DEFAULT_PRINT_FORMAT()
+
+        Return Content
+    End Function
+
+    Public Function GEN_CASH_CONFIRMATION_SLIP(ByVal TXN_ID As Integer) As DataTable
+
+        Dim Content As DataTable = GEN_DEFAULT_SLIP_HEADER()
+
+        Dim SQL As String = "SELECT * FROM VW_TXN_CASH" & vbLf
+        SQL &= "WHERE TXN_ID=" & TXN_ID & " AND TXN_STEP='completed'"
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        DA.Fill(DT)
+        If DT.Rows.Count = 0 Then
+            Return DT
         End If
 
-        DT.Rows.Add(" ")
-        DT.Rows.Add(" ")
-        DT.Rows.Add("ขอบคุณที่ใช้บริการ")
-        '----------------- Ads ----------------
+        Dim SITE_CODE As String = DT.Rows(0).Item("SITE_CODE").ToString
+        Dim SITE_NAME As String = ""
+        If Not IsDBNull(DT.Rows(0).Item("SITE_NAME")) Then
+            SITE_NAME = "(" & DT.Rows(0).Item("SITE_NAME") & ")"
+        End If
+        Dim SLIP_CODE As String = DT.Rows(0).Item("SLIP_CODE").ToString
+        Dim TXN_END As DateTime = DT.Rows(0).Item("TXN_END")
+        Dim PRODUCT_CODE As String = DT.Rows(0).Item("PRODUCT_CODE")
+        Dim TOTAL_PRICE As String = FormatNumber(DT.Rows(0).Item("TOTAL_PRICE"))
+        Dim PRODUCT_NAME As String = DT.Rows(0).Item("PRODUCT_NAME")
+        Dim SERIAL_NO As String = DT.Rows(0).Item("SERIAL_NO")
+        Dim PAID As String = DT.Rows(0).Item("PAID")
+        Dim ACTUAL_CHANGE As Double = DT.Rows(0).Item("ACTUAL_CHANGE")
+        Dim REMAIN_CHANGE As Double = DT.Rows(0).Item("REMAIN_CHANGE")
 
+
+        Content.Rows.Add("สาขาที่ : " & SITE_CODE & SITE_NAME)
+        Content.Rows.Add("ใบยืนยันการรับชำระ   	        " & TXN_END.ToString("dd/MM/yyyy"))
+        Content.Rows.Add("" & SLIP_CODE & " 	" & TXN_END.ToString("hh:mm"))
+        Content.Rows.Add("__________________________________________")
+        Content.Rows.Add("รายการสินค้า")
+        Content.Rows.Add(" ")
+        Content.Rows.Add("1. " & PRODUCT_CODE & "		" & FormatNumber(TOTAL_PRICE, 2))
+        Content.Rows.Add(PRODUCT_NAME)
+        Content.Rows.Add("S/N : " & SERIAL_NO)
+        Content.Rows.Add(" ")
+        Content.Rows.Add("__________________________________________")
+        Content.Rows.Add("CASH                                         " & FormatNumber(PAID, 2))
+
+        If ACTUAL_CHANGE > 0 Then
+            Content.Rows.Add("__________________________________________")
+            Content.Rows.Add("CHANGE                                       " & FormatNumber(ACTUAL_CHANGE, 2))
+        End If
+        If REMAIN_CHANGE > 0 Then
+            Content.Rows.Add("__________________________________________")
+            Content.Rows.Add("REMAIN CHANGE                                       " & FormatNumber(REMAIN_CHANGE, 2))
+        End If
+
+        Content.Rows.Add(" ")
+        Content.Rows.Add(" ")
+        Content.Rows.Add("ขอบคุณที่ใช้บริการ")
         '----------------- Ads ----------------
-        DT.Rows.Add("__________________________________________")
+        Content.Merge(GEN_SLIP_ADS)
+        '----------------- Ads ----------------
+        Content.Rows.Add("__________________________________________")
 
         '------------ Set Default Parameter
-        Set_Default_Print_Content_Style(DT)
+        Set_Default_Print_Content_Style(Content)
 
-        Return DT
+
+        '------------ Set Default Parameter
+        Set_Default_Print_Content_Style(Content)
+        Return Content
+    End Function
+
+    Public Function GEN_TMN_CONFIRMATION_SLIP(ByVal TXN_ID As Integer) As DataTable
+        Dim Content As DataTable = GEN_DEFAULT_SLIP_HEADER()
+
+
+        '------------ Set Default Parameter
+        Set_Default_Print_Content_Style(Content)
+        Return Content
+    End Function
+
+    Public Function GEN_CREDITCARD_CONFIRMATION_SLIP(ByVal TXN_ID As Integer) As DataTable
+        Dim Content As DataTable = GEN_DEFAULT_SLIP_HEADER()
+
+
+        '------------ Set Default Parameter
+        Set_Default_Print_Content_Style(Content)
+        Return Content
     End Function
 
     Public Sub Set_Default_Print_Content_Style(ByRef DT As DataTable)
@@ -1920,13 +1941,13 @@ Public Class VDM_BL
                 DR("ImagePath") = ""
             End If
             If IsDBNull(DR("FontSize")) Then
-                DR("FontSize") = 12
+                DR("FontSize") = 10
             End If
             If IsDBNull(DR("FontName")) Then
                 DR("FontName") = "FontA1x1"
             End If
             If IsDBNull(DR("Bold")) Then
-                DR("Bold") = True
+                DR("Bold") = False
             End If
             If IsDBNull(DR("IsColor")) Then
                 DR("IsColor") = False
@@ -1937,7 +1958,32 @@ Public Class VDM_BL
         Next
     End Sub
 
+    Public Sub UPDATE_CONFIRMATION_SLIP(ByVal TXN_ID As Integer, ByVal Contents As DataTable)
 
+        Dim SQL As String = "SELECT METHOD_ID FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        DA.Fill(DT)
+        If DT.Rows.Count = 0 OrElse IsDBNull(DT.Rows(0).Item("METHOD_ID")) Then
+            Exit Sub
+        End If
+        Dim C As New Converter
+        Dim METHOD_ID As PaymentMethod = DT.Rows(0).Item("METHOD_ID")
+
+        Select Case METHOD_ID
+            Case PaymentMethod.CASH
+                SQL = "SELECT * FROM TB_TRANSACTION_CASH WHERE TXN_ID=" & TXN_ID
+                DT = New DataTable
+                DA = New SqlDataAdapter(SQL, ConnectionString)
+                DA.Fill(DT)
+                If DT.Rows.Count > 0 Then
+                    DT.Rows(0).Item("SLIP_CONTENT") = C.DatatableToXML(Contents)
+                    Dim cmd As New SqlCommandBuilder(DA)
+                    DA.Update(DT)
+                End If
+        End Select
+
+    End Sub
 
     'Public Function Print_Cash_ConfirmationSlip() As PrintResult
 

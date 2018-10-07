@@ -1,6 +1,7 @@
 ﻿Imports System.Data
 Imports System.Security.Cryptography
 Imports System.IO
+Imports System.Net
 
 Module ModuleGlobal
 
@@ -458,6 +459,33 @@ Module ModuleGlobal
             Case Else
                 Return "Last " & Int(Minute / 44640) & " months"
         End Select
+    End Function
+
+
+    Public Function postXMLData(ByVal URL As String, ByVal XMLString As String) As String
+        Dim request As HttpWebRequest = DirectCast(WebRequest.Create(URL), HttpWebRequest)
+        Dim bytes As Byte()
+        bytes = System.Text.Encoding.UTF8.GetBytes(XMLString)
+        request.ContentType = "text/xml"
+
+        request.ContentLength = bytes.Length
+        request.Method = "POST"
+        Dim requestStream As Stream = request.GetRequestStream()
+        requestStream.Write(bytes, 0, bytes.Length)
+        requestStream.Close()
+        Dim resp As HttpWebResponse
+        Try
+            resp = DirectCast(request.GetResponse(), HttpWebResponse)
+            If resp.StatusCode = HttpStatusCode.OK Then
+                Dim responseStream As Stream = resp.GetResponseStream()
+                Dim responseStr As String = New StreamReader(responseStream).ReadToEnd()
+                Return responseStr
+            Else
+                Return ""
+            End If
+        Catch ex As Exception
+            Return ex.Message
+        End Try
     End Function
 
 End Module

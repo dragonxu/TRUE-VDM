@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="VDM_Printer_Print" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://localhost/Print.asmx</Value>
+      <Value Profile="(Default)">http://localhost:59807/Print.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -62,13 +62,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\CoinReciever.dll</HintPath>
     </Reference>
+    <Reference Include="Controller, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Controller.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="Printer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Printer\bin\Debug\Printer.dll</HintPath>
     </Reference>
     <Reference Include="SimDispenser, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -114,9 +114,13 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Print.asmx.vb">
-      <DependentUpon>Print.asmx</DependentUpon>
-      <SubType>Component</SubType>
+    <Compile Include="App_Code\Converter.vb" />
+    <Compile Include="Print.aspx.designer.vb">
+      <DependentUpon>Print.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print.aspx.vb">
+      <DependentUpon>Print.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="ProductPicker.aspx.designer.vb">
       <DependentUpon>ProductPicker.aspx</DependentUpon>
@@ -146,7 +150,7 @@
       <DependentUpon>TestController.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Content Include="Print.asmx" />
+    <Content Include="Print.aspx" />
     <Content Include="ProductPicker.aspx" />
     <Content Include="RequireCash.aspx" />
     <Content Include="CashDispense.aspx" />
@@ -231,9 +235,9 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Controller\Controller\Controller.csproj">
-      <Project>{06e40abd-e6fb-4001-9d67-4b80000f212f}</Project>
-      <Name>Controller</Name>
+    <ProjectReference Include="..\Printer\Printer.vbproj">
+      <Project>{261d72ea-1c25-4b8d-bf7c-937dd9121c37}</Project>
+      <Name>Printer</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

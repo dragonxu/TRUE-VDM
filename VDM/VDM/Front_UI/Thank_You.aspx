@@ -15,40 +15,54 @@
 </style>
 </head>
 <body class="bg2">
-     <form id="form1" runat="server">
+<form id="form1" runat="server">
 <div class="warp">
 <header><img src="images/bg-top.png"/></header>
-<main>
-  <div class="priceplan">
-    <div class="main3">
-      <div class="thank">
-        <img src="images/pic-thank.png">
-          <h4 class="margin-re true-l"><font class="true-m">ท่่านได้ทำรายการเสร็จสิ้น</font><br/>กรุณารับใบเสร็จและสินค้า<br/>ทางช่องรับสินค้า</h4>
-      </div>
-    </div>
-  </div>
-</main>
 
-               <footer style="bottom: 0px">
-                <nav>
-                    <div class="main">
-                        <span class="col-md-6">
-                            <asp:ImageButton ID="lnkHome" runat="server" ImageUrl="images/btu-home.png" />
-                        </span>
-                        <span class="col-md-6">
+<asp:ScriptManager ID="scm" runat="server"></asp:ScriptManager>
+<asp:UpdatePanel ID="UDP" runat="server">
+    <ContentTemplate>
+
+    <main>
+      <div class="priceplan">
+        <div class="main3">
+          <div class="thank">
+            <img src="images/pic-thank.png">
+              <h4 class="margin-re true-l"><font class="true-m">ท่่านได้ทำรายการเสร็จสิ้น</font><br/>กรุณารับใบเสร็จและสินค้า<br/>ทางช่องรับสินค้า</h4>
+              <asp:Button ID="btnPrint" runat="server" Text="Print" style="display:none;" />
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer style="bottom: 0px">
+        <nav>
+            <div class="main">
+                <span class="col-md-6">
+                    <asp:ImageButton ID="lnkHome" runat="server" ImageUrl="images/btu-home.png" />
+                </span>
+                <span class="col-md-6">
                       
-                        </span>
-                    </div>
-                </nav>
-            </footer>
+                </span>
+            </div>
+        </nav>
+    </footer>
+
+    </ContentTemplate>
+</asp:UpdatePanel>
 </div>
 
          <script type="text/javascript">
 
+             var printDelegate = function () {
+                 $('#btnPrint').click();
+             }
+             
+
              var redirectDelegate = function () {
                  $('#lnkHome').click();
              }
-             var waitSeconds = 7;// รอ 7 วินาที
+             var waitSeconds = 10;// รอ 10 วินาที
              setTimeout(redirectDelegate, waitSeconds * 1000);
             
 

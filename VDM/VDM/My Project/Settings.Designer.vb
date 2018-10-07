@@ -57,7 +57,7 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.WebServiceUrl),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("http://localhost/Print.asmx")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("http://localhost:59807/Print.asmx")>  _
         Public ReadOnly Property VDM_Printer_Print() As String
             Get
                 Return CType(Me("VDM_Printer_Print"),String)

@@ -74,6 +74,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web.DynamicData" />
@@ -116,7 +118,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
-    <Content Include="extras-sortable.html" />
     <Content Include="fonts\card\card-icon.svg" />
     <Content Include="fonts\climacons\.gitignore" />
     <Content Include="fonts\climacons\climacons-webfont.svg" />
@@ -542,6 +543,7 @@
     <Content Include="Scripts\DragDrop.js" />
     <Content Include="Scripts\extent.js" />
     <Content Include="Scripts\toastr.js" />
+    <Content Include="My Project\DataSources\System.Data.DataTable.datasource" />
     <Content Include="SignIn.aspx" />
     <Content Include="Machine_Console\Login.aspx" />
     <Content Include="Machine_Console\Machine_Overview.aspx" />
@@ -626,6 +628,7 @@
     <Content Include="Styles\Site.css" />
     <Content Include="Styles\sli.css" />
     <Content Include="Styles\webfont.css" />
+    <Content Include="Test.aspx" />
     <Content Include="Test_API\Test_API_Interface.aspx" />
     <Content Include="Test_API\Test_BBL.aspx" />
     <Content Include="Test_API\Test_TMN_Payment.aspx" />
@@ -957,6 +960,13 @@
     <Compile Include="Setting_Site.aspx.vb">
       <DependentUpon>Setting_Site.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test.aspx.designer.vb">
+      <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test.aspx.vb">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Test_API\Test_API_Interface.aspx.designer.vb">
       <DependentUpon>Test_API_Interface.aspx</DependentUpon>
@@ -1478,10 +1488,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://localhost/Print.asmx">
+    <WebReferenceUrl Include="http://localhost:59807/Print.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\Printer\</RelPath>
-      <UpdateFromURL>http://localhost/Print.asmx</UpdateFromURL>
+      <UpdateFromURL>http://localhost:59807/Print.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
