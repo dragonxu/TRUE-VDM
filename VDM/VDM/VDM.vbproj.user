@@ -9,7 +9,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
+<<<<<<< HEAD
           <StartPageUrl>Front_UI/Default.aspx?KO_ID=1</StartPageUrl>
+=======
+          <StartPageUrl>Front_UI/Default.aspx</StartPageUrl>
+>>>>>>> 1f2946cdcfb88a2c1a852b1c90515a5b08df84ba
           <StartAction>SpecificPage</StartAction>
           <AspNetDebugging>True</AspNetDebugging>
           <SilverlightDebugging>False</SilverlightDebugging>
