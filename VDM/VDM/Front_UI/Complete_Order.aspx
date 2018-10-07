@@ -65,7 +65,8 @@
                             <div class="step-payment" style ="padding :10px 0 100px 0;">
                             <h4 class="margin-re true-m">ท่านได้ชำระค่าสินค้าแล้ว</h4>
                                 </div>
-                            <img src="images/icon-pack.png">
+                            <img src="images/icon-pack-gif.gif">
+                            <img src="images/icon-Shadow.png">
                             <div class="step-payment">
 
 
