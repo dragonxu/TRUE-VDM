@@ -234,15 +234,15 @@ namespace Controller
                     {
                         if (ConnectionChange != null)
                             this.ConnectionChange(this, new EventArgs());
-                        this.BRun.RunWorkerAsync();
+                        ////this.BRun.RunWorkerAsync();
                         this.iRetryReadCount = 0;
                     }
                     else
                     {
                         if (ConnectionChange != null)
                             this.ConnectionChange(this, new EventArgs());
-                        if (IsOpen == true)
-                            this.BConnector.RunWorkerAsync();
+                  //      if (IsOpen == true)
+                  //          this.BConnector.RunWorkerAsync();
                     }
                 }
             }
@@ -287,13 +287,14 @@ namespace Controller
         {
             if (this.IsOpen == false)
             {
-                try
-                {
+             //   try
+             //   {
                     this.iIsOpen = Network.PingIP(this.Transport.RemoteIP);//this._transport.Ping();
                     if (iIsOpen)
                     {
                         this.iConnectotSleep = 100;
-                        this.BConnector.RunWorkerAsync();
+                        test();
+                        // this.BConnector.RunWorkerAsync();
 
                     }
                     else
@@ -301,13 +302,13 @@ namespace Controller
                         this.iConnectotSleep = 1000;
                         this.BConnector.RunWorkerAsync();
                     }
-                }
-                catch (Exception ex)
-                {
-                    this._lastError = ex.Message;
-                    this.iConnectotSleep = 1000;
-                    this.BConnector.RunWorkerAsync();
-                }
+             //   }
+             //   catch (Exception ex)
+             //   {
+             //       this._lastError = ex.Message;
+             //       this.iConnectotSleep = 1000;
+             //      this.BConnector.RunWorkerAsync();
+             //   }
             }
             else
             {
@@ -322,6 +323,20 @@ namespace Controller
                     this.iConnectotSleep = 1000;
                     this.BConnector.RunWorkerAsync();
                 }
+            }
+        }
+        private void test()
+        {
+            bool conncet = this._transport.Open();
+            if (conncet == true)
+            {
+                this.NodeAddressDataSend();
+                this.Connected = true;
+            }
+            else
+            {
+                this.iConnectotSleep = 1000;
+                this.BConnector.RunWorkerAsync();
             }
         }
         public void Disconnect()

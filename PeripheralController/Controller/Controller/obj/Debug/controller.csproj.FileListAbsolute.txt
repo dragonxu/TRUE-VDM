@@ -1,13 +1,10 @@
-c:\users\maytee\source\repos\controller\controller\bin\Debug\controller.pdb
-c:\users\maytee\source\repos\controller\controller\obj\Debug\controller.Form1.resources
-c:\users\maytee\source\repos\controller\controller\obj\Debug\controller.Properties.Resources.resources
-c:\users\maytee\source\repos\controller\controller\obj\Debug\controller.csproj.GenerateResource.cache
-c:\users\maytee\source\repos\controller\controller\obj\Debug\controller.csproj.CoreCompileInputs.cache
-c:\users\maytee\source\repos\controller\controller\obj\Debug\controller.pdb
-C:\Users\Maytee\source\repos\controller\controller\bin\Debug\controller.dll.config
-C:\Users\Maytee\source\repos\controller\controller\bin\Debug\controller.dll
-C:\Users\Maytee\source\repos\controller\controller\obj\Debug\controller.csprojAssemblyReference.cache
-C:\Users\Maytee\source\repos\controller\controller\obj\Debug\controller.dll
+E:\GitHub\ProgrammableLogicControl\Controller\Controller\bin\Debug\Controller.xml
+E:\GitHub\ProgrammableLogicControl\Controller\Controller\bin\Debug\Controller.dll
+E:\GitHub\ProgrammableLogicControl\Controller\Controller\bin\Debug\Controller.pdb
+E:\GitHub\ProgrammableLogicControl\Controller\Controller\obj\Debug\Controller.csproj.CoreCompileInputs.cache
+E:\GitHub\ProgrammableLogicControl\Controller\Controller\obj\Debug\Controller.dll
+E:\GitHub\ProgrammableLogicControl\Controller\Controller\obj\Debug\Controller.pdb
+E:\GitHub\ProgrammableLogicControl\Controller\Controller\obj\Debug\Controller.csprojAssemblyReference.cache
 D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\bin\Debug\controller.dll.config
 D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\bin\Debug\controller.dll
 D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\bin\Debug\controller.pdb
@@ -15,3 +12,5 @@ D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\obj\De
 D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\obj\Debug\Controller.csproj.GenerateResource.Cache
 D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\obj\Debug\controller.dll
 D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\obj\Debug\controller.pdb
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\obj\Debug\Controller.csprojAssemblyReference.cache
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\Controller\Controller\obj\Debug\Controller.csproj.CoreCompileInputs.cache
