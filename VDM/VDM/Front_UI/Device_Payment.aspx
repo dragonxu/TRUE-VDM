@@ -348,7 +348,7 @@
             function RequireCash() {
                 calculateTotal();
                 var required = parseInt($('#txtRequire').val().replace(',', ''));
-               
+                
                 if (required > 0) {
                     // Gen URL
                     var url = '<% 
@@ -356,7 +356,6 @@
             Response.Write(BL.LocalControllerURL)
                     %>/RequireCash.aspx?REQ=' + required + '&callback=updatePayment';
                     // 
-                   
                     var script = document.createElement('script');
                     script.src = url;
                     var body = document.getElementsByTagName('body')[0];

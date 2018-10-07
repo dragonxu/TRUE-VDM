@@ -37,6 +37,13 @@ Public Class Thank_You
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        If Not IsPostBack Then
+
+            PrintSlip()
+            Change()
+        End If
+        '---------------- Change And Print Slip--------------
+
         'BL.Update_Service_Transaction(TXN_ID, Me.Page) '-------------- Update ทุกหน้า ------------
         'If Not IsPostBack Then
         '    PrintSlipAndChange()
@@ -44,10 +51,105 @@ Public Class Thank_You
 
     End Sub
 
+    Private Sub PrintSlip()
+
+    End Sub
+
+
+    Private Sub Change()
+        Dim SQL As String = ""
+        SQL &= " SELECT ISNULL(MUST_CHANGE,0)-ISNULL(ACTUAL_CHANGE,0) REMAIN_CHANGE" & vbLf
+        Sql &= " FROM TB_TRANSACTION_CASH TXN_CASH" & vbLf
+        Sql &= " LEFT JOIN TB_TRANSACTION_CASH_CHANGE ACTUAL_CHANGE ON TXN_CASH.TXN_ID=ACTUAL_CHANGE.TXN_ID" & vbLf
+        SQL &= " WHERE TXN_CASH.TXN_ID=" & TXN_ID & " AND" & vbLf
+        SQL &= " ISNULL(MUST_CHANGE,0)-ISNULL(ACTUAL_CHANGE,0)>0" & vbLf
+        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        '------------- ไม่ต้องทอน ----------
+        If DT.Rows.Count = 0 Then Exit Sub
+
+        '------------- ต้องทอน ------------
+        Dim MUST_CHANGE As Integer = DT.Rows(0)(0)
+
+        '------------ CHECK MONEY_STOCK---------------
+        SQL = "SELECT KD.D_ID,D.Unit_Value,KD.Current_Qty" & vbLf
+        SQL &= "FROM TB_KIOSK_DEVICE KD " & vbLf
+        SQL &= "INNER JOIN MS_DEVICE D ON KD.D_ID=D.D_ID" & vbLf
+        SQL &= "		AND D.Active_Status=1" & vbLf
+        SQL &= "WHERE KD.KO_ID=" & KO_ID & " AND D.DT_ID IN (" & VDM_BL.DeviceType.CoinOut & "," & VDM_BL.DeviceType.CashOut & ")" & vbLf
+        SQL &= "And KD.Current_Qty > 0" & vbLf
+        SQL &= "ORDER BY D.Unit_Value DESC"
+        DA = New SqlDataAdapter(SQL, BL.ConnectionString)
+        Dim MONEY_STOCK As New DataTable
+        DA.Fill(MONEY_STOCK)
+
+        Dim TMP As DataTable = BL.Calculate_Change_Quantity(MUST_CHANGE, MONEY_STOCK.Copy)
+
+        Dim col() As String = {"Unit_Value"}
+        Dim PAYLIST As DataTable = TMP.DefaultView.ToTable(True, col)
+        PAYLIST.Columns.Add("Current_Qty", GetType(Integer))
+        PAYLIST.Columns.Add("Total", GetType(Integer), "Unit_Value*Current_Qty")
+        For i As Integer = 0 To PAYLIST.Rows.Count - 1
+            PAYLIST.Rows(i).Item("Current_Qty") = TMP.Compute("SUM(Current_Qty)", "Unit_Value=" & PAYLIST.Rows(i).Item("Unit_Value"))
+        Next
+        PAYLIST.DefaultView.RowFilter = ""
+
+
+        Dim ACTUAL_CHANGE As Object = PAYLIST.Compute("SUM(Total)", "")
+        If IsDBNull(ACTUAL_CHANGE) Then ACTUAL_CHANGE = 0
+        Dim REMAIN_CHANGE As Integer = MUST_CHANGE - ACTUAL_CHANGE
+
+        '------------- Call Hardware -------------
+        For i As Integer = 0 To PAYLIST.Rows.Count - 1
+            Dim Script As String = ""
+            Dim Unit_Value As Integer = PAYLIST.Rows(i).Item("Unit_Value")
+            Dim Current_Qty As Integer = PAYLIST.Rows(i).Item("Current_Qty")
+            Select Case Unit_Value
+                Case 20, 50, 100, 500, 1000
+                    Script = "cashDispense(" & Unit_Value & "," & Current_Qty & ");"
+                Case 1, 2, 5, 10
+                    Script = "coinDispense(" & Unit_Value & "," & Current_Qty & ");"
+            End Select
+            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Dispense" & Unit_Value, Script, True)
+        Next
+
+        '---------------------TB_TRANSACTION_CASH_CHANGE------ Completed Transaction----------------------
+        SQL = "SELECT * FROM TB_TRANSACTION_CASH_CHANGE" & vbLf
+        SQL &= "WHERE TXN_ID=" & TXN_ID
+        DA = New SqlDataAdapter(SQL, BL.ConnectionString)
+        DT = New DataTable
+        DA.Fill(DT)
+
+        Dim DR As DataRow
+        If DT.Rows.Count = 0 Then
+            DR = DT.NewRow
+            DR("TXN_ID") = TXN_ID
+            DT.Rows.Add(DR)
+        Else
+            DR = DT.Rows(0)
+        End If
+        DR("ACTUAL_CHANGE") = ACTUAL_CHANGE
+        DR("REMAIN_CHANGE") = REMAIN_CHANGE
+        DR("TXN_TIME") = Now
+        Dim cmd As New SqlCommandBuilder(DA)
+        DA.Update(DT)
+
+        '-------------------UPDATE MONEY STOCK----------------
+        For i As Integer = 0 To PAYLIST.Rows.Count - 1
+            MONEY_STOCK.DefaultView.RowFilter = "Unit_Value=" & PAYLIST.Rows(i).Item("Unit_Value")
+            If MONEY_STOCK.DefaultView.Count > 0 Then
+                BL.UPDATE_KIOSK_DEVICE_TRANSACTION_STOCK(KO_ID, TXN_ID, MONEY_STOCK.DefaultView(0).Item("D_ID"), PAYLIST.Rows(i).Item("Current_Qty"))
+            End If
+        Next
+        '------------------- Completed------------------------
+
+    End Sub
+
     Private Sub PrintSlipAndChange()
 
         ''--------Check Existing TXN-----------
-        'Dim SQL As String = "SELECT * FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
+        'Dim SQL As String = "Select * FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
         'Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
         'Dim DT As New DataTable
         'DA.Fill(DT)
@@ -75,12 +177,12 @@ Public Class Thank_You
         'Dim DR As DataRow = Nothing
         ''TB_TRANSACTION_STOCK
         'Dim BEFORE_QUANTITY As Object = DBNull.Value
-        'SQL = "SELECT Current_Qty FROM TB_KIOSK_DEVICE WHERE KO_ID=" & KO_ID & " AND D_ID=" & VDM_BL.Device.Printer
+        'SQL = "Select Current_Qty FROM TB_KIOSK_DEVICE WHERE KO_ID=" & KO_ID & " And D_ID=" & VDM_BL.Device.Printer
         'DA = New SqlDataAdapter(SQL, BL.ConnectionString)
         'DT = New DataTable
         'DA.Fill(DT)
 
-        'SQL = "SELECT * FROM TB_TRANSACTION_STOCK WHERE TXN_ID=" & TXN_ID & " AND D_ID=" & VDM_BL.DeviceType.Printer
+        'SQL = "Select * FROM TB_TRANSACTION_STOCK WHERE TXN_ID=" & TXN_ID & " And D_ID=" & VDM_BL.DeviceType.Printer
         'DA = New SqlDataAdapter(SQL, BL.ConnectionString)
         'DA.Fill(DT)
         'DR("TXN_ID") = TXN_ID
@@ -97,18 +199,18 @@ Public Class Thank_You
 
     '    '------------ Check Remain Change ----------
     '    Dim SQL As String = ""
-    '    SQL &= " SELECT PD.TOTAL_PRICE,CASH_PAID,ISNULL(CASH_CHANGE,0) CASH_CHANGE" & vbLf
+    '    SQL &= " Select PD.TOTAL_PRICE,CASH_PAID,ISNULL(CASH_CHANGE,0) CASH_CHANGE" & vbLf
     '    SQL &= "FROM TB_SERVICE_TRANSACTION TXN " & vbLf
-    '    SQL &= "LEFT JOIN TB_BUY_PRODUCT PD ON TXN.TXN_ID=PD.TXN_ID" & vbLf
+    '    SQL &= "LEFT JOIN TB_BUY_PRODUCT PD On TXN.TXN_ID=PD.TXN_ID" & vbLf
 
     '    SQL &= "WHERE TXN.TXN_ID=" & TXN_ID & vbLf
-    '    SQL &= "AND METHOD_ID=" & VDM_BL.PaymentMethod.CASH & vbLf
-    '    SQL &= "AND CASH_PAID-ISNULL(CASH_CHANGE,0)<>PD.TOTAL_PRICE" & vbLf
+    '    SQL &= "And METHOD_ID=" & VDM_BL.PaymentMethod.CASH & vbLf
+    '    SQL &= "And CASH_PAID-ISNULL(CASH_CHANGE,0)<>PD.TOTAL_PRICE" & vbLf
     '    Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
     '    Dim DT As New DataTable
     '    DA.Fill(DT)
     '    If DT.Rows.Count = 0 Then
-    '        SQL = "UPDATE TB_SERVICE_TRANSACTION SET CASH_CHANGE=0 WHERE TXN_ID=" & TXN_ID
+    '        SQL = "UPDATE TB_SERVICE_TRANSACTION Set CASH_CHANGE=0 WHERE TXN_ID=" & TXN_ID
     '        BL.ExecuteNonQuery(SQL)
     '        Exit Sub
     '    End If
@@ -116,11 +218,11 @@ Public Class Thank_You
     '    Dim Remain As Integer = DT.Rows(0).Item("CASH_PAID") - DT.Rows(0).Item("TOTAL_PRICE")
 
     '    '------------ Call hardware ---------------
-    '    SQL &= "SELECT KD.D_ID,D.Unit_Value,KD.Current_Qty" & vbLf
+    '    SQL &= "Select KD.D_ID,D.Unit_Value,KD.Current_Qty" & vbLf
     '    SQL &= "FROM TB_KIOSK_DEVICE KD " & vbLf
-    '    SQL &= "INNER JOIN MS_DEVICE D ON KD.D_ID=D.D_ID" & vbLf
-    '    SQL &= "		AND D.Active_Status=1" & vbLf
-    '    SQL &= "WHERE KD.KO_ID=" & KO_ID & " AND D.DT_ID IN (" & VDM_BL.DeviceType.CoinOut & "," & VDM_BL.DeviceType.CashOut & ")  AND KD.Current_Qty>0" & vbLf
+    '    SQL &= "INNER JOIN MS_DEVICE D On KD.D_ID=D.D_ID" & vbLf
+    '    SQL &= "		And D.Active_Status=1" & vbLf
+    '    SQL &= "WHERE KD.KO_ID=" & KO_ID & " And D.DT_ID In (" & VDM_BL.DeviceType.CoinOut & "," & VDM_BL.DeviceType.CashOut & ")  And KD.Current_Qty>0" & vbLf
     '    SQL &= "ORDER BY D.Unit_Value DESC"
     '    DA = New SqlDataAdapter(SQL, BL.ConnectionString)
     '    DT = New DataTable
@@ -186,16 +288,6 @@ Public Class Thank_You
     '    PrintSlipNotEnoughMoney(Total, Remain)
     'End Sub
 
-    'Private Function NextToPay(ByVal Amount As Integer, ByVal MoneyStock As DataTable) As Integer
-    '    Dim Result As Object = DBNull.Value
-    '    Result = MoneyStock.Compute("MAX(Unit_Value)", "Unit_Value<=" & Amount)
-    '    If Not IsDBNull(Result) Then
-    '        Return Result
-    '    Else
-    '        Return 0
-    '    End If
-    '    Return Result
-    'End Function
 
     'Private Sub PrintSlipNotEnoughMoney(ByVal Change As Integer, ByVal Remain As Integer)
 

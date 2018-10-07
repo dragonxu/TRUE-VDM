@@ -1158,8 +1158,8 @@ Public Class VDM_BL
         SQL &= "  ,KO_ID" & vbLf
         SQL &= "  ,SHIFT_Y,SHIFT_M,SHIFT_D,SHIFT_N,KO_CODE" & vbLf
         SQL &= "  ,dbo.FN_SHIFT_CODE(SHIFT_Y,SHIFT_M,SHIFT_D,ISNULL(KO_CODE,dbo.FN_KO_CODE(KO_ID)),SHIFT_N)    SHIFT_CODE" & vbLf
-        SQL &= "  ,Open_Time,Open_By , USER_Open.FIRST_NAME+' '+ USER_Open.LAST_NAME Open_By_Name" & vbLf
-        SQL &= "  ,Close_Time,Close_By  , USER_Close.FIRST_NAME+' '+ USER_Close.LAST_NAME Close_By_Name" & vbLf
+        SQL &= "  ,Open_Time,Open_By,USER_Open.EMPLOYEE_ID Open_EMP_ID , USER_Open.FIRST_NAME+' '+ USER_Open.LAST_NAME Open_By_Name" & vbLf
+        SQL &= "  ,Close_Time,Close_By,USER_Close.EMPLOYEE_ID Close_EMP_ID,USER_Close.FIRST_NAME+' '+ USER_Close.LAST_NAME Close_By_Name" & vbLf
         SQL &= "  From TB_SHIFT" & vbLf
         SQL &= "  Left Join MS_USER USER_Open On USER_Open.USER_ID=TB_SHIFT.Open_By" & vbLf
         SQL &= "  Left Join MS_USER USER_Close ON USER_Close.USER_ID=TB_SHIFT.Close_By" & vbLf
@@ -1657,13 +1657,13 @@ Public Class VDM_BL
         Return TXN_ID
     End Function
 
-    Private Function Gen_New_Slip_Code(ByVal TXN_ID As Integer) As String
-        Dim SQL As String = "EXEC dbo.SP_GEN_CONFIRMATION_SLIP_CODE  " & TXN_ID
-        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
-        Dim DT As New DataTable
-        DA.Fill(DT)
-        Return DT.Rows(0)(0)
-    End Function
+    'Private Function Gen_New_Slip_Code(ByVal TXN_ID As Integer) As String
+    '    Dim SQL As String = "EXEC dbo.SP_GEN_CONFIRMATION_SLIP_CODE  " & TXN_ID
+    '    Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+    '    Dim DT As New DataTable
+    '    DA.Fill(DT)
+    '    Return DT.Rows(0)(0)
+    'End Function
 
     Public Function Get_Next_Product_To_Pick(ByVal KO_ID As Integer, ByVal PRODUCT_ID As Integer) As DataTable
 
@@ -1716,6 +1716,30 @@ Public Class VDM_BL
 
     Public Function Commit_Product_Problem_Slip() As Integer '--------------- Return ITEM_NO ------------
 
+    End Function
+
+    Public Function Calculate_Change_Quantity(ByVal REMAIN As Integer, ByVal MoneyStock As DataTable) As DataTable
+
+        Dim RESULT As New DataTable
+        RESULT.Columns.Add("Unit_Value", GetType(Integer))
+        RESULT.Columns.Add("Current_Qty", GetType(Integer))
+
+        While REMAIN > 0 And MoneyStock.Rows.Count > 0
+            '---------- Get Max Value Can Pay
+            Dim NextToPay As Object = MoneyStock.Compute("MAX(Unit_Value)", "Unit_Value<=" & REMAIN) '
+            If IsDBNull(NextToPay) Then
+                Exit While '---------Nothing Can Pay Anymore
+            End If
+            RESULT.Rows.Add(NextToPay, 1)
+            REMAIN -= NextToPay
+            MoneyStock.DefaultView.RowFilter = "Unit_Value=" & NextToPay
+            MoneyStock.DefaultView(0).Item("Current_Qty") -= 1
+            If MoneyStock.DefaultView(0).Item("Current_Qty") = 0 Then
+                MoneyStock.DefaultView(0).Row.Delete()
+            End If
+        End While
+
+        Return RESULT
     End Function
 
 #End Region
@@ -1928,7 +1952,7 @@ Public Class VDM_BL
     'End Function
 
     Public Sub UPDATE_KIOSK_DEVICE_TRANSACTION_STOCK(ByVal KO_ID As Integer, ByVal TXN_ID As Integer, ByVal D_ID As VDM_BL.Device, ByVal DIFF As Integer)
-        Dim Sql As String = "SELECT Current_Qty FROM TB_KIOSK_DEVICE WHERE KO_ID=" & KO_ID & " AND D_ID=" & D_ID
+        Dim Sql As String = "SELECT * FROM TB_KIOSK_DEVICE WHERE KO_ID=" & KO_ID & " AND D_ID=" & D_ID
         Dim DA As New SqlDataAdapter(Sql, ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)
@@ -1958,7 +1982,7 @@ Public Class VDM_BL
             BEFORE_QUANTITY = DT.Rows(0).Item("Current_Qty")
             '---------------- Update Current -------------
             Dim NEW_QUANTITY As Integer = BEFORE_QUANTITY + DIFF
-            DR("Current_Qty") = IIf(NEW_QUANTITY > 0, NEW_QUANTITY, 0)
+            DT.Rows(0).Item("Current_Qty") = IIf(NEW_QUANTITY > 0, NEW_QUANTITY, 0)
             cmd = New SqlCommandBuilder(DA)
             DA.Update(DT)
         End If
@@ -1967,7 +1991,7 @@ Public Class VDM_BL
         Sql = "SELECT MAX(STOCK.TXN_ID) TXN_ID" & vbLf
         Sql &= " FROM TB_SERVICE_TRANSACTION TXN" & vbLf
         Sql &= " INNER JOIN TB_TRANSACTION_STOCK STOCK ON TXN.TXN_ID=STOCK.TXN_ID" & vbLf
-        Sql &= " WHERE KO_ID=" & KO_ID & vbLf
+        Sql &= " WHERE KO_ID=" & KO_ID & " AND D_ID=" & D_ID & " AND STOCK.TXN_ID<" & TXN_ID & vbLf
         DA = New SqlDataAdapter(Sql, ConnectionString)
         DT = New DataTable
         DA.Fill(DT)

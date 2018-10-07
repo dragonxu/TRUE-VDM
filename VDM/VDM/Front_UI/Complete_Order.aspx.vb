@@ -241,11 +241,89 @@ Public Class Complete_Order
         End Set
     End Property
 
+    Private Property SHIFT_ID As Integer
+        Get
+            Try
+                Return ViewState("SHIFT_ID")
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+        Set(value As Integer)
+            ViewState("SHIFT_ID") = value
+        End Set
+    End Property
+
+    Private Property KO_CODE As String
+        Get
+            Try
+                Return ViewState("KO_CODE")
+            Catch ex As Exception
+                Return ""
+            End Try
+        End Get
+        Set(value As String)
+            ViewState("KO_CODE") = value
+        End Set
+    End Property
+
+    Private Property SHOP_CODE As String
+        Get
+            Try
+                Return ViewState("SHOP_CODE")
+            Catch ex As Exception
+                Return ""
+            End Try
+        End Get
+        Set(value As String)
+            ViewState("SHOP_CODE") = value
+        End Set
+    End Property
+
+    Private Property SALE_CODE As String
+        Get
+            Try
+                Return ViewState("SALE_CODE")
+            Catch ex As Exception
+                Return ""
+            End Try
+        End Get
+        Set(value As String)
+            ViewState("SALE_CODE") = value
+        End Set
+    End Property
+
+    Private Property SHIFT_OPEN_BY As Integer
+        Get
+            Try
+                Return ViewState("SHIFT_OPEN_BY")
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+        Set(value As Integer)
+            ViewState("SHIFT_OPEN_BY") = value
+        End Set
+    End Property
+
 #End Region
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Not IsPostBack Then
+
+            Dim DT As DataTable = BL.Get_Kiosk_Current_Shift(KO_ID)
+            If DT.Rows.Count > 0 Then
+                SHIFT_ID = DT.Rows(0).Item("SHIFT_ID")
+                SALE_CODE = DT.Rows(0).Item("Open_EMP_ID").ToString
+                SHIFT_OPEN_BY = DT.Rows(0).Item("Open_By")
+            End If
+            DT = BL.GetList_Kiosk(KO_ID)
+            If DT.Rows.Count > 0 Then
+                KO_CODE = DT.Rows(0).Item("KO_CODE")
+                SHOP_CODE = DT.Rows(0).Item("SITE_CODE")
+            End If
+
             If PRODUCT_ID > 0 Then
                 PickUpProduct()
             Else
@@ -283,8 +361,10 @@ Public Class Complete_Order
 
     Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
 
-        '---------------------TB_TRANSACTION_PICK_PRODUCT----------------
-        Dim SQL As String = "SELECT Top 0 * FROM  TB_TRANSACTION_PICK_PRODUCT" & vbLf
+        '-------------------- Product_Picked_Up------------------
+
+        '---------------------TB_TRANSACTION_PICK----------------
+        Dim SQL As String = "SELECT Top 0 * FROM  TB_TRANSACTION_PICK" & vbLf
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
         DA.Fill(DT)
@@ -302,49 +382,19 @@ Public Class Complete_Order
         Dim cmd As New SqlCommandBuilder(DA)
         DA.Update(DT)
 
-        ''--------------- Get Product Price -------------
-        'DT = BL.Get_Product_Info_From_ID(PRODUCT_ID)
-        'PRODUCT_CODE = DT.Rows(0).Item("PRODUCT_CODE")
-        'PRODUCT_NAME = DT.Rows(0).Item("DISPLAY_NAME_TH")
-        'PRICE = DT.Rows(0).Item("PRICE")
-        ''--------------- Get Koisk Detail-------------
-        'DT = BL.GetList_Kiosk(KO_ID)
-        'KO_CODE = DT.Rows(0).Item("KO_CODE")
-        'SITE_ID = DT.Rows(0).Item("SITE_ID")
-        'SITE_CODE = DT.Rows(0).Item("SITE_CODE")
-        'SITE_NAME = DT.Rows(0).Item("SITE_NAME")
-        ''--------------- Get Shift Detail---------------
-        'DT = BL.Get_Kiosk_Current_Shift(KO_ID)
-        'SHIFT_ID = DT.Rows(0).Item("SHIFT_ID")
-
-        ''------------------ Gen Reciept ---------
-        'Dim SQL As String = "SELECT * FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
-        'Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
-        'DT = New DataTable
-        'DA.Fill(DT)
-        'SLIP_CODE = BL.Get_Confirmation_Slip_Code(TXN_ID)
+        '---------------- Cut-Off Stock----------------
+        BL.Drop_PRODUCT_STOCK_SERIAL(SLOT_ID, SERIAL_NO)
+        BL.Save_Product_Movement_Log(SHIFT_ID, VDM_BL.ShiftStatus.OnGoing, PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.Sell, SLOT_NAME, SLOT_ID, "", 0, "ขายที่ตู้ " & SHOP_CODE & "-" & KO_CODE & " ไปเมื่อวันที่ " & Now.ToString("dd-MMM-yyyy") & " by SaleCode : " & SALE_CODE, SHIFT_OPEN_BY, Now)
 
         '---------------- Create Slip Content -----------
         Select Case METHOD_ID
             Case VDM_BL.PaymentMethod.CASH
-                'Dim SLIP As DataTable = BL.Gen_Cash_Confirmation_Slip(TXN_ID, SITE_CODE, SITE_NAME, SLIP_CODE, DT.Rows(0).Item("TXN_END"), PRODUCT_CODE, PRODUCT_NAME, SERIAL_NO, PRICE, DT.Rows(0).Item("CASH_PAID"))
-                ''----------- Save Slip Content ----------
-                'Dim C As New Converter
-                'DT.Rows(0).Item("SLIP_CONTENT") = C.DatatableToXML(SLIP)
-                'DT.Rows(0).Item("CASH_CHANGE") = DT.Rows(0).Item("CASH_PAID") - PRICE
-                'Dim cmd As New SqlCommandBuilder(DA)
-                'DA.Update(DT)
+
 
             Case VDM_BL.PaymentMethod.TRUE_MONEY
 
         End Select
-        ''------------------ Save Log ----------------
-        'BL.Save_Product_Movement_Log(SHIFT_ID, VDM_BL.ShiftStatus.OnGoing, PRODUCT_ID, SERIAL_NO,
-        '                             VDM_BL.StockMovementType.Sell, SLOT_NAME, SLOT_ID, "Sell", 0, "ขายที่ " & SITE_CODE & " " & KO_CODE & " ไปเมื่อ " & Now.ToString("dd-MMM-yyyy hh:mm:ss"), 0, Now)
-        ''------------------ ตัด Stock----------------
-        'BL.Drop_PRODUCT_STOCK_SERIAL(SLOT_ID, SERIAL_NO)
-
-        '------------------ ไปหน้า พิมพ์ใบเสร็จ เพื่อ ประมวลใบเสร็จทั้งหมด และทอนเงิน----------
+        '------------------ ไปหน้า พิมพ์ใบเสร็จและทอนเงิน ----------
         Response.Redirect("Thank_You.aspx")
     End Sub
 
