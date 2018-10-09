@@ -143,9 +143,13 @@ Public Class Device_Product_Detail
 
 
         Else
-            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Scoll", "$(document).ready(function () {$('.detail-slider').slick({infinite: true,slidesToShow: 1,slidesToScroll: 1,}); });", True)
-
+            initFormPlugin()
         End If
+    End Sub
+
+    Private Sub initFormPlugin()
+
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "SlickGoTo", "$(document).ready(function () {$('div[data-slide]').click(function (e) {e.preventDefault();var slideno = $(this).data('slide');$('.detail-slider').slick('slickGoTo', slideno);}); });", True)
     End Sub
 
     Dim DT_Color_Page As DataTable
@@ -418,8 +422,6 @@ Public Class Device_Product_Detail
 
         Dim btnSelect As Button = e.Item.FindControl("btnSelect")
 
-        'Dim btnColor As HtmlAnchor = e.Item.FindControl("btnColor")
-        'btnColor.Attributes("onclick") = "$('#" & btnSelect.ClientID & "').click();"
         Dim P_ID As Integer = 0
         P_ID = BL.GetProduct_ID_Select(MODEL, e.Item.DataItem("DESCRIPTION_COLOR").ToString(), Default_Capacity, KO_ID, LANGUAGE)
 
@@ -434,12 +436,20 @@ Public Class Device_Product_Detail
 
         Dim pnlSelect As Panel = e.Item.FindControl("pnlSelect")
         Dim BoxIndex As HtmlGenericControl = e.Item.FindControl("BoxIndex")
+        BoxIndex.Attributes("data-slide") = e.Item.ItemIndex
+        BoxIndex.Attributes("onclick") = "$('#" & btnSelect.ClientID & "').click();"
         If e.Item.DataItem("DESCRIPTION_COLOR").ToString = Default_Color Then
             pnlSelect.Attributes("class") = "select-color-active"
         Else
             pnlSelect.Attributes("class") = "select-color"
         End If
         lnkColor.CommandArgument = e.Item.DataItem("DESCRIPTION_COLOR").ToString()
+    End Sub
+
+    Protected Sub rptColor_ItemCommand(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.RepeaterCommandEventArgs)
+        Select Case e.CommandName
+            Case "Select"
+        End Select
     End Sub
 #End Region
 
