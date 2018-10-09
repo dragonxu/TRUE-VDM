@@ -68,8 +68,6 @@
 
              function cashDispense(_type,qty) {
                  var url = $('#txtLocalControllerURL').val() + '/CashDispense.aspx?Type=' + _type + '&Q=' + qty + '&callback=';
-                    // 
-                    return;
                     var script = document.createElement('script');
                     script.src = url;
                     var body = document.getElementsByTagName('body')[0];
@@ -78,8 +76,6 @@
 
              function coinDispense(_type,qty) {
                  var url = $('#txtLocalControllerURL').val() + '/CoinDispense.aspx?Type=' + _type + '&Q=' + qty + '&callback=';
-                    // 
-                    return;
                     var script = document.createElement('script');
                     script.src = url;
                     var body = document.getElementsByTagName('body')[0];

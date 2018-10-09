@@ -1916,6 +1916,59 @@ Public Class VDM_BL
     Public Function GEN_TMN_CONFIRMATION_SLIP(ByVal TXN_ID As Integer) As DataTable
         Dim Content As DataTable = GEN_DEFAULT_SLIP_HEADER()
 
+        Dim SQL As String = "SELECT * FROM VW_TXN_TMN" & vbLf
+        SQL &= "WHERE TXN_ID=" & TXN_ID & " AND TXN_STEP='completed'"
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        DA.Fill(DT)
+        If DT.Rows.Count = 0 Then
+            Return DT
+        End If
+
+        Dim SITE_CODE As String = DT.Rows(0).Item("SITE_CODE").ToString
+        Dim SITE_NAME As String = ""
+        If Not IsDBNull(DT.Rows(0).Item("SITE_NAME")) Then
+            SITE_NAME = "(" & DT.Rows(0).Item("SITE_NAME") & ")"
+        End If
+        Dim SLIP_CODE As String = DT.Rows(0).Item("SLIP_CODE").ToString
+        Dim TXN_END As DateTime = DT.Rows(0).Item("TXN_END")
+        Dim PRODUCT_CODE As String = DT.Rows(0).Item("PRODUCT_CODE")
+        Dim TOTAL_PRICE As String = FormatNumber(DT.Rows(0).Item("TOTAL_PRICE"))
+        Dim PRODUCT_NAME As String = DT.Rows(0).Item("PRODUCT_NAME")
+        Dim SERIAL_NO As String = DT.Rows(0).Item("SERIAL_NO")
+        Dim TMN_ISV As String = DT.Rows(0).Item("TMN_ISV").ToString
+        Dim TMN_REQUEST_AMOUNT As Double = DT.Rows(0).Item("TMN_REQUEST_AMOUNT")
+        Dim TMN_PAYMENT_CODE As String = DT.Rows(0).Item("TMN_PAYMENT_CODE")
+        Dim TMN_PAYMENT_ID As String = DT.Rows(0).Item("TMN_PAYMENT_ID").ToString
+        Dim TMN_RESP_TIME As DateTime = DT.Rows(0).Item("TMN_RESP_TIME").ToString
+
+        Content.Rows.Add("สาขาที่ : " & SITE_CODE & SITE_NAME)
+        Content.Rows.Add("ใบยืนยันการรับชำระ   	        " & TXN_END.ToString("dd/MM/yyyy"))
+        Content.Rows.Add("" & SLIP_CODE & " 	" & TXN_END.ToString("hh:mm"))
+        Content.Rows.Add("__________________________________________")
+        Content.Rows.Add("รายการสินค้า")
+        Content.Rows.Add(" ")
+        Content.Rows.Add("1. " & PRODUCT_CODE & "		" & FormatNumber(TOTAL_PRICE, 2))
+        Content.Rows.Add(PRODUCT_NAME)
+        Content.Rows.Add("S/N : " & SERIAL_NO)
+        Content.Rows.Add(" ")
+        Content.Rows.Add("__________________________________________")
+        Content.Rows.Add("TRUE MONEY                                         " & FormatNumber(TMN_REQUEST_AMOUNT / 100, 2))
+        Content.Rows.Add(" ")
+        Content.Rows.Add("ISV : " & TMN_ISV)
+        Content.Rows.Add("PAYMENT ID : " & TMN_PAYMENT_ID)
+        Content.Rows.Add("PAYMENT CODE : " & TMN_PAYMENT_CODE)
+        Content.Rows.Add("__________________________________________")
+        Content.Rows.Add(" ")
+        Content.Rows.Add("ขอบคุณที่ใช้บริการ")
+        '----------------- Ads ----------------
+        Content.Merge(GEN_SLIP_ADS)
+        '----------------- Ads ----------------
+        Content.Rows.Add("__________________________________________")
+
+        '------------ Set Default Parameter
+        Set_Default_Print_Content_Style(Content)
+
 
         '------------ Set Default Parameter
         Set_Default_Print_Content_Style(Content)
@@ -1981,21 +2034,19 @@ Public Class VDM_BL
                     Dim cmd As New SqlCommandBuilder(DA)
                     DA.Update(DT)
                 End If
+            Case PaymentMethod.TRUE_MONEY
+                SQL = "SELECT * FROM TB_TRANSACTION_TMN WHERE TXN_ID=" & TXN_ID
+                DT = New DataTable
+                DA = New SqlDataAdapter(SQL, ConnectionString)
+                DA.Fill(DT)
+                If DT.Rows.Count > 0 Then
+                    DT.Rows(0).Item("SLIP_CONTENT") = C.DatatableToXML(Contents)
+                    Dim cmd As New SqlCommandBuilder(DA)
+                    DA.Update(DT)
+                End If
         End Select
 
     End Sub
-
-    'Public Function Print_Cash_ConfirmationSlip() As PrintResult
-
-    'End Function
-
-    'Public Function Print_TrueMoney_ConfirmationSlip() As PrintResult
-
-    'End Function
-
-    'Public Function Print_CreditCard_ConfirmationSlip() As PrintResult
-
-    'End Function
 
     Public Sub UPDATE_KIOSK_DEVICE_TRANSACTION_STOCK(ByVal KO_ID As Integer, ByVal TXN_ID As Integer, ByVal D_ID As VDM_BL.Device, ByVal DIFF As Integer)
         Dim Sql As String = "SELECT * FROM TB_KIOSK_DEVICE WHERE KO_ID=" & KO_ID & " AND D_ID=" & D_ID

@@ -38,14 +38,11 @@ Public Class Thank_You
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Not IsPostBack Then
+            txtLocalControllerURL.Text = BL.LocalControllerURL
             '---------------- Change And Print Slip--------------
             WaitForPrintSlip()
             Change()
-
-            txtLocalControllerURL.Text = BL.LocalControllerURL
-
         End If
-
 
     End Sub
 
@@ -63,20 +60,23 @@ Public Class Thank_You
         Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
         DA.Fill(DT)
         If DT.Rows.Count = 0 OrElse IsDBNull(DT.Rows(0).Item("METHOD_ID")) Then Exit Sub
+        '----------------- Check Print Method ID----------------
         Select Case DT.Rows(0).Item("METHOD_ID")
             Case VDM_BL.PaymentMethod.CASH
                 DT = BL.GEN_CASH_CONFIRMATION_SLIP(TXN_ID)
-                postXMLData(BL.LocalControllerURL & "/Print.aspx", C.DatatableToXML(DT))
+                postXMLData(BL.LocalControllerURL & "/Print.aspx?Mode=Print", C.DatatableToXML(DT))
                 BL.UPDATE_CONFIRMATION_SLIP(TXN_ID, DT)
             Case VDM_BL.PaymentMethod.TRUE_MONEY
                 DT = BL.GEN_TMN_CONFIRMATION_SLIP(TXN_ID)
-                postXMLData(BL.LocalControllerURL & "/Print.aspx", C.DatatableToXML(DT))
+                postXMLData(BL.LocalControllerURL & "/Print.aspx?Mode=Print", C.DatatableToXML(DT))
                 BL.UPDATE_CONFIRMATION_SLIP(TXN_ID, DT)
             Case VDM_BL.PaymentMethod.CREDIT_CARD
                 DT = BL.GEN_CREDITCARD_CONFIRMATION_SLIP(TXN_ID)
-                postXMLData(BL.LocalControllerURL & "/Print.aspx", C.DatatableToXML(DT))
+                postXMLData(BL.LocalControllerURL & "/Print.aspx?Mode=Print", C.DatatableToXML(DT))
                 BL.UPDATE_CONFIRMATION_SLIP(TXN_ID, DT)
         End Select
+        '----------------- Update PrinterStock---------------
+        BL.UPDATE_KIOSK_DEVICE_TRANSACTION_STOCK(KO_ID, TXN_ID, VDM_BL.Device.Printer, -1)
     End Sub
 
 

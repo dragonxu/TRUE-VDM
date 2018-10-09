@@ -312,6 +312,8 @@ Public Class Complete_Order
 
         If Not IsPostBack Then
 
+            txtLocalControllerURL.Text = BL.LocalControllerURL
+
             Dim DT As DataTable = BL.Get_Kiosk_Current_Shift(KO_ID)
             If DT.Rows.Count > 0 Then
                 SHIFT_ID = DT.Rows(0).Item("SHIFT_ID")
@@ -330,7 +332,6 @@ Public Class Complete_Order
                 PickUpSIM()
             End If
 
-            txtLocalControllerURL.Text = BL.LocalControllerURL
         End If
 
     End Sub
@@ -385,17 +386,20 @@ Public Class Complete_Order
         DA.Update(DT)
 
         '---------------- Cut-Off Stock----------------
-        BL.Drop_PRODUCT_STOCK_SERIAL(SLOT_ID, SERIAL_NO)
-        BL.Save_Product_Movement_Log(SHIFT_ID, VDM_BL.ShiftStatus.OnGoing, PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.Sell, SLOT_NAME, SLOT_ID, "", 0, "ขายที่ตู้ " & SHOP_CODE & "-" & KO_CODE & " ไปเมื่อวันที่ " & Now.ToString("dd-MMM-yyyy") & " by SaleCode : " & SALE_CODE, SHIFT_OPEN_BY, Now)
+        If PRODUCT_ID > 0 Then '------------ Product---------------
+            BL.Drop_PRODUCT_STOCK_SERIAL(SLOT_ID, SERIAL_NO)
+            BL.Save_Product_Movement_Log(SHIFT_ID, VDM_BL.ShiftStatus.OnGoing, PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.Sell, SLOT_NAME, SLOT_ID, "", 0, "ขายที่ตู้ " & SHOP_CODE & "-" & KO_CODE & " ไปเมื่อวันที่ " & Now.ToString("dd-MMM-yyyy") & " by SaleCode : " & SALE_CODE, SHIFT_OPEN_BY, Now)
+        Else '------------ SIM---------------
 
-        '---------------- Create Slip Content -----------
-        Select Case METHOD_ID
-            Case VDM_BL.PaymentMethod.CASH
+        End If
 
+        ''---------------- Create Slip Content -----------
+        'Select Case METHOD_ID
+        '    Case VDM_BL.PaymentMethod.CASH
 
-            Case VDM_BL.PaymentMethod.TRUE_MONEY
+        '    Case VDM_BL.PaymentMethod.TRUE_MONEY
 
-        End Select
+        'End Select
         '------------------ ไปหน้า พิมพ์ใบเสร็จและทอนเงิน ----------
         Response.Redirect("Thank_You.aspx")
     End Sub

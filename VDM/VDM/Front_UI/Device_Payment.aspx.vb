@@ -145,11 +145,17 @@ Public Class Device_Payment
         lnkCash.Attributes("class") = ""
         lnkCredit.Attributes("class") = ""
         lnkTruemoney.Attributes("class") = ""
+        txtBarcode.Text = ""
 
         '----------------------- Stop Focus Barcode ----------------------
         Dim Script As String = "stopFocusBarcode();" & vbLf
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "clearBarcode", Script, True)
+        CloseCashReciever()
+    End Sub
 
+    Private Sub CloseCashReciever()
+        Dim Script As String = "disableCash();"
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "disableCash", Script, True)
     End Sub
 
     Private Sub lnkCash_ServerClick(sender As Object, e As EventArgs) Handles lnkCash.ServerClick
@@ -209,23 +215,47 @@ Public Class Device_Payment
         '---------------- ตรวจสอบผลลัพธ์ -------------------
         If RESP.status.code.ToLower <> "success" Then
             Alert(Me.Page, RESP.status.message)
+            txtBarcode.Text = ""
             Exit Sub
         End If
+        '---------------- UPDATE Payment Method --------------------
+        Dim SQL As String = "UPDATE TB_SERVICE_TRANSACTION SET METHOD_ID=" & VDM_BL.PaymentMethod.TRUE_MONEY & vbLf
+        SQL &= "WHERE TXN_ID=" & TXN_ID
+        BL.ExecuteNonQuery(SQL)
 
-        '---------------- Gen SlipNo --------------------
-
-        '---------------- Save Service Transaction-------
-        Dim SQL As String = "SELECT * FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
-        DT = New DataTable
+        SQL = "SELECT * FROM TB_TRANSACTION_TMN WHERE TXN_ID=" & TXN_ID
         Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        DT = New DataTable
         DA.Fill(DT)
-        DT.Rows(0).Item("METHOD_ID") = VDM_BL.PaymentMethod.TRUE_MONEY
-        DT.Rows(0).Item("TMN_REQ_ID") = RESP.REQ_ID
-        DT.Rows(0).Item("TMN_ISV") = RESP.Request.isv_payment_ref
-        DT.Rows(0).Item("TMN_REQUEST_AMOUNT") = RESP.Request.request_amount
-        DT.Rows(0).Item("TMN_STATUS_CODE") = RESP.status.code
-        DT.Rows(0).Item("TMN_PAYMENT_ID") = RESP.data.payment_id
-        DT.Rows(0).Item("TMN_RESP_TIME") = Now
+        Dim DR As DataRow
+        If DT.Rows.Count = 0 Then
+            DR = DT.NewRow
+            DT.Rows.Add(DR)
+            DR("TXN_ID") = TXN_ID
+        Else
+            DR = DT.Rows(0)
+        End If
+
+        DR("ITEM_NO") = 1
+        DR("SLIP_YEAR") = Now.Year.ToString.Substring(2, 2)
+        DR("SLIP_MONTH") = Now.Month.ToString.PadLeft(2, "0")
+        DR("SLIP_DAY") = Now.Day.ToString.PadLeft(2, "0")
+        DR("SLIP_NO") = BL.Get_New_Confirmation_Slip_No
+        DR("SLIP_CONTENT") = DBNull.Value
+        DR("PRODUCT_ID") = PRODUCT_ID
+        DR("IS_SERIAL") = IS_SERIAL
+        DR("UNIT_PRICE") = PRODUCT_COST
+        DR("QUANTITY") = 1
+        DR("TOTAL_PRICE") = PRODUCT_COST
+        DR("TMN_REQ_ID") = RESP.REQ_ID
+        DR("TMN_ISV") = RESP.Request.isv_payment_ref
+        DR("TMN_REQUEST_AMOUNT") = RESP.Request.request_amount
+        DR("TMN_STATUS_CODE") = RESP.status.code
+        DR("TMN_PAYMENT_ID") = RESP.data.payment_id
+        DR("TMN_PAYMENT_CODE") = RESP.Request.payment_code
+        DR("TMN_RESP_TIME") = Now
+        DR("TXN_TIME") = Now
+
         Dim cmd As New SqlCommandBuilder(DA)
         DA.Update(DT)
 
@@ -240,11 +270,13 @@ Public Class Device_Payment
 
 
     Private Sub lnkHome_Click(sender As Object, e As ImageClickEventArgs) Handles lnkHome.Click
-        Response.Redirect("Select_Menu.aspx")
+        CloseCashReciever()
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Redirect", "window.location.href='Select_Menu.aspx';", True)
     End Sub
 
     Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click
-        Response.Redirect("Device_Shoping_Cart.aspx?PRODUCT_ID=" & PRODUCT_ID)
+        CloseCashReciever()
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Redirect", "window.location.href='" & "Device_Shoping_Cart.aspx?PRODUCT_ID=" & PRODUCT_ID & "';", True)
     End Sub
 
 #Region "PRODUCT"
@@ -301,7 +333,6 @@ Public Class Device_Payment
             Next
         End If
     End Sub
-
 
 #End Region
 
@@ -414,7 +445,6 @@ Public Class Device_Payment
     End Sub
 
     Private Sub UpdateCashProblem()
-
 
     End Sub
 

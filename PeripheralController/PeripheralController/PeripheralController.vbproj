@@ -115,6 +115,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\Converter.vb" />
+    <Compile Include="DisableCash.aspx.designer.vb">
+      <DependentUpon>DisableCash.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DisableCash.aspx.vb">
+      <DependentUpon>DisableCash.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Print.aspx.designer.vb">
       <DependentUpon>Print.aspx</DependentUpon>
     </Compile>
@@ -143,20 +150,13 @@
       <DependentUpon>CashDispense.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="TestController.aspx.designer.vb">
-      <DependentUpon>TestController.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="TestController.aspx.vb">
-      <DependentUpon>TestController.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
+    <Content Include="DisableCash.aspx" />
     <Content Include="Print.aspx" />
     <Content Include="ProductPicker.aspx" />
     <Content Include="RequireCash.aspx" />
     <Content Include="CashDispense.aspx" />
     <Content Include="CoinDispense.aspx" />
     <Content Include="Default.aspx" />
-    <Content Include="TestController.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

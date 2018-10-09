@@ -177,6 +177,7 @@ Public Class TrueMoney
         DA = New SqlDataAdapter(SQL, BL.LogConnectionString)
         DT = New DataTable
         DA.Fill(DT)
+        DR = DT.NewRow
         DR("REQ_ID") = REQ_ID
         DR("code") = Result.status.code
         DR("message") = Result.status.message
@@ -184,6 +185,7 @@ Public Class TrueMoney
         DR("JSONString") = Result.JSONString
         DR("ConnectionMessage") = Result.ConnectionMessage
         DR("RESP_TIME") = Now
+        DT.Rows.Add(DR)
         cmd = New SqlCommandBuilder(DA)
         DA.Update(DT)
         '----------------------------------------------

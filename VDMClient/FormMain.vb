@@ -2,6 +2,7 @@
 Imports CefSharp.WinForms
 Imports System.Net
 Imports System.IO
+Imports System.Diagnostics
 
 Public Class FormMain
 
@@ -22,6 +23,7 @@ Public Class FormMain
         'ProductThred.Start()
 
         '------------- Start SIM Dispenser------------
+        StartProductController()
 
     End Sub
 
@@ -32,17 +34,23 @@ Public Class FormMain
         Me.Controls.Add(ChromeBrowser)
         ChromeBrowser.Dock = DockStyle.Fill
         ChromeBrowser.Load("http://localhost/Hardware/Default.aspx")
+
+
     End Sub
 
     Private Sub StartProductController()
 
         Dim url As String = "http://localhost/Hardware/ProductPicker.aspx?Mode=SetHome&callback=test"
+
         ' Using WebRequest
-        Dim request As WebRequest = WebRequest.Create(url)
-        Dim response As WebResponse = request.GetResponse()
-        Dim result As String = New StreamReader(response.GetResponseStream()).ReadToEnd()
-        ' Using WebClient
-        Dim result1 As String = New WebClient().DownloadString(url)
+        'Dim request As WebRequest = WebRequest.Create(url)
+        'Dim response As WebResponse = request.GetResponse()
+        'Dim result As String = New StreamReader(response.GetResponseStream()).ReadToEnd()
+        '' Using WebClient
+        Try
+            Dim result As String = New WebClient().DownloadString(url)
+        Catch : End Try
+
 
     End Sub
 End Class

@@ -132,6 +132,8 @@
                                     </div>
                                 </div>
 
+                                 <asp:TextBox ID="txtLocalControllerURL" runat="server"></asp:TextBox>
+
                                 <asp:Panel ID="pnlCash" runat="server">
                                     <form class="step">
                                         <div class="step-payment">
@@ -217,7 +219,7 @@
                                                 1000 :
                                                 <asp:TextBox ID="txt1000" runat="server" Text="0"></asp:TextBox>
                                             </div>
-                                            <asp:TextBox ID="txtLocalControllerURL" runat="server"></asp:TextBox>
+                                           
                                             <asp:TextBox ID="txtCashProblem" runat="server"></asp:TextBox>
                                             <asp:Button ID="btnCashCompleted" runat="server" />
                                             <asp:Button ID="btnCashTimeout" runat="server" />
@@ -314,9 +316,9 @@
                                         </div>
                                     </form>
 
-                                    <asp:Panel ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" Style="position: fixed; left: -500px; top: 0px;">
+                                    <asp:Panel ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" Style="position: fixed; left: 500px; top: 100px;">
                                         <asp:TextBox ID="txtBarcode" runat="server"></asp:TextBox>
-                                        <asp:Button ID="btnBarcode" runat="server" Style="display: none;" />
+                                        <asp:Button ID="btnBarcode" runat="server" />
                                     </asp:Panel>
 
                                 </asp:Panel>
@@ -344,6 +346,14 @@
         </asp:UpdatePanel>
 
         <script type="text/javascript">
+
+            function disableCash() {
+                var url = $('#txtLocalControllerURL').val() + '/DisableCash.aspx&callback=';                // 
+                var script = document.createElement('script');
+                script.src = url;
+                var body = document.getElementsByTagName('body')[0];
+                body.appendChild(script);
+            }
 
             // เริ่มจ่าย 
             function RequireCash() {
@@ -416,15 +426,11 @@
                     clearInterval(cashTimer);
                 } else {
                     cashSec -= 1;
-                    //$('#castTimeOut').html(cashSec);
-                    //var min = Math.floor(cashSec / 60).toString().padStart(2, '0');
                     var min = (cashSec - (cashSec % 60)) / 60;
-                    var displayMin = min.toString();                   
-                  
+                    var displayMin = min.toString();                  
                     if (displayMin.length < 2) {
                         displayMin = '0' + displayMin;
-                    }
-                    
+                    }                    
                     var sec = (cashSec % 60);
                     var displaySec = sec.toString();
                     if (displaySec.length < 2) {
@@ -434,13 +440,11 @@
                     $('#castTimeOut').html(displayMin + ':' + displaySec);
                 }
             }
-            var cashTimer = setInterval(cashCounter, 1000);
-            
+            var cashTimer = setInterval(cashCounter, 1000);            
 
         </script>
 
         <uc1:UC_CommonUI runat="server" ID="CommonUI" />
-
 
          <asp:Panel ID="pnlModul" runat="server" Visible ="false" >
 

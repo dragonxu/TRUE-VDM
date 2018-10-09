@@ -6,36 +6,38 @@
 
     var userPasscode = "";
     var passcodeTime = 0;
-    var truePasscode = "11221";
+    var backEndPasscode = "11221";
+    var closePasscode = "11112222";
 
     function inputPasscodeLeft() {
         userPasscode += '1';
         checkPasscode();
-        clearInterval(passcodeInterval);
-        passcodeInterval = setInterval(passcodeTimer, 3000);
+        //clearInterval(passcodeInterval);
+        //passcodeInterval = setInterval(passcodeTimer, 3000);
     }
 
     function inputPasscodeRight() {
         userPasscode += '2';
         checkPasscode();
-        clearInterval(passcodeInterval);
-        passcodeInterval = setInterval(passcodeTimer, 3000);
+        //clearInterval(passcodeInterval);
+        //passcodeInterval = setInterval(passcodeTimer, 3000);
     }
 
     function checkPasscode() {
-        if (userPasscode == truePasscode) {
+        if (userPasscode.indexOf(backEndPasscode)>-1) {
             location.href = '../Machine_Console/Login.aspx?KO_ID=<% Response.Write(KO_ID) %>';
         }
-        else {
-            if (userPasscode.length() == truePasscode.length())
-                userPasscode = "";
+        else if (userPasscode.length() > 40) {
+            alert(userPasscode);
+            userPasscode = "";
+            
         }
     }
 
-    var passcodeTimer = function () {
-        userPasscode = '';
-    }
-    var passcodeInterval = setInterval(passcodeTimer,3000);
+    //var passcodeTimer = function () {
+    //    userPasscode = '';
+    //}
+    //var passcodeInterval = setInterval(passcodeTimer,3000);
 
 
 </script>
