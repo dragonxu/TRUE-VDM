@@ -122,6 +122,13 @@
       <DependentUpon>DisableCash.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="HardwareControl.aspx.designer.vb">
+      <DependentUpon>HardwareControl.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HardwareControl.aspx.vb">
+      <DependentUpon>HardwareControl.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Print.aspx.designer.vb">
       <DependentUpon>Print.aspx</DependentUpon>
     </Compile>
@@ -151,12 +158,14 @@
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Content Include="DisableCash.aspx" />
+    <Content Include="HardwareControl.aspx" />
     <Content Include="Print.aspx" />
     <Content Include="ProductPicker.aspx" />
     <Content Include="RequireCash.aspx" />
     <Content Include="CashDispense.aspx" />
     <Content Include="CoinDispense.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="css\style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
