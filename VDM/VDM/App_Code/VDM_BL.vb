@@ -1968,10 +1968,6 @@ Public Class VDM_BL
 
         '------------ Set Default Parameter
         Set_Default_Print_Content_Style(Content)
-
-
-        '------------ Set Default Parameter
-        Set_Default_Print_Content_Style(Content)
         Return Content
     End Function
 

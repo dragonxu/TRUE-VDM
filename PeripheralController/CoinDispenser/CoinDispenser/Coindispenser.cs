@@ -78,7 +78,7 @@ namespace CoinDispenser
                             break;
                         }
 
-                        Thread.Sleep(1000);
+                        Thread.Sleep(100);
                         data = ConvertHexToByte("80");
                         _serialPort.Write(data, 0, data.Length);
                         Thread.Sleep(100);
@@ -89,7 +89,7 @@ namespace CoinDispenser
 
                         data = ConvertHexToByte("10");
                         _serialPort.Write(data, 0, data.Length);
-                        Thread.Sleep(1000);
+                        Thread.Sleep(100);
                         coin--;
                         Console.WriteLine("Remain : " + coin);
                     } 

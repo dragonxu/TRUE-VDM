@@ -3,8 +3,51 @@
 
     Dim BL As New Core_BL
 
-    Dim Cash As CashReceiver.CashReceiver = Nothing
-    Dim Coin As CoinReciever.CoinReciever = Nothing
+    Private ReadOnly Property CashReceiver As CashReceiver.CashReceiver
+        Get
+            If IsNothing(Application("CashReceiver")) Then
+                '----------- Init Object And Connect---------
+                Dim _cash As New CashReceiver.CashReceiver
+                _cash.SetPort(BL.CashReciever_Port)
+
+                Try
+                    _cash.Close()
+                Catch ex As Exception
+                End Try
+
+                Threading.Thread.Sleep(100)
+
+                Application.Lock()
+                Application("CashReceiver") = _cash
+                Application.UnLock()
+
+            End If
+            Return Application("CashReceiver")
+        End Get
+    End Property
+
+    Private ReadOnly Property CoinReceiver As CoinReciever.CoinReciever
+        Get
+            If IsNothing(Application("CoinReceiver")) Then
+                '----------- Init Object And Connect---------
+                Dim _coin As New CoinReciever.CoinReciever
+                _coin.SetPort(BL.CoinReciever_Port)
+
+                Try
+                    _coin.Close()
+                Catch ex As Exception
+                End Try
+
+                Threading.Thread.Sleep(100)
+
+                Application.Lock()
+                Application("CoinReceiver") = _coin
+                Application.UnLock()
+
+            End If
+            Return Application("CoinReceiver")
+        End Get
+    End Property
 
     Private ReadOnly Property callBackFunction As String
         Get
@@ -18,28 +61,23 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        Cash = New CashReceiver.CashReceiver
-        Coin = New CoinReciever.CoinReciever
-
-        Cash.SetPort(BL.CashReciever_Port)
-        Coin.SetPort(BL.CoinReciever_Port)
 
         Try
-            Cash.Close()
+            CashReceiver.Close()
         Catch : End Try
 
         Try
-            Coin.Close()
+            CoinReceiver.Close()
         Catch : End Try
 
     End Sub
 
     Private Sub callBack()
         Try
-            Cash.Close()
+            CashReceiver.Close()
         Catch : End Try
         Try
-            Coin.Close()
+            CoinReceiver.Close()
         Catch : End Try
 
         Dim Script As String = callBackFunction & "('success');"

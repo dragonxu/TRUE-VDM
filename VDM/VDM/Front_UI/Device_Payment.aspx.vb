@@ -1,5 +1,5 @@
 ﻿Imports System.Data.SqlClient
-
+Imports System.Net
 Public Class Device_Payment
     Inherits System.Web.UI.Page
 
@@ -154,8 +154,10 @@ Public Class Device_Payment
     End Sub
 
     Private Sub CloseCashReciever()
-        Dim Script As String = "disableCash();"
-        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "disableCash", Script, True)
+        Dim url As String = BL.LocalControllerURL & "/DisableCash.aspx"
+        Try
+            Dim result As String = New WebClient().DownloadString(url)
+        Catch : End Try
     End Sub
 
     Private Sub lnkCash_ServerClick(sender As Object, e As EventArgs) Handles lnkCash.ServerClick

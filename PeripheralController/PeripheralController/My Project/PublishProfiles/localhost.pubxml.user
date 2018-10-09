@@ -19,7 +19,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/28/2018 13:28:14</publishTime>
     </File>
     <File Include="bin/CoinDispenser.dll">
-      <publishTime>09/28/2018 13:09:46</publishTime>
+      <publishTime>10/09/2018 20:24:35</publishTime>
     </File>
     <File Include="bin/CoinReciever.dll">
       <publishTime>09/28/2018 13:30:39</publishTime>
@@ -31,13 +31,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/15/2015 02:06:24</publishTime>
     </File>
     <File Include="bin/PeripheralController.dll">
-      <publishTime>10/08/2018 01:13:29</publishTime>
+      <publishTime>10/09/2018 21:37:50</publishTime>
     </File>
     <File Include="bin/PeripheralController.xml">
-      <publishTime>10/08/2018 01:13:29</publishTime>
+      <publishTime>10/09/2018 21:37:50</publishTime>
     </File>
     <File Include="bin/Printer.dll">
-      <publishTime>10/07/2018 16:22:19</publishTime>
+      <publishTime>10/09/2018 19:06:06</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>06/18/2015 20:19:46</publishTime>
@@ -90,8 +90,44 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="CoinDispense.aspx">
       <publishTime>09/30/2018 22:00:22</publishTime>
     </File>
+    <File Include="Control/UC_Camera.ascx">
+      <publishTime>10/09/2018 18:30:58</publishTime>
+    </File>
+    <File Include="Control/UC_CashDispenser.ascx">
+      <publishTime>10/09/2018 18:30:13</publishTime>
+    </File>
+    <File Include="Control/UC_CashReciever.ascx">
+      <publishTime>10/09/2018 19:03:01</publishTime>
+    </File>
+    <File Include="Control/UC_CoinDispenser.ascx">
+      <publishTime>10/09/2018 18:30:26</publishTime>
+    </File>
+    <File Include="Control/UC_CoinReciever.ascx">
+      <publishTime>10/09/2018 18:29:56</publishTime>
+    </File>
+    <File Include="Control/UC_PassportScanner.ascx">
+      <publishTime>10/09/2018 18:31:11</publishTime>
+    </File>
+    <File Include="Control/UC_Printer.ascx">
+      <publishTime>10/09/2018 21:32:44</publishTime>
+    </File>
+    <File Include="Control/UC_ProductPicker.ascx">
+      <publishTime>10/09/2018 18:31:28</publishTime>
+    </File>
+    <File Include="Control/UC_QRReader.ascx">
+      <publishTime>10/09/2018 18:31:41</publishTime>
+    </File>
+    <File Include="css/style.css">
+      <publishTime>10/09/2018 19:01:17</publishTime>
+    </File>
     <File Include="Default.aspx">
       <publishTime>09/28/2018 17:55:36</publishTime>
+    </File>
+    <File Include="DisableCash.aspx">
+      <publishTime>10/09/2018 12:19:50</publishTime>
+    </File>
+    <File Include="HardwareControl.aspx">
+      <publishTime>10/09/2018 21:21:57</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>09/30/2018 21:43:41</publishTime>

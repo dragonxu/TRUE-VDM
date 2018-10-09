@@ -1,5 +1,10 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="HardwareControl.aspx.vb" Inherits="PeripheralController.HardwareControl" %>
 
+<%@ Register Src="~/Control/UC_CashReciever.ascx" TagPrefix="uc1" TagName="UC_CashReciever" %>
+<%@ Register Src="~/Control/UC_Printer.ascx" TagPrefix="uc1" TagName="UC_Printer" %>
+
+
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -12,23 +17,10 @@
         <table width="100%">
             <tr>
                 <td style="width:33%; padding:20px;">
-                    <table class="control-box" style="background:#aaaaaa; width:100%;">
-                        <thead>
-                            <tr>
-                                <th colspan="2">
-                                    Cash Reciever
-                                </th>
-                            </tr>
-                        </thead>
-                        
-                        <tr>
-                            <td>Port</td>
-                            <td><asp:DropDownList ID="ddl"></asp:DropDownList></td>
-                        </tr>
-                    </table>
+                    <uc1:UC_CashReciever runat="server" id="CashReciever" />
                 </td>
                 <td style="width:33%; padding:20px;">
-
+                    <uc1:UC_Printer runat="server" ID="Printer" />
                 </td>
                 <td style="width:33%; padding:20px;">
 

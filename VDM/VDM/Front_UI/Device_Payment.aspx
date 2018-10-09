@@ -316,7 +316,7 @@
                                         </div>
                                     </form>
 
-                                    <asp:Panel ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" Style="position: fixed; left: 500px; top: 100px;">
+                                    <asp:Panel ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" Style="position: fixed; left: -500px; top: 100px;">
                                         <asp:TextBox ID="txtBarcode" runat="server"></asp:TextBox>
                                         <asp:Button ID="btnBarcode" runat="server" />
                                     </asp:Panel>
@@ -346,14 +346,6 @@
         </asp:UpdatePanel>
 
         <script type="text/javascript">
-
-            function disableCash() {
-                var url = $('#txtLocalControllerURL').val() + '/DisableCash.aspx&callback=';                // 
-                var script = document.createElement('script');
-                script.src = url;
-                var body = document.getElementsByTagName('body')[0];
-                body.appendChild(script);
-            }
 
             // เริ่มจ่าย 
             function RequireCash() {

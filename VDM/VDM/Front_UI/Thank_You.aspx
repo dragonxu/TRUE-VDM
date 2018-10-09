@@ -58,7 +58,6 @@
                  $('#btnPrint').click();
              }
              
-
              var redirectDelegate = function () {
                  $('#lnkHome').click();
              }

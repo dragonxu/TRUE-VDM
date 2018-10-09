@@ -16,12 +16,6 @@ Public Class FormMain
         Cursor.Hide()
         InitChromium()
 
-        '------------- Start Product Controller------------
-        'Dim ProductThred As New Threading.Thread(AddressOf StartProductController)
-        'ProductThred.Priority = Threading.ThreadPriority.Normal
-        'ProductThred.IsBackground = True
-        'ProductThred.Start()
-
         '------------- Start SIM Dispenser------------
         StartProductController()
 
@@ -33,14 +27,14 @@ Public Class FormMain
         ChromeBrowser = New ChromiumWebBrowser("about:blank")
         Me.Controls.Add(ChromeBrowser)
         ChromeBrowser.Dock = DockStyle.Fill
-        ChromeBrowser.Load("http://localhost/Hardware/Default.aspx")
+        ChromeBrowser.Load("http://localhost/Default.aspx")
 
 
     End Sub
 
     Private Sub StartProductController()
 
-        Dim url As String = "http://localhost/Hardware/ProductPicker.aspx?Mode=SetHome&callback=test"
+        Dim url As String = "http://localhost/ProductPicker.aspx?Mode=SetHome&callback=test"
 
         ' Using WebRequest
         'Dim request As WebRequest = WebRequest.Create(url)

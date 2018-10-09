@@ -7,8 +7,52 @@ Public Class RequireCash
 
     Dim BL As New Core_BL
 
-    Dim Cash As CashReceiver.CashReceiver = Nothing
-    Dim Coin As CoinReciever.CoinReciever = Nothing
+    Private ReadOnly Property CashReceiver As CashReceiver.CashReceiver
+        Get
+            If IsNothing(Application("CashReceiver")) Then
+                '----------- Init Object And Connect---------
+                Dim _cash As New CashReceiver.CashReceiver
+                _cash.SetPort(BL.CashReciever_Port)
+
+                Try
+                    _cash.Close()
+                Catch ex As Exception
+                End Try
+
+                Threading.Thread.Sleep(100)
+
+                Application.Lock()
+                Application("CashReceiver") = _cash
+                Application.UnLock()
+
+            End If
+            Return Application("CashReceiver")
+        End Get
+    End Property
+
+    Private ReadOnly Property CoinReceiver As CoinReciever.CoinReciever
+        Get
+            If IsNothing(Application("CoinReceiver")) Then
+                '----------- Init Object And Connect---------
+                Dim _coin As New CoinReciever.CoinReciever
+                _coin.SetPort(BL.CoinReciever_Port)
+
+                Try
+                    _coin.Close()
+                Catch ex As Exception
+                End Try
+
+                Threading.Thread.Sleep(100)
+
+                Application.Lock()
+                Application("CoinReceiver") = _coin
+                Application.UnLock()
+
+            End If
+            Return Application("CoinReceiver")
+        End Get
+    End Property
+
     Dim Result As DataTable
 
     Dim Recieved As Integer = 0
@@ -61,25 +105,19 @@ Public Class RequireCash
         DR("message") = ""
         Result.Rows.Add(DR)
 
-        Cash = New CashReceiver.CashReceiver
-        Coin = New CoinReciever.CoinReciever
-
-        Cash.SetPort(BL.CashReciever_Port)
-        Coin.SetPort(BL.CoinReciever_Port)
-
         Try
-            Cash.Close()
-            Cash.Open()
+            CashReceiver.Close()
+            CashReceiver.Open()
         Catch : End Try
 
         Try
-            Coin.Close()
-            Coin.Open()
+            CoinReceiver.Close()
+            CoinReceiver.Open()
         Catch : End Try
 
         '---------------- Check Cash Status---------------
         Try
-            Select Case Cash.CurrentStatus
+            Select Case CashReceiver.CurrentStatus
                 Case CashState.Unknown
                     DR("message") = "Cash Reciever is Unknown"
                 Case CashState.Unavailable
@@ -115,7 +153,7 @@ Public Class RequireCash
 
         '---------------- Check Coin Status---------------
         Try
-            Select Case Coin.CurrentStatus
+            Select Case CoinReceiver.CurrentStatus
                 Case CoinState.Unknown
                     DR("message") = "Coin Reciever is Unknown"
                     callBack()
@@ -149,16 +187,16 @@ Public Class RequireCash
             Exit Sub
         End Try
 
-        AddHandler Cash.Received, AddressOf Cash_Received
-        AddHandler Coin.Recieved, AddressOf Coin_Received
+        AddHandler CashReceiver.Received, AddressOf Cash_Received
+        AddHandler CoinReceiver.Recieved, AddressOf Coin_Received
 
         '------------- รอจนกว่าจะหยอด
         While Recieved = 0 And Now < EndWait
             Threading.Thread.Sleep(200)
         End While
         '------------- ไม่หยอดสักที -------------
-        Try : Cash.Close() : Catch : End Try
-        Try : Coin.Close() : Catch : End Try
+        Try : CashReceiver.Close() : Catch : End Try
+        Try : CoinReceiver.Close() : Catch : End Try
 
         DR("amount") = Recieved
         DR("status") = (Recieved > 0).ToString.ToLower
@@ -186,10 +224,10 @@ Public Class RequireCash
 
     Private Sub callBack()
         Try
-            Cash.Close()
+            CashReceiver.Close()
         Catch : End Try
         Try
-            Coin.Close()
+            CoinReceiver.Close()
         Catch : End Try
 
 

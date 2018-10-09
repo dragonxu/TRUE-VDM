@@ -115,6 +115,69 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\Converter.vb" />
+    <Compile Include="Control\UC_Camera.ascx.designer.vb">
+      <DependentUpon>UC_Camera.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Control\UC_Camera.ascx.vb">
+      <DependentUpon>UC_Camera.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Control\UC_CashDispenser.ascx.designer.vb">
+      <DependentUpon>UC_CashDispenser.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Control\UC_CashDispenser.ascx.vb">
+      <DependentUpon>UC_CashDispenser.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Control\UC_CashReciever.ascx.designer.vb">
+      <DependentUpon>UC_CashReciever.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Control\UC_CashReciever.ascx.vb">
+      <DependentUpon>UC_CashReciever.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Control\UC_CoinDispenser.ascx.designer.vb">
+      <DependentUpon>UC_CoinDispenser.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Control\UC_CoinDispenser.ascx.vb">
+      <DependentUpon>UC_CoinDispenser.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Control\UC_CoinReciever.ascx.designer.vb">
+      <DependentUpon>UC_CoinReciever.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Control\UC_CoinReciever.ascx.vb">
+      <DependentUpon>UC_CoinReciever.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Control\UC_PassportScanner.ascx.designer.vb">
+      <DependentUpon>UC_PassportScanner.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Control\UC_PassportScanner.ascx.vb">
+      <DependentUpon>UC_PassportScanner.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Control\UC_Printer.ascx.designer.vb">
+      <DependentUpon>UC_Printer.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Control\UC_Printer.ascx.vb">
+      <DependentUpon>UC_Printer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Control\UC_ProductPicker.ascx.designer.vb">
+      <DependentUpon>UC_ProductPicker.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Control\UC_ProductPicker.ascx.vb">
+      <DependentUpon>UC_ProductPicker.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Control\UC_QRReader.ascx.designer.vb">
+      <DependentUpon>UC_QRReader.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Control\UC_QRReader.ascx.vb">
+      <DependentUpon>UC_QRReader.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="DisableCash.aspx.designer.vb">
       <DependentUpon>DisableCash.aspx</DependentUpon>
     </Compile>
@@ -157,6 +220,15 @@
       <DependentUpon>CashDispense.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Content Include="Control\UC_Camera.ascx" />
+    <Content Include="Control\UC_CashDispenser.ascx" />
+    <Content Include="Control\UC_CashReciever.ascx" />
+    <Content Include="Control\UC_CoinDispenser.ascx" />
+    <Content Include="Control\UC_CoinReciever.ascx" />
+    <Content Include="Control\UC_PassportScanner.ascx" />
+    <Content Include="Control\UC_Printer.ascx" />
+    <Content Include="Control\UC_ProductPicker.ascx" />
+    <Content Include="Control\UC_QRReader.ascx" />
     <Content Include="DisableCash.aspx" />
     <Content Include="HardwareControl.aspx" />
     <Content Include="Print.aspx" />
