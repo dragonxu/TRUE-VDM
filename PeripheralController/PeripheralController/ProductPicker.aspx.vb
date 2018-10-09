@@ -58,6 +58,9 @@ Public Class ProductPicker
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        Controller.SetIP(BL.Product_Picker_IP, BL.Product_Picker_Port)
+        Controller.Connect()
+
         Select Case Mode.ToUpper
             Case "SetHome".ToUpper
                 SetHome()

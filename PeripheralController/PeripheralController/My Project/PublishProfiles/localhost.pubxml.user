@@ -31,10 +31,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/15/2015 02:06:24</publishTime>
     </File>
     <File Include="bin/PeripheralController.dll">
-      <publishTime>10/07/2018 16:22:25</publishTime>
+      <publishTime>10/08/2018 01:13:29</publishTime>
     </File>
     <File Include="bin/PeripheralController.xml">
-      <publishTime>10/07/2018 16:22:25</publishTime>
+      <publishTime>10/08/2018 01:13:29</publishTime>
     </File>
     <File Include="bin/Printer.dll">
       <publishTime>10/07/2018 16:22:19</publishTime>

@@ -8,7 +8,7 @@ Public Class RequireCash
     Dim BL As New Core_BL
 
     Dim Cash As CashReceiver.CashReceiver = Nothing
-    Dim Coin As CoinReciever.CoinReciever = Nothing
+    'Dim Coin As CoinReciever.CoinReciever = Nothing
     Dim Result As DataTable
 
     Dim Recieved As Integer = 0
@@ -62,20 +62,20 @@ Public Class RequireCash
         Result.Rows.Add(DR)
 
         Cash = New CashReceiver.CashReceiver
-        Coin = New CoinReciever.CoinReciever
+        'Coin = New CoinReciever.CoinReciever
 
         Cash.SetPort(BL.CashReciever_Port)
-        Coin.SetPort(BL.CoinReciever_Port)
+        'Coin.SetPort(BL.CoinReciever_Port)
 
         Try
             Cash.Close()
             Cash.Open()
         Catch : End Try
 
-        Try
-            Coin.Close()
-            Coin.Open()
-        Catch : End Try
+        'Try
+        '    Coin.Close()
+        '    Coin.Open()
+        'Catch : End Try
 
         '---------------- Check Cash Status---------------
         Try
@@ -113,44 +113,44 @@ Public Class RequireCash
             Exit Sub
         End If
 
-        '---------------- Check Coin Status---------------
-        Try
-            Select Case Coin.CurrentStatus
-                Case CoinState.Unknown
-                    DR("message") = "Coin Reciever is Unknown"
-                    callBack()
-                    Exit Sub
-                Case CoinState.Unavailable
-                    DR("message") = "Coin Reciever is Unavailable"
-                    callBack()
-                    Exit Sub
-                Case CoinState.Sensor_1_problem
-                    DR("message") = "Coin Reciever is Sensor_1_problem"
-                    callBack()
-                    Exit Sub
-                Case CoinState.Sensor_2_problem
-                    DR("message") = "Coin Reciever is Sensor_2_problem"
-                    callBack()
-                    Exit Sub
-                Case CoinState.Sensor_3_problem
-                    DR("message") = "Coin Reciever is Sensor_3_problem"
-                    callBack()
-                    Exit Sub
-                Case CoinState.Disconnected
-                    DR("message") = "Coin Reciever is Disconnected"
-                    callBack()
-                    Exit Sub
-                Case CoinState.Ready
-                    DR("message") = "" '---------------OK ------------------
-            End Select
-        Catch ex As Exception
-            DR("message") = ex.Message
-            callBack()
-            Exit Sub
-        End Try
+        ''---------------- Check Coin Status---------------
+        'Try
+        '    Select Case Coin.CurrentStatus
+        '        Case CoinState.Unknown
+        '            DR("message") = "Coin Reciever is Unknown"
+        '            callBack()
+        '            Exit Sub
+        '        Case CoinState.Unavailable
+        '            DR("message") = "Coin Reciever is Unavailable"
+        '            callBack()
+        '            Exit Sub
+        '        Case CoinState.Sensor_1_problem
+        '            DR("message") = "Coin Reciever is Sensor_1_problem"
+        '            callBack()
+        '            Exit Sub
+        '        Case CoinState.Sensor_2_problem
+        '            DR("message") = "Coin Reciever is Sensor_2_problem"
+        '            callBack()
+        '            Exit Sub
+        '        Case CoinState.Sensor_3_problem
+        '            DR("message") = "Coin Reciever is Sensor_3_problem"
+        '            callBack()
+        '            Exit Sub
+        '        Case CoinState.Disconnected
+        '            DR("message") = "Coin Reciever is Disconnected"
+        '            callBack()
+        '            Exit Sub
+        '        Case CoinState.Ready
+        '            DR("message") = "" '---------------OK ------------------
+        '    End Select
+        'Catch ex As Exception
+        '    'DR("message") = ex.Message
+        '    'callBack()
+        '    'Exit Sub
+        'End Try
 
         AddHandler Cash.Received, AddressOf Cash_Received
-        AddHandler Coin.Recieved, AddressOf Coin_Received
+        'AddHandler Coin.Recieved, AddressOf Coin_Received
 
         '------------- รอจนกว่าจะหยอด
         While Recieved = 0 And Now < EndWait
@@ -158,7 +158,7 @@ Public Class RequireCash
         End While
         '------------- ไม่หยอดสักที -------------
         Try : Cash.Close() : Catch : End Try
-        Try : Coin.Close() : Catch : End Try
+        'Try : Coin.Close() : Catch : End Try
 
         DR("amount") = Recieved
         DR("status") = (Recieved > 0).ToString.ToLower
@@ -188,9 +188,9 @@ Public Class RequireCash
         Try
             Cash.Close()
         Catch : End Try
-        Try
-            Coin.Close()
-        Catch : End Try
+        'Try
+        '    Coin.Close()
+        'Catch : End Try
 
 
         Dim Script As String = callBackFunction & "('" & Result.Rows(0).Item("amount") & "','" & Result.Rows(0).Item("status") & "','" & Result.Rows(0).Item("message") & "');"

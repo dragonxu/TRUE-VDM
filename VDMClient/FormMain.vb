@@ -22,7 +22,7 @@ Public Class FormMain
         'ProductThred.Start()
 
         '------------- Start SIM Dispenser------------
-        StartProductController()
+
     End Sub
 
     Private Sub InitChromium()
@@ -31,8 +31,7 @@ Public Class FormMain
         ChromeBrowser = New ChromiumWebBrowser("about:blank")
         Me.Controls.Add(ChromeBrowser)
         ChromeBrowser.Dock = DockStyle.Fill
-        ChromeBrowser.Load("http://localhost/Hardware/")
-
+        ChromeBrowser.Load("http://localhost/Hardware/Default.aspx")
     End Sub
 
     Private Sub StartProductController()
