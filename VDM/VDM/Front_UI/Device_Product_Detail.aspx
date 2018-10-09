@@ -107,7 +107,7 @@
 
                                                         <asp:Repeater ID="rptColor" runat="server">
                                                             <ItemTemplate>
-                                                                <div id="BoxIndex" runat="server" style="float: left; width: 110px;">
+                                                                <div id="BoxIndex" runat="server" style="float: left; width: 110px;" data-slide="3"  >
                                                                     <div class="priceplan">
                                                                         <div class="thumb">
 
@@ -313,7 +313,11 @@
                     slidesToScroll: 1,
 
                 });
-
+                $('div[data-slide]').click(function (e) {
+                    e.preventDefault();
+                    var slideno = $(this).data('slide');
+                    $('.detail-slider').slick('slickGoTo', slideno);
+                });
                 $('.card-slider').slick({
                     infinite: true,
                     slidesToShow: 3,
