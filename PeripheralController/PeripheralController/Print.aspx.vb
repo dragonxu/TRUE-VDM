@@ -29,7 +29,7 @@
     End Sub
 
     Private Sub Print()
-        If Request.ContentType <> "text/xml" Then Exit Sub
+        'If Request.ContentType <> "application/x-www-form-urlencoded; charset=UTF-8" Then Exit Sub
         'Throw New HttpException(500, "Unexpected Content-Type")
 
         Dim Reader = New IO.StreamReader(Request.InputStream)

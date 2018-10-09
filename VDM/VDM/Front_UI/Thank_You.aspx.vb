@@ -38,20 +38,19 @@ Public Class Thank_You
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Not IsPostBack Then
+
+            Session("TXN_ID") = 83
+
             txtLocalControllerURL.Text = BL.LocalControllerURL
             '---------------- Change And Print Slip--------------
-            WaitForPrintSlip()
+            Print()
             Change()
         End If
 
     End Sub
 
-    Private Sub WaitForPrintSlip()
-        Dim Script As String = "setTimeout(printDelegate, 1000);"
-        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Print", Script, True)
-    End Sub
+    Private Sub Print()
 
-    Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
         Dim C As New Converter
 
         Dim SQL As String = "SELECT * FROM TB_SERVICE_TRANSACTION" & vbLf
@@ -61,24 +60,30 @@ Public Class Thank_You
         DA.Fill(DT)
         If DT.Rows.Count = 0 OrElse IsDBNull(DT.Rows(0).Item("METHOD_ID")) Then Exit Sub
         '----------------- Check Print Method ID----------------
+        Dim content As String = ""
         Select Case DT.Rows(0).Item("METHOD_ID")
             Case VDM_BL.PaymentMethod.CASH
                 DT = BL.GEN_CASH_CONFIRMATION_SLIP(TXN_ID)
-                postXMLData(BL.LocalControllerURL & "/Print.aspx?Mode=Print", C.DatatableToXML(DT))
+                content = C.DatatableToXML(DT)
                 BL.UPDATE_CONFIRMATION_SLIP(TXN_ID, DT)
             Case VDM_BL.PaymentMethod.TRUE_MONEY
                 DT = BL.GEN_TMN_CONFIRMATION_SLIP(TXN_ID)
-                postXMLData(BL.LocalControllerURL & "/Print.aspx?Mode=Print", C.DatatableToXML(DT))
+                content = C.DatatableToXML(DT)
                 BL.UPDATE_CONFIRMATION_SLIP(TXN_ID, DT)
             Case VDM_BL.PaymentMethod.CREDIT_CARD
                 DT = BL.GEN_CREDITCARD_CONFIRMATION_SLIP(TXN_ID)
-                postXMLData(BL.LocalControllerURL & "/Print.aspx?Mode=Print", C.DatatableToXML(DT))
+                content = C.DatatableToXML(DT)
                 BL.UPDATE_CONFIRMATION_SLIP(TXN_ID, DT)
         End Select
+        '----------------- set Print Content ----------------
+        txtPrintContent.Text = Replace(Replace(content, "<", "&lt"), ">", "&gt")
+
         '----------------- Update PrinterStock---------------
         BL.UPDATE_KIOSK_DEVICE_TRANSACTION_STOCK(KO_ID, TXN_ID, VDM_BL.Device.Printer, -1)
-    End Sub
 
+        Dim Script As String = "setTimeout(printDelegate, 1000);"
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Print", Script, True)
+    End Sub
 
     Private Sub Change()
         Dim SQL As String = ""

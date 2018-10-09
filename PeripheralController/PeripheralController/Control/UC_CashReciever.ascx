@@ -10,8 +10,12 @@
     </thead>
     <tbody>
         <tr>
-            <td>Port</td>
-            <td><asp:DropDownList ID="ddlPort" runat="server"></asp:DropDownList></td>
+            <td>Cash Receiver Port</td>
+            <td><asp:DropDownList ID="ddlCash" runat="server"></asp:DropDownList></td>
+        </tr>
+        <tr>
+            <td>Coin Receiver Port</td>
+            <td><asp:DropDownList ID="ddlCoin" runat="server"></asp:DropDownList></td>
         </tr>
         <tr>
             <td colspan="2" style="text-align:center;"><input type="button" ID="btnStart" runat="server" style="width:90%; padding:5px;" value="Start Recieve" /></td>

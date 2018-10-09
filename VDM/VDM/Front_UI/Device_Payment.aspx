@@ -48,6 +48,7 @@
                 <div class="warp">
                     <header>
                         <img src="images/bg-top.png" />
+                        <asp:TextBox ID="txtLocalControllerURL" runat="server" style="display:none;"></asp:TextBox>
                     </header>
                     <main>
                         <div class="priceplan">
@@ -132,7 +133,7 @@
                                     </div>
                                 </div>
 
-                                 <asp:TextBox ID="txtLocalControllerURL" runat="server"></asp:TextBox>
+                                 
 
                                 <asp:Panel ID="pnlCash" runat="server">
                                     <form class="step">
@@ -347,6 +348,14 @@
 
         <script type="text/javascript">
 
+            function disableCashIn() {
+                var url = $('#txtLocalControllerURL').val() + '/DisableCash.aspx';
+                var script = document.createElement('script');
+                script.src = url;
+                var body = document.getElementsByTagName('body')[0];
+                body.appendChild(script);
+            }
+
             // เริ่มจ่าย 
             function RequireCash() {
                 calculateTotal();
@@ -364,6 +373,7 @@
                 } else {
                     // จ่ายครบ
                     clearInterval(cashTimer);
+                    disableCashIn();
                     $('#btnCashCompleted').click();
                 }
             }
@@ -371,7 +381,7 @@
             var tryPay = 0;
             function updatePayment(amount,status,message) {
                 //---------Update Timeout ?
-
+                cashSec = 150;
                 if (status == 'true') {
                     /*-----------Lock Mode-----------*/
                     $('footer').css("visibility", "hidden");                   
@@ -386,9 +396,10 @@
                     if (tryPay == 0) {
                         tryPay += 1;
                         RequireCash();
-                        return
+                        return;
                     }
                     clearInterval(cashTimer);
+                    disableCashIn();
                     $('#txtCashProblem').val(message);
                     $('#btnCashProblem').click();
                 }
@@ -432,7 +443,7 @@
                     $('#castTimeOut').html(displayMin + ':' + displaySec);
                 }
             }
-            var cashTimer = setInterval(cashCounter, 1000);            
+            var cashTimer = setInterval(cashCounter, 1000);
 
         </script>
 

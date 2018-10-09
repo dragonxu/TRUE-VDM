@@ -110,6 +110,8 @@ Public Class Device_Payment
 
         If Not IsPostBack Then
 
+            txtLocalControllerURL.Text = BL.LocalControllerURL
+
             ClearForm()
 
             If PRODUCT_ID = 0 Then
@@ -130,7 +132,6 @@ Public Class Device_Payment
 
     Private Sub initFormPlugin()
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
-        txtLocalControllerURL.Text = BL.LocalControllerURL
     End Sub
 
     Private Sub ClearForm()
@@ -150,14 +151,13 @@ Public Class Device_Payment
         '----------------------- Stop Focus Barcode ----------------------
         Dim Script As String = "stopFocusBarcode();" & vbLf
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "clearBarcode", Script, True)
+        '----------------------- Stop Cash In ----------------------
         CloseCashReciever()
     End Sub
 
     Private Sub CloseCashReciever()
-        Dim url As String = BL.LocalControllerURL & "/DisableCash.aspx"
-        Try
-            Dim result As String = New WebClient().DownloadString(url)
-        Catch : End Try
+        Dim Script As String = "disableCashIn();" & vbLf
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "CloseCashReciever", Script, True)
     End Sub
 
     Private Sub lnkCash_ServerClick(sender As Object, e As EventArgs) Handles lnkCash.ServerClick

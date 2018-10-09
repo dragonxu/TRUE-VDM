@@ -41,13 +41,13 @@ Partial Public Class Thank_You
     Protected WithEvents UDP As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
-    '''btnPrint control.
+    '''txtPrintContent control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnPrint As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents txtPrintContent As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''lnkHome control.

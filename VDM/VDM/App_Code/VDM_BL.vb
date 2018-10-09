@@ -2123,9 +2123,14 @@ Public Class VDM_BL
         DR("DIFF_QUANTITY") = DIFF
         DR("BEFORE_TXN_ID") = BEFORE_TXN
 
-        DT.Rows.Add(DR)
-        cmd = New SqlCommandBuilder(DA)
-        DA.Update(DT)
+        Try
+            DT.Rows.Add(DR)
+            cmd = New SqlCommandBuilder(DA)
+            DA.Update(DT)
+        Catch ex As Exception
+
+        End Try
+
     End Sub
 
 #End Region

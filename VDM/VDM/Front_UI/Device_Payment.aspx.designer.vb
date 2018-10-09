@@ -41,6 +41,15 @@ Partial Public Class Device_Payment
     Protected WithEvents udpList As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
+    '''txtLocalControllerURL control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtLocalControllerURL As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''img control.
     '''</summary>
     '''<remarks>
@@ -165,15 +174,6 @@ Partial Public Class Device_Payment
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlSelectChoice As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
-    '''txtLocalControllerURL control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtLocalControllerURL As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''pnlCash control.

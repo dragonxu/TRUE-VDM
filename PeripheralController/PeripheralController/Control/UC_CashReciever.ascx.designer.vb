@@ -14,13 +14,22 @@ Option Explicit On
 Partial Public Class UC_CashReciever
     
     '''<summary>
-    '''ddlPort control.
+    '''ddlCash control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ddlPort As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents ddlCash As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''ddlCoin control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlCoin As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
     '''btnStart control.

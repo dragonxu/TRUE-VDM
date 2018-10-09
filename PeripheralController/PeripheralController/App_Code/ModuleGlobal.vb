@@ -1,5 +1,6 @@
 ﻿Imports System.Data
 Imports System.Security.Cryptography
+Imports System.IO.Ports
 
 Module ModuleGlobal
 
@@ -174,6 +175,10 @@ Module ModuleGlobal
 
     Public Function GetIPAddress() As String
         Return HttpContext.Current.Request.UserHostAddress
+    End Function
+
+    Public Function GetListComPort() As String()
+        Return SerialPort.GetPortNames()
     End Function
 
     Public Function GetCurrentPageName() As String

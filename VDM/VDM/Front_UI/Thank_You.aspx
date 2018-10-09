@@ -29,12 +29,11 @@
           <div class="thank">
             <img src="images/pic-thank.png">
               <h4 class="margin-re true-l"><font class="true-m">ท่่านได้ทำรายการเสร็จสิ้น</font><br/>กรุณารับใบเสร็จและสินค้า<br/>ทางช่องรับสินค้า</h4>
-              <asp:Button ID="btnPrint" runat="server" Text="Print" style="display:none;" />
           </div>
         </div>
       </div>
     </main>
-
+        <asp:TextBox ID="txtPrintContent" runat="server" Width="50%" Height="200px" TextMode="MultiLine"></asp:TextBox>
     <footer style="bottom: 0px">
         <nav>
             <div class="main">
@@ -54,8 +53,18 @@
 
          <script type="text/javascript">
 
+             String.prototype.replaceAll = function (search, replacement) {
+                 var target = this;
+                 return target.split(search).join(replacement);
+             };
+
              var printDelegate = function () {
-                 $('#btnPrint').click();
+                 var content = $('#txtPrintContent').val().replaceAll("&lt", "<").replaceAll("&gt",">");                 
+                 var url = $('#txtLocalControllerURL').val() + '/Print.aspx?Mode=Print';
+                 var xhr = new XMLHttpRequest();
+                 xhr.open("POST", url, true);
+                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+                 xhr.send(content);
              }
              
              var redirectDelegate = function () {

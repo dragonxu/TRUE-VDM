@@ -9,16 +9,19 @@
         </tr>
     </thead>
     <tbody>
-        <%--<tr>
+        <tr>
             <td>Printer</td>
             <td><asp:DropDownList ID="ddlPrinter" runat="server" Width="100%"></asp:DropDownList></td>
         </tr>
         <tr>
             <td>Text</td>
             <td><asp:TextBox ID="txtContent" runat="server" Width="100%" TextMode="MultiLine" Height="50px"></asp:TextBox></td>
-        </tr>--%>
+        </tr>
         <tr>
-            <td colspan="2" style="text-align:center;"><asp:Button  ID="btnPrint" runat="server" style="width:90%; padding:5px;" value="Print" /></td>
+            <td colspan="2" style="text-align:center;"><asp:Button  ID="btnPrint" runat="server" style="width:90%; padding:5px;" Text="Print" /></td>
+        </tr>
+         <tr>
+            <td colspan="2" style="text-align:center;"><asp:Label ID="lblResult" runat="server"></asp:Label></td>
         </tr>
     </tbody>
   
