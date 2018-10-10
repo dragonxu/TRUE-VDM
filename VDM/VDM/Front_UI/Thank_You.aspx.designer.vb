@@ -66,4 +66,13 @@ Partial Public Class Thank_You
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtLocalControllerURL As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''UC_CommonUI control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UC_CommonUI As Global.VDM.UC_CommonUI
 End Class

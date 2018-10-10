@@ -12,32 +12,24 @@
     function inputPasscodeLeft() {
         userPasscode += '1';
         checkPasscode();
-        //clearInterval(passcodeInterval);
-        //passcodeInterval = setInterval(passcodeTimer, 3000);
     }
 
     function inputPasscodeRight() {
         userPasscode += '2';
         checkPasscode();
-        //clearInterval(passcodeInterval);
-        //passcodeInterval = setInterval(passcodeTimer, 3000);
     }
 
     function checkPasscode() {
         if (userPasscode.indexOf(backEndPasscode)>-1) {
             location.href = '../Machine_Console/Login.aspx?KO_ID=<% Response.Write(KO_ID) %>';
         }
+        else if (userPasscode.indexOf(closePasscode) > -1) {
+            location.href = "about:blank"; /////// Raise cefSharp to close window
+        }
         else if (userPasscode.length() > 40) {
-            alert(userPasscode);
-            userPasscode = "";
-            
+            userPasscode = "";            
         }
     }
-
-    //var passcodeTimer = function () {
-    //    userPasscode = '';
-    //}
-    //var passcodeInterval = setInterval(passcodeTimer,3000);
 
 
 </script>

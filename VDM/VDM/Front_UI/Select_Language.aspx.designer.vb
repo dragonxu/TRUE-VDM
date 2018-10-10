@@ -77,11 +77,11 @@ Partial Public Class Select_Language
     Protected WithEvents RU As Global.System.Web.UI.HtmlControls.HtmlAnchor
     
     '''<summary>
-    '''CommonUI control.
+    '''UC_CommonUI control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents CommonUI As Global.VDM.UC_CommonUI
+    Protected WithEvents UC_CommonUI As Global.VDM.UC_CommonUI
 End Class

@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Device_Shoping_Cart.aspx.vb" Inherits="VDM.Device_Shoping_Cart" %>
 
+<%@ Register Src="~/Front_UI/UC_CommonUI.ascx" TagPrefix="uc1" TagName="UC_CommonUI" %>
+
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Page-Exit" content="revealTrans(Duration=5.0,Transition=0)">
@@ -177,7 +180,7 @@
                 </nav>
             </footer>
         </div>
-
+        <uc1:UC_CommonUI runat="server" ID="UC_CommonUI" />
     </form>
 </body>
 

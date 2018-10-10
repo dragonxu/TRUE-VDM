@@ -38,9 +38,6 @@ Public Class Thank_You
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Not IsPostBack Then
-
-            Session("TXN_ID") = 83
-
             txtLocalControllerURL.Text = BL.LocalControllerURL
             '---------------- Change And Print Slip--------------
             Print()
@@ -174,7 +171,6 @@ Public Class Thank_You
         '------------------- Completed------------------------
 
     End Sub
-
 
     Private Sub lnkHome_Click(sender As Object, e As ImageClickEventArgs) Handles lnkHome.Click
         Response.Redirect("Select_Language.aspx")

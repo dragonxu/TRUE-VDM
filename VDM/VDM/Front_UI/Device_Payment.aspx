@@ -481,6 +481,8 @@
                 </div>
 
             </asp:Panel>
+
+        <uc1:UC_CommonUI runat="server" ID="UC_CommonUI" />
     </form>
 
 </body>

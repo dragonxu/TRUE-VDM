@@ -1,7 +1,8 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Select_Language.aspx.vb" Inherits="VDM.Select_Language" %>
 
- <%@ Register Src="~/Front_UI/UC_CommonUI.ascx" TagPrefix="uc1" TagName="UC_CommonUI" %>
- 
+<%@ Register Src="~/Front_UI/UC_CommonUI.ascx" TagPrefix="uc1" TagName="UC_CommonUI" %>
+
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -38,9 +39,10 @@
 </div>
 
 </footer>
+
 </div>
 
-<uc1:UC_CommonUI runat="server" id="CommonUI" />
+<uc1:UC_CommonUI runat="server" ID="UC_CommonUI" />
 
 </form>
 </body>

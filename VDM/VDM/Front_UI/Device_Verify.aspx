@@ -74,15 +74,11 @@
                                     <asp:Button ID="btnSkip_ScanIDCard" runat="server" class="btu true-bs" Style="background: #635b5b; padding: 0 50px 0 50px; float: right; margin-top: 100px;" Text="ข้าม" />
                                 </div>
 
-
-
                             </div>
                         </div>
                     </div>
                 </div>
             </main>
-
-
 
             <asp:Panel ID="pnlModul_IDCard_Success" runat="server">
 
@@ -116,16 +112,7 @@
                 </div>
 
             </asp:Panel>
-
-
-
-
-
-
-
-
-
-
+            
                <footer style="bottom: 0px">
                 <nav>
                     <div class="main">
@@ -138,10 +125,6 @@
                     </div>
                 </nav>
             </footer>
-
-
-
-
 
         </div>
     </form>

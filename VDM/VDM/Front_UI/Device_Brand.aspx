@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Device_Brand.aspx.vb" Inherits="VDM.Device_Brand" %>
 
+<%@ Register Src="~/Front_UI/UC_CommonUI.ascx" TagPrefix="uc1" TagName="UC_CommonUI" %>
+
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -95,6 +98,8 @@
                 </footer>
             </ContentTemplate>
         </asp:UpdatePanel>
+        <uc1:UC_CommonUI runat="server" ID="UC_CommonUI" />
+
     </form>
 </body>
 <script type="text/javascript" src="js/slick.js"></script>

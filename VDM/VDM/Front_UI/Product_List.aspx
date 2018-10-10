@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" CodeBehind="Product_List.aspx.vb" Inherits="VDM.Product_List" %>
 
 <%@ Register Src="~/PageNavigation.ascx" TagName="PageNavigation" TagPrefix="uc1" %>
- 
+<%@ Register Src="~/Front_UI/UC_CommonUI.ascx" TagPrefix="uc1" TagName="UC_CommonUI" %>
+
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -97,6 +99,9 @@
 
                 </ContentTemplate>
             </asp:UpdatePanel>
+
+        <uc1:UC_CommonUI runat="server" ID="UC_CommonUI" />
+
     </form>
 </body>
 <script type="text/javascript" src="js/slick.js"></script>
