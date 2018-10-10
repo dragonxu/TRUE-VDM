@@ -2092,44 +2092,49 @@ Public Class VDM_BL
             BEFORE_TXN = DT.Rows(0).Item("TXN_ID")
         End If
 
-        Sql = "SELECT TOP 0 * FROM TB_TRANSACTION_STOCK"
+        Dim Unit_Value As Integer = 0
+        Select Case D_ID
+            Case Device.Coin1
+                Unit_Value = 1
+            Case Device.Coin5
+                Unit_Value = 5
+            Case Device.Coin10
+                Unit_Value = 10
+            Case Device.Cash20
+                Unit_Value = 20
+            Case Device.Cash50
+                Unit_Value = 50
+            Case Device.Cash100
+                Unit_Value = 100
+            Case Device.Cash500
+                Unit_Value = 500
+            Case Device.Cash1000
+                Unit_Value = 1000
+            Case Device.Printer
+                Unit_Value = 0
+        End Select
+
+        Sql = "SELECT TOP 1 * FROM TB_TRANSACTION_STOCK WHERE TXN_ID=" & TXN_ID & " AND D_ID=" & D_ID & " AND Unit_Value=" & Unit_Value
         DA = New SqlDataAdapter(Sql, ConnectionString)
         DT = New DataTable
         DA.Fill(DT)
+        If DT.Rows.Count = 0 Then
+            DR = DT.NewRow
+            DR("TXN_ID") = TXN_ID
+            DR("D_ID") = D_ID
+            DR("Unit_Value") = Unit_Value
+            DT.Rows.Add(DR)
+        Else
+            DR = DT.Rows(0)
+        End If
         DR = DT.NewRow
-        DR("TXN_ID") = TXN_ID
-        DR("D_ID") = D_ID
-        Select Case D_ID
-            Case Device.Coin1
-                DR("Unit_Value") = 1
-            Case Device.Coin5
-                DR("Unit_Value") = 5
-            Case Device.Coin10
-                DR("Unit_Value") = 10
-            Case Device.Cash20
-                DR("Unit_Value") = 20
-            Case Device.Cash50
-                DR("Unit_Value") = 50
-            Case Device.Cash100
-                DR("Unit_Value") = 100
-            Case Device.Cash500
-                DR("Unit_Value") = 500
-            Case Device.Cash1000
-                DR("Unit_Value") = 1000
-            Case Device.Printer
-                DR("Unit_Value") = 0
-        End Select
         DR("BEFORE_QUANTITY") = BEFORE_QUANTITY
         DR("DIFF_QUANTITY") = DIFF
         DR("BEFORE_TXN_ID") = BEFORE_TXN
-
         Try
-            DT.Rows.Add(DR)
             cmd = New SqlCommandBuilder(DA)
             DA.Update(DT)
-        Catch ex As Exception
-
-        End Try
+        Catch : End Try
 
     End Sub
 

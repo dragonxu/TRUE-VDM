@@ -13,10 +13,10 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        Select Case Mode
-            Case "Print"
+        Select Case Mode.ToUpper
+            Case "Print".ToUpper
                 Print()
-            Case "GetList"
+            Case "GetList".ToUpper
                 '------------- Send Contents To Printer------------
                 Dim ThePrinter As New Printer.Printer
                 Dim _list As String() = ThePrinter.GetList
@@ -24,6 +24,23 @@
                     Response.Write(_list(i) & "<br/>")
                 Next
                 Response.End()
+            Case "Test".ToUpper
+                Dim BL As New Core_BL
+                Dim ThePrinter As New Printer.Printer
+
+                Dim TestLine As New Printer.Printer.ContentLine
+                With TestLine
+                    .Text = "---- OK success ----"
+                    .ImagePath = ""
+                    .FontSize = 14
+                    .FontName = "FontA1x1"
+                    .Bold = True
+                    .IsColor = False
+                    .ContentType = Printer.Printer.ContentType.Text
+                End With
+                Dim Contents As New List(Of Printer.Printer.ContentLine)
+                Contents.Add(TestLine)
+                ThePrinter.Print(BL.Printer_Name, Contents)
         End Select
 
     End Sub

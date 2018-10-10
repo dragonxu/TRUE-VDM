@@ -31,10 +31,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/15/2015 02:06:24</publishTime>
     </File>
     <File Include="bin/PeripheralController.dll">
-      <publishTime>10/09/2018 21:37:50</publishTime>
+      <publishTime>10/10/2018 12:50:41</publishTime>
     </File>
     <File Include="bin/PeripheralController.xml">
-      <publishTime>10/09/2018 21:37:50</publishTime>
+      <publishTime>10/10/2018 12:50:41</publishTime>
     </File>
     <File Include="bin/Printer.dll">
       <publishTime>10/09/2018 19:06:06</publishTime>
@@ -97,7 +97,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/09/2018 18:30:13</publishTime>
     </File>
     <File Include="Control/UC_CashReciever.ascx">
-      <publishTime>10/09/2018 19:03:01</publishTime>
+      <publishTime>10/10/2018 01:34:23</publishTime>
     </File>
     <File Include="Control/UC_CoinDispenser.ascx">
       <publishTime>10/09/2018 18:30:26</publishTime>
@@ -109,7 +109,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/09/2018 18:31:11</publishTime>
     </File>
     <File Include="Control/UC_Printer.ascx">
-      <publishTime>10/09/2018 21:32:44</publishTime>
+      <publishTime>10/10/2018 01:09:37</publishTime>
     </File>
     <File Include="Control/UC_ProductPicker.ascx">
       <publishTime>10/09/2018 18:31:28</publishTime>
@@ -151,7 +151,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/06/2018 21:35:33</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/07/2018 16:22:25</publishTime>
+      <publishTime>10/10/2018 12:02:16</publishTime>
     </File>
   </ItemGroup>
 </Project>
