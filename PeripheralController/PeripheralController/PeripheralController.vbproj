@@ -220,13 +220,6 @@
       <DependentUpon>CashDispense.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Test.aspx.designer.vb">
-      <DependentUpon>Test.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Test.aspx.vb">
-      <DependentUpon>Test.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Content Include="Control\UC_Camera.ascx" />
     <Content Include="Control\UC_CashDispenser.ascx" />
     <Content Include="Control\UC_CashReciever.ascx" />
@@ -245,7 +238,6 @@
     <Content Include="CoinDispense.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="css\style.css" />
-    <Content Include="Test.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

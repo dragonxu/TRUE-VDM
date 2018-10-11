@@ -654,6 +654,9 @@
     <Content Include="Machine_Console\UC_SIM_Stock.ascx" />
     <Content Include="Scripts\DragDrop.js" />
     <Content Include="Scripts\extent.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.onScreenKeyboard.js" />
+    <Content Include="Scripts\onScreenKeyboard.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="My Project\DataSources\System.Data.DataTable.datasource" />
     <Content Include="SignIn.aspx" />
@@ -712,9 +715,6 @@
     <Content Include="Front_UI\fonts\tmedium.woff2" />
     <Content Include="Front_UI\MasterFront.Master" />
     <None Include="My Project\PublishProfiles\TempPublish.pubxml" />
-    <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.4.1.js" />
-    <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Scripts\jquery.cookie.min.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\main.js" />
@@ -736,6 +736,7 @@
     <Content Include="Styles\Extent.css" />
     <Content Include="Styles\font-awesome.css" />
     <Content Include="Styles\jquery.dataTables.min.css" />
+    <Content Include="Styles\OnScreenKeyboard.css" />
     <Content Include="Styles\product_shelf.css" />
     <Content Include="Styles\sim.css" />
     <Content Include="Styles\Site.css" />

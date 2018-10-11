@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="../styles/animate.css">
   <link rel="stylesheet" href="../styles/app.css">
   <link rel="stylesheet" href="../styles/app.skins.css">
-
+  <link rel="stylesheet" href="../styles/onScreenKeyboard.css">
 </head>
 <body class="page-loading">
  <form id="form1" runat="server">
@@ -47,9 +47,9 @@
                 </div>
                 <div class="form-inputs">
                   <label class="text-uppercase">User Name</label>
-                  <asp:TextBox ID="txtUser" runat="server" CssClass="form-control input-lg m-b" placeholder="User Name"></asp:TextBox>
+                  <asp:TextBox ID="txtUser" runat="server" CssClass="form-control input-lg m-b osk-trigger" data-osk-options="disableReturn" placeholder="User Name"></asp:TextBox>
                   <label class="text-uppercase">Password</label>
-                  <asp:TextBox ID="txtPass" runat="server" CssClass="form-control input-lg m-b" TextMode="Password" placeholder="Password"></asp:TextBox>
+                  <asp:TextBox ID="txtPass" runat="server" CssClass="form-control input-lg m-b osk-trigger" data-osk-options="disableReturn" TextMode="Password" placeholder="Password"></asp:TextBox>
                 </div>
                   <div class="col-xs-12 m-b">                      
                       <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-danger btn-block btn-lg " Text="Sign In" />
@@ -71,7 +71,7 @@
 
       
     <!-- bottom footer -->
-    <footer class="session-footer">
+    <%--<footer class="session-footer">
       <nav class="footer-right">
         <ul class="nav">
           <li>
@@ -89,13 +89,14 @@
 
         </ul>
       </nav>
-    </footer>
+    </footer>--%>
     <!-- /bottom footer -->
   </div>
 
      <!-- build:js({.tmp,app}) scripts/app.min.js -->
     <script src="../scripts/helpers/modernizr.js" type="text/javascript"></script>
-    <script src="../vendor/jquery/dist/jquery.js" type="text/javascript"></script>
+    <script src="../Scripts/jquery.min.js" type="text/javascript"></script>
+    <script src="../Scripts/jquery.onScreenKeyboard.js" type="text/javascript"></script>
     <script src="../vendor/bootstrap/dist/js/bootstrap.js" type="text/javascript"></script>
     <script src="../vendor/fastclick/lib/fastclick.js" type="text/javascript"></script>
     <script src="../vendor/perfect-scrollbar/js/perfect-scrollbar.jquery.js" type="text/javascript"></script>
@@ -103,6 +104,7 @@
     <script src="../scripts/jquery.cookie.min.js" type="text/javascript"></script>
     <script src="../scripts/constants.js" type="text/javascript"></script>
     <script src="../scripts/main.js" type="text/javascript"></script>
+    <script src="../Scripts/onScreenKeyboard.js" type="text/javascript" ></script>
 
   <!-- build:js({.tmp,app}) scripts/app.min.js -->
   <script src="../vendor/chosen_v1.4.0/chosen.jquery.js" type="text/javascript" language="javascript"></script>

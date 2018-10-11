@@ -17,6 +17,7 @@
   <link rel="stylesheet" type="text/css" href="styles/animate.css">
   <link rel="stylesheet" type="text/css" href="styles/app.css">
   <link rel="stylesheet" type="text/css" href="styles/app.skins.css">
+  <link rel="stylesheet" type="text/css" href="styles/onScreenKeyboard.css">
   <!-- endbuild -->
 </head>
 
@@ -60,9 +61,9 @@
             </div>
             <div class="form-inputs p-b">
               <label class="text-uppercase">Username</label>
-              <asp:TextBox ID="txtUser" runat="server" CssClass="form-control input-lg" required></asp:TextBox>
+              <asp:TextBox ID="txtUser" runat="server" CssClass="form-control input-lg osk-trigger" data-osk-options="disableReturn" required></asp:TextBox>
               <label class="text-uppercase">Password</label>
-              <asp:TextBox ID="txtPass" runat="server" CssClass="form-control input-lg" required TextMode="Password"></asp:TextBox>
+              <asp:TextBox ID="txtPass" runat="server" CssClass="form-control input-lg osk-trigger" data-osk-options="disableReturn" required TextMode="Password"></asp:TextBox>
             </div>
             <asp:LinkButton CssClass="btn btn-danger btn-block btn-lg m-b" ID="btnLogin" runat="server" Text="Login"></asp:LinkButton>
               <asp:Label ID="lblError" runat="server">Invalid admin username and password</asp:Label>
@@ -71,6 +72,7 @@
             </div>
             <p class="text-center"><small><em>Management Tool by Autobox-TiT Development 2018</em></small>
             </p>
+
           </form>
         </div>
       </div>
@@ -78,15 +80,20 @@
     </div>
   </div>
   <!-- build:js({.tmp,app}) scripts/app.min.js -->
+
+  <script type="text/javascript" src="Scripts/jquery.min.js"></script>
+  <script type="text/javascript" src="Scripts/jquery.onScreenKeyboard.js"></script>
   <script type="text/javascript" src="scripts/helpers/modernizr.js"></script>
-  <script type="text/javascript" src="vendor/jquery/dist/jquery.js"></script>
+  <%--<script type="text/javascript" src="vendor/jquery/dist/jquery.js"></script>--%>
   <script type="text/javascript" src="vendor/bootstrap/dist/js/bootstrap.js"></script>
   <script type="text/javascript" src="vendor/fastclick/lib/fastclick.js"></script>
   <script type="text/javascript" src="vendor/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
   <script type="text/javascript" src="scripts/jquery.cookie.min.js" type="text/javascript"></script>
   <script type="text/javascript" src="scripts/helpers/smartresize.js"></script>
-  <script type="text/javascript" src="scripts/constants.js"></script>
+  <script type="text/javascript" src="scripts/constants.js"></script>  
+  <script type="text/javascript" src="Scripts/onScreenKeyboard.js"></script>
   <script type="text/javascript" src="scripts/main.js"></script>
+  
   <!-- endbuild -->
 </body>
 

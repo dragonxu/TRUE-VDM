@@ -11,7 +11,7 @@
         padding: 0.5rem;
       }
   </style>
-  <script src="vendor/jquery/dist/jquery.js" type="text/javascript"></script>
+  <script src="Scripts/jquery.min.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
