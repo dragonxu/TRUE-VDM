@@ -44,7 +44,7 @@
                                 <span>-</span>
                              </td>
                             <td data-title="เอาออก" style="padding-right: 0px;">
-                                <asp:TextBox ID="txt_Pick" runat="server" class="form-control" Style="width: 80px; text-align: center;" OnTextChanged="txt_TextChanged" AutoPostBack="true"></asp:TextBox>
+                                <asp:TextBox ID="txt_Pick" runat="server" CssClass="form-control osk-trigger"  data-osk-options="disableReturn" Style="width: 80px; text-align: center;" OnTextChanged="txt_TextChanged" AutoPostBack="true"></asp:TextBox>
                             </td>
                             
                             <td data-title="เอาออก" style="text-align: left; padding-left: 0px;">
@@ -55,7 +55,7 @@
                                 <span>+</span>
                              </td>
                             <td data-title="เอาเข้า" style="padding-right: 0px;">
-                                <asp:TextBox ID="txt_Input" runat="server" class="form-control" Style="width: 80px; text-align: center;" OnTextChanged="txt_TextChanged" AutoPostBack="true"></asp:TextBox>
+                                <asp:TextBox ID="txt_Input" runat="server" CssClass="form-control osk-trigger"  data-osk-options="disableReturn" Style="width: 80px; text-align: center;" OnTextChanged="txt_TextChanged" AutoPostBack="true"></asp:TextBox>
                             </td>
                             <td data-title="เอาเข้า" style="text-align: left; padding-left: 0px;">
                              
@@ -101,75 +101,4 @@
     </div>
 
 
-
-
-
-
-
-
-
-
-
-
-    <%--coin5--%>
-    <%--    <div class="row">
-
-        <div class="col-sm-2">
-            <div class="row m-b">
-                <div class="col-xs-4 text-right">
-                    <img id="imgcoin5" src="../images/Icon/green/coin5.png" width="40px">
-                    <span>เดิม</span>
-                </div>
-                <div class="col-xs-8">
-                    <asp:TextBox ID="TextBox1" runat="server" class="form-control"></asp:TextBox>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-2">
-            <div class="row m-b">
-                <div class="col-xs-4 text-right">
-                    <span>เอาออก</span>
-                </div>
-                <div class="col-xs-6">
-                    <asp:TextBox ID="TextBox2" runat="server" class="form-control"></asp:TextBox>
-                </div>
-                <div class="col-xs-2">
-                    <button type="button" class="btn btn-dark">เต็มจำนวน</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-2">
-            <div class="row m-b">
-                <div class="col-xs-4 text-right">
-                    <span>เอาเข้า</span>
-                </div>
-                <div class="col-xs-6">
-                    <asp:TextBox ID="TextBox3" runat="server" class="form-control"></asp:TextBox>
-                </div>
-                <div class="col-xs-2">
-                    <button type="button" class="btn btn-dark">เต็มจำนวน</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-2">
-            <div class="row m-b">
-                <div class="col-xs-4 text-right">
-                    <span>คงเหลือ</span>
-                </div>
-                <div class="col-xs-8">
-                    <asp:TextBox ID="TextBox4" runat="server" class="form-control"></asp:TextBox>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-2">
-            <div class="row m-b">
-                <div class="col-xs-4 text-right">
-                    <span>จำนวนเงิน</span>
-                </div>
-                <div class="col-xs-8">
-                    <asp:Label ID="lblSumChangeCoin5" runat="server" Text="1,005"></asp:Label>
-                </div>
-            </div>
-        </div>
-    </div>--%>
 </div>

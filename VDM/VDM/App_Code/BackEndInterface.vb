@@ -227,8 +227,18 @@ Public Class BackEndInterface
             Dim URL As String = (New BackEndInterface.General).ValidateSerialURL & "?Shop=" & Shop & "&Serial=" & Serial
             Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
 
-            JSONString = (New BackEndInterface.General).SendGetURL(WebRequest)
-            Dim Result As Response = JsonConvert.DeserializeObject(Of Response)(JSONString)
+            Dim Result As Response = Nothing '------------- ยังไงก็ต้อง Return Result ----------------
+            Try
+                JSONString = (New BackEndInterface.General).SendGetURL(WebRequest)
+                Result = JsonConvert.DeserializeObject(Of Response)(JSONString)
+            Catch ex As Exception
+                Result = New Response
+                Result.ReturnValues = New List(Of Object)
+                Result.IsError = True
+                Result.ErrorMessage = ex.Message
+                Result.IsNotTransaction = False
+            End Try
+
             Result.JSONString = JSONString
             Result.REQ_ID = REQ_ID
 
@@ -240,8 +250,12 @@ Public Class BackEndInterface
             DR = DT.NewRow : DT.Rows.Add(DR)
             DR("REQ_ID") = REQ_ID
             DR("JSONString") = Result.JSONString
-            DR("CODE") = Result.ReturnValues(0)
-            DR("IS_SIM") = Result.ReturnValues(1)
+            If Result.ReturnValues.Count > 0 Then
+                DR("CODE") = Result.ReturnValues(0)
+            End If
+            If Result.ReturnValues.Count > 1 Then
+                DR("IS_SIM") = Result.ReturnValues(1)
+            End If
             DR("IsError") = Result.IsError
             DR("ErrorMessage") = Result.ErrorMessage
             DR("IsNotTransaction") = Result.IsNotTransaction

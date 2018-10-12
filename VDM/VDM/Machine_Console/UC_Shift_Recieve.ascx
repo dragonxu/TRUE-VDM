@@ -28,12 +28,6 @@
         <table class="table m-b-0">
             <thead>
                 <tr>
-                    <%--<th></th>
-                    <th class="col-md-5" style="text-align: right;">เดิม</th>
-                    <th colspan="2">เอาออก</th>
-                    <th colspan="2">เอาเข้า</th>
-                    <th class="col-md-5" style="text-align: right;">คงเหลือ</th>
-                    <th class="col-md-5" style="text-align: right;"><span>บาท</span></th>--%>
 
                     <th></th>
                     <th class="col-md-5" style="text-align: right;">เดิม</th>
@@ -108,7 +102,7 @@
                                 <span>-</span>
                             </td>
                             <td data-title="เอาออก" style="padding-right: 0px;">
-                                <asp:TextBox ID="txt_Pick" runat="server" class="form-control" Style="width: 80px; text-align: center;" OnTextChanged="txt_TextChanged_CoinIn" AutoPostBack="true"></asp:TextBox>
+                                <asp:TextBox ID="txt_Pick" runat="server" CssClass="form-control osk-trigger"  data-osk-options="disableReturn" Style="width: 80px; text-align: center;" OnTextChanged="txt_TextChanged_CoinIn" AutoPostBack="true"></asp:TextBox>
                             </td>
 
                             <td data-title="เอาออก" style="text-align: left; padding-left: 0px;">
@@ -119,7 +113,7 @@
                                 <span>+</span>
                             </td>
                             <td data-title="เอาเข้า" style="padding-right: 0px;">
-                                <asp:TextBox ID="txt_Input" runat="server" class="form-control" Style="width: 80px; text-align: center;" OnTextChanged="txt_TextChanged_CoinIn" AutoPostBack="true"></asp:TextBox>
+                                <asp:TextBox ID="txt_Input" runat="server" CssClass="form-control osk-trigger"  data-osk-options="disableReturn" Style="width: 80px; text-align: center;" OnTextChanged="txt_TextChanged_CoinIn" AutoPostBack="true"></asp:TextBox>
                             </td>
                             <td data-title="เอาเข้า" style="text-align: left; padding-left: 0px;">
 
@@ -216,7 +210,7 @@
                                 <span>-</span>
                             </td>
                             <td data-title="เอาออก" style="padding-right: 0px;">
-                                <asp:TextBox ID="txt_Pick" runat="server" class="form-control" Style="width: 80px; text-align: center;" OnTextChanged="txt_TextChanged_CashIn" AutoPostBack="true"></asp:TextBox>
+                                <asp:TextBox ID="txt_Pick" runat="server" CssClass="form-control osk-trigger"  data-osk-options="disableReturn" Style="width: 80px; text-align: center;" OnTextChanged="txt_TextChanged_CashIn" AutoPostBack="true"></asp:TextBox>
                             </td>
 
                             <td data-title="เอาออก" style="text-align: left; padding-left: 0px;">
@@ -227,7 +221,7 @@
                                 <span>+</span>
                             </td>
                             <td data-title="เอาเข้า" style="padding-right: 0px;">
-                                <asp:TextBox ID="txt_Input" runat="server" class="form-control" Style="width: 80px; text-align: center;" OnTextChanged="txt_TextChanged_CashIn" AutoPostBack="true"></asp:TextBox>
+                                <asp:TextBox ID="txt_Input" runat="server" CssClass="form-control osk-trigger"  data-osk-options="disableReturn" Style="width: 80px; text-align: center;" OnTextChanged="txt_TextChanged_CashIn" AutoPostBack="true"></asp:TextBox>
                             </td>
                             <td data-title="เอาเข้า" style="text-align: left; padding-left: 0px;">
 

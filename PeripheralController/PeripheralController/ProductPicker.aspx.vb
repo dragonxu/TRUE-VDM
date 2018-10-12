@@ -26,7 +26,7 @@ Public Class ProductPicker
 
     Private ReadOnly Property Mode As String
         Get
-            Return Request.QueryString("Mode")
+            Return Request.QueryString("Mode").ToString
         End Get
     End Property
 
@@ -52,7 +52,7 @@ Public Class ProductPicker
 
     Private ReadOnly Property callBackFunction As String
         Get
-            Return Request.QueryString("callback")
+            Return Request.QueryString("callback").ToString
         End Get
     End Property
 

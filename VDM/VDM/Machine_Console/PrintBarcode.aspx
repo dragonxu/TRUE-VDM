@@ -12,6 +12,7 @@
         }
         td {
             padding:10px;
+            height:60px;
         }
     </style>
 </head>

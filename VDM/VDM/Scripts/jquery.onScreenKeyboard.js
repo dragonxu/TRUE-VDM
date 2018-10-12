@@ -20,8 +20,8 @@
 			rewireTab: false,
 			topPosition: '',
             bottomPosition :'0px',
-            leftPosition: '20%',
-            rightPosition: '20%',
+            leftPosition: '0px',
+            rightPosition: '0px',
             margin:'0'
 		}, options);
 		var $keyboardTriggers = this;
@@ -83,7 +83,7 @@
 						if ($key.hasClass('osk-last-item')) {
 							difference = keyboardWidth - totalKeysWidth;
 							if (difference > 0) {
-								$key.width($key.width() + difference);
+								//$key.width($key.width() + difference); // T-Changed
 							}
 							difference = 0;
 							totalKeysWidth = 0;

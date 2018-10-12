@@ -108,7 +108,7 @@
                                                         <span class="true-l">เงินสด<span>
                                                     </dt>
                                                 </a>
-                                                <a id="lnkCredit" runat="server" visible="false">
+                                                <a id="lnkCredit" runat="server">
                                                     <dt class="icon-credit">
                                                         <span class="true-l">บัตรเครดิต
                                                     <p class="text">บัตรเดบิต บัตรเงินสด</p>
@@ -120,11 +120,11 @@
                                                     </dt>
                                                 </a>
                                                 <%--<a href="javascript:;">
-                                            <dt class="icon-online-banking">
-                                                <span class="true-l">Online<br />
-                                                    banking<span>
-                                            </dt>
-                                        </a>--%>
+                                                    <dt class="icon-online-banking">
+                                                        <span class="true-l">Online<br />
+                                                            banking<span>
+                                                    </dt>
+                                                </a>--%>
                                             </div>
                                         </div>
                                 <asp:Panel ID="pnlSelectChoice" runat="server">
@@ -132,8 +132,6 @@
                                 </asp:Panel>
                                     </div>
                                 </div>
-
-                                 
 
                                 <asp:Panel ID="pnlCash" runat="server">
                                     <form class="step">
@@ -228,9 +226,8 @@
                                         </div>                                      
                                     </form>
                                 </asp:Panel>
-
-
-                                <asp:Panel ID="pnlCredit" runat="server">
+                                
+                                <%--<asp:Panel ID="pnlCredit" runat="server">
                                     <form class="step">
                                         <div class="step-payment">
                                             <h4 class="true-m">ชำระด้วยบัตรเครดิต</h4>
@@ -291,6 +288,16 @@
                                     </form>
                                 </asp:Panel>
 
+
+                                <div id="popup1">
+                                  <div class="privilege">
+                                    <h3 class="true-m">สิทธิพิเศษสำหรับลูกค้า</h3>
+                                    <a id="clicksetp2" class="idcard" href="#popup2"><img src="images/pic-idcard.png"/></a>
+                                    <h4 class="true-l">กรุณาสอดบัตรประชาชนของท่าน</h4>
+                                    <br/><br/> <br/><br/>
+                                  </div>
+                                </div>--%>
+
                                 <asp:Panel ID="pnlTruemoney" runat="server">
                                     <form class="step">
                                         <div class="step-payment">
@@ -342,6 +349,62 @@
                         </nav>
                     </footer>
                 </div>
+
+                <%--<asp:Panel ID="pnlCredit" runat="server" Visible ="false" >
+                    <div class="fancybox-overlay fancybox-overlay-fixed" style="width: auto; height: auto; display: block;">
+                        <div class="fancybox-wrap fancybox-desktop fancybox-type-inline fancybox-opened" tabindex="-1" style="width: auto; height: auto; position: fixed; top: 10%; left: 20%; right: 30%; bottom: 30%; opacity: 1; overflow: visible;">
+                            <div class="fancybox-skin" style="padding: 0px; width: 100%; height: 100%;">
+                                <div class="fancybox-outer">
+                                    <div class="fancybox-inner" style="overflow: visible; width: 100%; height: 100%;">
+                                        <div id="popup2" style="display: block;">
+
+                                            <div class="privilege" style="width:100%; height:100%;">
+
+                                                <h3 class="true-m" style="margin: 20px 0 60px 0;">สำเร็จ</h3>
+                                                <div class="idcard">
+                                                    <img src="images/pic-idcard2.png">
+                                                </div>
+
+                                                <h4 class="true-m t-red">อย่าลืมเก็บบัตรของท่าน</h4>
+                                               <div class="icon" style="margin: 0px 0 50px 0">
+                                                    <asp:LinkButton ID="btnStart_Take_Photos" runat="server" class="btu true-l" Text="เริ่มแสกนใบหน้า"></asp:LinkButton>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a title="Close" class="fancybox-item fancybox-close" href="javascript:;"></a>
+                                <asp:LinkButton ID="lnkCloseCredit" runat="server" class="fancybox-item fancybox-close"></asp:LinkButton>
+                            </div>
+                        </div>
+                    </div>
+                </asp:Panel>--%>
+
+                <asp:Panel ID="pnlCredit" runat="server" Visible ="false" >
+                    <div class="fancybox-overlay fancybox-overlay-fixed" style="width: auto; height: auto; display: block;">
+                        <div class="fancybox-wrap fancybox-desktop fancybox-type-inline fancybox-opened" tabindex="-1" style="width: auto; height: auto; position: fixed; top: 10%; left: 20%; right: 20%; bottom: 30%; opacity: 1; overflow: visible;">
+                            <div class="fancybox-skin" style="padding: 0px; width: 100%; height: 100%;">
+                                <div class="fancybox-outer">
+                                    <div class="fancybox-inner" style="overflow: visible; width: 100%; height: 100%;">
+                                        <div id="popup2" style="display: block;">
+
+                                            <div class="privilege" style="width:100%; height:100%; text-align:center; position:relative;">
+
+                                              <iframe id="paymentGatewayWindow" runat="server" scrollable="false" style="position:absolute; left:10px; width:90%; height:90%;">
+
+                                              </iframe>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%--<a title="Close" class="fancybox-item fancybox-close" href="javascript:;"></a>--%>
+                                <asp:LinkButton ID="lnkCloseCredit" runat="server" class="fancybox-item fancybox-close"></asp:LinkButton>
+                            </div>
+                        </div>
+                    </div>
+                </asp:Panel>
 
             </ContentTemplate>
         </asp:UpdatePanel>
@@ -449,38 +512,7 @@
 
         <uc1:UC_CommonUI runat="server" ID="CommonUI" />
 
-         <asp:Panel ID="pnlModul" runat="server" Visible ="false" >
-
-                <div class="fancybox-overlay fancybox-overlay-fixed" style="width: auto; height: auto; display: block;">
-                    <div class="fancybox-wrap fancybox-desktop fancybox-type-inline fancybox-opened" tabindex="-1" style="width: 818px; height: auto; position: absolute; top: 250px; left: 122px; opacity: 1; overflow: visible;">
-                        <div class="fancybox-skin" style="padding: 0px; width: auto; height: auto;">
-                            <div class="fancybox-outer">
-                                <div class="fancybox-inner" style="overflow: auto; width: 818px; height: auto;">
-                                    <div id="popup2" style="display: block;">
-
-                                        <div class="privilege">
-
-                                            <h3 class="true-m" style="margin: 20px 0 60px 0;">สำเร็จ</h3>
-                                            <div class="idcard">
-                                                <img src="images/pic-idcard2.png">
-                                            </div>
-
-                                            <%--<h4 class="true-m t-red">อย่าลืมเก็บบัตรของท่าน</h4>--%>
-                                            <div class="icon" style="margin: 0px 0 50px 0">
-                                                <asp:LinkButton ID="btnStart_Take_Photos" runat="server" class="btu true-l" Text="เริ่มแสกนใบหน้า"></asp:LinkButton>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <%--<a title="Close" class="fancybox-item fancybox-close" href="javascript:;"></a>--%>
-                            <asp:LinkButton ID="lnkClose" runat="server" class="fancybox-item fancybox-close"></asp:LinkButton>
-                        </div>
-                    </div>
-                </div>
-
-            </asp:Panel>
+         
 
         <uc1:UC_CommonUI runat="server" ID="UC_CommonUI" />
     </form>

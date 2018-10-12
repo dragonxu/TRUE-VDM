@@ -6,17 +6,18 @@ Public Class PrintBarcode
     Dim BL As New VDM_BL
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        BindProductSerial()
+        'BindProductSerial()
         'BindProdcutNon()
         'BindProductAll()
-        'BindSIMSerial()
+        BindSIMSerial()
+        'BindProductTest()
     End Sub
 
 
     Private Sub BindSIMSerial()
-        Dim SQL As String = "SELECT MS.SIM_ID,SIM.PRODUCT_CODE,SIM.SERIAL_NO,MS.DISPLAY_NAME_TH" & vbLf
-        SQL &= " FROM TMP_SIM SIM" & vbLf
-        SQL &= " INNER JOIN MS_SIM MS ON SIM.PRODUCT_CODE=MS.PRODUCT_CODE"
+        Dim SQL As String = "SELECT 0 SIM_ID,MAT PRODUCT_CODE,SERIAL SERIAL_NO,MSISDN DISPLAY_NAME_TH" & vbLf
+        SQL &= " FROM TMP_SIM_TEST SIM" & vbLf
+        'SQL &= " INNER JOIN MS_SIM MS ON SIM.PRODUCT_CODE=MS.PRODUCT_CODE"
         Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)
@@ -30,6 +31,17 @@ Public Class PrintBarcode
         SQL &= " FROM TMP_Serial TMP" & vbLf
         SQL &= " INNER JOIN MS_Product PD ON TMP.Product_Code=PD.Product_Code" & vbLf
         SQL &= " WHERE TMP.PRODUCT_CODE='3000066334'"
+        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        rptSerial.DataSource = DT
+        rptSerial.DataBind()
+
+    End Sub
+
+    Private Sub BindProductTest()
+        Dim SQL As String = "SELECT MAT PRODUCT_CODE ,SERIAL SERIAL_NO,'' DISPLAY_NAME_TH" & vbLf
+        SQL &= " FROM TMP_PRODUCT_TEST " & vbLf
         Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)

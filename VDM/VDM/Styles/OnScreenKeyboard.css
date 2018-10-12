@@ -6,15 +6,17 @@
 	overflow: hidden;
 	padding: 1%;
 	margin: 0;
-	z-index: 100;
+	z-index: 10000;
 }
 
 	#osk-container > li {
 		float: left;
 		width: 5.81395349%;
-		height: 3em;
+		
 		margin: 0 0.726744186% 5px 0;
-		line-height: 3em;
+
+        height: 3.5em;
+		line-height: 3.5em;
 		text-align: center;
 		list-style-type: none;
 		cursor: pointer;

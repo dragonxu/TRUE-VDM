@@ -199,6 +199,9 @@
       <DependentUpon>Print.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="App_Code\Printer.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ProductPicker.aspx.designer.vb">
       <DependentUpon>ProductPicker.aspx</DependentUpon>
     </Compile>
@@ -303,23 +306,6 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="PrinterClassDll">
-      <Guid>{429E4CBE-98AC-4513-AF5E-47DE18C0B4F5}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Printer\Printer.vbproj">
-      <Project>{261d72ea-1c25-4b8d-bf7c-937dd9121c37}</Project>
-      <Name>Printer</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -46,19 +46,6 @@ Public Class Device_Payment
         End Get
     End Property
 
-    Private Property PAYMENT_METHOD As VDM_BL.PaymentMethod
-        Get
-            Try
-                Return ViewState("PAYMENT_METHOD")
-            Catch ex As Exception
-                Return VDM_BL.PaymentMethod.UNKNOWN
-            End Try
-        End Get
-        Set(value As VDM_BL.PaymentMethod)
-            ViewState("PAYMENT_METHOD") = value
-        End Set
-    End Property
-
     Private Property CASH_PAID As Integer
         Get
             Return txtPaid.Text
@@ -136,7 +123,7 @@ Public Class Device_Payment
 
     Private Sub ClearForm()
 
-        PAYMENT_METHOD = VDM_BL.PaymentMethod.UNKNOWN
+        'PAYMENT_METHOD = VDM_BL.PaymentMethod.UNKNOWN
 
         pnlCash.Visible = False
         pnlCredit.Visible = False
@@ -163,8 +150,6 @@ Public Class Device_Payment
     Private Sub lnkCash_ServerClick(sender As Object, e As EventArgs) Handles lnkCash.ServerClick
         ClearForm()
 
-        PAYMENT_METHOD = VDM_BL.PaymentMethod.CASH
-
         pnlSelectChoice.Visible = False
         pnlCash.Visible = True
         lnkCash.Attributes("class") = "current"
@@ -176,17 +161,21 @@ Public Class Device_Payment
     Private Sub lnkCredit_ServerClick(sender As Object, e As EventArgs) Handles lnkCredit.ServerClick
         ClearForm()
 
-        PAYMENT_METHOD = VDM_BL.PaymentMethod.CREDIT_CARD
-
         pnlSelectChoice.Visible = False
         pnlCredit.Visible = True
         lnkCredit.Attributes("class") = "current"
+
+        Dim url As String = "Payment_Gateway_Start.aspx?amount=" & PRODUCT_COST & ".00&PRODUCT_ID=" & PRODUCT_ID
+        paymentGatewayWindow.Src = url
+
+    End Sub
+
+    Private Sub lnkCloseCredit_Click(sender As Object, e As EventArgs) Handles lnkCloseCredit.Click
+        pnlCredit.Visible = False
     End Sub
 
     Private Sub lnkTruemoney_ServerClick(sender As Object, e As EventArgs) Handles lnkTruemoney.ServerClick
         ClearForm()
-
-        PAYMENT_METHOD = VDM_BL.PaymentMethod.TRUE_MONEY
 
         pnlSelectChoice.Visible = False
         pnlTruemoney.Visible = True
@@ -365,8 +354,8 @@ Public Class Device_Payment
     Private Sub btnCashTimeout_Click(sender As Object, e As EventArgs) Handles btnCashTimeout.Click
         '------------If pay some amount
         'If CASH_PAID > 0 Then UpdateCashProblem()
-        'Alert(Me.Page, txtCashProblem.Text)
-        'ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Refresh", "location.href=location.href;", True)
+        Alert(Me.Page, txtCashProblem.Text)
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Refresh", "location.href=location.href;", True)
     End Sub
 
     Private Sub btnCashProblem_Click(sender As Object, e As EventArgs) Handles btnCashProblem.Click
@@ -449,6 +438,8 @@ Public Class Device_Payment
     Private Sub UpdateCashProblem()
 
     End Sub
+
+
 
 
 #End Region

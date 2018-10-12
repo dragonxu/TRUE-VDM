@@ -61,9 +61,9 @@
             </div>
             <div class="form-inputs p-b">
               <label class="text-uppercase">Username</label>
-              <asp:TextBox ID="txtUser" runat="server" CssClass="form-control input-lg osk-trigger" data-osk-options="disableReturn" required></asp:TextBox>
+              <asp:TextBox ID="txtUser" runat="server" CssClass="form-control input-lg" required></asp:TextBox>
               <label class="text-uppercase">Password</label>
-              <asp:TextBox ID="txtPass" runat="server" CssClass="form-control input-lg osk-trigger" data-osk-options="disableReturn" required TextMode="Password"></asp:TextBox>
+              <asp:TextBox ID="txtPass" runat="server" CssClass="form-control input-lg" required TextMode="Password"></asp:TextBox>
             </div>
             <asp:LinkButton CssClass="btn btn-danger btn-block btn-lg m-b" ID="btnLogin" runat="server" Text="Login"></asp:LinkButton>
               <asp:Label ID="lblError" runat="server">Invalid admin username and password</asp:Label>

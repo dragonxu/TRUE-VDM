@@ -27,7 +27,14 @@ Public Class MasterStaffConsole
         If Not IsPostBack Then
             LoginInfo()
             GetMachineInfo()
+        Else
+            InitOnScreenKeyboard()
         End If
+    End Sub
+
+    Private Sub InitOnScreenKeyboard()
+        Dim Script As String = "initKeyboard();"
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Keyboard", Script, True)
     End Sub
 
     Private Sub LoginInfo()

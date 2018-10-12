@@ -19,7 +19,7 @@
 <input type="hidden" name="lang" value="E">
 <input type="hidden" name="remark" value="-">
 <input type="submit" value="sample" />
-</form>
+</form>--%>
 
 <form name="payFormTrue" method="post" action="https://psipay.bangkokbank.com/b2c/eng/payment/payForm.jsp">
 <input type="hidden" name="merchantId" value="3971">
@@ -33,9 +33,9 @@
 <input type="hidden" name="lang" value="E">
 <input type="hidden" name="remark" value="-">
 <input type="submit" value="True Profile" />
-</form>
+</form> 
 
-<form name="payFormTrue" method="post" action=" https://ipay.bangkokbank.com/b2c/eng/payment/payForm.jsp">
+<%-- <form name="payFormTrue" method="post" action=" https://ipay.bangkokbank.com/b2c/eng/payment/payForm.jsp">
 <input type="hidden" name="merchantId" value="3971">
 <input type="hidden" name="amount" value="1.0" >
 <input type="hidden" name="orderRef" value="TRUEVDM-837294"> <!--เปลี่ยนทุกครั้ง-->
@@ -47,9 +47,9 @@
 <input type="hidden" name="lang" value="E">
 <input type="hidden" name="remark" value="-">
 <input type="submit" value="Sathit" />
-</form>--%>
+</form>
 
-    
+  
 <form name="payForm" method="post" action="https://psipay.bangkokbank.com/b2c/eng/dPayment/payComp.jsp">
 <input type="hidden" name="merchantId" value="3971">
 <input type="hidden" name="amount" value="1.0" >
@@ -76,7 +76,7 @@
 <input type="hidden" name="holderEmail" value="tsathit40@hotmail.com">
 <input type="hidden" name="issueCountry" value="764">
 <input type="submit" value="Integrate">
-</form>
+</form>--%>
 
 
 </body>

@@ -69,55 +69,55 @@ Public Class UC_Printer
     End Sub
 
     Private Sub BindListPrinter()
-        Dim Printer As New Printer.Printer
-        Dim _list As String() = Printer.GetList()
+        'Dim Printer As New Printer.Printer
+        'Dim _list As String() = Printer.GetList()
 
-        ddlPrinter.Items.Clear()
-        For i As Integer = 0 To _list.Count - 1
-            ddlPrinter.Items.Add(_list(i))
-            '------------- Select Default ------------
-            If ddlPrinter.Items(i).Text = BL.Printer_Name Then
-                ddlPrinter.SelectedIndex = i
-            End If
-        Next
+        'ddlPrinter.Items.Clear()
+        'For i As Integer = 0 To _list.Count - 1
+        '    ddlPrinter.Items.Add(_list(i))
+        '    '------------- Select Default ------------
+        '    If ddlPrinter.Items(i).Text = BL.Printer_Name Then
+        '        ddlPrinter.SelectedIndex = i
+        '    End If
+        'Next
 
     End Sub
 
 
 
     Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
-        Dim ThePrinter As New Printer.Printer
-        Dim Contents As String() = txtContent.Text.Split(vbNewLine)
-        Dim Lines As New List(Of Printer.Printer.ContentLine)
-        Dim PrinterName As String = ddlPrinter.Items(ddlPrinter.SelectedIndex).Value
-        Select Case ThePrinter.GetStatus(PrinterName)
-            Case Printer.Printer.PrinterStatus.Offline
-                lblResult.Text = "Printer is Offline"
-                Exit Sub
-            Case Printer.Printer.PrinterStatus.Unknow
-                lblResult.Text = "Printer is Unknow"
-                Exit Sub
-        End Select
-        Try
-            '------- Transalate DataTable To Printer Contents--------
-            For i As Integer = 0 To Contents.Count - 1
-                Dim Line As New Printer.Printer.ContentLine
-                With Line
-                    .Text = Contents(i)
-                    .ImagePath = ""
-                    .FontSize = 10
-                    .FontName = "FontA1x1"
-                    .Bold = False
-                    .IsColor = False
-                    .ContentType = Printer.Printer.ContentType.Text
-                End With
-                Lines.Add(Line)
-            Next
-            ThePrinter.Print(PrinterName, Lines)
-            lblResult.Text = "command sent"
-        Catch ex As Exception
-            lblResult.Text = ex.Message
-        End Try
+        'Dim ThePrinter As New Printer.Printer
+        'Dim Contents As String() = txtContent.Text.Split(vbNewLine)
+        'Dim Lines As New List(Of Printer.Printer.ContentLine)
+        'Dim PrinterName As String = ddlPrinter.Items(ddlPrinter.SelectedIndex).Value
+        'Select Case ThePrinter.GetStatus(PrinterName)
+        '    Case Printer.Printer.PrinterStatus.Offline
+        '        lblResult.Text = "Printer is Offline"
+        '        Exit Sub
+        '    Case Printer.Printer.PrinterStatus.Unknow
+        '        lblResult.Text = "Printer is Unknow"
+        '        Exit Sub
+        'End Select
+        'Try
+        '    '------- Transalate DataTable To Printer Contents--------
+        '    For i As Integer = 0 To Contents.Count - 1
+        '        Dim Line As New Printer.Printer.ContentLine
+        '        With Line
+        '            .Text = Contents(i)
+        '            .ImagePath = ""
+        '            .FontSize = 10
+        '            .FontName = "FontA1x1"
+        '            .Bold = False
+        '            .IsColor = False
+        '            .ContentType = Printer.Printer.ContentType.Text
+        '        End With
+        '        Lines.Add(Line)
+        '    Next
+        '    ThePrinter.Print(PrinterName, Lines)
+        '    lblResult.Text = "command sent"
+        'Catch ex As Exception
+        '    lblResult.Text = ex.Message
+        'End Try
     End Sub
 
 

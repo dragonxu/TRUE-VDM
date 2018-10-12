@@ -6,12 +6,14 @@ Imports System.Configuration.ConfigurationManager
 
 Public Class VDM_BL
 
+    Public ServerRoot As String = AppSettings("ServerRoot").ToString
     Public ConnectionString As String = ConnectionStrings("ConnectionString").ConnectionString
     Public LogConnectionString As String = ConnectionStrings("LogConnectionString").ConnectionString
     Public ServerMapPath As String = AppSettings("ServerMapPath").ToString
     Public PicturePath As String = AppSettings("PicturePath").ToString
     Public Product_Critical_Percent As Integer = 30 '----------- Level ที่สีแดงใน Product Stock -----------
     Public SIM_Critical_Percent As Integer = 30 '----------- Level ที่สีแดงใน Product Stock -----------
+
 
     Public LocalControllerURL As String = AppSettings("LocalControllerURL").ToString
 
@@ -633,7 +635,16 @@ Public Class VDM_BL
         'End If
         '---------------------------- Get From TSM -------------------------------
         Dim TSM As New BackEndInterface.Validate_Serial
-        Dim Resp As BackEndInterface.Validate_Serial.Response = TSM.Get_Result(SHOP, SERIAL)
+        Dim Resp As BackEndInterface.Validate_Serial.Response = Nothing
+        Try
+            Resp = TSM.Get_Result(SHOP, SERIAL)
+        Catch ex As Exception
+            Resp = New BackEndInterface.Validate_Serial.Response
+            With Resp
+                .ErrorMessage = ex.Message
+            End With
+        End Try
+
 
         Return Resp
 
@@ -1735,15 +1746,7 @@ Public Class VDM_BL
 
 #Region "Printing"
 
-    Public Class PrintResult
-        Public Result As Boolean
-        Public Message As String
-    End Class
-
-    Public Enum PrintContentType
-        Text = 1
-        Image = 2
-    End Enum
+    Dim PrintLine As String = "_________________________________" & vbLf
 
     Public Function Get_New_Confirmation_Slip_No() As String
         Dim SQL As String = "SELECT TOP 1 SLIP_NO FROM"
@@ -1768,86 +1771,25 @@ Public Class VDM_BL
         Return DT.Rows(0).Item(0).ToString.PadLeft(3, "0") '-------------ณ วันนี้จองไว้ 3 แต่ DB เผื่อไว้ 4
     End Function
 
-    'Public Sub Commit_Product_Order(ByVal TXN_ID As Integer, ByVal KO_ID As Integer, ByVal PRODUCT_ID As Integer)
-
-    '    Dim SLIP_CODE As String = Gen_New_Slip_Code(TXN_ID)
-
-    '    Dim SQL As String = "SELECT PRICE FROM MS_PRODUCT WHERE PRODUCT_ID=" & PRODUCT_ID
-    '    Dim DT As New DataTable
-    '    Dim DA As New SqlDataAdapter(SQL, ConnectionString)
-    '    DA.Fill(DT)
-    '    Dim PRICE As Integer = CInt(DT.Rows(0).Item("PRICE"))
-
-    '    Dim Result As DataTable = Get_Next_Product_To_Pick(KO_ID, PRODUCT_ID)
-
-
-    '    If Result.Rows.Count = 0 Then
-    '        'R("IsProblem") = True
-    '        'R("ProblemDetail") = "PRODUCT NOT FOUND"
-    '        'Return Result
-    '        Exit Sub
-    '    End If
-
-    '    '----------------- Save Order --------------------
-    '    SQL = "SELECT * FROM TB_BUY_PRODUCT WHERE TXN_ID=" & TXN_ID & " AND PRODUCT_ID=" & PRODUCT_ID
-    '    DA = New SqlDataAdapter(SQL, ConnectionString)
-    '    DT = New DataTable
-    '    DA.Fill(DT)
-    '    Dim DR As DataRow
-    '    If DT.Rows.Count = 0 Then
-    '        DR = DT.NewRow
-    '        DT.Rows.Add(DR)
-    '        DR("TXN_ID") = TXN_ID
-    '        DR("ITEM_NO") = 1
-    '        DR("PRODUCT_ID") = PRODUCT_ID
-    '    Else
-    '        DR = DT.Rows(0)
-    '    End If
-    '    DR("SERIAL_NO") = R("SERIAL_NO") '------------------ Get From Next Step--------------
-    '    DR("SLOT_NAME") = R("SLOT_NAME")
-    '    DR("UNIT_PRICE") = PRICE
-    '    DR("QUANTITY") = 1
-    '    DR("VAT") = DBNull.Value
-    '    DR("TOTAL_PRICE") = PRICE
-    '    Dim cmd As New SqlCommandBuilder(DA)
-    '    DA.Update(DT)
-
-
-    'End Sub
-
-    Public Function GEN_DEFAULT_PRINT_FORMAT() As DataTable
-        Dim DT As New DataTable
-        DT.Columns.Add("Text", GetType(String))
-        DT.Columns.Add("ImagePath", GetType(String))
-        DT.Columns.Add("FontSize", GetType(Single))
-        DT.Columns.Add("FontName", GetType(String))
-        DT.Columns.Add("Bold", GetType(Boolean))
-        DT.Columns.Add("IsColor", GetType(Boolean))
-        DT.Columns.Add("ContentType", GetType(VDM_BL.PrintContentType))
-        DT.TableName = "PrintContent"
-        Return DT
-    End Function
-
-    Public Function GEN_DEFAULT_SLIP_HEADER() As DataTable
-        Dim Content As DataTable = GEN_DEFAULT_PRINT_FORMAT()
-        Content.Rows.Add("   บริษัท ทรู ดิสทริบิวชั่น แอนด์ เซลส์ จำกัด")
-        Content.Rows.Add("18 อาคารทรูทาวเวอร์ ถ.รัชดาภิเษก แขวงห้วยขวาง")
-        Content.Rows.Add("    เขตห้วยขวาง กรุงเทพมหานคร 10310")
-        Content.Rows.Add(" ")
-        Content.Rows.Add(" ")
+    Public Function GEN_DEFAULT_SLIP_HEADER() As String
+        Dim Content As String = "   บริษัท ทรู ดิสทริบิวชั่น แอนด์ เซลส์ จำกัด" & vbLf
+        Content &= "18 อาคารทรูทาวเวอร์ ถ.รัชดาภิเษก แขวงห้วยขวาง" & vbLf
+        Content &= "    เขตห้วยขวาง กรุงเทพมหานคร 10310" & vbLf
+        Content &= vbLf & vbLf
         Return Content
     End Function
+
 
     '------------ ถ้ามี Ads เพิ่ม Ads ตรงนี้---------
-    Public Function GEN_SLIP_ADS() As DataTable
-        Dim Content As DataTable = GEN_DEFAULT_PRINT_FORMAT()
+    Public Function GEN_SLIP_ADS() As String
+        Dim Content As String = vbNewLine
 
         Return Content
     End Function
 
-    Public Function GEN_CASH_CONFIRMATION_SLIP(ByVal TXN_ID As Integer) As DataTable
+    Public Function GEN_CASH_CONFIRMATION_SLIP(ByVal TXN_ID As Integer) As String
 
-        Dim Content As DataTable = GEN_DEFAULT_SLIP_HEADER()
+        Dim Content As String = GEN_DEFAULT_SLIP_HEADER()
 
         Dim SQL As String = "SELECT * FROM VW_TXN_CASH" & vbLf
         SQL &= "WHERE TXN_ID=" & TXN_ID & " AND TXN_STEP='completed'"
@@ -1855,7 +1797,7 @@ Public Class VDM_BL
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         DA.Fill(DT)
         If DT.Rows.Count = 0 Then
-            Return DT
+            Return Content
         End If
 
         Dim SITE_CODE As String = DT.Rows(0).Item("SITE_CODE").ToString
@@ -1874,47 +1816,44 @@ Public Class VDM_BL
         Dim REMAIN_CHANGE As Double = DT.Rows(0).Item("REMAIN_CHANGE")
 
 
-        Content.Rows.Add("สาขาที่ : " & SITE_CODE & SITE_NAME)
-        Content.Rows.Add("ใบยืนยันการรับชำระ   	        " & TXN_END.ToString("dd/MM/yyyy"))
-        Content.Rows.Add("" & SLIP_CODE & " 	" & TXN_END.ToString("hh:mm"))
-        Content.Rows.Add("__________________________________________")
-        Content.Rows.Add("รายการสินค้า")
-        Content.Rows.Add(" ")
-        Content.Rows.Add("1. " & PRODUCT_CODE & "		" & FormatNumber(TOTAL_PRICE, 2))
-        Content.Rows.Add(PRODUCT_NAME)
-        Content.Rows.Add("S/N : " & SERIAL_NO)
-        Content.Rows.Add(" ")
-        Content.Rows.Add("__________________________________________")
-        Content.Rows.Add("CASH                                         " & FormatNumber(PAID, 2))
+        Content &= "สาขาที่ : " & SITE_CODE & SITE_NAME & vbLf
+        Content &= "ใบยืนยันการรับชำระ             " & TXN_END.ToString("dd/MM/yyyy") & vbLf
+        Content &= "" & SLIP_CODE & " 	    " & TXN_END.ToString("hh:mm") & vbLf
+        Content &= PrintLine
+        Content &= "รายการสินค้า" & vbLf
+        Content &= " " & vbLf
+        Content &= "1. " & PRODUCT_CODE & "             " & FormatNumber(TOTAL_PRICE, 2) & vbLf
+        Content &= PRODUCT_NAME & vbLf
+        Content &= "S/N : " & SERIAL_NO & vbLf
+        Content &= " " & vbLf
+        Content &= PrintLine
+        Content &= "CASH                " & FormatNumber(PAID, 2) & vbLf
 
         If ACTUAL_CHANGE > 0 Then
-            Content.Rows.Add("__________________________________________")
-            Content.Rows.Add("CHANGE                                       " & FormatNumber(ACTUAL_CHANGE, 2))
+            Content &= PrintLine
+            Content &= "CHANGE              " & FormatNumber(ACTUAL_CHANGE, 2) & vbLf
         End If
         If REMAIN_CHANGE > 0 Then
-            Content.Rows.Add("__________________________________________")
-            Content.Rows.Add("REMAIN CHANGE                                       " & FormatNumber(REMAIN_CHANGE, 2))
+            Content &= PrintLine
+            Content &= "REMAIN CHANGE           " & FormatNumber(REMAIN_CHANGE, 2) & vbLf
         End If
-
-        Content.Rows.Add(" ")
-        Content.Rows.Add(" ")
-        Content.Rows.Add("ขอบคุณที่ใช้บริการ")
+        Content &= PrintLine
+        Content &= " " & vbLf
+        Content &= " " & vbLf
+        Content &= "ขอบคุณที่ใช้บริการ" & vbLf
         '----------------- Ads ----------------
-        Content.Merge(GEN_SLIP_ADS)
+        Content &= GEN_SLIP_ADS()
         '----------------- Ads ----------------
-        Content.Rows.Add("__________________________________________")
+        Content &= PrintLine
 
         '------------ Set Default Parameter
-        Set_Default_Print_Content_Style(Content)
+        'Set_Default_Print_Content_Style(Content)
 
-
-        '------------ Set Default Parameter
-        Set_Default_Print_Content_Style(Content)
         Return Content
     End Function
 
-    Public Function GEN_TMN_CONFIRMATION_SLIP(ByVal TXN_ID As Integer) As DataTable
-        Dim Content As DataTable = GEN_DEFAULT_SLIP_HEADER()
+    Public Function GEN_TMN_CONFIRMATION_SLIP(ByVal TXN_ID As Integer) As String
+        Dim Content As String = GEN_DEFAULT_SLIP_HEADER()
 
         Dim SQL As String = "SELECT * FROM VW_TXN_TMN" & vbLf
         SQL &= "WHERE TXN_ID=" & TXN_ID & " AND TXN_STEP='completed'"
@@ -1922,7 +1861,7 @@ Public Class VDM_BL
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         DA.Fill(DT)
         If DT.Rows.Count = 0 Then
-            Return DT
+            Return Content
         End If
 
         Dim SITE_CODE As String = DT.Rows(0).Item("SITE_CODE").ToString
@@ -1942,72 +1881,72 @@ Public Class VDM_BL
         Dim TMN_PAYMENT_ID As String = DT.Rows(0).Item("TMN_PAYMENT_ID").ToString
         Dim TMN_RESP_TIME As DateTime = DT.Rows(0).Item("TMN_RESP_TIME").ToString
 
-        Content.Rows.Add("สาขาที่ : " & SITE_CODE & SITE_NAME)
-        Content.Rows.Add("ใบยืนยันการรับชำระ   	        " & TXN_END.ToString("dd/MM/yyyy"))
-        Content.Rows.Add("" & SLIP_CODE & " 	" & TXN_END.ToString("hh:mm"))
-        Content.Rows.Add("__________________________________________")
-        Content.Rows.Add("รายการสินค้า")
-        Content.Rows.Add(" ")
-        Content.Rows.Add("1. " & PRODUCT_CODE & "		" & FormatNumber(TOTAL_PRICE, 2))
-        Content.Rows.Add(PRODUCT_NAME)
-        Content.Rows.Add("S/N : " & SERIAL_NO)
-        Content.Rows.Add(" ")
-        Content.Rows.Add("__________________________________________")
-        Content.Rows.Add("TRUE MONEY                                         " & FormatNumber(TMN_REQUEST_AMOUNT / 100, 2))
-        Content.Rows.Add(" ")
-        Content.Rows.Add("ISV : " & TMN_ISV)
-        Content.Rows.Add("PAYMENT ID : " & TMN_PAYMENT_ID)
-        Content.Rows.Add("PAYMENT CODE : " & TMN_PAYMENT_CODE)
-        Content.Rows.Add("__________________________________________")
-        Content.Rows.Add(" ")
-        Content.Rows.Add("ขอบคุณที่ใช้บริการ")
+        Content &= "สาขาที่ : " & SITE_CODE & SITE_NAME & vbLf
+        Content &= "ใบยืนยันการรับชำระ   	        " & TXN_END.ToString("dd/MM/yyyy") & vbLf
+        Content &= "" & SLIP_CODE & " 	" & TXN_END.ToString("hh:mm") & vbLf
+        Content &= PrintLine
+        Content &= "รายการสินค้า" & vbLf
+        Content &= " " & vbLf
+        Content &= "1. " & PRODUCT_CODE & "             " & FormatNumber(TOTAL_PRICE, 2) & vbLf
+        Content &= PRODUCT_NAME & vbLf
+        Content &= "S/N : " & SERIAL_NO & vbLf
+        Content &= " " & vbLf
+        Content &= PrintLine
+        Content &= "TRUE MONEY              " & FormatNumber(TMN_REQUEST_AMOUNT / 100, 2) & vbLf
+        Content &= " " & vbLf
+        Content &= "ISV :   " & TMN_ISV & vbLf
+        Content &= "PAYMENT ID :    " & TMN_PAYMENT_ID & vbLf
+        Content &= "PAYMENT CODE :  " & TMN_PAYMENT_CODE & vbLf
+        Content &= PrintLine
+        Content &= " " & vbLf
+        Content &= "ขอบคุณที่ใช้บริการ" & vbLf
         '----------------- Ads ----------------
-        Content.Merge(GEN_SLIP_ADS)
+        Content &= GEN_SLIP_ADS()
         '----------------- Ads ----------------
-        Content.Rows.Add("__________________________________________")
+        Content &= PrintLine
 
-        '------------ Set Default Parameter
-        Set_Default_Print_Content_Style(Content)
+        ''------------ Set Default Parameter
+        'Set_Default_Print_Content_Style(Content)
         Return Content
     End Function
 
-    Public Function GEN_CREDITCARD_CONFIRMATION_SLIP(ByVal TXN_ID As Integer) As DataTable
-        Dim Content As DataTable = GEN_DEFAULT_SLIP_HEADER()
+    Public Function GEN_CREDITCARD_CONFIRMATION_SLIP(ByVal TXN_ID As Integer) As String
+        Dim Content As String = GEN_DEFAULT_SLIP_HEADER()
 
 
         '------------ Set Default Parameter
-        Set_Default_Print_Content_Style(Content)
+        'Set_Default_Print_Content_Style(Content)
         Return Content
     End Function
 
-    Public Sub Set_Default_Print_Content_Style(ByRef DT As DataTable)
-        For i As Integer = 0 To DT.Rows.Count - 1
-            Dim DR As DataRow = DT.Rows(i)
-            If IsDBNull(DR("Text")) Then
-                DR("Text") = ""
-            End If
-            If IsDBNull(DR("ImagePath")) Then
-                DR("ImagePath") = ""
-            End If
-            If IsDBNull(DR("FontSize")) Then
-                DR("FontSize") = 10
-            End If
-            If IsDBNull(DR("FontName")) Then
-                DR("FontName") = "FontA1x1"
-            End If
-            If IsDBNull(DR("Bold")) Then
-                DR("Bold") = False
-            End If
-            If IsDBNull(DR("IsColor")) Then
-                DR("IsColor") = False
-            End If
-            If IsDBNull(DR("ContentType")) Then
-                DR("ContentType") = VDM_BL.PrintContentType.Text
-            End If
-        Next
-    End Sub
+    'Public Sub Set_Default_Print_Content_Style(ByRef DT As DataTable)
+    '    For i As Integer = 0 To DT.Rows.Count - 1
+    '        Dim DR As DataRow = DT.Rows(i)
+    '        If IsDBNull(DR("Text")) Then
+    '            DR("Text") = ""
+    '        End If
+    '        If IsDBNull(DR("ImagePath")) Then
+    '            DR("ImagePath") = ""
+    '        End If
+    '        If IsDBNull(DR("FontSize")) Then
+    '            DR("FontSize") = 10
+    '        End If
+    '        If IsDBNull(DR("FontName")) Then
+    '            DR("FontName") = "FontA1x1"
+    '        End If
+    '        If IsDBNull(DR("Bold")) Then
+    '            DR("Bold") = False
+    '        End If
+    '        If IsDBNull(DR("IsColor")) Then
+    '            DR("IsColor") = False
+    '        End If
+    '        If IsDBNull(DR("ContentType")) Then
+    '            DR("ContentType") = VDM_BL.PrintContentType.Text
+    '        End If
+    '    Next
+    'End Sub
 
-    Public Sub UPDATE_CONFIRMATION_SLIP(ByVal TXN_ID As Integer, ByVal Contents As DataTable)
+    Public Sub UPDATE_CONFIRMATION_SLIP(ByVal TXN_ID As Integer, ByVal Content As String)
 
         Dim SQL As String = "SELECT METHOD_ID FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
         Dim DT As New DataTable
@@ -2026,7 +1965,7 @@ Public Class VDM_BL
                 DA = New SqlDataAdapter(SQL, ConnectionString)
                 DA.Fill(DT)
                 If DT.Rows.Count > 0 Then
-                    DT.Rows(0).Item("SLIP_CONTENT") = C.DatatableToXML(Contents)
+                    DT.Rows(0).Item("SLIP_CONTENT") = Content
                     Dim cmd As New SqlCommandBuilder(DA)
                     DA.Update(DT)
                 End If
@@ -2036,7 +1975,7 @@ Public Class VDM_BL
                 DA = New SqlDataAdapter(SQL, ConnectionString)
                 DA.Fill(DT)
                 If DT.Rows.Count > 0 Then
-                    DT.Rows(0).Item("SLIP_CONTENT") = C.DatatableToXML(Contents)
+                    DT.Rows(0).Item("SLIP_CONTENT") = Content
                     Dim cmd As New SqlCommandBuilder(DA)
                     DA.Update(DT)
                 End If

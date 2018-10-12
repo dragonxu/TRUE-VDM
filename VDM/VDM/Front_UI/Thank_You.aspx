@@ -36,7 +36,7 @@
         </div>
       </div>
     </main>
-        <asp:TextBox ID="txtPrintContent" runat="server" Width="50%" Height="200px" TextMode="MultiLine"></asp:TextBox>
+        <asp:TextBox ID="txtPrintContent" runat="server" TextMode="MultiLine" style="display:none;"></asp:TextBox>
     <footer style="bottom: 0px">
         <nav>
             <div class="main">

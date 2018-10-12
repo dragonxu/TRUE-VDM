@@ -15,7 +15,7 @@
         <div class="form-group  col-sm-12">
             <label class="col-sm-4 control-label  h3">เหลือพิมพ์ได้ </label>
             <div class="col-sm-4">
-                <asp:TextBox ID="txtRemainPaper" runat="server" class="form-control h3" Style="text-align: center;"></asp:TextBox>
+                <asp:TextBox ID="txtRemainPaper" runat="server" CssClass="form-control h3 osk-trigger"  data-osk-options="disableReturn" Style="text-align: center;"></asp:TextBox>
             </div>
             <div class="col-sm-1">
                <h3> <span   >ครั้ง</span></h3>

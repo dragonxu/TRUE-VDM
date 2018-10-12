@@ -38,6 +38,10 @@ Public Class Thank_You
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Not IsPostBack Then
+
+            'Session("TXN_ID") = 83 ' Test True Money
+            'Session("TXN_ID") = 65 ' Test Cash
+
             txtLocalControllerURL.Text = BL.LocalControllerURL
             '---------------- Change And Print Slip--------------
             Print()
@@ -60,17 +64,14 @@ Public Class Thank_You
         Dim content As String = ""
         Select Case DT.Rows(0).Item("METHOD_ID")
             Case VDM_BL.PaymentMethod.CASH
-                DT = BL.GEN_CASH_CONFIRMATION_SLIP(TXN_ID)
-                content = C.DatatableToXML(DT)
-                BL.UPDATE_CONFIRMATION_SLIP(TXN_ID, DT)
+                content = BL.GEN_CASH_CONFIRMATION_SLIP(TXN_ID)
+                BL.UPDATE_CONFIRMATION_SLIP(TXN_ID, content)
             Case VDM_BL.PaymentMethod.TRUE_MONEY
-                DT = BL.GEN_TMN_CONFIRMATION_SLIP(TXN_ID)
-                content = C.DatatableToXML(DT)
-                BL.UPDATE_CONFIRMATION_SLIP(TXN_ID, DT)
+                content = BL.GEN_TMN_CONFIRMATION_SLIP(TXN_ID)
+                BL.UPDATE_CONFIRMATION_SLIP(TXN_ID, content)
             Case VDM_BL.PaymentMethod.CREDIT_CARD
-                DT = BL.GEN_CREDITCARD_CONFIRMATION_SLIP(TXN_ID)
-                content = C.DatatableToXML(DT)
-                BL.UPDATE_CONFIRMATION_SLIP(TXN_ID, DT)
+                content = BL.GEN_CREDITCARD_CONFIRMATION_SLIP(TXN_ID)
+                BL.UPDATE_CONFIRMATION_SLIP(TXN_ID, content)
         End Select
         '----------------- set Print Content ----------------
         txtPrintContent.Text = Replace(Replace(content, "<", "&lt"), ">", "&gt")
