@@ -26,6 +26,7 @@
     <link href="css/lightslider.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="js/jquery.fancybox.js"></script>
     <script type="text/javascript" src="js/lightslider.js"></script>
+    <link href="../styles/onScreenKeyboard.css" rel="stylesheet" />
 
     <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
@@ -391,10 +392,11 @@
 
                                             <div class="privilege" style="width:100%; height:100%; text-align:center; position:relative;">
 
-                                              <iframe id="paymentGatewayWindow" runat="server" scrollable="false" style="position:absolute; left:10px; width:90%; height:90%;">
+                                              <iframe id="paymentGatewayWindow" runat="server" style="position:absolute; left:10px; width:90%; height:90%;" >
 
                                               </iframe>
-
+                                              <asp:TextBox ID="txtCreditReq" runat="server" style="display:none;" />
+                                              <asp:Button ID="btnCreditComplete" runat="server" style="display:none;" />
                                             </div>
                                         </div>
                                     </div>
@@ -510,12 +512,27 @@
 
         </script>
 
+        <script type="text/javascript">
+            //--------------- Add onScreenKeyboard -----------------
+            function impletmentKeyboard() {
+                //alert(1);
+                $("#paymentGatewayWindow").contents().find("input:text").addClass("osk-trigger");
+                //$("#paymentGatewayWindow").contents().find("input:password").addClass("osk-trigger");
+                //$("#paymentGatewayWindow").attr("data-osk-options", "disableReturn");
+
+                //initKeyboard();
+            }
+        </script>
+
         <uc1:UC_CommonUI runat="server" ID="CommonUI" />
 
          
 
         <uc1:UC_CommonUI runat="server" ID="UC_CommonUI" />
     </form>
+
+    <script src="../scripts/jquery.onScreenKeyboard.js" type="text/javascript"></script>
+    <script src="../scripts/onScreenKeyboard.js" type="text/javascript" ></script>
 
 </body>
 </html>

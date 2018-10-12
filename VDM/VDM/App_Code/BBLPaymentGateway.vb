@@ -14,9 +14,6 @@ Public Class BBLPaymentGateway
 
     Dim BL As New VDM_BL
 
-
-
-
     Public Function Generate_OrderRef() As String ' Confirm จาก True
 
         Dim BBL_ORDER_Y As String = Now.ToString("yy")
@@ -35,4 +32,5 @@ Public Class BBLPaymentGateway
         Return "TRUE-VDM-" & BBL_ORDER_Y & BBL_ORDER_M & BBL_ORDER_D & BBL_ORDER_N
 
     End Function
+
 End Class

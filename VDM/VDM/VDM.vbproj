@@ -145,7 +145,10 @@
     <Content Include="Front_UI\fonts\tboldspecial.svg" />
     <Content Include="Front_UI\fonts\tlight.svg" />
     <Content Include="Front_UI\fonts\tmedium.svg" />
+    <Content Include="Front_UI\Payment_Gateway_Cancel.aspx" />
+    <Content Include="Front_UI\Payment_Gateway_Fail.aspx" />
     <Content Include="Front_UI\Payment_Gateway_Start.aspx" />
+    <Content Include="Front_UI\Payment_Gateway_Success.aspx" />
     <Content Include="Front_UI\Select_Menu.aspx" />
     <Content Include="Front_UI\images\bg-bottom.png" />
     <Content Include="Front_UI\images\bg-slide_card-.png" />
@@ -814,11 +817,32 @@
       <DependentUpon>Device_Shoping_Cart.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Front_UI\Payment_Gateway_Cancel.aspx.designer.vb">
+      <DependentUpon>Payment_Gateway_Cancel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\Payment_Gateway_Cancel.aspx.vb">
+      <DependentUpon>Payment_Gateway_Cancel.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Front_UI\Payment_Gateway_Fail.aspx.designer.vb">
+      <DependentUpon>Payment_Gateway_Fail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\Payment_Gateway_Fail.aspx.vb">
+      <DependentUpon>Payment_Gateway_Fail.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Front_UI\Payment_Gateway_Start.aspx.designer.vb">
       <DependentUpon>Payment_Gateway_Start.aspx</DependentUpon>
     </Compile>
     <Compile Include="Front_UI\Payment_Gateway_Start.aspx.vb">
       <DependentUpon>Payment_Gateway_Start.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Front_UI\Payment_Gateway_Success.aspx.designer.vb">
+      <DependentUpon>Payment_Gateway_Success.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\Payment_Gateway_Success.aspx.vb">
+      <DependentUpon>Payment_Gateway_Success.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Front_UI\Select_Menu.aspx.designer.vb">

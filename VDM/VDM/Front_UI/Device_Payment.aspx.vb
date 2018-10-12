@@ -165,6 +165,9 @@ Public Class Device_Payment
         pnlCredit.Visible = True
         lnkCredit.Attributes("class") = "current"
 
+        '-------------- Set JS Leyboard -----------------
+        paymentGatewayWindow.Attributes("onload") = "impletmentKeyboard()"
+
         Dim url As String = "Payment_Gateway_Start.aspx?amount=" & PRODUCT_COST & ".00&PRODUCT_ID=" & PRODUCT_ID
         paymentGatewayWindow.Src = url
 
@@ -173,6 +176,42 @@ Public Class Device_Payment
     Private Sub lnkCloseCredit_Click(sender As Object, e As EventArgs) Handles lnkCloseCredit.Click
         pnlCredit.Visible = False
     End Sub
+
+    Private Sub btnCreditComplete_Click(sender As Object, e As EventArgs) Handles btnCreditComplete.Click
+        '--------------- Save Transaction Requested---------------
+        Dim Sql As String = "SELECT TOP 1 * FROM TB_TRANSACTION_CREDITCARD WHERE TXN_ID=" & TXN_ID
+        Dim DA As New SqlDataAdapter(Sql, BL.ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Dim DR As DataRow
+        If DT.Rows.Count = 0 Then
+            DR = DT.NewRow
+            DT.Rows.Add(DR)
+            '    DR("TXN_ID") = TXN_ID
+            '    DR("ITEM_NO") = 1
+            '    DR("SLIP_YEAR") = xxxxxxxxxxxxxxxxx
+            '    DR("SLIP_MONTH") = xxxxxxxxxxxxxxxxx
+            '    DR("SLIP_DAY") = xxxxxxxxxxxxxxxxx
+            '    DR("SLIP_NO") = xxxxxxxxxxxxxxxxx
+            '    DR("SLIP_CONTENT") = xxxxxxxxxxxxxxxxx
+            '    DR("PRODUCT_ID") = PRODUCT_ID
+            '    DR("IS_SERIAL") = xxxxxxxxxxxxxxxxx
+            '    DR("UNIT_PRICE") = xxxxxxxxxxxxxxxxx
+            '    DR("QUANTITY") = 1
+            '    DR("TOTAL_PRICE") = xxxxxxxxxxxxxxxxx
+            '    DR("BBL_REQ_ID") = xxxxxxxxxxxxxxxxx
+            '    DR("BBL_ORDER_Y") = xxxxxxxxxxxxxxxxx
+            '    DR("BBL_ORDER_M") = xxxxxxxxxxxxxxxxx
+            '    DR("BBL_ORDER_D") = xxxxxxxxxxxxxxxxx
+            '    DR("BBL_ORDER_N") = xxxxxxxxxxxxxxxxx
+            '    DR("BBL_REQ_TIME") = xxxxxxxxxxxxxxxxx
+            '    DR("BBL_RESP_TIME") = xxxxxxxxxxxxxxxxx
+            '    DR("TXN_TIME") = Now
+        Else
+            DR = DT.Rows(0)
+        End If
+    End Sub
+
 
     Private Sub lnkTruemoney_ServerClick(sender As Object, e As EventArgs) Handles lnkTruemoney.ServerClick
         ClearForm()
@@ -438,6 +477,8 @@ Public Class Device_Payment
     Private Sub UpdateCashProblem()
 
     End Sub
+
+
 
 
 

@@ -21,6 +21,15 @@
             <asp:Textbox runat="server" ID="remark" Text ="-"/> <br>
             <asp:Button ID="btnOK" runat="server" Text="Go" />
         </div>
+
+        <script tyle="text/javascript">
+        
+            function LinkGateway(REQ_ID) {
+                window.parent.document.getElementById("txtCreditReq").value = REQ_ID;
+                setTimeout(function () { document.getElementById('btnOK').click(); }, 200);
+            }
+        
+        </script>
     </form>
 
 <%--<input type="hidden" name="merchantId" value="3971">
