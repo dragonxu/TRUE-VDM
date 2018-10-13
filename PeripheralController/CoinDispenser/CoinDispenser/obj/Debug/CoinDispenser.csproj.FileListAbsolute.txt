@@ -1,0 +1,14 @@
+E:\GitHub\Repository\coin-dispenser\CoinDispenser\CoinDispenser\bin\Debug\CoinDispenser.xml
+E:\GitHub\Repository\coin-dispenser\CoinDispenser\CoinDispenser\bin\Debug\CoinDispenser.dll
+E:\GitHub\Repository\coin-dispenser\CoinDispenser\CoinDispenser\bin\Debug\CoinDispenser.pdb
+E:\GitHub\Repository\coin-dispenser\CoinDispenser\CoinDispenser\obj\Debug\CoinDispenser.csproj.CoreCompileInputs.cache
+E:\GitHub\Repository\coin-dispenser\CoinDispenser\CoinDispenser\obj\Debug\CoinDispenser.dll
+E:\GitHub\Repository\coin-dispenser\CoinDispenser\CoinDispenser\obj\Debug\CoinDispenser.pdb
+E:\GitHub\Repository\coin-dispenser\CoinDispenser\CoinDispenser\obj\Debug\CoinDispenser.csprojAssemblyReference.cache
+E:\GitHub\repo\TRUE-VDM\PeripheralController\CoinDispenser\CoinDispenser\bin\Debug\CoinDispenser.xml
+E:\GitHub\repo\TRUE-VDM\PeripheralController\CoinDispenser\CoinDispenser\bin\Debug\CoinDispenser.dll
+E:\GitHub\repo\TRUE-VDM\PeripheralController\CoinDispenser\CoinDispenser\bin\Debug\CoinDispenser.pdb
+E:\GitHub\repo\TRUE-VDM\PeripheralController\CoinDispenser\CoinDispenser\obj\Debug\CoinDispenser.csprojAssemblyReference.cache
+E:\GitHub\repo\TRUE-VDM\PeripheralController\CoinDispenser\CoinDispenser\obj\Debug\CoinDispenser.csproj.CoreCompileInputs.cache
+E:\GitHub\repo\TRUE-VDM\PeripheralController\CoinDispenser\CoinDispenser\obj\Debug\CoinDispenser.dll
+E:\GitHub\repo\TRUE-VDM\PeripheralController\CoinDispenser\CoinDispenser\obj\Debug\CoinDispenser.pdb
