@@ -229,22 +229,25 @@ namespace Controller
         /// <returns>AxisState</returns>
         public bool CloseGate()
         {
-            bool state = false;
+            bool state = true;
             bool readbit = false;
             bool reply;
             try
             {
-                bool result = Omron.WriteRelay(Omron_Command_Header_State_Write.CIO_Write, 4660, 00, true);
-                do
-                {
-                    reply = Omron.ReadRelay(Omron_Command_Header_State_Read.CIO_Read, 4679, 00, ref readbit);
-                    if (!readbit)
+                Task.Run(() => {
+                    bool result = Omron.WriteRelay(Omron_Command_Header_State_Write.CIO_Write, 4660, 00, true);
+                    do
                     {
-                        Thread.Sleep(500);
-                        state = true;
-                        break;
-                    }
-                } while (result);
+                        reply = Omron.ReadRelay(Omron_Command_Header_State_Read.CIO_Read, 4679, 00, ref readbit);
+                        if (!readbit)
+                        {
+                            Thread.Sleep(500);
+                            state = true;
+                            break;
+                        }
+                    } while (result);
+                    Console.WriteLine("task state : " + state);
+                });                
             }
             catch(Exception e)
             {
