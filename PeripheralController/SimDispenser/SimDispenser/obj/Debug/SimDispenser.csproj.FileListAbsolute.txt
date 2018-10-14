@@ -11,3 +11,4 @@ E:\GitHub\Repository\sim-dispenser\SimDispenser\SimDispenser\bin\Debug\SimDispen
 E:\GitHub\Repository\sim-dispenser\SimDispenser\SimDispenser\obj\Debug\SimDispenser.csproj.CoreCompileInputs.cache
 E:\GitHub\Repository\sim-dispenser\SimDispenser\SimDispenser\obj\Debug\SimDispenser.dll
 E:\GitHub\Repository\sim-dispenser\SimDispenser\SimDispenser\obj\Debug\SimDispenser.pdb
+E:\GitHub\Repository\sim-dispenser\SimDispenser\SimDispenser\obj\Debug\SimDispenser.csprojAssemblyReference.cache

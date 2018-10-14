@@ -106,14 +106,26 @@ namespace SimDispenser
 
                 var processInformationTask = Task<string>.Factory.StartNew(() =>
                 {
-                    while (_device.Received(_serialPort, info.PinInput1) == 1)
+                    while (_device.Received(_serialPort, info.PinInput1) != 1)
                     {
+                        if (_device.Received(_serialPort, info.PinInput1) == 1)
+                        {
+                            // Clean up here, then...
+                            Console.WriteLine("break..");
+                            Thread.Sleep(500);
+                            /*Motor Break*/
+                            _device.Rotates(_serialPort, info.PinBreak1);
+                            break;
+                        }
                         if (token.IsCancellationRequested)
                         {
                             // Clean up here, then...
                             Console.WriteLine("break..");
+                            Thread.Sleep(500);
+                            /*Motor Break*/
+                            _device.Rotates(_serialPort, info.PinBreak1);
                             break;
-                        }                        
+                        }
                     }
                     /*Motor Break*/
                     Thread.Sleep(500);
@@ -125,21 +137,27 @@ namespace SimDispenser
                     /*Motor Break*/
                     _device.Rotates(_serialPort, info.PinBreak1);
                     state = true;
-
+                    if (token.IsCancellationRequested)
+                    {
+                        tokenSource.Cancel();
+                    }
                     return "Ran without problems'";
 
                 }, token);
-
                 if (!processInformationTask.Wait(Timeout, token))
                 {
-                    Console.WriteLine("ProcessInformationTask timed out");
-                    /*Motor Break*/
-                    Thread.Sleep(500);
-                    _device.Rotates(_serialPort, info.PinBreak1);
 
+                    Console.WriteLine("ProcessInformationTask timed out");
                     tokenSource.Cancel();
+
                 }
-              }
+                if (tokenSource.IsCancellationRequested)
+                {
+                    /*Motor Break*/
+                    _device.Rotates(_serialPort, info.PinBreak1);
+                    Thread.Sleep(500);
+                }
+            }
             catch (Exception e)
             {
                 if (_serialPort.IsOpen)
@@ -168,36 +186,56 @@ namespace SimDispenser
 
                 var processInformationTask = Task<string>.Factory.StartNew(() =>
                 {
-                    while (_device.Received(_serialPort, info.PinInput2) == 1)
+                    while (_device.Received(_serialPort, info.PinInput2) != 1)
                     {
+                        if (_device.Received(_serialPort, info.PinInput2) == 1)
+                        {
+                            // Clean up here, then...
+                            Console.WriteLine("break..");
+                            Thread.Sleep(500);
+                            /*Motor Break*/
+                            _device.Rotates(_serialPort, info.PinBreak2);
+                            break;
+                        }
                         if (token.IsCancellationRequested)
                         {
                             // Clean up here, then...
                             Console.WriteLine("break..");
+                            Thread.Sleep(500);
+                            /*Motor Break*/
+                            _device.Rotates(_serialPort, info.PinBreak2);
                             break;
                         }
                     }
-                /*Motor Break*/
-                Thread.Sleep(500);
-                _device.Rotates(_serialPort, info.PinBreak2);
-                /*Motor Rotates Revers*/
-                Thread.Sleep(500);
-                _device.Rotates(_serialPort, info.PinOutput2B);
-                Thread.Sleep(2500);
-                /*Motor Break*/
-                _device.Rotates(_serialPort, info.PinBreak2);
-                state = true;
+                    /*Motor Break*/
+                    Thread.Sleep(500);
+                    _device.Rotates(_serialPort, info.PinBreak2);
+                    /*Motor Rotates Revers*/
+                    Thread.Sleep(500);
+                    _device.Rotates(_serialPort, info.PinOutput2B);
+                    Thread.Sleep(2500);
+                    /*Motor Break*/
+                    _device.Rotates(_serialPort, info.PinBreak2);
+                    state = true;
+                    if (token.IsCancellationRequested)
+                    {
+                        tokenSource.Cancel();
+                    }
                     return "Ran without problems'";
 
                 }, token);
                 if (!processInformationTask.Wait(Timeout, token))
                 {
-                    Console.WriteLine("ProcessInformationTask timed out");
-                    /*Motor Break*/
-                    Thread.Sleep(500);
-                    _device.Rotates(_serialPort, info.PinBreak1);
 
+                    Console.WriteLine("ProcessInformationTask timed out");
                     tokenSource.Cancel();
+
+                }
+                if (tokenSource.IsCancellationRequested)
+                {
+                    /*Motor Break*/
+                    _device.Rotates(_serialPort, info.PinBreak2);
+                    Thread.Sleep(500);
                 }
             }
             catch (Exception e)
@@ -228,37 +266,56 @@ namespace SimDispenser
 
                 var processInformationTask = Task<string>.Factory.StartNew(() =>
                 {
-                    while (_device.Received(_serialPort, info.PinInput3) == 1)
+                    while (_device.Received(_serialPort, info.PinInput3) != 1)
                     {
+                        if (_device.Received(_serialPort, info.PinInput3) == 1)
+                        {
+                            // Clean up here, then...
+                            Console.WriteLine("break..");
+                            Thread.Sleep(500);
+                            /*Motor Break*/
+                            _device.Rotates(_serialPort, info.PinBreak3);
+                            break;
+                        }
                         if (token.IsCancellationRequested)
                         {
                             // Clean up here, then...
                             Console.WriteLine("break..");
+                            Thread.Sleep(500);
+                            /*Motor Break*/
+                            _device.Rotates(_serialPort, info.PinBreak3);
                             break;
                         }
                     }
-                /*Motor Break*/
-                Thread.Sleep(500);
-                _device.Rotates(_serialPort, info.PinBreak3);
-                /*Motor Rotates Revers*/
-                Thread.Sleep(500);
-                _device.Rotates(_serialPort, info.PinOutput3B);
-                Thread.Sleep(2500);
-                /*Motor Break*/
-                _device.Rotates(_serialPort, info.PinBreak3);
-                state = true;
+                    /*Motor Break*/
+                    Thread.Sleep(500);
+                    _device.Rotates(_serialPort, info.PinBreak3);
+                    /*Motor Rotates Revers*/
+                    Thread.Sleep(500);
+                    _device.Rotates(_serialPort, info.PinOutput3B);
+                    Thread.Sleep(2500);
+                    /*Motor Break*/
+                    _device.Rotates(_serialPort, info.PinBreak3);
+                    state = true;
+                    if (token.IsCancellationRequested)
+                    {
+                        tokenSource.Cancel();
+                    }
                     return "Ran without problems'";
 
                 }, token);
-
                 if (!processInformationTask.Wait(Timeout, token))
                 {
-                    Console.WriteLine("ProcessInformationTask timed out");
-                    /*Motor Break*/
-                    Thread.Sleep(500);
-                    _device.Rotates(_serialPort, info.PinBreak1);
 
+                    Console.WriteLine("ProcessInformationTask timed out");
                     tokenSource.Cancel();
+
+                }
+                if (tokenSource.IsCancellationRequested)
+                {
+                    /*Motor Break*/
+                    _device.Rotates(_serialPort, info.PinBreak3);
+                    Thread.Sleep(500);
                 }
             }
             catch (Exception e)
@@ -289,38 +346,57 @@ namespace SimDispenser
 
                 var processInformationTask = Task<string>.Factory.StartNew(() =>
                 {
-                    while (_device.Received(_serialPort, info.PinInput4) == 1)
+                    while (_device.Received(_serialPort, info.PinInput4) != 1)
                     {
+                        if (_device.Received(_serialPort, info.PinInput4) == 1)
+                        {
+                            // Clean up here, then...
+                            Console.WriteLine("break..");
+                            Thread.Sleep(500);
+                            /*Motor Break*/
+                            _device.Rotates(_serialPort, info.PinBreak4);
+                            break;
+                        }
                         if (token.IsCancellationRequested)
                         {
                             // Clean up here, then...
                             Console.WriteLine("break..");
+                            Thread.Sleep(500);
+                            /*Motor Break*/
+                            _device.Rotates(_serialPort, info.PinBreak4);
                             break;
                         }
                     }
-                /*Motor Break*/
-                Thread.Sleep(500);
-                _device.Rotates(_serialPort, info.PinBreak4);
-                /*Motor Rotates Revers*/
-                Thread.Sleep(500);
-                _device.Rotates(_serialPort, info.PinOutput4B);
-                Thread.Sleep(Timeout);
-                /*Motor Break*/
-                _device.Rotates(_serialPort, info.PinBreak4);
-                state = true;
-                return "Ran without problems'";
+                    /*Motor Break*/
+                    Thread.Sleep(500);
+                    _device.Rotates(_serialPort, info.PinBreak4);
+                    /*Motor Rotates Revers*/
+                    Thread.Sleep(500);
+                    _device.Rotates(_serialPort, info.PinOutput4B);
+                    Thread.Sleep(2500);
+                    /*Motor Break*/
+                    _device.Rotates(_serialPort, info.PinBreak4);
+                    state = true;
+                    if (token.IsCancellationRequested)
+                    {
+                        tokenSource.Cancel();
+                    }
+                    return "Ran without problems'";
 
-            }, token);
+                }, token);
+                if (!processInformationTask.Wait(Timeout, token))
+                {
 
-            if (!processInformationTask.Wait(Timeout, token))
-            {
-                Console.WriteLine("ProcessInformationTask timed out");
-                /*Motor Break*/
-                Thread.Sleep(500);
-                _device.Rotates(_serialPort, info.PinBreak1);
+                    Console.WriteLine("ProcessInformationTask timed out");
+                    tokenSource.Cancel();
 
-                tokenSource.Cancel();
-            }
+                }
+                if (tokenSource.IsCancellationRequested)
+                {
+                    /*Motor Break*/
+                    _device.Rotates(_serialPort, info.PinBreak4);
+                    Thread.Sleep(500);
+                }
             }
             catch (Exception e)
             {
@@ -350,37 +426,56 @@ namespace SimDispenser
 
                 var processInformationTask = Task<string>.Factory.StartNew(() =>
                 {
-                    while (_device.Received(_serialPort, info.PinInput5) == 1)
+                    while (_device.Received(_serialPort, info.PinInput5) != 1)
                     {
+                        if (_device.Received(_serialPort, info.PinInput5) == 1)
+                        {
+                            // Clean up here, then...
+                            Console.WriteLine("break..");
+                            Thread.Sleep(500);
+                            /*Motor Break*/
+                            _device.Rotates(_serialPort, info.PinBreak5);
+                            break;
+                        }
                         if (token.IsCancellationRequested)
                         {
                             // Clean up here, then...
                             Console.WriteLine("break..");
+                            Thread.Sleep(500);
+                            /*Motor Break*/
+                            _device.Rotates(_serialPort, info.PinBreak5);
                             break;
                         }
                     }
-                /*Motor Break*/
-                Thread.Sleep(500);
-                _device.Rotates(_serialPort, info.PinBreak5);
-                /*Motor Rotates Revers*/
-                Thread.Sleep(500);
-                _device.Rotates(_serialPort, info.PinOutput5B);
-                Thread.Sleep(2500);
-                /*Motor Break*/
-                _device.Rotates(_serialPort, info.PinBreak5);
-                state = true;
+                    /*Motor Break*/
+                    Thread.Sleep(500);
+                    _device.Rotates(_serialPort, info.PinBreak5);
+                    /*Motor Rotates Revers*/
+                    Thread.Sleep(500);
+                    _device.Rotates(_serialPort, info.PinOutput5B);
+                    Thread.Sleep(2500);
+                    /*Motor Break*/
+                    _device.Rotates(_serialPort, info.PinBreak5);
+                    state = true;
+                    if (token.IsCancellationRequested)
+                    {
+                        tokenSource.Cancel();
+                    }
                     return "Ran without problems'";
 
                 }, token);
-
                 if (!processInformationTask.Wait(Timeout, token))
                 {
-                    Console.WriteLine("ProcessInformationTask timed out");
-                    /*Motor Break*/
-                    Thread.Sleep(500);
-                    _device.Rotates(_serialPort, info.PinBreak1);
 
+                    Console.WriteLine("ProcessInformationTask timed out");
                     tokenSource.Cancel();
+
+                }
+                if (tokenSource.IsCancellationRequested)
+                {
+                    /*Motor Break*/
+                    _device.Rotates(_serialPort, info.PinBreak5);
+                    Thread.Sleep(500);
                 }
             }
             catch (Exception e)

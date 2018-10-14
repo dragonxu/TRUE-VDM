@@ -46,9 +46,10 @@
                
                 <asp:Button ID="btn_Save_File" runat="server" Text="Save_File" />
                 <asp:Button ID="btn_Service_Flow_Create" runat="server" Text="Service_Flow_Create" />
-                <asp:Button ID="btn_Service_Flow_Finish" runat="server" Text="Service_Flow_Finish" />
                 <asp:Button ID="btn_Activity_Start" runat="server" Text="Activity_Start" />                    
                 <asp:Button ID="btn_Activity_End" runat="server" Text="Activity_End" />
+                <asp:Button ID="btn_Service_Flow_Finish" runat="server" Text="Service_Flow_Finish" />
+
                 <asp:Button ID="btn_Get_Product_Info" runat="server" Text="Get_Product_Info" />
                 <asp:Button ID="btn_Validate_Serial" runat="server" Text="Validate_Serial" />
                 <asp:Button ID="btn_Prepaid_Register" runat="server" Text="Prepaid_Register" />

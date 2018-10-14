@@ -145,6 +145,18 @@
     <Content Include="Front_UI\fonts\tboldspecial.svg" />
     <Content Include="Front_UI\fonts\tlight.svg" />
     <Content Include="Front_UI\fonts\tmedium.svg" />
+    <Content Include="Front_UI\images\Confirm_Contact_CUST.png" />
+    <Content Include="Front_UI\images\Error_ID_Card.png" />
+    <Content Include="Front_UI\images\Error_Recieve_Cash.png" />
+    <Content Include="Front_UI\images\icon-pack-gif.gif" />
+    <Content Include="Front_UI\images\icon-Shadow.png" />
+    <Content Include="Front_UI\images\Manage_Console.png" />
+    <Content Include="Front_UI\images\Rescan_Face.png" />
+    <Content Include="Front_UI\images\Rescan_ID_Card.png" />
+    <Content Include="Front_UI\images\Warning_Coin.png" />
+    <Content Include="Front_UI\images\Warning_Credit.png" />
+    <Content Include="Front_UI\images\Warning_ID_Card.png" />
+    <Content Include="Front_UI\images\Warning_Truemoney.png" />
     <Content Include="Front_UI\Payment_Gateway_Cancel.aspx" />
     <Content Include="Front_UI\Payment_Gateway_Fail.aspx" />
     <Content Include="Front_UI\Payment_Gateway_Start.aspx" />
@@ -277,6 +289,7 @@
     <Content Include="Front_UI\Device_Product_Detail.aspx" />
     <Content Include="Front_UI\Thank_You.aspx" />
     <Content Include="Front_UI\UC_CommonUI.ascx" />
+    <Content Include="Front_UI\UC_Dialog.ascx" />
     <Content Include="Front_UI\UC_Scan_Face_Recognition.ascx" />
     <Content Include="Front_UI\UC_Scan_IDCart.ascx" />
     <Content Include="Global.asax" />
@@ -808,6 +821,13 @@
     </Compile>
     <Compile Include="Front_UI\UC_CommonUI.ascx.vb">
       <DependentUpon>UC_CommonUI.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Front_UI\UC_Dialog.ascx.designer.vb">
+      <DependentUpon>UC_Dialog.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\UC_Dialog.ascx.vb">
+      <DependentUpon>UC_Dialog.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Front_UI\UC_Scan_Face_Recognition.ascx.designer.vb">
