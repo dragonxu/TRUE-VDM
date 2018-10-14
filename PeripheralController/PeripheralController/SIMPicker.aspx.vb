@@ -5,6 +5,26 @@ Public Class SIMPicker
 
     Dim BL As New Core_BL
 
+
+    Private ReadOnly Property Controller As Controller.Control
+        Get
+            If IsNothing(Application("Controller")) Then
+                '----------- Init Object And Connect---------
+                Dim _control As New Controller.Control
+                _control.SetIP(BL.Product_Picker_IP, BL.Product_Picker_Port)
+                _control.Connect()
+
+                Threading.Thread.Sleep(200)
+
+                Application.Lock()
+                Application("Controller") = _control
+                Application.UnLock()
+
+            End If
+            Return Application("Controller")
+        End Get
+    End Property
+
     Private ReadOnly Property SIMPicker As SimDispenser.SimDispenser
         Get
             If IsNothing(Application("SIMPicker")) Then
@@ -41,6 +61,16 @@ Public Class SIMPicker
         End Get
     End Property
 
+    Private ReadOnly Property OpenTimeOut As Integer
+        Get
+            If IsNumeric(Request.QueryString("OpenTimeOut")) Then
+                Return CInt(Request.QueryString("OpenTimeOut"))
+            Else
+                Return 0
+            End If
+        End Get
+    End Property
+
     Private ReadOnly Property callBackFunction As String
         Get
             If Not IsNothing(Request.QueryString("callback")) Then
@@ -54,13 +84,12 @@ Public Class SIMPicker
     Private ReadOnly Property TimeOut As Integer
         Get
             If IsNumeric(Request.QueryString("TimeOut")) Then
-                Return CInt(Request.QueryString("TimeOut")) * 1000
+                Return Request.QueryString("TimeOut")
             Else
-                Return 10000
+                Return 15
             End If
         End Get
     End Property
-
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
@@ -81,26 +110,48 @@ Public Class SIMPicker
     End Sub
 
     Private Sub Pull()
+        Dim Result As Boolean = False
         Select Case SLOT_ID
             Case 1
-                SIMPicker.Dispenser1(TimeOut)
+                Result = SIMPicker.Dispenser1(TimeOut * 1000)
             Case 2
-                SIMPicker.Dispenser2(TimeOut)
+                Result = SIMPicker.Dispenser2(TimeOut * 1000)
             Case 3
-                SIMPicker.Dispenser3(TimeOut)
+                Result = SIMPicker.Dispenser3(TimeOut * 1000)
             Case 4
-                SIMPicker.Dispenser4(TimeOut)
+                Result = SIMPicker.Dispenser4(TimeOut * 1000)
             Case 5
-                SIMPicker.Dispenser5(TimeOut)
+                Result = SIMPicker.Dispenser5(TimeOut * 1000)
         End Select
+        callBack(Result)
     End Sub
 
     Private Sub Back()
+        Dim EndWait As DateTime = DateAdd(DateInterval.Second, TimeOut, Now)
         SIMPicker.RotateBack()
+        While Now < EndWait
+            Threading.Thread.Sleep(200)
+        End While
+        SIMPicker.Break()
+        'callBack(True)
     End Sub
 
     Private Sub Forward()
+        Dim EndWait As DateTime = DateAdd(DateInterval.Second, TimeOut, Now)
         SIMPicker.RotateForward()
+        While Now < EndWait
+            Threading.Thread.Sleep(200)
+        End While
+        SIMPicker.Break()
+        Controller.BasketPickUp() '-----------OpenDoor
+
+        EndWait = DateAdd(DateInterval.Second, OpenTimeOut, Now)
+        While Now < EndWait
+            Threading.Thread.Sleep(200)
+        End While
+
+        Controller.CloseGate() '-----------CloseDoor
+        callBack(True)
     End Sub
 
     Private Sub callBack(ByVal Result As Boolean)
