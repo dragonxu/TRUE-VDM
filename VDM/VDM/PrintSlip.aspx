@@ -9,6 +9,7 @@
 </head>
 <body>
     <form id="form1" runat="server" style="width:100%; height:100%;">
+        <asp:ScriptManager ID="scm" runat="server"></asp:ScriptManager>
          <asp:Label ID="lblPrintContent" runat="server" style="width:100%;"></asp:Label>
         <asp:TextBox ID="txtLocalControllerURL" runat="server" Style="display:none;"></asp:TextBox>
     
@@ -19,7 +20,7 @@
              };
 
              var printDelegate = function () {
-                 var content = $('#txtPrintContent').val().replaceAll("&lt", "<").replaceAll("&gt", ">");
+                 var content = $('#lblPrintContent').html().replaceAll('&nbsp;', ' ').replaceAll("<br>", '\n').replaceAll("&lt", "<").replaceAll("&gt", ">");
                  var url = $('#txtLocalControllerURL').val() + '/Print.aspx?Mode=Print';
                  var xhr = new XMLHttpRequest();
                  xhr.open("POST", url, true);

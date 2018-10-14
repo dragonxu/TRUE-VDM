@@ -9,11 +9,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-<<<<<<< HEAD
-          <StartPageUrl>PrintSlip.aspx</StartPageUrl>
-=======
-          <StartPageUrl>Front_UI/Default.aspx</StartPageUrl>
->>>>>>> 7373904b6ade4ac86d27e57633998ba11023f0a2
+          <StartPageUrl>Front_UI/Default.aspx?KO_ID=1</StartPageUrl>
           <StartAction>SpecificPage</StartAction>
           <AspNetDebugging>True</AspNetDebugging>
           <SilverlightDebugging>False</SilverlightDebugging>

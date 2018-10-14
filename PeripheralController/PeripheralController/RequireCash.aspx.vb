@@ -61,17 +61,21 @@ Public Class RequireCash
 
     Private ReadOnly Property Required As Integer
         Get
-            Try
+            If IsNumeric(Request.QueryString("REQ")) Then
                 Return Request.QueryString("REQ")
-            Catch ex As Exception
+            Else
                 Return 0
-            End Try
+            End If
         End Get
     End Property
 
     Private ReadOnly Property callBackFunction As String
         Get
-            Return Request.QueryString("callback")
+            If Not IsNothing(Request.QueryString("callback")) Then
+                Return Request.QueryString("callback")
+            Else
+                Return ""
+            End If
         End Get
     End Property
 

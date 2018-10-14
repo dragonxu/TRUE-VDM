@@ -356,15 +356,6 @@ Partial Public Class Device_Payment
     Protected WithEvents btnBarcode As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''btnSkip control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnSkip As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
     '''lnkHome control.
     '''</summary>
     '''<remarks>
@@ -435,13 +426,4 @@ Partial Public Class Device_Payment
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents CommonUI As Global.VDM.UC_CommonUI
-    
-    '''<summary>
-    '''UC_CommonUI control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents UC_CommonUI As Global.VDM.UC_CommonUI
 End Class

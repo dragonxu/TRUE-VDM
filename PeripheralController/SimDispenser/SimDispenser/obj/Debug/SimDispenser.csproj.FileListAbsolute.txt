@@ -12,3 +12,8 @@ E:\GitHub\Repository\sim-dispenser\SimDispenser\SimDispenser\obj\Debug\SimDispen
 E:\GitHub\Repository\sim-dispenser\SimDispenser\SimDispenser\obj\Debug\SimDispenser.dll
 E:\GitHub\Repository\sim-dispenser\SimDispenser\SimDispenser\obj\Debug\SimDispenser.pdb
 E:\GitHub\Repository\sim-dispenser\SimDispenser\SimDispenser\obj\Debug\SimDispenser.csprojAssemblyReference.cache
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\SimDispenser\SimDispenser\bin\Debug\SimDispenser.xml
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\SimDispenser\SimDispenser\bin\Debug\SimDispenser.dll
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\SimDispenser\SimDispenser\bin\Debug\SimDispenser.pdb
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\SimDispenser\SimDispenser\obj\Debug\SimDispenser.dll
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\SimDispenser\SimDispenser\obj\Debug\SimDispenser.pdb

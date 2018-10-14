@@ -492,7 +492,7 @@ namespace SimDispenser
         /// <para>return success ? true : false</para>
         /// <para name="target">rotates : 0601,0602 break : 0600</para> 
         /// </summary>
-        public Boolean RotateLeft()
+        public Boolean RotateBack()
         {
             bool state = false;
             try
@@ -511,7 +511,7 @@ namespace SimDispenser
             }
             return state;
         }
-        public Boolean RotateRight()
+        public Boolean RotateForward()
         {
             bool state = false;
             try

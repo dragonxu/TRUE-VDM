@@ -165,8 +165,19 @@ Public Class Printer
             e.HasMorePages = False
             curChar = 0
         End If
+
+
     End Sub
 #End Region
+
+#Region " OnBeginEnd"
+    'Protected Overrides Sub OnEndPrint(e As PrintEventArgs)
+    '    MyBase.OnEndPrint(e)
+
+    '    MyBase.
+    'End Sub
+#End Region
+
 
 #Region " RemoveZeros "
     ''' <summary>

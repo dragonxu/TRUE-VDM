@@ -223,6 +223,13 @@
       <DependentUpon>CashDispense.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="SIMPicker.aspx.designer.vb">
+      <DependentUpon>SIMPicker.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SIMPicker.aspx.vb">
+      <DependentUpon>SIMPicker.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Content Include="Control\UC_Camera.ascx" />
     <Content Include="Control\UC_CashDispenser.ascx" />
     <Content Include="Control\UC_CashReciever.ascx" />
@@ -241,6 +248,7 @@
     <Content Include="CoinDispense.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="css\style.css" />
+    <Content Include="SIMPicker.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

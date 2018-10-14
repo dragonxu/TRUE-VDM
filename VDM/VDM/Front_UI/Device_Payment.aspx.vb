@@ -36,13 +36,13 @@ Public Class Device_Payment
 
 #End Region
 
-    Public ReadOnly Property PRODUCT_ID As Integer
+    Private ReadOnly Property PRODUCT_ID As Integer
         Get
-            Try
-                Return CInt(Request.QueryString("PRODUCT_ID"))
-            Catch ex As Exception
+            If IsNumeric(Request.QueryString("PRODUCT_ID")) Then
+                Return Request.QueryString("PRODUCT_ID")
+            Else
                 Return 0
-            End Try
+            End If
         End Get
     End Property
 
@@ -80,13 +80,13 @@ Public Class Device_Payment
 
 #Region "SIM"
 
-    Protected ReadOnly Property SIM_ID As Integer
+    Private ReadOnly Property SIM_ID As Integer
         Get
-            Try
+            If IsNumeric(Request.QueryString("SIM_ID")) Then
                 Return Request.QueryString("SIM_ID")
-            Catch ex As Exception
+            Else
                 Return 0
-            End Try
+            End If
         End Get
     End Property
 
@@ -272,7 +272,11 @@ Public Class Device_Payment
         DR("SLIP_DAY") = Now.Day.ToString.PadLeft(2, "0")
         DR("SLIP_NO") = BL.Get_New_Confirmation_Slip_No
         DR("SLIP_CONTENT") = DBNull.Value
-        DR("PRODUCT_ID") = PRODUCT_ID
+        If PRODUCT_ID <> 0 Then
+            DR("PRODUCT_ID") = PRODUCT_ID
+        Else
+            DR("SIM_ID") = SIM_ID
+        End If
         DR("IS_SERIAL") = IS_SERIAL
         DR("UNIT_PRICE") = PRODUCT_COST
         DR("QUANTITY") = 1
@@ -290,14 +294,9 @@ Public Class Device_Payment
         DA.Update(DT)
 
         '---------------- Goto Next Page ----------------
-        Response.Redirect("Complete_Order.aspx?PRODUCT_ID=" & PRODUCT_ID)
+        Response.Redirect("Complete_Order.aspx?PRODUCT_ID=" & PRODUCT_ID & "&SIM_ID=" & SIM_ID)
 
     End Sub
-
-    Private Sub btnSkip_Click(sender As Object, e As EventArgs) Handles btnSkip.Click
-        Response.Redirect("Complete_Order.aspx?PRODUCT_ID=" & PRODUCT_ID)
-    End Sub
-
 
     Private Sub lnkHome_Click(sender As Object, e As ImageClickEventArgs) Handles lnkHome.Click
         CloseCashReciever()
@@ -429,7 +428,11 @@ Public Class Device_Payment
         DR("SLIP_DAY") = Now.Day.ToString.PadLeft(2, "0")
         DR("SLIP_NO") = BL.Get_New_Confirmation_Slip_No
         DR("SLIP_CONTENT") = DBNull.Value
-        DR("PRODUCT_ID") = PRODUCT_ID
+        If PRODUCT_ID <> 0 Then
+            DR("PRODUCT_ID") = PRODUCT_ID
+        Else
+            DR("SIM_ID") = SIM_ID
+        End If
         DR("IS_SERIAL") = IS_SERIAL
         DR("UNIT_PRICE") = PRODUCT_COST
         DR("QUANTITY") = 1
@@ -470,7 +473,7 @@ Public Class Device_Payment
         End If
 
         ''--------------------------------
-        Response.Redirect("Complete_Order.aspx?PRODUCT_ID=" & PRODUCT_ID & "&METHOD_ID=" & VDM_BL.PaymentMethod.CASH)
+        Response.Redirect("Complete_Order.aspx?PRODUCT_ID=" & PRODUCT_ID & "&SIM_ID=" & SIM_ID)
 
     End Sub
 

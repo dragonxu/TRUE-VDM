@@ -23,6 +23,15 @@ Partial Public Class PrintSlip
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
     
     '''<summary>
+    '''scm control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents scm As Global.System.Web.UI.ScriptManager
+    
+    '''<summary>
     '''lblPrintContent control.
     '''</summary>
     '''<remarks>

@@ -289,7 +289,7 @@
             <para name="target">parameter : 0101, 0201, 0301, 0401, 0501, 0601</para> 
             </summary>
         </member>
-        <member name="M:SimDispenser.SimDispenser.RotateLeft">
+        <member name="M:SimDispenser.SimDispenser.RotateBack">
             <summary>
             <para>return success ? true : false</para>
             <para name="target">rotates : 0601,0602 break : 0600</para> 

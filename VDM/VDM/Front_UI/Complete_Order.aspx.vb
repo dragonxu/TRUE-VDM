@@ -100,133 +100,24 @@ Public Class Complete_Order
 
     Public ReadOnly Property PRODUCT_ID As Integer
         Get
-            Return CInt(Request.QueryString("PRODUCT_ID"))
+            If IsNumeric(Request.QueryString("PRODUCT_ID")) Then
+                Return Request.QueryString("PRODUCT_ID")
+            Else
+                Return 0
+            End If
         End Get
     End Property
 
     Public ReadOnly Property SIM_ID As Integer
         Get
-            Try
+            If IsNumeric(Request.QueryString("SIM_ID")) Then
                 Return Request.QueryString("SIM_ID")
-            Catch ex As Exception
+            Else
                 Return 0
-            End Try
+            End If
         End Get
     End Property
 
-    'Private Property PRODUCT_NAME As String
-    '    Get
-    '        Try
-    '            Return ViewState("PRODUCT_NAME")
-    '        Catch ex As Exception
-    '            Return ""
-    '        End Try
-    '    End Get
-    '    Set(value As String)
-    '        ViewState("PRODUCT_NAME") = value
-    '    End Set
-    'End Property
-
-    'Private Property PRODUCT_CODE As String
-    '    Get
-    '        Try
-    '            Return ViewState("PRODUCT_CODE")
-    '        Catch ex As Exception
-    '            Return ""
-    '        End Try
-    '    End Get
-    '    Set(value As String)
-    '        ViewState("PRODUCT_CODE") = value
-    '    End Set
-    'End Property
-
-    'Private Property PRICE As Integer
-    '    Get
-    '        Try
-    '            Return ViewState("PRICE")
-    '        Catch ex As Exception
-    '            Return 0
-    '        End Try
-    '    End Get
-    '    Set(value As Integer)
-    '        ViewState("PRICE") = value
-    '    End Set
-    'End Property
-
-    'Private Property KO_CODE As String
-    '    Get
-    '        Try
-    '            Return ViewState("KO_CODE")
-    '        Catch ex As Exception
-    '            Return ""
-    '        End Try
-    '    End Get
-    '    Set(value As String)
-    '        ViewState("KO_CODE") = value
-    '    End Set
-    'End Property
-
-    'Private Property SITE_ID As Integer
-    '    Get
-    '        Try
-    '            Return ViewState("SITE_ID")
-    '        Catch ex As Exception
-    '            Return 0
-    '        End Try
-    '    End Get
-    '    Set(value As Integer)
-    '        ViewState("SITE_ID") = value
-    '    End Set
-    'End Property
-
-    'Private Property SITE_CODE As String
-    '    Get
-    '        Try
-    '            Return ViewState("SITE_CODE")
-    '        Catch ex As Exception
-    '            Return ""
-    '        End Try
-    '    End Get
-    '    Set(value As String)
-    '        ViewState("SITE_CODE") = value
-    '    End Set
-    'End Property
-
-    'Private Property SITE_NAME As String
-    '    Get
-    '        Try
-    '            Return ViewState("SITE_NAME")
-    '        Catch ex As Exception
-    '            Return ""
-    '        End Try
-    '    End Get
-    '    Set(value As String)
-    '        ViewState("SITE_NAME") = value
-    '    End Set
-    'End Property
-
-    'Private Property SHIFT_ID As Integer
-    '    Get
-    '        Try
-    '            Return ViewState("SHIFT_ID")
-    '        Catch ex As Exception
-    '            Return 0
-    '        End Try
-    '    End Get
-    '    Set(value As Integer)
-    '        ViewState("SHIFT_ID") = value
-    '    End Set
-    'End Property
-
-    Private ReadOnly Property METHOD_ID As VDM_BL.PaymentMethod
-        Get
-            Try
-                Return Request.QueryString("METHOD_ID")
-            Catch ex As Exception
-                Return VDM_BL.PaymentMethod.UNKNOWN
-            End Try
-        End Get
-    End Property
 
     Private Property SLIP_CODE As String
         Get
@@ -351,7 +242,12 @@ Public Class Complete_Order
     End Sub
 
     Private Sub PickUpSIM()
+        Dim DT As DataTable = BL.Get_Next_SIM_To_Pick(KO_ID, PRODUCT_ID)
+        If DT.Rows.Count = 0 Then
 
+        Else
+
+        End If
     End Sub
 
     Private Sub lnkHome_Click(sender As Object, e As ImageClickEventArgs) Handles lnkHome.Click
@@ -359,7 +255,7 @@ Public Class Complete_Order
     End Sub
 
     Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click
-        Response.Redirect("Device_Payment.aspx?PRODUCT_ID=" & PRODUCT_ID)
+        Response.Redirect("Device_Payment.aspx?PRODUCT_ID=" & PRODUCT_ID & "&SIM_ID=" & SIM_ID)
     End Sub
 
     Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
@@ -375,7 +271,13 @@ Public Class Complete_Order
 
         DR("TXN_ID") = TXN_ID
         DR("ITEM_NO") = 1
-        DR("PRODUCT_ID") = PRODUCT_ID
+
+        If PRODUCT_ID <> 0 Then
+            DR("PRODUCT_ID") = PRODUCT_ID
+        Else
+            DR("SIM_ID") = SIM_ID
+        End If
+
         DR("SERIAL_NO") = SERIAL_NO
         DR("SLOT_ID") = SLOT_ID
         DR("SLOT_NAME") = SLOT_NAME
@@ -393,14 +295,6 @@ Public Class Complete_Order
 
         End If
 
-        ''---------------- Create Slip Content -----------
-        'Select Case METHOD_ID
-        '    Case VDM_BL.PaymentMethod.CASH
-
-        '    Case VDM_BL.PaymentMethod.TRUE_MONEY
-
-        'End Select
-        '------------------ ไปหน้า พิมพ์ใบเสร็จและทอนเงิน ----------
         Response.Redirect("Thank_You.aspx")
     End Sub
 

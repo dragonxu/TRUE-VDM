@@ -34,30 +34,14 @@
 
 #End Region
 
-    Protected Property PRODUCT_ID As Integer
+    Private ReadOnly Property SIM_ID As Integer
         Get
-            Try
-                Return Request.QueryString("PRODUCT_ID")
-            Catch ex As Exception
-                Return 0
-            End Try
-        End Get
-        Set(value As Integer)
-            Request.QueryString("PRODUCT_ID") = value
-        End Set
-    End Property
-
-    Protected Property SIM_ID As Integer
-        Get
-            Try
+            If IsNumeric(Request.QueryString("SIM_ID")) Then
                 Return Request.QueryString("SIM_ID")
-            Catch ex As Exception
+            Else
                 Return 0
-            End Try
+            End If
         End Get
-        Set(value As Integer)
-            Request.QueryString("SIM_ID") = value
-        End Set
     End Property
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -71,34 +55,29 @@
 
         End If
 
-
-
     End Sub
 
     Private Sub btnSkip_ScanIDCard_Click(sender As Object, e As EventArgs) Handles btnSkip_ScanIDCard.Click
         'pnlScanIDCard.Visible = False  เป็นการซื้อ Device แต่ไม่ Scan บัตร User กดเอง
-        pnlScanIDCard.Visible = False
-        Response.Redirect("Device_Payment.aspx?PRODUCT_ID=" & PRODUCT_ID)
-        'width:400px;
+        'pnlScanIDCard.Visible = False
+        Response.Redirect("Device_Payment.aspx?SIM_ID=" & SIM_ID)
     End Sub
 
     Private Sub btnStart_Take_Photos_Click(sender As Object, e As EventArgs) Handles btnStart_Take_Photos.Click
         pnlScanIDCard.Visible = False
         pnlModul_IDCard_Success.Visible = False
         pnlFace_Recognition.Visible = True
-
     End Sub
 
     Private Sub lnkClose_Click(sender As Object, e As EventArgs) Handles lnkClose.Click
         pnlModul_IDCard_Success.Visible = False
     End Sub
 
-
     Private Sub lnkHome_Click(sender As Object, e As ImageClickEventArgs) Handles lnkHome.Click
         Response.Redirect("Select_Menu.aspx")
     End Sub
 
     Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click
-        Response.Redirect("Device_Shoping_Cart.aspx?PRODUCT_ID=" & PRODUCT_ID)
+        Response.Redirect("SIM_Detail.aspx?SIM_ID=" & SIM_ID)
     End Sub
 End Class

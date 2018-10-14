@@ -39,39 +39,23 @@ Public Class SIM_Detail
 
 #End Region
 
-    Protected Property SIM_ID As Integer
+    Private ReadOnly Property SIM_ID As Integer
         Get
-            Try
-                Return lblCode.Attributes("SIM_ID")
-            Catch ex As Exception
+            If IsNumeric(Request.QueryString("SIM_ID")) Then
+                Return Request.QueryString("SIM_ID")
+            Else
                 Return 0
-            End Try
+            End If
         End Get
-        Set(value As Integer)
-            lblCode.Attributes("SIM_ID") = value
-        End Set
-    End Property
-    Protected Property D_ID As Integer
-        Get
-            Try
-                Return lblCode.Attributes("D_ID")
-            Catch ex As Exception
-                Return 0
-            End Try
-        End Get
-        Set(value As Integer)
-            lblCode.Attributes("D_ID") = value
-        End Set
     End Property
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        If Not IsNumeric(Session("LANGUAGE")) Then
+        If Not IsNumeric(Session("LANGUAGE")) Or SIM_ID = 0 Then
             Response.Redirect("Select_Language.aspx")
+            Response.End()
         End If
 
         If Not IsPostBack Then
-            SIM_ID = Request.QueryString("SIM_ID")
-            'BindList()
             BindDetail()
         Else
             initFormPlugin()
@@ -153,7 +137,6 @@ Public Class SIM_Detail
 
             lblDISPLAY_NAME.Text = DT.Rows(0).Item("DISPLAY_NAME_" & BL.Get_Language_Code(LANGUAGE)).ToString()
             lblDesc.Text = DT.Rows(0).Item("DESCRIPTION_" & BL.Get_Language_Code(LANGUAGE)).ToString()
-            D_ID = IIf(Not IsDBNull(DT.Rows(0).Item("D_ID")), DT.Rows(0).Item("D_ID"), 0)
 
             Dim Package As String = BL.Get_SIM_Package_Picture_Path(SIM_ID, LANGUAGE)
             If IO.File.Exists(Package) Then
@@ -169,18 +152,15 @@ Public Class SIM_Detail
                 imgPrice.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=SIM_DETAIL&UID=" & SIM_ID & "&LANG=" & VDM_BL.UILanguage.TH
             End If
 
-            'lblPrice_str.Text = ""
             If Not IsDBNull(DT.Rows(0).Item("PRICE")) Then
                 lblPrice_Money.Text = FormatNumber(Val(DT.Rows(0).Item("PRICE")), 2)
-                'lblCurrency_Str.Text = ""
             End If
-
         End If
 
     End Sub
 
     Private Sub btnSelect_str_Click(sender As Object, e As EventArgs) Handles btnSelect_str.Click
-        Response.Redirect("Device_Shoping_Cart.aspx?SIM_ID=" & SIM_ID & "&D_ID=" & D_ID)
+        Response.Redirect("Device_Shoping_Cart.aspx?SIM_ID=" & SIM_ID)
     End Sub
 
     Private Sub lnkHome_Click(sender As Object, e As ImageClickEventArgs) Handles lnkHome.Click

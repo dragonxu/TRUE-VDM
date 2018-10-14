@@ -21,4 +21,7 @@ Public Class Core_BL
     Public Product_Picker_IP As String = AppSettings("Product_Picker_IP").ToString
     Public Product_Picker_Port As Integer = AppSettings("Product_Picker_Port").ToString
 
+    Public SIM_Dispenser_Port As String = AppSettings("SIM_Dispenser_Port").ToString
+
+
 End Class

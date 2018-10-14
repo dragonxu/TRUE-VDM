@@ -26,7 +26,7 @@
     <link href="css/lightslider.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="js/jquery.fancybox.js"></script>
     <script type="text/javascript" src="js/lightslider.js"></script>
-    <link href="../styles/onScreenKeyboard.css" rel="stylesheet" />
+<%--    <link href="../styles/onScreenKeyboard.css" rel="stylesheet" />--%>
 
     <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
@@ -330,10 +330,7 @@
                                         <asp:Button ID="btnBarcode" runat="server" />
                                     </asp:Panel>
 
-                                </asp:Panel>
-                                <div class="col-md-12">
-                                    <asp:Button ID="btnSkip" runat="server" class="btu true-bs" Style="background: #635b5b; padding: 0 50px 0 50px; float: right; margin-top: 100px; display:none;" Text="ต่อไป" />
-                                </div>
+                                </asp:Panel>                                
                             </div>
                         </div>
                     </main>
@@ -515,32 +512,16 @@
         <script type="text/javascript">
             //--------------- Add onScreenKeyboard -----------------
             function impletmentKeyboard() {
-                //alert(1);
-                //document.getElementsByTagName("LI");
-
-
-                $("#paymentGatewayWindow").contents().find("input").each(function () {
-                   alert( $( this ).attr("name"));
-                });
-
-                //$("#paymentGatewayWindow").contents().find("input").addClass("osk-trigger");
-                //$("#paymentGatewayWindow").contents().find("input:text").addClass("osk-trigger");
-                //$("#paymentGatewayWindow").contents().find("input:password").addClass("osk-trigger");
-                //$("#paymentGatewayWindow").attr("data-osk-options", "disableReturn");
-
+              
                 //initKeyboard();
             }
         </script>
 
         <uc1:UC_CommonUI runat="server" ID="CommonUI" />
-
-         
-
-        <uc1:UC_CommonUI runat="server" ID="UC_CommonUI" />
     </form>
 
-    <script src="../scripts/jquery.onScreenKeyboard.js" type="text/javascript"></script>
-    <script src="../scripts/onScreenKeyboard.js" type="text/javascript" ></script>
+<%--    <script src="../scripts/jquery.onScreenKeyboard.js" type="text/javascript"></script>
+    <script src="../scripts/onScreenKeyboard.js" type="text/javascript" ></script>--%>
 
 </body>
 </html>

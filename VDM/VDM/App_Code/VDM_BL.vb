@@ -1768,6 +1768,31 @@ Public Class VDM_BL
         Return Result
     End Function
 
+    Public Function Get_Next_SIM_To_Pick(ByVal KO_ID As Integer, ByVal SIM_ID As Integer) As DataTable
+        Dim Result As New DataTable
+        Result.Columns.Add("POS_ID", GetType(Integer))
+        Result.Columns.Add("SLOT_ID", GetType(Integer))
+        Result.Columns.Add("SLOT_NAME", GetType(String))
+        Result.Columns.Add("SERIAL_NO", GetType(String))
+
+        'Dim Sql As String = "" '-------------- คำนวนจำนวน ทั้งหมดในตู้
+        'Sql &= " SELECT POS_ID,PRODUCT.SLOT_ID,PRODUCT.SLOT_NAME,TOTAL" & vbLf
+        'Sql &= " FROM" & vbLf
+        'Sql &= " (SELECT SLOT_ID,SLOT_NAME ,COUNT(1) TOTAL" & vbLf
+        'Sql &= " FROM VW_CURRENT_PRODUCT_STOCK" & vbLf
+        'Sql &= " WHERE KO_ID=" & KO_ID & " AND PRODUCT_ID=" & PRODUCT_ID & vbLf
+        'Sql &= " GROUP BY SLOT_ID,SLOT_NAME) PRODUCT" & vbLf
+        'Sql &= " LEFT JOIN MS_SLOT_ARM_POSITION ARM ON PRODUCT.SLOT_NAME=ARM.SLOT_NAME" & vbLf
+        'Dim DT As New DataTable
+        'Dim DA As New SqlDataAdapter(Sql, ConnectionString)
+        'DA.Fill(DT)
+
+        'If DT.Rows.Count = 0 Then
+        '    Return Result
+        'End If '
+
+        Return Result
+    End Function
 
     Public Function Calculate_Change_Quantity(ByVal REMAIN As Integer, ByVal MoneyStock As DataTable) As DataTable
 
@@ -1797,7 +1822,7 @@ Public Class VDM_BL
 
 #Region "Printing"
 
-    Dim PrintLine As String = "_________________________________" & vbLf
+    Dim PrintLine As String = "_________________________________"
 
     Public Function Get_New_Confirmation_Slip_No() As String
         Dim SQL As String = "SELECT TOP 1 SLIP_NO FROM"
@@ -1833,7 +1858,7 @@ Public Class VDM_BL
 
     '------------ ถ้ามี Ads เพิ่ม Ads ตรงนี้---------
     Public Function GEN_SLIP_ADS() As String
-        Dim Content As String = vbNewLine
+        Dim Content As String = ""
 
         Return Content
     End Function
@@ -1868,28 +1893,29 @@ Public Class VDM_BL
 
 
         Content &= "สาขาที่ : " & SITE_CODE & SITE_NAME & vbLf
-        Content &= "ใบยืนยันการรับชำระ             " & TXN_END.ToString("dd/MM/yyyy") & vbLf
+        Content &= "ใบยืนยันการรับชำระ                 " & TXN_END.ToString("dd/MM/yyyy") & vbLf
         Content &= "" & SLIP_CODE & " 	    " & TXN_END.ToString("hh:mm") & vbLf
-        Content &= PrintLine
+        Content &= PrintLine & vbLf
         Content &= "รายการสินค้า" & vbLf
         Content &= " " & vbLf
-        Content &= "1. " & PRODUCT_CODE & "             " & FormatNumber(TOTAL_PRICE, 2) & vbLf
+        Content &= "1. " & PRODUCT_CODE & "                 " & FormatNumber(TOTAL_PRICE, 2) & vbLf
         Content &= PRODUCT_NAME & vbLf
-        Content &= "S/N : " & SERIAL_NO & vbLf
-        Content &= " " & vbLf
-        Content &= PrintLine
-        Content &= "CASH                " & FormatNumber(PAID, 2) & vbLf
+        If Trim(SERIAL_NO) <> "" Then
+            Content &= "S/N : " & SERIAL_NO & vbLf
+            Content &= " " & vbLf
+        End If
+        Content &= PrintLine & vbLf
+        Content &= "CASH                                " & FormatNumber(PAID, 2) & vbLf
 
         If ACTUAL_CHANGE > 0 Then
-            Content &= PrintLine
-            Content &= "CHANGE              " & FormatNumber(ACTUAL_CHANGE, 2) & vbLf
+            Content &= PrintLine & vbLf
+            Content &= "CHANGE                              " & FormatNumber(ACTUAL_CHANGE, 2) & vbLf
         End If
         If REMAIN_CHANGE > 0 Then
-            Content &= PrintLine
-            Content &= "REMAIN CHANGE           " & FormatNumber(REMAIN_CHANGE, 2) & vbLf
+            Content &= PrintLine & vbLf
+            Content &= "REMAIN CHANGE                           " & FormatNumber(REMAIN_CHANGE, 2) & vbLf
         End If
-        Content &= PrintLine
-        Content &= " " & vbLf
+        Content &= PrintLine & vbLf
         Content &= " " & vbLf
         Content &= "ขอบคุณที่ใช้บริการ" & vbLf
         '----------------- Ads ----------------
@@ -1934,21 +1960,23 @@ Public Class VDM_BL
 
         Content &= "สาขาที่ : " & SITE_CODE & SITE_NAME & vbLf
         Content &= "ใบยืนยันการรับชำระ   	        " & TXN_END.ToString("dd/MM/yyyy") & vbLf
-        Content &= "" & SLIP_CODE & " 	" & TXN_END.ToString("hh:mm") & vbLf
-        Content &= PrintLine
+        Content &= "" & SLIP_CODE & " 	    " & TXN_END.ToString("hh:mm") & vbLf
+        Content &= PrintLine & vbLf
         Content &= "รายการสินค้า" & vbLf
         Content &= " " & vbLf
-        Content &= "1. " & PRODUCT_CODE & "             " & FormatNumber(TOTAL_PRICE, 2) & vbLf
+        Content &= "1. " & PRODUCT_CODE & "                         " & FormatNumber(TOTAL_PRICE, 2) & vbLf
         Content &= PRODUCT_NAME & vbLf
-        Content &= "S/N : " & SERIAL_NO & vbLf
-        Content &= " " & vbLf
-        Content &= PrintLine
-        Content &= "TRUE MONEY              " & FormatNumber(TMN_REQUEST_AMOUNT / 100, 2) & vbLf
+        If Trim(SERIAL_NO) <> "" Then
+            Content &= "S/N : " & SERIAL_NO & vbLf
+            Content &= " " & vbLf
+        End If
+        Content &= PrintLine & vbLf
+        Content &= "TRUE MONEY                            " & FormatNumber(TMN_REQUEST_AMOUNT / 100, 2) & vbLf
         Content &= " " & vbLf
         Content &= "ISV :   " & TMN_ISV & vbLf
         Content &= "PAYMENT ID :    " & TMN_PAYMENT_ID & vbLf
-        Content &= "PAYMENT CODE :  " & TMN_PAYMENT_CODE & vbLf
-        Content &= PrintLine
+        Content &= "PAYMENT CODE :" & TMN_PAYMENT_CODE & vbLf
+        Content &= PrintLine & vbLf
         Content &= " " & vbLf
         Content &= "ขอบคุณที่ใช้บริการ" & vbLf
         '----------------- Ads ----------------
