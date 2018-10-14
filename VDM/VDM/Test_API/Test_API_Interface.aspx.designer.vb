@@ -86,15 +86,6 @@ Partial Public Class Test_API_Interface
     Protected WithEvents btn_Service_Flow_Create As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''btn_Service_Flow_Finish control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btn_Service_Flow_Finish As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
     '''btn_Activity_Start control.
     '''</summary>
     '''<remarks>
@@ -111,6 +102,15 @@ Partial Public Class Test_API_Interface
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btn_Activity_End As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''btn_Service_Flow_Finish control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btn_Service_Flow_Finish As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
     '''btn_Get_Product_Info control.

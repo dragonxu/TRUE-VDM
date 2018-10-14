@@ -35,7 +35,7 @@
         '---------- Start New Transaction After This Page----------
         Session.Remove("TXN_ID")
         Session.Remove("LANGUAGE")
-
+        Session.Remove("Accept_Contact_EMP")
     End Sub
 
     Private Sub TH_ServerClick(sender As Object, e As EventArgs) Handles TH.ServerClick

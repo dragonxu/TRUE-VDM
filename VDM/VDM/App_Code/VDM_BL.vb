@@ -185,6 +185,56 @@ Public Class VDM_BL
         End Select
     End Function
 
+    Public Class DialogImage
+
+        Public Property ModeAccept_Contact As Accept_Contact_EMP
+        Public Property ModeID_Card As ID_Card
+        Public Property ModeCredit_Card As Credit_Card
+        Public Property ModeTruemoney As TrueMoney
+        Public Property ModeFace As Face
+        Public Property ModeCash As Cash
+        Public Property ModeCoin As String = "images/Warning_Coin.png"
+
+        Public Class Accept_Contact_EMP
+            Public Property Alert_Show As String = "images/Confirm_Contact_CUST.png"
+
+        End Class
+
+        Public Class ID_Card
+            Public Property Alert_Error As String = "images/Error_ID_Card.png"
+            Public Property Alert_Repeat As String = "images/Rescan_ID_Card.png"
+            Public Property Alert_Warning As String = "images/Warning_ID_Card.png"
+            Public Property Alert_Success As String = "images/pic-idcard2.png"
+            Public Property Alert_Show As String = "images/pic-idcard.png"
+
+        End Class
+
+        Public Class Credit_Card
+            Public Property Alert_Warning As String = "images/Warning_Credit.png"
+            Public Property Alert_Show As String = "images/icon-credit.png"
+        End Class
+
+        Public Class TrueMoney
+            Public Property Alert_Warning As String = "images/Warning_Truemoney.png"
+            Public Property Alert_Show As String = "images/icon-truemoney.png"
+        End Class
+
+        Public Class Face
+            Public Property Alert_Warning As String = "images/Warning_Face.png"
+            Public Property Alert_Show As String = "images/pic-scanface.png"
+
+        End Class
+
+        Public Class Cash
+            Public Property Alert_Error As String = "images/Error_Recieve_Cash.png"
+            Public Property Alert_Repeat As String = "images/Rescan_ID_Card.png"
+            Public Property Alert_Show As String = "images/icon-cash.png"
+
+
+        End Class
+
+    End Class
+
     Public Function Get_Site_Icon_Path(ByVal SITE_ID As Integer) As String
         Return PicturePath & "\Site\" & SITE_ID
     End Function

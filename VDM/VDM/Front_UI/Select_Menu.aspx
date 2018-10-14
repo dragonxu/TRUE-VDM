@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Front_UI/MasterFront.Master" CodeBehind="Select_Menu.aspx.vb" Inherits="VDM.Select_Menu" %>
 
 <%@ Register Src="~/Front_UI/UC_CommonUI.ascx" TagPrefix="uc1" TagName="UC_CommonUI" %>
+<%@ Register Src="~/Front_UI/UC_Dialog.ascx" TagPrefix="uc1" TagName="UC_Dialog" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -46,5 +48,6 @@
                     </div>
                 </nav>
             </footer>
+    <uc1:UC_Dialog runat="server" id="UC_Dialog" />
     <uc1:UC_CommonUI runat="server" ID="UC_CommonUI" />
 </asp:Content>

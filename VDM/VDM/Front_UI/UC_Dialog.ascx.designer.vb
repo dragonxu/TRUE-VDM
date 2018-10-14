@@ -11,50 +11,50 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Select_Menu
+Partial Public Class UC_Dialog
     
     '''<summary>
-    '''lnkDevice control.
+    '''pnlModul control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkDevice As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents pnlModul As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''lnkSim control.
+    '''lbl_HeaderMessage control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkSim As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents lbl_HeaderMessage As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lnkBack control.
+    '''imgAlert control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkBack As Global.System.Web.UI.WebControls.ImageButton
+    Protected WithEvents imgAlert As Global.System.Web.UI.HtmlControls.HtmlImage
     
     '''<summary>
-    '''UC_Dialog control.
+    '''lbl_DetailMessage control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UC_Dialog As Global.VDM.UC_Dialog
+    Protected WithEvents lbl_DetailMessage As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''UC_CommonUI control.
+    '''btnClose_Dialog control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UC_CommonUI As Global.VDM.UC_CommonUI
+    Protected WithEvents btnClose_Dialog As Global.System.Web.UI.WebControls.LinkButton
 End Class
