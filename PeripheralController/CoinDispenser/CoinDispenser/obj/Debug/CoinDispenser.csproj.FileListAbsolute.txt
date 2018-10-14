@@ -1,0 +1,6 @@
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\CoinDispenser\CoinDispenser\bin\Debug\CoinDispenser.xml
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\CoinDispenser\CoinDispenser\bin\Debug\CoinDispenser.dll
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\CoinDispenser\CoinDispenser\bin\Debug\CoinDispenser.pdb
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\CoinDispenser\CoinDispenser\obj\Debug\CoinDispenser.csprojResolveAssemblyReference.cache
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\CoinDispenser\CoinDispenser\obj\Debug\CoinDispenser.dll
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\CoinDispenser\CoinDispenser\obj\Debug\CoinDispenser.pdb
