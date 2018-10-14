@@ -51,16 +51,15 @@
 
     Private ReadOnly Property callBackFunction As String
         Get
-            Try
+            If Not IsNothing(Request.QueryString("callback")) Then
                 Return Request.QueryString("callback")
-            Catch ex As Exception
+            Else
                 Return ""
-            End Try
+            End If
         End Get
     End Property
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
 
         Try
             CashReceiver.Close()

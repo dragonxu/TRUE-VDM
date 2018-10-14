@@ -179,11 +179,21 @@ Public Class TrueMoney
         DA.Fill(DT)
         DR = DT.NewRow
         DR("REQ_ID") = REQ_ID
-        DR("code") = Result.status.code
-        DR("message") = Result.status.message
-        DR("payment_id") = Result.data.payment_id
-        DR("JSONString") = Result.JSONString
-        DR("ConnectionMessage") = Result.ConnectionMessage
+        If Not IsDBNull(Result.status.code) And Not IsNothing(Result.status.code) Then
+            DR("code") = Result.status.code
+        End If
+        If Not IsDBNull(Result.status.message) And Not IsNothing(Result.status.message) Then
+            DR("message") = Result.status.message
+        End If
+        If Not IsDBNull(Result.data.payment_id) And Not IsNothing(Result.data.payment_id) Then
+            DR("payment_id") = Result.data.payment_id
+        End If
+        If Not IsDBNull(Result.JSONString) And Not IsNothing(Result.JSONString) Then
+            DR("JSONString") = Result.JSONString
+        End If
+        If Not IsDBNull(Result.ConnectionMessage) And Not IsNothing(Result.ConnectionMessage) Then
+            DR("ConnectionMessage") = Result.ConnectionMessage
+        End If
         DR("RESP_TIME") = Now
         DT.Rows.Add(DR)
         cmd = New SqlCommandBuilder(DA)

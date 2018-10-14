@@ -514,6 +514,7 @@ Public Class VDM_BL
 
             If Not IsNothing(TSM) AndAlso
                  Not IsNothing(TSM.ReturnValues) AndAlso
+                 TSM.ReturnValues.Count > 1 AndAlso
                  Not IsNothing(TSM.ReturnValues(0)) AndAlso
                  Not IsNothing(TSM.ReturnValues(1)) AndAlso
                  Not CBool(TSM.ReturnValues(1)) AndAlso
@@ -2011,6 +2012,7 @@ Public Class VDM_BL
             DA.Update(DT)
             BEFORE_QUANTITY = 0
         Else
+            If IsDBNull(DT.Rows(0).Item("Current_Qty")) Then DT.Rows(0).Item("Current_Qty") = 0
             BEFORE_QUANTITY = DT.Rows(0).Item("Current_Qty")
             '---------------- Update Current -------------
             Dim NEW_QUANTITY As Integer = BEFORE_QUANTITY + DIFF

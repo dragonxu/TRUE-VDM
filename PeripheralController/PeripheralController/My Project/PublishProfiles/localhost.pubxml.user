@@ -31,10 +31,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/15/2015 02:06:24</publishTime>
     </File>
     <File Include="bin/PeripheralController.dll">
-      <publishTime>10/12/2018 04:04:47</publishTime>
+      <publishTime>10/12/2018 18:15:08</publishTime>
     </File>
     <File Include="bin/PeripheralController.xml">
-      <publishTime>10/12/2018 04:04:47</publishTime>
+      <publishTime>10/12/2018 18:15:08</publishTime>
     </File>
     <File Include="bin/Printer.dll">
       <publishTime>10/09/2018 19:06:06</publishTime>
@@ -151,7 +151,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/06/2018 21:35:33</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/10/2018 12:02:16</publishTime>
+      <publishTime>10/12/2018 18:15:08</publishTime>
     </File>
   </ItemGroup>
 </Project>

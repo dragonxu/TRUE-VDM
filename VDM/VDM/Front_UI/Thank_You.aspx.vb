@@ -44,8 +44,9 @@ Public Class Thank_You
 
             txtLocalControllerURL.Text = BL.LocalControllerURL
             '---------------- Change And Print Slip--------------
-            Print()
             Change()
+            Print()
+
         End If
 
     End Sub

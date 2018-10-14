@@ -142,11 +142,17 @@ Public Class Printer
         Dim format As New StringFormat(StringFormatFlags.LineLimit)
 
         'Fit as many characters as we can into the print area      
-
-        e.Graphics.MeasureString(_text.Substring(RemoveZeros(curChar)), PrinterFont, New SizeF(printWidth, printHeight), format, chars, lines)
+        Try
+            e.Graphics.MeasureString(_text.Substring(RemoveZeros(curChar)), PrinterFont, New SizeF(printWidth, printHeight), format, chars, lines)
+        Catch ex As Exception
+        End Try
 
         'Print the page
-        e.Graphics.DrawString(_text.Substring(RemoveZeros(curChar)), PrinterFont, Brushes.Black, printArea, format)
+        Try
+            e.Graphics.DrawString(_text.Substring(RemoveZeros(curChar)), PrinterFont, Brushes.Black, printArea, format)
+        Catch ex As Exception
+        End Try
+
 
         'Increase current char count
         curChar += chars

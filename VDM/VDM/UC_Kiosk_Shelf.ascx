@@ -18,21 +18,21 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Max Width</label>
                                 <div class="col-sm-5">
-                                    <asp:TextBox ID="txtShelfWidth" runat="server" CssClass="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="txtShelfWidth" runat="server" CssClass="form-control osk-trigger"  data-osk-options="disableReturn"></asp:TextBox>
                                 </div>
                                 <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Max Height</label>
                                 <div class="col-sm-5">
-                                    <asp:TextBox ID="txtShelfHeight" runat="server" CssClass="form-control"></asp:TextBox>                                    
+                                    <asp:TextBox ID="txtShelfHeight" runat="server" CssClass="form-control osk-trigger"  data-osk-options="disableReturn"></asp:TextBox>                                    
                                 </div>
                                 <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>                           
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Slot Depth</label>
                                 <div class="col-sm-5">
-                                    <asp:TextBox ID="txtShelfDepth" runat="server" CssClass="form-control"></asp:TextBox>                                     
+                                    <asp:TextBox ID="txtShelfDepth" runat="server" CssClass="form-control osk-trigger"  data-osk-options="disableReturn"></asp:TextBox>                                     
                                 </div>
                                 <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>
@@ -62,7 +62,7 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Height</label>
                                 <div class="col-sm-5">
-                                     <asp:TextBox ID="txtFloorHeight" runat="server" CssClass="form-control"></asp:TextBox>                                     
+                                     <asp:TextBox ID="txtFloorHeight" runat="server" CssClass="form-control osk-trigger"  data-osk-options="disableReturn"></asp:TextBox>                                     
                                 </div>
                                 <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>
@@ -76,7 +76,7 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">POS-Y</label>
                                 <div class="col-sm-5">
-                                    <asp:TextBox ID="txtFloorY" runat="server" CssClass="form-control"></asp:TextBox>                                    
+                                    <asp:TextBox ID="txtFloorY" runat="server" CssClass="form-control osk-trigger"  data-osk-options="disableReturn"></asp:TextBox>                                    
                                 </div>
                                 <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>
@@ -99,7 +99,7 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Width</label>
                                 <div class="col-sm-5">
-                                    <asp:TextBox ID="txtSlotWidth" runat="server" CssClass="form-control"></asp:TextBox>                                    
+                                    <asp:TextBox ID="txtSlotWidth" runat="server" CssClass="form-control osk-trigger"  data-osk-options="disableReturn"></asp:TextBox>                                    
                                 </div>
                                 <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>
@@ -120,7 +120,7 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">POS-X</label>
                                 <div class="col-sm-5">
-                                    <asp:TextBox ID="txtSlotX" runat="server" CssClass="form-control"></asp:TextBox>                                    
+                                    <asp:TextBox ID="txtSlotX" runat="server" CssClass="form-control osk-trigger"  data-osk-options="disableReturn"></asp:TextBox>                                    
                                 </div>
                                 <label class="col-sm-3 control-label" style="text-align:left;">mm</label>
                             </div>

@@ -1,19 +1,13 @@
 ﻿Public Class Print
     Inherits System.Web.UI.Page
 
-    'Private ReadOnly Property Mode
-    '    Get
-    '        Try
-    '            Return Request.QueryString("Mode")
-    '        Catch ex As Exception
-    '            Return ""
-    '        End Try
-    '    End Get
-    'End Property
-
     Private ReadOnly Property callBackFunction As String
         Get
-            Return Request.QueryString("callback")
+            If Not IsNothing(Request.QueryString("callback")) Then
+                Return Request.QueryString("callback")
+            Else
+                Return ""
+            End If
         End Get
     End Property
 

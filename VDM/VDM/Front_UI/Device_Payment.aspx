@@ -516,7 +516,15 @@
             //--------------- Add onScreenKeyboard -----------------
             function impletmentKeyboard() {
                 //alert(1);
-                $("#paymentGatewayWindow").contents().find("input:text").addClass("osk-trigger");
+                //document.getElementsByTagName("LI");
+
+
+                $("#paymentGatewayWindow").contents().find("input").each(function () {
+                   alert( $( this ).attr("name"));
+                });
+
+                //$("#paymentGatewayWindow").contents().find("input").addClass("osk-trigger");
+                //$("#paymentGatewayWindow").contents().find("input:text").addClass("osk-trigger");
                 //$("#paymentGatewayWindow").contents().find("input:password").addClass("osk-trigger");
                 //$("#paymentGatewayWindow").attr("data-osk-options", "disableReturn");
 

@@ -8,21 +8,21 @@ Public Class CashDispense
 
     Public ReadOnly Property NoteType As Integer
         Get
-            Try
+            If IsNumeric(Request.QueryString("Type")) Then
                 Return Request.QueryString("Type")
-            Catch ex As Exception
+            Else
                 Return 0
-            End Try
+            End If
         End Get
     End Property
 
     Public ReadOnly Property Quantity As Integer
         Get
-            Try
+            If IsNumeric(Request.QueryString("Q")) Then
                 Return Request.QueryString("Q")
-            Catch ex As Exception
+            Else
                 Return 0
-            End Try
+            End If
         End Get
     End Property
 

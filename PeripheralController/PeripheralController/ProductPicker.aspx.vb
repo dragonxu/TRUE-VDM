@@ -26,33 +26,41 @@ Public Class ProductPicker
 
     Private ReadOnly Property Mode As String
         Get
-            Return Request.QueryString("Mode").ToString
+            If Not IsNothing(Request.QueryString("Mode")) Then
+                Return Request.QueryString("Mode").ToString
+            Else
+                Return ""
+            End If
         End Get
     End Property
 
     Private ReadOnly Property POS_ID As Integer
         Get
-            Try
-                Return Request.QueryString("POS_ID")
-            Catch ex As Exception
+            If IsNumeric(Request.QueryString("POS_ID")) Then
+                Return CInt(Request.QueryString("POS_ID"))
+            Else
                 Return 0
-            End Try
+            End If
         End Get
     End Property
 
     Private ReadOnly Property OpenTimeOut As Integer
         Get
-            Try
-                Return Request.QueryString("OpenTimeOut")
-            Catch ex As Exception
+            If IsNumeric(Request.QueryString("OpenTimeOut")) Then
+                Return CInt(Request.QueryString("OpenTimeOut"))
+            Else
                 Return 0
-            End Try
+            End If
         End Get
     End Property
 
     Private ReadOnly Property callBackFunction As String
         Get
-            Return Request.QueryString("callback").ToString
+            If Not IsNothing(Request.QueryString("callback")) Then
+                Return Request.QueryString("callback")
+            Else
+                Return ""
+            End If
         End Get
     End Property
 
