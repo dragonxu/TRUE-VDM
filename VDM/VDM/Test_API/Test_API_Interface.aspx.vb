@@ -23,7 +23,7 @@
         pnl_Get_Product_Info.Visible = False
         pnl_Prepaid_Register.Visible = False
         pnl_Validate_Serial.Visible = False
-
+        pnl_Auto_Prepaid_Register.Visible = False
     End Sub
 
     Private Sub btnFace_Recognition_Click(sender As Object, e As EventArgs) Handles btnFace_Recognition.Click
@@ -96,5 +96,9 @@
         Me.Page.Title = "Prepaid_Register"
     End Sub
 
-
+    Private Sub btn_Auto_Prepaid_Register_Click(sender As Object, e As EventArgs) Handles btn_Auto_Prepaid_Register.Click
+        ClearForm()
+        pnl_Auto_Prepaid_Register.Visible = True
+        Me.Page.Title = "Auto_Prepaid_Register"
+    End Sub
 End Class

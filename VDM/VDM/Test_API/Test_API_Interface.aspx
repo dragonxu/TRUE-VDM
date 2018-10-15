@@ -12,6 +12,7 @@
 <%@ Register Src="~/Test_API/UC_Get_Product_Info.ascx" TagPrefix="uc1" TagName="UC_Get_Product_Info" %>
 <%@ Register Src="~/Test_API/UC_Prepaid_Register.ascx" TagPrefix="uc1" TagName="UC_Prepaid_Register" %>
 <%@ Register Src="~/Test_API/UC_Validate_Serial.ascx" TagPrefix="uc1" TagName="UC_Validate_Serial" %>
+<%@ Register Src="~/Test_API/UC_Auto_Prepaid_Register.ascx" TagPrefix="uc1" TagName="UC_Auto_Prepaid_Register" %>
 
 
 
@@ -53,7 +54,8 @@
                 <asp:Button ID="btn_Get_Product_Info" runat="server" Text="Get_Product_Info" />
                 <asp:Button ID="btn_Validate_Serial" runat="server" Text="Validate_Serial" />
                 <asp:Button ID="btn_Prepaid_Register" runat="server" Text="Prepaid_Register" />
-                 
+                 <asp:Button ID="btn_Auto_Prepaid_Register" runat="server" Text="Auto_Prepaid_Register" />
+                
         </asp:Panel>
         
         
@@ -103,6 +105,10 @@
 
             <asp:Panel ID="pnl_Validate_Serial" runat="server">
                 <uc1:UC_Validate_Serial runat="server" id="UC_Validate_Serial" />
+            </asp:Panel>
+
+            <asp:Panel ID="pnl_Auto_Prepaid_Register" runat="server">
+                <uc1:UC_Auto_Prepaid_Register runat="server" id="UC_Auto_Prepaid_Register" />
             </asp:Panel>
          </div>
     </form>

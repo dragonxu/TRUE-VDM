@@ -2177,4 +2177,27 @@ Public Class VDM_BL
     End Sub
 
 #End Region
+
+    Public Function GET_TXN_PREPAID_REGISTER(ByVal TXN_ID As Integer)
+        Dim SQL As String = "SELECT * FROM VW_TXN_PREPAID_REGISTER WHERE TXN_ID=" & TXN_ID
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        DA.Fill(DT)
+        Return DT
+    End Function
+
+    Public Function GET_TXN_CUS_ID(ByVal TXN_ID As Integer) As Integer
+        Dim SQL As String = "SELECT * FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        DA.Fill(DT)
+        Dim CUS_ID As Integer = 0
+        If DT.Rows.Count > 0 Then
+            If Not IsDBNull(DT.Rows(0).Item("CUS_ID")) Then
+                CUS_ID = DT.Rows(0).Item("CUS_ID")
+            End If
+        End If
+        Return CUS_ID
+    End Function
+
 End Class

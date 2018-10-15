@@ -112,8 +112,8 @@
                 </div>
 
             </asp:Panel>
-            
-               <footer style="bottom: 0px">
+
+            <footer style="bottom: 0px">
                 <nav>
                     <div class="main">
                         <span class="col-md-6">
@@ -127,6 +127,79 @@
             </footer>
 
         </div>
+
+
+
+        <div style="position: absolute; top: 300px; right: 100px; display: none;" class="row">
+            <%--<div style="display: block;" class="col-lg-3">
+                                                Partner_code :
+                                                <asp:TextBox ID="partner_code" runat="server" AutoPostBack ="true" ></asp:TextBox>
+                                            </div>--%>
+            <div style="display: block;" class="col-lg-3">
+                ID_number :<asp:TextBox ID="id_number" runat="server" AutoPostBack="true"></asp:TextBox>
+            </div>
+            <div style="display: block;" class="col-lg-3">
+                Face_cust_certificate :<asp:TextBox ID="Face_cust_certificate" runat="server" AutoPostBack="true" TextMode="MultiLine" Style="margin: 0px; width: 161px; height: 131px;"></asp:TextBox>
+            </div>
+            <div style="display: block;" class="col-lg-3">
+                Face_cust_capture :<asp:TextBox ID="Face_cust_capture" runat="server" AutoPostBack="true" TextMode="MultiLine" Style="margin: 0px; width: 161px; height: 131px;"></asp:TextBox>
+            </div>
+
+            <%--ID Card--%>
+            <div style="display: block;" class="col-lg-3">
+                CUS_TITLE :<asp:TextBox ID="CUS_TITLE" runat="server" AutoPostBack="true"></asp:TextBox>
+            </div>
+            <div style="display: block;" class="col-lg-3">
+                CUS_NAME :<asp:TextBox ID="CUS_NAME" runat="server" AutoPostBack="true"></asp:TextBox>
+            </div>
+            <div style="display: block;" class="col-lg-3">
+                CUS_SURNAME :<asp:TextBox ID="CUS_SURNAME" runat="server" AutoPostBack="true"></asp:TextBox>
+            </div>
+            <div style="display: block;" class="col-lg-3">
+                NAT_CODE :<asp:TextBox ID="NAT_CODE" runat="server" AutoPostBack="true"></asp:TextBox>
+            </div>
+            <div style="display: block;" class="col-lg-3">
+                CUS_GENDER :<asp:TextBox ID="CUS_GENDER" runat="server" AutoPostBack="true"></asp:TextBox>
+            </div>
+            <div style="display: block;" class="col-lg-3">
+                CUS_BIRTHDATE :<asp:TextBox ID="CUS_BIRTHDATE" runat="server" AutoPostBack="true"></asp:TextBox>
+            </div>
+            <div style="display: block;" class="col-lg-3">
+                CUS_PID :<asp:TextBox ID="CUS_PID" runat="server" AutoPostBack="true"></asp:TextBox>
+            </div>
+            <div style="display: block;" class="col-lg-3">
+                CUS_PASSPORT_ID :<asp:TextBox ID="CUS_PASSPORT_ID" runat="server" AutoPostBack="true"></asp:TextBox>
+            </div>
+            <div style="display: block;" class="col-lg-3">
+                CUS_PASSPORT_START :<asp:TextBox ID="CUS_PASSPORT_START" runat="server" AutoPostBack="true"></asp:TextBox>
+            </div>
+            <div style="display: block;" class="col-lg-3">
+                CUS_PASSPORT_EXPIRE :<asp:TextBox ID="CUS_PASSPORT_EXPIRE" runat="server" AutoPostBack="true"></asp:TextBox>
+            </div>
+            <div style="display: block;" class="col-lg-3">
+                CUS_IMAGE :<asp:TextBox ID="CUS_IMAGE" runat="server" AutoPostBack="true"></asp:TextBox>
+            </div>
+            
+            <asp:Button ID="btnFace_Recognition" runat="server" />
+        </div>
+
+
+
+        <script type="text/javascript">
+
+
+
+            // เริ่มจ่าย 
+            function Face_Recognition() {
+                $('#btnFace_Recognition').click();
+            }
+
+
+
+
+        </script>
+
+
     </form>
 </body>
 </html>

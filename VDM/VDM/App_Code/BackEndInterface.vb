@@ -4,6 +4,7 @@ Imports System.Net
 Imports System.IO
 Imports System.Data.SqlClient
 Imports System.Data
+Imports System.Drawing
 
 Public Class BackEndInterface
 
@@ -1251,6 +1252,357 @@ Public Class BackEndInterface
         End Function
 
     End Class
+
+
+    Public Class Register
+
+        Public Class Command_Result
+            Public Property Status As String
+            Public Property Message As String
+        End Class
+        Public Class CUSTOMER_INFO
+            Public Property CUS_ID As String
+            Public Property CUS_TITLE As String
+            Public Property CUS_NAME As String
+            Public Property CUS_SURNAME As String
+            Public Property NAT_CODE As String
+            Public Property CUS_GENDER As String
+            Public Property CUS_BIRTHDATE As DateTime
+            Public Property CUS_PID As String
+            Public Property CUS_PASSPORT_ID As String
+            Public Property CUS_PASSPORT_START As Date
+            Public Property CUS_PASSPORT_EXPIRE As Date
+            Public Property CUS_IMAGE As Image
+        End Class
+
+        Public Function Get_Result(Face_cust_certificate As String, Face_cust_capture As String, SIM_Serial As String, KO_ID As Integer, USER_ID As Integer, TXN_ID As Integer) As Boolean
+            Dim Result_Register As Boolean = True
+            Dim SHOP_CODE As String = GET_SHOP_CODE(KO_ID)
+            Dim Cust_Info As New CUSTOMER_INFO
+
+            Dim SQL As String = "SELECT * FROM TB_CUSTOMER WHERE CUS_ID=" & BL.GET_TXN_CUS_ID(TXN_ID)
+            Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+            Dim DT_Customer_Info As New DataTable
+            DA.Fill(DT_Customer_Info)
+            If DT_Customer_Info.Rows.Count > 0 Then
+                Cust_Info.CUS_ID = DT_Customer_Info.Rows(0).Item("CUS_ID")
+                Cust_Info.CUS_TITLE = DT_Customer_Info.Rows(0).Item("CUS_TITLE")
+                Cust_Info.CUS_NAME = DT_Customer_Info.Rows(0).Item("CUS_NAME")
+                Cust_Info.CUS_SURNAME = DT_Customer_Info.Rows(0).Item("CUS_SURNAME")
+                Cust_Info.NAT_CODE = DT_Customer_Info.Rows(0).Item("NAT_CODE")
+                Cust_Info.CUS_GENDER = DT_Customer_Info.Rows(0).Item("CUS_GENDER")
+                Cust_Info.CUS_BIRTHDATE = DT_Customer_Info.Rows(0).Item("CUS_BIRTHDATE")
+                Cust_Info.CUS_PID = IIf(Not IsDBNull(DT_Customer_Info.Rows(0).Item("CUS_PID")), DT_Customer_Info.Rows(0).Item("CUS_PID"), "")
+                Cust_Info.CUS_PASSPORT_ID = IIf(Not IsDBNull(DT_Customer_Info.Rows(0).Item("CUS_PASSPORT_ID")), DT_Customer_Info.Rows(0).Item("CUS_PASSPORT_ID"), "")
+                Cust_Info.CUS_PASSPORT_START = DT_Customer_Info.Rows(0).Item("CUS_PASSPORT_START")
+                Cust_Info.CUS_PASSPORT_EXPIRE = DT_Customer_Info.Rows(0).Item("CUS_PASSPORT_EXPIRE")
+                'Cust_Info.CUS_IMAGE = DT_Customer_Info.Rows(0).Item("CUS_IMAGE")
+            End If
+
+            Dim Result As New Command_Result
+
+#Region "Face_Recognition"
+            Dim BackEndFace_Recognition As New Face_Recognition
+            Dim Response_Face_Recognition As New BackEndInterface.Face_Recognition.Response
+            'Dim Base64_Certificate As String = Convert_Base64(Face_cust_certificate)           ' ถ้าส่งมาเป็น Face_cust_certificate As Byte()
+            'Dim Base64_capture As String = Convert_Base64(Face_cust_capture)           ' ถ้าส่งมาเป็น  Face_cust_capture As Byte()
+            Dim Base64_Certificate As String = Face_cust_certificate
+            Dim Base64_capture As String = Face_cust_capture
+            Response_Face_Recognition = BackEndFace_Recognition.Get_Result(SHOP_CODE, IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID), Base64_Certificate, Base64_capture, 1)
+            Try
+                If Not IsNothing(Response_Face_Recognition) Then
+                    Result.Status = Response_Face_Recognition.status
+                    Result.Message = "CUS_ID:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID) & " Type:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), "I", "P") & "ยืนยันตัวตน Step Face_Recognition"
+                End If
+            Catch ex As Exception
+                Result.Status = Response_Face_Recognition.status
+                Result.Message = "CUS_ID:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID) & " Type:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), "I", "P") & " Step Face_Recognition" & ex.Message
+                Result_Register = False
+                Return Result_Register
+                Exit Function
+            End Try
+#End Region
+
+#Region "Prepaid_Validate_Register"
+
+            Dim BackEndPrepaid_Validate_Register As New Prepaid_Validate_Register
+            Dim Response_Prepaid_Validate As New BackEndInterface.Prepaid_Validate_Register.Response
+            Response_Prepaid_Validate = BackEndPrepaid_Validate_Register.Get_Result(SIM_Serial, IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID), IIf(Not IsDBNull(Cust_Info.CUS_PID), "I", "P"))
+            Try
+                If Not IsNothing(Response_Prepaid_Validate) Then
+                    Result.Status = Response_Prepaid_Validate.status
+                    Result.Message = "CUS_ID:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID) & " Type:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), "I", "P") & " SIM_Serial:" & SIM_Serial & " Step Prepaid_Validate_Register"
+                End If
+            Catch ex As Exception
+                Result.Status = Response_Prepaid_Validate.status
+                Result.Message = "CUS_ID:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID) & " Type:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), "I", "P") & " SIM_Serial:" & SIM_Serial & "Step Prepaid_Validate_Register" & ex.Message
+                Result_Register = False
+                Return Result_Register
+                Exit Function
+            End Try
+#End Region
+
+#Region "Generate_Order_Id"
+            Dim BackEndGenerate_Order_Id As New Generate_Order_Id
+            Dim Response_Generate_Order_Id As New BackEndInterface.Generate_Order_Id.Response
+            Response_Generate_Order_Id = BackEndGenerate_Order_Id.Get_Result(SHOP_CODE)
+            Try
+
+                If Not IsNothing(Response_Generate_Order_Id) Then
+                    Result.Status = Response_Generate_Order_Id.status
+                    Result.Message = "CUS_ID:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID) & " Type:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), "I", "P") & " SIM_Serial:" & SIM_Serial & " Step Generate_Order_Id"
+                End If
+            Catch ex As Exception
+                Result.Status = Response_Generate_Order_Id.status
+                Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Generate_Order_Id " & ex.Message
+                Result_Register = False
+                Return Result_Register
+                Exit Function
+            End Try
+#End Region
+
+#Region "Delete_File"
+            Dim BackEndDelete_File As New Delete_File
+            Dim Response_Delete_File As New BackEndInterface.Delete_File.Response
+            Response_Delete_File = BackEndDelete_File.Get_Result(Response_Generate_Order_Id.response_data)
+            Try
+                If Not IsNothing(Response_Delete_File) Then
+                    Result.Status = Response_Delete_File.status
+                    Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Generate_Order_Id"
+                End If
+            Catch ex As Exception
+                Result.Status = Response_Delete_File.status
+                Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Generate_Order_Id " & ex.Message
+                Result_Register = False
+                Return Result_Register
+                Exit Function
+            End Try
+
+#End Region
+
+#Region "Save_File"
+            Dim C As New Converter
+            Dim Merge As Image  '--Merg บัตรประชาชนกับภาพ
+            Merge = CombineImages(C.BlobToImage(Base64_Certificate.ToString()), C.BlobToImage(Base64_capture.ToString()), SHOP_CODE, Response_Prepaid_Validate.response_data.subscriber)
+            Dim Merge_bytes As Byte() = C.ImageToByte(Merge)
+
+            Dim BackEndSave_File As New Save_File
+            Dim Response_Save_File As New BackEndInterface.Save_File.Response
+            Response_Save_File = BackEndSave_File.Get_Result(Response_Generate_Order_Id.response_data, "PNG", Convert_Base64(Merge_bytes))
+            Try
+
+                If Not IsNothing(Response_Save_File) Then
+                    Result.Status = Response_Save_File.status
+                    Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Save_File"
+                End If
+
+            Catch ex As Exception
+                Result.Status = Response_Save_File.status
+                Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Save_File " & ex.Message
+                Result_Register = False
+                Return Result_Register
+                Exit Function
+            End Try
+
+#End Region
+
+#Region "Service_Flow_Create"
+            Dim BackEndFlow_Create As New Service_Flow_Create
+            Dim Response_Flow_Create As New BackEndInterface.Service_Flow_Create.Response
+            Response_Flow_Create = BackEndFlow_Create.Get_Result(
+                                    Response_Generate_Order_Id.response_data,
+                                    USER_ID,
+                                    IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID),
+                                    Response_Prepaid_Validate.response_data.subscriber,
+                                    SHOP_CODE,
+                                    Cust_Info.CUS_NAME & " " & Cust_Info.CUS_SURNAME,
+                                    Response_Prepaid_Validate.response_data.priceplan,
+                                    SIM_Serial,
+                                    Response_Face_Recognition.response_data.face_recognition_result,
+                                    Response_Face_Recognition.response_data.is_identical,
+                                    Response_Face_Recognition.response_data.confident_ratio)
+            Try
+
+                If Not IsNothing(Response_Flow_Create) Then
+                    Result.Status = Response_Flow_Create.status
+                    Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Service_Flow_Create"
+                End If
+            Catch ex As Exception
+                Result.Status = Response_Flow_Create.status
+                Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Service_Flow_Create " & ex.Message
+                Result_Register = False
+                Return Result_Register
+                Exit Function
+            End Try
+
+
+#End Region
+
+#Region "Activity_Start"
+            Dim BackEndActivity_Start As New Activity_Start
+            Dim Response_Activity_Start As New BackEndInterface.Activity_Start.Response
+            Response_Activity_Start = BackEndActivity_Start.Get_Result(Response_Generate_Order_Id.response_data)
+            Try
+                If Not IsNothing(Response_Activity_Start) Then
+                    Result.Status = Response_Activity_Start.status
+                    Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Activity_Start"
+                End If
+            Catch ex As Exception
+                Result.Status = Response_Activity_Start.status
+                Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Activity_Start " & ex.Message
+                Result_Register = False
+                Return Result_Register
+                Exit Function
+            End Try
+#End Region
+
+#Region "Activity_End"
+            Dim BackEndActivity_End As New Activity_End
+            Dim Response_Activity_End As New BackEndInterface.Activity_End.Response
+            Response_Activity_End = BackEndActivity_End.Get_Result(Response_Generate_Order_Id.response_data)
+            Try
+                If Not IsNothing(Response_Activity_End) Then
+                    Result.Status = Response_Activity_End.status
+                    Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Activity_End"
+                End If
+            Catch ex As Exception
+                Result.Status = Response_Activity_End.status
+                Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Activity_End " & ex.Message
+                Result_Register = False
+                Return Result_Register
+                Exit Function
+            End Try
+#End Region
+
+#Region "Service_Flow_Finish"
+            Dim BackEndFlow_Finish As New Service_Flow_Finish
+            Dim Response_Flow_Finish As New BackEndInterface.Service_Flow_Finish.Response
+            Response_Flow_Finish = BackEndFlow_Finish.Get_Result(Response_Generate_Order_Id.response_data)
+            Try
+                If Not IsNothing(Response_Flow_Finish) Then
+                    Result.Status = Response_Flow_Finish.status
+                    Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Service_Flow_Finish"
+                End If
+            Catch ex As Exception
+                Result.Status = Response_Flow_Finish.status
+                Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Service_Flow_Finish " & ex.Message
+                Result_Register = False
+                Return Result_Register
+                Exit Function
+            End Try
+#End Region
+
+#Region "Prepaid_Register"
+
+            Dim DT_TXN_MAT_CODE As DataTable = BL.GET_TXN_PREPAID_REGISTER(TXN_ID)
+            'Dim mat_code As String = "3000014920" 
+            'Dim mat_desc As String = "ซิมซูเปอร์ฟัน ฟอร์ทีน"
+            Dim mat_code As String = ""
+            Dim mat_desc As String = ""
+            If DT_TXN_MAT_CODE.Rows.Count > 0 Then
+                mat_code = DT_TXN_MAT_CODE.Rows(0).Item("PRODUCT_CODE").ToString
+                mat_desc = DT_TXN_MAT_CODE.Rows(0).Item("PRODUCT_NAME").ToString
+            End If
+            Dim BackEndPrepaid_Register As New Prepaid_Register
+            Dim Response_Prepaid_Register As New BackEndInterface.Prepaid_Register.Response
+            Response_Prepaid_Register = BackEndPrepaid_Register.Get_Result(Response_Generate_Order_Id.response_data,
+                Cust_Info.CUS_GENDER, '--ดูว่าบัตรส่งมาเป็นอะไร
+                Cust_Info.CUS_TITLE,
+                Cust_Info.NAT_CODE,
+                "T5",
+                Cust_Info.CUS_NAME,
+                Cust_Info.CUS_SURNAME,
+                C.DateToString(Cust_Info.CUS_BIRTHDATE, "yyyy-MM-dd'T'HH:mm:ss'+0700'"), '1990-02-05T00:00:00+0700  customer_birthdate
+                IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID),
+                C.DateToString(Cust_Info.CUS_PASSPORT_EXPIRE, "yyyy-MM-dd'T'HH:mm:ss'+0700'"), '1990-02-05T00:00:00+0700  customer_id_expire_date
+                "-", 'address_number.Text,
+                "-", 'address_moo.Text,
+                "-", 'address_village.Text,
+                "-", 'address_street.Text,
+                "-", 'address_soi.Text,
+                "-", 'address_district.Text,
+                "-", 'address_province.Text,
+                "-", 'address_building_name.Text,
+                "-", 'address_building_room.Text,
+                "-", 'address_building_floor.Text,
+                "-", 'sddress_sub_district.Text,
+                "-", 'address_zip.Text,
+                "-", 'shopCode.Text,
+                "-", 'shopName.Text,
+                USER_ID,
+                mat_code,  'mat_code.Text,
+                mat_desc,  'mat_desc.Text,
+                SIM_Serial,
+                False,
+                Response_Prepaid_Validate.response_data.priceplan,
+                Response_Prepaid_Validate.response_data.subscriber,
+                0,' "N"
+                2,  '"PAIR"
+                Response_Prepaid_Validate.response_data.company_code)
+            Try
+                If Not IsNothing(Response_Prepaid_Register) Then
+                    Result.Status = Response_Prepaid_Register.status
+                    Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Prepaid_Register"
+                End If
+            Catch ex As Exception
+                Result.Status = Response_Prepaid_Register.status
+                Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Prepaid_Register " & ex.Message
+                Result_Register = False
+                Return Result_Register
+                Exit Function
+            End Try
+
+
+#End Region
+
+            Return Result_Register
+        End Function
+
+
+
+        Public Function Convert_Base64(Image As Byte()) As String
+            Dim base64String As String = Convert.ToBase64String(Image, 0, Image.Length)
+            Return base64String
+        End Function
+        Dim BL As New VDM_BL
+        Public Function GET_SHOP_CODE(KO_ID As Integer) As Integer
+            Dim SHOP_CODE As String = ""
+            Dim DT As DataTable = BL.GetList_Kiosk(KO_ID)
+            If DT.Rows.Count > 0 Then
+                SHOP_CODE = DT.Rows(0).Item("SITE_CODE")
+            End If
+            Return SHOP_CODE
+        End Function
+
+        Public Function CombineImages(ByVal img1 As Image, ByVal img2 As Image, Shop_Code As String, Subscriber As String) As Image
+            Dim bmp As New Bitmap(Math.Max(img1.Width, img2.Width), img1.Height + img2.Height)
+            Dim g As Graphics = Graphics.FromImage(bmp)
+
+            g.DrawImage(img1, 0, 0, img1.Width, img1.Height)
+            g.DrawImage(img2, 0, img1.Height, img2.Width, img2.Height)
+
+            Dim theString As String = "ใช้สำหรับลงทะเบียนเบอร์โทรศัพท์ ทรู เท่านั้น" & vbNewLine & "dealer:" & Shop_Code & vbNewLine & "หมายเลขโทรศัพท์:" & Subscriber
+            Dim the_font As Font = New Font("Comic Sans MS", 35, FontStyle.Bold)
+            'g.RotateTransform(-45)
+            Dim sz As SizeF = g.VisibleClipBounds.Size
+            sz = g.MeasureString(theString, the_font)
+            g.DrawString(theString, the_font, Brushes.Red, 10, (img1.Height) - 50)
+            g.ResetTransform()
+
+
+            g.Dispose()
+
+            Return bmp
+        End Function
+
+
+    End Class
+
+
+
+
+
+
 
 
 End Class
