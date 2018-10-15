@@ -92,6 +92,8 @@ Public Class Printer
             'Create the font we need
             _font = New Font("Times New Roman", 10)
         End If
+
+        '-------------- Set Page Setting Here (T-Custom)------------------
     End Sub
 #End Region
 

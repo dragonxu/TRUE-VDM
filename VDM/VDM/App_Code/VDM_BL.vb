@@ -909,6 +909,24 @@ Public Class VDM_BL
         Return DT
     End Function
 
+    Public Function Get_SIM_SLOT_INFO(Optional ByVal KO_ID As Integer = 0) As DataTable
+        Dim SQL As String = "SELECT KO_ID,D_ID,SLOT_NAME,SIM_ID,PRODUCT_CODE,PRODUCT_NAME,PRICE" & vbLf
+        SQL &= ", COUNT(SERIAL_NO) TOTAL_SIM" & vbLf
+        SQL &= " FROM VW_CURRENT_SIM_STOCK" & vbLf
+        Dim Filter As String = ""
+        If KO_ID <> 0 Then
+            Filter &= " KO_ID=" & KO_ID & " AND "
+        End If
+        If Filter <> "" Then
+            SQL &= " WHERE " & Filter.Substring(0, Filter.Length - 4) & vbLf
+        End If
+        SQL &= " GROUP BY KO_ID,D_ID,SLOT_NAME,SIM_ID,PRODUCT_CODE,PRODUCT_NAME,PRICE"
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Return DT
+    End Function
+
     Public Sub Bind_SIMDispenser_Stock(ByRef Dispenser As UC_SIM_Dispenser, ByVal STOCK_DATA As DataTable, Optional ByVal VW_ALL_SIM As DataTable = Nothing)
         If IsNothing(VW_ALL_SIM) Then
             Dim SQL As String = "SELECT * FROM VW_ALL_SIM"
@@ -1149,27 +1167,27 @@ Public Class VDM_BL
         ExecuteNonQuery(SQL)
     End Sub
 
-    Public Sub Drop_SIM_Serial(ByVal KO_ID As Integer)
+    Public Sub Drop_SIM_SERIAL(ByVal KO_ID As Integer)
         Dim SQL As String = "SELECT D_ID FROM TB_SIM_SERIAL WHERE KO_ID=" & KO_ID
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         DA.Fill(DT)
         For i As Integer = 0 To DT.Rows.Count - 1
-            Drop_SIM_Serial(KO_ID, DT.Rows(i).Item("D_ID"))
+            Drop_SIM_SERIAL(KO_ID, DT.Rows(i).Item("D_ID"))
         Next
     End Sub
 
-    Public Sub Drop_SIM_Serial(ByVal KO_ID As Integer, ByVal D_ID As Integer)
+    Public Sub Drop_SIM_SERIAL(ByVal KO_ID As Integer, ByVal D_ID As Integer)
         Dim SQL As String = "SELECT SERIAL_NO FROM TB_SIM_SERIAL WHERE KO_ID=" & KO_ID & " AND D_ID=" & D_ID
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         DA.Fill(DT)
         For i As Integer = 0 To DT.Rows.Count - 1
-            Drop_SIM_Serial(KO_ID, D_ID, DT.Rows(i).Item("SERIAL_NO"))
+            Drop_SIM_SERIAL(KO_ID, D_ID, DT.Rows(i).Item("SERIAL_NO"))
         Next
     End Sub
 
-    Public Sub Drop_SIM_Serial(ByVal KO_ID As Integer, ByVal D_ID As Integer, ByVal SERIAL_NO As String)
+    Public Sub Drop_SIM_SERIAL(ByVal KO_ID As Integer, ByVal D_ID As Integer, ByVal SERIAL_NO As String)
         Dim SQL As String = "DELETE FROM TB_SIM_SERIAL" & vbLf
         SQL &= "WHERE KO_ID=" & KO_ID & " AND D_ID=" & D_ID & " AND SERIAL_NO='" & SERIAL_NO.Replace("'", "''") & "'"
         ExecuteNonQuery(SQL)
@@ -1769,29 +1787,30 @@ Public Class VDM_BL
     End Function
 
     Public Function Get_Next_SIM_To_Pick(ByVal KO_ID As Integer, ByVal SIM_ID As Integer) As DataTable
-        Dim Result As New DataTable
-        Result.Columns.Add("POS_ID", GetType(Integer))
-        Result.Columns.Add("SLOT_ID", GetType(Integer))
-        Result.Columns.Add("SLOT_NAME", GetType(String))
-        Result.Columns.Add("SERIAL_NO", GetType(String))
 
-        'Dim Sql As String = "" '-------------- คำนวนจำนวน ทั้งหมดในตู้
-        'Sql &= " SELECT POS_ID,PRODUCT.SLOT_ID,PRODUCT.SLOT_NAME,TOTAL" & vbLf
-        'Sql &= " FROM" & vbLf
-        'Sql &= " (SELECT SLOT_ID,SLOT_NAME ,COUNT(1) TOTAL" & vbLf
-        'Sql &= " FROM VW_CURRENT_PRODUCT_STOCK" & vbLf
-        'Sql &= " WHERE KO_ID=" & KO_ID & " AND PRODUCT_ID=" & PRODUCT_ID & vbLf
-        'Sql &= " GROUP BY SLOT_ID,SLOT_NAME) PRODUCT" & vbLf
-        'Sql &= " LEFT JOIN MS_SLOT_ARM_POSITION ARM ON PRODUCT.SLOT_NAME=ARM.SLOT_NAME" & vbLf
-        'Dim DT As New DataTable
-        'Dim DA As New SqlDataAdapter(Sql, ConnectionString)
-        'DA.Fill(DT)
+        Dim SQL As String = " SELECT CASE WHEN SLOT_NAME LIKE '%1' THEN 1 " & vbLf
+        SQL &= " When SLOT_NAME Like '%2' THEN 2 " & vbLf
+        SQL &= " WHEN SLOT_NAME LIKE '%3' THEN 3 " & vbLf
+        SQL &= " WHEN SLOT_NAME Like '%4' THEN 4 " & vbLf
+        SQL &= " WHEN SLOT_NAME LIKE '%5' THEN 5 " & vbLf
+        SQL &= " End SLOT_ID, " & vbLf
+        SQL &= " SLOT_NAME,COUNT(SERIAL_NO) TOTAL " & vbLf
+        SQL &= " FROM VW_CURRENT_SIM_STOCK " & vbLf
+        SQL &= " WHERE KO_ID=" & KO_ID & " AND SIM_ID=" & SIM_ID & vbLf
+        SQL &= " GROUP BY SLOT_NAME"
 
-        'If DT.Rows.Count = 0 Then
-        '    Return Result
-        'End If '
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        DA.Fill(DT)
 
-        Return Result
+        DT.Columns.Add("RND")
+        For i As Integer = 0 To DT.Rows.Count - 1
+            DT.Rows(i).Item("RND") = GenerateNewUniqueID()
+        Next
+        DT.DefaultView.Sort = "TOTAL DESC,RND ASC"
+        DT = DT.DefaultView.ToTable
+
+        Return DT
     End Function
 
     Public Function Calculate_Change_Quantity(ByVal REMAIN As Integer, ByVal MoneyStock As DataTable) As DataTable

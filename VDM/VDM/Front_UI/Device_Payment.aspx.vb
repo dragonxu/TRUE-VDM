@@ -101,7 +101,7 @@ Public Class Device_Payment
 
             ClearForm()
 
-            If PRODUCT_ID = 0 Then
+            If PRODUCT_ID = 0 And SIM_ID = 0 Then
                 Response.Redirect("Device_Brand.aspx")
                 Exit Sub
             End If
@@ -377,6 +377,9 @@ Public Class Device_Payment
             End If
             lblDISPLAY_NAME.Text = DT.Rows(0).Item("DISPLAY_NAME_" & BL.Get_Language_Code(LANGUAGE)).ToString()
         End If
+        PRODUCT_COST = DT.Rows(0).Item("PRICE")
+        txtRequire.Text = FormatNumber(DT.Rows(0).Item("PRICE"), 0)
+        CASH_PAID = 0
         IS_SERIAL = True
         '---------------- Update Cost And Money --------------
     End Sub

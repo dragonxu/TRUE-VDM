@@ -98,6 +98,15 @@ Public Class Complete_Order
         End Set
     End Property
 
+    Private Property SIM_SERIAL As String
+        Get
+            Return txtBarcode.Text
+        End Get
+        Set(value As String)
+            txtBarcode.Text = value
+        End Set
+    End Property
+
     Public ReadOnly Property PRODUCT_ID As Integer
         Get
             If IsNumeric(Request.QueryString("PRODUCT_ID")) Then
@@ -203,6 +212,12 @@ Public Class Complete_Order
 
         If Not IsPostBack Then
 
+            initFirstTimeScript()
+            '----------------------- Stop Focus Barcode ----------------------
+            Dim Script As String = "stopFocusBarcode();" & vbLf
+            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "clearBarcode", Script, True)
+            '----------------------- Stop SIM ----------------------
+
             txtLocalControllerURL.Text = BL.LocalControllerURL
 
             Dim DT As DataTable = BL.Get_Kiosk_Current_Shift(KO_ID)
@@ -227,6 +242,11 @@ Public Class Complete_Order
 
     End Sub
 
+    Private Sub initFirstTimeScript()
+        Dim Script = "breakSIMSlot(); stopFocusBarcode(); $('#btnLeaveFocus').focus();"
+        txtBarcode.Attributes("onchange") = Script
+    End Sub
+
     Private Sub PickUpProduct()
 
         Dim DT As DataTable = BL.Get_Next_Product_To_Pick(KO_ID, PRODUCT_ID)
@@ -242,12 +262,18 @@ Public Class Complete_Order
     End Sub
 
     Private Sub PickUpSIM()
-        Dim DT As DataTable = BL.Get_Next_SIM_To_Pick(KO_ID, PRODUCT_ID)
+        Dim DT As DataTable = BL.Get_Next_SIM_To_Pick(KO_ID, SIM_ID)
         If DT.Rows.Count = 0 Then
 
         Else
-
+            SLOT_ID = DT.Rows(0).Item("SLOT_ID")
+            SLOT_NAME = DT.Rows(0).Item("SLOT_NAME")
+            Dim Script As String = "txtBarcode='" & txtBarcode.ClientID & "';" & vbLf
+            Script &= "startFocusBarcode();" & vbLf
+            Script &= "pullSIM();" & vbLf
+            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "PickSIM", Script, True)
         End If
+
     End Sub
 
     Private Sub lnkHome_Click(sender As Object, e As ImageClickEventArgs) Handles lnkHome.Click
@@ -263,42 +289,82 @@ Public Class Complete_Order
         '-------------------- Product_Picked_Up------------------
 
         '---------------------TB_TRANSACTION_PICK----------------
-        Dim SQL As String = "SELECT Top 0 * FROM  TB_TRANSACTION_PICK" & vbLf
+        Dim SQL As String = "SELECT * FROM  TB_TRANSACTION_PICK WHERE TXN_ID=" & TXN_ID & vbLf
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
         DA.Fill(DT)
-        Dim DR As DataRow = DT.NewRow
-
-        DR("TXN_ID") = TXN_ID
-        DR("ITEM_NO") = 1
-
-        If PRODUCT_ID <> 0 Then
-            DR("PRODUCT_ID") = PRODUCT_ID
+        Dim DR As DataRow
+        If DT.Rows.Count = 0 Then
+            DR = DT.NewRow
+            DT.Rows.Add(DR)
+            DR("TXN_ID") = TXN_ID
+            DR("ITEM_NO") = 1
         Else
-            DR("SIM_ID") = SIM_ID
+            DR = DT.Rows(0)
         End If
 
-        DR("SERIAL_NO") = SERIAL_NO
-        DR("SLOT_ID") = SLOT_ID
         DR("SLOT_NAME") = SLOT_NAME
-        DR("POS_ID") = POS_ID
         DR("TXN_TIME") = Now
-        DT.Rows.Add(DR)
-        Dim cmd As New SqlCommandBuilder(DA)
-        DA.Update(DT)
+
+        Dim D_ID As Integer = 0
+        If PRODUCT_ID <> 0 Then
+            DR("PRODUCT_ID") = PRODUCT_ID
+            DR("SLOT_ID") = SLOT_ID
+            DR("POS_ID") = POS_ID
+            DR("SERIAL_NO") = SERIAL_NO
+        Else
+            DR("SERIAL_NO") = SIM_SERIAL
+            DR("SIM_ID") = SIM_ID
+            Dim ST As DataTable = BL.Get_SIM_SLOT_INFO(KO_ID)
+            ST.DefaultView.RowFilter = "SLOT_NAME='" & SLOT_NAME & "'"
+            If ST.DefaultView.Count > 0 Then
+                D_ID = ST.DefaultView(0).Item("D_ID")
+                DR("SLOT_ID") = D_ID
+            End If
+            ST.Dispose()
+        End If
+
+        Try
+            Dim cmd As New SqlCommandBuilder(DA)
+            DA.Update(DT)
+        Catch ex As Exception
+            Alert(Me.Page, ex.Message)
+            'Response.End()
+            Exit Sub
+        End Try
+
 
         '---------------- Cut-Off Stock----------------
         If PRODUCT_ID > 0 Then '------------ Product---------------
             BL.Drop_PRODUCT_STOCK_SERIAL(SLOT_ID, SERIAL_NO)
             BL.Save_Product_Movement_Log(SHIFT_ID, VDM_BL.ShiftStatus.OnGoing, PRODUCT_ID, SERIAL_NO, VDM_BL.StockMovementType.Sell, SLOT_NAME, SLOT_ID, "", 0, "ขายที่ตู้ " & SHOP_CODE & "-" & KO_CODE & " ไปเมื่อวันที่ " & Now.ToString("dd-MMM-yyyy") & " by SaleCode : " & SALE_CODE, SHIFT_OPEN_BY, Now)
         Else '------------ SIM---------------
+            Try
+                BL.Drop_SIM_SERIAL(KO_ID, D_ID, SIM_SERIAL)
+                BL.Save_SIM_Movement_Log(SHIFT_ID, VDM_BL.ShiftStatus.OnGoing, SIM_ID, SERIAL_NO, VDM_BL.StockMovementType.Sell, SLOT_NAME, D_ID, "", 0, "ขายที่ตู้ " & SHOP_CODE & "-" & KO_CODE & " ไปเมื่อวันที่ " & Now.ToString("dd-MMM-yyyy") & " by SaleCode : " & SALE_CODE, SHIFT_OPEN_BY, Now)
+            Catch ex As Exception
+                Alert(Me.Page, ex.Message)
+                'Response.End()
+                Exit Sub
+            End Try
 
         End If
 
         Response.Redirect("Thank_You.aspx")
     End Sub
 
+    Private Sub btnBarcode_Click(sender As Object, e As EventArgs) Handles btnBarcode.Click ' ได้ Barcode หยุดเอาไว้ก่อน
 
+        Dim Script As String = " sendSIMValidation();" & vbLf
 
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "BreakSIM", Script, True)
+    End Sub
 
+    Private Sub btnValidatePrepaid_Click(sender As Object, e As EventArgs) Handles btnValidatePrepaid.Click
+        ' ------------- Call Validate Prepaid -------------
+
+        '----------- validate Success -----------------
+        Dim Script As String = "sendSIMToCustomer();" & vbLf
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "ForwardSIM", Script, True)
+    End Sub
 End Class
