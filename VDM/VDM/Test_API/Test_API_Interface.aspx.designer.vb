@@ -140,6 +140,15 @@ Partial Public Class Test_API_Interface
     Protected WithEvents btn_Prepaid_Register As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
+    '''btn_Auto_Prepaid_Register control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btn_Auto_Prepaid_Register As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
     '''pnl_face_recognition control.
     '''</summary>
     '''<remarks>
@@ -354,4 +363,22 @@ Partial Public Class Test_API_Interface
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents UC_Validate_Serial As Global.VDM.UC_Validate_Serial
+    
+    '''<summary>
+    '''pnl_Auto_Prepaid_Register control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnl_Auto_Prepaid_Register As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''UC_Auto_Prepaid_Register control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UC_Auto_Prepaid_Register As Global.VDM.UC_Auto_Prepaid_Register
 End Class

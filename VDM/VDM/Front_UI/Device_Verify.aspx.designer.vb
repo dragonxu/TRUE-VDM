@@ -147,4 +147,139 @@ Partial Public Class Device_Verify
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkBack As Global.System.Web.UI.WebControls.ImageButton
+    
+    '''<summary>
+    '''id_number control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_number As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''Face_cust_certificate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Face_cust_certificate As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''Face_cust_capture control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Face_cust_capture As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''CUS_TITLE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CUS_TITLE As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''CUS_NAME control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CUS_NAME As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''CUS_SURNAME control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CUS_SURNAME As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''NAT_CODE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NAT_CODE As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''CUS_GENDER control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CUS_GENDER As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''CUS_BIRTHDATE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CUS_BIRTHDATE As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''CUS_PID control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CUS_PID As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''CUS_PASSPORT_ID control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CUS_PASSPORT_ID As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''CUS_PASSPORT_START control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CUS_PASSPORT_START As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''CUS_PASSPORT_EXPIRE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CUS_PASSPORT_EXPIRE As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''CUS_IMAGE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CUS_IMAGE As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''btnFace_Recognition control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnFace_Recognition As Global.System.Web.UI.WebControls.Button
 End Class
