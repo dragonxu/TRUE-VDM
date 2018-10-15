@@ -149,6 +149,24 @@ Partial Public Class Device_Shoping_Cart
     Protected WithEvents btnConfirm_str As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
+    '''btnIDCard control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnIDCard As Global.System.Web.UI.HtmlControls.HtmlInputButton
+    
+    '''<summary>
+    '''clickIDCard control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents clickIDCard As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
     '''lnkHome control.
     '''</summary>
     '''<remarks>

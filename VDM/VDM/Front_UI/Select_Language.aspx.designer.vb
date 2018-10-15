@@ -23,6 +23,15 @@ Partial Public Class Select_Language
     Protected WithEvents form As Global.System.Web.UI.HtmlControls.HtmlForm
     
     '''<summary>
+    '''UC_CommonUI control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UC_CommonUI As Global.VDM.UC_CommonUI
+    
+    '''<summary>
     '''TH control.
     '''</summary>
     '''<remarks>
@@ -75,13 +84,4 @@ Partial Public Class Select_Language
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RU As Global.System.Web.UI.HtmlControls.HtmlAnchor
-    
-    '''<summary>
-    '''UC_CommonUI control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents UC_CommonUI As Global.VDM.UC_CommonUI
 End Class

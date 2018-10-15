@@ -94,7 +94,7 @@
                          <asp:Panel ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" Style="position: fixed; left: -500px; top: 100px;">
                             <asp:TextBox ID="txtBarcode" runat="server"></asp:TextBox>
                             <asp:Button ID="btnBarcode" runat="server" />    
-                             <button type="button" id="btnFocus" value="focus"/>                                              
+                             <button type="button" id="btnFocus" value="focus"/>                      
                         </asp:Panel>
                         
                     </div>

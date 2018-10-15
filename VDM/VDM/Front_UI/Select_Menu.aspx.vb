@@ -45,13 +45,13 @@ Public Class Select_Menu
         End If
 
 
-        If Not IsPostBack Then
-            If IsNothing(Session("Accept_Contact_EMP")) Then        'แสดงครั้งเดียว เคลียร์ Session("Accept_Contact_EMP") หลังจากเข้าหน้า Select_Language
-                Dim img As New VDM_BL.DialogImage.Accept_Contact_EMP
-                UC_Dialog.Set_Dialog("หากท่านต้องการ<br/>ใบเสร็จรับเงินฉบับจริง<br/>หรือใบกำกับภาษี", img.Alert_Show, "กรุณาติดต่อพนักงานก่อนทำรายการ", "ดำเนินการ", True)
-                Session("Accept_Contact_EMP") = True
-            End If
-        End If
+        'If Not IsPostBack Then
+        '    If IsNothing(Session("Accept_Contact_EMP")) Then        'แสดงครั้งเดียว เคลียร์ Session("Accept_Contact_EMP") หลังจากเข้าหน้า Select_Language
+        '        Dim img As New VDM_BL.DialogImage.Accept_Contact_EMP
+        '        UC_Dialog.Set_Dialog("หากท่านต้องการ<br/>ใบเสร็จรับเงินฉบับจริง<br/>หรือใบกำกับภาษี", img.Alert_Show, "กรุณาติดต่อพนักงานก่อนทำรายการ", "ดำเนินการ", True)
+        '        Session("Accept_Contact_EMP") = True
+        '    End If
+        'End If
 
 
         'Dim img As New VDM_BL.DialogImage.ID_Card

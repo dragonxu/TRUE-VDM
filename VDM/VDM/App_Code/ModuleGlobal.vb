@@ -488,4 +488,11 @@ Module ModuleGlobal
         End Try
     End Function
 
+    Public Function GetImageDimension(ByVal ImagePath As String) As Drawing.Size
+        Dim C As New Converter
+        Dim ST As Stream = C.ByteToStream(ReadFile(ImagePath))
+        Dim img As Drawing.Image = Drawing.Image.FromStream(ST)
+        Return New Drawing.Size(img.Width, img.Height)
+    End Function
+
 End Module

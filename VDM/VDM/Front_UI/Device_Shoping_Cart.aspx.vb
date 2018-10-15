@@ -108,11 +108,12 @@ Public Class Device_Shoping_Cart
 
     Private Sub ClearForm()
 
-        If PRODUCT_ID <> 0 Then
-            pnlProduct.Visible = True
-        Else
-            pnlProduct.Visible = False
-        End If
+
+        pnlProduct.Visible = PRODUCT_ID <> 0
+        btnConfirm_str.Visible = PRODUCT_ID <> 0
+
+        btnIDCard.Visible = SIM_ID <> 0
+        clickIDCard.Visible = SIM_ID <> 0
 
         chkActive.Checked = False
         pnlConfirm.Enabled = False

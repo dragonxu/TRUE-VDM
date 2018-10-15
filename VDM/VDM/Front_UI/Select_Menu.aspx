@@ -1,9 +1,6 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Front_UI/MasterFront.Master" CodeBehind="Select_Menu.aspx.vb" Inherits="VDM.Select_Menu" %>
 
 <%@ Register Src="~/Front_UI/UC_CommonUI.ascx" TagPrefix="uc1" TagName="UC_CommonUI" %>
-<%@ Register Src="~/Front_UI/UC_Dialog.ascx" TagPrefix="uc1" TagName="UC_Dialog" %>
-
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -39,15 +36,14 @@
      <footer>
                 <nav>
                     <div class="main">
-                        <span class="col-md-6">
-                           <%-- <asp:ImageButton ID="lnkHome" runat="server" ImageUrl="images/btu-home.png" />--%>
-                        </span>
-                        <span class="col-md-6">
+                        <%--<span class="col-md-6">
+                            <asp:ImageButton ID="lnkHome" runat="server" ImageUrl="images/btu-home.png" />
+                        </span>--%>
+                        <span class="col-md-12">
                             <asp:ImageButton ID="lnkBack" runat="server" ImageUrl="images/btu-prev.png" />
                         </span>
                     </div>
                 </nav>
             </footer>
-    <uc1:UC_Dialog runat="server" id="UC_Dialog" />
     <uc1:UC_CommonUI runat="server" ID="UC_CommonUI" />
 </asp:Content>

@@ -86,7 +86,7 @@
                 <img src="images/bg-top.png" />
             </header>
             <main>
-                <div class="priceplan">
+                <div class="priceplan" style="max-height:1500px; overflow:hidden;">
                     <asp:Label ID="lblCode" runat="server" Style="display: none;" CAPACITY=""></asp:Label>
                     <div class="main3">
                         <div class="detail-slider">
@@ -99,7 +99,7 @@
                                                     <div class="col-md-5">
                                                         <div class="row">
                                                             <div class="pic" style="padding: unset;">
-                                                                <asp:Image ID="img" runat="server"></asp:Image>
+                                                                <asp:Image ID="img" runat="server" Height="370px" Width="370px"></asp:Image>
                                                             </div>
                                                         </div>
 
@@ -118,7 +118,7 @@
                                                                                 <asp:LinkButton ID="lnkColor" runat="server"> </asp:LinkButton>
                                                                                 <%--<a id="btnColor" runat="server">--%>
                                                                                 <asp:Panel class="select-color" Style="padding: 10px 0; width: 90%;" ID="pnlSelect" runat="server">
-                                                                                    <asp:Image ID="img" runat="server" Style="height: 80px; width: unset;"></asp:Image>
+                                                                                    <asp:Image ID="img" runat="server" Height="80px" Width="80px"></asp:Image>
                                                                                 </asp:Panel>
                                                                                 <p class="true-m" style="width: unset;">
                                                                                     <asp:Label ID="lblColor" runat="server" Style="width: unset; text-align: center; font-size: 25px;"></asp:Label>
@@ -230,15 +230,13 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="term" style="margin: unset;">
+                                                    <div class="term" style="margin: unset; max-height:500px;">
 
                                                         <div class="frame" style="border: unset; background-color: transparent;">
-                                                            <span id="content-d3" class="light" style="max-height: 250px;">
-                                                                <p class="true-l">
-                                                                    <div style="width: 100%; font-size: 30px; margin-top: 10px;">
+                                                            <span id="content-d3" class="light true-l" style="max-height: 500px;">                                                               
+                                                                    <div style="width: 100%; font-size: 30px; margin-top: 10px; overflow:hidden;">
                                                                         <asp:Label ID="lblDesc" runat="server"></asp:Label>
-                                                                    </div>
-                                                                </p>
+                                                                    </div>                                                               
                                                             </span>
                                                         </div>
                                                     </div>

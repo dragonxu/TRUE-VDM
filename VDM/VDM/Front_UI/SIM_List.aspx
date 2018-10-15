@@ -52,12 +52,12 @@
              <footer>
                 <nav>
                     <div class="main">
-                        <span class="col-md-6">
+                        <span class="col-md-12">
                             <asp:ImageButton ID="lnkHome" runat="server" ImageUrl="images/btu-home.png" />
                         </span>
-                        <span class="col-md-6">
-                            <%--<asp:ImageButton ID="lnkBack" runat="server" ImageUrl="images/btu-prev.png" />--%>
-                        </span>
+                        <%--<span class="col-md-6">
+                            <asp:ImageButton ID="lnkBack" runat="server" ImageUrl="images/btu-prev.png" />
+                        </span>--%>
                     </div>
                 </nav>
             </footer>

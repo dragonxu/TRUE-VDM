@@ -321,8 +321,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', end
 .priceplan .slick-initialized .slick-slide{padding:0; }
 
 .priceplan .slick-prev, .priceplan .slick-next{top:70px;}
-.priceplan .slick-next{right:-20px; }
-.priceplan .slick-prev{left:-50px; }
+.priceplan .slick-next{right:-80px; }
+.priceplan .slick-prev{left:-80px; }
 .priceplan .description{width:100%; margin:60px 0; display:inline-block;}
 .priceplan .description .pic{width:370px; padding:0 40px; display:inline-block; float:left;}
 .priceplan .description .pic img{width:100%;}

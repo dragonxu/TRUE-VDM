@@ -148,6 +148,8 @@ Public Class SIM_Detail
             Dim Detail As String = BL.Get_SIM_Detail_Picture_Path(SIM_ID, LANGUAGE)
             If IO.File.Exists(Detail) Then
                 imgPrice.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=SIM_DETAIL&UID=" & SIM_ID & "&LANG=" & LANGUAGE
+                ''------------- Set Image Dimension ------------
+                'Dim Dimen As Drawing.Size = GetImageDimension(Detail)
             Else
                 imgPrice.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=SIM_DETAIL&UID=" & SIM_ID & "&LANG=" & VDM_BL.UILanguage.TH
             End If

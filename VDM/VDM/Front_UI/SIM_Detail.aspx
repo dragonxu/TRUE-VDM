@@ -27,10 +27,7 @@
             position: relative;
         }
     </style>
-    <script>
-        $("#clicksetp1").fancybox();
-        $("#clicksetp2").fancybox();
-    </script>
+
 </head>
 <body class="bg2">
     <form id="form1" runat="server">
@@ -50,7 +47,7 @@
                                 <div class="description">
                                     <div class="pic">
                                         <div class="pic-shadow">
-                                            <asp:Image ID="img" runat="server"></asp:Image>
+                                            <asp:Image ID="img" runat="server" Height="360px"></asp:Image>
                                         </div>
                                     </div>
                                     <figure class="col-md-7">
@@ -94,17 +91,17 @@
 
                                 <div class="detail-sim" style ="margin-bottom:10px;width :80%;">
 
-                                    <asp:Image ID="imgPrice" runat="server"></asp:Image>
+                                    <asp:Image ID="imgPrice" runat="server" Height="560px"></asp:Image>
                                 </div>
                                 <div class="true-l">
                                     <div class="term" style="margin: unset;">
-                                        <div class="frame" style="border: unset; background-color: transparent;">
-                                            <span id="content-d3" class="light" style="max-height: 250px;">
-                                                <p class="true-l">
+                                        <div class="frame" style="border: unset; margin-top:40px; background-color: transparent;">
+                                            <span id="content-d3" class="light" style="max-height: 350px;">
+                                                
                                                     <div style="width: 100%; font-size: 30px; margin-top: 20px;">
                                                         <asp:Label ID="lblDesc" runat="server"></asp:Label>
                                                     </div>
-                                                </p>
+                                               
                                             </span>
                                         </div>
                                     </div>

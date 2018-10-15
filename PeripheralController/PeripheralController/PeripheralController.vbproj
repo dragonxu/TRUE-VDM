@@ -111,6 +111,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\Converter.vb" />
+    <Compile Include="CamCapture.aspx.designer.vb">
+      <DependentUpon>CamCapture.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CamCapture.aspx.vb">
+      <DependentUpon>CamCapture.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Control\UC_Camera.ascx.designer.vb">
       <DependentUpon>UC_Camera.ascx</DependentUpon>
     </Compile>
@@ -226,6 +233,7 @@
       <DependentUpon>SIMPicker.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Content Include="CamCapture.aspx" />
     <Content Include="Control\UC_Camera.ascx" />
     <Content Include="Control\UC_CashDispenser.ascx" />
     <Content Include="Control\UC_CashReciever.ascx" />
@@ -245,7 +253,9 @@
     <Content Include="Default.aspx" />
     <Content Include="css\style.css" />
     <Content Include="SIMPicker.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\Core_BL.vb" />

@@ -41,15 +41,6 @@ Partial Public Class Select_Menu
     Protected WithEvents lnkBack As Global.System.Web.UI.WebControls.ImageButton
     
     '''<summary>
-    '''UC_Dialog control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents UC_Dialog As Global.VDM.UC_Dialog
-    
-    '''<summary>
     '''UC_CommonUI control.
     '''</summary>
     '''<remarks>

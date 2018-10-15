@@ -16,13 +16,20 @@
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/bootstrap-select.css" rel="stylesheet">
-    <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+    
+    <link href="css/true-popup.css" rel="stylesheet" type="text/css" />
+    <link href="css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="../Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.fancybox.js"></script>
+
     <script type="text/javascript" src="js/bootstrap.js"></script>
+     <script src="js/jquery.mCustomScrollbar.js"></script>
 
     <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
+   
 
-
-    <style>
+    <style type="text/css">
         header {
             position: relative;
         }
@@ -49,7 +56,7 @@
                         </div>
                         <div class="description">
                             <div class="pic" style="padding: unset; text-align: center;">
-                                <asp:Image ID="img" runat="server" Style="width: 70%;"></asp:Image>
+                                <asp:Image ID="img" runat="server" Style="width: 70%; height:320px;"></asp:Image>
                             </div>
                             <figure class="col-md-6">
                                 <div class="topic true-l">
@@ -114,10 +121,10 @@
                         </div>
 
 
-                        <div class="term" style="margin: unset;">
+                        <div class="term" style="height:750px;">
                             <h2 class="true-m">Term & Condition</h2>
-                            <div class="frame">
-                                <span id="content-d3" class="light">
+                            <div class="frame" style="height: 620px;">
+                                <span id="content-d3" class="light" style="height:560px; overflow:hidden;">
                                     <p class="true-l">
                                         <%-- <asp:Label  class="true-l" ID="lblTerm_Condition" runat="server" Text=""></asp:Label>--%>
                                         ข้อกำหนดและเงื่อนไขรายการส่งเสริมการขาย 4G+ FUN Unlimited 299, 4G+ FUN Unlimited 399, 4G+ FUN Unlimited 499, 4G+ FUN Unlimited 599, 4G+ FUN Unlimited 699, 4G+ FUN Unlimited 899, 4G+ FUN Unlimited 1099, 4G+ FUN Unlimited 1299, 4G+ FUN Unlimited 1499, และ 4G+ FUN Unlimited 1899
@@ -147,7 +154,7 @@
                         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                         <asp:UpdatePanel ID="udpList" runat="server">
                             <ContentTemplate>
-                                <label class="check true-l">
+                                <label class="check true-l" style="height:100px;">
                                     ข้าพเจ้าได้อ่านข้อกำหนดและเงื่อนไขทุกข้อแล้ว
                                     <asp:CheckBox ID="chkActive" runat="server" Checked="false" AutoPostBack="true" />
                                     <span class="checkmark"></span>
@@ -157,7 +164,8 @@
                                 <div class="col-md-12" style="text-align: center;">
                                     <asp:Panel ID="pnlConfirm" runat="server">
                                         <asp:Button ID="btnConfirm_str" runat="server" class="order true-m btn-default " Text="ชำระเงิน" />
-
+                                        <input type="button" class="order true-m" id="btnIDCard" runat="server" value="สั่งซื้อ" onclick="$('#clickIDCard').click();" />
+                                        <a id="clickIDCard" runat="server" style="display:none;" href="#popupIPCard">สั่งซื้อ</a>
                                     </asp:Panel>
                                 </div>
                             </ContentTemplate>
@@ -181,18 +189,30 @@
             </footer>
         </div>
         <uc1:UC_CommonUI runat="server" ID="UC_CommonUI" />
+
+        <div id="popupIPCard" class="popup">
+          <div class="popup-frame">
+            <h3 class="true-m">ขั้นตอนการยืนยันตัวบุคคล</h3>
+            <div class="icon"><img src="images/Popup/icon-idcard.png"/></div>
+            <h4 class="true-b">กรุณาสอดบัตรประชาชนของท่าน</h4>
+            <%--<div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;">ตกลง</a></div>--%>
+          </div>
+        </div>
+
     </form>
 </body>
 
-<script src="js/jquery.mCustomScrollbar.js"></script>
 
-<script>
+
+<script type="text/javascript">
+
+    $("#clickIDCard").fancybox();
+
     (function ($) {
         $(window).on("load", function () {
 
             $.mCustomScrollbar.defaults.scrollButtons.enable = true; //enable scrolling buttons by default
             $.mCustomScrollbar.defaults.axis = "yx"; //enable 2 axis scrollbars by default
-
             $("#content-d3").mCustomScrollbar({ theme: "dark-3" });
 
         });
