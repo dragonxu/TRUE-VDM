@@ -8,16 +8,19 @@ Public Class FormMain
 
     Public ChromeBrowser As ChromiumWebBrowser
     'Dim StartURL As String = "http://localhost:62820/Front_UI/Default.aspx?KO_ID=1" '********** Production Check '-********** 
-    Dim StartURL As String = "http://localhost"
+    'Dim StartURL As String = "http://localhost"
+    Dim StartURL As String = "http://localhost:62820/test.aspx"
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles Me.Load
+        ShowKeyboard()
 
+        'Exit Sub
         CheckForIllegalCrossThreadCalls = False
 
-        Cursor.Hide() '********** Production Check '-********** 
+        'Cursor.Hide() '********** Production Check '-********** 
         InitChromium()
         '------------- Start SIM Dispenser------------
-        StartProductController() '********** Production Check '-********** 
+        'StartProductController() '********** Production Check '-********** 
     End Sub
 
     Private Sub InitChromium()
@@ -52,7 +55,7 @@ Public Class FormMain
     End Sub
 
     Private Sub ShowKeyboard()
-
+        FormKeyboard.Show()
     End Sub
 
 
