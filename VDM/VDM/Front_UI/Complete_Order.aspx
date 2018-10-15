@@ -12,8 +12,10 @@
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/bootstrap-select.css" rel="stylesheet">
-    <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+    <script type="text/javascript" src="../Scripts/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="../Scripts/extent.js"></script>
+
     <style>
         header {
             position: relative;
@@ -77,6 +79,7 @@
                             </div>
                         </div>
                         <div class="col-md-12">
+                           
                             <asp:TextBox ID="txtLocalControllerURL" runat="server" Style="display:none;"></asp:TextBox>
                             <asp:TextBox ID="txtSerial" runat="server"  Style="display:none;"></asp:TextBox>
                             <asp:TextBox ID="txtSlotID" runat="server"  Style="display:none;"></asp:TextBox>
@@ -85,23 +88,29 @@
                             <asp:TextBox ID="txtStatus" runat="server"  Style="display:none;"></asp:TextBox>
                             <asp:TextBox ID="txtMessage" runat="server"  Style="display:none;"></asp:TextBox>
                             <asp:Button ID="btnNext" runat="server" Style="display:none; /*background: #635b5b; padding: 0 50px 0 50px; float: right; margin-top: 100px;*/" Text="ข้าม" />
+                            <asp:Button ID="btnValidatePrepaid" runat="server"  Style="display:none;"  />
                         </div>
 
+                         <asp:Panel ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" Style="position: fixed; left: -500px; top: 100px;">
+                            <asp:TextBox ID="txtBarcode" runat="server"></asp:TextBox>
+                            <asp:Button ID="btnBarcode" runat="server" />    
+                             <button type="button" id="btnFocus" value="focus"/>                                              
+                        </asp:Panel>
+                        
                     </div>
                 </div>
             </main>
-
-          
                <footer style="bottom: 0px">
                 <nav>
                     <div class="main">
                         <span class="col-md-6">
-                            <asp:ImageButton ID="lnkHome" runat="server" ImageUrl="images/btu-home.png" />
+                            <asp:ImageButton ID="lnkHome" runat="server" ImageUrl="images/btu-home.png" Visible="false" />
                         </span>
                         <span class="col-md-6">
-                            <asp:ImageButton ID="lnkBack" runat="server" ImageUrl="images/btu-prev.png" />
+                            <asp:ImageButton ID="lnkBack" runat="server" ImageUrl="images/btu-prev.png" Visible="false" />
                         </span>
                     </div>
+                          
                 </nav>
             </footer>
         </ContentTemplate>
@@ -112,7 +121,7 @@
 
             function pickProduct() {
                 // Gen URL
-                var url =  $('#txtLocalControllerURL').val() + '/ProductPicker.aspx?Mode=GoPick&OpenTimeOut=10&POS_ID=' + $('#txtPosID').val() + '&callback=picked';
+                var url =  $('#txtLocalControllerURL').val() + '/ProductPicker.aspx?Mode=GoPick&OpenTimeOut=10&POS_ID=' + $('#txtPosID').val() + '&callback=productPicked';
               
                     var script = document.createElement('script');
                     script.src = url;
@@ -120,7 +129,7 @@
                     body.appendChild(script);
             }
 
-            function picked(status, message) {
+            function productPicked(status, message) {
 
                 $('#txtStatus').val(status);
                 $('#txtMessage').val(message);
@@ -132,8 +141,64 @@
                 }*/
                 $('#btnNext').click();
             }
+
+            function pullSIM() {
+
+                var url = $('#txtLocalControllerURL').val() + '/SIMPicker.aspx?Mode=PULL&TimeOut=15&SLOT_ID=' + $('#txtSlotID').val() + '&callback=pulled';
+                var script = document.createElement('script');
+                script.src = url;
+                var body = document.getElementsByTagName('body')[0];
+                body.appendChild(script);
+            }
+
+
+            function pulled(status) {
+                if (status == 'true') {
+                    rotateSIMToScan();
+                } else {
+                    // ดึงจน TimeOut
+                }
+            }
+
+            function rotateSIMToScan() {
+                var url = $('#txtLocalControllerURL').val() + '/SIMPicker.aspx?Mode=Back&TimeOut=10&callback=';
+                var script = document.createElement('script');
+                script.src = url;
+                var body = document.getElementsByTagName('body')[0];
+                body.appendChild(script);
+                $('#txtBarcode').focus();
+            }
+
+            function breakSIMSlot() {
+                var url = $('#txtLocalControllerURL').val() + '/SIMPicker.aspx?Mode=Break&callback=';
+                var script = document.createElement('script');
+                script.src = url;
+                var body = document.getElementsByTagName('body')[0];
+                body.appendChild(script);
+            }
+
+            function sendSIMValidation() {
+                setTimeout(function () { $('#btnValidatePrepaid').click(); }, 5000);
+                $('#btnValidatePrepaid').click();
+            }
+
+            function sendSIMToCustomer() {
+                $('#btnFocus').focus();
+                var url = $('#txtLocalControllerURL').val() + '/SIMPicker.aspx?Mode=Forward&TimeOut=15&OpenTimeOut=10&callback=simPicked';
+                var script = document.createElement('script');
+                script.src = url;
+                var body = document.getElementsByTagName('body')[0];
+                body.appendChild(script);
+            }
+
+            function simPicked(status) {
+                $('#btnNext').click();
+            }
+
+           
         </script>
         <uc1:UC_CommonUI runat="server" ID="UC_CommonUI" />
     </form>
+     
 </body>
 </html>

@@ -113,6 +113,42 @@ Partial Public Class Complete_Order
     Protected WithEvents btnNext As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
+    '''btnValidatePrepaid control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnValidatePrepaid As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''pnlBarcode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlBarcode As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''txtBarcode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtBarcode As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''btnBarcode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnBarcode As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
     '''lnkHome control.
     '''</summary>
     '''<remarks>

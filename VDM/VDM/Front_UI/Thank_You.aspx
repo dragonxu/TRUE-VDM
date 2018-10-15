@@ -62,18 +62,18 @@
              };
 
              var printDelegate = function () {
-                 var content = $('#txtPrintContent').val().replaceAll("&lt", "<").replaceAll("&gt",">");                 
+                 var content = $('#txtPrintContent').val().replaceAll("&lt", "<").replaceAll("&gt", ">");
                  var url = $('#txtLocalControllerURL').val() + '/Print.aspx?Mode=Print';
                  var xhr = new XMLHttpRequest();
                  xhr.open("POST", url, true);
-                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                  xhr.send(content);
              }
              
              var redirectDelegate = function () {
                  $('#lnkHome').click();
              }
-             var waitSeconds = 10;// รอ 10 วินาที
+             var waitSeconds = 15;// รอ 15 วินาที
              setTimeout(redirectDelegate, waitSeconds * 1000);
             
 
