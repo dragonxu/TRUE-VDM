@@ -1,14 +1,14 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="UC_Dialog.ascx.vb" Inherits="VDM.UC_Dialog" %>
 
-<asp:Panel ID="pnlModul" runat="server" Visible ="False" >
+        <asp:Panel ID="pnlModul" runat="server" Visible ="False" >
                 <div class="fancybox-overlay fancybox-overlay-fixed" style="width: auto; height: auto; display: block;">
-                    <div class="fancybox-wrap fancybox-desktop fancybox-type-inline fancybox-opened" tabindex="-1" style="width: 818px; height: auto; position: absolute; top: 500px; left: 250px; opacity: 1; overflow: visible;">
+                    <div class="fancybox-wrap fancybox-desktop fancybox-type-inline fancybox-opened" tabindex="-1" style="100%; height: auto; max-width:800px; position: absolute; top: 20%; left: 20%; right:20%; opacity: 1; overflow: visible;">
                         <div class="fancybox-skin" style="padding: 0px; width: auto; height: auto;">
                             <div class="fancybox-outer">
-                                <div class="fancybox-inner" style="overflow: auto; width: 818px; height: auto;">
+                                <div class="fancybox-inner" style="overflow: auto; width: 100%; height: auto;">
                                     <div id="popup2" style="display: block;">
 
-                                        <div class="privilege">
+                                        <div class="privilege" style="width:100%;">
 <%--                                            <h3 class="true-m half">หากท่านต้องการ<br/>ใบเสร็จรับเงินฉบับจริง<br/>หรือใบกำกับภาษี</h3>--%>
 
                                             <h3 class="true-m half"><asp:Label ID="lbl_HeaderMessage" runat ="server" ></asp:Label></h3>

@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Login.aspx.vb" Inherits="VDM.Login" %>
 
+<%@ Register Src="~/Front_UI/UC_CommonUI.ascx" TagPrefix="uc1" TagName="UC_CommonUI" %>
+
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -69,6 +72,7 @@
       </div>
     </div>
 
+      <uc1:UC_CommonUI runat="server" ID="UC_CommonUI" />
       
     <!-- bottom footer -->
     <%--<footer class="session-footer">

@@ -213,9 +213,6 @@ Public Class Complete_Order
         If Not IsPostBack Then
 
             initFirstTimeScript()
-            '----------------------- Stop Focus Barcode ----------------------
-            Dim Script As String = "stopFocusBarcode();" & vbLf
-            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "clearBarcode", Script, True)
             '----------------------- Stop SIM ----------------------
 
             txtLocalControllerURL.Text = BL.LocalControllerURL
@@ -243,8 +240,7 @@ Public Class Complete_Order
     End Sub
 
     Private Sub initFirstTimeScript()
-        Dim Script = "breakSIMSlot(); stopFocusBarcode(); $('#btnLeaveFocus').focus();"
-        txtBarcode.Attributes("onchange") = Script
+        'txtBarcode.Attributes("onchange") = "leaveBarcode();"
     End Sub
 
     Private Sub PickUpProduct()
@@ -268,9 +264,8 @@ Public Class Complete_Order
         Else
             SLOT_ID = DT.Rows(0).Item("SLOT_ID")
             SLOT_NAME = DT.Rows(0).Item("SLOT_NAME")
-            Dim Script As String = "txtBarcode='" & txtBarcode.ClientID & "';" & vbLf
-            Script &= "startFocusBarcode();" & vbLf
-            Script &= "pullSIM();" & vbLf
+            txtBarcode.Text = ""
+            Dim Script As String = "pullSIM();" & vbLf
             ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "PickSIM", Script, True)
         End If
 
@@ -355,7 +350,7 @@ Public Class Complete_Order
 
     Private Sub btnBarcode_Click(sender As Object, e As EventArgs) Handles btnBarcode.Click ' ได้ Barcode หยุดเอาไว้ก่อน
 
-        Dim Script As String = " sendSIMValidation();" & vbLf
+        Dim Script As String = "$('#btnFocus').focus(); sendSIMValidation();" & vbLf
 
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "BreakSIM", Script, True)
     End Sub

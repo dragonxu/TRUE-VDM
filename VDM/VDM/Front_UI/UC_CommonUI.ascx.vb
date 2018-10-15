@@ -28,7 +28,7 @@ Public Class UC_CommonUI
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If KO_ID = 0 Then
-            Response.Redirect("../Machine_Console/Login.aspx")
+            Response.Redirect("http://localhost")
             Response.End()
         End If
 

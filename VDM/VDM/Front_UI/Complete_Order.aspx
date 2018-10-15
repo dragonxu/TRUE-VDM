@@ -93,25 +93,24 @@
 
                          <asp:Panel ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" Style="position: fixed; left: -500px; top: 100px;">
                             <asp:TextBox ID="txtBarcode" runat="server"></asp:TextBox>
-                            <asp:Button ID="btnBarcode" runat="server" />
+                            <asp:Button ID="btnBarcode" runat="server" />    
+                             <button type="button" id="btnFocus" value="focus"/>                                              
                         </asp:Panel>
                         
                     </div>
                 </div>
             </main>
-
-          
                <footer style="bottom: 0px">
                 <nav>
                     <div class="main">
                         <span class="col-md-6">
-                            <asp:ImageButton ID="lnkHome" runat="server" ImageUrl="images/btu-home.png" />
+                            <asp:ImageButton ID="lnkHome" runat="server" ImageUrl="images/btu-home.png" Visible="false" />
                         </span>
                         <span class="col-md-6">
-                            <asp:ImageButton ID="lnkBack" runat="server" ImageUrl="images/btu-prev.png" />
+                            <asp:ImageButton ID="lnkBack" runat="server" ImageUrl="images/btu-prev.png" Visible="false" />
                         </span>
                     </div>
-                    <input type="button" id="btnLeaveFocus" style="position:fixed; left:-500px;" />
+                          
                 </nav>
             </footer>
         </ContentTemplate>
@@ -167,6 +166,7 @@
                 script.src = url;
                 var body = document.getElementsByTagName('body')[0];
                 body.appendChild(script);
+                $('#txtBarcode').focus();
             }
 
             function breakSIMSlot() {
@@ -179,10 +179,11 @@
 
             function sendSIMValidation() {
                 setTimeout(function () { $('#btnValidatePrepaid').click(); }, 5000);
-                //$('#btnValidatePrepaid').click();
+                $('#btnValidatePrepaid').click();
             }
 
             function sendSIMToCustomer() {
+                $('#btnFocus').focus();
                 var url = $('#txtLocalControllerURL').val() + '/SIMPicker.aspx?Mode=Forward&TimeOut=15&OpenTimeOut=10&callback=simPicked';
                 var script = document.createElement('script');
                 script.src = url;
@@ -194,9 +195,10 @@
                 $('#btnNext').click();
             }
 
-
+           
         </script>
         <uc1:UC_CommonUI runat="server" ID="UC_CommonUI" />
     </form>
+     
 </body>
 </html>
