@@ -32,7 +32,7 @@
     }
 
     // ทิ้งหน้าจอไว้นานเกิน 5 นาที กลับไปหน้า เลือกภาษา
-    setTimeout(function(){location.href='http://localhost';},300000); 
+    setTimeout(function(){location.href='http://localhost';},600000); 
 
 </script>
 

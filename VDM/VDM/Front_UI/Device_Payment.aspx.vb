@@ -166,15 +166,15 @@ Public Class Device_Payment
         lnkCredit.Attributes("class") = "current"
 
         '-------------- Set JS Leyboard -----------------
-        paymentGatewayWindow.Attributes("onload") = "impletmentKeyboard()"
+        'paymentGatewayWindow.Attributes("onload") = "impletmentKeyboard()"
 
         Dim url As String = "Payment_Gateway_Start.aspx?amount=" & PRODUCT_COST & ".00&PRODUCT_ID=" & PRODUCT_ID
         paymentGatewayWindow.Src = url
 
     End Sub
 
-    Private Sub lnkCloseCredit_Click(sender As Object, e As EventArgs) Handles lnkCloseCredit.Click
-        pnlCredit.Visible = False
+    Private Sub btnCloseCredit_Click(sender As Object, e As EventArgs) Handles btnCloseCredit.Click
+        ClearForm()
     End Sub
 
     Private Sub btnCreditComplete_Click(sender As Object, e As EventArgs) Handles btnCreditComplete.Click
@@ -231,6 +231,7 @@ Public Class Device_Payment
         If txtBarcode.Text = "" Then Exit Sub
         Dim Barcode As String = txtBarcode.Text
         txtBarcode.Text = ""
+        lblTMNPaymentCode.Text = ""
 
         Dim TMN As New TrueMoney
         '------------------- Get Parameter --------------
@@ -244,8 +245,8 @@ Public Class Device_Payment
         Dim RESP As TrueMoney.Response = TMN.GetResult(TXN_ID, ISV, Amount, Barcode, PaymentDescription, ShopCode)
         '---------------- ตรวจสอบผลลัพธ์ -------------------
         If RESP.status.code.ToLower <> "success" Then
+            lblTMNPaymentCode.Text = RESP.Request.payment_code
             ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "TrueMoneyError", "$('#lnkTrueMoney').click();", True)
-            txtBarcode.Text = ""
             Exit Sub
         End If
         '---------------- UPDATE Payment Method --------------------
@@ -324,8 +325,8 @@ Public Class Device_Payment
                 img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & PRODUCT_ID & "&LANG=" & VDM_BL.UILanguage.TH
             End If
             lblDISPLAY_NAME.Text = DT.Rows(0).Item("DISPLAY_NAME_" & BL.Get_Language_Code(LANGUAGE)).ToString()
-            PRODUCT_COST = DT.Rows(0).Item("PRICE")
-            txtRequire.Text = FormatNumber(DT.Rows(0).Item("PRICE"), 0)
+            PRODUCT_COST = Val(DT.Rows(0).Item("PRICE"))
+            txtRequire.Text = FormatNumber(PRODUCT_COST, 0)
             CASH_PAID = 0
             IS_SERIAL = DT.Rows(0).Item("IS_SERIAL")
         End If
@@ -377,8 +378,8 @@ Public Class Device_Payment
             End If
             lblDISPLAY_NAME.Text = DT.Rows(0).Item("DISPLAY_NAME_" & BL.Get_Language_Code(LANGUAGE)).ToString()
         End If
-        PRODUCT_COST = DT.Rows(0).Item("PRICE")
-        txtRequire.Text = FormatNumber(DT.Rows(0).Item("PRICE"), 0)
+        PRODUCT_COST = Val(DT.Rows(0).Item("PRICE"))
+        txtRequire.Text = FormatNumber(PRODUCT_COST, 0)
         CASH_PAID = 0
         IS_SERIAL = True
         '---------------- Update Cost And Money --------------

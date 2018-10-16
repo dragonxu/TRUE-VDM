@@ -404,11 +404,28 @@
                                     </div>
                                 </div>
                                 <%--<a title="Close" class="fancybox-item fancybox-close" href="javascript:;"></a>--%>
-                                <asp:LinkButton ID="lnkCloseCredit" runat="server" class="fancybox-item fancybox-close"></asp:LinkButton>
+                                <a class="fancybox-item fancybox-close" onclick="closeCredit();"></a>
+                                <asp:Button ID="btnCloseCredit" runat="server" style="display:none;" />
                             </div>
                         </div>
                     </div>
                 </asp:Panel>
+
+                <div id="TrueMoneyError" class="popup">
+                    <div class="popup-frame">
+                    <h3 class="true-m">ท่านไม่สามารถชำระค่าบริการ<br/>ผ่านช่องทางนี้ได้</h3>
+                    <div class="icon"><img src="images/Popup/icon-truemoneyError.png"/></div>
+                    <h4 class="true-b small" style="font-size: 30px;">
+                        PAYMENT CODE : <asp:Label ID="lblTMNPaymentCode" runat="server"></asp:Label><br>
+                    </h4>
+                    <h4 class="true-b">
+                        
+                        กรุณาติดต่อพนักงาน
+                    </h4>
+
+                    <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;">ตกลง</a></div>
+                    </div>
+                </div>
 
             </ContentTemplate>
         </asp:UpdatePanel>
@@ -521,18 +538,16 @@
             }
         </script>
 
-<script type="text/javascript">
-    $("#lnkTrueMoney").fancybox();
-</script>
+        <script type="text/javascript">
+            $("#lnkTrueMoney").fancybox();
 
-        <div id="TrueMoneyError" class="popup">
-           <div class="popup-frame">
-            <h3 class="true-m">ท่านไม่สามารถชำระค่าบริการ<br/>ผ่านช่องทางนี้ได้</h3>
-            <div class="icon"><img src="images/Popup/icon-truemoneyError.png"/></div>
-            <h4 class="true-b">กรุณาติดต่อพนักงาน</h4>
-            <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;">ตกลง</a></div>
-          </div>
-        </div>
+            function closeCredit() {
+                $('#paymentGatewayWindow').attr('src','../images/WhiteDot.png'); // Go Somewhere to close keyboard
+                setTimeout(function () { $('#btnCloseCredit').click(); }, 2000);
+            }
+        </script>
+
+        
 
         <uc1:UC_CommonUI runat="server" ID="CommonUI" />
     </form>

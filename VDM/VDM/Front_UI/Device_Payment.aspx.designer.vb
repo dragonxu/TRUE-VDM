@@ -410,13 +410,22 @@ Partial Public Class Device_Payment
     Protected WithEvents btnCreditComplete As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''lnkCloseCredit control.
+    '''btnCloseCredit control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkCloseCredit As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnCloseCredit As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''lblTMNPaymentCode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTMNPaymentCode As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''CommonUI control.

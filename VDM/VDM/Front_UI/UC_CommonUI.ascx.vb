@@ -30,6 +30,7 @@ Public Class UC_CommonUI
         If KO_ID = 0 Then
             Response.Redirect("http://localhost")
             Response.End()
+            Exit Sub
         End If
 
         If TXN_ID > 0 Then
@@ -42,8 +43,9 @@ Public Class UC_CommonUI
         DA.Fill(DT)
         If DT.Rows.Count = 0 Then
             '------------- Shift ยังไม่เปิด -------------
-            Response.Redirect("../Machine_Console/Login.aspx?KO_ID=" & KO_ID)
+            Response.Redirect("http://localhost")
             Response.End()
+            Exit Sub
         End If
 
     End Sub

@@ -8,7 +8,6 @@
     <meta http-equiv="Page-Exit" content="revealTrans(Duration=5.0,Transition=0)">
     <meta http-equiv="Page-Enter" content="revealTrans(Duration=5.0,Transition=8)">
 
-
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     <title>Kiosk</title>
@@ -61,7 +60,7 @@
                             <figure class="col-md-6">
                                 <div class="topic true-l">
                                     <h1 class="true-l" style="padding-bottom: 30px;">
-                                        <asp:Label ID="lblDISPLAY_NAME" runat="server" Style="font-size: 78pt; line-height: 70px;"></asp:Label>
+                                        <asp:Label ID="lblDISPLAY_NAME" runat="server" Style="font-size: 60pt; line-height: 70px;"></asp:Label>
 
                                     </h1>
                                     <asp:Panel ID="pnlProduct" runat="server">

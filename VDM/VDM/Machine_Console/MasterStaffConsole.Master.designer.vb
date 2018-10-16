@@ -131,6 +131,15 @@ Partial Public Class MasterStaffConsole
     Protected WithEvents MainContent As Global.System.Web.UI.WebControls.ContentPlaceHolder
     
     '''<summary>
+    '''UC_CommonUI control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UC_CommonUI As Global.VDM.UC_CommonUI
+    
+    '''<summary>
     '''ScriptContainer control.
     '''</summary>
     '''<remarks>

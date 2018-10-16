@@ -156,9 +156,11 @@
     <Content Include="Front_UI\images\Manage_Console.png" />
     <Content Include="Front_UI\images\Popup\icon-idcard.png" />
     <Content Include="Front_UI\images\Popup\icon-Tax.png" />
+    <Content Include="Front_UI\images\Popup\icon-truemoneyError.png" />
     <Content Include="Front_UI\images\Rescan_ID_Card.png" />
     <Content Include="Front_UI\images\Warning_Coin.png" />
     <Content Include="Front_UI\images\Warning_Credit.png" />
+    <Content Include="Front_UI\images\Warning_Face.png" />
     <Content Include="Front_UI\images\Warning_ID_Card.png" />
     <Content Include="Front_UI\images\Warning_Truemoney.png" />
     <Content Include="Front_UI\Payment_Gateway_Cancel.aspx" />
