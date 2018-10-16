@@ -40,12 +40,11 @@
     <footer style="bottom: 0px">
         <nav>
             <div class="main">
-                <span class="col-md-6">
+                <span class="col-md-12">
                     <asp:ImageButton ID="lnkHome" runat="server" ImageUrl="images/btu-home.png" />
+                    <asp:TextBox ID="txtLocalControllerURL" runat="server" Style="display:none;"></asp:TextBox>
                 </span>
-                <span class="col-md-6">
-                      <asp:TextBox ID="txtLocalControllerURL" runat="server" Style="display:none;"></asp:TextBox>
-                </span>
+               
             </div>
         </nav>
     </footer>

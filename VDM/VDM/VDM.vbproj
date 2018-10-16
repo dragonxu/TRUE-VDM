@@ -643,6 +643,7 @@
     <Content Include="Styles\webfont.css" />
     <Content Include="Test_API\Test_API_Interface.aspx" />
     <Content Include="Test_API\Test_BBL.aspx" />
+    <Content Include="Test_API\Test_BBL_Query.aspx" />
     <Content Include="Test_API\Test_DrawImage.aspx" />
     <Content Include="Test_API\Test_TMN_Payment.aspx" />
     <Content Include="Test_API\UC_Activity_End.ascx" />
@@ -1030,6 +1031,13 @@
     <Compile Include="Test_API\Test_BBL.aspx.vb">
       <DependentUpon>Test_BBL.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test_API\Test_BBL_Query.aspx.designer.vb">
+      <DependentUpon>Test_BBL_Query.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test_API\Test_BBL_Query.aspx.vb">
+      <DependentUpon>Test_BBL_Query.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Test_API\Test_DrawImage.aspx.designer.vb">
       <DependentUpon>Test_DrawImage.aspx</DependentUpon>

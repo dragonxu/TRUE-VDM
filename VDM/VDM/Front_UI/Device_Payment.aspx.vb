@@ -182,8 +182,14 @@ Public Class Device_Payment
     End Sub
 
     Private Sub btnCreditComplete_Click(sender As Object, e As EventArgs) Handles btnCreditComplete.Click
+
+        '--------------- Update TB_SERVICE_TRANSACTION
+        Dim SQL As String = "UPDATE TB_SERVICE_TRANSACTION SET METHOD_ID=" & VDM_BL.PaymentMethod.CREDIT_CARD & vbLf
+        SQL &= " WHERE TXN_ID=" & TXN_ID
+        BL.ExecuteNonQuery(SQL)
+
         '--------------- Save Transaction Requested---------------
-        Dim Sql As String = "SELECT TOP 1 * FROM TB_TRANSACTION_CREDITCARD WHERE TXN_ID=" & TXN_ID
+        SQL = "SELECT TOP 1 * FROM TB_TRANSACTION_CREDITCARD WHERE TXN_ID=" & TXN_ID
         Dim DA As New SqlDataAdapter(Sql, BL.ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)
@@ -191,29 +197,47 @@ Public Class Device_Payment
         If DT.Rows.Count = 0 Then
             DR = DT.NewRow
             DT.Rows.Add(DR)
-            '    DR("TXN_ID") = TXN_ID
-            '    DR("ITEM_NO") = 1
-            '    DR("SLIP_YEAR") = xxxxxxxxxxxxxxxxx
-            '    DR("SLIP_MONTH") = xxxxxxxxxxxxxxxxx
-            '    DR("SLIP_DAY") = xxxxxxxxxxxxxxxxx
-            '    DR("SLIP_NO") = xxxxxxxxxxxxxxxxx
-            '    DR("SLIP_CONTENT") = xxxxxxxxxxxxxxxxx
-            '    DR("PRODUCT_ID") = PRODUCT_ID
-            '    DR("IS_SERIAL") = xxxxxxxxxxxxxxxxx
-            '    DR("UNIT_PRICE") = xxxxxxxxxxxxxxxxx
-            '    DR("QUANTITY") = 1
-            '    DR("TOTAL_PRICE") = xxxxxxxxxxxxxxxxx
-            '    DR("BBL_REQ_ID") = xxxxxxxxxxxxxxxxx
-            '    DR("BBL_ORDER_Y") = xxxxxxxxxxxxxxxxx
-            '    DR("BBL_ORDER_M") = xxxxxxxxxxxxxxxxx
-            '    DR("BBL_ORDER_D") = xxxxxxxxxxxxxxxxx
-            '    DR("BBL_ORDER_N") = xxxxxxxxxxxxxxxxx
-            '    DR("BBL_REQ_TIME") = xxxxxxxxxxxxxxxxx
-            '    DR("BBL_RESP_TIME") = xxxxxxxxxxxxxxxxx
-            '    DR("TXN_TIME") = Now
+            DR("TXN_ID") = TXN_ID
+            DR("ITEM_NO") = 1
         Else
             DR = DT.Rows(0)
         End If
+
+        DR("SLIP_YEAR") = Now.Year.ToString.Substring(2, 2)
+        DR("SLIP_MONTH") = Now.Month.ToString.PadLeft(2, "0")
+        DR("SLIP_DAY") = Now.Day.ToString.PadLeft(2, "0")
+        DR("SLIP_NO") = BL.Get_New_Confirmation_Slip_No
+        DR("SLIP_CONTENT") = DBNull.Value
+        If PRODUCT_ID <> 0 Then
+            DR("PRODUCT_ID") = PRODUCT_ID
+        Else
+            DR("SIM_ID") = SIM_ID
+        End If
+        DR("IS_SERIAL") = IS_SERIAL
+        DR("UNIT_PRICE") = PRODUCT_COST
+        DR("QUANTITY") = 1
+        DR("TOTAL_PRICE") = PRODUCT_COST
+        DR("BBL_REQ_ID") = CREDIT_CARD_REQ_ID
+
+        SQL = "SELECT orderRef,REQ_Time,RESP_Time" & vbLf
+        SQL &= " FROM BBL_Payment_REQ REQ " & vbLf
+        SQL &= " INNER JOIN BBL_PAYMENT_RESP RESP ON REQ.REQ_ID=RESP.REQ_ID" & vbLf
+        SQL &= " WHERE REQ.REQ_ID=" & CREDIT_CARD_REQ_ID & vbLf
+        Dim BA As New SqlDataAdapter(SQL, BL.LogConnectionString)
+        Dim BT As New DataTable
+        BA.Fill(BT)
+        If BT.Rows.Count > 0 Then
+            DR("BBL_ORDER_REF") = BT.Rows(0).Item("orderRef").ToString
+            DR("BBL_REQ_TIME") = BT.Rows(0).Item("REQ_Time")
+            DR("BBL_RESP_TIME") = BT.Rows(0).Item("RESP_Time")
+        End If
+        DR("TXN_TIME") = Now
+
+        Dim cmd As New SqlCommandBuilder(DA)
+        DA.Update(DT)
+
+        ''-------------------------------- Go To Pick ---------------------
+        Response.Redirect("Complete_Order.aspx?PRODUCT_ID=" & PRODUCT_ID & "&SIM_ID=" & SIM_ID)
     End Sub
 
 
@@ -298,7 +322,7 @@ Public Class Device_Payment
         Dim cmd As New SqlCommandBuilder(DA)
         DA.Update(DT)
 
-        '---------------- Goto Next Page ----------------
+        '---------------- Goto Pick ----------------
         Response.Redirect("Complete_Order.aspx?PRODUCT_ID=" & PRODUCT_ID & "&SIM_ID=" & SIM_ID)
 
     End Sub
@@ -480,7 +504,7 @@ Public Class Device_Payment
             BL.UPDATE_KIOSK_DEVICE_TRANSACTION_STOCK(KO_ID, TXN_ID, VDM_BL.Device.Cash1000, CInt(txt1000.Text))
         End If
 
-        ''--------------------------------
+        ''-------------------------------- Go To Pick ----------------------------------------
         Response.Redirect("Complete_Order.aspx?PRODUCT_ID=" & PRODUCT_ID & "&SIM_ID=" & SIM_ID)
 
     End Sub

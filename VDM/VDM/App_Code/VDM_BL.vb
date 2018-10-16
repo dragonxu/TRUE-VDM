@@ -1939,9 +1939,6 @@ Public Class VDM_BL
         '----------------- Ads ----------------
         Content &= PrintLine
 
-        '------------ Set Default Parameter
-        'Set_Default_Print_Content_Style(Content)
-
         Return Content
     End Function
 
@@ -2000,46 +1997,60 @@ Public Class VDM_BL
         '----------------- Ads ----------------
         Content &= PrintLine
 
-        ''------------ Set Default Parameter
-        'Set_Default_Print_Content_Style(Content)
         Return Content
     End Function
 
     Public Function GEN_CREDITCARD_CONFIRMATION_SLIP(ByVal TXN_ID As Integer) As String
         Dim Content As String = GEN_DEFAULT_SLIP_HEADER()
 
+        Dim SQL As String = "SELECT * FROM VW_TXN_CREDIT" & vbLf
+        SQL &= "WHERE TXN_ID=" & TXN_ID & " AND TXN_STEP='completed'"
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        DA.Fill(DT)
+        If DT.Rows.Count = 0 Then
+            Return Content
+        End If
 
-        '------------ Set Default Parameter
-        'Set_Default_Print_Content_Style(Content)
+        Dim SITE_CODE As String = DT.Rows(0).Item("SITE_CODE").ToString
+        Dim SITE_NAME As String = ""
+        If Not IsDBNull(DT.Rows(0).Item("SITE_NAME")) Then
+            SITE_NAME = "(" & DT.Rows(0).Item("SITE_NAME") & ")"
+        End If
+        Dim SLIP_CODE As String = DT.Rows(0).Item("SLIP_CODE").ToString
+        Dim TXN_END As DateTime = DT.Rows(0).Item("TXN_END")
+        Dim PRODUCT_CODE As String = DT.Rows(0).Item("PRODUCT_CODE")
+        Dim TOTAL_PRICE As String = FormatNumber(DT.Rows(0).Item("TOTAL_PRICE"))
+        Dim PRODUCT_NAME As String = DT.Rows(0).Item("PRODUCT_NAME")
+        Dim SERIAL_NO As String = DT.Rows(0).Item("SERIAL_NO")
+        Dim ORDER_REF As String = DT.Rows(0).Item("ORDER_REF")
+
+        Content &= "สาขาที่ : " & SITE_CODE & SITE_NAME & vbLf
+        Content &= "ใบยืนยันการรับชำระ   	        " & TXN_END.ToString("dd/MM/yyyy") & vbLf
+        Content &= "" & SLIP_CODE & " 	    " & TXN_END.ToString("hh:mm") & vbLf
+        Content &= PrintLine & vbLf
+        Content &= "รายการสินค้า" & vbLf
+        Content &= " " & vbLf
+        Content &= "1. " & PRODUCT_CODE & "                         " & FormatNumber(TOTAL_PRICE, 2) & vbLf
+        Content &= PRODUCT_NAME & vbLf
+        If Trim(SERIAL_NO) <> "" Then
+            Content &= "S/N : " & SERIAL_NO & vbLf
+            Content &= " " & vbLf
+        End If
+        Content &= PrintLine & vbLf
+        Content &= "CREDIT CARD                            " & TOTAL_PRICE & vbLf
+        Content &= " " & vbLf
+        Content &= "ORDER REF :   " & ORDER_REF & vbLf
+        Content &= PrintLine & vbLf
+        Content &= " " & vbLf
+        Content &= "ขอบคุณที่ใช้บริการ" & vbLf
+        '----------------- Ads ----------------
+        Content &= GEN_SLIP_ADS()
+        '----------------- Ads ----------------
+        Content &= PrintLine
+
         Return Content
     End Function
-
-    'Public Sub Set_Default_Print_Content_Style(ByRef DT As DataTable)
-    '    For i As Integer = 0 To DT.Rows.Count - 1
-    '        Dim DR As DataRow = DT.Rows(i)
-    '        If IsDBNull(DR("Text")) Then
-    '            DR("Text") = ""
-    '        End If
-    '        If IsDBNull(DR("ImagePath")) Then
-    '            DR("ImagePath") = ""
-    '        End If
-    '        If IsDBNull(DR("FontSize")) Then
-    '            DR("FontSize") = 10
-    '        End If
-    '        If IsDBNull(DR("FontName")) Then
-    '            DR("FontName") = "FontA1x1"
-    '        End If
-    '        If IsDBNull(DR("Bold")) Then
-    '            DR("Bold") = False
-    '        End If
-    '        If IsDBNull(DR("IsColor")) Then
-    '            DR("IsColor") = False
-    '        End If
-    '        If IsDBNull(DR("ContentType")) Then
-    '            DR("ContentType") = VDM_BL.PrintContentType.Text
-    '        End If
-    '    Next
-    'End Sub
 
     Public Sub UPDATE_CONFIRMATION_SLIP(ByVal TXN_ID As Integer, ByVal Content As String)
 
@@ -2066,6 +2077,16 @@ Public Class VDM_BL
                 End If
             Case PaymentMethod.TRUE_MONEY
                 SQL = "SELECT * FROM TB_TRANSACTION_TMN WHERE TXN_ID=" & TXN_ID
+                DT = New DataTable
+                DA = New SqlDataAdapter(SQL, ConnectionString)
+                DA.Fill(DT)
+                If DT.Rows.Count > 0 Then
+                    DT.Rows(0).Item("SLIP_CONTENT") = Content
+                    Dim cmd As New SqlCommandBuilder(DA)
+                    DA.Update(DT)
+                End If
+            Case PaymentMethod.CREDIT_CARD
+                SQL = "SELECT * FROM TB_TRANSACTION_CREDITCARD WHERE TXN_ID=" & TXN_ID
                 DT = New DataTable
                 DA = New SqlDataAdapter(SQL, ConnectionString)
                 DA.Fill(DT)

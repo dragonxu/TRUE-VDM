@@ -41,6 +41,7 @@ Public Class Thank_You
 
             'Session("TXN_ID") = 83 ' Test True Money
             'Session("TXN_ID") = 65 ' Test Cash
+            'Session("TXN_ID") = 196 ' CreditCard
 
             txtLocalControllerURL.Text = BL.LocalControllerURL
             '---------------- Change And Print Slip--------------
