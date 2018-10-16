@@ -26,7 +26,7 @@
         
             function LinkGateway(REQ_ID) {
                 window.parent.document.getElementById("txtCreditReq").value = REQ_ID;
-                setTimeout(function () { document.getElementById('btnOK').click(); }, 200);
+                setTimeout(function () { document.getElementById('btnOK').click(); }, 100);
             }
         
         </script>

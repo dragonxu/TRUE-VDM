@@ -21,7 +21,9 @@
 
              var printDelegate = function () {
                  var content = $('#lblPrintContent').html().replaceAll('&nbsp;', ' ').replaceAll("<br>", '\n').replaceAll("&lt", "<").replaceAll("&gt", ">");
+                 alert(content);
                  var url = $('#txtLocalControllerURL').val() + '/Print.aspx?Mode=Print';
+                 alert(url);
                  var xhr = new XMLHttpRequest();
                  xhr.open("POST", url, true);
                  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");

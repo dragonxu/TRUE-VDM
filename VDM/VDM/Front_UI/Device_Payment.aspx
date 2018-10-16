@@ -50,6 +50,7 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <asp:UpdatePanel ID="udpList" runat="server">
             <ContentTemplate>
+                <asp:Button ID="btnFirstTime" runat="server" style="display:none;" />
                 <div class="warp">
                     <header>
                         <img src="images/bg-top.png" />
@@ -331,8 +332,7 @@
 
                                     <asp:Panel ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" Style="position: fixed; left: -500px; top: 200px;">
                                         <asp:TextBox ID="txtBarcode" runat="server"></asp:TextBox>
-                                        <asp:Button ID="btnBarcode" runat="server" />
-                                        <a id="lnkTrueMoney" href="#TrueMoneyError">True Money Error</a>
+                                        <asp:Button ID="btnBarcode" runat="server" />                                        
                                     </asp:Panel>
 
                                 </asp:Panel>                                
@@ -386,7 +386,7 @@
 
                 <asp:Panel ID="pnlCredit" runat="server" Visible ="false" >
                     <div class="fancybox-overlay fancybox-overlay-fixed" style="width: auto; height: auto; display: block;">
-                        <div class="fancybox-wrap fancybox-desktop fancybox-type-inline fancybox-opened" tabindex="-1" style="width: auto; height: auto; position: fixed; top: 10%; left: 20%; right: 20%; bottom: 30%; opacity: 1; overflow: visible;">
+                        <div class="fancybox-wrap fancybox-desktop fancybox-type-inline fancybox-opened" tabindex="-1" style="width: auto; height: auto; position: fixed; top: 10%; left: 20%; right: 20%; bottom: 35%; opacity: 1; overflow: visible;">
                             <div class="fancybox-skin" style="padding: 0px; width: 100%; height: 100%;">
                                 <div class="fancybox-outer">
                                     <div class="fancybox-inner" style="overflow: visible; width: 100%; height: 100%;">
@@ -404,8 +404,8 @@
                                     </div>
                                 </div>
                                 <%--<a title="Close" class="fancybox-item fancybox-close" href="javascript:;"></a>--%>
-                                <a class="fancybox-item fancybox-close" onclick="closeCredit();"></a>
-                                <asp:Button ID="btnCloseCredit" runat="server" style="display:none;" />
+                                <a id="aCloseCredit" class="fancybox-item fancybox-close" onclick="closeCredit();"></a>
+                                <asp:Button ID="btnCloseCredit" runat="server" style="display:none;" />                                
                             </div>
                         </div>
                     </div>
@@ -413,6 +413,7 @@
                     
                 </asp:Panel>
 
+                <!-----Popup------>
                 <div id="TrueMoneyError" class="popup">
                     <div class="popup-frame">
                     <h3 class="true-m">ท่านไม่สามารถชำระค่าบริการ<br/>ผ่านช่องทางนี้ได้</h3>
@@ -420,14 +421,22 @@
                     <h4 class="true-b small" style="font-size: 30px;">
                         PAYMENT CODE : <asp:Label ID="lblTMNPaymentCode" runat="server"></asp:Label><br>
                     </h4>
-                    <h4 class="true-b">
-                        
-                        กรุณาติดต่อพนักงาน
-                    </h4>
-
+                    <h4 class="true-b">กรุณาติดต่อพนักงาน</h4>
                     <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;">ตกลง</a></div>
                     </div>
                 </div>
+                <a id="lnkTrueMoneyError" href="#TrueMoneyError" style="display:none;">True Money Error</a>
+
+                <div id="CreditCardError" class="popup">
+                  <div class="popup-frame">
+                    <h3 class="true-m">บัตรเครดิตของท่านไม่สามารถทำรายการได้</h3>
+                    <div class="icon"><img src="images/Popup/icon-creditError.png"/></div>
+                    <h4 class="true-b">กรุณาเปลี่ยนบัตรใหม่</h4>
+                    <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close(); closeCredit();" href="javascript:;">ตกลง</a></div>
+                  </div>
+                </div>
+                <a id="lnkCreditCardError" href="#CreditCardError" style="display:none;">Credit Card Error</a>
+                <!-----Popup------>
 
             </ContentTemplate>
         </asp:UpdatePanel>
@@ -533,15 +542,11 @@
         </script>
 
         <script type="text/javascript">
-            //--------------- Add onScreenKeyboard -----------------
-            function impletmentKeyboard() {
-              
-                //initKeyboard();
-            }
-        </script>
 
-        <script type="text/javascript">
-            $("#lnkTrueMoney").fancybox();
+            $("#lnkTrueMoneyError").fancybox();
+            $("#lnkCreditCardError").fancybox();
+
+            setTimeout(function () { $("#btnFirstTime").click();} , 600) ; // Click for postback single time
 
             function closeCredit() {
                 $('#paymentGatewayWindow').load(function () {
@@ -549,8 +554,14 @@
                 });
                 $('#paymentGatewayWindow').css('visibility', 'hidden');
                 $('#paymentGatewayWindow').attr('src', 'images/fancybox_overlay.png');
-                    // Go Somewhere to close keyboard
+                    // Go Somewhere to close chromium keyboard
             }
+
+            function showCreditCardError() {
+                $("#lnkCreditCardError").click();
+            }
+
+            
         </script>
 
         <uc1:UC_CommonUI runat="server" ID="CommonUI" />

@@ -93,6 +93,13 @@ Public Class Device_Payment
 
 #End Region
 
+    Private ReadOnly Property CREDIT_CARD_REQ_ID As Integer
+        Get
+            Return Val(txtCreditReq.Text)
+        End Get
+    End Property
+
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Not IsPostBack Then
@@ -164,9 +171,6 @@ Public Class Device_Payment
         pnlSelectChoice.Visible = False
         pnlCredit.Visible = True
         lnkCredit.Attributes("class") = "current"
-
-        '-------------- Set JS Leyboard -----------------
-        'paymentGatewayWindow.Attributes("onload") = "impletmentKeyboard()"
 
         Dim url As String = "Payment_Gateway_Start.aspx?amount=" & PRODUCT_COST & ".00&PRODUCT_ID=" & PRODUCT_ID
         paymentGatewayWindow.Src = url
@@ -246,7 +250,7 @@ Public Class Device_Payment
         '---------------- ตรวจสอบผลลัพธ์ -------------------
         If RESP.status.code.ToLower <> "success" Then
             lblTMNPaymentCode.Text = RESP.Request.payment_code
-            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "TrueMoneyError", "$('#lnkTrueMoney').click();", True)
+            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "TrueMoneyError", "$('#lnkTrueMoneyError').click();", True)
             Exit Sub
         End If
         '---------------- UPDATE Payment Method --------------------
@@ -485,9 +489,9 @@ Public Class Device_Payment
 
     End Sub
 
+    Private Sub btnFirstTime_Click(sender As Object, e As EventArgs) Handles btnFirstTime.Click
 
-
-
+    End Sub
 
 
 #End Region

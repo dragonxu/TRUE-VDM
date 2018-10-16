@@ -154,6 +154,7 @@
     <Content Include="Front_UI\images\icon-pack-gif.gif" />
     <Content Include="Front_UI\images\icon-Shadow.png" />
     <Content Include="Front_UI\images\Manage_Console.png" />
+    <Content Include="Front_UI\images\Popup\icon-creditError.png" />
     <Content Include="Front_UI\images\Popup\icon-idcard.png" />
     <Content Include="Front_UI\images\Popup\icon-Tax.png" />
     <Content Include="Front_UI\images\Popup\icon-truemoneyError.png" />

@@ -65,9 +65,9 @@ Public Class Payment_Gateway_Start
 
 
         Dim REQ_ID As Integer = BL.Get_NewID_Log("BBL_Payment_REQ", "REQ_ID")
-        successUrl.Text = BL.ServerRoot & "/FRONT_UI/Payment_Gateway_Success.aspx?REQ_ID=" & REQ_ID
-        failUrl.Text = BL.ServerRoot & "/FRONT_UI/Payment_Gateway_Fail.aspx?REQ_ID=" & REQ_ID
-        cancelUrl.Text = BL.ServerRoot & "/FRONT_UI/Payment_Gateway_Cancel.aspx?REQ_ID=" & REQ_ID
+        successUrl.Text = BL.ServerRoot & "/Payment_Gateway_Success.aspx?REQ_ID=" & REQ_ID
+        failUrl.Text = BL.ServerRoot & "/Payment_Gateway_Fail.aspx?REQ_ID=" & REQ_ID
+        cancelUrl.Text = BL.ServerRoot & "/Payment_Gateway_Cancel.aspx?REQ_ID=" & REQ_ID
 
         '--------------- Get ProductInfo for remark-------------
         Dim DT As DataTable = BL.Get_Product_Info_From_ID(PRODUCT_ID)
@@ -114,7 +114,7 @@ Public Class Payment_Gateway_Start
         DA.Update(DT)
 
         '--------------- Set Auto Link----------------
-        form1.Action = BBL.BBL_PostPaymentURL
+        form1.Action = BBL.BBL_PostPaymentURL & "?REQ_ID=" & REQ_ID '---------------- ฝากไว้ด้วย ตอนส่งกลับมันจะส่ง Request.QueryString ทั้งหมดมา
 
         Dim Script As String = "LinkGateway(" & REQ_ID & ");"
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Gateway", Script, True)

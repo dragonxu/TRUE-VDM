@@ -6,16 +6,16 @@ Imports System.Diagnostics
 
 Public Class FormMain
 
-    Public ChromeBrowser As ChromiumWebBrowser
-    Dim StartURL As String = "http://localhost:62820/Front_UI/Default.aspx?KO_ID=1" '********** Production Check '-********** 
-    'Dim StartURL As String = "http://localhost"
+    Public WithEvents ChromeBrowser As ChromiumWebBrowser
+    'Dim StartURL As String = "http://localhost:62820/Front_UI/Default.aspx?KO_ID=1" '********** Production Check '-********** 
+    Dim StartURL As String = "http://localhost"
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles Me.Load
         CheckForIllegalCrossThreadCalls = False
 
         LoadKeyboard()
 
-        'Cursor.Hide() '********** Production Check '-********** 
+        Cursor.Hide() '********** Production Check '-********** 
         InitChromium()
         '------------- Start SIM Dispenser------------
         StartProductController() '********** Production Check '-********** 
@@ -35,21 +35,25 @@ Public Class FormMain
     Private Sub ChromeBrowser_AddressChanged(sender As Object, e As AddressChangedEventArgs)
         If e.Address = "about:blank" Then
             On Error Resume Next
-            'CefSharp.Cef.Shutdown()
             Application.Exit()
         End If
     End Sub
 
+    Private Sub ChromeBrowser_Click(sender As Object, e As EventArgs) Handles ChromeBrowser.Click
+        If ChromeBrowser.GetBrowser.GetFrameCount = 2 Then
+            If ChromeBrowser.GetFocusedFrame.Url.IndexOf("psipay.bangkokbank") > -1 Then
+                Keyboard.Show()
+            End If
+        End If
+    End Sub
 
-    Private Sub ChromeBrowser_FrameLoadEnd(sender As Object, e As FrameLoadEndEventArgs)
-
+    Private Sub ChromeBrowser_FrameLoadEnd(sender As Object, e As FrameLoadEndEventArgs) Handles ChromeBrowser.FrameLoadEnd
         Select Case True
             Case Not e.Frame.IsMain And e.Frame.Url.IndexOf("psipay.bangkokbank") > -1
                 Keyboard.Show()
             Case Else
                 Keyboard.Hide()
         End Select
-
     End Sub
 
     Dim Keyboard As FormKeyboard = Nothing
@@ -58,17 +62,6 @@ Public Class FormMain
         Keyboard = New FormKeyboard
         Keyboard.MainForm = Me
     End Sub
-
-    'Private Sub ShowKeyboard()
-    '    Keyboard.Show()
-    'End Sub
-
-    'Private Sub HideKeyboard()
-    '    Try
-    '        Keyboard.Hide()
-    '    Catch ex As Exception
-    '    End Try
-    'End Sub
 
     Private Sub StartProductController()
         '--------------- Set Home --------------
@@ -82,5 +75,6 @@ Public Class FormMain
             Dim result As String = New WebClient().DownloadString(url)
         Catch : End Try
     End Sub
+
 
 End Class

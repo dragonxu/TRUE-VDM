@@ -31,10 +31,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/15/2015 02:06:24</publishTime>
     </File>
     <File Include="bin/PeripheralController.dll">
-      <publishTime>10/14/2018 21:42:10</publishTime>
+      <publishTime>10/16/2018 19:25:39</publishTime>
     </File>
     <File Include="bin/PeripheralController.xml">
-      <publishTime>10/14/2018 21:42:10</publishTime>
+      <publishTime>10/16/2018 19:25:39</publishTime>
     </File>
     <File Include="bin/Printer.dll">
       <publishTime>10/09/2018 19:06:06</publishTime>
@@ -77,6 +77,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/SimDispenser.dll">
       <publishTime>10/14/2018 21:42:03</publishTime>
+    </File>
+    <File Include="CamCapture.aspx">
+      <publishTime>10/15/2018 20:54:26</publishTime>
     </File>
     <File Include="Cash.aspx">
       <publishTime>09/28/2018 15:54:30</publishTime>
@@ -154,7 +157,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/06/2018 21:35:33</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/14/2018 21:42:11</publishTime>
+      <publishTime>10/16/2018 19:25:40</publishTime>
     </File>
   </ItemGroup>
 </Project>

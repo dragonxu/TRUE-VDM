@@ -41,6 +41,15 @@ Partial Public Class Device_Payment
     Protected WithEvents udpList As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
+    '''btnFirstTime control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnFirstTime As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
     '''txtLocalControllerURL control.
     '''</summary>
     '''<remarks>
