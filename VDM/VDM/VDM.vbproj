@@ -90,6 +90,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="My Project\DataSources\" />
+    <Folder Include="My Project\PublishProfiles\" />
     <Folder Include="Temp\" />
   </ItemGroup>
   <ItemGroup>
@@ -557,7 +559,6 @@
     <Content Include="Scripts\jquery.onScreenKeyboard.js" />
     <Content Include="Scripts\onScreenKeyboard.js" />
     <Content Include="Scripts\toastr.js" />
-    <Content Include="My Project\DataSources\System.Data.DataTable.datasource" />
     <Content Include="SignIn.aspx" />
     <Content Include="Machine_Console\Login.aspx" />
     <Content Include="Machine_Console\Machine_Overview.aspx" />
@@ -613,7 +614,6 @@
     <Content Include="Front_UI\fonts\tmedium.woff" />
     <Content Include="Front_UI\fonts\tmedium.woff2" />
     <Content Include="Front_UI\MasterFront.Master" />
-    <None Include="My Project\PublishProfiles\TempPublish.pubxml" />
     <Content Include="Scripts\jquery.cookie.min.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\main.js" />

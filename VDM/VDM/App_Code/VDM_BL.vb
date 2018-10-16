@@ -642,7 +642,7 @@ Public Class VDM_BL
                  TSM.ReturnValues.Count > 1 AndAlso
                  Not IsNothing(TSM.ReturnValues(0)) AndAlso
                  Not IsNothing(TSM.ReturnValues(1)) AndAlso
-                 Not CBool(TSM.ReturnValues(1)) AndAlso
+                  CBool(TSM.ReturnValues(1)) AndAlso
                 TSM.ReturnValues(0) <> "" Then
             Result.PRODUCT_CODE = TSM.ReturnValues(0)
         End If
