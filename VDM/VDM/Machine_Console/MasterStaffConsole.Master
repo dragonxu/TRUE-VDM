@@ -1,6 +1,6 @@
 ﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="MasterStaffConsole.Master.vb" Inherits="VDM.MasterStaffConsole" %>
 
-<%@ Register Src="~/Front_UI/UC_CommonUI.ascx" TagPrefix="uc1" TagName="UC_CommonUI" %>
+<%--<%@ Register Src="~/Front_UI/UC_CommonUI.ascx" TagPrefix="uc1" TagName="UC_CommonUI" %>--%>
 
 
 <!DOCTYPE html>
@@ -126,7 +126,7 @@
         </div>
     </footer>
 
-    <uc1:UC_CommonUI runat="server" ID="UC_CommonUI" />
+<%--    <uc1:UC_CommonUI runat="server" ID="UC_CommonUI" />--%>
     <!-- /footer -->
 
      <div style="display:none;" id="toastBuffer">
