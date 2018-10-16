@@ -9,10 +9,21 @@ Public Class PrintBarcode
         'BindProductSerial()
         'BindProdcutNon()
         'BindProductAll()
-        BindSIMSerial()
+        'BindSIMSerial()
         'BindProductTest()
+        BindSIM()
     End Sub
 
+    Private Sub BindSIM()
+        Dim SQL As String = "SELECT PRODUCT_CODE,SERIAL_NO, SERIAL_NO DISPLAY_NAME_TH" & vbLf
+        SQL &= " FROM TMP_SIM" & vbLf
+        'SQL &= " INNER JOIN MS_SIM MS ON SIM.PRODUCT_CODE=MS.PRODUCT_CODE"
+        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        rptSIM.DataSource = DT
+        rptSIM.DataBind()
+    End Sub
 
     Private Sub BindSIMSerial()
         Dim SQL As String = "SELECT 0 SIM_ID,MAT PRODUCT_CODE,SERIAL SERIAL_NO,MSISDN DISPLAY_NAME_TH" & vbLf

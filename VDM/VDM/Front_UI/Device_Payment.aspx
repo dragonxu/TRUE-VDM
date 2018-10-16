@@ -325,7 +325,7 @@
                                         </div>
                                     </form>
 
-                                    <asp:Panel ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" Style="position: fixed; left: -500px; top: 100px;">
+                                    <asp:Panel ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" Style="position: fixed; left: 500px; top: 100px;">
                                         <asp:TextBox ID="txtBarcode" runat="server"></asp:TextBox>
                                         <asp:Button ID="btnBarcode" runat="server" />
                                     </asp:Panel>
