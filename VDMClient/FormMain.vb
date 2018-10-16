@@ -13,6 +13,8 @@ Public Class FormMain
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles Me.Load
         CheckForIllegalCrossThreadCalls = False
 
+        LoadKeyboard()
+
         'Cursor.Hide() '********** Production Check '-********** 
         InitChromium()
         '------------- Start SIM Dispenser------------
@@ -43,20 +45,30 @@ Public Class FormMain
 
         Select Case True
             Case Not e.Frame.IsMain And e.Frame.Url.IndexOf("psipay.bangkokbank") > -1
-                ShowKeyboard()
+                Keyboard.Show()
             Case Else
-                HideKeyboard()
+                Keyboard.Hide()
         End Select
 
     End Sub
 
-    Private Sub ShowKeyboard()
-        FormKeyboard.Show()
+    Dim Keyboard As FormKeyboard = Nothing
+
+    Private Sub LoadKeyboard()
+        Keyboard = New FormKeyboard
+        Keyboard.MainForm = Me
     End Sub
 
-    Private Sub HideKeyboard()
-        FormKeyboard.Close()
-    End Sub
+    'Private Sub ShowKeyboard()
+    '    Keyboard.Show()
+    'End Sub
+
+    'Private Sub HideKeyboard()
+    '    Try
+    '        Keyboard.Hide()
+    '    Catch ex As Exception
+    '    End Try
+    'End Sub
 
     Private Sub StartProductController()
         '--------------- Set Home --------------

@@ -325,7 +325,7 @@ Public Class Device_Payment
                 img.ImageUrl = "../RenderImage.aspx?Mode=D&Entity=PRODUCT&UID=" & PRODUCT_ID & "&LANG=" & VDM_BL.UILanguage.TH
             End If
             lblDISPLAY_NAME.Text = DT.Rows(0).Item("DISPLAY_NAME_" & BL.Get_Language_Code(LANGUAGE)).ToString()
-            PRODUCT_COST = Val(DT.Rows(0).Item("PRICE"))
+            PRODUCT_COST = Val(DT.Rows(0).Item("PRICE").ToString)
             txtRequire.Text = FormatNumber(PRODUCT_COST, 0)
             CASH_PAID = 0
             IS_SERIAL = DT.Rows(0).Item("IS_SERIAL")
@@ -378,7 +378,7 @@ Public Class Device_Payment
             End If
             lblDISPLAY_NAME.Text = DT.Rows(0).Item("DISPLAY_NAME_" & BL.Get_Language_Code(LANGUAGE)).ToString()
         End If
-        PRODUCT_COST = Val(DT.Rows(0).Item("PRICE"))
+        PRODUCT_COST = Val(DT.Rows(0).Item("PRICE").ToString)
         txtRequire.Text = FormatNumber(PRODUCT_COST, 0)
         CASH_PAID = 0
         IS_SERIAL = True

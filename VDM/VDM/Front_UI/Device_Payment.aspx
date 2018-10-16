@@ -409,6 +409,8 @@
                             </div>
                         </div>
                     </div>
+
+                    
                 </asp:Panel>
 
                 <div id="TrueMoneyError" class="popup">
@@ -542,12 +544,14 @@
             $("#lnkTrueMoney").fancybox();
 
             function closeCredit() {
-                $('#paymentGatewayWindow').attr('src','../images/WhiteDot.png'); // Go Somewhere to close keyboard
-                setTimeout(function () { $('#btnCloseCredit').click(); }, 2000);
+                $('#paymentGatewayWindow').load(function () {
+                    $('#btnCloseCredit').click();
+                });
+                $('#paymentGatewayWindow').css('visibility', 'hidden');
+                $('#paymentGatewayWindow').attr('src', 'images/fancybox_overlay.png');
+                    // Go Somewhere to close keyboard
             }
         </script>
-
-        
 
         <uc1:UC_CommonUI runat="server" ID="CommonUI" />
     </form>

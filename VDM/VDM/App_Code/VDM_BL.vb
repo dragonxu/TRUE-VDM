@@ -574,7 +574,7 @@ Public Class VDM_BL
 
             If Result.PRODUCT_CODE = "" Then
                 Result.Result = False
-                Result.Message = "ไม่พบเลข Barcode"
+                Result.Message = "ไม่พบเลข SERIAL : " & Search
                 Return Result
             Else
                 SQL = "SELECT PRODUCT_ID,PRODUCT_CODE,DISPLAY_NAME,IS_SERIAL,GS1,TYPE" & vbLf
@@ -586,7 +586,7 @@ Public Class VDM_BL
                 DA.Fill(DT)
                 If DT.Rows.Count = 0 Then
                     Result.Result = False
-                    Result.Message = "ไม่พบ Product Code"
+                    Result.Message = "ไม่พบ PRODUCT CODE : " & Result.PRODUCT_CODE
                     Return Result
                 Else
                     Result.PRODUCT_ID = DT.Rows(0).Item("PRODUCT_ID")
@@ -633,57 +633,56 @@ Public Class VDM_BL
         End If
 
         '----------- Get mat Code From TSM----------
+        Result.IS_SERIAL = True
+        Result.SERIAL_NO = Search
+        Dim TSM As BackEndInterface.Validate_Serial.Response = Get_TSM_Product_Code_From_Serial(Shop_Code, Search)
 
-        SQL = "SELECT * " & vbLf
-        SQL &= "FROM TMP_SIM" & vbLf
-        SQL &= "WHERE SERIAL_NO='" & Search.Replace("'", "''") & "'"
-        DT = New DataTable
-        DA = New SqlDataAdapter(SQL, ConnectionString)
-        DA.Fill(DT)
+        If Not IsNothing(TSM) AndAlso
+                 Not IsNothing(TSM.ReturnValues) AndAlso
+                 TSM.ReturnValues.Count > 1 AndAlso
+                 Not IsNothing(TSM.ReturnValues(0)) AndAlso
+                 Not IsNothing(TSM.ReturnValues(1)) AndAlso
+                 Not CBool(TSM.ReturnValues(1)) AndAlso
+                TSM.ReturnValues(0) <> "" Then
+            Result.PRODUCT_CODE = TSM.ReturnValues(0)
+        End If
 
-        If DT.Rows.Count = 0 Then
+        If Result.PRODUCT_CODE = "" Then
             Result.Result = False
-            Result.Message = "ไม่พบ Product Code"
+            Result.Message = "ไม่พบเลข SERIAL : " & Search
             Return Result
         Else
-            Result.PRODUCT_CODE = DT.Rows(0).Item("PRODUCT_CODE")
-            Result.SERIAL_NO = Search
-
-            SQL = "SELECT * " & vbLf
-            SQL &= "From VW_SIM_FOR_SCAN" & vbLf
+            SQL = "SELECT SIM_ID,PRODUCT_CODE,DISPLAY_NAME,SERIAL_NO" & vbLf
+            SQL &= "FROM VW_SIM_FOR_SCAN" & vbLf
             SQL &= "WHERE PRODUCT_CODE='" & Result.PRODUCT_CODE.Replace("'", "''") & "'"
             DT = New DataTable
             DA = New SqlDataAdapter(SQL, ConnectionString)
             DA.Fill(DT)
-            Result.PRODUCT_ID = DT.Rows(0).Item("SIM_ID")
-            Result.DISPLAY_NAME = DT.Rows(0).Item("DISPLAY_NAME")
-            DT.DefaultView.RowFilter = "SERIAL_NO='" & Search.Replace("'", "''") & "'"
-            If DT.DefaultView.Count > 0 Then
+            If DT.Rows.Count = 0 Then
                 Result.Result = False
-                Result.Message = "สินค้านี้มีอยู่ใน Stock แล้ว (ซ้ำ)"
+                Result.Message = "ไม่พบ PRODUCT CODE : " & Result.PRODUCT_CODE
                 Return Result
             Else
-                Result.Result = True
-                Result.Message = "Success"
-                Return Result
+                Result.PRODUCT_ID = DT.Rows(0).Item("SIM_ID")
+                Result.DISPLAY_NAME = DT.Rows(0).Item("DISPLAY_NAME").ToString
+
+                '---------------- ตรวจสอบว่ามีอยู่ใน Stock ปัจจุบันหรือไม่----------------
+                DT.DefaultView.RowFilter = "SERIAL_NO='" & Search.Replace("'", "''") & "'"
+                If DT.DefaultView.Count > 0 Then
+                    Result.Result = False
+                    Result.Message = "สินค้านี้มีอยู่ใน Stock แล้ว (ซ้ำ)"
+                    Return Result
+                Else
+                    Result.Result = True
+                    Result.Message = "Success"
+                    Return Result
+                End If
             End If
         End If
+
     End Function
 
     Public Function Get_TSM_Product_Code_From_Serial(ByVal SHOP As String, ByVal SERIAL As String) As BackEndInterface.Validate_Serial.Response
-        ''----------- Get From TSM : Hardcode For Test--------------
-        'Dim SQL As String = "SELECT PRODUCT_CODE,SERIAL_NO FROM TMP_Serial" & vbLf
-        'SQL &= "WHERE SERIAL_NO='" & SERIAL_NO.Replace("'", "''") & "'"
-
-        'Dim DT As New DataTable
-        'Dim DA As New SqlDataAdapter(SQL, ConnectionString)
-        'DA.Fill(DT)
-
-        'If DT.Rows.Count = 0 Then
-        '    Return ""
-        'Else
-        '    Return DT.Rows(0).Item("PRODUCT_CODE").ToString
-        'End If
         '---------------------------- Get From TSM -------------------------------
         Dim TSM As New BackEndInterface.Validate_Serial
         Dim Resp As BackEndInterface.Validate_Serial.Response = Nothing
@@ -696,9 +695,7 @@ Public Class VDM_BL
             End With
         End Try
 
-
         Return Resp
-
     End Function
 
     Public Sub Save_Product_Movement_Log(ByVal SHIFT_ID As Integer, ByVal SHIFT_STATUS As ShiftStatus, ByVal PRODUCT_ID As Integer, ByVal SERIAL_NO As String, ByVal MOVE_ID As StockMovementType, ByVal MOVE_FROM As String, ByVal MOVE_FROM_SLOT As Integer, ByVal MOVE_TO As String, ByVal MOVE_TO_SLOT As Integer, ByVal REMARK As String, ByVal MOVE_BY As Integer, ByVal MOVE_TIME As DateTime)
