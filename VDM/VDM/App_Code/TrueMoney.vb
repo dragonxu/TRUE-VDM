@@ -179,21 +179,37 @@ Public Class TrueMoney
         DA.Fill(DT)
         DR = DT.NewRow
         DR("REQ_ID") = REQ_ID
-        If Not IsDBNull(Result.status.code) And Not IsNothing(Result.status.code) Then
-            DR("code") = Result.status.code
+
+        If IsNothing(Result.status) Then
+            Result.status = New Response.ResponseStatus
         End If
-        If Not IsDBNull(Result.status.message) And Not IsNothing(Result.status.message) Then
-            DR("message") = Result.status.message
+        If IsNothing(Result.status.code) Then
+            Result.status.code = "error"
         End If
-        If Not IsDBNull(Result.data.payment_id) And Not IsNothing(Result.data.payment_id) Then
-            DR("payment_id") = Result.data.payment_id
+        If IsNothing(Result.status.message) Then
+            Result.status.message = Result.ConnectionMessage
         End If
-        If Not IsDBNull(Result.JSONString) And Not IsNothing(Result.JSONString) Then
-            DR("JSONString") = Result.JSONString
+        DR("code") = Result.status.code
+        DR("message") = Result.status.message
+
+        If IsNothing(Result.data) Then
+            Result.data = New Response.ResponseData
         End If
-        If Not IsDBNull(Result.ConnectionMessage) And Not IsNothing(Result.ConnectionMessage) Then
-            DR("ConnectionMessage") = Result.ConnectionMessage
+        If IsNothing(Result.data.payment_id) Then
+            Result.data.payment_id = ""
         End If
+        DR("payment_id") = Result.data.payment_id
+
+        If IsNothing(Result.JSONString) Then
+            Result.JSONString = ""
+        End If
+        DR("JSONString") = Result.JSONString
+
+        If IsNothing(Result.ConnectionMessage) Then
+            Result.ConnectionMessage = ""
+        End If
+        DR("ConnectionMessage") = Result.ConnectionMessage
+
         DR("RESP_TIME") = Now
         DT.Rows.Add(DR)
         cmd = New SqlCommandBuilder(DA)

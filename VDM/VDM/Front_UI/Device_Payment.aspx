@@ -28,7 +28,11 @@
     <script type="text/javascript" src="js/lightslider.js"></script>
 <%--    <link href="../styles/onScreenKeyboard.css" rel="stylesheet" />--%>
 
-    <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+    <link href="css/true-popup.css" rel="stylesheet" type="text/css" />
+    <link href="css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.fancybox.js"></script>
+
     <script type="text/javascript" src="js/bootstrap.js"></script>
     
     <!---------VDM----------->
@@ -325,9 +329,10 @@
                                         </div>
                                     </form>
 
-                                    <asp:Panel ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" Style="position: fixed; left: 500px; top: 100px;">
+                                    <asp:Panel ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" Style="position: fixed; left: -500px; top: 200px;">
                                         <asp:TextBox ID="txtBarcode" runat="server"></asp:TextBox>
                                         <asp:Button ID="btnBarcode" runat="server" />
+                                        <a id="lnkTrueMoney" href="#TrueMoneyError">True Money Error</a>
                                     </asp:Panel>
 
                                 </asp:Panel>                                
@@ -389,7 +394,7 @@
 
                                             <div class="privilege" style="width:100%; height:100%; text-align:center; position:relative;">
 
-                                              <iframe id="paymentGatewayWindow" runat="server" style="position:absolute; left:10px; width:90%; height:90%;" >
+                                              <iframe id="paymentGatewayWindow" runat="server" style=" position:absolute; left:10px; width:90%; height:90%;" >
 
                                               </iframe>
                                               <asp:TextBox ID="txtCreditReq" runat="server" style="display:none;" />
@@ -515,6 +520,19 @@
                 //initKeyboard();
             }
         </script>
+
+<script type="text/javascript">
+    $("#lnkTrueMoney").fancybox();
+</script>
+
+        <div id="TrueMoneyError" class="popup">
+           <div class="popup-frame">
+            <h3 class="true-m">ท่านไม่สามารถชำระค่าบริการ<br/>ผ่านช่องทางนี้ได้</h3>
+            <div class="icon"><img src="images/Popup/icon-truemoneyError.png"/></div>
+            <h4 class="true-b">กรุณาติดต่อพนักงาน</h4>
+            <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;">ตกลง</a></div>
+          </div>
+        </div>
 
         <uc1:UC_CommonUI runat="server" ID="CommonUI" />
     </form>

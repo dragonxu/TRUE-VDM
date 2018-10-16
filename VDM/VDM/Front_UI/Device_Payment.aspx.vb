@@ -244,7 +244,7 @@ Public Class Device_Payment
         Dim RESP As TrueMoney.Response = TMN.GetResult(TXN_ID, ISV, Amount, Barcode, PaymentDescription, ShopCode)
         '---------------- ตรวจสอบผลลัพธ์ -------------------
         If RESP.status.code.ToLower <> "success" Then
-            Alert(Me.Page, RESP.status.message)
+            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "TrueMoneyError", "$('#lnkTrueMoney').click();", True)
             txtBarcode.Text = ""
             Exit Sub
         End If
