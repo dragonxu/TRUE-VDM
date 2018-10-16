@@ -1,4 +1,5 @@
-﻿Public Class FormKeyboard
+﻿Imports System.Windows.Forms
+Public Class FormKeyboard
 
     Enum CaseMode
         Lower = 1
@@ -95,8 +96,19 @@
 
     Private Sub btnAlpha_Click(sender As Object, e As EventArgs)
         Dim btn As Button = sender
-        FormMain.Controls(0).Focus()
-        SendKeys.Send(btn.Text)
+        'FormMain.Controls(0).Focus()
+
+        Dim k As New KeyEvent()
+        k.WindowsKeyCode = 0x0D
+k.FocusOnEditableField = True
+        k.IsSystemKey = False
+        k.Type = KeyEventType.Char
+        Browser.GetBrowser().GetHost().SendKeyEvent(k)
+
+
+
+        FormMain.ChromeBrowser.GetBrowser()
+        SendKeys.SendWait(btn.Text)
     End Sub
 
     Private Sub btn_shift_Click(sender As Object, e As EventArgs) Handles btn_shift.Click, btn_caplock.Click

@@ -256,13 +256,7 @@
                                                         </div>
 
                                                     </li>
-                                                    <br />
-                                                    <br />
-                                                    <br />
-                                                    <br />
-
-
-
+                        
                                                 </div>
                                             </ContentTemplate>
                                         </asp:UpdatePanel>

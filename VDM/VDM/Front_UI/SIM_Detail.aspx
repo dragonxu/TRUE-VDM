@@ -47,7 +47,7 @@
                                 <div class="description">
                                     <div class="pic">
                                         <div class="pic-shadow">
-                                            <asp:Image ID="img" runat="server" Height="360px"></asp:Image>
+                                            <asp:Image ID="img" runat="server" Height="340px"></asp:Image>
                                         </div>
                                     </div>
                                     <figure class="col-md-7">
@@ -89,14 +89,14 @@
                                     </figure>
                                 </div>
 
-                                <div class="detail-sim" style ="margin-bottom:10px;width :80%;">
+                                <div class="detail-sim" style ="margin-bottom:10px; width:80%; text-align:center;">
 
-                                    <asp:Image ID="imgPrice" runat="server" Height="560px"></asp:Image>
+                                    <asp:Image ID="imgPrice" runat="server" Height="340px" style="width:unset;"></asp:Image>
                                 </div>
                                 <div class="true-l">
                                     <div class="term" style="margin: unset;">
                                         <div class="frame" style="border: unset; margin-top:40px; background-color: transparent;">
-                                            <span id="content-d3" class="light" style="max-height: 350px;">
+                                            <span id="content-d3" class="light" style="max-height: 300px;">
                                                 
                                                     <div style="width: 100%; font-size: 30px; margin-top: 20px;">
                                                         <asp:Label ID="lblDesc" runat="server"></asp:Label>

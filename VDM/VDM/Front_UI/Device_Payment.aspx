@@ -67,7 +67,7 @@
                             <figure class="col-md-7">
                                 <div class="topic true-l">
                                     <h2 class="true-l" style="padding-bottom: 30px;">
-                                        <asp:Label ID="lblDISPLAY_NAME" runat="server" Style="font-size: 60pt; line-height: 70px;" Width="140%"></asp:Label>
+                                        <asp:Label ID="lblDISPLAY_NAME" runat="server" Style="font-size: 60pt; line-height: 70px;" Width="100%"></asp:Label>
 
                                     </h2>
                                     <asp:Panel ID="pnlProduct" runat="server">

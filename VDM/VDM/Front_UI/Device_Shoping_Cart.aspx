@@ -121,10 +121,10 @@
                         </div>
 
 
-                        <div class="term" style="height:750px;">
+                        <div class="term" style="height:460px; margin:unset;">
                             <h2 class="true-m">Term & Condition</h2>
-                            <div class="frame" style="height: 620px;">
-                                <span id="content-d3" class="light" style="height:560px; overflow:hidden;">
+                            <div class="frame" style="height: 380px;">
+                                <span id="content-d3" class="light" style="height:340px; overflow:hidden;">
                                     <p class="true-l">
                                         <%-- <asp:Label  class="true-l" ID="lblTerm_Condition" runat="server" Text=""></asp:Label>--%>
                                         ข้อกำหนดและเงื่อนไขรายการส่งเสริมการขาย 4G+ FUN Unlimited 299, 4G+ FUN Unlimited 399, 4G+ FUN Unlimited 499, 4G+ FUN Unlimited 599, 4G+ FUN Unlimited 699, 4G+ FUN Unlimited 899, 4G+ FUN Unlimited 1099, 4G+ FUN Unlimited 1299, 4G+ FUN Unlimited 1499, และ 4G+ FUN Unlimited 1899
@@ -190,11 +190,11 @@
         </div>
         <uc1:UC_CommonUI runat="server" ID="UC_CommonUI" />
 
-        <div id="popupIPCard" class="popup">
-          <div class="popup-frame">
+        <div id="popupIPCard" class="popup" >
+          <div class="popup-frame" >
             <h3 class="true-m">ขั้นตอนการยืนยันตัวบุคคล</h3>
             <div class="icon"><img src="images/Popup/icon-idcard.png"/></div>
-            <h4 class="true-b">กรุณาสอดบัตรประชาชนของท่าน</h4>
+            <h4 class="true-b" style="padding-bottom:30px;">กรุณาสอดบัตรประชาชนของท่าน</h4>
             <%--<div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;">ตกลง</a></div>--%>
           </div>
         </div>
