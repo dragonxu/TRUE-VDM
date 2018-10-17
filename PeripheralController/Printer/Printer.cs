@@ -124,6 +124,7 @@ namespace Printer
             IntPtr buf = Marshal.StringToCoTaskMemAnsi(outputstring);
 
             Int32 done = 0;
+           System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("th-TH");
             bool ok = WritePrinter(HandlePrinter, buf, outputstring.Length, out done);
 
             Marshal.FreeCoTaskMem(buf);
@@ -132,5 +133,6 @@ namespace Printer
             else return true;
         }
 
+       
     }
 }

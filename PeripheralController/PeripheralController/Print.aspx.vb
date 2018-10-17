@@ -117,6 +117,8 @@
 
     Private Function Print() As Boolean
 
+        Threading.Thread.CurrentThread.CurrentCulture = Globalization.CultureInfo.CreateSpecificCulture("th-TH")
+
         '-------------Get Post Content------------
         Dim C As New Converter
         Dim Reader As IO.Stream = Request.InputStream
@@ -126,6 +128,9 @@
         'Dim Content As String = Reader.ToString
         Dim Content As String = C.ByteToString(C.StreamToByte(Reader), Converter.EncodeType._UTF8)
 
+        If Content = "" AndAlso Not IsNothing(Request.QueryString("Content")) AndAlso Request.QueryString("Content") <> "" Then
+            Content = Request.QueryString("Content")
+        End If
         'Dim Printer As New Printer
         'Printer.PrinterFont = New Drawing.Font("Verdana", 9)
         ''Dim settings As New System.Drawing.Printing.PrinterSettings
@@ -142,7 +147,8 @@
         For i As Integer = 0 To _Lines.Count - 1
             Printer.Print(_Lines(i))
         Next
-        Printer.Close()
+
+        Response.Write(callBackFunction & "('" & Printer.Close() & ");")
 
         Return True
     End Function

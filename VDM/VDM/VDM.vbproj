@@ -666,6 +666,7 @@
     <Content Include="Machine_Console\UC_Product_Slot.ascx" />
     <Content Include="UC_Kiosk_Shelf.ascx" />
     <Content Include="UC_Product_Spec.ascx" />
+    <Content Include="UpdateProgress.ascx" />
     <Content Include="Upload_User_Form.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1223,6 +1224,13 @@
     </Compile>
     <Compile Include="UC_Product_Spec.ascx.vb">
       <DependentUpon>UC_Product_Spec.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateProgress.ascx.designer.vb">
+      <DependentUpon>UpdateProgress.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateProgress.ascx.vb">
+      <DependentUpon>UpdateProgress.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Upload_User_Form.aspx.designer.vb">

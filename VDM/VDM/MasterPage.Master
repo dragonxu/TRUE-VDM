@@ -1,5 +1,7 @@
 ﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="MasterPage.master.vb" Inherits="VDM.MasterPage" %>
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="ajaxToolkit" %>
+<%@ Register Src="~/UpdateProgress.ascx" TagPrefix="uc1" TagName="UpdateProgress" %>
+
 <!doctype html>
 <html class="no-js">
 <head runat="server">
@@ -312,6 +314,7 @@
         <input type="text" id="toastrTimeout" />
         <input type="button" href="javascript:;" class="showToastr"/>
     </div>  
+
 
   </form>
   <!-- build:js({.tmp,app}) scripts/app.min.js -->

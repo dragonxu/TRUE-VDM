@@ -17,3 +17,4 @@ D:\Project\TRUE-VDM\SourceCode\PeripheralController\SimDispenser\SimDispenser\bi
 D:\Project\TRUE-VDM\SourceCode\PeripheralController\SimDispenser\SimDispenser\bin\Debug\SimDispenser.pdb
 D:\Project\TRUE-VDM\SourceCode\PeripheralController\SimDispenser\SimDispenser\obj\Debug\SimDispenser.dll
 D:\Project\TRUE-VDM\SourceCode\PeripheralController\SimDispenser\SimDispenser\obj\Debug\SimDispenser.pdb
+D:\Project\TRUE-VDM\SourceCode\PeripheralController\SimDispenser\SimDispenser\obj\Debug\SimDispenser.csprojResolveAssemblyReference.cache

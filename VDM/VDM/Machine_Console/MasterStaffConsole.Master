@@ -1,5 +1,8 @@
 ﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="MasterStaffConsole.Master.vb" Inherits="VDM.MasterStaffConsole" %>
 
+<%@ Register Src="~/UpdateProgress.ascx" TagPrefix="uc1" TagName="UpdateProgress" %>
+
+
 <%--<%@ Register Src="~/Front_UI/UC_CommonUI.ascx" TagPrefix="uc1" TagName="UC_CommonUI" %>--%>
 
 
@@ -112,6 +115,9 @@
                 </asp:ContentPlaceHolder>
             </div>
         </section>
+
+        <uc1:UpdateProgress runat="server" id="UpdateProgress" />
+
     </form>
     <!-- /how it works section -->
     <!-- footer -->
