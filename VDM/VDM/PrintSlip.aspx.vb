@@ -43,7 +43,7 @@ Public Class PrintSlip
                 BL.UPDATE_CONFIRMATION_SLIP(TXN_ID, content)
         End Select
         '----------------- set Print Content ----------------
-        lblPrintContent.Text = content.Replace(vbLf, "<br>").Replace(vbTab, "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
+        lblPrintContent.Text = content.Replace(vbNewLine, "<br>").Replace(vbTab, "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
 
         Dim Script As String = "setTimeout(printDelegate, 1000);"
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Print", Script, True)

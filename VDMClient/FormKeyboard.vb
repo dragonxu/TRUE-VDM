@@ -44,63 +44,62 @@ Public Class FormKeyboard
 
         '------------------------- MouseDown ----------------------
         '-------- First Row ----------
-        AddHandler btn_grave.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_1.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_2.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_3.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_4.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_5.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_6.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_7.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_8.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_9.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_0.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_minus.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_equal.MouseDown, AddressOf btn_MouseDown
-        'btn_backspace
+        AddHandler btn_grave.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_1.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_2.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_3.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_4.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_5.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_6.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_7.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_8.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_9.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_0.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_minus.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_equal.MouseDown, AddressOf btn_alpha_MouseDown
         '-------- Second Row ----------
-        AddHandler btn_tab.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_q.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_w.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_e.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_r.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_t.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_y.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_u.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_i.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_o.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_p.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_left_sq.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_right_sq.MouseDown, AddressOf btn_MouseDown
+        AddHandler btn_tab.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_q.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_w.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_e.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_r.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_t.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_y.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_u.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_i.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_o.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_p.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_left_sq.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_right_sq.MouseDown, AddressOf btn_alpha_MouseDown
         '-------- Third Row ----------
-        'btn_caplock
-        AddHandler btn_a.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_s.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_d.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_f.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_g.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_h.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_j.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_k.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_l.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_colon.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_quote.MouseDown, AddressOf btn_MouseDown
-        'btn_submit
+        AddHandler btn_a.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_s.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_d.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_f.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_g.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_h.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_j.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_k.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_l.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_colon.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_quote.MouseDown, AddressOf btn_alpha_MouseDown
         '-------- Forth Row ----------
-        'btn_shift
-        AddHandler btn_z.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_x.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_c.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_v.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_b.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_n.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_m.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_comma.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_dot.MouseDown, AddressOf btn_MouseDown
-        AddHandler btn_slash.MouseDown, AddressOf btn_MouseDown
-        'btn_keyboard
-        '---------------- Fifth Row ------------------
-        'btn_space
+        AddHandler btn_z.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_x.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_c.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_v.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_b.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_n.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_m.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_comma.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_dot.MouseDown, AddressOf btn_alpha_MouseDown
+        AddHandler btn_slash.MouseDown, AddressOf btn_alpha_MouseDown
+        '---------------- CtrlButton ------------------
+        AddHandler btn_tab.MouseDown, AddressOf btn_ctrl_MouseDown
+        AddHandler btn_submit.MouseDown, AddressOf btn_ctrl_MouseDown
+        AddHandler btn_backspace.MouseDown, AddressOf btn_ctrl_MouseDown
+        AddHandler btn_space.MouseDown, AddressOf btn_ctrl_MouseDown
+        AddHandler btn_delete.MouseDown, AddressOf btn_ctrl_MouseDown
 
 
         '------------------------- MouseUp ----------------------
@@ -118,7 +117,6 @@ Public Class FormKeyboard
         AddHandler btn_0.MouseUp, AddressOf btn_MouseUp
         AddHandler btn_minus.MouseUp, AddressOf btn_MouseUp
         AddHandler btn_equal.MouseUp, AddressOf btn_MouseUp
-        'btn_backspace
         '-------- Second Row ----------
         AddHandler btn_tab.MouseUp, AddressOf btn_MouseUp
         AddHandler btn_q.MouseUp, AddressOf btn_MouseUp
@@ -134,7 +132,6 @@ Public Class FormKeyboard
         AddHandler btn_left_sq.MouseUp, AddressOf btn_MouseUp
         AddHandler btn_right_sq.MouseUp, AddressOf btn_MouseUp
         '-------- Third Row ----------
-        'btn_caplock
         AddHandler btn_a.MouseUp, AddressOf btn_MouseUp
         AddHandler btn_s.MouseUp, AddressOf btn_MouseUp
         AddHandler btn_d.MouseUp, AddressOf btn_MouseUp
@@ -146,9 +143,7 @@ Public Class FormKeyboard
         AddHandler btn_l.MouseUp, AddressOf btn_MouseUp
         AddHandler btn_colon.MouseUp, AddressOf btn_MouseUp
         AddHandler btn_quote.MouseUp, AddressOf btn_MouseUp
-        'btn_submit
         '-------- Forth Row ----------
-        'btn_shift
         AddHandler btn_z.MouseUp, AddressOf btn_MouseUp
         AddHandler btn_x.MouseUp, AddressOf btn_MouseUp
         AddHandler btn_c.MouseUp, AddressOf btn_MouseUp
@@ -159,9 +154,12 @@ Public Class FormKeyboard
         AddHandler btn_comma.MouseUp, AddressOf btn_MouseUp
         AddHandler btn_dot.MouseUp, AddressOf btn_MouseUp
         AddHandler btn_slash.MouseUp, AddressOf btn_MouseUp
-        'btn_keyboard
-        '---------------- Fifth Row ------------------
-        'btn_space
+        '---------------- CtrlButton ------------------
+        AddHandler btn_tab.MouseUp, AddressOf btn_MouseUp
+        AddHandler btn_submit.MouseUp, AddressOf btn_MouseUp
+        AddHandler btn_backspace.MouseUp, AddressOf btn_MouseUp
+        AddHandler btn_space.MouseUp, AddressOf btn_MouseUp
+        AddHandler btn_delete.MouseUp, AddressOf btn_MouseUp
 
 
     End Sub
@@ -170,20 +168,18 @@ Public Class FormKeyboard
         SendKeys.SendWait(KeyEvent)
     End Sub
 
-    Private Sub btn_MouseDown(sender As Object, e As MouseEventArgs)
+    Private Sub btn_alpha_MouseDown(sender As Object, e As MouseEventArgs)
         Dim btn As Button = sender
         KeyEvent = btn.Text
         MainForm.Focus()
     End Sub
 
-    'Private Sub btnAlpha_Click(sender As Object, e As EventArgs)
-    '    Dim btn As Button = sender
-    '    KeyEvent = btn.Text
+    Private Sub btn_ctrl_MouseDown(sender As Object, e As MouseEventArgs)
+        Dim btn As Button = sender
+        KeyEvent = btn.Tag
+        MainForm.Focus()
+    End Sub
 
-
-    '    MainForm.Focus()
-    '    'SendKeys.SendWait(KeyEvent)
-    'End Sub
 
     Private Sub btn_shift_Click(sender As Object, e As EventArgs) Handles btn_shift.Click, btn_caplock.Click
 
@@ -315,36 +311,6 @@ Public Class FormKeyboard
                 'btn_space
         End Select
 
-    End Sub
-
-    Private Sub btn_tab_Click(sender As Object, e As EventArgs) Handles btn_tab.Click
-        KeyEvent = "{TAB}"
-        MainForm.Focus()
-        'SendKeys.SendWait(KeyEvent)
-    End Sub
-
-    Private Sub btn_submit_Click(sender As Object, e As EventArgs) Handles btn_submit.Click
-        KeyEvent = "{ENTER}"
-        MainForm.Focus()
-        'SendKeys.SendWait("{ENTER}")
-    End Sub
-
-    Private Sub btn_backspace_Click(sender As Object, e As EventArgs) Handles btn_backspace.Click
-        KeyEvent = "{BACKSPACE}"
-        MainForm.Focus()
-        'SendKeys.SendWait("{BACKSPACE}")
-    End Sub
-
-    Private Sub btn_space_Click(sender As Object, e As EventArgs) Handles btn_space.Click
-        KeyEvent = " "
-        MainForm.Focus()
-        'SendKeys.SendWait(" ")
-    End Sub
-
-    Private Sub btn_delete_Click(sender As Object, e As EventArgs) Handles btn_delete.Click
-        KeyEvent = "{DELETE}"
-        MainForm.Focus()
-        'SendKeys.SendWait("{DELETE}")
     End Sub
 
 

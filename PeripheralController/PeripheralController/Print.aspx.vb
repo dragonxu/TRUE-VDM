@@ -12,7 +12,7 @@
     End Property
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Response.Write(callBackFunction & "" & Print().ToString.ToLower & ");")
+        Response.Write(callBackFunction & "(" & Print().ToString.ToLower & ");")
     End Sub
 
     'Private Sub Print()
@@ -126,14 +126,23 @@
         'Dim Content As String = Reader.ToString
         Dim Content As String = C.ByteToString(C.StreamToByte(Reader), Converter.EncodeType._UTF8)
 
-        Dim Printer As New Printer
-        Printer.PrinterFont = New Drawing.Font("Verdana", 9)
-        'Dim settings As New System.Drawing.Printing.PrinterSettings
-        '--------------- Set PaperWidth ------------
-        '--------------- Set Margin ------------
-        Printer.DefaultPageSettings.Margins = New Drawing.Printing.Margins(0, 0, 0, 0)
-        Printer.TextToPrint = Content
-        Printer.Print()
+        'Dim Printer As New Printer
+        'Printer.PrinterFont = New Drawing.Font("Verdana", 9)
+        ''Dim settings As New System.Drawing.Printing.PrinterSettings
+        ''--------------- Set PaperWidth ------------
+        ''--------------- Set Margin ------------
+        'Printer.DefaultPageSettings.Margins = New Drawing.Printing.Margins(0, 0, 0, 0)
+        'Printer.TextToPrint = Content
+        'Printer.Print()
+
+        Dim Printer As New Printer.Printer
+        If Not Printer.Open("Slip") Then Return False
+
+        Dim _Lines As String() = Content.Split(vbNewLine)
+        For i As Integer = 0 To _Lines.Count - 1
+            Printer.Print(_Lines(i))
+        Next
+        Printer.Close()
 
         Return True
     End Function

@@ -1883,7 +1883,7 @@ Public Class VDM_BL
 
         Dim Content As String = GEN_DEFAULT_SLIP_HEADER()
 
-        Dim SQL As String = "SELECT * FROM VW_TXN_CASH" & vbLf
+        Dim SQL As String = "SELECT * FROM VW_TXN_CASH" & vbNewLine
         SQL &= "WHERE TXN_ID=" & TXN_ID & " AND TXN_STEP='completed'"
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
@@ -1908,32 +1908,32 @@ Public Class VDM_BL
         Dim REMAIN_CHANGE As Double = DT.Rows(0).Item("REMAIN_CHANGE")
 
 
-        Content &= "สาขาที่ : " & SITE_CODE & SITE_NAME & vbLf
-        Content &= "ใบยืนยันการรับชำระ                 " & TXN_END.ToString("dd/MM/yyyy") & vbLf
-        Content &= "" & SLIP_CODE & " 	    " & TXN_END.ToString("hh:mm") & vbLf
-        Content &= PrintLine & vbLf
-        Content &= "รายการสินค้า" & vbLf
-        Content &= " " & vbLf
-        Content &= "1. " & PRODUCT_CODE & "                 " & FormatNumber(TOTAL_PRICE, 2) & vbLf
-        Content &= PRODUCT_NAME & vbLf
+        Content &= "สาขาที่ : " & SITE_CODE & SITE_NAME & vbNewLine
+        Content &= "ใบยืนยันการรับชำระ                 " & TXN_END.ToString("dd/MM/yyyy") & vbNewLine
+        Content &= "" & SLIP_CODE & " 	    " & TXN_END.ToString("hh:mm") & vbNewLine
+        Content &= PrintLine & vbNewLine
+        Content &= "รายการสินค้า" & vbNewLine
+        Content &= " " & vbNewLine
+        Content &= "1. " & PRODUCT_CODE & "                 " & FormatNumber(TOTAL_PRICE, 2) & vbNewLine
+        Content &= PRODUCT_NAME & vbNewLine
         If Trim(SERIAL_NO) <> "" Then
-            Content &= "S/N : " & SERIAL_NO & vbLf
-            Content &= " " & vbLf
+            Content &= "S/N : " & SERIAL_NO & vbNewLine
+            Content &= " " & vbNewLine
         End If
-        Content &= PrintLine & vbLf
-        Content &= "CASH                                " & FormatNumber(PAID, 2) & vbLf
+        Content &= PrintLine & vbNewLine
+        Content &= "CASH                                " & FormatNumber(PAID, 2) & vbNewLine
 
         If ACTUAL_CHANGE > 0 Then
-            Content &= PrintLine & vbLf
-            Content &= "CHANGE                              " & FormatNumber(ACTUAL_CHANGE, 2) & vbLf
+            Content &= PrintLine & vbNewLine
+            Content &= "CHANGE                              " & FormatNumber(ACTUAL_CHANGE, 2) & vbNewLine
         End If
         If REMAIN_CHANGE > 0 Then
-            Content &= PrintLine & vbLf
-            Content &= "REMAIN CHANGE                           " & FormatNumber(REMAIN_CHANGE, 2) & vbLf
+            Content &= PrintLine & vbNewLine
+            Content &= "REMAIN CHANGE                           " & FormatNumber(REMAIN_CHANGE, 2) & vbNewLine
         End If
-        Content &= PrintLine & vbLf
-        Content &= " " & vbLf
-        Content &= "ขอบคุณที่ใช้บริการ" & vbLf
+        Content &= PrintLine & vbNewLine
+        Content &= " " & vbNewLine
+        Content &= "ขอบคุณที่ใช้บริการ" & vbNewLine
         '----------------- Ads ----------------
         Content &= GEN_SLIP_ADS()
         '----------------- Ads ----------------
@@ -1945,7 +1945,7 @@ Public Class VDM_BL
     Public Function GEN_TMN_CONFIRMATION_SLIP(ByVal TXN_ID As Integer) As String
         Dim Content As String = GEN_DEFAULT_SLIP_HEADER()
 
-        Dim SQL As String = "SELECT * FROM VW_TXN_TMN" & vbLf
+        Dim SQL As String = "SELECT * FROM VW_TXN_TMN" & vbNewLine
         SQL &= "WHERE TXN_ID=" & TXN_ID & " AND TXN_STEP='completed'"
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
@@ -1971,27 +1971,27 @@ Public Class VDM_BL
         Dim TMN_PAYMENT_ID As String = DT.Rows(0).Item("TMN_PAYMENT_ID").ToString
         Dim TMN_RESP_TIME As DateTime = DT.Rows(0).Item("TMN_RESP_TIME").ToString
 
-        Content &= "สาขาที่ : " & SITE_CODE & SITE_NAME & vbLf
-        Content &= "ใบยืนยันการรับชำระ   	        " & TXN_END.ToString("dd/MM/yyyy") & vbLf
-        Content &= "" & SLIP_CODE & " 	    " & TXN_END.ToString("hh:mm") & vbLf
-        Content &= PrintLine & vbLf
-        Content &= "รายการสินค้า" & vbLf
-        Content &= " " & vbLf
-        Content &= "1. " & PRODUCT_CODE & "                         " & FormatNumber(TOTAL_PRICE, 2) & vbLf
-        Content &= PRODUCT_NAME & vbLf
+        Content &= "สาขาที่ : " & SITE_CODE & SITE_NAME & vbNewLine
+        Content &= "ใบยืนยันการรับชำระ   	        " & TXN_END.ToString("dd/MM/yyyy") & vbNewLine
+        Content &= "" & SLIP_CODE & " 	    " & TXN_END.ToString("hh:mm") & vbNewLine
+        Content &= PrintLine & vbNewLine
+        Content &= "รายการสินค้า" & vbNewLine
+        Content &= " " & vbNewLine
+        Content &= "1. " & PRODUCT_CODE & "                         " & FormatNumber(TOTAL_PRICE, 2) & vbNewLine
+        Content &= PRODUCT_NAME & vbNewLine
         If Trim(SERIAL_NO) <> "" Then
-            Content &= "S/N : " & SERIAL_NO & vbLf
-            Content &= " " & vbLf
+            Content &= "S/N : " & SERIAL_NO & vbNewLine
+            Content &= " " & vbNewLine
         End If
-        Content &= PrintLine & vbLf
-        Content &= "TRUE MONEY                            " & FormatNumber(TMN_REQUEST_AMOUNT / 100, 2) & vbLf
-        Content &= " " & vbLf
-        Content &= "ISV :   " & TMN_ISV & vbLf
-        Content &= "PAYMENT ID :    " & TMN_PAYMENT_ID & vbLf
-        Content &= "PAYMENT CODE :" & TMN_PAYMENT_CODE & vbLf
-        Content &= PrintLine & vbLf
-        Content &= " " & vbLf
-        Content &= "ขอบคุณที่ใช้บริการ" & vbLf
+        Content &= PrintLine & vbNewLine
+        Content &= "TRUE MONEY                            " & FormatNumber(TMN_REQUEST_AMOUNT / 100, 2) & vbNewLine
+        Content &= " " & vbNewLine
+        Content &= "ISV :   " & TMN_ISV & vbNewLine
+        Content &= "PAYMENT ID :    " & TMN_PAYMENT_ID & vbNewLine
+        Content &= "PAYMENT CODE :" & TMN_PAYMENT_CODE & vbNewLine
+        Content &= PrintLine & vbNewLine
+        Content &= " " & vbNewLine
+        Content &= "ขอบคุณที่ใช้บริการ" & vbNewLine
         '----------------- Ads ----------------
         Content &= GEN_SLIP_ADS()
         '----------------- Ads ----------------
@@ -2003,7 +2003,7 @@ Public Class VDM_BL
     Public Function GEN_CREDITCARD_CONFIRMATION_SLIP(ByVal TXN_ID As Integer) As String
         Dim Content As String = GEN_DEFAULT_SLIP_HEADER()
 
-        Dim SQL As String = "SELECT * FROM VW_TXN_CREDIT" & vbLf
+        Dim SQL As String = "SELECT * FROM VW_TXN_CREDIT" & vbNewLine
         SQL &= "WHERE TXN_ID=" & TXN_ID & " AND TXN_STEP='completed'"
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
@@ -2025,25 +2025,25 @@ Public Class VDM_BL
         Dim SERIAL_NO As String = DT.Rows(0).Item("SERIAL_NO")
         Dim ORDER_REF As String = DT.Rows(0).Item("ORDER_REF")
 
-        Content &= "สาขาที่ : " & SITE_CODE & SITE_NAME & vbLf
-        Content &= "ใบยืนยันการรับชำระ   	        " & TXN_END.ToString("dd/MM/yyyy") & vbLf
-        Content &= "" & SLIP_CODE & " 	    " & TXN_END.ToString("hh:mm") & vbLf
-        Content &= PrintLine & vbLf
-        Content &= "รายการสินค้า" & vbLf
-        Content &= " " & vbLf
-        Content &= "1. " & PRODUCT_CODE & "                         " & FormatNumber(TOTAL_PRICE, 2) & vbLf
-        Content &= PRODUCT_NAME & vbLf
+        Content &= "สาขาที่ : " & SITE_CODE & SITE_NAME & vbNewLine
+        Content &= "ใบยืนยันการรับชำระ   	        " & TXN_END.ToString("dd/MM/yyyy") & vbNewLine
+        Content &= "" & SLIP_CODE & " 	    " & TXN_END.ToString("hh:mm") & vbNewLine
+        Content &= PrintLine & vbNewLine
+        Content &= "รายการสินค้า" & vbNewLine
+        Content &= " " & vbNewLine
+        Content &= "1. " & PRODUCT_CODE & "                         " & FormatNumber(TOTAL_PRICE, 2) & vbNewLine
+        Content &= PRODUCT_NAME & vbNewLine
         If Trim(SERIAL_NO) <> "" Then
-            Content &= "S/N : " & SERIAL_NO & vbLf
-            Content &= " " & vbLf
+            Content &= "S/N : " & SERIAL_NO & vbNewLine
+            Content &= " " & vbNewLine
         End If
-        Content &= PrintLine & vbLf
-        Content &= "CREDIT CARD                            " & TOTAL_PRICE & vbLf
-        Content &= " " & vbLf
-        Content &= "ORDER REF :   " & ORDER_REF & vbLf
-        Content &= PrintLine & vbLf
-        Content &= " " & vbLf
-        Content &= "ขอบคุณที่ใช้บริการ" & vbLf
+        Content &= PrintLine & vbNewLine
+        Content &= "CREDIT CARD                            " & TOTAL_PRICE & vbNewLine
+        Content &= " " & vbNewLine
+        Content &= "ORDER REF :   " & ORDER_REF & vbNewLine
+        Content &= PrintLine & vbNewLine
+        Content &= " " & vbNewLine
+        Content &= "ขอบคุณที่ใช้บริการ" & vbNewLine
         '----------------- Ads ----------------
         Content &= GEN_SLIP_ADS()
         '----------------- Ads ----------------

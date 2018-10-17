@@ -146,6 +146,7 @@ Partial Class FormKeyboard
         Me.btn_delete.Name = "btn_delete"
         Me.btn_delete.Size = New System.Drawing.Size(73, 49)
         Me.btn_delete.TabIndex = 14
+        Me.btn_delete.Tag = "{DELETE}"
         Me.btn_delete.Text = "Delete"
         Me.btn_delete.UseVisualStyleBackColor = False
         '
@@ -164,6 +165,7 @@ Partial Class FormKeyboard
         Me.btn_backspace.Name = "btn_backspace"
         Me.btn_backspace.Size = New System.Drawing.Size(112, 49)
         Me.btn_backspace.TabIndex = 13
+        Me.btn_backspace.Tag = "{BACKSPACE}"
         Me.btn_backspace.Text = "Backspace"
         Me.btn_backspace.UseVisualStyleBackColor = False
         '
@@ -715,7 +717,7 @@ Partial Class FormKeyboard
         Me.btn_tab.Name = "btn_tab"
         Me.btn_tab.Size = New System.Drawing.Size(180, 49)
         Me.btn_tab.TabIndex = 0
-        Me.btn_tab.Tag = ""
+        Me.btn_tab.Tag = "{TAB}"
         Me.btn_tab.Text = "Tab"
         Me.btn_tab.UseVisualStyleBackColor = False
         '
@@ -771,7 +773,7 @@ Partial Class FormKeyboard
         Me.btn_submit.Name = "btn_submit"
         Me.btn_submit.Size = New System.Drawing.Size(139, 49)
         Me.btn_submit.TabIndex = 12
-        Me.btn_submit.Tag = ""
+        Me.btn_submit.Tag = "{ENTER}"
         Me.btn_submit.Text = "Submit"
         Me.btn_submit.UseVisualStyleBackColor = False
         '
@@ -1305,7 +1307,7 @@ Partial Class FormKeyboard
         Me.btn_space.Name = "btn_space"
         Me.btn_space.Size = New System.Drawing.Size(841, 44)
         Me.btn_space.TabIndex = 0
-        Me.btn_space.Tag = ""
+        Me.btn_space.Tag = " "
         Me.btn_space.Text = "Space"
         Me.btn_space.UseVisualStyleBackColor = False
         '
