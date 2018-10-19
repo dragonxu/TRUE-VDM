@@ -1904,9 +1904,16 @@ Public Class VDM_BL
         Dim PRODUCT_NAME As String = DT.Rows(0).Item("PRODUCT_NAME")
         Dim SERIAL_NO As String = DT.Rows(0).Item("SERIAL_NO")
         Dim PAID As String = DT.Rows(0).Item("PAID")
-        Dim ACTUAL_CHANGE As Double = DT.Rows(0).Item("ACTUAL_CHANGE")
-        Dim REMAIN_CHANGE As Double = DT.Rows(0).Item("REMAIN_CHANGE")
 
+        Dim ACTUAL_CHANGE As Double = 0
+        If Not IsDBNull(DT.Rows(0).Item("ACTUAL_CHANGE")) Then
+            ACTUAL_CHANGE = DT.Rows(0).Item("ACTUAL_CHANGE")
+        End If
+
+        Dim REMAIN_CHANGE As Double = 0
+        If Not IsDBNull(DT.Rows(0).Item("REMAIN_CHANGE")) Then
+            REMAIN_CHANGE = DT.Rows(0).Item("REMAIN_CHANGE")
+        End If
 
         Content &= "สาขาที่ : " & SITE_CODE & SITE_NAME & vbNewLine
         Content &= "ใบยืนยันการรับชำระ                 " & TXN_END.ToString("dd/MM/yyyy") & vbNewLine
