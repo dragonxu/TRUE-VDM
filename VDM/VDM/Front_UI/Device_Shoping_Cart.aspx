@@ -163,7 +163,7 @@
                                 <div class="col-md-12" style="text-align: center;">
                                     <asp:Panel ID="pnlConfirm" runat="server">
                                         <asp:Button ID="btnConfirm_str" runat="server" class="order true-m btn-default " Text="ชำระเงิน" />
-                                        <input type="button" class="order true-m" id="btnIDCard" runat="server" value="สั่งซื้อ" onclick="$('#clickIDCard').click();" />
+                                        <input type="button" class="order true-m" id="btnIDCard" runat="server" value="สั่งซื้อ" onclick="$('#clickIDCard').click(); requestIDCard(); requestPassport(); " />
                                         <a id="clickIDCard" runat="server" style="display:none;" href="#popupIPCard">สั่งซื้อ</a>
                                     </asp:Panel>
                                 </div>
@@ -185,6 +185,8 @@
                         </span>
                     </div>
                 </nav>
+                            <asp:TextBox ID="txtLocalControllerURL" runat="server" Style="display:none;"></asp:TextBox>
+
             </footer>
         </div>
         <uc1:UC_CommonUI runat="server" ID="UC_CommonUI" />
@@ -195,6 +197,46 @@
             <div class="icon"><img src="images/Popup/icon-idcard.png"/></div>
             <h4 class="true-b" style="padding-bottom:30px;">กรุณาสอดบัตรประชาชนของท่าน</h4>
             <%--<div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;">ตกลง</a></div>--%>
+          </div>
+          <div style="position:absolute; top:40px; right:0; display:none;"> <!--ID Card-->
+                Citizenid : <asp:Textbox ID="id_Citizenid" runat="Server" /><br/>
+                Th_Prefix : <asp:Textbox ID="id_Th_Prefix" runat="Server" /><br/>
+                Th_Firstname : <asp:Textbox ID="id_Th_Firstname" runat="Server" /><br/>
+                Th_Middlename : <asp:Textbox ID="id_Th_Middlename" runat="Server" /><br/>
+                Th_Lastname : <asp:Textbox ID="id_Th_Lastname" runat="Server" /><br/>
+                En_Prefix : <asp:Textbox ID="id_En_Prefix" runat="Server" /><br/>
+                En_Firstname: <asp:Textbox ID="id_En_Firstname" runat="Server" /><br/>
+                En_Middlename : <asp:Textbox ID="id_En_Middlename" runat="Server" /><br/>
+                En_Lastname : <asp:Textbox ID="id_En_Lastname" runat="Server" /><br/>
+                Sex : <asp:Textbox ID="id_Sex" runat="Server" /><br/>
+                Birthday : <asp:Textbox ID="id_Birthday" runat="Server" /><br/>
+                Address : <asp:Textbox ID="id_Address" runat="Server" /><br/>
+                addrHouseNo : <asp:Textbox ID="id_addrHouseNo" runat="Server" /><br/>
+                addrVillageNo : <asp:Textbox ID="id_addrVillageNo" runat="Server" /><br/>
+                addrLane : <asp:Textbox ID="id_addrLane" runat="Server" /><br/>
+                addrRoad : <asp:Textbox ID="id_addrRoad" runat="Server" /><br/>
+                addrTambol : <asp:Textbox ID="id_addrTambol" runat="Server" /><br/>
+                addrAmphur : <asp:Textbox ID="id_addrAmphur" runat="Server" /><br/>
+                addrProvince : <asp:Textbox ID="id_addrProvince" runat="Server" /><br/>
+                Issue : <asp:Textbox ID="id_Issue" runat="Server" /><br/>
+                Issuer : <asp:Textbox ID="id_Issuer" runat="Server" /><br/>
+                Expire : <asp:Textbox ID="id_Expire" runat="Server" /><br/>
+                Photo : <asp:Textbox ID="id_Photo" runat="Server" TextMode="MultiLine" /><br/>
+          </div>
+          <div style="position:absolute; top:40px; right:0; "> <!--Passport-->
+                FirstName : <asp:Textbox ID="pass_FirstName" runat="Server" /><br/>
+                MiddleName : <asp:Textbox ID="pass_MiddleName" runat="Server" /><br/>
+                LastName : <asp:Textbox ID="pass_LastName" runat="Server" /><br/>
+                DocType : <asp:Textbox ID="pass_DocType" runat="Server" /><br/>
+                Nationality : <asp:Textbox ID="pass_Nationality" runat="Server" /><br/>
+                PassportNo : <asp:Textbox ID="pass_PassportNo" runat="Server" /><br/>
+                DateOfBirth : <asp:Textbox ID="pass_DateOfBirth" runat="Server" /><br/>
+                Sex : <asp:Textbox ID="pass_Sex" runat="Server" /><br/>
+                Expire : <asp:Textbox ID="pass_Expire" runat="Server" /><br/>
+                PersonalID : <asp:Textbox ID="pass_PersonalID" runat="Server" /><br/>
+                IssueCountry : <asp:Textbox ID="pass_IssueCountry" runat="Server" /><br/>
+                MRZ : <asp:Textbox ID="pass_MRZ" runat="Server" /><br/>
+                Photo : <asp:Textbox ID="pass_Photo" runat="Server" TextMode="MultiLine" /><br/>
           </div>
         </div>
 
@@ -216,6 +258,108 @@
 
         });
     })(jQuery);
+
+    function requestIDCard() {
+                // Gen URL
+                var url =  $('#txtLocalControllerURL').val() + '/ScanIDCard.aspx?timeout=60&callback=updateIDCard&callbackError=IDCardError';              
+                var script = document.createElement('script');
+                script.src = url;
+                var body = document.getElementsByTagName('body')[0];
+                body.appendChild(script);
+            }
+
+    function IDCardError(Message){
+        alert(Message);
+    }
+
+    function requestPassport() {
+                // Gen URL
+                var url =  $('#txtLocalControllerURL').val() + '/ScanPassport.aspx?timeout=60&Mode=Scan&callback=updatePassport';              
+                var script = document.createElement('script');
+                script.src = url;
+                var body = document.getElementsByTagName('body')[0];
+                body.appendChild(script);
+            }
+    
+    function updateIDCard(Citizenid,
+                            Th_Prefix,
+                            Th_Firstname,
+                            Th_Middlename,
+                            Th_Lastname,
+                            En_Prefix,
+                            En_Firstname,
+                            En_Middlename,
+                            En_Lastname,
+                            Sex,
+                            Birthday,
+                            Address,
+                            addrHouseNo,
+                            addrVillageNo,
+                            addrLane,
+                            addrRoad,
+                            addrTambol,
+                            addrAmphur,
+                            addrProvince,
+                            Issue,
+                            Issuer,
+                            Expire,
+                            Photo){
+
+                            $('#id_Citizenid').val(Citizenid);
+                            $('#id_Th_Prefix').val(Th_Prefix);
+                            $('#id_Th_Firstname').val(Th_Firstname);
+                            $('#id_Th_Middlename').val(Th_Middlename);
+                            $('#id_Th_Lastname').val(Th_Lastname);
+                            $('#id_En_Prefix').val(En_Prefix);
+                            $('#id_En_Firstname').val(En_Firstname);
+                            $('#id_En_Middlename').val(En_Middlename);
+                            $('#id_En_Lastname').val(En_Lastname);
+                            $('#id_Sex').val(Sex);
+                            $('#id_Birthday').val(Birthday);
+                            $('#id_Address').val(Address);
+                            $('#id_addrHouseNo').val(addrHouseNo);
+                            $('#id_addrVillageNo').val(addrVillageNo);
+                            $('#id_addrLane').val(addrLane);
+                            $('#id_addrRoad').val(addrRoad);
+                            $('#id_addrTambol').val(addrTambol);
+                            $('#id_addrAmphur').val(addrAmphur);
+                            $('#id_addrProvince').val(addrProvince);
+                            $('#id_Issue').val(Issue);
+                            $('#id_Issuer').val(Issuer);
+                            $('#id_Expire').val(Expire);
+                            $('#id_Photo').val(Photo);
+    
+    }
+
+    function updatePassport(FirstName,
+                            MiddleName,
+                            LastName,
+                            DocType,
+                            Nationality,
+                            PassportNo,
+                            DateOfBirth,
+                            Sex,
+                            Expire,
+                            PersonalID,
+                            IssueCountry,
+                            MRZ,
+                            Photo){
+
+                            $('#pass_FirstName').val(FirstName);
+                            $('#pass_MiddleName').val(MiddleName);
+                            $('#pass_LastName').val(LastName);
+                            $('#pass_DocType').val(DocType);
+                            $('#pass_Nationality').val(Nationality);
+                            $('#pass_PassportNo').val(PassportNo);
+                            $('#pass_DateOfBirth').val(DateOfBirth);
+                            $('#pass_Sex').val(Sex);
+                            $('#pass_Expire').val(Expire);
+                            $('#pass_PersonalID').val(PersonalID);
+                            $('#pass_IssueCountry').val(IssueCountry);
+                            $('#pass_MRZ').val(MRZ);
+                            $('#pass_Photo').val(Photo);
+    
+    }
 </script>
 </html>
 

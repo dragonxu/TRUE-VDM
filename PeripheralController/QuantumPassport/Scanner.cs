@@ -53,8 +53,8 @@ namespace QuantumPassport
         //AutoScan
         public bool g_bAutoScanned = false;
 
-        // Raise Event
-        public event EventHandler GetResult;
+        //// Raise Event
+        //public event EventHandler GetResult;
 
         //public void Setting_Default()
         //{
@@ -161,6 +161,16 @@ namespace QuantumPassport
             }
         }
 
+        public void WriteMRZ() {
+            using (Stream sw = File.Open(FilePath + "\\MRZ.txt", FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
+            {
+                byte[] b = System.Text.Encoding.UTF8.GetBytes(ReadMRZ());
+                sw.Write(b, 0, b.Length);
+                sw.Close();
+            }
+        }
+
+
         protected override void WndProc(ref Message wMessage)
         {
             switch (wMessage.Msg)
@@ -199,10 +209,13 @@ namespace QuantumPassport
                     break;
 
                 case QuantA6.WM_SAVEEND: //Scan and Save complete.
-                    {
-                        EventHandler handler = GetResult;
-                        handler(this, EventArgs.Empty);
-                    }
+             
+                    //    EventHandler handler = GetResult;
+                    //    handler(this, EventArgs.Empty);
+
+                        // Write MRZ Result
+                        WriteMRZ();
+                
                     break;
 
                 case QuantA6.WM_SCANTIMEOUT: //Scan timeout.
@@ -211,7 +224,10 @@ namespace QuantumPassport
                 default:
                     break;
             }
-            base.WndProc(ref wMessage);
+            try
+            { base.WndProc(ref wMessage); }
+            catch (Exception e)
+            { }
         }
 
         public void OpenScanner() {
@@ -240,12 +256,8 @@ namespace QuantumPassport
             timer2.Stop();
             QuantA6.QuantA6_DeviceClose();
         }
-
-        public void ManualScan() {
-            Scan();
-        }
-
-        private void Scan() {
+        
+        public void Scan() {
             string str = FilePath + "\\Scanned"; //+ g_nScanCount.ToString("D3");
             int nResult = QuantA6.QuantA6_Scan(str, 0x00);
         }
@@ -280,6 +292,20 @@ namespace QuantumPassport
                 }
         }
 
-       
+        private void CommandWatcher_Changed(object sender, FileSystemEventArgs e)
+        {
+            if (e.Name.ToLower() != "command.txt") return;
+            String command = "";
+            using (StreamReader sr = new StreamReader(e.FullPath))
+            {
+                // Read the stream to a string, and write the string to the console.
+                 command = sr.ReadToEnd();
+                 sr.Close();
+            }
+            if (command == "start")
+                StartScan();
+            else 
+                CloseScanner();
+        }
     }
 }

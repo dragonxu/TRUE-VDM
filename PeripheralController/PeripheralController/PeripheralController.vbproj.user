@@ -10,7 +10,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <StartPageUrl>ScanPassport.aspx?Mode=Scan&amp;timeout=60&amp;Callback=test</StartPageUrl>
+          <StartPageUrl>ScanIDCard.aspx?timeout=60</StartPageUrl>
           <StartAction>SpecificPage</StartAction>
           <AspNetDebugging>True</AspNetDebugging>
           <SilverlightDebugging>False</SilverlightDebugging>

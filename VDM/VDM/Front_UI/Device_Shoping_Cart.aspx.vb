@@ -96,7 +96,7 @@ Public Class Device_Shoping_Cart
             Else
                 BindSIM()
             End If
-
+            txtLocalControllerURL.Text = BL.LocalControllerURL
         Else
             initFormPlugin()
         End If
@@ -197,8 +197,9 @@ Public Class Device_Shoping_Cart
                 lblPrice_Money.Text = FormatNumber(Val(DT.Rows(0).Item("PRICE")), 2)
                 'lblCurrency_Str.Text = ""
             End If
-
         End If
+
+
 
     End Sub
 #End Region

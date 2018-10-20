@@ -5,24 +5,6 @@ Public Class ScanPassport
     Dim BL As New Core_BL
     Dim ResultFileName As String = BL.PassportScanPath & "\Scanned.bmp"
 
-    Private ReadOnly Property Scanner As QuantumPassport.Scanner
-        Get
-            If IsNothing(Application("PassportScanner")) Then
-                '----------- Init Object And Connect---------
-                Dim _scanner As New QuantumPassport.Scanner()
-                _scanner.FilePath = BL.PassportScanPath
-
-                Threading.Thread.Sleep(200)
-
-                Application.Lock()
-                Application("PassportScanner") = _scanner
-                Application.UnLock()
-
-            End If
-            Return Application("PassportScanner")
-        End Get
-    End Property
-
     Private ReadOnly Property Mode As String
         Get
             If Not IsNothing(Request.QueryString("Mode")) Then
@@ -57,31 +39,90 @@ Public Class ScanPassport
         Select Case Mode
             Case "Scan"
                 Scan()
+            Case "Stop"
+                StopScan()
         End Select
     End Sub
 
     Private MRZ As String = ""
-    Private Sub Scan()
-        AddHandler Scanner.GetResult, AddressOf Scanner_GetResult
-        Scanner.StartScan()
-        Dim EndWait As DateTime = DateAdd(DateInterval.Second, TimeOut, Now)
 
-        Scanner.ManualScan()
+    Private Sub Scan()
+        Dim EndWait As DateTime = DateAdd(DateInterval.Second, TimeOut, Now)
+        Dim LastModify As DateTime = IO.File.GetLastWriteTime(BL.PassportScanPath & "\MRZ.txt")
+        StartScan()
         '------------- รอจนกว่าจะScan -------
         While MRZ = "" And Now < EndWait
-            Threading.Thread.Sleep(200)
+            Threading.Thread.Sleep(1000)
+            If IO.File.GetLastWriteTime(BL.PassportScanPath & "\MRZ.txt") <> LastModify Then
+                MRZ = ReadMRZ()
+            End If
         End While
-        '------------- ไม่ Scan สักที -------------
-        Try : Scanner.CloseScanner() : Catch : End Try
+        ''------------- สิ้นทุดการรอคอย -------------
+        Try : StopScan() : Catch : End Try
         callBack()
     End Sub
 
-    Protected Sub Scanner_GetResult(ByVal sender As Object, ByVal e As System.EventArgs)
-        MRZ = Scanner.ReadMRZ
+    Private Sub StartScan()
+        '------------ Just Write Text file ------
+        Dim C As New Converter
+        Dim B As Byte() = C.StringToByte("start", Converter.EncodeType._UTF8)
+        Dim S As IO.Stream = IO.File.Open(BL.PassportScanPath & "\command.txt", IO.FileMode.OpenOrCreate, IO.FileAccess.Write, IO.FileShare.ReadWrite)
+        S.Write(B, 0, B.Length)
+        S.Close()
     End Sub
 
-    Private Sub callBack()
-        Response.Write(callBackFunction & "('" & MRZ & "');")
+    Private Sub StopScan()
+        '------------ Just Write Text file ------
+        Dim C As New Converter
+        Dim B As Byte() = C.StringToByte("stop", Converter.EncodeType._UTF8)
+        Dim S As IO.Stream = IO.File.Open(BL.PassportScanPath & "\command.txt", IO.FileMode.OpenOrCreate, IO.FileAccess.Write, IO.FileShare.ReadWrite)
+        S.Write(B, 0, B.Length)
+        S.Close()
     End Sub
+
+    Private Function ReadMRZ() As String
+        Dim C As New Converter
+        Dim S As IO.Stream = IO.File.Open(BL.PassportScanPath & "\MRZ.txt", IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.ReadWrite)
+        Dim B() As Byte = C.StreamToByte(S)
+        Return C.ByteToString(B, Converter.EncodeType._UTF8)
+    End Function
+
+    Private Sub callBack()
+
+        'Split MRZ
+        Dim ThePassport As New Passport
+        ThePassport = ThePassport.MRZToCusInfo(MRZ)
+
+        Dim C As New Converter
+        Dim ImagePath As String = BL.PassportScanPath & "\Scanned.bmp"
+        If IO.File.Exists(ImagePath) Then
+            Dim S As IO.Stream = IO.File.Open(ImagePath, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.ReadWrite)
+            Dim Img As Drawing.Image = Drawing.Image.FromStream(S)
+            ThePassport.Blob = C.ImageToBlob(Img)
+            S.Close()
+        End If
+
+        Dim Script As String = callBackFunction & "("
+
+        Script &= "'" & ThePassport.FirstName.Replace("'", "") & "',"
+        Script &= "'" & ThePassport.MiddleName.Replace("'", "") & "',"
+        Script &= "'" & ThePassport.LastName.Replace("'", "") & "',"
+        Script &= "'" & ThePassport.DocType.Replace("'", "") & "',"
+        Script &= "'" & ThePassport.Nationality.Replace("'", "") & "',"
+        Script &= "'" & ThePassport.PassportNo.Replace("'", "") & "',"
+        Script &= "'" & ThePassport.DateOfBirth.Replace("'", "") & "',"
+        Script &= "'" & ThePassport.Sex.Replace("'", "") & "',"
+        Script &= "'" & ThePassport.Expire.Replace("'", "") & "',"
+        Script &= "'" & ThePassport.PersonalID.Replace("'", "") & "',"
+        Script &= "'" & ThePassport.IssueCountry.Replace("'", "") & "',"
+        Script &= "'" & ThePassport.MRZ.Replace("'", "") & "',"
+        Script &= "'" & ThePassport.Blob.Replace("'", "") & "');"
+
+        Response.Write(Script)
+    End Sub
+
+
+
+
 
 End Class

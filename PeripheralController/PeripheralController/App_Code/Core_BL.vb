@@ -22,7 +22,7 @@ Public Class Core_BL
     Public Product_Picker_Port As Integer = AppSettings("Product_Picker_Port").ToString
 
     Public SIM_Dispenser_Port As String = AppSettings("SIM_Dispenser_Port").ToString
-
+    Public IDCardReader As String = AppSettings("IDCardReader").ToString
     Public PassportScanPath As String = AppSettings("PassportScanPath").ToString
 
 

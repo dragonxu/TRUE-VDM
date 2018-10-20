@@ -185,6 +185,15 @@ Partial Public Class Device_Shoping_Cart
     Protected WithEvents lnkBack As Global.System.Web.UI.WebControls.ImageButton
     
     '''<summary>
+    '''txtLocalControllerURL control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtLocalControllerURL As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''UC_CommonUI control.
     '''</summary>
     '''<remarks>
@@ -192,4 +201,328 @@ Partial Public Class Device_Shoping_Cart
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents UC_CommonUI As Global.VDM.UC_CommonUI
+    
+    '''<summary>
+    '''id_Citizenid control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_Citizenid As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''id_Th_Prefix control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_Th_Prefix As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''id_Th_Firstname control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_Th_Firstname As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''id_Th_Middlename control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_Th_Middlename As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''id_Th_Lastname control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_Th_Lastname As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''id_En_Prefix control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_En_Prefix As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''id_En_Firstname control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_En_Firstname As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''id_En_Middlename control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_En_Middlename As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''id_En_Lastname control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_En_Lastname As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''id_Sex control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_Sex As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''id_Birthday control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_Birthday As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''id_Address control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_Address As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''id_addrHouseNo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_addrHouseNo As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''id_addrVillageNo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_addrVillageNo As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''id_addrLane control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_addrLane As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''id_addrRoad control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_addrRoad As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''id_addrTambol control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_addrTambol As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''id_addrAmphur control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_addrAmphur As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''id_addrProvince control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_addrProvince As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''id_Issue control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_Issue As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''id_Issuer control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_Issuer As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''id_Expire control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_Expire As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''id_Photo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents id_Photo As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''pass_FirstName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pass_FirstName As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''pass_MiddleName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pass_MiddleName As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''pass_LastName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pass_LastName As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''pass_DocType control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pass_DocType As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''pass_Nationality control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pass_Nationality As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''pass_PassportNo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pass_PassportNo As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''pass_DateOfBirth control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pass_DateOfBirth As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''pass_Sex control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pass_Sex As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''pass_Expire control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pass_Expire As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''pass_PersonalID control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pass_PersonalID As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''pass_IssueCountry control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pass_IssueCountry As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''pass_MRZ control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pass_MRZ As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''pass_Photo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pass_Photo As Global.System.Web.UI.WebControls.TextBox
 End Class
