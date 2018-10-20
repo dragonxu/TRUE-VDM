@@ -224,6 +224,20 @@
       <DependentUpon>CashDispense.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="ScanIDCard.aspx.designer.vb">
+      <DependentUpon>ScanIDCard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ScanIDCard.aspx.vb">
+      <DependentUpon>ScanIDCard.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ScanPassport.aspx.designer.vb">
+      <DependentUpon>ScanPassport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ScanPassport.aspx.vb">
+      <DependentUpon>ScanPassport.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="SIMPicker.aspx.designer.vb">
       <DependentUpon>SIMPicker.aspx</DependentUpon>
     </Compile>
@@ -250,6 +264,8 @@
     <Content Include="CoinDispense.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="css\style.css" />
+    <Content Include="ScanIDCard.aspx" />
+    <Content Include="ScanPassport.aspx" />
     <Content Include="SIMPicker.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -320,10 +336,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\QuantumPassport\QuantumPassport.csproj">
-      <Project>{8ad5be24-b43f-411c-8e29-20918b987f57}</Project>
-      <Name>QuantumPassport</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SimDispenser\SimDispenser\SimDispenser.csproj">
       <Project>{81b3df48-67d4-4ab4-806c-63712ca35780}</Project>
       <Name>SimDispenser</Name>

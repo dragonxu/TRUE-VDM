@@ -23,5 +23,7 @@ Public Class Core_BL
 
     Public SIM_Dispenser_Port As String = AppSettings("SIM_Dispenser_Port").ToString
 
+    Public PassportScanPath As String = AppSettings("PassportScanPath").ToString
+
 
 End Class

@@ -47,7 +47,7 @@ namespace QuantumPassport
         public const int DBT_DEVTYP_DEVICEINTERFACE = 5;
 
         //Global variables.
-        public string FilePath = "c:\\Scanimage";
+        public string FilePath = "C:\\inetpub\\wwwroot\\Passport";
         public static IntPtr g_notificationHandle;
 
         //AutoScan
@@ -82,10 +82,11 @@ namespace QuantumPassport
         //}
 
 
-        private void Scanner_Load(object sender, EventArgs e)
+        protected void FormScan_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
+
 
         public void StartScan() {
             //Register QuantumScan Guid for auto connect.
@@ -119,7 +120,7 @@ namespace QuantumPassport
             //Show MRZ
             return strName.ToString();
         }
-        
+
         public void ShowMRZ()
         {
             String MRZ = ReadMRZ();
@@ -159,7 +160,7 @@ namespace QuantumPassport
 
             }
         }
-        
+
         protected override void WndProc(ref Message wMessage)
         {
             switch (wMessage.Msg)
@@ -234,17 +235,20 @@ namespace QuantumPassport
             timer2.Start();
         }
 
-      
-        private void CloseScanner() {
+
+        public void CloseScanner() {
             timer2.Stop();
             QuantA6.QuantA6_DeviceClose();
         }
 
-        public void Scan() {
+        public void ManualScan() {
+            Scan();
+        }
+
+        private void Scan() {
             string str = FilePath + "\\Scanned"; //+ g_nScanCount.ToString("D3");
             int nResult = QuantA6.QuantA6_Scan(str, 0x00);
         }
-
         
         private void timer2_Tick(object sender, EventArgs e)
         {
