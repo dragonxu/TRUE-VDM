@@ -1838,7 +1838,7 @@ Public Class VDM_BL
 
 #Region "Printing"
 
-    Dim PrintLine As String = "_________________________________"
+    Dim PrintLine As String = "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "
 
     Public Function Get_New_Confirmation_Slip_No() As String
         Dim SQL As String = "SELECT TOP 1 SLIP_NO FROM"

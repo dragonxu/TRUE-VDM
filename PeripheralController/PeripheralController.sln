@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashDispenser", "CashDispen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimDispenser", "SimDispenser\SimDispenser\SimDispenser.csproj", "{81B3DF48-67D4-4AB4-806C-63712CA35780}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Printer", "Printer\Printer.csproj", "{46B272B6-465E-46AB-8ECB-AF37041DDBE8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuantumPassport", "QuantumPassport\QuantumPassport.csproj", "{8AD5BE24-B43F-411C-8E29-20918B987F57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,10 +53,10 @@ Global
 		{81B3DF48-67D4-4AB4-806C-63712CA35780}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81B3DF48-67D4-4AB4-806C-63712CA35780}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81B3DF48-67D4-4AB4-806C-63712CA35780}.Release|Any CPU.Build.0 = Release|Any CPU
-		{46B272B6-465E-46AB-8ECB-AF37041DDBE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{46B272B6-465E-46AB-8ECB-AF37041DDBE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{46B272B6-465E-46AB-8ECB-AF37041DDBE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{46B272B6-465E-46AB-8ECB-AF37041DDBE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AD5BE24-B43F-411C-8E29-20918B987F57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AD5BE24-B43F-411C-8E29-20918B987F57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AD5BE24-B43F-411C-8E29-20918B987F57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AD5BE24-B43F-411C-8E29-20918B987F57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

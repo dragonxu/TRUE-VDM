@@ -111,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\Converter.vb" />
+    <Compile Include="App_Code\Printer.vb" />
     <Compile Include="CamCapture.aspx.designer.vb">
       <DependentUpon>CamCapture.aspx</DependentUpon>
     </Compile>
@@ -319,9 +320,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Printer\Printer.csproj">
-      <Project>{46b272b6-465e-46ab-8ecb-af37041ddbe8}</Project>
-      <Name>Printer</Name>
+    <ProjectReference Include="..\QuantumPassport\QuantumPassport.csproj">
+      <Project>{8ad5be24-b43f-411c-8e29-20918b987f57}</Project>
+      <Name>QuantumPassport</Name>
     </ProjectReference>
     <ProjectReference Include="..\SimDispenser\SimDispenser\SimDispenser.csproj">
       <Project>{81b3df48-67d4-4ab4-806c-63712ca35780}</Project>

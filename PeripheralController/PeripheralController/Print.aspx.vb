@@ -122,33 +122,17 @@
         '-------------Get Post Content------------
         Dim C As New Converter
         Dim Reader As IO.Stream = Request.InputStream
-        'Request.ContentEncoding = Encoding.UTF8
-        'Request.InputStream.Seek(0, IO.SeekOrigin.Begin)
-        'Reader.DiscardBufferedData()
-        'Dim Content As String = Reader.ToString
         Dim Content As String = C.ByteToString(C.StreamToByte(Reader), Converter.EncodeType._UTF8)
 
         If Content = "" AndAlso Not IsNothing(Request.QueryString("Content")) AndAlso Request.QueryString("Content") <> "" Then
             Content = Request.QueryString("Content")
         End If
-        'Dim Printer As New Printer
-        'Printer.PrinterFont = New Drawing.Font("Verdana", 9)
-        ''Dim settings As New System.Drawing.Printing.PrinterSettings
-        ''--------------- Set PaperWidth ------------
-        ''--------------- Set Margin ------------
-        'Printer.DefaultPageSettings.Margins = New Drawing.Printing.Margins(0, 0, 0, 0)
-        'Printer.TextToPrint = Content
-        'Printer.Print()
 
-        Dim Printer As New Printer.Printer
-        If Not Printer.Open("Slip") Then Return False
+        Dim Printer As New Printer
+        Printer.Content = Content
+        Printer.Print()
 
-        Dim _Lines As String() = Content.Split(vbNewLine)
-        For i As Integer = 0 To _Lines.Count - 1
-            Printer.Print(_Lines(i))
-        Next
-
-        Response.Write(callBackFunction & "('" & Printer.Close() & ");")
+        Response.Write(callBackFunction & "('true);")
 
         Return True
     End Function
