@@ -170,7 +170,8 @@
         <asp:UpdatePanel ID="UDBVerify" runat="server">
         <ContentTemplate>
         
-            <div style="position:fixed; top:40px; left:-500px;"> <!--ID Card-->
+            <div style="position:fixed; top:40px; left:800px;"> <!--ID Card-->
+                    <h4>IDCard</h4>
                     Citizenid : <asp:Textbox ID="id_Citizenid" runat="Server" /><br/>
                     Th_Prefix : <asp:Textbox ID="id_Th_Prefix" runat="Server" /><br/>
                     Th_Firstname : <asp:Textbox ID="id_Th_Firstname" runat="Server" /><br/>
@@ -194,7 +195,7 @@
                     Issuer : <asp:Textbox ID="id_Issuer" runat="Server" /><br/>
                     Expire : <asp:Textbox ID="id_Expire" runat="Server" /><br/>
                     Photo : <asp:Textbox ID="id_Photo" runat="Server" TextMode="MultiLine" /><br/>
-                    <!----------------------------->
+                    <h4>Passport</h4>
                     FirstName : <asp:Textbox ID="pass_FirstName" runat="Server" /><br/>
                     MiddleName : <asp:Textbox ID="pass_MiddleName" runat="Server" /><br/>
                     LastName : <asp:Textbox ID="pass_LastName" runat="Server" /><br/>
@@ -380,7 +381,6 @@
         $('#clickCamTrigger').click();
         var url = $('#txtLocalControllerURL').val() + '/CamCapture.aspx';
         $('#frmCamTrigger').attr('src',url);
-        alert($('#frmCamTrigger').attr('src'));
     }
 
     </script>

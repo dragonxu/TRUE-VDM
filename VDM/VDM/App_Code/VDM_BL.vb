@@ -209,6 +209,7 @@ Public Class VDM_BL
         Public Issuer As String = ""
         Public Expire As DateTime = DateTime.FromOADate(0)
         Public Photo As String = ""
+        Public FaceCamera As String = ""
     End Class
 
     Public Class Customer_Passport
@@ -225,6 +226,7 @@ Public Class VDM_BL
         Public IssueCountry As String = ""
         Public MRZ As String = ""
         Public Photo As String = ""
+        Public FaceCamera As String = ""
     End Class
 
 
