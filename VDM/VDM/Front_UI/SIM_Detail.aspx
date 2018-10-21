@@ -91,7 +91,7 @@
 
                                 <div class="detail-sim" style ="margin-bottom:10px; width:80%; text-align:center;">
 
-                                    <asp:Image ID="imgPrice" runat="server" Height="340px" style="width:unset;"></asp:Image>
+                                    <asp:Image ID="imgPrice" runat="server" Height="500px" style="width:unset;"></asp:Image>
                                 </div>
                                 <div class="true-l">
                                     <div class="term" style="margin: unset;">

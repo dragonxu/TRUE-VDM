@@ -91,7 +91,7 @@
                                 <asp:ImageButton ID="lnkHome" runat="server" ImageUrl="images/btu-home.png" />
                             </span>
                             <span class="col-md-6">
-                                <%-- <asp:ImageButton ID="lnkBack" runat="server" ImageUrl="images/btu-prev.png" />--%>
+                                 <asp:ImageButton ID="lnkBack" runat="server" ImageUrl="images/btu-prev.png" />
                             </span>
                         </div>
                     </nav>

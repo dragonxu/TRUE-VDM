@@ -194,5 +194,7 @@ Public Class Device_Brand
         Response.Redirect("Select_Menu.aspx")
     End Sub
 
-
+    Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click
+        Response.Redirect("Select_Menu.aspx")
+    End Sub
 End Class

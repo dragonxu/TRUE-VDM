@@ -1,5 +1,6 @@
 ﻿Imports System.Data
 Imports System.Data.SqlClient
+
 Public Class Device_Shoping_Cart
     Inherits System.Web.UI.Page
 
@@ -68,23 +69,36 @@ Public Class Device_Shoping_Cart
             Request.QueryString("SIM_ID") = value
         End Set
     End Property
-    Protected Property D_ID As Integer
+
+    Public Property Customer_IDCard As VDM_BL.Customer_IDCard
         Get
-            Try
-                Return Request.QueryString("D_ID")
-            Catch ex As Exception
-                Return 0
-            End Try
+            If IsNothing(Session("Customer_IDCard")) Then
+                Session("Customer_IDCard") = New VDM_BL.Customer_IDCard
+            End If
+            Return Session("Customer_IDCard")
         End Get
-        Set(value As Integer)
-            Request.QueryString("D_ID") = value
+        Set(value As VDM_BL.Customer_IDCard)
+            Session("Customer_IDCard") = value
         End Set
     End Property
 
 
+    Public Property Customer_Passport As VDM_BL.Customer_Passport
+        Get
+            If IsNothing(Session("Customer_Passport")) Then
+                Session("Customer_Passport") = New VDM_BL.Customer_Passport
+            End If
+            Return Session("Customer_Passport")
+        End Get
+        Set(value As VDM_BL.Customer_Passport)
+            Session("Customer_Passport") = value
+        End Set
+    End Property
+
 #End Region
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
         If Not IsNumeric(Session("LANGUAGE")) Then
             Response.Redirect("Select_Language.aspx")
         End If
@@ -103,21 +117,20 @@ Public Class Device_Shoping_Cart
     End Sub
 
     Private Sub initFormPlugin()
-        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
+        'ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
     End Sub
 
     Private Sub ClearForm()
-
+        Customer_IDCard = Nothing
+        Customer_Passport = Nothing
 
         pnlProduct.Visible = PRODUCT_ID <> 0
-        btnConfirm_str.Visible = PRODUCT_ID <> 0
+        btnConfirm.Visible = PRODUCT_ID <> 0
 
-        btnIDCard.Visible = SIM_ID <> 0
+        btnVerify.Visible = SIM_ID <> 0
         clickIDCard.Visible = SIM_ID <> 0
 
         chkActive.Checked = False
-        pnlConfirm.Enabled = False
-        btnConfirm_str.Style("background") = "#5a5454 url(images/icon-cart.png) no-repeat left 40px top 10px"
     End Sub
 
 #Region "PRODUCT"
@@ -199,31 +212,15 @@ Public Class Device_Shoping_Cart
             End If
         End If
 
-
-
     End Sub
 #End Region
-
-
-
-    Private Sub btnConfirm_str_Click(sender As Object, e As EventArgs) Handles btnConfirm_str.Click
-        'Response.Redirect("Device_Verify.aspx?PRODUCT_ID=" & PRODUCT_ID)  ข้ามหน้า Scan ไปก่อน
-
-        If PRODUCT_ID <> 0 Then
-            Response.Redirect("Device_Payment.aspx?PRODUCT_ID=" & PRODUCT_ID)
-        Else
-            Response.Redirect("Device_Verify.aspx?SIM_ID=" & SIM_ID)
-        End If
-
-    End Sub
-
 
     Private Sub lnkHome_Click(sender As Object, e As ImageClickEventArgs) Handles lnkHome.Click
         Response.Redirect("Select_Menu.aspx")
     End Sub
 
     Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click
- 
+
         If PRODUCT_ID <> 0 Then
             Response.Redirect("Device_Product_Detail.aspx?PRODUCT_ID=" & PRODUCT_ID)
         Else
@@ -233,14 +230,191 @@ Public Class Device_Shoping_Cart
 
     Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged
         If chkActive.Checked Then
-            pnlConfirm.Enabled = True
-            'btnConfirm_str.Attributes("class") = ""
-            btnConfirm_str.Style("background") = "#D80915 url(images/icon-cart.png) no-repeat left 40px top 10px"
+            btnConfirm.CssClass = "order true-m"
+            btnVerify.CssClass = "order true-m"
         Else
-            pnlConfirm.Enabled = False
-            'btnConfirm_str.Attributes("class") = "default"
-            btnConfirm_str.Style("background") = "#5a5454 url(images/icon-cart.png) no-repeat left 40px top 10px"
+            btnConfirm.CssClass = "order true-m default"
+            btnVerify.CssClass = "order true-m default"
         End If
+
+    End Sub
+
+    Private Sub btnConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
+        If Not chkActive.Checked Then Exit Sub
+
+        If PRODUCT_ID <> 0 Then
+            Response.Redirect("Device_Payment.aspx?PRODUCT_ID=" & PRODUCT_ID)
+        Else
+            Response.Redirect("Device_Verify.aspx?SIM_ID=" & SIM_ID)
+        End If
+
+    End Sub
+
+    Private Sub btnVerify_Click(sender As Object, e As EventArgs) Handles btnVerify.Click
+        If Not chkActive.Checked Then Exit Sub
+
+        Dim Script As String = "$(""#clickIDCard"").click();" & vbNewLine
+        If LANGUAGE = VDM_BL.UILanguage.TH Then
+            Script &= " requestIDCard();"
+        Else
+            Script &= " requestPassport();"
+        End If
+
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "StartScan", Script, True)
+    End Sub
+
+    Private Sub btnKeepInfo_Click(sender As Object, e As EventArgs) Handles btnKeepInfo.Click
+        Customer_IDCard = Nothing
+        Customer_Passport = Nothing
+        Dim C As New Converter
+
+        If LANGUAGE = VDM_BL.UILanguage.TH Then
+            Dim cus As New VDM_BL.Customer_IDCard
+
+            cus.Citizenid = id_Citizenid.Text
+            If id_Citizenid.Text = "" Or id_Th_Firstname.Text = "" Or id_Th_Lastname.Text = "" Then
+                '--------------Error ----------------
+                ResponseCannotReadIDCard()
+                Exit Sub
+            End If
+            cus.Th_Prefix = id_Th_Prefix.Text
+            cus.Th_Firstname = id_Th_Firstname.Text
+            cus.Th_Middlename = id_Th_Middlename.Text
+            cus.Th_Lastname = id_Th_Lastname.Text
+            cus.En_Prefix = id_En_Prefix.Text
+            cus.En_Firstname = id_En_Firstname.Text
+            cus.En_Middlename = id_En_Middlename.Text
+            cus.En_Lastname = id_En_Lastname.Text
+            cus.Sex = id_Sex.Text
+            If id_Birthday.Text <> "" Then
+                cus.Birthday = C.DateToString(id_Birthday.Text, "yyyy-MM-dd")
+            Else
+                '--------------Error ----------------
+                ResponseCannotReadIDCard()
+                Exit Sub
+            End If
+            cus.Address = id_Address.Text
+            cus.addrHouseNo = id_addrHouseNo.Text
+            cus.addrVillageNo = id_addrVillageNo.Text
+            cus.addrLane = id_addrLane.Text
+            cus.addrRoad = id_addrRoad.Text
+            cus.addrTambol = id_addrTambol.Text
+            cus.addrAmphur = id_addrAmphur.Text
+            cus.addrProvince = id_addrProvince.Text
+            If id_Issue.Text <> "" Then
+                cus.Issue = C.DateToString(id_Issue.Text, "yyyy-MM-dd")
+            Else
+                '--------------Error ----------------
+                ResponseCannotReadIDCard()
+                Exit Sub
+            End If
+            cus.Issuer = id_Issuer.Text
+            If id_Expire.Text <> "" Then
+                cus.Expire = C.DateToString(id_Expire.Text, "yyyy-MM-dd")
+                If DateDiff(DateInterval.Day, cus.Expire, Now) > 0 Then
+                    ResponseIDCardExpired()
+                    Exit Sub
+                End If
+            Else
+                '--------------Error ----------------
+                ResponseCannotReadIDCard()
+                Exit Sub
+            End If
+            cus.Photo = id_Photo.Text
+
+            Customer_IDCard = cus
+        Else
+            Dim cus As New VDM_BL.Customer_Passport
+
+            If pass_FirstName.Text = "" Or pass_LastName.Text = "" Or pass_DocType.Text = "" Or
+                pass_Nationality.Text = "" Or pass_PassportNo.Text = "" Or pass_DateOfBirth.Text = "" Or
+                pass_Expire.Text = "" Or pass_PersonalID.Text = "" Or pass_IssueCountry.Text = "" Or pass_Photo.Text = "" Then
+                '--------------Error ----------------
+                ResponseCannotReadPassport()
+                Exit Sub
+            End If
+
+            cus.FirstName = pass_FirstName.Text
+            cus.MiddleName = pass_MiddleName.Text
+            cus.LastName = pass_LastName.Text
+            cus.DocType = pass_DocType.Text
+            cus.Nationality = pass_Nationality.Text
+            cus.PassportNo = pass_PassportNo.Text
+            cus.DateOfBirth = pass_DateOfBirth.Text
+            cus.Sex = pass_Sex.Text
+            cus.Expire = pass_Expire.Text
+
+            cus.PersonalID = pass_PersonalID.Text
+            cus.IssueCountry = pass_IssueCountry.Text
+            cus.MRZ = pass_MRZ.Text.Replace("&lt", "<")
+            cus.Photo = pass_Photo.Text
+            Customer_Passport = cus
+        End If
+
+        '------------- Clear Textbox Improve Postback Performance--------------
+        id_Citizenid.Text = ""
+        id_Th_Prefix.Text = ""
+        id_Th_Firstname.Text = ""
+        id_Th_Middlename.Text = ""
+        id_Th_Lastname.Text = ""
+        id_En_Prefix.Text = ""
+        id_En_Firstname.Text = ""
+        id_En_Middlename.Text = ""
+        id_En_Lastname.Text = ""
+        id_Sex.Text = ""
+        id_Birthday.Text = ""
+        id_Address.Text = ""
+        id_addrHouseNo.Text = ""
+        id_addrVillageNo.Text = ""
+        id_addrLane.Text = ""
+        id_addrRoad.Text = ""
+        id_addrTambol.Text = ""
+        id_addrAmphur.Text = ""
+        id_addrProvince.Text = ""
+        id_Issue.Text = ""
+        id_Issuer.Text = ""
+        id_Expire.Text = ""
+        id_Photo.Text = ""
+
+        pass_FirstName.Text = ""
+        pass_MiddleName.Text = ""
+        pass_LastName.Text = ""
+        pass_DocType.Text = ""
+        pass_Nationality.Text = ""
+        pass_PassportNo.Text = ""
+        pass_DateOfBirth.Text = ""
+        pass_Sex.Text = ""
+        pass_Expire.Text = ""
+        pass_PersonalID.Text = ""
+        pass_IssueCountry.Text = ""
+        pass_MRZ.Text = ""
+        pass_Photo.Text = ""
+
+        '------------------- Next to Camera Scan -------------
+        Dim Script As String = "triggerCamera();"
+
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "ToCamera", Script, True)
+    End Sub
+
+    Private Sub ResponseIDCardExpired()
+        Dim Script As String = ""
+        Script &= "$('#idCardCrossReason').html('ขออภัย บัตรของท่านหมดอายุ');" & vbLf
+        Script &= "$('#clickIDCardCross').click();" & vbLf
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "IDCardExpired", Script, True)
+    End Sub
+
+    Private Sub ResponseCannotReadIDCard()
+        Dim Script As String = ""
+        Script &= "$('#idCardAlertReason').html('ขออภัย ไม่สามารถอ่านบัตรประชาชนของท่านได้');" & vbLf
+        Script &= "$('#clickIDCardAlert').click();" & vbLf
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "CannotReadIDCard", Script, True)
+    End Sub
+
+    Private Sub ResponseCannotReadPassport()
+
+    End Sub
+
+    Private Sub ResponsePassportExpired()
 
     End Sub
 End Class

@@ -185,6 +185,49 @@ Public Class VDM_BL
         End Select
     End Function
 
+    Public Class Customer_IDCard
+        Public Citizenid As String = ""
+        Public Th_Prefix As String = ""
+        Public Th_Firstname As String = ""
+        Public Th_Middlename As String = ""
+        Public Th_Lastname As String = ""
+        Public En_Prefix As String = ""
+        Public En_Firstname As String = ""
+        Public En_Middlename As String = ""
+        Public En_Lastname As String = ""
+        Public Sex As String = ""
+        Public Birthday As DateTime = DateTime.FromOADate(0)
+        Public Address As String = ""
+        Public addrHouseNo As String = ""
+        Public addrVillageNo As String = ""
+        Public addrLane As String = ""
+        Public addrRoad As String = ""
+        Public addrTambol As String = ""
+        Public addrAmphur As String = ""
+        Public addrProvince As String = ""
+        Public Issue As DateTime = DateTime.FromOADate(0)
+        Public Issuer As String = ""
+        Public Expire As DateTime = DateTime.FromOADate(0)
+        Public Photo As String = ""
+    End Class
+
+    Public Class Customer_Passport
+        Public FirstName As String = ""
+        Public MiddleName As String = ""
+        Public LastName As String = ""
+        Public DocType As String = ""
+        Public Nationality As String = ""
+        Public PassportNo As String = ""
+        Public DateOfBirth As String = ""
+        Public Sex As String = ""
+        Public Expire As String = ""
+        Public PersonalID As String = ""
+        Public IssueCountry As String = ""
+        Public MRZ As String = ""
+        Public Photo As String = ""
+    End Class
+
+
     Public Class DialogImage
 
         Public Property ModeAccept_Contact As Accept_Contact_EMP

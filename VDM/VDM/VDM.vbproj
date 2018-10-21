@@ -133,6 +133,7 @@
     <Content Include="Front_UI\css\jquery.fancybox.css" />
     <Content Include="Front_UI\css\jquery.mCustomScrollbar.css" />
     <Content Include="Front_UI\css\lightslider.css" />
+    <Content Include="Front_UI\css\mCSB_buttons.png" />
     <Content Include="Front_UI\css\responsive.css" />
     <Content Include="Front_UI\css\slick-theme.css" />
     <Content Include="Front_UI\css\slick.css" />
@@ -141,9 +142,9 @@
     <Content Include="Front_UI\css\true.css" />
     <Content Include="Front_UI\Default.aspx" />
     <Content Include="Front_UI\Device_Category.aspx" />
+    <Content Include="Front_UI\Device_Shoping_Cart.aspx" />
     <Content Include="Front_UI\Device_Verify.aspx" />
     <Content Include="Front_UI\Device_Product_Detail_Old.aspx" />
-    <Content Include="Front_UI\Device_Shoping_Cart.aspx" />
     <Content Include="Front_UI\fonts\fontawesome-webfont.svg" />
     <Content Include="Front_UI\fonts\tbold.svg" />
     <Content Include="Front_UI\fonts\tboldspecial.svg" />
@@ -157,6 +158,8 @@
     <Content Include="Front_UI\images\icon-Shadow.png" />
     <Content Include="Front_UI\images\Manage_Console.png" />
     <Content Include="Front_UI\images\Popup\icon-creditError.png" />
+    <Content Include="Front_UI\images\Popup\icon-idcard-alert.png" />
+    <Content Include="Front_UI\images\Popup\icon-idcard-cross.png" />
     <Content Include="Front_UI\images\Popup\icon-idcard.png" />
     <Content Include="Front_UI\images\Popup\icon-Tax.png" />
     <Content Include="Front_UI\images\Popup\icon-truemoneyError.png" />
@@ -704,6 +707,13 @@
       <DependentUpon>Device_Category.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Front_UI\Device_Shoping_Cart.aspx.designer.vb">
+      <DependentUpon>Device_Shoping_Cart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\Device_Shoping_Cart.aspx.vb">
+      <DependentUpon>Device_Shoping_Cart.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Front_UI\Device_Verify.aspx.designer.vb">
       <DependentUpon>Device_Verify.aspx</DependentUpon>
     </Compile>
@@ -716,13 +726,6 @@
     </Compile>
     <Compile Include="Front_UI\Device_Product_Detail_Old.aspx.vb">
       <DependentUpon>Device_Product_Detail_Old.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="Front_UI\Device_Shoping_Cart.aspx.designer.vb">
-      <DependentUpon>Device_Shoping_Cart.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Front_UI\Device_Shoping_Cart.aspx.vb">
-      <DependentUpon>Device_Shoping_Cart.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Front_UI\Payment_Gateway_Cancel.aspx.designer.vb">

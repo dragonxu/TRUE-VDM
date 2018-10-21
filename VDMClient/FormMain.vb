@@ -7,18 +7,19 @@ Imports System.Diagnostics
 Public Class FormMain
 
     Public WithEvents ChromeBrowser As ChromiumWebBrowser
-    'Dim StartURL As String = "http://localhost:62820/Front_UI/Default.aspx?KO_ID=1" '********** Production Check '-********** 
-    Dim StartURL As String = "http://localhost"
+    Dim StartURL As String = "http://localhost:62820/Front_UI/Default.aspx?KO_ID=1" '********** Production Check '-********** 
+    'Dim StartURL As String = "http://localhost"
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles Me.Load
         CheckForIllegalCrossThreadCalls = False
 
         LoadKeyboard()
+        LoadCamera()
 
-        Cursor.Hide() '********** Production Check '-********** 
+        'Cursor.Hide() '********** Production Check '-********** 
         InitChromium()
         '------------- Start SIM Dispenser------------
-        StartProductController() '********** Production Check '-********** 
+        'StartProductController() '********** Production Check '-********** 
     End Sub
 
     Private Sub InitChromium()
@@ -51,16 +52,25 @@ Public Class FormMain
         Select Case True
             Case Not e.Frame.IsMain And e.Frame.Url.IndexOf("psipay.bangkokbank") > -1
                 Keyboard.Show()
+            Case Not e.Frame.IsMain And e.Frame.Url.ToUpper.IndexOf("/CAMCAPTURE.ASPX") > -1
+                Camera.Show()
             Case Else
                 Keyboard.Hide()
+                Camera.Hide()
         End Select
     End Sub
 
     Dim Keyboard As FormKeyboard = Nothing
+    Dim Camera As FormCamera = Nothing
 
     Private Sub LoadKeyboard()
         Keyboard = New FormKeyboard
         Keyboard.MainForm = Me
+    End Sub
+
+    Private Sub LoadCamera()
+        Camera = New FormCamera
+        Camera.MainForm = Me
     End Sub
 
     Private Sub StartProductController()

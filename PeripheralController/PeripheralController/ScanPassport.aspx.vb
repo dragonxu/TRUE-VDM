@@ -52,7 +52,7 @@ Public Class ScanPassport
         StartScan()
         '------------- รอจนกว่าจะScan -------
         While MRZ = "" And Now < EndWait
-            Threading.Thread.Sleep(1000)
+            Threading.Thread.Sleep(100)
             If IO.File.GetLastWriteTime(BL.PassportScanPath & "\MRZ.txt") <> LastModify Then
                 MRZ = ReadMRZ()
             End If
@@ -98,8 +98,12 @@ Public Class ScanPassport
         If IO.File.Exists(ImagePath) Then
             Dim S As IO.Stream = IO.File.Open(ImagePath, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.ReadWrite)
             Dim Img As Drawing.Image = Drawing.Image.FromStream(S)
-            ThePassport.Blob = C.ImageToBlob(Img)
             S.Close()
+            '------------Scale Down Image -----------
+            Img = ScaleImage(Img, Img.Height / 3, Img.Width / 3)
+            Img.Save(ImagePath)
+            ThePassport.Photo = C.ImageToBlob(Img)
+
         End If
 
         Dim Script As String = callBackFunction & "("
@@ -116,8 +120,8 @@ Public Class ScanPassport
         Script &= "'" & ThePassport.PersonalID.Replace("'", "") & "',"
         Script &= "'" & ThePassport.IssueCountry.Replace("'", "") & "',"
         Script &= "'" & ThePassport.MRZ.Replace("'", "") & "',"
-        Script &= "'" & ThePassport.Blob.Replace("'", "") & "');"
-
+        Script &= "'" & ThePassport.Photo.Replace("'", "") & "');"
+        Dim Temp As Long = ThePassport.Photo.Length
         Response.Write(Script)
     End Sub
 

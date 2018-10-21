@@ -3,30 +3,34 @@
 <%@ Register Src="~/Front_UI/UC_CommonUI.ascx" TagPrefix="uc1" TagName="UC_CommonUI" %>
 
 
+<!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<head runat="server">
     <meta http-equiv="Page-Exit" content="revealTrans(Duration=5.0,Transition=0)">
     <meta http-equiv="Page-Enter" content="revealTrans(Duration=5.0,Transition=8)">
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+
     <title>Kiosk</title>
+
     <link href="css/true.css" rel="stylesheet" type="text/css" />
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/bootstrap-select.css" rel="stylesheet">
-    
+    <link href="css/bootstrap-select.css" rel="stylesheet">    
     <link href="css/true-popup.css" rel="stylesheet" type="text/css" />
     <link href="css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
 
     <script type="text/javascript" src="../Scripts/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery.fancybox.js"></script>
-
     <script type="text/javascript" src="js/bootstrap.js"></script>
-     <script src="js/jquery.mCustomScrollbar.js"></script>
-
-    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
-   
+    <script type="text/javascript" src="js/jquery.fancybox.js"></script>
+    <script src="js/jquery.mCustomScrollbar.js"></script>
+    
+    <!---------VDM----------->
+    <script src="../Scripts/txtClientControl.js" type="text/javascript" ></script>
+    <script src="../Scripts/extent.js" type="text/javascript"></script>
 
     <style type="text/css">
         header {
@@ -34,12 +38,13 @@
         }
 
         .default {
-            background: #5a5454 url(images/icon-cart.png) no-repeat left 40px top 10px;
+            background: #5a5454 url(images/icon-cart.png) no-repeat left 40px top 10px !important;
         }
     </style>
 </head>
 <body class="bg2">
-    <form id="form1" runat="server">
+<form id="form1" runat="server">
+<asp:ScriptManager ID="SCM" runat="server"></asp:ScriptManager>
         <div class="warp">
             <header>
                 <img src="images/bg-top.png" />
@@ -61,12 +66,9 @@
                                 <div class="topic true-l">
                                     <h1 class="true-l" style="padding-bottom: 30px;">
                                         <asp:Label ID="lblDISPLAY_NAME" runat="server" Style="font-size: 60pt; line-height: 70px;"></asp:Label>
-
                                     </h1>
                                     <asp:Panel ID="pnlProduct" runat="server">
-
                                         <div class="capacity">
-
                                             <div style="float: left;">
                                                 <asp:Panel ID="pnlCapacity" runat="server">
                                                     <p>
@@ -74,7 +76,6 @@
                                                     </p>
                                                 </asp:Panel>
                                             </div>
-
                                             <div class="color true-m" style="float: left;">
                                                 <asp:Label ID="lblColor" runat="server" Text=""></asp:Label>
                                             </div>
@@ -84,27 +85,8 @@
 
                                 </div>
 
-
-
-                                <%--Phase 2--%>
-                                <%--<span class="cart1 true-l">
-                                    <p class="true-m">
-                                        <asp:Label ID="lblHeader_Package" runat="server" Text="พร้อมสมัครแพ็กเกจ"></asp:Label>
-                                    </p>
-                                    <br />
-                                    <asp:Label ID="lblDetail_Package" runat="server" Text="4G+ FUN Unlimited 1499 -1899"></asp:Label>
-                                </span>
-                                <span class="cart1 true-l">
-                                    <p class="true-m">
-                                        <asp:Label ID="lblHeader_Promotion" runat="server" Text="สิทธิพิเศษจากทรูยู"></asp:Label>
-                                    </p>
-                                    <br />
-                                    <asp:Label ID="lblDetail_Promotion" runat="server" Text="ทรูแบลคการ์ด ซื้อเคส UAG ในราคา 500.-"></asp:Label>
-
-                                </span>--%>
                             </figure>
                         </div>
-
                         <div class="step-cart">
                             <div class="total" style="margin-bottom: 30px;">
                                 <h4 class="true-b t-red">
@@ -115,17 +97,13 @@
 
                                 </h4>
                             </div>
-
-                            <%--cart-step2.html--%>
                         </div>
-
 
                         <div class="term" style="height:460px; margin:unset;">
                             <h2 class="true-m">Term & Condition</h2>
                             <div class="frame" style="height: 380px;">
                                 <span id="content-d3" class="light" style="height:340px; overflow:hidden;">
                                     <p class="true-l">
-                                        <%-- <asp:Label  class="true-l" ID="lblTerm_Condition" runat="server" Text=""></asp:Label>--%>
                                         ข้อกำหนดและเงื่อนไขรายการส่งเสริมการขาย 4G+ FUN Unlimited 299, 4G+ FUN Unlimited 399, 4G+ FUN Unlimited 499, 4G+ FUN Unlimited 599, 4G+ FUN Unlimited 699, 4G+ FUN Unlimited 899, 4G+ FUN Unlimited 1099, 4G+ FUN Unlimited 1299, 4G+ FUN Unlimited 1499, และ 4G+ FUN Unlimited 1899
                                         <br />
                                         <br />
@@ -150,26 +128,22 @@
                                 </span>
                             </div>
                         </div>
-                        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-                        <asp:UpdatePanel ID="udpList" runat="server">
-                            <ContentTemplate>
-                                <label class="check true-l" style="height:100px;">
-                                    ข้าพเจ้าได้อ่านข้อกำหนดและเงื่อนไขทุกข้อแล้ว
-                                    <asp:CheckBox ID="chkActive" runat="server" Checked="false" AutoPostBack="true" />
-                                    <span class="checkmark"></span>
-                                </label>
 
+                <asp:UpdatePanel ID="UDPTerm" runat="server">
+                <ContentTemplate>
+                
+                        <label class="check true-l" style="height:100px;">
+                            ข้าพเจ้าได้อ่านข้อกำหนดและเงื่อนไขทุกข้อแล้ว
+                            <asp:CheckBox ID="chkActive" runat="server" Checked="false" AutoPostBack="true" />
+                            <span class="checkmark"></span>
+                        </label>
 
-                                <div class="col-md-12" style="text-align: center;">
-                                    <asp:Panel ID="pnlConfirm" runat="server">
-                                        <asp:Button ID="btnConfirm_str" runat="server" class="order true-m btn-default " Text="ชำระเงิน" />
-                                        <input type="button" class="order true-m" id="btnIDCard" runat="server" value="สั่งซื้อ" onclick="$('#clickIDCard').click(); requestIDCard(); requestPassport(); " />
-                                        <a id="clickIDCard" runat="server" style="display:none;" href="#popupIPCard">สั่งซื้อ</a>
-                                    </asp:Panel>
-                                </div>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
-
+                        <div class="col-md-12" style="text-align: center;">
+                                <asp:Button ID="btnConfirm" runat="server" CssClass="order true-m default " Text="ชำระเงิน" />
+                                <asp:Button ID="btnVerify" runat="server" CssClass="order true-m default " Text="สั่งซื้อ" />
+                        </div>
+                </ContentTemplate>
+                </asp:UpdatePanel>
 
                     </div>
                 </div>
@@ -185,102 +159,138 @@
                         </span>
                     </div>
                 </nav>
-                            <asp:TextBox ID="txtLocalControllerURL" runat="server" Style="display:none;"></asp:TextBox>
+                <asp:TextBox ID="txtLocalControllerURL" runat="server" Style="display:none;"></asp:TextBox>
 
             </footer>
         </div>
+
         <uc1:UC_CommonUI runat="server" ID="UC_CommonUI" />
 
-        <div id="popupIPCard" class="popup" >
+        
+        <asp:UpdatePanel ID="UDBVerify" runat="server">
+        <ContentTemplate>
+        
+            <div style="position:fixed; top:40px; left:-500px;"> <!--ID Card-->
+                    Citizenid : <asp:Textbox ID="id_Citizenid" runat="Server" /><br/>
+                    Th_Prefix : <asp:Textbox ID="id_Th_Prefix" runat="Server" /><br/>
+                    Th_Firstname : <asp:Textbox ID="id_Th_Firstname" runat="Server" /><br/>
+                    Th_Middlename : <asp:Textbox ID="id_Th_Middlename" runat="Server" /><br/>
+                    Th_Lastname : <asp:Textbox ID="id_Th_Lastname" runat="Server" /><br/>
+                    En_Prefix : <asp:Textbox ID="id_En_Prefix" runat="Server" /><br/>
+                    En_Firstname: <asp:Textbox ID="id_En_Firstname" runat="Server" /><br/>
+                    En_Middlename : <asp:Textbox ID="id_En_Middlename" runat="Server" /><br/>
+                    En_Lastname : <asp:Textbox ID="id_En_Lastname" runat="Server" /><br/>
+                    Sex : <asp:Textbox ID="id_Sex" runat="Server" /><br/>
+                    Birthday : <asp:Textbox ID="id_Birthday" runat="Server" /><br/>
+                    Address : <asp:Textbox ID="id_Address" runat="Server" /><br/>
+                    addrHouseNo : <asp:Textbox ID="id_addrHouseNo" runat="Server" /><br/>
+                    addrVillageNo : <asp:Textbox ID="id_addrVillageNo" runat="Server" /><br/>
+                    addrLane : <asp:Textbox ID="id_addrLane" runat="Server" /><br/>
+                    addrRoad : <asp:Textbox ID="id_addrRoad" runat="Server" /><br/>
+                    addrTambol : <asp:Textbox ID="id_addrTambol" runat="Server" /><br/>
+                    addrAmphur : <asp:Textbox ID="id_addrAmphur" runat="Server" /><br/>
+                    addrProvince : <asp:Textbox ID="id_addrProvince" runat="Server" /><br/>
+                    Issue : <asp:Textbox ID="id_Issue" runat="Server" /><br/>
+                    Issuer : <asp:Textbox ID="id_Issuer" runat="Server" /><br/>
+                    Expire : <asp:Textbox ID="id_Expire" runat="Server" /><br/>
+                    Photo : <asp:Textbox ID="id_Photo" runat="Server" TextMode="MultiLine" /><br/>
+                    <!----------------------------->
+                    FirstName : <asp:Textbox ID="pass_FirstName" runat="Server" /><br/>
+                    MiddleName : <asp:Textbox ID="pass_MiddleName" runat="Server" /><br/>
+                    LastName : <asp:Textbox ID="pass_LastName" runat="Server" /><br/>
+                    DocType : <asp:Textbox ID="pass_DocType" runat="Server" /><br/>
+                    Nationality : <asp:Textbox ID="pass_Nationality" runat="Server" /><br/>
+                    PassportNo : <asp:Textbox ID="pass_PassportNo" runat="Server" /><br/>
+                    DateOfBirth : <asp:Textbox ID="pass_DateOfBirth" runat="Server" /><br/>
+                    Sex : <asp:Textbox ID="pass_Sex" runat="Server" /><br/>
+                    Expire : <asp:Textbox ID="pass_Expire" runat="Server" /><br/>
+                    PersonalID : <asp:Textbox ID="pass_PersonalID" runat="Server" /><br/>
+                    IssueCountry : <asp:Textbox ID="pass_IssueCountry" runat="Server" /><br/>
+                    MRZ : <asp:Textbox ID="pass_MRZ" runat="Server" /><br/>
+                    Photo : <asp:Textbox ID="pass_Photo" runat="Server" TextMode="MultiLine" /><br/>
+
+                    <asp:Button ID="btnKeepInfo" runat="server" Text="KeepInfo" />
+              </div>
+
+        </ContentTemplate>
+        </asp:UpdatePanel>
+
+        <div id="popupIDCard" class="popup" >
           <div class="popup-frame" >
-            <h3 class="true-m">ขั้นตอนการยืนยันตัวบุคคล</h3>
-            <div class="icon"><img src="images/Popup/icon-idcard.png"/></div>
-            <h4 class="true-b" style="padding-bottom:30px;">กรุณาสอดบัตรประชาชนของท่าน</h4>
-            <%--<div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;">ตกลง</a></div>--%>
-          </div>
-          <div style="position:absolute; top:40px; right:0; display:none;"> <!--ID Card-->
-                Citizenid : <asp:Textbox ID="id_Citizenid" runat="Server" /><br/>
-                Th_Prefix : <asp:Textbox ID="id_Th_Prefix" runat="Server" /><br/>
-                Th_Firstname : <asp:Textbox ID="id_Th_Firstname" runat="Server" /><br/>
-                Th_Middlename : <asp:Textbox ID="id_Th_Middlename" runat="Server" /><br/>
-                Th_Lastname : <asp:Textbox ID="id_Th_Lastname" runat="Server" /><br/>
-                En_Prefix : <asp:Textbox ID="id_En_Prefix" runat="Server" /><br/>
-                En_Firstname: <asp:Textbox ID="id_En_Firstname" runat="Server" /><br/>
-                En_Middlename : <asp:Textbox ID="id_En_Middlename" runat="Server" /><br/>
-                En_Lastname : <asp:Textbox ID="id_En_Lastname" runat="Server" /><br/>
-                Sex : <asp:Textbox ID="id_Sex" runat="Server" /><br/>
-                Birthday : <asp:Textbox ID="id_Birthday" runat="Server" /><br/>
-                Address : <asp:Textbox ID="id_Address" runat="Server" /><br/>
-                addrHouseNo : <asp:Textbox ID="id_addrHouseNo" runat="Server" /><br/>
-                addrVillageNo : <asp:Textbox ID="id_addrVillageNo" runat="Server" /><br/>
-                addrLane : <asp:Textbox ID="id_addrLane" runat="Server" /><br/>
-                addrRoad : <asp:Textbox ID="id_addrRoad" runat="Server" /><br/>
-                addrTambol : <asp:Textbox ID="id_addrTambol" runat="Server" /><br/>
-                addrAmphur : <asp:Textbox ID="id_addrAmphur" runat="Server" /><br/>
-                addrProvince : <asp:Textbox ID="id_addrProvince" runat="Server" /><br/>
-                Issue : <asp:Textbox ID="id_Issue" runat="Server" /><br/>
-                Issuer : <asp:Textbox ID="id_Issuer" runat="Server" /><br/>
-                Expire : <asp:Textbox ID="id_Expire" runat="Server" /><br/>
-                Photo : <asp:Textbox ID="id_Photo" runat="Server" TextMode="MultiLine" /><br/>
-          </div>
-          <div style="position:absolute; top:40px; right:0; "> <!--Passport-->
-                FirstName : <asp:Textbox ID="pass_FirstName" runat="Server" /><br/>
-                MiddleName : <asp:Textbox ID="pass_MiddleName" runat="Server" /><br/>
-                LastName : <asp:Textbox ID="pass_LastName" runat="Server" /><br/>
-                DocType : <asp:Textbox ID="pass_DocType" runat="Server" /><br/>
-                Nationality : <asp:Textbox ID="pass_Nationality" runat="Server" /><br/>
-                PassportNo : <asp:Textbox ID="pass_PassportNo" runat="Server" /><br/>
-                DateOfBirth : <asp:Textbox ID="pass_DateOfBirth" runat="Server" /><br/>
-                Sex : <asp:Textbox ID="pass_Sex" runat="Server" /><br/>
-                Expire : <asp:Textbox ID="pass_Expire" runat="Server" /><br/>
-                PersonalID : <asp:Textbox ID="pass_PersonalID" runat="Server" /><br/>
-                IssueCountry : <asp:Textbox ID="pass_IssueCountry" runat="Server" /><br/>
-                MRZ : <asp:Textbox ID="pass_MRZ" runat="Server" /><br/>
-                Photo : <asp:Textbox ID="pass_Photo" runat="Server" TextMode="MultiLine" /><br/>
+                <h3 class="true-m">ขั้นตอนการยืนยันตัวบุคคล</h3>
+                <div class="icon"><img src="images/Popup/icon-idcard.png"/></div>
+                <h4 class="true-b" style="padding-bottom:30px;">กรุณาสอดบัตรประชาชนของท่าน</h4>
           </div>
         </div>
+        <a id="clickIDCard" runat="server" style="display:none;" href="#popupIDCard">สั่งซื้อ</a>
 
-    </form>
+        <div id="popupIDCardAlert" class="popup" >
+            <div class="popup-frame" >
+                <h3 class="true-m" id="idCardAlertReason">xxxxxxxxxxxxxxxx</h3>
+                <div class="icon"><img src="images/Popup/icon-idcard-alert.png"/></div>
+                <h4 class="true-b">กรุณาเสียบบัตรใหม่</h4>
+                <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;">ตกลง</a></div>
+            </div>
+        </div>
+        <a id="clickIDCardAlert" runat="server" style="display:none;"  href="#popupIDCardAlert">Click</a>
+
+        <div id="popupIDCardCross" class="popup" >
+            <div class="popup-frame" >
+                <h3 class="true-m" id="idCardCrossReason">xxxxxxxxxxxxxxxxx</h3>
+                <div class="icon"><img src="images/Popup/icon-idcard-cross.png"/></div>
+                <h4 class="true-b">กรุณาเปลี่ยนบัตรใหม่</h4>
+                <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;">ตกลง</a></div>
+            </div>
+        </div>
+        <a id="clickIDCardCross" runat="server" style="display:none;"  href="#popupIDCardCross">Click</a>
+
+        <div id="popupCam" class="popup" >
+            <iframe id="frmCamTrigger" runat="server" style="visibility:hidden;"></iframe>
+        </div>
+        <a id="clickCamTrigger" runat="server" style="display:none;"  href="#popupCam">Click</a>
+
+</form>
 </body>
+    <script type="text/javascript">
+        $("#clickIDCard").fancybox();
+        $("#clickIDCardAlert").fancybox();
+        $("#clickIDCardCross").fancybox();
+        $("#clickCamTrigger").fancybox();
 
-
-
-<script type="text/javascript">
-
-    $("#clickIDCard").fancybox();
-
-    (function ($) {
+        (function ($) {
         $(window).on("load", function () {
+                $.mCustomScrollbar.defaults.scrollButtons.enable = true; //enable scrolling buttons by default
+                $.mCustomScrollbar.defaults.axis = "yx"; //enable 2 axis scrollbars by default
+                $("#content-d3").mCustomScrollbar({ theme: "dark-3" });
+            });
+        })(jQuery);
+    </script>
 
-            $.mCustomScrollbar.defaults.scrollButtons.enable = true; //enable scrolling buttons by default
-            $.mCustomScrollbar.defaults.axis = "yx"; //enable 2 axis scrollbars by default
-            $("#content-d3").mCustomScrollbar({ theme: "dark-3" });
-
-        });
-    })(jQuery);
+    <script type="text/javascript">
 
     function requestIDCard() {
-                // Gen URL
-                var url =  $('#txtLocalControllerURL').val() + '/ScanIDCard.aspx?timeout=60&callback=updateIDCard&callbackError=IDCardError';              
-                var script = document.createElement('script');
-                script.src = url;
-                var body = document.getElementsByTagName('body')[0];
-                body.appendChild(script);
-            }
-
-    function IDCardError(Message){
-        alert(Message);
+            // Gen URL
+            var url =  $('#txtLocalControllerURL').val() + '/ScanIDCard.aspx?timeout=30&callback=updateIDCard&callbackError=verifyError';              
+            var script = document.createElement('script');
+            script.src = url;
+            var body = document.getElementsByTagName('body')[0];
+            body.appendChild(script);
+        }
+   
+    function requestPassport() {
+            // Gen URL
+            var url = $('#txtLocalControllerURL').val() + '/ScanPassport.aspx?timeout=30&Mode=Scan&callback=updatePassport&callbackError=verifyError';
+            var script = document.createElement('script');
+            script.src = url;
+            var body = document.getElementsByTagName('body')[0];
+            body.appendChild(script);
     }
 
-    function requestPassport() {
-                // Gen URL
-                var url =  $('#txtLocalControllerURL').val() + '/ScanPassport.aspx?timeout=60&Mode=Scan&callback=updatePassport';              
-                var script = document.createElement('script');
-                script.src = url;
-                var body = document.getElementsByTagName('body')[0];
-                body.appendChild(script);
-            }
-    
+    function verifyError(Message) {
+        $(".fancybox-close").click();
+         $("#btnKeepInfo").click();        
+    }
+
     function updateIDCard(Citizenid,
                             Th_Prefix,
                             Th_Firstname,
@@ -328,10 +338,12 @@
                             $('#id_Issuer').val(Issuer);
                             $('#id_Expire').val(Expire);
                             $('#id_Photo').val(Photo);
-    
-    }
+            
+             $(".fancybox-close").click();
+             $("#btnKeepInfo").click();
+        }
 
-    function updatePassport(FirstName,
+        function updatePassport(FirstName,
                             MiddleName,
                             LastName,
                             DocType,
@@ -344,7 +356,6 @@
                             IssueCountry,
                             MRZ,
                             Photo){
-
                             $('#pass_FirstName').val(FirstName);
                             $('#pass_MiddleName').val(MiddleName);
                             $('#pass_LastName').val(LastName);
@@ -356,10 +367,22 @@
                             $('#pass_Expire').val(Expire);
                             $('#pass_PersonalID').val(PersonalID);
                             $('#pass_IssueCountry').val(IssueCountry);
-                            $('#pass_MRZ').val(MRZ);
+                            $('#pass_MRZ').val(MRZ.replaceAll('<','&lt'));
+                            
                             $('#pass_Photo').val(Photo);
-    
-    }
-</script>
-</html>
+           
+             $(".fancybox-close").click();
+             $("#btnKeepInfo").click();
+        }
 
+    function triggerCamera(){        
+        // Show Lightbox
+        $('#clickCamTrigger').click();
+        var url = $('#txtLocalControllerURL').val() + '/CamCapture.aspx';
+        $('#frmCamTrigger').attr('src',url);
+        alert($('#frmCamTrigger').attr('src'));
+    }
+
+    </script>
+    
+</html>

@@ -26,7 +26,6 @@
     <link href="css/lightslider.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="js/jquery.fancybox.js"></script>
     <script type="text/javascript" src="js/lightslider.js"></script>
-<%--    <link href="../styles/onScreenKeyboard.css" rel="stylesheet" />--%>
 
     <link href="css/true-popup.css" rel="stylesheet" type="text/css" />
     <link href="css/jquery.fancybox.css" rel="stylesheet" type="text/css" />

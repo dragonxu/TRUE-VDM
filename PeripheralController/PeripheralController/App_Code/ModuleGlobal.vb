@@ -216,6 +216,12 @@ Module ModuleGlobal
         Return String.Join("", System.Security.Cryptography.MD5.Create().ComputeHash(System.Text.Encoding.ASCII.GetBytes(Input)).Select(Function(x) x.ToString("x2")))
     End Function
 
+    Public Function GetJavascriptTimestamp(ByVal input As DateTime) As Long
+        Dim Span As TimeSpan = New System.TimeSpan(System.DateTime.Parse("1/1/1970").Ticks)
+        Dim T As DateTime = input.Subtract(Span)
+        Return T.Ticks / 10000
+    End Function
+
 #Region "MaterialForm"
     Public Sub StoreMaterialForm(ByRef Panel As Control)
         For i As Integer = 0 To Panel.Controls.Count - 1
@@ -290,10 +296,20 @@ Module ModuleGlobal
     End Function
 #End Region
 
-    Public Function GetJavascriptTimestamp(ByVal input As DateTime) As Long
-        Dim Span As TimeSpan = New System.TimeSpan(System.DateTime.Parse("1/1/1970").Ticks)
-        Dim T As DateTime = input.Subtract(Span)
-        Return T.Ticks / 10000
+#Region "Image"
+    Public Function ScaleImage(ByVal OldImage As Drawing.Image, ByVal TargetHeight As Integer, ByVal TargetWidth As Integer) As System.Drawing.Image
+
+        Dim NewHeight As Integer = TargetHeight
+        Dim NewWidth As Integer = NewHeight / OldImage.Height * OldImage.Width
+
+        If NewWidth > TargetWidth Then
+            NewWidth = TargetWidth
+            NewHeight = NewWidth / OldImage.Width * OldImage.Height
+        End If
+
+        Return New Drawing.Bitmap(OldImage, NewWidth, NewHeight)
+
     End Function
+#End Region
 
 End Module

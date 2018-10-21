@@ -488,11 +488,24 @@ Module ModuleGlobal
         End Try
     End Function
 
+#Region "Image"
+
     Public Function GetImageDimension(ByVal ImagePath As String) As Drawing.Size
         Dim C As New Converter
         Dim ST As Stream = C.ByteToStream(ReadFile(ImagePath))
         Dim img As Drawing.Image = Drawing.Image.FromStream(ST)
         Return New Drawing.Size(img.Width, img.Height)
     End Function
+
+    Public Function ScaleImage(ByVal OldImage As Drawing.Image, ByVal TargetHeight As Integer, ByVal TargetWidth As Integer) As System.Drawing.Image
+        Dim NewHeight As Integer = TargetHeight
+        Dim NewWidth As Integer = NewHeight / OldImage.Height * OldImage.Width
+        If NewWidth > TargetWidth Then
+            NewWidth = TargetWidth
+            NewHeight = NewWidth / OldImage.Width * OldImage.Height
+        End If
+        Return New Drawing.Bitmap(OldImage, NewWidth, NewHeight)
+    End Function
+#End Region
 
 End Module

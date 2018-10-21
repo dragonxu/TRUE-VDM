@@ -11,7 +11,7 @@
     Public PersonalID As String = ""
     Public IssueCountry As String = ""
     Public MRZ As String = ""
-    Public Blob As String = ""
+    Public Photo As String = ""
 
     Public Function MRZToCusInfo(ByVal MRZ As String) As Passport
 
@@ -36,10 +36,10 @@
         Result.Nationality = OtherPart.Substring(10, 3)
         Result.PassportNo = OtherPart.Substring(0, 9).Replace("<", "")
         Dim DOB As String = C.StringToDate(OtherPart.Substring(13, 6), "yyMMdd").ToString("yyyy-MM-dd")
-        Result.DateOfBirth = DOB
+        Result.DateOfBirth = DOB.ToString
         Result.Sex = OtherPart.Substring(20, 1)
         Dim Expire As String = C.StringToDate(OtherPart.Substring(21, 6), "yyMMdd").ToString("yyyy-MM-dd")
-        Result.Expire = Expire
+        Result.Expire = Expire.ToString
         Result.PersonalID = OtherPart.Substring(28, 14).Replace("<", "")
         Result.IssueCountry = MRZ.Substring(2, 3)
 

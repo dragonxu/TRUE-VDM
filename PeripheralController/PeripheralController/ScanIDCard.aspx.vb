@@ -71,12 +71,13 @@ Public Class ScanIDCard
         '------------- รอจนกว่าจะScan -------
         While IsNothing(PersonalInfo) And Now < EndWait
             Try
-                PersonalInfo = CardReader.readAllPhoto
+                PersonalInfo = CardReader.readAllPhoto(BL.IDCardReader)
             Catch : End Try
             Threading.Thread.Sleep(100)
         End While
         '------------- สิ้นทุดการรอคอย -------------
         If IsNothing(PersonalInfo) Then
+            ErrorMessage = "TimeOut"
             callBackError()
         Else
             callBack()

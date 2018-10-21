@@ -23,6 +23,15 @@ Partial Public Class Device_Shoping_Cart
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
     
     '''<summary>
+    '''SCM control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SCM As Global.System.Web.UI.ScriptManager
+    
+    '''<summary>
     '''img control.
     '''</summary>
     '''<remarks>
@@ -104,22 +113,13 @@ Partial Public Class Device_Shoping_Cart
     Protected WithEvents lblCurrency_Str As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''ScriptManager1 control.
+    '''UDPTerm control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ScriptManager1 As Global.System.Web.UI.ScriptManager
-    
-    '''<summary>
-    '''udpList control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents udpList As Global.System.Web.UI.UpdatePanel
+    Protected WithEvents UDPTerm As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
     '''chkActive control.
@@ -131,40 +131,22 @@ Partial Public Class Device_Shoping_Cart
     Protected WithEvents chkActive As Global.System.Web.UI.WebControls.CheckBox
     
     '''<summary>
-    '''pnlConfirm control.
+    '''btnConfirm control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlConfirm As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents btnConfirm As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''btnConfirm_str control.
+    '''btnVerify control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnConfirm_str As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''btnIDCard control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnIDCard As Global.System.Web.UI.HtmlControls.HtmlInputButton
-    
-    '''<summary>
-    '''clickIDCard control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents clickIDCard As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    Protected WithEvents btnVerify As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
     '''lnkHome control.
@@ -201,6 +183,15 @@ Partial Public Class Device_Shoping_Cart
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents UC_CommonUI As Global.VDM.UC_CommonUI
+    
+    '''<summary>
+    '''UDBVerify control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UDBVerify As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
     '''id_Citizenid control.
@@ -525,4 +516,58 @@ Partial Public Class Device_Shoping_Cart
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pass_Photo As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''btnKeepInfo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnKeepInfo As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''clickIDCard control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents clickIDCard As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''clickIDCardAlert control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents clickIDCardAlert As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''clickIDCardCross control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents clickIDCardCross As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''frmCamTrigger control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents frmCamTrigger As Global.System.Web.UI.HtmlControls.HtmlIframe
+    
+    '''<summary>
+    '''clickCamTrigger control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents clickCamTrigger As Global.System.Web.UI.HtmlControls.HtmlAnchor
 End Class
