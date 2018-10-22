@@ -394,6 +394,9 @@ Public Class Device_Shoping_Cart
         Dim Script As String = "triggerCamera();"
 
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "ToCamera", Script, True)
+
+
+        'Response.Redirect("Device_Verify.aspx?SIM_ID=" & SIM_ID)
     End Sub
 
     Private Sub ResponseIDCardExpired()

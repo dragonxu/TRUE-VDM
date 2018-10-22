@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class Complete_Order
-    
+
     '''<summary>
     '''form1 control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class Complete_Order
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-    
+
     '''<summary>
     '''scp control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class Complete_Order
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents scp As Global.System.Web.UI.ScriptManager
-    
+
     '''<summary>
     '''UDP control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class Complete_Order
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents UDP As Global.System.Web.UI.UpdatePanel
-    
+
     '''<summary>
     '''txtLocalControllerURL control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class Complete_Order
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtLocalControllerURL As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''txtSerial control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class Complete_Order
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtSerial As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''txtSlotID control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class Complete_Order
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtSlotID As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''txtSlotName control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class Complete_Order
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtSlotName As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''txtPosID control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class Complete_Order
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtPosID As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''txtStatus control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class Complete_Order
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtStatus As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''txtMessage control.
     '''</summary>
@@ -102,7 +102,7 @@ Partial Public Class Complete_Order
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtMessage As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''btnNext control.
     '''</summary>
@@ -111,7 +111,7 @@ Partial Public Class Complete_Order
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnNext As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''btnValidatePrepaid control.
     '''</summary>
@@ -120,7 +120,7 @@ Partial Public Class Complete_Order
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnValidatePrepaid As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''pnlBarcode control.
     '''</summary>
@@ -129,7 +129,7 @@ Partial Public Class Complete_Order
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlBarcode As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''txtBarcode control.
     '''</summary>
@@ -138,7 +138,7 @@ Partial Public Class Complete_Order
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtBarcode As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''btnBarcode control.
     '''</summary>
@@ -147,7 +147,7 @@ Partial Public Class Complete_Order
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnBarcode As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''lnkHome control.
     '''</summary>
@@ -156,7 +156,7 @@ Partial Public Class Complete_Order
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkHome As Global.System.Web.UI.WebControls.ImageButton
-    
+
     '''<summary>
     '''lnkBack control.
     '''</summary>
@@ -165,7 +165,187 @@ Partial Public Class Complete_Order
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkBack As Global.System.Web.UI.WebControls.ImageButton
-    
+
+    '''<summary>
+    '''pnltxt control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnltxt As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Face_cust_certificate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Face_cust_certificate As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Face_cust_capture control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Face_cust_capture As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''USER_ID control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents USER_ID As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''CUS_TITLE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CUS_TITLE As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''CUS_NAME control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CUS_NAME As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''CUS_SURNAME control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CUS_SURNAME As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''NAT_CODE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NAT_CODE As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''CUS_GENDER control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CUS_GENDER As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''CUS_BIRTHDATE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CUS_BIRTHDATE As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''CUS_PID control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CUS_PID As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''CUS_PASSPORT_ID control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CUS_PASSPORT_ID As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''CUS_PASSPORT_START control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CUS_PASSPORT_START As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''CUS_PASSPORT_EXPIRE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CUS_PASSPORT_EXPIRE As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''btn_Request control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btn_Request As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''ReturnResult control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ReturnResult As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''status control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents status As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Message control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Message As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''popupCannotRegister control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents popupCannotRegister As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
+    '''lnkprint control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkprint As Global.System.Web.UI.HtmlControls.HtmlAnchor
+
     '''<summary>
     '''UC_CommonUI control.
     '''</summary>
