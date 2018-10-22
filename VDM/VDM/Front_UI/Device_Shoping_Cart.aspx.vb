@@ -351,44 +351,44 @@ Public Class Device_Shoping_Cart
             Customer_Passport = cus
         End If
 
-        ''------------- Clear Textbox Improve Postback Performance--------------
-        'id_Citizenid.Text = ""
-        'id_Th_Prefix.Text = ""
-        'id_Th_Firstname.Text = ""
-        'id_Th_Middlename.Text = ""
-        'id_Th_Lastname.Text = ""
-        'id_En_Prefix.Text = ""
-        'id_En_Firstname.Text = ""
-        'id_En_Middlename.Text = ""
-        'id_En_Lastname.Text = ""
-        'id_Sex.Text = ""
-        'id_Birthday.Text = ""
-        'id_Address.Text = ""
-        'id_addrHouseNo.Text = ""
-        'id_addrVillageNo.Text = ""
-        'id_addrLane.Text = ""
-        'id_addrRoad.Text = ""
-        'id_addrTambol.Text = ""
-        'id_addrAmphur.Text = ""
-        'id_addrProvince.Text = ""
-        'id_Issue.Text = ""
-        'id_Issuer.Text = ""
-        'id_Expire.Text = ""
-        'id_Photo.Text = ""
+        '------------- Clear Textbox Improve Postback Performance--------------
+        id_Citizenid.Text = ""
+        id_Th_Prefix.Text = ""
+        id_Th_Firstname.Text = ""
+        id_Th_Middlename.Text = ""
+        id_Th_Lastname.Text = ""
+        id_En_Prefix.Text = ""
+        id_En_Firstname.Text = ""
+        id_En_Middlename.Text = ""
+        id_En_Lastname.Text = ""
+        id_Sex.Text = ""
+        id_Birthday.Text = ""
+        id_Address.Text = ""
+        id_addrHouseNo.Text = ""
+        id_addrVillageNo.Text = ""
+        id_addrLane.Text = ""
+        id_addrRoad.Text = ""
+        id_addrTambol.Text = ""
+        id_addrAmphur.Text = ""
+        id_addrProvince.Text = ""
+        id_Issue.Text = ""
+        id_Issuer.Text = ""
+        id_Expire.Text = ""
+        id_Photo.Text = ""
 
-        'pass_FirstName.Text = ""
-        'pass_MiddleName.Text = ""
-        'pass_LastName.Text = ""
-        'pass_DocType.Text = ""
-        'pass_Nationality.Text = ""
-        'pass_PassportNo.Text = ""
-        'pass_DateOfBirth.Text = ""
-        'pass_Sex.Text = ""
-        'pass_Expire.Text = ""
-        'pass_PersonalID.Text = ""
-        'pass_IssueCountry.Text = ""
-        'pass_MRZ.Text = ""
-        'pass_Photo.Text = ""
+        pass_FirstName.Text = ""
+        pass_MiddleName.Text = ""
+        pass_LastName.Text = ""
+        pass_DocType.Text = ""
+        pass_Nationality.Text = ""
+        pass_PassportNo.Text = ""
+        pass_DateOfBirth.Text = ""
+        pass_Sex.Text = ""
+        pass_Expire.Text = ""
+        pass_PersonalID.Text = ""
+        pass_IssueCountry.Text = ""
+        pass_MRZ.Text = ""
+        pass_Photo.Text = ""
 
         '------------------- Next to Camera Scan -------------
         Dim Script As String = "triggerCamera();"
@@ -407,14 +407,38 @@ Public Class Device_Shoping_Cart
         Dim Script As String = ""
         Script &= "$('#idCardAlertReason').html('ขออภัย ไม่สามารถอ่านบัตรประชาชนของท่านได้');" & vbLf
         Script &= "$('#clickIDCardAlert').click();" & vbLf
+        ' Auto ReScan
+        Script &= "setTimeOut(function(){ $(""#clickIDCard"").click();requestIDCard();},1000);" & vbNewLine
+
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "CannotReadIDCard", Script, True)
     End Sub
 
     Private Sub ResponseCannotReadPassport()
+        Dim Script As String = ""
+        Script &= "$('#passportAlertReason').html('Cannot read your document');" & vbLf
+        Script &= "$('#clickPassportAlert').click();" & vbLf
+        ' Auto ReScan
+        Script &= "setTimeOut(function(){ $(""#clickIDCard"").click();requestIDCard();},1000);" & vbNewLine
 
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "CannotReadPassport", Script, True)
     End Sub
 
     Private Sub ResponsePassportExpired()
+        Dim Script As String = ""
+        Script &= "$('#passportCrossReason').html('Your document has expired');" & vbLf
+        Script &= "$('#clickPassportCross').click();" & vbLf
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "PassportExpired", Script, True)
+    End Sub
 
+
+    Private Sub btnPostCam_Click(sender As Object, e As EventArgs) Handles btnPostCam.Click
+        If txtCamData.Text = "" Then Exit Sub
+
+        If LANGUAGE = VDM_BL.UILanguage.TH Then
+            Customer_IDCard.FaceCamera = txtCamData.Text
+        Else
+            Customer_Passport.FaceCamera = txtCamData.Text
+        End If
+        Response.Redirect("Device_Verify.aspx?SIM_ID=" & SIM_ID)
     End Sub
 End Class

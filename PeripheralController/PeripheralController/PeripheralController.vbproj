@@ -112,13 +112,6 @@
   <ItemGroup>
     <Compile Include="App_Code\Converter.vb" />
     <Compile Include="App_Code\Printer.vb" />
-    <Compile Include="CamCapture.aspx.designer.vb">
-      <DependentUpon>CamCapture.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="CamCapture.aspx.vb">
-      <DependentUpon>CamCapture.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="Control\UC_Camera.ascx.designer.vb">
       <DependentUpon>UC_Camera.ascx</DependentUpon>
     </Compile>
@@ -246,7 +239,6 @@
       <DependentUpon>SIMPicker.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Content Include="CamCapture.aspx" />
     <Content Include="Control\UC_Camera.ascx" />
     <Content Include="Control\UC_CashDispenser.ascx" />
     <Content Include="Control\UC_CashReciever.ascx" />
@@ -323,6 +315,7 @@
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
     <None Include="My Project\PublishProfiles\localhost.pubxml" />
+    <None Include="My Project\PublishProfiles\Publish.pubxml" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>

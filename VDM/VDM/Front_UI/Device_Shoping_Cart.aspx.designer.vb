@@ -554,13 +554,22 @@ Partial Public Class Device_Shoping_Cart
     Protected WithEvents clickIDCardCross As Global.System.Web.UI.HtmlControls.HtmlAnchor
     
     '''<summary>
-    '''frmCamTrigger control.
+    '''clickPassportAlert control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents frmCamTrigger As Global.System.Web.UI.HtmlControls.HtmlIframe
+    Protected WithEvents clickPassportAlert As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''clickPassportCross control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents clickPassportCross As Global.System.Web.UI.HtmlControls.HtmlAnchor
     
     '''<summary>
     '''clickCamTrigger control.
@@ -570,4 +579,22 @@ Partial Public Class Device_Shoping_Cart
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents clickCamTrigger As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''txtCamData control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtCamData As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''btnPostCam control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnPostCam As Global.System.Web.UI.WebControls.Button
 End Class

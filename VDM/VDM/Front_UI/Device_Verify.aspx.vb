@@ -40,6 +40,30 @@ Public Class Device_Verify
 
 #End Region
 
+    Public Property Customer_IDCard As VDM_BL.Customer_IDCard
+        Get
+            If IsNothing(Session("Customer_IDCard")) Then
+                Session("Customer_IDCard") = New VDM_BL.Customer_IDCard
+            End If
+            Return Session("Customer_IDCard")
+        End Get
+        Set(value As VDM_BL.Customer_IDCard)
+            Session("Customer_IDCard") = value
+        End Set
+    End Property
+
+    Public Property Customer_Passport As VDM_BL.Customer_Passport
+        Get
+            If IsNothing(Session("Customer_Passport")) Then
+                Session("Customer_Passport") = New VDM_BL.Customer_Passport
+            End If
+            Return Session("Customer_Passport")
+        End Get
+        Set(value As VDM_BL.Customer_Passport)
+            Session("Customer_Passport") = value
+        End Set
+    End Property
+
     Private ReadOnly Property SIM_ID As Integer
         Get
             If IsNumeric(Request.QueryString("SIM_ID")) Then
@@ -113,6 +137,9 @@ Public Class Device_Verify
 
     Dim BackEndInterface As New BackEndInterface.Face_Recognition
     Private Sub btnFace_Recognition_Click(sender As Object, e As EventArgs) Handles btnFace_Recognition.Click
+
+        '------ ถ้ามีปัญหาทุกอย่างให้เรียก Javascript : showFaceProblem();-----------------
+
         If SEQ_Face_Recognition <= 3 Then
 
             Dim result As New BackEndInterface.Face_Recognition.Response

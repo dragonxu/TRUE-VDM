@@ -1883,7 +1883,7 @@ Public Class VDM_BL
 
 #Region "Printing"
 
-    Dim PrintLine As String = "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "
+    Dim PrintLine As String = "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 
     Public Function Get_New_Confirmation_Slip_No() As String
         Dim SQL As String = "SELECT TOP 1 SLIP_NO FROM"
@@ -1909,17 +1909,37 @@ Public Class VDM_BL
     End Function
 
     Public Function GEN_DEFAULT_SLIP_HEADER() As String
-        Dim Content As String = "   บริษัท ทรู ดิสทริบิวชั่น แอนด์ เซลส์ จำกัด" & vbLf
+        Dim Content As String = "       บริษัท ทรู ดิสทริบิวชั่น แอนด์ เซลส์ จำกัด" & vbLf
         Content &= "18 อาคารทรูทาวเวอร์ ถ.รัชดาภิเษก แขวงห้วยขวาง" & vbLf
-        Content &= "    เขตห้วยขวาง กรุงเทพมหานคร 10310" & vbLf
-        Content &= vbLf & vbLf
+        Content &= "        เขตห้วยขวาง กรุงเทพมหานคร 10310" & vbLf
+        Content &= vbLf
         Return Content
     End Function
 
+    Public Function GEN_FOOTER_SLIP() As String
+        Dim Content As String = PrintLine & vbNewLine
+        Content &= "ใบยืนยันการชำระเงินนี้ไม่ใช่ใบเสร็จรับเงิน " & vbNewLine
+        Content &= "หากท่านต้องการใบเสร็จรับเงินกรุณาติดต่อพนักงาน" & vbNewLine
+        Content &= PrintLine & vbNewLine
+        Content &= "เงื่อนไขระยะเวลาการรับประกันสินค้าเสีย" & vbNewLine
+        Content &= "โดย Functional การใช้งานเท่านั้น" & vbNewLine
+        Content &= PrintLine & vbNewLine
+        Content &= "เงื่อนไขการ DAP " & vbNewLine
+        Content &= "สภาพสินค้าและตัวกล่องต้องสมบูรณ์ ไม่ฉีกขาด บุบ ตกกระแทก " & vbNewLine
+        Content &= "กรุณาแนบหลักฐานการซื้อขายทุกครั้งที่เข้ารับบริการ " & vbNewLine
+        Content &= "กรณีพบริ้วรอยรอบตัวเครื่องชัดเจน (เฉพาะสินค้ายังไม่" & vbNewLine
+        Content &= "Activated และ ยังไม่เปิดใช้งานเท่านั้น)" & vbNewLine
+        Content &= "รบกวนติดต่อทรูช้อปสาขาใกล้เคียง " & vbNewLine
+        Content &= "ภายในวันที่ซื้อขายสินค้าเท่านั้น" & vbNewLine
+        Content &= PrintLine & vbNewLine
+        Content &= "โปรดศึกษาเงื่อนไขการรับประกันและคู่มือการใช้งานเพิ่มเติมภายในกล่องสินค้า" & vbNewLine
+
+        Return Content
+    End Function
 
     '------------ ถ้ามี Ads เพิ่ม Ads ตรงนี้---------
     Public Function GEN_SLIP_ADS() As String
-        Dim Content As String = ""
+        Dim Content As String = vbNewLine
 
         Return Content
     End Function
@@ -1928,8 +1948,8 @@ Public Class VDM_BL
 
         Dim Content As String = GEN_DEFAULT_SLIP_HEADER()
 
-        Dim SQL As String = "SELECT * FROM VW_TXN_CASH" & vbNewLine
-        SQL &= "WHERE TXN_ID=" & TXN_ID & " AND TXN_STEP='completed'"
+        Dim SQL As String = "Select * FROM VW_TXN_CASH" & vbNewLine
+        SQL &= "WHERE TXN_ID=" & TXN_ID & " And TXN_STEP='completed'"
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         DA.Fill(DT)
@@ -1966,30 +1986,28 @@ Public Class VDM_BL
         Content &= PrintLine & vbNewLine
         Content &= "รายการสินค้า" & vbNewLine
         Content &= " " & vbNewLine
-        Content &= "1. " & PRODUCT_CODE & "                 " & FormatNumber(TOTAL_PRICE, 2) & vbNewLine
+        Content &= "1. " & PRODUCT_CODE & "                         " & FormatNumber(TOTAL_PRICE, 2) & vbNewLine
         Content &= PRODUCT_NAME & vbNewLine
         If Trim(SERIAL_NO) <> "" Then
             Content &= "S/N : " & SERIAL_NO & vbNewLine
-            Content &= " " & vbNewLine
         End If
         Content &= PrintLine & vbNewLine
-        Content &= "CASH                                " & FormatNumber(PAID, 2) & vbNewLine
+        Content &= "CASH                                        " & FormatNumber(PAID, 2) & vbNewLine
 
         If ACTUAL_CHANGE > 0 Then
             Content &= PrintLine & vbNewLine
-            Content &= "CHANGE                              " & FormatNumber(ACTUAL_CHANGE, 2) & vbNewLine
+            Content &= "CHANGE                                      " & FormatNumber(ACTUAL_CHANGE, 2) & vbNewLine
         End If
         If REMAIN_CHANGE > 0 Then
             Content &= PrintLine & vbNewLine
-            Content &= "REMAIN CHANGE                           " & FormatNumber(REMAIN_CHANGE, 2) & vbNewLine
+            Content &= "REMAIN CHANGE                                   " & FormatNumber(REMAIN_CHANGE, 2) & vbNewLine
         End If
         Content &= PrintLine & vbNewLine
-        Content &= " " & vbNewLine
-        Content &= "ขอบคุณที่ใช้บริการ" & vbNewLine
+        Content &= "ขอบคุณที่ใช้บริการ"
         '----------------- Ads ----------------
         Content &= GEN_SLIP_ADS()
         '----------------- Ads ----------------
-        Content &= PrintLine
+        Content &= GEN_FOOTER_SLIP()
 
         Return Content
     End Function
@@ -2041,13 +2059,13 @@ Public Class VDM_BL
         Content &= "ISV :   " & TMN_ISV & vbNewLine
         Content &= "PAYMENT ID :    " & TMN_PAYMENT_ID & vbNewLine
         Content &= "PAYMENT CODE :" & TMN_PAYMENT_CODE & vbNewLine
-        Content &= PrintLine & vbNewLine
+        Content &= PrintLine
         Content &= " " & vbNewLine
-        Content &= "ขอบคุณที่ใช้บริการ" & vbNewLine
+        Content &= "ขอบคุณที่ใช้บริการ"
         '----------------- Ads ----------------
         Content &= GEN_SLIP_ADS()
         '----------------- Ads ----------------
-        Content &= PrintLine
+        Content &= GEN_FOOTER_SLIP()
 
         Return Content
     End Function
@@ -2093,13 +2111,13 @@ Public Class VDM_BL
         Content &= "CREDIT CARD                            " & TOTAL_PRICE & vbNewLine
         Content &= " " & vbNewLine
         Content &= "ORDER REF :   " & ORDER_REF & vbNewLine
-        Content &= PrintLine & vbNewLine
+        Content &= PrintLine
         Content &= " " & vbNewLine
-        Content &= "ขอบคุณที่ใช้บริการ" & vbNewLine
+        Content &= "ขอบคุณที่ใช้บริการ"
         '----------------- Ads ----------------
         Content &= GEN_SLIP_ADS()
         '----------------- Ads ----------------
-        Content &= PrintLine
+        Content &= GEN_FOOTER_SLIP()
 
         Return Content
     End Function

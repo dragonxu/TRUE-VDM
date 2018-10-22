@@ -23,6 +23,15 @@ Partial Public Class Device_Verify
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
     
     '''<summary>
+    '''SCM control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SCM As Global.System.Web.UI.ScriptManager
+    
+    '''<summary>
     '''formStep control.
     '''</summary>
     '''<remarks>
@@ -147,6 +156,15 @@ Partial Public Class Device_Verify
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkBack As Global.System.Web.UI.WebControls.ImageButton
+    
+    '''<summary>
+    '''UDPTerm control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UDPTerm As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
     '''id_number control.

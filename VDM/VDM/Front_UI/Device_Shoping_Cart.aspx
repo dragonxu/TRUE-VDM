@@ -170,7 +170,7 @@
         <asp:UpdatePanel ID="UDBVerify" runat="server">
         <ContentTemplate>
         
-            <div style="position:fixed; top:40px; left:800px;"> <!--ID Card-->
+            <div style="position:fixed; top:40px; left:-800px;"> <!--ID Card-->
                     <h4>IDCard</h4>
                     Citizenid : <asp:Textbox ID="id_Citizenid" runat="Server" /><br/>
                     Th_Prefix : <asp:Textbox ID="id_Th_Prefix" runat="Server" /><br/>
@@ -245,17 +245,43 @@
         </div>
         <a id="clickIDCardCross" runat="server" style="display:none;"  href="#popupIDCardCross">Click</a>
 
+        <div id="popupPassportAlert" class="popup" >
+            <div class="popup-frame" >
+                <h3 class="true-m" id="passportAlertReason">xxxxxxxxxxxxxxxx</h3>
+                <div class="icon"><img src="images/Popup/icon-idcard-alert.png"/></div>
+                <h4 class="true-b">Please try again</h4>
+                <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;">OK</a></div>
+            </div>
+        </div>
+        <a id="clickPassportAlert" runat="server" style="display:none;"  href="#popupPassportAlert">Click</a>
+
+        <div id="popupPassportCross" class="popup" >
+            <div class="popup-frame" >
+                <h3 class="true-m" id="passportCrossReason">xxxxxxxxxxxxxxxxx</h3>
+                <div class="icon"><img src="images/Popup/icon-idcard-cross.png"/></div>
+                <h4 class="true-b">Please try another document</h4>
+                <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;">OK</a></div>
+            </div>
+        </div>
+        <a id="clickPassportCross" runat="server" style="display:none;"  href="#popupPassportCross">Click</a>
+
         <div id="popupCam" class="popup" >
-            <iframe id="frmCamTrigger" runat="server" style="visibility:hidden;"></iframe>
+            <div class="popup-frame" style="width:0px; height:0px;" >
+            
+            </div>
         </div>
         <a id="clickCamTrigger" runat="server" style="display:none;"  href="#popupCam">Click</a>
-
+        <iframe id="frmCamTrigger" style="visibility:hidden;"></iframe>
+        <asp:TextBox ID="txtCamData" runat="server" TextMode="MultiLine" style="display:none;"></asp:TextBox>
+        <asp:Button ID="btnPostCam" runat="server" style="display:none;"></asp:Button>
 </form>
 </body>
     <script type="text/javascript">
         $("#clickIDCard").fancybox();
         $("#clickIDCardAlert").fancybox();
         $("#clickIDCardCross").fancybox();
+        $("#clickPassportAlert").fancybox();
+        $("#clickPassportCross").fancybox();
         $("#clickCamTrigger").fancybox();
 
         (function ($) {
@@ -289,7 +315,7 @@
 
     function verifyError(Message) {
         $(".fancybox-close").click();
-         $("#btnKeepInfo").click();        
+        $("#btnKeepInfo").click();        
     }
 
     function updateIDCard(Citizenid,
@@ -339,6 +365,8 @@
                             $('#id_Issuer').val(Issuer);
                             $('#id_Expire').val(Expire);
                             $('#id_Photo').val(Photo);
+
+                            cusAlias = En_Firstname;
             
              $(".fancybox-close").click();
              $("#btnKeepInfo").click();
@@ -368,21 +396,34 @@
                             $('#pass_Expire').val(Expire);
                             $('#pass_PersonalID').val(PersonalID);
                             $('#pass_IssueCountry').val(IssueCountry);
-                            $('#pass_MRZ').val(MRZ.replaceAll('<','&lt'));
-                            
+                            $('#pass_MRZ').val(MRZ.replaceAll('<','&lt'));                            
                             $('#pass_Photo').val(Photo);
+
+                            cusAlias = FirstName;
            
              $(".fancybox-close").click();
              $("#btnKeepInfo").click();
         }
 
+        var cusAlias = "";
     function triggerCamera(){        
         // Show Lightbox
-        $('#clickCamTrigger').click();
-        var url = $('#txtLocalControllerURL').val() + '/CamCapture.aspx';
-        $('#frmCamTrigger').attr('src',url);
+        
+        var url = 'CamCapture.aspx?CusName=' + cusAlias; // Send AliasName To Camera Detector
+        setTimeout(function () { $('#frmCamTrigger').attr('src', url); }, 700);
+        setTimeout(function () { $('#clickCamTrigger').click(); }, 900);
+
+        $('#popupCam').find('.popup-frame').hide();
+        $('#popupCam').find('.fancybox-close').hide();
+    }
+
+    function PostCustomerFace(blob) {
+        $('#frmCamTrigger').attr("src", "");
+        $(".fancybox-close").click();
+        
+        $('#txtCamData').val(blob);
+        $('#btnPostCam').click();
     }
 
     </script>
-    
 </html>

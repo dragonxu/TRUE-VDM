@@ -18,17 +18,23 @@
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/bootstrap-select.css" rel="stylesheet">
-    <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <link href="css/true-popup.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
 
 
     <link href="css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
     <link href="css/slick.css" rel="stylesheet" type="text/css" />
     <link href="css/slick-theme.css" rel="stylesheet" type="text/css" />
     <link href="css/lightslider.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="../Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/jquery.fancybox.js"></script>
     <script type="text/javascript" src="js/lightslider.js"></script>
 
+    <!---------VDM----------->
+    <script src="../Scripts/txtClientControl.js" type="text/javascript" ></script>
+    <script src="../Scripts/extent.js" type="text/javascript"></script>
 
     <style>
         header {
@@ -38,7 +44,7 @@
 </head>
 <body class="bg2">
     <form id="form1" runat="server">
-
+<asp:ScriptManager ID="SCM" runat="server"></asp:ScriptManager>
         <div class="warp">
             <header>
                 <img src="images/bg-top.png" />
@@ -129,6 +135,9 @@
         </div>
 
 
+<asp:UpdatePanel ID="UDPTerm" runat="server">
+        <ContentTemplate>
+
 
         <div style="position: absolute; top: 300px; right: 100px; display: none;" class="row">
             <%--<div style="display: block;" class="col-lg-3">
@@ -182,19 +191,54 @@
             
             <asp:Button ID="btnFace_Recognition" runat="server" />
         </div>
+        </ContentTemplate>
+</asp:UpdatePanel>
 
-
+        <div id="popupVerifing">
+          <div class="popup-frame">
+            <h3 class="true-m">กำลังดำเนินการตรวจสอบ</h3>
+            <div class="icon"><img src="images/Popup/icon-scanface.png"/></div>
+            <h4 class="true-b">กรุณารอสักครู่</h4>
+          </div>
+        </div><a id="clickVerifing" href="#popupVerifing" style="display:none;">Click</a>
+        
+        <div id="popupCannotVerify">
+          <div class="popup-frame">
+            <h3 class="true-m">ขออภัย ระบบไม่สามารถอ่านใบหน้าได้</h3>
+            <div class="icon"><img src="images/Popup/icon-warning-face.png"/></div>
+            <h4 class="true-b">กรุณาสแกนใบหน้าอีกครั้ง</h4>
+            <div class="bottom"><a class="btu true-l" onclick="backToScan();" href="javascript:;">ตกลง</a></div>
+          </div>
+        </div>
+        <a id="clickCannotVerify" href="#popupCannotVerify" style="display:none;">Click</a>
 
         <script type="text/javascript">
 
 
+            $("#clickVerifing").fancybox();
+            $("#clickCannotVerify").fancybox();
+
+
+            function showFaceProblem() {
+                $('#clickCannotVerify').click();
+                $('#popupCannotVerify').find(".fancybox-close").on('click', function () {
+                    backToScan();
+                });
+            }
+
+            function backToScan() {
+                $.fancybox.close(); 
+                setTimeout(function () { history.back(); }, 300);
+            }
 
             // เริ่มจ่าย 
             function Face_Recognition() {
                 $('#btnFace_Recognition').click();
             }
 
-
+            //--------- เริ่มที่นี่ --------------//
+            setTimeout(function () { $("#clickVerifing").click(); }, 200);
+            setTimeout(function () { Face_Recognition(); }, 300);
 
 
         </script>

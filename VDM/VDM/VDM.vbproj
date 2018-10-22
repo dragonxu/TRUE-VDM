@@ -126,6 +126,7 @@
     <Content Include="fonts\fontawesome\fontawesome-webfont.svg" />
     <Content Include="fonts\sli\Simple-Line-Icons.dev.svg" />
     <Content Include="fonts\sli\Simple-Line-Icons.svg" />
+    <Content Include="Front_UI\CamCapture.aspx" />
     <Content Include="Front_UI\Complete_Order.aspx" />
     <Content Include="Front_UI\css\bootstrap-select.css" />
     <Content Include="Front_UI\css\bootstrap.css" />
@@ -685,6 +686,13 @@
     <Compile Include="Export_Batch_File.aspx.vb">
       <DependentUpon>Export_Batch_File.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Front_UI\CamCapture.aspx.designer.vb">
+      <DependentUpon>CamCapture.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\CamCapture.aspx.vb">
+      <DependentUpon>CamCapture.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Front_UI\Complete_Order.aspx.designer.vb">
       <DependentUpon>Complete_Order.aspx</DependentUpon>
