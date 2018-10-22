@@ -1292,7 +1292,7 @@ Public Class BackEndInterface
             Public Property CUS_IMAGE As Image
         End Class
 
-        Public Function Get_Result(Face_cust_certificate As String, Face_cust_capture As String, SIM_Serial As String, KO_ID As Integer, USER_ID As Integer, TXN_ID As Integer, ByVal LANGUAGE As VDM_BL.UILanguage, ByVal Customer_IDCard As VDM_BL.Customer_IDCard, ByVal Customer_Passport As VDM_BL.Customer_Passport) As Boolean
+        Public Function Get_Result(Face_cust_certificate As String, Face_cust_capture As String, SIM_Serial As String, KO_ID As Integer, USER_ID As Integer, TXN_ID As Integer, Optional ByVal LANGUAGE As VDM_BL.UILanguage = VDM_BL.UILanguage.TH, Optional ByVal Customer_IDCard As VDM_BL.Customer_IDCard = Nothing, Optional ByVal Customer_Passport As VDM_BL.Customer_Passport = Nothing) As Boolean
             Dim Result_Register As Boolean = True
             Dim SHOP_CODE As String = GET_SHOP_CODE(KO_ID)
             Dim Cust_Info As New CUSTOMER_INFO
