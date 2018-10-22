@@ -15,7 +15,7 @@ Public Class FormMain
 
         LoadKeyboard()
 
-        'Cursor.Hide() '********** Production Check '-********** 
+        Cursor.Hide() '********** Production Check '-********** 
         InitChromium()
         '------------- Start SIM Dispenser------------
         StartProductController() '********** Production Check '-********** 
