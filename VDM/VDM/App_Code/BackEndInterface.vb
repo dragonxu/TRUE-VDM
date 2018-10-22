@@ -356,9 +356,26 @@ Public Class BackEndInterface
             PostData.Add("seq", seq)
             PostData.Add("max-seq", "")
 
-            Dim JSONString As String = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
-            Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+            'Dim JSONString As String = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
+            'Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+
+
+            Dim JSONString As String = ""
+            Dim Result As Response = Nothing
+            Try
+                JSONString = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
+                Result = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+
+            Catch ex As Exception
+                Result = New Response
+                'Result.ReturnValues = New List(Of Object)
+                'Result.IsError = True
+                'Result.ErrorMessage = ex.Message
+                'Result.IsNotTransaction = False
+            End Try
+
             Result.JSONString = JSONString
+
             Return Result
         End Function
 
@@ -1275,7 +1292,7 @@ Public Class BackEndInterface
             Public Property CUS_IMAGE As Image
         End Class
 
-        Public Function Get_Result(Face_cust_certificate As String, Face_cust_capture As String, SIM_Serial As String, KO_ID As Integer, USER_ID As Integer, TXN_ID As Integer) As Boolean
+        Public Function Get_Result(Face_cust_certificate As String, Face_cust_capture As String, SIM_Serial As String, KO_ID As Integer, USER_ID As Integer, TXN_ID As Integer, Optional ByVal LANGUAGE As VDM_BL.UILanguage = VDM_BL.UILanguage.TH, Optional ByVal Customer_IDCard As VDM_BL.Customer_IDCard = Nothing, Optional ByVal Customer_Passport As VDM_BL.Customer_Passport = Nothing) As Boolean
             Dim Result_Register As Boolean = True
             Dim SHOP_CODE As String = GET_SHOP_CODE(KO_ID)
             Dim Cust_Info As New CUSTOMER_INFO
@@ -1503,6 +1520,57 @@ Public Class BackEndInterface
                 mat_code = DT_TXN_MAT_CODE.Rows(0).Item("PRODUCT_CODE").ToString
                 mat_desc = DT_TXN_MAT_CODE.Rows(0).Item("PRODUCT_NAME").ToString
             End If
+
+            Dim address_number As String = ""
+            Dim address_moo As String = ""
+            Dim address_village As String = ""
+            Dim address_street As String = ""
+            Dim address_soi As String = ""
+            Dim address_district As String = ""
+            Dim address_province As String = ""
+            Dim address_building_name As String = ""
+            Dim address_building_room As String = ""
+            Dim address_building_floor As String = ""
+            Dim sddress_sub_district As String = ""
+            Dim address_zip As String = ""
+
+            If LANGUAGE = VDM_BL.UILanguage.TH Then
+
+                Dim cus As New VDM_BL.Customer_IDCard
+                If Not IsNothing(Customer_IDCard) Then
+                    cus = Customer_IDCard
+                    address_number = cus.addrHouseNo
+                    address_moo = "-"
+                    address_village = cus.addrVillageNo
+                    address_street = cus.addrRoad
+                    address_soi = "-"
+                    address_district = cus.addrAmphur
+                    address_province = cus.addrProvince
+                    address_building_name = "-"
+                    address_building_room = "-"
+                    address_building_floor = "-"
+                    sddress_sub_district = "-"
+                    address_zip = "-"
+                End If
+            Else
+                Dim cus As New VDM_BL.Customer_Passport
+                If Not IsNothing(Customer_Passport) Then
+                    cus = Customer_Passport
+                    address_number = "-"
+                    address_moo = "-"
+                    address_village = "-"
+                    address_street = "-"
+                    address_soi = "-"
+                    address_district = "-"
+                    address_province = "-"
+                    address_building_name = "-"
+                    address_building_room = "-"
+                    address_building_floor = "-"
+                    sddress_sub_district = "-"
+                    address_zip = "-"
+                End If
+            End If
+
             Dim BackEndPrepaid_Register As New Prepaid_Register
             Dim Response_Prepaid_Register As New BackEndInterface.Prepaid_Register.Response
             Response_Prepaid_Register = BackEndPrepaid_Register.Get_Result(Response_Generate_Order_Id.response_data,
@@ -1515,18 +1583,18 @@ Public Class BackEndInterface
                 C.DateToString(Cust_Info.CUS_BIRTHDATE, "yyyy-MM-dd'T'HH:mm:ss'+0700'"), '1990-02-05T00:00:00+0700  customer_birthdate
                 IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID),
                 C.DateToString(Cust_Info.CUS_PASSPORT_EXPIRE, "yyyy-MM-dd'T'HH:mm:ss'+0700'"), '1990-02-05T00:00:00+0700  customer_id_expire_date
-                "-", 'address_number.Text,
-                "-", 'address_moo.Text,
-                "-", 'address_village.Text,
-                "-", 'address_street.Text,
-                "-", 'address_soi.Text,
-                "-", 'address_district.Text,
-                "-", 'address_province.Text,
-                "-", 'address_building_name.Text,
-                "-", 'address_building_room.Text,
-                "-", 'address_building_floor.Text,
-                "-", 'sddress_sub_district.Text,
-                "-", 'address_zip.Text,
+                address_number,
+                address_moo,
+                address_village,
+                address_street,
+                address_soi,
+                address_district,
+                address_province,
+                address_building_name,
+                address_building_room,
+                address_building_floor,
+                sddress_sub_district,
+                address_zip,
                 "-", 'shopCode.Text,
                 "-", 'shopName.Text,
                 USER_ID,

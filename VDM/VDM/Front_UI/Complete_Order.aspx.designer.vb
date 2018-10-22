@@ -167,6 +167,96 @@ Partial Public Class Complete_Order
     Protected WithEvents lnkBack As Global.System.Web.UI.WebControls.ImageButton
     
     '''<summary>
+    '''pnltxt control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnltxt As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''Face_cust_certificate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Face_cust_certificate As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''Face_cust_capture control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Face_cust_capture As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''USER_ID control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents USER_ID As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''btn_Request control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btn_Request As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''ReturnResult control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ReturnResult As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''status control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents status As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''Message control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Message As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''popupCannotRegister control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents popupCannotRegister As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''lnkprint control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkprint As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
     '''UC_CommonUI control.
     '''</summary>
     '''<remarks>

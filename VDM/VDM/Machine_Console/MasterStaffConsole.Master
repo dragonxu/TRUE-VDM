@@ -116,7 +116,7 @@
             </div>
         </section>
 
-        <uc1:UpdateProgress runat="server" id="UpdateProgress" />
+      <%--  <uc1:UpdateProgress runat="server" id="UpdateProgress" />--%>
 
     </form>
     <!-- /how it works section -->

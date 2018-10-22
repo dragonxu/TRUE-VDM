@@ -20,7 +20,8 @@
     <link href="css/bootstrap-select.css" rel="stylesheet">
     <link href="css/true-popup.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
-
+     
+     
 
     <link href="css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
     <link href="css/slick.css" rel="stylesheet" type="text/css" />
@@ -66,18 +67,18 @@
                                     <i title="฿">
                                         <asp:Label ID="lblPrice_Money" runat="server" Text="39,000"></asp:Label></i>
                                     <asp:Label ID="lblCurrency_Str" runat="server" Text="บาท"></asp:Label></h3>
-                                <asp:Panel ID="pnlScanIDCard" runat="server">
+                                <asp:Panel ID="pnlScanIDCard" runat="server" Visible ="false" >
 
                                     <uc1:UC_Scan_IDCart runat="server" ID="UC_Scan_IDCart" />
 
 
 
                                 </asp:Panel>
-                                <asp:Panel ID="pnlFace_Recognition" runat="server">
+                                <asp:Panel ID="pnlFace_Recognition" runat="server"  Visible ="false" >
                                     <uc1:UC_Scan_Face_Recognition runat="server" ID="UC_Scan_Face_Recognition" />
                                 </asp:Panel>
                                 <div class="col-md-12">
-                                    <asp:Button ID="btnSkip_ScanIDCard" runat="server" class="btu true-bs" Style="background: #635b5b; padding: 0 50px 0 50px; float: right; margin-top: 100px;" Text="ข้าม" />
+                                    <asp:Button ID="btnSkip_ScanIDCard" runat="server" class="btu true-bs" Style="background: #635b5b; padding: 0 50px 0 50px; float: right; margin-top: 100px;" Text="ข้าม" Visible="false"  />
                                 </div>
 
                             </div>
@@ -86,39 +87,7 @@
                 </div>
             </main>
 
-            <asp:Panel ID="pnlModul_IDCard_Success" runat="server">
-
-                <div class="fancybox-overlay fancybox-overlay-fixed" style="width: auto; height: auto; display: block;">
-                    <div class="fancybox-wrap fancybox-desktop fancybox-type-inline fancybox-opened" tabindex="-1" style="width: 818px; height: auto; position: absolute; top: 250px; left: 122px; opacity: 1; overflow: visible;">
-                        <div class="fancybox-skin" style="padding: 0px; width: auto; height: auto;">
-                            <div class="fancybox-outer">
-                                <div class="fancybox-inner" style="overflow: auto; width: 818px; height: auto;">
-                                    <div id="popup2" style="display: block;">
-
-                                        <div class="privilege">
-
-                                            <h3 class="true-m" style="margin: 20px 0 60px 0;">สำเร็จ</h3>
-                                            <div class="idcard">
-                                                <img src="images/pic-idcard2.png">
-                                            </div>
-
-                                            <%--<h4 class="true-m t-red">อย่าลืมเก็บบัตรของท่าน</h4>--%>
-                                            <div class="icon" style="margin: 0px 0 50px 0">
-                                                <asp:LinkButton ID="btnStart_Take_Photos" runat="server" class="btu true-l" Text="เริ่มแสกนใบหน้า"></asp:LinkButton>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <%--<a title="Close" class="fancybox-item fancybox-close" href="javascript:;"></a>--%>
-                            <asp:LinkButton ID="lnkClose" runat="server" class="fancybox-item fancybox-close"></asp:LinkButton>
-                        </div>
-                    </div>
-                </div>
-
-            </asp:Panel>
-
+ 
             <footer style="bottom: 0px">
                 <nav>
                     <div class="main">
@@ -191,26 +160,36 @@
             
             <asp:Button ID="btnFace_Recognition" runat="server" />
         </div>
-        </ContentTemplate>
-</asp:UpdatePanel>
 
-        <div id="popupVerifing">
+
+
+        <div id="popupVerifing" runat ="server" >
           <div class="popup-frame">
             <h3 class="true-m">กำลังดำเนินการตรวจสอบ</h3>
             <div class="icon"><img src="images/Popup/icon-scanface.png"/></div>
             <h4 class="true-b">กรุณารอสักครู่</h4>
           </div>
         </div><a id="clickVerifing" href="#popupVerifing" style="display:none;">Click</a>
-        
-        <div id="popupCannotVerify">
-          <div class="popup-frame">
-            <h3 class="true-m">ขออภัย ระบบไม่สามารถอ่านใบหน้าได้</h3>
-            <div class="icon"><img src="images/Popup/icon-warning-face.png"/></div>
-            <h4 class="true-b">กรุณาสแกนใบหน้าอีกครั้ง</h4>
-            <div class="bottom"><a class="btu true-l" onclick="backToScan();" href="javascript:;">ตกลง</a></div>
-          </div>
-        </div>
-        <a id="clickCannotVerify" href="#popupCannotVerify" style="display:none;">Click</a>
+
+
+
+
+       
+       
+
+             <div id="popupCannotVerify" class="popup" runat ="server"  >
+            <div class="popup-frame" >
+                <h3 class="true-m" id="idCardAlertReason">ขออภัย ระบบไม่สามารถอ่านใบหน้าได้</h3>
+                <div class="icon"><img src="images/Popup/icon-warning-face.png"/></div>
+                <h4 class="true-b">กรุณาสแกนใบหน้าอีกครั้ง</h4>
+                <div class="bottom"><a class="btu true-l" onclick="backToScan();" href="javascript:;">ตกลง</a></div>
+            </div>
+        </div> <a id="clickCannotVerify" href="#popupCannotVerify" style="display:none;">Click</a>
+ 
+
+        </ContentTemplate>
+</asp:UpdatePanel>
+
 
         <script type="text/javascript">
 
