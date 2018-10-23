@@ -1,4 +1,6 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Net
+
 Public Class PrintSlip
     Inherits System.Web.UI.Page
 
@@ -30,23 +32,28 @@ Public Class PrintSlip
         DA.Fill(DT)
         If DT.Rows.Count = 0 OrElse IsDBNull(DT.Rows(0).Item("METHOD_ID")) Then Exit Sub
         '----------------- Check Print Method ID----------------
-        Dim content As String = ""
-        Select Case DT.Rows(0).Item("METHOD_ID")
-            Case VDM_BL.PaymentMethod.CASH
-                content = BL.GEN_CASH_CONFIRMATION_SLIP(TXN_ID)
-                BL.UPDATE_CONFIRMATION_SLIP(TXN_ID, content)
-            Case VDM_BL.PaymentMethod.TRUE_MONEY
-                content = BL.GEN_TMN_CONFIRMATION_SLIP(TXN_ID)
-                BL.UPDATE_CONFIRMATION_SLIP(TXN_ID, content)
-            Case VDM_BL.PaymentMethod.CREDIT_CARD
-                content = BL.GEN_CREDITCARD_CONFIRMATION_SLIP(TXN_ID)
-                BL.UPDATE_CONFIRMATION_SLIP(TXN_ID, content)
-        End Select
+
+        Dim url As String = "PrintContent.aspx?TXN_ID=" & TXN_ID
+
+        Dim content As String = New WebClient().DownloadString(url)
+        'Select Case DT.Rows(0).Item("METHOD_ID")
+        '    Case VDM_BL.PaymentMethod.CASH
+        '        content = BL.GEN_CASH_CONFIRMATION_SLIP(TXN_ID)
+        '        BL.UPDATE_CONFIRMATION_SLIP(TXN_ID, content)
+        '    Case VDM_BL.PaymentMethod.TRUE_MONEY
+        '        content = BL.GEN_TMN_CONFIRMATION_SLIP(TXN_ID)
+        '        BL.UPDATE_CONFIRMATION_SLIP(TXN_ID, content)
+        '    Case VDM_BL.PaymentMethod.CREDIT_CARD
+        '        content = BL.GEN_CREDITCARD_CONFIRMATION_SLIP(TXN_ID)
+        '        BL.UPDATE_CONFIRMATION_SLIP(TXN_ID, content)
+        'End Select
         '----------------- set Print Content ----------------
         lblPrintContent.Text = content.Replace(vbNewLine, "<br>").Replace(vbTab, "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
 
         Dim Script As String = "setTimeout(printDelegate, 1000);"
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Print", Script, True)
     End Sub
+
+
 
 End Class

@@ -29,10 +29,10 @@ Public Class FormCamera
         SetDoubleBuffered(pbDetected)
 
         '----------- For Test
-        Player.Location = New Point(33, 140)
+        'Player.Location = New Point(33, 140)
 
         Detector = New HaarObjectDetector(New FaceHaarCascade(), 32, ObjectDetectorSearchMode.Average, 1.5F, ObjectDetectorScalingMode.GreaterToSmaller)
-        Detector.MaxSize = New Size(320, 320)
+        Detector.MaxSize = New Size(500, 500)
         Detector.UseParallelProcessing = True
         Detector.Suppression = 2
         ListLocalCamera()
@@ -209,7 +209,7 @@ Public Class FormCamera
     End Sub
 
     Private Sub TimerDetected_Tick(sender As Object, e As EventArgs) Handles TimerDetected.Tick
-        If DetectCount > 15 Then
+        If DetectCount > 20 Then
             ImageReady()
         End If
     End Sub

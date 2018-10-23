@@ -1931,8 +1931,8 @@ Public Class VDM_BL
         Content &= "Activated และ ยังไม่เปิดใช้งานเท่านั้น)" & vbNewLine
         Content &= "รบกวนติดต่อทรูช้อปสาขาใกล้เคียง " & vbNewLine
         Content &= "ภายในวันที่ซื้อขายสินค้าเท่านั้น" & vbNewLine
-        Content &= PrintLine & vbNewLine
-        Content &= "โปรดศึกษาเงื่อนไขการรับประกันและคู่มือการใช้งานเพิ่มเติมภายในกล่องสินค้า" & vbNewLine
+        Content &= PrintLine '& vbNewLine
+        'Content &= "โปรดศึกษาเงื่อนไขการรับประกันและคู่มือการใช้งานเพิ่มเติมภายในกล่องสินค้า" & vbNewLine
 
         Return Content
     End Function

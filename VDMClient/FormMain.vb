@@ -8,6 +8,7 @@ Public Class FormMain
 
     Public WithEvents ChromeBrowser As ChromiumWebBrowser
     'Dim StartURL As String = "http://localhost:62820/Front_UI/Default.aspx?KO_ID=1" '********** Production Check '-********** 
+    'Dim StartURL As String = "http://localhost:62820/Front_UI/Thank_You.aspx" '********** Production Check '-********** 
     Dim StartURL As String = "http://localhost"
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -50,12 +51,11 @@ Public Class FormMain
     'Dim LastLoadCam As DateTime = Now
     Dim Camera As FormCamera = Nothing
     Private Sub ChromeBrowser_FrameLoadEnd(sender As Object, e As FrameLoadEndEventArgs) Handles ChromeBrowser.FrameLoadEnd
+
         Select Case True
             Case Not e.Frame.IsMain And e.Frame.Url.IndexOf("psipay.bangkokbank") > -1
                 Keyboard.Show()
             Case Not e.Frame.IsMain And e.Frame.Url.ToUpper.IndexOf("/CAMCAPTURE.ASPX") > -1
-
-
                 'If DateDiff(DateInterval.Second, LastLoadCam, Now) < 2 Then Exit Sub
                 'LastLoadCam = Now
                 If Not IsNothing(Camera) Then Exit Sub
@@ -76,6 +76,18 @@ Public Class FormMain
 
                 Camera.MainForm = Me
                 Camera.Show(Me)
+
+            Case Not e.Frame.IsMain And e.Frame.Url.ToUpper.IndexOf("/PRINTCONTENT.ASPX") > -1
+
+                Dim C As New Converter
+                Dim Data As Byte() = New WebClient().DownloadData(e.Frame.Url)
+                Dim Content As String = C.ByteToString(Data, Converter.EncodeType._UTF8)
+
+                If Content <> "" Then
+                    Dim Printer As New Printer
+                    Printer.Content = Content
+                    Printer.Print()
+                End If
 
             Case Else
                 Keyboard.Hide()
@@ -101,11 +113,6 @@ Public Class FormMain
     Private Sub StartProductController()
         '--------------- Set Home --------------
         Dim url As String = StartURL & "/ProductPicker.aspx?Mode=SetHome&callback=test"
-        ' Using WebRequest
-        'Dim request As WebRequest = WebRequest.Create(url)
-        'Dim response As WebResponse = request.GetResponse()
-        'Dim result As String = New StreamReader(response.GetResponseStream()).ReadToEnd()
-        '' Using WebClient
         Try
             Dim result As String = New WebClient().DownloadString(url)
         Catch : End Try

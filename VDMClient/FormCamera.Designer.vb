@@ -41,9 +41,9 @@ Partial Class FormCamera
         '
         'Player
         '
-        Me.Player.Location = New System.Drawing.Point(33, 140)
+        Me.Player.Location = New System.Drawing.Point(58, 140)
         Me.Player.Name = "Player"
-        Me.Player.Size = New System.Drawing.Size(523, 375)
+        Me.Player.Size = New System.Drawing.Size(601, 375)
         Me.Player.TabIndex = 27
         Me.Player.Text = "Player"
         Me.Player.VideoSource = Nothing
@@ -63,7 +63,7 @@ Partial Class FormCamera
         Me.btnStart.FlatAppearance.BorderSize = 0
         Me.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnStart.Image = CType(resources.GetObject("btnStart.Image"), System.Drawing.Image)
-        Me.btnStart.Location = New System.Drawing.Point(203, 475)
+        Me.btnStart.Location = New System.Drawing.Point(259, 524)
         Me.btnStart.Margin = New System.Windows.Forms.Padding(0)
         Me.btnStart.Name = "btnStart"
         Me.btnStart.Size = New System.Drawing.Size(200, 40)
@@ -72,9 +72,9 @@ Partial Class FormCamera
         '
         'pbDetected
         '
-        Me.pbDetected.Location = New System.Drawing.Point(174, 150)
+        Me.pbDetected.Location = New System.Drawing.Point(185, 150)
         Me.pbDetected.Name = "pbDetected"
-        Me.pbDetected.Size = New System.Drawing.Size(250, 250)
+        Me.pbDetected.Size = New System.Drawing.Size(347, 346)
         Me.pbDetected.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.pbDetected.TabIndex = 30
         Me.pbDetected.TabStop = False
@@ -85,7 +85,7 @@ Partial Class FormCamera
         Me.btnClose.FlatAppearance.BorderSize = 0
         Me.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnClose.Image = CType(resources.GetObject("btnClose.Image"), System.Drawing.Image)
-        Me.btnClose.Location = New System.Drawing.Point(535, 9)
+        Me.btnClose.Location = New System.Drawing.Point(668, 9)
         Me.btnClose.Margin = New System.Windows.Forms.Padding(0)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(40, 40)
@@ -95,9 +95,9 @@ Partial Class FormCamera
         'pbStart
         '
         Me.pbStart.Image = CType(resources.GetObject("pbStart.Image"), System.Drawing.Image)
-        Me.pbStart.Location = New System.Drawing.Point(33, 69)
+        Me.pbStart.Location = New System.Drawing.Point(100, 69)
         Me.pbStart.Name = "pbStart"
-        Me.pbStart.Size = New System.Drawing.Size(523, 50)
+        Me.pbStart.Size = New System.Drawing.Size(531, 50)
         Me.pbStart.TabIndex = 33
         Me.pbStart.TabStop = False
         '
@@ -106,7 +106,7 @@ Partial Class FormCamera
         Me.btnAgain.FlatAppearance.BorderSize = 0
         Me.btnAgain.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAgain.Image = CType(resources.GetObject("btnAgain.Image"), System.Drawing.Image)
-        Me.btnAgain.Location = New System.Drawing.Point(143, 481)
+        Me.btnAgain.Location = New System.Drawing.Point(185, 524)
         Me.btnAgain.Margin = New System.Windows.Forms.Padding(0)
         Me.btnAgain.Name = "btnAgain"
         Me.btnAgain.Size = New System.Drawing.Size(131, 40)
@@ -118,7 +118,7 @@ Partial Class FormCamera
         Me.btnOK.FlatAppearance.BorderSize = 0
         Me.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnOK.Image = CType(resources.GetObject("btnOK.Image"), System.Drawing.Image)
-        Me.btnOK.Location = New System.Drawing.Point(329, 481)
+        Me.btnOK.Location = New System.Drawing.Point(401, 524)
         Me.btnOK.Margin = New System.Windows.Forms.Padding(0)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(131, 40)
@@ -128,7 +128,7 @@ Partial Class FormCamera
         'pbGet
         '
         Me.pbGet.Image = CType(resources.GetObject("pbGet.Image"), System.Drawing.Image)
-        Me.pbGet.Location = New System.Drawing.Point(203, 69)
+        Me.pbGet.Location = New System.Drawing.Point(273, 69)
         Me.pbGet.Name = "pbGet"
         Me.pbGet.Size = New System.Drawing.Size(181, 50)
         Me.pbGet.TabIndex = 36
@@ -143,8 +143,8 @@ Partial Class FormCamera
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
-        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(584, 549)
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.ClientSize = New System.Drawing.Size(717, 594)
         Me.ControlBox = False
         Me.Controls.Add(Me.pbGet)
         Me.Controls.Add(Me.btnOK)
@@ -152,9 +152,9 @@ Partial Class FormCamera
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnStart)
         Me.Controls.Add(Me.cmbcamera)
-        Me.Controls.Add(Me.Player)
         Me.Controls.Add(Me.pbDetected)
         Me.Controls.Add(Me.pbStart)
+        Me.Controls.Add(Me.Player)
         Me.Font = New System.Drawing.Font("Arial Unicode MS", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)

@@ -68,6 +68,15 @@ Partial Public Class Thank_You
     Protected WithEvents txtLocalControllerURL As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''CommandTrigger control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CommandTrigger As Global.System.Web.UI.HtmlControls.HtmlIframe
+    
+    '''<summary>
     '''UC_CommonUI control.
     '''</summary>
     '''<remarks>

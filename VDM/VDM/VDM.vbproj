@@ -556,6 +556,7 @@
     <Content Include="Machine_Console\UC_SIM_Dispenser.ascx" />
     <Content Include="Machine_Console\UC_SIM_Slot.ascx" />
     <Content Include="Machine_Console\UC_SIM_Stock.ascx" />
+    <Content Include="PrintContent.aspx" />
     <Content Include="PrintSlip.aspx" />
     <Content Include="Scripts\DragDrop.js" />
     <Content Include="Scripts\extent.js" />
@@ -931,6 +932,13 @@
     <Compile Include="Machine_Console\UC_SIM_Stock.ascx.vb">
       <DependentUpon>UC_SIM_Stock.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PrintContent.aspx.designer.vb">
+      <DependentUpon>PrintContent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PrintContent.aspx.vb">
+      <DependentUpon>PrintContent.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="PrintSlip.aspx.designer.vb">
       <DependentUpon>PrintSlip.aspx</DependentUpon>

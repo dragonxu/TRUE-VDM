@@ -11,7 +11,7 @@
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
 <link href="css/font-awesome.min.css" rel="stylesheet">
 <link href="css/bootstrap-select.css" rel="stylesheet">
-<script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+<script type="text/javascript" src="../Scripts/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
 <style>
   header{position:relative;}
@@ -48,7 +48,7 @@
             </div>
         </nav>
     </footer>
-
+    <iframe id="CommandTrigger" runat="server" style="visibility:hidden; width:0px; height:0px;"></iframe>
     </ContentTemplate>
 </asp:UpdatePanel>
 </div>
@@ -60,17 +60,21 @@
                  return target.split(search).join(replacement);
              };
 
-             var printDelegate = function () {
-                 var content = $('#txtPrintContent').val().replaceAll("&lt", "<").replaceAll("&gt", ">");
-                 var url = $('#txtLocalControllerURL').val() + '/Print.aspx?Mode=Print';
-                 var xhr = new XMLHttpRequest();
-                 xhr.open("POST", url, true);
-                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                 xhr.send(content);
+             //var printDelegate = function () {
+             //    var content = $('#txtPrintContent').val().replaceAll("&lt", "<").replaceAll("&gt", ">");
+             //    var url = $('#txtLocalControllerURL').val() + '/Print.aspx?Mode=Print';
+             //    var xhr = new XMLHttpRequest();
+             //    xhr.open("POST", url, true);
+             //    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+             //    xhr.send(content);
+             //}
+             function printSlip(TXN_ID) {
+                 var url = '../PrintContent.aspx?TXN_ID=' + TXN_ID;
+                 $('#CommandTrigger').attr('src', url);
              }
              
              var redirectDelegate = function () {
-                 $('#lnkHome').click();
+                 //$('#lnkHome').click();
              }
              var waitSeconds = 15;// รอ 15 วินาที
              setTimeout(redirectDelegate, waitSeconds * 1000);
