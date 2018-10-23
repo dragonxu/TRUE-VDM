@@ -182,15 +182,15 @@
             $("#clickNetworkProblem").fancybox();
 
             function showFaceProblem() {
-                $('#clickNetworkProblem').click();
-                $('#popupNetworkProblem').find(".fancybox-close").on('click', function () {
+                $('#clickCannotVerify').click();
+                $('#popupCannotVerify').find(".fancybox-close").on('click', function () {
                     backToScan();
                 });
             }
 
             function showNetworkProblem() {
-                $('#clickCannotVerify').click();
-                $('#popupCannotVerify').find(".fancybox-close").on('click', function () {
+                $('#clickNetworkProblem').click();
+                $('#popupNetworkProblem').find(".fancybox-close").on('click', function () {
                     backToScan();
                 });
             }
