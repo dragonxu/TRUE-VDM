@@ -1316,15 +1316,66 @@ Public Class BackEndInterface
                 'Cust_Info.CUS_IMAGE = DT_Customer_Info.Rows(0).Item("CUS_IMAGE")
             End If
 
-            Dim Result As New Command_Result
 
+            Dim Result As New Command_Result
+            Dim Base64_Certificate As String = ""
+            Dim Base64_capture As String = ""
+            Dim address_number As String = ""
+            Dim address_moo As String = ""
+            Dim address_village As String = ""
+            Dim address_street As String = ""
+            Dim address_soi As String = ""
+            Dim address_district As String = ""
+            Dim address_province As String = ""
+            Dim address_building_name As String = ""
+            Dim address_building_room As String = ""
+            Dim address_building_floor As String = ""
+            Dim sddress_sub_district As String = ""
+            Dim address_zip As String = ""
+            If LANGUAGE = VDM_BL.UILanguage.TH Then
+                Dim cus As New VDM_BL.Customer_IDCard
+                If Not IsNothing(Customer_IDCard) Then
+                    cus = Customer_IDCard
+                    address_number = cus.addrHouseNo
+                    address_moo = "-"
+                    address_village = cus.addrVillageNo
+                    address_street = cus.addrRoad
+                    address_soi = "-"
+                    address_district = cus.addrAmphur
+                    address_province = cus.addrProvince
+                    address_building_name = "-"
+                    address_building_room = "-"
+                    address_building_floor = "-"
+                    sddress_sub_district = "-"
+                    address_zip = "-"
+                    Base64_Certificate = cus.Photo
+                    Base64_capture = cus.FaceCamera
+                End If
+            Else
+                Dim cus As New VDM_BL.Customer_Passport
+                If Not IsNothing(Customer_Passport) Then
+                    cus = Customer_Passport
+                    address_number = "-"
+                    address_moo = "-"
+                    address_village = "-"
+                    address_street = "-"
+                    address_soi = "-"
+                    address_district = "-"
+                    address_province = "-"
+                    address_building_name = "-"
+                    address_building_room = "-"
+                    address_building_floor = "-"
+                    sddress_sub_district = "-"
+                    address_zip = "-"
+                    Base64_Certificate = cus.Photo
+                    Base64_capture = cus.FaceCamera
+                End If
+            End If
 #Region "Face_Recognition"
             Dim BackEndFace_Recognition As New Face_Recognition
             Dim Response_Face_Recognition As New BackEndInterface.Face_Recognition.Response
-            'Dim Base64_Certificate As String = Convert_Base64(Face_cust_certificate)           ' ถ้าส่งมาเป็น Face_cust_certificate As Byte()
-            'Dim Base64_capture As String = Convert_Base64(Face_cust_capture)           ' ถ้าส่งมาเป็น  Face_cust_capture As Byte()
-            Dim Base64_Certificate As String = Face_cust_certificate
-            Dim Base64_capture As String = Face_cust_capture
+            'Dim Base64_Certificate As String = Face_cust_certificate
+            'Dim Base64_capture As String = Face_cust_capture
             Response_Face_Recognition = BackEndFace_Recognition.Get_Result(SHOP_CODE, IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID), Base64_Certificate, Base64_capture, 1)
             Try
                 If Not IsNothing(Response_Face_Recognition) Then
@@ -1521,55 +1572,55 @@ Public Class BackEndInterface
                 mat_desc = DT_TXN_MAT_CODE.Rows(0).Item("PRODUCT_NAME").ToString
             End If
 
-            Dim address_number As String = ""
-            Dim address_moo As String = ""
-            Dim address_village As String = ""
-            Dim address_street As String = ""
-            Dim address_soi As String = ""
-            Dim address_district As String = ""
-            Dim address_province As String = ""
-            Dim address_building_name As String = ""
-            Dim address_building_room As String = ""
-            Dim address_building_floor As String = ""
-            Dim sddress_sub_district As String = ""
-            Dim address_zip As String = ""
+            'Dim address_number As String = ""
+            'Dim address_moo As String = ""
+            'Dim address_village As String = ""
+            'Dim address_street As String = ""
+            'Dim address_soi As String = ""
+            'Dim address_district As String = ""
+            'Dim address_province As String = ""
+            'Dim address_building_name As String = ""
+            'Dim address_building_room As String = ""
+            'Dim address_building_floor As String = ""
+            'Dim sddress_sub_district As String = ""
+            'Dim address_zip As String = ""
 
-            If LANGUAGE = VDM_BL.UILanguage.TH Then
+            'If LANGUAGE = VDM_BL.UILanguage.TH Then
 
-                Dim cus As New VDM_BL.Customer_IDCard
-                If Not IsNothing(Customer_IDCard) Then
-                    cus = Customer_IDCard
-                    address_number = cus.addrHouseNo
-                    address_moo = "-"
-                    address_village = cus.addrVillageNo
-                    address_street = cus.addrRoad
-                    address_soi = "-"
-                    address_district = cus.addrAmphur
-                    address_province = cus.addrProvince
-                    address_building_name = "-"
-                    address_building_room = "-"
-                    address_building_floor = "-"
-                    sddress_sub_district = "-"
-                    address_zip = "-"
-                End If
-            Else
-                Dim cus As New VDM_BL.Customer_Passport
-                If Not IsNothing(Customer_Passport) Then
-                    cus = Customer_Passport
-                    address_number = "-"
-                    address_moo = "-"
-                    address_village = "-"
-                    address_street = "-"
-                    address_soi = "-"
-                    address_district = "-"
-                    address_province = "-"
-                    address_building_name = "-"
-                    address_building_room = "-"
-                    address_building_floor = "-"
-                    sddress_sub_district = "-"
-                    address_zip = "-"
-                End If
-            End If
+            '    Dim cus As New VDM_BL.Customer_IDCard
+            '    If Not IsNothing(Customer_IDCard) Then
+            '        cus = Customer_IDCard
+            '        address_number = cus.addrHouseNo
+            '        address_moo = "-"
+            '        address_village = cus.addrVillageNo
+            '        address_street = cus.addrRoad
+            '        address_soi = "-"
+            '        address_district = cus.addrAmphur
+            '        address_province = cus.addrProvince
+            '        address_building_name = "-"
+            '        address_building_room = "-"
+            '        address_building_floor = "-"
+            '        sddress_sub_district = "-"
+            '        address_zip = "-"
+            '    End If
+            'Else
+            '    Dim cus As New VDM_BL.Customer_Passport
+            '    If Not IsNothing(Customer_Passport) Then
+            '        cus = Customer_Passport
+            '        address_number = "-"
+            '        address_moo = "-"
+            '        address_village = "-"
+            '        address_street = "-"
+            '        address_soi = "-"
+            '        address_district = "-"
+            '        address_province = "-"
+            '        address_building_name = "-"
+            '        address_building_room = "-"
+            '        address_building_floor = "-"
+            '        sddress_sub_district = "-"
+            '        address_zip = "-"
+            '    End If
+            'End If
 
             Dim BackEndPrepaid_Register As New Prepaid_Register
             Dim Response_Prepaid_Register As New BackEndInterface.Prepaid_Register.Response

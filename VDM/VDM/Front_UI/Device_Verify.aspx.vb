@@ -251,7 +251,7 @@ Public Class Device_Verify
 
                     'Update TB_SERVICE_TRANSACTION
                     Dim SQL_Update As String = "UPDATE TB_SERVICE_TRANSACTION SET CUS_ID=" & CUS_ID & " WHERE TXN_ID=" & TXN_ID
-                    BL.ExecuteNonQuery(SQL)
+                    BL.ExecuteNonQuery(SQL_Update)
 
                     Response.Redirect("Device_Payment.aspx?SIM_ID=" & SIM_ID)
                 Else
