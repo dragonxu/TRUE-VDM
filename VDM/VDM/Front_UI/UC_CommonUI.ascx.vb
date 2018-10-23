@@ -7,11 +7,14 @@ Public Class UC_CommonUI
 
     Public ReadOnly Property KO_ID
         Get
-            Try
+
+            If Not IsNothing(Request.QueryString("KO_ID")) AndAlso IsNumeric(Request.QueryString("KO_ID")) Then
+                Return Request.QueryString("KO_ID")
+            ElseIf Not IsNothing(Request.Cookies("KO_ID").Value) AndAlso IsNumeric(Request.Cookies("KO_ID").Value) Then
                 Return Request.Cookies("KO_ID").Value
-            Catch ex As Exception
+            Else
                 Return 0
-            End Try
+            End If
         End Get
     End Property
 

@@ -67,19 +67,7 @@
                                     <i title="฿">
                                         <asp:Label ID="lblPrice_Money" runat="server" Text="39,000"></asp:Label></i>
                                     <asp:Label ID="lblCurrency_Str" runat="server" Text="บาท"></asp:Label></h3>
-                                <asp:Panel ID="pnlScanIDCard" runat="server" Visible ="false" >
-
-                                    <uc1:UC_Scan_IDCart runat="server" ID="UC_Scan_IDCart" />
-
-
-
-                                </asp:Panel>
-                                <asp:Panel ID="pnlFace_Recognition" runat="server"  Visible ="false" >
-                                    <uc1:UC_Scan_Face_Recognition runat="server" ID="UC_Scan_Face_Recognition" />
-                                </asp:Panel>
-                                <div class="col-md-12">
-                                    <asp:Button ID="btnSkip_ScanIDCard" runat="server" class="btu true-bs" Style="background: #635b5b; padding: 0 50px 0 50px; float: right; margin-top: 100px;" Text="ข้าม" Visible="false"  />
-                                </div>
+                                
 
                             </div>
                         </div>
@@ -165,21 +153,15 @@
 
         <div id="popupVerifing" runat ="server" >
           <div class="popup-frame">
-            <h3 class="true-m">กำลังดำเนินการตรวจสอบ</h3>
+            <h3 class="true-m">กำลังตรวจสอบความตรงกันของใบหน้า</h3>
             <div class="icon"><img src="images/Popup/icon-scanface.png"/></div>
             <h4 class="true-b">กรุณารอสักครู่</h4>
           </div>
         </div><a id="clickVerifing" href="#popupVerifing" style="display:none;">Click</a>
 
-
-
-
-       
-       
-
-             <div id="popupCannotVerify" class="popup" runat ="server"  >
+        <div id="popupCannotVerify" class="popup" runat ="server"  >
             <div class="popup-frame" >
-                <h3 class="true-m" id="idCardAlertReason">ขออภัย ระบบไม่สามารถอ่านใบหน้าได้</h3>
+                <h3 class="true-m" id="idCardAlertReason">ขออภัย ใบหน้าไม่ตรงกับบัตร</h3>
                 <div class="icon"><img src="images/Popup/icon-warning-face.png"/></div>
                 <h4 class="true-b">กรุณาสแกนใบหน้าอีกครั้ง</h4>
                 <div class="bottom"><a class="btu true-l" onclick="backToScan();" href="javascript:;">ตกลง</a></div>

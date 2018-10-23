@@ -38,8 +38,8 @@ Public Class Thank_You
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Not IsPostBack Then
-            Response.Cookies("KO_ID").Value = 1
-            Session("TXN_ID") = 83 ' Test True Money
+            'Response.Cookies("KO_ID").Value = 1
+            'Session("TXN_ID") = 83 ' Test True Money
             'Session("TXN_ID") = 65 ' Test Cash
             'Session("TXN_ID") = 196 ' CreditCard
 
@@ -62,24 +62,6 @@ Public Class Thank_You
         Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
         DA.Fill(DT)
         If DT.Rows.Count = 0 OrElse IsDBNull(DT.Rows(0).Item("METHOD_ID")) Then Exit Sub
-        ''----------------- Check Print Method ID----------------
-        'Dim content As String = ""
-        'Select Case DT.Rows(0).Item("METHOD_ID")
-        '    Case VDM_BL.PaymentMethod.CASH
-        '        content = BL.GEN_CASH_CONFIRMATION_SLIP(TXN_ID)
-        '        BL.UPDATE_CONFIRMATION_SLIP(TXN_ID, content)
-        '    Case VDM_BL.PaymentMethod.TRUE_MONEY
-        '        content = BL.GEN_TMN_CONFIRMATION_SLIP(TXN_ID)
-        '        BL.UPDATE_CONFIRMATION_SLIP(TXN_ID, content)
-        '    Case VDM_BL.PaymentMethod.CREDIT_CARD
-        '        content = BL.GEN_CREDITCARD_CONFIRMATION_SLIP(TXN_ID)
-        '        BL.UPDATE_CONFIRMATION_SLIP(TXN_ID, content)
-        'End Select
-        ''----------------- set Print Content ----------------
-        'txtPrintContent.Text = Replace(Replace(content, "<", "&lt"), ">", "&gt")
-
-        ''----------------- Update PrinterStock---------------
-        'BL.UPDATE_KIOSK_DEVICE_TRANSACTION_STOCK(KO_ID, TXN_ID, VDM_BL.Device.Printer, -1)
 
         Dim Script As String = "setTimeout( function(){ printSlip(" & TXN_ID & "); } , 1000);"
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Print", Script, True)

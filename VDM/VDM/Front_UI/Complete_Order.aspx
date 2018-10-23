@@ -12,8 +12,12 @@
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/bootstrap-select.css" rel="stylesheet">
+    <link href="css/true-popup.css" rel="stylesheet" type="text/css" />
+    <link href="css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+
     <script type="text/javascript" src="../Scripts/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/jquery.fancybox.js"></script>
     <script type="text/javascript" src="../Scripts/extent.js"></script>
 
     <style>
@@ -92,7 +96,7 @@
                                     <asp:Button ID="btnValidatePrepaid" runat="server" Style="display: none;" />
                                 </div>
 
-                                <asp:Panel ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" Style="position: fixed; left: -500px; top: 100px;">
+                                <asp:Panel ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" Style="position: fixed; left: 500px; top: 100px;">
                                     <asp:TextBox ID="txtBarcode" runat="server"></asp:TextBox>
                                     <asp:Button ID="btnBarcode" runat="server" />
                                     <button type="button" id="btnFocus" value="focus" />
@@ -166,20 +170,26 @@
                     </asp:Panel>
 
 
-                    <div id="popupCannotRegister" class="popup" runat="server" visible="false">
+                    <div id="popupCannotRegister" class="popup">
                         <div class="popup-frame">
                             <h3 class="true-m" id="idCardAlertReason">ขออภัย ระบบไม่สามารถลงทะเบียนซิมได้</h3>
-                            <div class="icon">
-                                <img src="images/Popup/icon-warning-face.png" /></div>
-                            <div class="bottom"><a class="btu true-l" id="lnkprint" runat="server">ตกลง</a></div>
+                            <div class="icon"><img src="images/Popup/icon-warning-face.png" /></div>
+                            <h4 class="true-b"><asp:Label ID="lblMSG" runat ="server" ></asp:Label></h4>
+                            <div class="bottom">
+                                <a class="btu true-l" id="lnkprint" runat="server">ตกลง</a>
+                            </div>
                         </div>
                     </div>
+                    <a id="clickCannotRegister" style="display:none;"  href="#popupCannotRegister">Click</a>
+
 
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>
 
         <script type="text/javascript">
+
+            $("#clickCannotRegister").fancybox();
 
             function pickProduct() {
                 // Gen URL
@@ -213,7 +223,7 @@
                 body.appendChild(script);
             }
 
-
+            
             function pulled(status) {
                 if (status == 'true') {
                     rotateSIMToScan();
@@ -228,6 +238,7 @@
                 script.src = url;
                 var body = document.getElementsByTagName('body')[0];
                 body.appendChild(script);
+                $('#txtBarcode').change(breakSIMSlot);
                 $('#txtBarcode').focus();
             }
 
