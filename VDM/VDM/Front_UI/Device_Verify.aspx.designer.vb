@@ -68,51 +68,6 @@ Partial Public Class Device_Verify
     Protected WithEvents lblCurrency_Str As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''pnlScanIDCard control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnlScanIDCard As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
-    '''UC_Scan_IDCart control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents UC_Scan_IDCart As Global.VDM.UC_Scan_IDCart
-    
-    '''<summary>
-    '''pnlFace_Recognition control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnlFace_Recognition As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
-    '''UC_Scan_Face_Recognition control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents UC_Scan_Face_Recognition As Global.VDM.UC_Scan_Face_Recognition
-    
-    '''<summary>
-    '''btnSkip_ScanIDCard control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnSkip_ScanIDCard As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
     '''lnkHome control.
     '''</summary>
     '''<remarks>
