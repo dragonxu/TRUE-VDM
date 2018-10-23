@@ -203,17 +203,11 @@ Public Class Device_Verify
             result = BackEndInterface.Get_Result(SHOP_CODE, id_number.Text, Face_cust_certificate.Text, Face_cust_capture.Text, SEQ_Face_Recognition)
 
             If Not IsNothing(result.response_data) Then
-                'If result.status = "SUCCESSFUL" Then
                 If result.response_data.face_recognition_result.ToLower = "pass" Then
 
                     ' ไปหน้าเริ่มจ่ายตัง
-                    ' Insert ข้อมูลเข้า TB_CUSTOMER
-                    Dim SQL As String = "SELECT * FROM TB_CUSTOMER WHERE 1=1 "
-                    If CUS_PID.Text <> "" Then
-                        SQL &= " AND CUS_PID=" & CUS_PID.Text
-                    ElseIf CUS_PASSPORT_ID.Text <> "" Then
-                        SQL &= " AND CUS_PASSPORT_ID=" & CUS_PASSPORT_ID.Text
-                    End If
+                    ' Insert ข้อมูลเข้า TB_CUSTOMER โดยสร้างรายการใหม่ทุกครั้ง
+                    Dim SQL As String = "SELECT * FROM TB_CUSTOMER WHERE 0=1"
 
                     Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
                     Dim DT As New DataTable
@@ -225,21 +219,20 @@ Public Class Device_Verify
                         DT.Rows.Add(DR)
                         CUS_ID = BL.Get_NewID("TB_CUSTOMER", "CUS_ID")
                         DR("CUS_ID") = CUS_ID
-                    Else
-                        DR = DT.Rows(0)
+
+                        DR("CUS_TITLE") = CUS_TITLE.Text
+                        DR("CUS_NAME") = CUS_NAME.Text
+                        DR("CUS_SURNAME") = CUS_SURNAME.Text
+                        DR("NAT_CODE") = NAT_CODE.Text
+                        DR("CUS_GENDER") = CUS_GENDER.Text
+                        DR("CUS_BIRTHDATE") = CUS_BIRTHDATE.Text
+                        DR("CUS_PID") = IIf(CUS_PID.Text <> "", CUS_PID.Text, DBNull.Value)
+                        DR("CUS_PASSPORT_ID") = IIf(CUS_PASSPORT_ID.Text <> "", CUS_PASSPORT_ID.Text, DBNull.Value)
+                        DR("CUS_PASSPORT_START") = IIf(CUS_PASSPORT_START.Text <> "", CUS_PASSPORT_START.Text, DBNull.Value)
+                        DR("CUS_PASSPORT_EXPIRE") = IIf(CUS_PASSPORT_EXPIRE.Text <> "", CUS_PASSPORT_EXPIRE.Text, DBNull.Value)
+                        DR("CUS_IMAGE") = CUS_IMAGE
+                        DR("Update_Time") = Now
                     End If
-                    DR("CUS_TITLE") = CUS_TITLE.Text
-                    DR("CUS_NAME") = CUS_NAME.Text
-                    DR("CUS_SURNAME") = CUS_SURNAME.Text
-                    DR("NAT_CODE") = NAT_CODE.Text
-                    DR("CUS_GENDER") = CUS_GENDER.Text
-                    DR("CUS_BIRTHDATE") = CUS_BIRTHDATE.Text
-                    DR("CUS_PID") = IIf(CUS_PID.Text <> "", CUS_PID.Text, DBNull.Value)
-                    DR("CUS_PASSPORT_ID") = IIf(CUS_PASSPORT_ID.Text <> "", CUS_PASSPORT_ID.Text, DBNull.Value)
-                    DR("CUS_PASSPORT_START") = IIf(CUS_PASSPORT_START.Text <> "", CUS_PASSPORT_START.Text, DBNull.Value)
-                    DR("CUS_PASSPORT_EXPIRE") = IIf(CUS_PASSPORT_EXPIRE.Text <> "", CUS_PASSPORT_EXPIRE.Text, DBNull.Value)
-                    DR("CUS_IMAGE") = CUS_IMAGE
-                    DR("Update_Time") = Now
                     Dim cmd As New SqlCommandBuilder(DA)
                     Try
                         DA.Update(DT)

@@ -298,6 +298,7 @@
     <Content Include="images\avatar.jpg" />
     <Content Include="images\avatar.png" />
     <Content Include="images\BlackDot.png" />
+    <Content Include="images\BlankIcon.png" />
     <Content Include="images\default-avatar.png" />
     <Content Include="images\Icon\alert.gif" />
     <Content Include="images\Icon\black\account.png" />
@@ -519,7 +520,9 @@
     <Content Include="images\Icon\white\wifi.png" />
     <Content Include="images\Logo128x128.png" />
     <Content Include="images\Logo320x55.png" />
+    <Content Include="images\Logo320x55_White.png" />
     <Content Include="images\Logo500x83.png" />
+    <Content Include="images\Logo500x83_White.png" />
     <Content Include="images\Logo70x55.png" />
     <Content Include="images\offline.png" />
     <Content Include="images\online.png" />
