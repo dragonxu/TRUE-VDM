@@ -184,8 +184,9 @@ Public Class VDM_BL
                 Return ""
         End Select
     End Function
-
+#Region "CUSTOMER"
     Public Class Customer_IDCard
+        Public CUS_ID As Integer = 0
         Public Citizenid As String = ""
         Public Th_Prefix As String = ""
         Public Th_Firstname As String = ""
@@ -210,9 +211,14 @@ Public Class VDM_BL
         Public Expire As DateTime = DateTime.FromOADate(0)
         Public Photo As String = ""
         Public FaceCamera As String = ""
+        Public Face_Recognition_Result As String = ""
+        Public Confident_Ratio As String = ""
+        Public Face_Certificate_ID As String = ""
+        Public Face_Capture_ID As String = ""
     End Class
 
     Public Class Customer_Passport
+        Public CUS_ID As Integer = 0
         Public FirstName As String = ""
         Public MiddleName As String = ""
         Public LastName As String = ""
@@ -227,58 +233,200 @@ Public Class VDM_BL
         Public MRZ As String = ""
         Public Photo As String = ""
         Public FaceCamera As String = ""
+        Public Face_Recognition_Result As String = ""
+        Public Confident_Ratio As String = ""
+        Public Face_Certificate_ID As String = ""
+        Public Face_Capture_ID As String = ""
     End Class
 
+    Public Sub SAVE_CUSTOMER_IDCard(ByRef CUSTOMER As Customer_IDCard, ByVal TXN_ID As Integer)
 
-    Public Class DialogImage
+        On Error Resume Next
 
-        Public Property ModeAccept_Contact As Accept_Contact_EMP
-        Public Property ModeID_Card As ID_Card
-        Public Property ModeCredit_Card As Credit_Card
-        Public Property ModeTruemoney As TrueMoney
-        Public Property ModeFace As Face
-        Public Property ModeCash As Cash
-        Public Property ModeCoin As String = "images/Warning_Coin.png"
+        Dim SQL As String = "SELECT TOP 1 * FROM TB_CUSTOMER_DOC WHERE CUS_ID=" & CUSTOMER.CUS_ID
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
 
-        Public Class Accept_Contact_EMP
-            Public Property Alert_Show As String = "images/Confirm_Contact_CUST.png"
+        Dim DR As DataRow
+        If DT.Rows.Count = 0 Then
+            DR = DT.NewRow
+            DT.Rows.Add(DR)
+            DR("CUS_ID") = Get_NewID("TB_CUSTOMER_DOC", "CUS_ID")
+            CUSTOMER.CUS_ID = DR("CUS_ID")
+        Else
+            DR = DT.Rows(0)
+        End If
 
-        End Class
+        DR("Th_Prefix") = CUSTOMER.Th_Prefix
+        DR("Th_Firstname") = CUSTOMER.Th_Firstname
+        DR("Th_Middlename") = CUSTOMER.Th_Middlename
+        DR("Th_Lastname") = CUSTOMER.Th_Lastname
+        DR("En_Prefix") = CUSTOMER.En_Prefix
+        DR("En_Firstname") = CUSTOMER.En_Firstname
+        DR("En_Middlename") = CUSTOMER.En_Middlename
+        DR("En_Lastname") = CUSTOMER.En_Lastname
+        DR("Sex") = CUSTOMER.Sex
+        DR("Birthday") = CUSTOMER.Birthday
+        DR("Nationality") = "THA"
+        DR("DocType") = "I"
+        DR("PassportNo") = DBNull.Value
+        DR("PersonalID") = CUSTOMER.Citizenid
+        DR("MRZ") = DBNull.Value
+        DR("Address") = CUSTOMER.Address
+        DR("addrHouseNo") = CUSTOMER.addrHouseNo
+        DR("addrVillageNo") = CUSTOMER.addrVillageNo
+        DR("addrLane") = CUSTOMER.addrLane
+        DR("addrRoad") = CUSTOMER.addrRoad
+        DR("addrTambol") = CUSTOMER.addrTambol
+        DR("addrAmphur") = CUSTOMER.addrAmphur
+        DR("addrProvince") = CUSTOMER.addrProvince
+        DR("Issue") = CUSTOMER.Issue
+        DR("Issuer") = CUSTOMER.Issuer
+        DR("IssueCountry") = "THA"
+        DR("Expire") = CUSTOMER.Expire
+        DR("DocPhoto") = CUSTOMER.Photo
+        DR("FaceCamera") = CUSTOMER.FaceCamera
+        DR("Face_Recognition_Result") = CUSTOMER.Face_Recognition_Result
+        DR("Confident_Ratio") = CUSTOMER.Confident_Ratio
+        DR("Face_Certificate_ID") = CUSTOMER.Face_Certificate_ID
+        DR("Face_Capture_ID") = CUSTOMER.Face_Capture_ID
+        DR("Update_Time") = Now
 
-        Public Class ID_Card
-            Public Property Alert_Error As String = "images/Error_ID_Card.png"
-            Public Property Alert_Repeat As String = "images/Rescan_ID_Card.png"
-            Public Property Alert_Warning As String = "images/Warning_ID_Card.png"
-            Public Property Alert_Success As String = "images/pic-idcard2.png"
-            Public Property Alert_Show As String = "images/pic-idcard.png"
+        Dim cmd As New SqlCommandBuilder(DA)
+        DA.Update(DT)
+        '----------------- Save TB_SERVICE_TRANSACTION ------------
+        SQL = "SELECT TOP 1 * FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
+        DA = New SqlDataAdapter(SQL, ConnectionString)
+        DT = New DataTable
+        DA.Fill(DT)
+        If DT.Rows.Count = 0 Then Exit Sub
+        DT.Rows(0).Item("CUS_ID") = CUSTOMER.CUS_ID
+        cmd = New SqlCommandBuilder(DA)
+        DA.Update(DT)
 
-        End Class
+    End Sub
 
-        Public Class Credit_Card
-            Public Property Alert_Warning As String = "images/Warning_Credit.png"
-            Public Property Alert_Show As String = "images/icon-credit.png"
-        End Class
+    Public Sub SAVE_CUSTOMER_Passport(ByRef CUSTOMER As Customer_Passport, ByVal TXN_ID As Integer)
 
-        Public Class TrueMoney
-            Public Property Alert_Warning As String = "images/Warning_Truemoney.png"
-            Public Property Alert_Show As String = "images/icon-truemoney.png"
-        End Class
+        On Error Resume Next
 
-        Public Class Face
-            Public Property Alert_Warning As String = "images/Warning_Face.png"
-            Public Property Alert_Show As String = "images/pic-scanface.png"
+        Dim SQL As String = "SELECT TOP 1 * FROM TB_CUSTOMER_DOC WHERE CUS_ID=" & CUSTOMER.CUS_ID
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
 
-        End Class
+        Dim DR As DataRow
+        If DT.Rows.Count = 0 Then
+            DR = DT.NewRow
+            DT.Rows.Add(DR)
+            DR("CUS_ID") = Get_NewID("TB_CUSTOMER_DOC", "CUS_ID")
+            CUSTOMER.CUS_ID = DR("CUS_ID")
+        Else
+            DR = DT.Rows(0)
+        End If
 
-        Public Class Cash
-            Public Property Alert_Error As String = "images/Error_Recieve_Cash.png"
-            Public Property Alert_Repeat As String = "images/Rescan_ID_Card.png"
-            Public Property Alert_Show As String = "images/icon-cash.png"
+        DR("Th_Prefix") = DBNull.Value
+        DR("Th_Firstname") = DBNull.Value
+        DR("Th_Middlename") = DBNull.Value
+        DR("Th_Lastname") = DBNull.Value
+        DR("En_Prefix") = DBNull.Value
+        DR("En_Firstname") = CUSTOMER.FirstName
+        DR("En_Middlename") = CUSTOMER.MiddleName
+        DR("En_Lastname") = CUSTOMER.LastName
+        DR("Sex") = CUSTOMER.Sex
+        DR("Birthday") = CUSTOMER.DateOfBirth
+        DR("Nationality") = CUSTOMER.Nationality
+        DR("DocType") = "P"
+        DR("PassportNo") = CUSTOMER.PassportNo
+        DR("PersonalID") = CUSTOMER.PersonalID
+        DR("MRZ") = CUSTOMER.MRZ
+        DR("Address") = DBNull.Value
+        DR("addrHouseNo") = DBNull.Value
+        DR("addrVillageNo") = DBNull.Value
+        DR("addrLane") = DBNull.Value
+        DR("addrRoad") = DBNull.Value
+        DR("addrTambol") = DBNull.Value
+        DR("addrAmphur") = DBNull.Value
+        DR("addrProvince") = DBNull.Value
+        DR("Issue") = DBNull.Value
+        DR("Issuer") = DBNull.Value
+        DR("IssueCountry") = CUSTOMER.IssueCountry
+        DR("Expire") = CUSTOMER.Expire
+        DR("DocPhoto") = CUSTOMER.Photo
+        DR("FaceCamera") = CUSTOMER.FaceCamera
+        DR("Face_Recognition_Result") = CUSTOMER.Face_Recognition_Result
+        DR("Confident_Ratio") = CUSTOMER.Confident_Ratio
+        DR("Face_Certificate_ID") = CUSTOMER.Face_Certificate_ID
+        DR("Face_Capture_ID") = CUSTOMER.Face_Capture_ID
+        DR("Update_Time") = Now
+
+        Dim cmd As New SqlCommandBuilder(DA)
+        DA.Update(DT)
+        '----------------- Save TB_SERVICE_TRANSACTION ------------
+        SQL = "SELECT TOP 1 * FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
+        DA = New SqlDataAdapter(SQL, ConnectionString)
+        DT = New DataTable
+        DA.Fill(DT)
+        If DT.Rows.Count = 0 Then Exit Sub
+        DT.Rows(0).Item("CUS_ID") = CUSTOMER.CUS_ID
+        cmd = New SqlCommandBuilder(DA)
+        DA.Update(DT)
+
+    End Sub
+
+#End Region
+
+    'Public Class DialogImage
+
+    '    Public Property ModeAccept_Contact As Accept_Contact_EMP
+    '    Public Property ModeID_Card As ID_Card
+    '    Public Property ModeCredit_Card As Credit_Card
+    '    Public Property ModeTruemoney As TrueMoney
+    '    Public Property ModeFace As Face
+    '    Public Property ModeCash As Cash
+    '    Public Property ModeCoin As String = "images/Warning_Coin.png"
+
+    '    Public Class Accept_Contact_EMP
+    '        Public Property Alert_Show As String = "images/Confirm_Contact_CUST.png"
+
+    '    End Class
+
+    '    Public Class ID_Card
+    '        Public Property Alert_Error As String = "images/Error_ID_Card.png"
+    '        Public Property Alert_Repeat As String = "images/Rescan_ID_Card.png"
+    '        Public Property Alert_Warning As String = "images/Warning_ID_Card.png"
+    '        Public Property Alert_Success As String = "images/pic-idcard2.png"
+    '        Public Property Alert_Show As String = "images/pic-idcard.png"
+
+    '    End Class
+
+    '    Public Class Credit_Card
+    '        Public Property Alert_Warning As String = "images/Warning_Credit.png"
+    '        Public Property Alert_Show As String = "images/icon-credit.png"
+    '    End Class
+
+    '    Public Class TrueMoney
+    '        Public Property Alert_Warning As String = "images/Warning_Truemoney.png"
+    '        Public Property Alert_Show As String = "images/icon-truemoney.png"
+    '    End Class
+
+    '    Public Class Face
+    '        Public Property Alert_Warning As String = "images/Warning_Face.png"
+    '        Public Property Alert_Show As String = "images/pic-scanface.png"
+
+    '    End Class
+
+    '    Public Class Cash
+    '        Public Property Alert_Error As String = "images/Error_Recieve_Cash.png"
+    '        Public Property Alert_Repeat As String = "images/Rescan_ID_Card.png"
+    '        Public Property Alert_Show As String = "images/icon-cash.png"
 
 
-        End Class
+    '    End Class
 
-    End Class
+    'End Class
+
 
     Public Function Get_Site_Icon_Path(ByVal SITE_ID As Integer) As String
         Return PicturePath & "\Site\" & SITE_ID

@@ -323,6 +323,8 @@ Public Class Device_Shoping_Cart
             cus.Photo = id_Photo.Text
 
             Customer_IDCard = cus
+            '--------------------- save ลง Database : TB_CUSTOMER_DOC----------------
+            BL.SAVE_CUSTOMER_IDCard(Customer_IDCard, TXN_ID)
         Else
             Dim cus As New VDM_BL.Customer_Passport
 
@@ -349,6 +351,8 @@ Public Class Device_Shoping_Cart
             cus.MRZ = pass_MRZ.Text.Replace("&lt", "<")
             cus.Photo = pass_Photo.Text
             Customer_Passport = cus
+            '--------------------- save ลง Database : TB_CUSTOMER_DOC----------------
+            BL.SAVE_CUSTOMER_Passport(cus, TXN_ID)
         End If
 
         '------------- Clear Textbox Improve Postback Performance--------------
@@ -394,8 +398,6 @@ Public Class Device_Shoping_Cart
         Dim Script As String = "triggerCamera();"
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "ToCamera", Script, True)
 
-
-        'Response.Redirect("Device_Verify.aspx?SIM_ID=" & SIM_ID)
     End Sub
 
     Private Sub ResponseIDCardExpired()
@@ -438,8 +440,10 @@ Public Class Device_Shoping_Cart
 
         If LANGUAGE = VDM_BL.UILanguage.TH Then
             Customer_IDCard.FaceCamera = txtCamData.Text
+            BL.SAVE_CUSTOMER_IDCard(Customer_IDCard, TXN_ID)
         Else
             Customer_Passport.FaceCamera = txtCamData.Text
+            BL.SAVE_CUSTOMER_Passport(Customer_Passport, TXN_ID)
         End If
         Response.Redirect("Device_Verify.aspx?SIM_ID=" & SIM_ID)
     End Sub

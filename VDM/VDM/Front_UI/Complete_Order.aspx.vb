@@ -206,6 +206,31 @@ Public Class Complete_Order
         End Set
     End Property
 
+    Public Property Customer_IDCard As VDM_BL.Customer_IDCard
+        Get
+            If IsNothing(Session("Customer_IDCard")) Then
+                Session("Customer_IDCard") = New VDM_BL.Customer_IDCard
+            End If
+            Return Session("Customer_IDCard")
+        End Get
+        Set(value As VDM_BL.Customer_IDCard)
+            Session("Customer_IDCard") = value
+        End Set
+    End Property
+
+
+    Public Property Customer_Passport As VDM_BL.Customer_Passport
+        Get
+            If IsNothing(Session("Customer_Passport")) Then
+                Session("Customer_Passport") = New VDM_BL.Customer_Passport
+            End If
+            Return Session("Customer_Passport")
+        End Get
+        Set(value As VDM_BL.Customer_Passport)
+            Session("Customer_Passport") = value
+        End Set
+    End Property
+
 #End Region
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -377,6 +402,10 @@ Public Class Complete_Order
 
     Private Function fn_Register() As Boolean
         If LANGUAGE = VDM_BL.UILanguage.TH Then
+
+            '------ ใช้ Customer_IDCard ได้เลยไม่ต้องประกาศ cus อีก
+            '------ ใน Customer_IDCard มี CUS_ID ซึ่งคือ ID ของตาราง TB_CUSTOMER_DOC
+            '------ ค่าที่อยู่ใน Customer_IDCard ก็เหมือนค่าที่ Save ในตาราง
             Dim cus As New VDM_BL.Customer_IDCard
             If Not IsNothing(Session("Customer_IDCard")) Then
                 cus = Session("Customer_IDCard")
@@ -386,14 +415,19 @@ Public Class Complete_Order
             Face_cust_capture.Text = cus.FaceCamera
             USER_ID.Text = SHIFT_OPEN_BY
         Else
+
+            '------ ใช้ Customer_Passport ได้เลยไม่ต้องประกาศ cus อีก
+            '------ ใน Customer_Passport มี CUS_ID ซึ่งคือ ID ของตาราง TB_CUSTOMER_DOC
+            '------ ค่าที่อยู่ใน Customer_Passport ก็เหมือนค่าที่ Save ในตาราง
             Dim cus As New VDM_BL.Customer_Passport
             If Not IsNothing(Session("Customer_Passport")) Then
                 cus = Session("Customer_Passport")
             End If
 
-            USER_ID.Text = SHIFT_OPEN_BY
             Face_cust_certificate.Text = cus.Photo
             Face_cust_capture.Text = cus.FaceCamera
+            USER_ID.Text = SHIFT_OPEN_BY
+
 
         End If
 
@@ -405,6 +439,9 @@ Public Class Complete_Order
         Dim ResponseCommand As New BackEndInterface.Register.Command_Result
         Dim Result As Boolean = False
         Try
+            '----------- เริ่มไล่จากตรงนี้นะ 
+            '---- Customer_IDCard.CUS_ID คือ ข้อมูลลูกค้าในตาราง TB_CUSTOMER_DOC
+            '---- Customer_Passport.CUS_ID คือ ข้อมูลลูกค้าในตาราง TB_CUSTOMER_DOC
             Result = BackEndInterface.Get_Result(Face_cust_certificate.Text, Face_cust_capture.Text, SIM_SERIAL, KO_ID, USER_ID.Text, TXN_ID, LANGUAGE, Session("Customer_IDCard"), Session("Customer_Passport"))
 
             If Result Then

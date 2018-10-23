@@ -291,9 +291,6 @@
     <Content Include="Front_UI\Device_Product_Detail.aspx" />
     <Content Include="Front_UI\Thank_You.aspx" />
     <Content Include="Front_UI\UC_CommonUI.ascx" />
-    <Content Include="Front_UI\UC_Dialog.ascx" />
-    <Content Include="Front_UI\UC_Scan_Face_Recognition.ascx" />
-    <Content Include="Front_UI\UC_Scan_IDCart.ascx" />
     <Content Include="Global.asax" />
     <Content Include="images\avatar.jpg" />
     <Content Include="images\avatar.png" />
@@ -840,27 +837,6 @@
     </Compile>
     <Compile Include="Front_UI\UC_CommonUI.ascx.vb">
       <DependentUpon>UC_CommonUI.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Front_UI\UC_Dialog.ascx.designer.vb">
-      <DependentUpon>UC_Dialog.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Front_UI\UC_Dialog.ascx.vb">
-      <DependentUpon>UC_Dialog.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Front_UI\UC_Scan_Face_Recognition.ascx.designer.vb">
-      <DependentUpon>UC_Scan_Face_Recognition.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Front_UI\UC_Scan_Face_Recognition.ascx.vb">
-      <DependentUpon>UC_Scan_Face_Recognition.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Front_UI\UC_Scan_IDCart.ascx.designer.vb">
-      <DependentUpon>UC_Scan_IDCart.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Front_UI\UC_Scan_IDCart.ascx.vb">
-      <DependentUpon>UC_Scan_IDCart.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Machine_Console\MasterStaffConsole.Master.designer.vb">

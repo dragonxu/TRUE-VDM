@@ -1,9 +1,5 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Device_Verify.aspx.vb" Inherits="VDM.Device_Verify" %>
 
-<%@ Register Src="~/Front_UI/UC_Scan_IDCart.ascx" TagPrefix="uc1" TagName="UC_Scan_IDCart" %>
-<%@ Register Src="~/Front_UI/UC_Scan_Face_Recognition.ascx" TagPrefix="uc1" TagName="UC_Scan_Face_Recognition" %>
-
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -97,10 +93,7 @@
 
 
         <div style="position: absolute; top: 300px; right: 100px; display: none;" class="row">
-            <%--<div style="display: block;" class="col-lg-3">
-                                                Partner_code :
-                                                <asp:TextBox ID="partner_code" runat="server" AutoPostBack ="true" ></asp:TextBox>
-                                            </div>--%>
+
             <div style="display: block;" class="col-lg-3">
                 ID_number :<asp:TextBox ID="id_number" runat="server" AutoPostBack="true"></asp:TextBox>
             </div>
@@ -151,7 +144,7 @@
 
 
 
-        <div id="popupVerifing" runat ="server" >
+        <div id="popupVerifing" class="popup">
           <div class="popup-frame">
             <h3 class="true-m">กำลังตรวจสอบความตรงกันของใบหน้า</h3>
             <div class="icon"><img src="images/Popup/icon-scanface.png"/></div>
@@ -159,7 +152,7 @@
           </div>
         </div><a id="clickVerifing" href="#popupVerifing" style="display:none;">Click</a>
 
-        <div id="popupCannotVerify" class="popup" runat ="server"  >
+        <div id="popupCannotVerify" class="popup">
             <div class="popup-frame" >
                 <h3 class="true-m" id="idCardAlertReason">ขออภัย ใบหน้าไม่ตรงกับบัตร</h3>
                 <div class="icon"><img src="images/Popup/icon-warning-face.png"/></div>
@@ -168,6 +161,14 @@
             </div>
         </div> <a id="clickCannotVerify" href="#popupCannotVerify" style="display:none;">Click</a>
  
+        <div id="popupNetworkProblem" class="popup">
+            <div class="popup-frame" >
+                <h3 class="true-m" id="idCardAlertReason">ไม่สามารถเชื่อมต่อระบบเครือข่าย</h3>
+                <div class="icon"><img src="images/Popup/icon-warning-face.png"/></div>
+                <h4 class="true-b">กรุณาสแกนใบหน้าอีกครั้ง</h4>
+                <div class="bottom"><a class="btu true-l" onclick="backToScan();" href="javascript:;">ตกลง</a></div>
+            </div>
+        </div> <a id="clickNetworkProblem" href="#popupNetworkProblem" style="display:none;">Click</a>
 
         </ContentTemplate>
 </asp:UpdatePanel>
@@ -178,9 +179,16 @@
 
             $("#clickVerifing").fancybox();
             $("#clickCannotVerify").fancybox();
-
+            $("#clickNetworkProblem").fancybox();
 
             function showFaceProblem() {
+                $('#clickNetworkProblem').click();
+                $('#popupNetworkProblem').find(".fancybox-close").on('click', function () {
+                    backToScan();
+                });
+            }
+
+            function showNetworkProblem() {
                 $('#clickCannotVerify').click();
                 $('#popupCannotVerify').find(".fancybox-close").on('click', function () {
                     backToScan();

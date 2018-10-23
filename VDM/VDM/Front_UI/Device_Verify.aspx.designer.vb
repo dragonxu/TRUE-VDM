@@ -228,22 +228,4 @@ Partial Public Class Device_Verify
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnFace_Recognition As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''popupVerifing control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents popupVerifing As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''popupCannotVerify control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents popupCannotVerify As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 End Class

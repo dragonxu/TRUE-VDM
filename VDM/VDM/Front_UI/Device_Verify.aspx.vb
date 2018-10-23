@@ -114,11 +114,11 @@ Public Class Device_Verify
 
     End Sub
 
-    Private Sub btnSkip_ScanIDCard_Click(sender As Object, e As EventArgs) Handles btnSkip_ScanIDCard.Click
-        'pnlScanIDCard.Visible = False  เป็นการซื้อ Device แต่ไม่ Scan บัตร User กดเอง
-        'pnlScanIDCard.Visible = False
-        Response.Redirect("Device_Payment.aspx?SIM_ID=" & SIM_ID)
-    End Sub
+    'Private Sub btnSkip_ScanIDCard_Click(sender As Object, e As EventArgs) Handles btnSkip_ScanIDCard.Click
+    '    'pnlScanIDCard.Visible = False  เป็นการซื้อ Device แต่ไม่ Scan บัตร User กดเอง
+    '    'pnlScanIDCard.Visible = False
+    '    Response.Redirect("Device_Payment.aspx?SIM_ID=" & SIM_ID)
+    'End Sub
 
     'Private Sub btnStart_Take_Photos_Click(sender As Object, e As EventArgs) Handles btnStart_Take_Photos.Click
     '    pnlScanIDCard.Visible = False
@@ -144,52 +144,44 @@ Public Class Device_Verify
 
         Dim CUS_IMAGE As Byte()
         If LANGUAGE = VDM_BL.UILanguage.TH Then
-            Dim cus As New VDM_BL.Customer_IDCard
-            If Not IsNothing(Session("Customer_IDCard")) Then
-                cus = Session("Customer_IDCard")
-            End If
 
-            id_number.Text = cus.Citizenid
-            Face_cust_certificate.Text = cus.Photo
-            Face_cust_capture.Text = cus.FaceCamera
+            id_number.Text = Customer_IDCard.Citizenid
+            Face_cust_certificate.Text = Customer_IDCard.Photo
+            Face_cust_capture.Text = Customer_IDCard.FaceCamera
 
 
-            CUS_PID.Text = cus.Citizenid
+            CUS_PID.Text = Customer_IDCard.Citizenid
 
-            CUS_TITLE.Text = cus.Th_Prefix
-            CUS_NAME.Text = cus.Th_Firstname
-            CUS_SURNAME.Text = cus.Th_Lastname
+            CUS_TITLE.Text = Customer_IDCard.Th_Prefix
+            CUS_NAME.Text = Customer_IDCard.Th_Firstname
+            CUS_SURNAME.Text = Customer_IDCard.Th_Lastname
             NAT_CODE.Text = ""
-            CUS_GENDER.Text = cus.Sex
-            CUS_BIRTHDATE.Text = cus.Birthday
+            CUS_GENDER.Text = Customer_IDCard.Sex
+            CUS_BIRTHDATE.Text = Customer_IDCard.Birthday
             CUS_PASSPORT_ID.Text = ""
             CUS_PASSPORT_START.Text = ""
             CUS_PASSPORT_EXPIRE.Text = ""
 
-            CUS_IMAGE = C.StringToByte(cus.Photo, 0)
+            CUS_IMAGE = C.StringToByte(Customer_IDCard.Photo, 0)
 
 
         Else
-            Dim cus As New VDM_BL.Customer_Passport
-            If Not IsNothing(Session("Customer_Passport")) Then
-                cus = Session("Customer_Passport")
-            End If
 
-            id_number.Text = cus.PassportNo
-            Face_cust_certificate.Text = cus.Photo
-            Face_cust_capture.Text = cus.FaceCamera
+            id_number.Text = Customer_Passport.PassportNo
+            Face_cust_certificate.Text = Customer_Passport.Photo
+            Face_cust_capture.Text = Customer_Passport.FaceCamera
 
             CUS_TITLE.Text = ""
-            CUS_NAME.Text = cus.FirstName
-            CUS_SURNAME.Text = cus.LastName
-            NAT_CODE.Text = cus.Nationality
-            CUS_GENDER.Text = cus.Sex
-            CUS_BIRTHDATE.Text = cus.DateOfBirth
-            CUS_PASSPORT_ID.Text = cus.PassportNo
+            CUS_NAME.Text = Customer_Passport.FirstName
+            CUS_SURNAME.Text = Customer_Passport.LastName
+            NAT_CODE.Text = Customer_Passport.Nationality
+            CUS_GENDER.Text = Customer_Passport.Sex
+            CUS_BIRTHDATE.Text = Customer_Passport.DateOfBirth
+            CUS_PASSPORT_ID.Text = Customer_Passport.PassportNo
             CUS_PASSPORT_START.Text = ""
-            CUS_PASSPORT_EXPIRE.Text = cus.Expire
+            CUS_PASSPORT_EXPIRE.Text = Customer_Passport.Expire
 
-            CUS_IMAGE = C.StringToByte(cus.Photo, 0)
+            CUS_IMAGE = C.StringToByte(Customer_Passport.Photo, 0)
 
         End If
 
@@ -203,71 +195,83 @@ Public Class Device_Verify
             result = BackEndInterface.Get_Result(SHOP_CODE, id_number.Text, Face_cust_certificate.Text, Face_cust_capture.Text, SEQ_Face_Recognition)
 
             If Not IsNothing(result.response_data) Then
-                'If result.status = "SUCCESSFUL" Then
+
                 If result.response_data.face_recognition_result.ToLower = "pass" Then
 
-                    ' ไปหน้าเริ่มจ่ายตัง
-                    ' Insert ข้อมูลเข้า TB_CUSTOMER
-                    Dim SQL As String = "SELECT * FROM TB_CUSTOMER WHERE 1=1 "
-                    If CUS_PID.Text <> "" Then
-                        SQL &= " AND CUS_PID=" & CUS_PID.Text
-                    ElseIf CUS_PASSPORT_ID.Text <> "" Then
-                        SQL &= " AND CUS_PASSPORT_ID=" & CUS_PASSPORT_ID.Text
-                    End If
 
-                    Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
-                    Dim DT As New DataTable
-                    DA.Fill(DT)
-                    Dim DR As DataRow
-                    Dim CUS_ID As Integer = 0
-                    If DT.Rows.Count = 0 Then
-                        DR = DT.NewRow
-                        DT.Rows.Add(DR)
-                        CUS_ID = BL.Get_NewID("TB_CUSTOMER", "CUS_ID")
-                        DR("CUS_ID") = CUS_ID
+                    If LANGUAGE = VDM_BL.UILanguage.TH Then
+                        Customer_IDCard.Face_Recognition_Result = result.response_data.face_recognition_result
+                        Customer_IDCard.Confident_Ratio = result.response_data.confident_ratio
+                        Customer_IDCard.Face_Certificate_ID = result.response_data.face_recog_cust_certificate_id
+                        Customer_IDCard.Face_Capture_ID = result.response_data.face_recog_cust_capture_id
+                        BL.SAVE_CUSTOMER_IDCard(Customer_IDCard, TXN_ID)
                     Else
-                        DR = DT.Rows(0)
+                        Customer_Passport.Face_Recognition_Result = result.response_data.face_recognition_result
+                        Customer_Passport.Confident_Ratio = result.response_data.confident_ratio
+                        Customer_Passport.Face_Certificate_ID = result.response_data.face_recog_cust_certificate_id
+                        Customer_Passport.Face_Capture_ID = result.response_data.face_recog_cust_capture_id
+                        BL.SAVE_CUSTOMER_Passport(Customer_Passport, TXN_ID)
                     End If
-                    DR("CUS_TITLE") = CUS_TITLE.Text
-                    DR("CUS_NAME") = CUS_NAME.Text
-                    DR("CUS_SURNAME") = CUS_SURNAME.Text
-                    DR("NAT_CODE") = NAT_CODE.Text
-                    DR("CUS_GENDER") = CUS_GENDER.Text
-                    DR("CUS_BIRTHDATE") = CUS_BIRTHDATE.Text
-                    DR("CUS_PID") = IIf(CUS_PID.Text <> "", CUS_PID.Text, DBNull.Value)
-                    DR("CUS_PASSPORT_ID") = IIf(CUS_PASSPORT_ID.Text <> "", CUS_PASSPORT_ID.Text, DBNull.Value)
-                    DR("CUS_PASSPORT_START") = IIf(CUS_PASSPORT_START.Text <> "", CUS_PASSPORT_START.Text, DBNull.Value)
-                    DR("CUS_PASSPORT_EXPIRE") = IIf(CUS_PASSPORT_EXPIRE.Text <> "", CUS_PASSPORT_EXPIRE.Text, DBNull.Value)
-                    DR("CUS_IMAGE") = CUS_IMAGE
-                    DR("Update_Time") = Now
-                    Dim cmd As New SqlCommandBuilder(DA)
-                    Try
-                        DA.Update(DT)
-                    Catch ex As Exception
-                        Alert(Me.Page, ex.Message)
-                        Exit Sub
-                    End Try
 
 
-                    'Update TB_SERVICE_TRANSACTION
-                    Dim SQL_Update As String = "UPDATE TB_SERVICE_TRANSACTION SET CUS_ID=" & CUS_ID & " WHERE TXN_ID=" & TXN_ID
-                    BL.ExecuteNonQuery(SQL_Update)
+                    '' ไปหน้าเริ่มจ่ายตัง
+                    '' Insert ข้อมูลเข้า TB_CUSTOMER
+                    'Dim SQL As String = "SELECT * FROM TB_CUSTOMER WHERE 1=1 "
+                    'If CUS_PID.Text <> "" Then
+                    '    SQL &= " AND CUS_PID=" & CUS_PID.Text
+                    'ElseIf CUS_PASSPORT_ID.Text <> "" Then
+                    '    SQL &= " AND CUS_PASSPORT_ID=" & CUS_PASSPORT_ID.Text
+                    'End If
+
+                    'Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+                    'Dim DT As New DataTable
+                    'DA.Fill(DT)
+                    'Dim DR As DataRow
+                    'Dim CUS_ID As Integer = 0
+                    'If DT.Rows.Count = 0 Then
+                    '    DR = DT.NewRow
+                    '    DT.Rows.Add(DR)
+                    '    CUS_ID = BL.Get_NewID("TB_CUSTOMER", "CUS_ID")
+                    '    DR("CUS_ID") = CUS_ID
+                    'Else
+                    '    DR = DT.Rows(0)
+                    'End If
+                    'DR("CUS_TITLE") = CUS_TITLE.Text
+                    'DR("CUS_NAME") = CUS_NAME.Text
+                    'DR("CUS_SURNAME") = CUS_SURNAME.Text
+                    'DR("NAT_CODE") = NAT_CODE.Text
+                    'DR("CUS_GENDER") = CUS_GENDER.Text
+                    'DR("CUS_BIRTHDATE") = CUS_BIRTHDATE.Text
+                    'DR("CUS_PID") = IIf(CUS_PID.Text <> "", CUS_PID.Text, DBNull.Value)
+                    'DR("CUS_PASSPORT_ID") = IIf(CUS_PASSPORT_ID.Text <> "", CUS_PASSPORT_ID.Text, DBNull.Value)
+                    'DR("CUS_PASSPORT_START") = IIf(CUS_PASSPORT_START.Text <> "", CUS_PASSPORT_START.Text, DBNull.Value)
+                    'DR("CUS_PASSPORT_EXPIRE") = IIf(CUS_PASSPORT_EXPIRE.Text <> "", CUS_PASSPORT_EXPIRE.Text, DBNull.Value)
+                    'DR("CUS_IMAGE") = CUS_IMAGE
+                    'DR("Update_Time") = Now
+                    'Dim cmd As New SqlCommandBuilder(DA)
+                    'Try
+                    '    DA.Update(DT)
+                    'Catch ex As Exception
+                    '    Alert(Me.Page, ex.Message)
+                    '    Exit Sub
+                    'End Try
+
+
+                    ''Update TB_SERVICE_TRANSACTION
+                    'Dim SQL_Update As String = "UPDATE TB_SERVICE_TRANSACTION SET CUS_ID=" & CUS_ID & " WHERE TXN_ID=" & TXN_ID
+                    'BL.ExecuteNonQuery(SQL_Update)
 
                     Response.Redirect("Device_Payment.aspx?SIM_ID=" & SIM_ID)
                 Else
                     SEQ_Face_Recognition = SEQ_Face_Recognition + 1
                     ' สั่งถ่ายภาพหรือ แสกนบัตรใหม่   
-                    popupVerifing.Visible = False
                     Dim Script As String = "showFaceProblem();"
                     ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Problem", Script, True)
-
-
 
                 End If
 
                 ' ไม่สามารถเชื่อมต่อ Network ได้
-                popupVerifing.Visible = False
-                Dim Script_Network As String = "showFaceProblem();"
+                Dim Script_Network As String = "showNetworkProblem();"
                 ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Problem", Script_Network, True)
             End If
 
