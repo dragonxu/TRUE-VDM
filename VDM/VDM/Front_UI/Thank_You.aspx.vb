@@ -38,8 +38,8 @@ Public Class Thank_You
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Not IsPostBack Then
-            Response.Cookies("KO_ID").Value = 1
-            Session("TXN_ID") = 83 ' Test True Money
+            'Response.Cookies("KO_ID").Value = 1
+            'Session("TXN_ID") = 83 ' Test True Money
             'Session("TXN_ID") = 65 ' Test Cash
             'Session("TXN_ID") = 196 ' CreditCard
 

@@ -239,13 +239,13 @@ Partial Public Class Complete_Order
     Protected WithEvents Message As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''popupCannotRegister control.
+    '''lblMSG control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents popupCannotRegister As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents lblMSG As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''lnkprint control.

@@ -367,7 +367,8 @@ Public Class Complete_Order
         Else
             '----------- validate Unsuccess -----------------
             '---------ถ้าไม่ผ่าน แสดง Dialog และออก Slip Error
-            popupCannotRegister.Visible = True
+            Dim Script As String = "$(""#clickCannotRegister"").click();"
+            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "register", Script, True)
         End If
 
     End Sub
@@ -412,12 +413,12 @@ Public Class Complete_Order
                 Result = False
             End If
             status.Text = ResponseCommand.Status
-            Message.Text = ResponseCommand.Message
+            lblMSG.Text = ResponseCommand.Message
 
         Catch ex As Exception
             Result = False
             status.Text = ResponseCommand.Status
-            Message.Text = ResponseCommand.Message
+            lblMSG.Text = ResponseCommand.Message
         End Try
 
         Return Result
