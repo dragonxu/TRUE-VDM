@@ -41,15 +41,6 @@ Partial Public Class Thank_You
     Protected WithEvents UDP As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
-    '''txtPrintContent control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtPrintContent As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
     '''lnkHome control.
     '''</summary>
     '''<remarks>

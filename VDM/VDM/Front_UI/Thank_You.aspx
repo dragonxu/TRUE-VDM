@@ -36,7 +36,6 @@
         </div>
       </div>
     </main>
-        <asp:TextBox ID="txtPrintContent" runat="server" TextMode="MultiLine" style="display:none;"></asp:TextBox>
     <footer style="bottom: 0px">
         <nav>
             <div class="main">
@@ -60,21 +59,13 @@
                  return target.split(search).join(replacement);
              };
 
-             //var printDelegate = function () {
-             //    var content = $('#txtPrintContent').val().replaceAll("&lt", "<").replaceAll("&gt", ">");
-             //    var url = $('#txtLocalControllerURL').val() + '/Print.aspx?Mode=Print';
-             //    var xhr = new XMLHttpRequest();
-             //    xhr.open("POST", url, true);
-             //    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-             //    xhr.send(content);
-             //}
              function printSlip(TXN_ID) {
                  var url = '../PrintContent.aspx?TXN_ID=' + TXN_ID;
                  $('#CommandTrigger').attr('src', url);
              }
              
              var redirectDelegate = function () {
-                 //$('#lnkHome').click();
+                 $('#lnkHome').click();
              }
              var waitSeconds = 15;// รอ 15 วินาที
              setTimeout(redirectDelegate, waitSeconds * 1000);
