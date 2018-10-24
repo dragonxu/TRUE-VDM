@@ -213,6 +213,7 @@ Public Class VDM_BL
         Public FaceCamera As String = ""
         Public Face_Recognition_Result As String = ""
         Public Confident_Ratio As String = ""
+        Public Face_Is_Identical As String = ""
         Public Face_Certificate_ID As String = ""
         Public Face_Capture_ID As String = ""
     End Class
@@ -235,6 +236,7 @@ Public Class VDM_BL
         Public FaceCamera As String = ""
         Public Face_Recognition_Result As String = ""
         Public Confident_Ratio As String = ""
+        Public Face_Is_Identical As String = ""
         Public Face_Certificate_ID As String = ""
         Public Face_Capture_ID As String = ""
     End Class
@@ -289,8 +291,10 @@ Public Class VDM_BL
         DR("FaceCamera") = CUSTOMER.FaceCamera
         DR("Face_Recognition_Result") = CUSTOMER.Face_Recognition_Result
         DR("Confident_Ratio") = CUSTOMER.Confident_Ratio
+        DR("Face_Is_Identical") = CUSTOMER.Face_Is_Identical
         DR("Face_Certificate_ID") = CUSTOMER.Face_Certificate_ID
         DR("Face_Capture_ID") = CUSTOMER.Face_Capture_ID
+
         DR("Update_Time") = Now
 
         Dim cmd As New SqlCommandBuilder(DA)
@@ -357,6 +361,7 @@ Public Class VDM_BL
         DR("FaceCamera") = CUSTOMER.FaceCamera
         DR("Face_Recognition_Result") = CUSTOMER.Face_Recognition_Result
         DR("Confident_Ratio") = CUSTOMER.Confident_Ratio
+        DR("Face_Is_Identical") = CUSTOMER.Face_Is_Identical
         DR("Face_Certificate_ID") = CUSTOMER.Face_Certificate_ID
         DR("Face_Capture_ID") = CUSTOMER.Face_Capture_ID
         DR("Update_Time") = Now
@@ -2414,8 +2419,8 @@ Public Class VDM_BL
 
 #End Region
 
-    Public Function GET_TXN_PREPAID_REGISTER(ByVal TXN_ID As Integer)
-        Dim SQL As String = "SELECT * FROM VW_TXN_PREPAID_REGISTER WHERE TXN_ID=" & TXN_ID
+    Public Function GET_TXN_PREPAID_REGISTER_PAID(ByVal TXN_ID As Integer)
+        Dim SQL As String = "SELECT * FROM VW_TXN_PREPAID_REGISTER_PAID WHERE TXN_ID=" & TXN_ID
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         DA.Fill(DT)

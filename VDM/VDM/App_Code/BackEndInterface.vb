@@ -1298,98 +1298,92 @@ Public Class BackEndInterface
             Dim SHOP_CODE As String = GET_SHOP_CODE(KO_ID)
             Dim Cust_Info As New CUSTOMER_INFO
 
-            Dim SQL As String = "SELECT * FROM TB_CUSTOMER WHERE CUS_ID=" & BL.GET_TXN_CUS_ID(TXN_ID)
+            Dim Base64_Certificate As String = ""
+            Dim Base64_capture As String = ""
+            Dim address_number As String = "-"
+            Dim address_moo As String = "-"
+            Dim address_village As String = "-"
+            Dim address_street As String = "-"
+            Dim address_soi As String = "-"
+            Dim address_district As String = "-"
+            Dim address_province As String = "-"
+            Dim address_building_name As String = "-"
+            Dim address_building_room As String = "-"
+            Dim address_building_floor As String = "-"
+            Dim sddress_sub_district As String = "-"
+            Dim address_zip As String = "-"
+            Dim face_recognition_result As String = "-"
+            Dim is_identical As String = "-"
+            Dim confident_ratio As String = "-"
+
+            Dim SQL As String = "SELECT * FROM TB_CUSTOMER_DOC WHERE CUS_ID=" & BL.GET_TXN_CUS_ID(TXN_ID)
             Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
             Dim DT_Customer_Info As New DataTable
             DA.Fill(DT_Customer_Info)
             If DT_Customer_Info.Rows.Count > 0 Then
+
                 Cust_Info.CUS_ID = DT_Customer_Info.Rows(0).Item("CUS_ID")
-                Cust_Info.CUS_TITLE = DT_Customer_Info.Rows(0).Item("CUS_TITLE")
-                Cust_Info.CUS_NAME = DT_Customer_Info.Rows(0).Item("CUS_NAME")
-                Cust_Info.CUS_SURNAME = DT_Customer_Info.Rows(0).Item("CUS_SURNAME")
-                Cust_Info.NAT_CODE = DT_Customer_Info.Rows(0).Item("NAT_CODE")
-                Cust_Info.CUS_GENDER = DT_Customer_Info.Rows(0).Item("CUS_GENDER")
-                Cust_Info.CUS_BIRTHDATE = DT_Customer_Info.Rows(0).Item("CUS_BIRTHDATE")
-                Cust_Info.CUS_PID = IIf(Not IsDBNull(DT_Customer_Info.Rows(0).Item("CUS_PID")), DT_Customer_Info.Rows(0).Item("CUS_PID"), "")
-                Cust_Info.CUS_PASSPORT_ID = IIf(Not IsDBNull(DT_Customer_Info.Rows(0).Item("CUS_PASSPORT_ID")), DT_Customer_Info.Rows(0).Item("CUS_PASSPORT_ID"), "")
-                Cust_Info.CUS_PASSPORT_START = DT_Customer_Info.Rows(0).Item("CUS_PASSPORT_START")
-                Cust_Info.CUS_PASSPORT_EXPIRE = DT_Customer_Info.Rows(0).Item("CUS_PASSPORT_EXPIRE")
-                'Cust_Info.CUS_IMAGE = DT_Customer_Info.Rows(0).Item("CUS_IMAGE")
+                Cust_Info.CUS_BIRTHDATE = IIf(Not IsDBNull(DT_Customer_Info.Rows(0).Item("CUS_BIRTHDATE")), DT_Customer_Info.Rows(0).Item("CUS_BIRTHDATE"), "-")
+                Cust_Info.CUS_PID = IIf(Not IsDBNull(DT_Customer_Info.Rows(0).Item("PersonalID")), DT_Customer_Info.Rows(0).Item("PersonalID"), "")
+                Cust_Info.CUS_PASSPORT_ID = IIf(Not IsDBNull(DT_Customer_Info.Rows(0).Item("PassportNo")), DT_Customer_Info.Rows(0).Item("PassportNo"), "")
+                Cust_Info.CUS_PASSPORT_EXPIRE = IIf(Not IsDBNull(DT_Customer_Info.Rows(0).Item("Expire")), DT_Customer_Info.Rows(0).Item("Expire"), "-")
+                Base64_Certificate = DT_Customer_Info.Rows(0).Item("DocPhoto").ToString
+                Base64_capture = DT_Customer_Info.Rows(0).Item("DocPhoto").ToString
+                face_recognition_result = DT_Customer_Info.Rows(0).Item("Face_Recognition_Result").ToString
+                is_identical = DT_Customer_Info.Rows(0).Item("Face_Is_Identical").ToString
+                confident_ratio = DT_Customer_Info.Rows(0).Item("Confident_Ratio").ToString
+
+                If LANGUAGE = VDM_BL.UILanguage.TH Then
+                    If Not IsNothing(Customer_IDCard) Then
+                        Cust_Info.CUS_TITLE = IIf(Not IsDBNull(DT_Customer_Info.Rows(0).Item("Th_Prefix")), DT_Customer_Info.Rows(0).Item("Th_Prefix").ToString, "-")
+                        Cust_Info.CUS_NAME = DT_Customer_Info.Rows(0).Item("Th_Firstname").ToString
+                        Cust_Info.CUS_SURNAME = DT_Customer_Info.Rows(0).Item("Th_Lastname").ToString
+                        Cust_Info.NAT_CODE = IIf(Not IsDBNull(DT_Customer_Info.Rows(0).Item("Nationality")), DT_Customer_Info.Rows(0).Item("Nationality"), "-")
+                        Cust_Info.CUS_GENDER = IIf(Not IsDBNull(DT_Customer_Info.Rows(0).Item("Sex")), DT_Customer_Info.Rows(0).Item("Sex"), "0")
+
+                        address_number = IIf(DT_Customer_Info.Rows(0).Item("addrHouseNo").ToString <> "", DT_Customer_Info.Rows(0).Item("addrHouseNo").ToString, "-")
+                        address_moo = "-"
+                        address_village = IIf(DT_Customer_Info.Rows(0).Item("addrVillageNo").ToString <> "", DT_Customer_Info.Rows(0).Item("addrVillageNo").ToString, "-")
+                        address_street = IIf(DT_Customer_Info.Rows(0).Item("addrRoad").ToString <> "", DT_Customer_Info.Rows(0).Item("addrRoad").ToString, "-")
+                        address_soi = "-"
+                        address_district = IIf(DT_Customer_Info.Rows(0).Item("addrTambol").ToString <> "", DT_Customer_Info.Rows(0).Item("addrTambol").ToString, "-")
+                        address_province = IIf(DT_Customer_Info.Rows(0).Item("addrProvince").ToString <> "", DT_Customer_Info.Rows(0).Item("addrProvince").ToString, "-")
+                        address_building_name = "-"
+                        address_building_room = "-"
+                        address_building_floor = "-"
+                        sddress_sub_district = "-"
+                        address_zip = "-"
+                    End If
+                Else
+                    If Not IsNothing(Customer_Passport) Then
+                        Cust_Info.CUS_TITLE = IIf(Not IsDBNull(DT_Customer_Info.Rows(0).Item("En_Prefix")), DT_Customer_Info.Rows(0).Item("En_Prefix").ToString, "-")
+                        Cust_Info.CUS_NAME = DT_Customer_Info.Rows(0).Item("En_Firstname").ToString
+                        Cust_Info.CUS_SURNAME = DT_Customer_Info.Rows(0).Item("En_Lastname").ToString
+                        Cust_Info.NAT_CODE = IIf(Not IsDBNull(DT_Customer_Info.Rows(0).Item("Nationality")), DT_Customer_Info.Rows(0).Item("Nationality"), "-")
+                        If DT_Customer_Info.Rows(0).Item("Sex").ToString = "F" Then
+                            Cust_Info.CUS_GENDER = 2
+                        Else
+                            Cust_Info.CUS_GENDER = 1
+                        End If
+                        address_number = "-"
+                        address_moo = "-"
+                        address_village = "-"
+                        address_street = "-"
+                        address_soi = "-"
+                        address_district = "-"
+                        address_province = "-"
+                        address_building_name = "-"
+                        address_building_room = "-"
+                        address_building_floor = "-"
+                        sddress_sub_district = "-"
+                        address_zip = "-"
+                    End If
+                End If
             End If
-
-
             Dim Result As New Command_Result
-            Dim Base64_Certificate As String = ""
-            Dim Base64_capture As String = ""
-            Dim address_number As String = ""
-            Dim address_moo As String = ""
-            Dim address_village As String = ""
-            Dim address_street As String = ""
-            Dim address_soi As String = ""
-            Dim address_district As String = ""
-            Dim address_province As String = ""
-            Dim address_building_name As String = ""
-            Dim address_building_room As String = ""
-            Dim address_building_floor As String = ""
-            Dim sddress_sub_district As String = ""
-            Dim address_zip As String = ""
-            If LANGUAGE = VDM_BL.UILanguage.TH Then
-                Dim cus As New VDM_BL.Customer_IDCard
-                If Not IsNothing(Customer_IDCard) Then
-                    cus = Customer_IDCard
-                    address_number = cus.addrHouseNo
-                    address_moo = "-"
-                    address_village = cus.addrVillageNo
-                    address_street = cus.addrRoad
-                    address_soi = "-"
-                    address_district = cus.addrAmphur
-                    address_province = cus.addrProvince
-                    address_building_name = "-"
-                    address_building_room = "-"
-                    address_building_floor = "-"
-                    sddress_sub_district = "-"
-                    address_zip = "-"
-                    Base64_Certificate = cus.Photo
-                    Base64_capture = cus.FaceCamera
-                End If
-            Else
-                Dim cus As New VDM_BL.Customer_Passport
-                If Not IsNothing(Customer_Passport) Then
-                    cus = Customer_Passport
-                    address_number = "-"
-                    address_moo = "-"
-                    address_village = "-"
-                    address_street = "-"
-                    address_soi = "-"
-                    address_district = "-"
-                    address_province = "-"
-                    address_building_name = "-"
-                    address_building_room = "-"
-                    address_building_floor = "-"
-                    sddress_sub_district = "-"
-                    address_zip = "-"
-                    Base64_Certificate = cus.Photo
-                    Base64_capture = cus.FaceCamera
-                End If
-            End If
+
 #Region "Face_Recognition"
-            Dim BackEndFace_Recognition As New Face_Recognition
-            Dim Response_Face_Recognition As New BackEndInterface.Face_Recognition.Response
-            'Dim Base64_Certificate As String = Face_cust_certificate
-            'Dim Base64_capture As String = Face_cust_capture
-            Response_Face_Recognition = BackEndFace_Recognition.Get_Result(SHOP_CODE, IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID), Base64_Certificate, Base64_capture, 1)
-            Try
-                If Not IsNothing(Response_Face_Recognition) Then
-                    Result.Status = Response_Face_Recognition.status
-                    Result.Message = "CUS_ID:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID) & " Type:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), "I", "P") & "ยืนยันตัวตน Step Face_Recognition"
-                End If
-            Catch ex As Exception
-                Result.Status = Response_Face_Recognition.status
-                Result.Message = "CUS_ID:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID) & " Type:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), "I", "P") & " Step Face_Recognition" & ex.Message
-                Result_Register = False
-                Return Result_Register
-                Exit Function
-            End Try
+
 #End Region
 
 #Region "Prepaid_Validate_Register"
@@ -1429,6 +1423,8 @@ Public Class BackEndInterface
                 Exit Function
             End Try
 #End Region
+
+
 
 #Region "Delete_File"
             Dim BackEndDelete_File As New Delete_File
@@ -1487,9 +1483,10 @@ Public Class BackEndInterface
                                     Cust_Info.CUS_NAME & " " & Cust_Info.CUS_SURNAME,
                                     Response_Prepaid_Validate.response_data.priceplan,
                                     SIM_Serial,
-                                    Response_Face_Recognition.response_data.face_recognition_result,
-                                    Response_Face_Recognition.response_data.is_identical,
-                                    Response_Face_Recognition.response_data.confident_ratio)
+                                   face_recognition_result,
+                                   is_identical,
+                                   confident_ratio)
+
             Try
 
                 If Not IsNothing(Response_Flow_Create) Then
@@ -1563,7 +1560,7 @@ Public Class BackEndInterface
 
 #Region "Prepaid_Register"
 
-            Dim DT_TXN_MAT_CODE As DataTable = BL.GET_TXN_PREPAID_REGISTER(TXN_ID)
+            Dim DT_TXN_MAT_CODE As DataTable = BL.GET_TXN_PREPAID_REGISTER_PAID(TXN_ID)
             'Dim mat_code As String = "3000014920" 
             'Dim mat_desc As String = "ซิมซูเปอร์ฟัน ฟอร์ทีน"
             Dim mat_code As String = ""
@@ -1573,68 +1570,26 @@ Public Class BackEndInterface
                 mat_desc = DT_TXN_MAT_CODE.Rows(0).Item("PRODUCT_NAME").ToString
             End If
 
-            'Dim address_number As String = ""
-            'Dim address_moo As String = ""
-            'Dim address_village As String = ""
-            'Dim address_street As String = ""
-            'Dim address_soi As String = ""
-            'Dim address_district As String = ""
-            'Dim address_province As String = ""
-            'Dim address_building_name As String = ""
-            'Dim address_building_room As String = ""
-            'Dim address_building_floor As String = ""
-            'Dim sddress_sub_district As String = ""
-            'Dim address_zip As String = ""
-
-            'If LANGUAGE = VDM_BL.UILanguage.TH Then
-
-            '    Dim cus As New VDM_BL.Customer_IDCard
-            '    If Not IsNothing(Customer_IDCard) Then
-            '        cus = Customer_IDCard
-            '        address_number = cus.addrHouseNo
-            '        address_moo = "-"
-            '        address_village = cus.addrVillageNo
-            '        address_street = cus.addrRoad
-            '        address_soi = "-"
-            '        address_district = cus.addrAmphur
-            '        address_province = cus.addrProvince
-            '        address_building_name = "-"
-            '        address_building_room = "-"
-            '        address_building_floor = "-"
-            '        sddress_sub_district = "-"
-            '        address_zip = "-"
-            '    End If
-            'Else
-            '    Dim cus As New VDM_BL.Customer_Passport
-            '    If Not IsNothing(Customer_Passport) Then
-            '        cus = Customer_Passport
-            '        address_number = "-"
-            '        address_moo = "-"
-            '        address_village = "-"
-            '        address_street = "-"
-            '        address_soi = "-"
-            '        address_district = "-"
-            '        address_province = "-"
-            '        address_building_name = "-"
-            '        address_building_room = "-"
-            '        address_building_floor = "-"
-            '        sddress_sub_district = "-"
-            '        address_zip = "-"
-            '    End If
-            'End If
+            Dim _EXPIRE As String = ""
+            If Cust_Info.CUS_PASSPORT_EXPIRE.ToString() <> "-" Then
+                _EXPIRE = C.DateToString(Cust_Info.CUS_PASSPORT_EXPIRE, "yyyy-MM-dd'T'HH:mm:ss'+0700'")
+            Else
+                _EXPIRE = "-"
+            End If
+            'C.DateToString(Cust_Info.CUS_PASSPORT_EXPIRE, "yyyy-MM-dd'T'HH:mm:ss'+0700'"), '1990-02-05T00:00:00+0700  customer_id_expire_date
 
             Dim BackEndPrepaid_Register As New Prepaid_Register
             Dim Response_Prepaid_Register As New BackEndInterface.Prepaid_Register.Response
             Response_Prepaid_Register = BackEndPrepaid_Register.Get_Result(Response_Generate_Order_Id.response_data,
                 Cust_Info.CUS_GENDER, '--ดูว่าบัตรส่งมาเป็นอะไร
                 Cust_Info.CUS_TITLE,
-                Cust_Info.NAT_CODE,
+                BL.Get_Language_Code(LANGUAGE).ToString(), 'Cust_Info.NAT_CODE
                 "T5",
                 Cust_Info.CUS_NAME,
                 Cust_Info.CUS_SURNAME,
                 C.DateToString(Cust_Info.CUS_BIRTHDATE, "yyyy-MM-dd'T'HH:mm:ss'+0700'"), '1990-02-05T00:00:00+0700  customer_birthdate
                 IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID),
-                C.DateToString(Cust_Info.CUS_PASSPORT_EXPIRE, "yyyy-MM-dd'T'HH:mm:ss'+0700'"), '1990-02-05T00:00:00+0700  customer_id_expire_date
+                _EXPIRE,
                 address_number,
                 address_moo,
                 address_village,
@@ -1647,7 +1602,7 @@ Public Class BackEndInterface
                 address_building_floor,
                 sddress_sub_district,
                 address_zip,
-                "-", 'shopCode.Text,
+                SHOP_CODE, 'shopCode.Text,
                 "-", 'shopName.Text,
                 USER_ID,
                 mat_code,  'mat_code.Text,
@@ -1659,26 +1614,32 @@ Public Class BackEndInterface
                 0,' "N"
                 2,  '"PAIR"
                 Response_Prepaid_Validate.response_data.company_code)
+
+            Dim SQL_Update As String = ""
             Try
                 If Not IsNothing(Response_Prepaid_Register) Then
                     Result.Status = Response_Prepaid_Register.status
                     Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Prepaid_Register"
+
                 End If
             Catch ex As Exception
                 Result.Status = Response_Prepaid_Register.status
                 Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Prepaid_Register " & ex.Message
                 Result_Register = False
+
+                SQL_Update = "UPDATE TB_SERVICE_TRANSACTION SET TSM_ORDER_ID='fail' ,  TSM_Result='" & Response_Prepaid_Register.JSONString & "' WHERE TXN_ID=" & TXN_ID
+                BL.ExecuteNonQuery(SQL_Update)
                 Return Result_Register
                 Exit Function
             End Try
 
-
+            'Update TB_SERVICE_TRANSACTION
+            SQL_Update = "UPDATE TB_SERVICE_TRANSACTION SET TSM_ORDER_ID='" & Response_Generate_Order_Id.response_data & "',  TSM_Result='" & Response_Prepaid_Register.JSONString & "' WHERE TXN_ID=" & TXN_ID
+            BL.ExecuteNonQuery(SQL_Update)
 #End Region
 
             Return Result_Register
         End Function
-
-
 
         Public Function Convert_Base64(Image As Byte()) As String
             Dim base64String As String = Convert.ToBase64String(Image, 0, Image.Length)

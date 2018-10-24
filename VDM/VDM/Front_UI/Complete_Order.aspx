@@ -96,7 +96,7 @@
                                     <asp:Button ID="btnValidatePrepaid" runat="server" Style="display: none;" />
                                 </div>
 
-                                <asp:Panel ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" Style="position: fixed; left: 500px; top: 100px;">
+                                <asp:Panel ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" Style="position: fixed; left: -500px; top: 100px;">
                                     <asp:TextBox ID="txtBarcode" runat="server"></asp:TextBox>
                                     <asp:Button ID="btnBarcode" runat="server" />
                                     <button type="button" id="btnFocus" value="focus" />
@@ -268,7 +268,10 @@
                 $('#btnNext').click();
             }
 
-
+            function printSlip(TXN_ID) {
+                var url = '../PrintContent.aspx?TXN_ID=' + TXN_ID;
+                $('#CommandTrigger').attr('src', url);
+            }
         </script>
         <uc1:UC_CommonUI runat="server" ID="UC_CommonUI" />
     </form>

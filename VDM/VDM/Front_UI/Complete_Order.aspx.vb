@@ -406,29 +406,26 @@ Public Class Complete_Order
             '------ ใช้ Customer_IDCard ได้เลยไม่ต้องประกาศ cus อีก
             '------ ใน Customer_IDCard มี CUS_ID ซึ่งคือ ID ของตาราง TB_CUSTOMER_DOC
             '------ ค่าที่อยู่ใน Customer_IDCard ก็เหมือนค่าที่ Save ในตาราง
-            Dim cus As New VDM_BL.Customer_IDCard
-            If Not IsNothing(Session("Customer_IDCard")) Then
-                cus = Session("Customer_IDCard")
+            'Dim cus As New VDM_BL.Customer_IDCard
+            'If Not IsNothing(Session("Customer_IDCard")) Then
+            '    cus = Session("Customer_IDCard")
+            'End If
+            If Not IsNothing(Customer_IDCard) Then
+                Face_cust_certificate.Text = Customer_IDCard.Photo
+                Face_cust_capture.Text = Customer_IDCard.FaceCamera
+                USER_ID.Text = SHIFT_OPEN_BY
             End If
-
-            Face_cust_certificate.Text = cus.Photo
-            Face_cust_capture.Text = cus.FaceCamera
-            USER_ID.Text = SHIFT_OPEN_BY
         Else
 
             '------ ใช้ Customer_Passport ได้เลยไม่ต้องประกาศ cus อีก
             '------ ใน Customer_Passport มี CUS_ID ซึ่งคือ ID ของตาราง TB_CUSTOMER_DOC
             '------ ค่าที่อยู่ใน Customer_Passport ก็เหมือนค่าที่ Save ในตาราง
             Dim cus As New VDM_BL.Customer_Passport
-            If Not IsNothing(Session("Customer_Passport")) Then
-                cus = Session("Customer_Passport")
+            If Not IsNothing(Customer_Passport) Then
+                Face_cust_certificate.Text = cus.Photo
+                Face_cust_capture.Text = cus.FaceCamera
+                USER_ID.Text = SHIFT_OPEN_BY
             End If
-
-            Face_cust_certificate.Text = cus.Photo
-            Face_cust_capture.Text = cus.FaceCamera
-            USER_ID.Text = SHIFT_OPEN_BY
-
-
         End If
 
         '--รอเปลี่ยนเมื่อถ่ายรูปได้
@@ -462,7 +459,25 @@ Public Class Complete_Order
     End Function
 
     Private Sub lnkprint_ServerClick(sender As Object, e As EventArgs) Handles lnkprint.ServerClick
-        Response.Redirect("Thank_You.aspx")
+        'Print Slip และกลับหน้าหลัก 
+        Print()
+        Response.Redirect("Select_Language.aspx")
 
     End Sub
+
+    Private Sub Print()
+
+        Dim C As New Converter
+
+        Dim SQL As String = "SELECT * FROM TB_SERVICE_TRANSACTION" & vbLf
+        SQL &= "WHERE TXN_ID=" & TXN_ID
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        DA.Fill(DT)
+        If DT.Rows.Count = 0 OrElse IsDBNull(DT.Rows(0).Item("METHOD_ID")) Then Exit Sub
+
+        Dim Script As String = "setTimeout( function(){ printSlip(" & TXN_ID & "); } , 1000);"
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Print", Script, True)
+    End Sub
+
 End Class
