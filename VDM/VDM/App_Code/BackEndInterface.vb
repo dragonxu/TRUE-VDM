@@ -1627,7 +1627,7 @@ Public Class BackEndInterface
                 Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Prepaid_Register " & ex.Message
                 Result_Register = False
 
-                SQL_Update = "UPDATE TB_SERVICE_TRANSACTION SET TSM_ORDER_ID='fail' ,  TSM_Result='" & Response_Prepaid_Register.JSONString & "' WHERE TXN_ID=" & TXN_ID
+                SQL_Update = "UPDATE TB_SERVICE_TRANSACTION SET TSM_ORDER_ID='fail' ,  TSM_Result='" & ex.Message & "' WHERE TXN_ID=" & TXN_ID
                 BL.ExecuteNonQuery(SQL_Update)
                 Return Result_Register
                 Exit Function

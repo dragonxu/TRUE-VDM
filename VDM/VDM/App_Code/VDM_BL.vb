@@ -2054,6 +2054,14 @@ Public Class VDM_BL
         SQL &= "	WHERE SLIP_YEAR=RIGHT(DATEPART(yyyy,GETDATE()),2) AND " & vbLf
         SQL &= "	CAST(SLIP_MONTH AS INT)=DATEPART(MM,GETDATE()) AND" & vbLf
         SQL &= "	CAST(SLIP_DAY AS INT)=DATEPART(dd,GETDATE())" & vbLf
+
+        SQL &= "	UNION ALL " & vbLf
+        SQL &= "" & vbLf
+        SQL &= "	SELECT ISNULL(MAX(CAST(SLIP_NO AS INT)),0)+1 SLIP_NO" & vbLf
+        SQL &= "	FROM TB_TRANSACTION_CREDITCARD" & vbLf
+        SQL &= "	WHERE SLIP_YEAR=RIGHT(DATEPART(yyyy,GETDATE()),2) AND " & vbLf
+        SQL &= "	CAST(SLIP_MONTH AS INT)=DATEPART(MM,GETDATE()) AND" & vbLf
+        SQL &= "	CAST(SLIP_DAY AS INT)=DATEPART(dd,GETDATE())" & vbLf
         SQL &= ") A ORDER BY SLIP_NO DESC" & vbLf
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         Dim DT As New DataTable

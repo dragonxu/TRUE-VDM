@@ -114,21 +114,6 @@ Public Class Device_Verify
 
     End Sub
 
-    'Private Sub btnSkip_ScanIDCard_Click(sender As Object, e As EventArgs) Handles btnSkip_ScanIDCard.Click
-    '    'pnlScanIDCard.Visible = False  เป็นการซื้อ Device แต่ไม่ Scan บัตร User กดเอง
-    '    'pnlScanIDCard.Visible = False
-    '    Response.Redirect("Device_Payment.aspx?SIM_ID=" & SIM_ID)
-    'End Sub
-
-    'Private Sub btnStart_Take_Photos_Click(sender As Object, e As EventArgs) Handles btnStart_Take_Photos.Click
-    '    pnlScanIDCard.Visible = False
-    '    pnlModul_IDCard_Success.Visible = False
-    '    pnlFace_Recognition.Visible = True
-    'End Sub
-
-    'Private Sub lnkClose_Click(sender As Object, e As EventArgs) Handles lnkClose.Click
-    '    pnlModul_IDCard_Success.Visible = False
-    'End Sub
 
     Private Sub lnkHome_Click(sender As Object, e As ImageClickEventArgs) Handles lnkHome.Click
         Response.Redirect("Select_Menu.aspx")
@@ -148,10 +133,7 @@ Public Class Device_Verify
             id_number.Text = Customer_IDCard.Citizenid
             Face_cust_certificate.Text = Customer_IDCard.Photo
             Face_cust_capture.Text = Customer_IDCard.FaceCamera
-
-
             CUS_PID.Text = Customer_IDCard.Citizenid
-
             CUS_TITLE.Text = Customer_IDCard.Th_Prefix
             CUS_NAME.Text = Customer_IDCard.Th_Firstname
             CUS_SURNAME.Text = Customer_IDCard.Th_Lastname
@@ -161,9 +143,7 @@ Public Class Device_Verify
             CUS_PASSPORT_ID.Text = ""
             CUS_PASSPORT_START.Text = ""
             CUS_PASSPORT_EXPIRE.Text = Customer_IDCard.Expire
-
             CUS_IMAGE = C.StringToByte(Customer_IDCard.Photo, 0)
-
 
         Else
 
@@ -194,22 +174,18 @@ Public Class Device_Verify
 
         Dim result As New BackEndInterface.Face_Recognition.Response
             result = BackEndInterface.Get_Result(SHOP_CODE, id_number.Text, Face_cust_certificate.Text, Face_cust_capture.Text, SEQ_Face_Recognition)
-
-            If Not IsNothing(result.response_data) Then
-
-                If result.response_data.face_recognition_result.ToLower = "pass" Then
-
-
-                    If LANGUAGE = VDM_BL.UILanguage.TH Then
-                        Customer_IDCard.Face_Recognition_Result = result.response_data.face_recognition_result
-                        Customer_IDCard.Confident_Ratio = result.response_data.confident_ratio
+        If Not IsNothing(result.response_data) Then
+            If result.response_data.face_recognition_result.ToLower = "pass" Then
+                If LANGUAGE = VDM_BL.UILanguage.TH Then
+                    Customer_IDCard.Face_Recognition_Result = result.response_data.face_recognition_result
+                    Customer_IDCard.Confident_Ratio = result.response_data.confident_ratio
                     Customer_IDCard.Face_Certificate_ID = result.response_data.face_recog_cust_certificate_id
                     Customer_IDCard.Face_Is_Identical = result.response_data.is_identical
                     Customer_IDCard.Face_Capture_ID = result.response_data.face_recog_cust_capture_id
                     BL.SAVE_CUSTOMER_IDCard(Customer_IDCard, TXN_ID)
                 Else
                     Customer_Passport.Face_Recognition_Result = result.response_data.face_recognition_result
-                        Customer_Passport.Confident_Ratio = result.response_data.confident_ratio
+                    Customer_Passport.Confident_Ratio = result.response_data.confident_ratio
                     Customer_Passport.Face_Certificate_ID = result.response_data.face_recog_cust_certificate_id
                     Customer_Passport.Face_Is_Identical = result.response_data.is_identical
                     Customer_Passport.Face_Capture_ID = result.response_data.face_recog_cust_capture_id
@@ -229,17 +205,16 @@ Public Class Device_Verify
 
                 Response.Redirect("Device_Payment.aspx?SIM_ID=" & SIM_ID)
             Else
-                    SEQ_Face_Recognition = SEQ_Face_Recognition + 1
-                    ' สั่งถ่ายภาพหรือ แสกนบัตรใหม่   
-                    Dim Script As String = "showFaceProblem();"
-                    ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Problem", Script, True)
-
-                End If
-
-                ' ไม่สามารถเชื่อมต่อ Network ได้
-                Dim Script_Network As String = "showNetworkProblem();"
-                ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Problem", Script_Network, True)
+                SEQ_Face_Recognition = SEQ_Face_Recognition + 1
+                ' สั่งถ่ายภาพหรือ แสกนบัตรใหม่   
+                Dim Script As String = "showFaceProblem();"
+                ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Problem", Script, True)
             End If
+
+            ' ไม่สามารถเชื่อมต่อ Network ได้
+            Dim Script_Network As String = "showNetworkProblem();"
+            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Problem", Script_Network, True)
+        End If
 
 
     End Sub
@@ -262,29 +237,19 @@ Public Class Device_Verify
             '------ ใช้ Customer_IDCard ได้เลยไม่ต้องประกาศ cus อีก
             '------ ใน Customer_IDCard มี CUS_ID ซึ่งคือ ID ของตาราง TB_CUSTOMER_DOC
             '------ ค่าที่อยู่ใน Customer_IDCard ก็เหมือนค่าที่ Save ในตาราง
-            Dim cus As New VDM_BL.Customer_IDCard
-            If Not IsNothing(Session("Customer_IDCard")) Then
-                cus = Session("Customer_IDCard")
+            If Not IsNothing(Customer_IDCard) Then
+                Face_cust_certificate.Text = Customer_IDCard.Photo
+                Face_cust_capture.Text = Customer_IDCard.FaceCamera
+
             End If
-
-            Face_cust_certificate.Text = cus.Photo
-            Face_cust_capture.Text = cus.FaceCamera
-            'USER_ID.Text = SHIFT_OPEN_BY
         Else
-
             '------ ใช้ Customer_Passport ได้เลยไม่ต้องประกาศ cus อีก
             '------ ใน Customer_Passport มี CUS_ID ซึ่งคือ ID ของตาราง TB_CUSTOMER_DOC
             '------ ค่าที่อยู่ใน Customer_Passport ก็เหมือนค่าที่ Save ในตาราง
-            Dim cus As New VDM_BL.Customer_Passport
-            If Not IsNothing(Session("Customer_Passport")) Then
-                cus = Session("Customer_Passport")
+            If Not IsNothing(Customer_Passport) Then
+                Face_cust_certificate.Text = Customer_Passport.Photo
+                Face_cust_capture.Text = Customer_Passport.FaceCamera
             End If
-
-            Face_cust_certificate.Text = cus.Photo
-            Face_cust_capture.Text = cus.FaceCamera
-            'USER_ID.Text = SHIFT_OPEN_BY
-
-
         End If
 
         '--รอเปลี่ยนเมื่อถ่ายรูปได้
@@ -319,6 +284,5 @@ Public Class Device_Verify
 
         Return Result
     End Function
-
 
 End Class
