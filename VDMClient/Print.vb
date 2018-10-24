@@ -18,56 +18,60 @@ Public Class Printer
         If PrinterName <> "" Then
             Document.PrinterSettings.PrinterName = PrinterName
         End If
-        Document.DefaultPageSettings.PaperSize = New PaperSize("Custom", 550, 2000)
-        Document.DefaultPageSettings.Margins.Left =
+        'Dim PaperSize As New PaperSize
+        'PaperSize.Width = 500
+        'PaperSize.Height = 1600
+        'Document.DefaultPageSettings.PaperSize = PaperSize
+        Document.DefaultPageSettings.Margins.Left = 0
         Document.DefaultPageSettings.Margins.Right = 0
         Document.DefaultPageSettings.Margins.Top = 0
         Document.DefaultPageSettings.Margins.Bottom = 0
     End Sub
 
-    Dim TotalPage As Integer = 2
-    Dim CurrentPage As Integer = 0
+    Dim TotalLine As Integer = 0
+    Dim CurrentLine As Integer = 0
+    Dim LinePerPage As Integer = 32
+    Dim PrintLines As String() = {}
     Private Sub Document_PrintPage(sender As Object, e As PrintPageEventArgs) Handles Document.PrintPage
 
-        CurrentPage += 1
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-        e.Graphics.TextRenderingHint = Text.TextRenderingHint.AntiAlias
+        e.Graphics.TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
         e.PageSettings.Landscape = False
 
-        Dim printHeight As Integer
-        Dim printWidth As Integer
-        Dim leftMargin As Integer
-        Dim rightMargin As Integer
 
-        'Set print area size and margins
-        With Document.DefaultPageSettings
-            printHeight = .PaperSize.Height - .Margins.Top - .Margins.Bottom
-            printWidth = .PaperSize.Width - .Margins.Left - .Margins.Right
-            leftMargin = .Margins.Left 'X
-            rightMargin = .Margins.Top   'Y
-        End With
+        While PrintLines.Count > 0 And CurrentLine < LinePerPage
 
-        'Now we need to determine the total number of lines
-        'we're going to be printing
-        Dim numLines As Integer = CInt(printHeight / PrintFont.Height)
+            Dim line As String = PrintLines(0)
+            Dim s As SizeF = e.Graphics.MeasureString(line, PrintFont)
+            Dim y As Integer = s.Height * CurrentLine
+            e.Graphics.DrawString(line, PrintFont, Brushes.Black, 0, y)
+            'Dim _temp As String() = PrintLines.ToArray()
+            PrintLines = RemoveFirstElement(PrintLines)
+            CurrentLine += 1
+        End While
 
-        'Create a rectangle printing are for our document
-        Dim printArea As New RectangleF(leftMargin, rightMargin, printWidth, printHeight)
-
-        'Use the StringFormat class for the text layout of our document
-        Dim format As New StringFormat(StringFormatFlags.LineLimit)
-
-        'Fit as many characters as we can into the print area    
-        e.Graphics.MeasureString(Content, PrintFont, New SizeF(printWidth, printHeight), format)
-
-        'Print the page
-        e.Graphics.DrawString(Content, PrintFont, Brushes.Black, printArea, format)
-
-        e.HasMorePages = False
+        If PrintLines.Count > 0 Then
+            e.HasMorePages = True
+            CurrentLine = 0
+        Else
+            e.HasMorePages = False
+        End If
 
     End Sub
 
+    Private Function RemoveFirstElement(ByVal Source As String()) As String()
+        Dim Temp As String() = {}
+        For i As Integer = 1 To Source.Count - 1
+            Array.Resize(Temp, Temp.Count + 1)
+            Temp(Temp.Count - 1) = Source(i)
+        Next
+        Return Temp
+    End Function
+
     Public Sub Print()
+        PrintLines = Content.Split(vbLf)
+        TotalLine = PrintLines.Count
+        CurrentLine = 0
         Document.Print()
     End Sub
 
