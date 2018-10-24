@@ -18,50 +18,51 @@ Public Class Printer
         If PrinterName <> "" Then
             Document.PrinterSettings.PrinterName = PrinterName
         End If
-        Document.DefaultPageSettings.PaperSize = New PaperSize("Custom", 550, 2000)
-        Document.DefaultPageSettings.Margins.Left =
+        'Dim PaperSize As New PaperSize
+        'PaperSize.Width = 500
+        'PaperSize.Height = 1600
+        'Document.DefaultPageSettings.PaperSize = PaperSize
+        Document.DefaultPageSettings.Margins.Left = 0
         Document.DefaultPageSettings.Margins.Right = 0
         Document.DefaultPageSettings.Margins.Top = 0
         Document.DefaultPageSettings.Margins.Bottom = 0
     End Sub
 
-    Dim TotalPage As Integer = 2
-    Dim CurrentPage As Integer = 0
     Private Sub Document_PrintPage(sender As Object, e As PrintPageEventArgs) Handles Document.PrintPage
 
-        CurrentPage += 1
         e.Graphics.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-        e.Graphics.TextRenderingHint = Text.TextRenderingHint.AntiAlias
+        e.Graphics.TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
         e.PageSettings.Landscape = False
 
-        Dim printHeight As Integer
-        Dim printWidth As Integer
-        Dim leftMargin As Integer
-        Dim rightMargin As Integer
+        'Dim printHeight As Integer
+        'Dim printWidth As Integer
+        'Dim leftMargin As Integer
+        'Dim rightMargin As Integer
 
-        'Set print area size and margins
-        With Document.DefaultPageSettings
-            printHeight = .PaperSize.Height - .Margins.Top - .Margins.Bottom
-            printWidth = .PaperSize.Width - .Margins.Left - .Margins.Right
-            leftMargin = .Margins.Left 'X
-            rightMargin = .Margins.Top   'Y
-        End With
+        ''Set print area size and margins
+        'With Document.DefaultPageSettings
+        '    printHeight = .PaperSize.Height - .Margins.Top - .Margins.Bottom
+        '    printWidth = .PaperSize.Width - .Margins.Left - .Margins.Right
+        '    leftMargin = .Margins.Left 'X
+        '    rightMargin = .Margins.Top   'Y
+        'End With
 
-        'Now we need to determine the total number of lines
-        'we're going to be printing
-        Dim numLines As Integer = CInt(printHeight / PrintFont.Height)
+        ''Now we need to determine the total number of lines
+        ''we're going to be printing
+        'Dim numLines As Integer = CInt(printHeight / PrintFont.Height)
 
-        'Create a rectangle printing are for our document
-        Dim printArea As New RectangleF(leftMargin, rightMargin, printWidth, printHeight)
+        ''Create a rectangle printing are for our document
+        'Dim printArea As New RectangleF(leftMargin, rightMargin, printWidth, printHeight)
 
         'Use the StringFormat class for the text layout of our document
-        Dim format As New StringFormat(StringFormatFlags.LineLimit)
+        Dim format As New StringFormat(StringFormatFlags.NoClip)
 
-        'Fit as many characters as we can into the print area    
-        e.Graphics.MeasureString(Content, PrintFont, New SizeF(printWidth, printHeight), format)
+        ''Fit as many characters as we can into the print area    
+        'e.Graphics.MeasureString(TextBox1.Text, PrintFont, New SizeF(printWidth, printHeight), format)
 
         'Print the page
-        e.Graphics.DrawString(Content, PrintFont, Brushes.Black, printArea, format)
+        'e.Graphics.DrawString(TextBox1.Text, PrintFont, Brushes.Black, printArea, format)
+        e.Graphics.DrawString(Content, PrintFont, Brushes.Black, 0, 0, format) ', format)
 
         e.HasMorePages = False
 
