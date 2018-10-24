@@ -2283,6 +2283,21 @@ Public Class VDM_BL
         Return Content
     End Function
 
+    Public Function GET_TXN_CODE(ByVal TXN_ID As Integer) As String
+        Dim SQL As String = "SELECT dbo.FN_TXN_CODE(SITE_CODE,KO_ID,TXN_Y,TXN_M,TXN_D,TXN_N) TXN_Code" & vbLf
+        SQL &= " FROM TB_SERVICE_TRANSACTION " & vbLf
+        SQL &= " WHERE TXN_ID = " & TXN_ID & vbLf
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        DA.Fill(DT)
+        If DT.Rows.Count > 0 Then
+            Return DT.Rows(0)(0)
+        Else
+            Return ""
+        End If
+    End Function
+
+
     Public Sub UPDATE_CONFIRMATION_SLIP(ByVal TXN_ID As Integer, ByVal Content As String)
 
         Dim SQL As String = "SELECT METHOD_ID FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
