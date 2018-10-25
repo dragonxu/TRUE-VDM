@@ -240,9 +240,9 @@ Public Class Complete_Order
             initFirstTimeScript()
             '----------------------- Stop SIM ----------------------
             '----------------- For Test ----------------
-            Session("TXN_ID") = 493
-            SIM_SERIAL = "896600041590433533"
-            Dim Result As BackEndInterface.Register.Command_Result = fn_Register()
+            'Session("TXN_ID") = 499
+            'SIM_SERIAL = "896600401500000620"
+            'Dim Result As BackEndInterface.Register.Command_Result = fn_Register()
 
             txtLocalControllerURL.Text = BL.LocalControllerURL
 
@@ -389,6 +389,8 @@ Public Class Complete_Order
     Private Sub btnValidatePrepaid_Click(sender As Object, e As EventArgs) Handles btnValidatePrepaid.Click
         ' ------------- Call Validate Prepaid -------------
         If fn_Register.Status Then
+            Dim SQL_Update As String = "UPDATE TB_SERVICE_TRANSACTION SET  TSM_Result='" & "SIM_Serial:" & SIM_SERIAL & ": " & fn_Register.Message & "' WHERE TXN_ID=" & TXN_ID
+            BL.ExecuteNonQuery(SQL_Update)
             '----------- validate Success -----------------
             Dim Script As String = "sendSIMToCustomer();" & vbLf
             ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "ForwardSIM", Script, True)
@@ -396,7 +398,8 @@ Public Class Complete_Order
         Else
             '----------- validate Unsuccess -----------------
             '---------ถ้าไม่ผ่าน แสดง Dialog และออก Slip Error
-
+            Dim SQL_Update As String = "UPDATE TB_SERVICE_TRANSACTION SET  TSM_Result='" & "SIM_Serial:" & SIM_SERIAL & ": " & fn_Register.Message & "' WHERE TXN_ID=" & TXN_ID
+            BL.ExecuteNonQuery(SQL_Update)
 
             Dim Script As String = "$(""#clickCannotRegister"").click();"
             ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "register", Script, True)
@@ -444,31 +447,9 @@ Public Class Complete_Order
         Dim CUS_ID As Integer = 0
         If LANGUAGE = VDM_BL.UILanguage.TH Then
             CUS_ID = Customer_IDCard.CUS_ID
-            '------ ใช้ Customer_IDCard ได้เลยไม่ต้องประกาศ cus อีก
-            '------ ใน Customer_IDCard มี CUS_ID ซึ่งคือ ID ของตาราง TB_CUSTOMER_DOC
-            '------ ค่าที่อยู่ใน Customer_IDCard ก็เหมือนค่าที่ Save ในตาราง
-            'Dim cus As New VDM_BL.Customer_IDCard
-            'If Not IsNothing(Session("Customer_IDCard")) Then
-            '    cus = Session("Customer_IDCard")
-            'End If
-            'If Not IsNothing(Customer_IDCard) Then
-            '    Face_cust_certificate.Text = Customer_IDCard.Photo
-            '    Face_cust_capture.Text = Customer_IDCard.FaceCamera
-            '    USER_ID.Text = SHIFT_OPEN_BY
-            'End If
         Else
             CUS_ID = Customer_Passport.CUS_ID
-            '------ ใช้ Customer_Passport ได้เลยไม่ต้องประกาศ cus อีก
-            '------ ใน Customer_Passport มี CUS_ID ซึ่งคือ ID ของตาราง TB_CUSTOMER_DOC
-            '------ ค่าที่อยู่ใน Customer_Passport ก็เหมือนค่าที่ Save ในตาราง
-            'Dim cus As New VDM_BL.Customer_Passport
-            'If Not IsNothing(Customer_Passport) Then
-            '    Face_cust_certificate.Text = cus.Photo
-            '    Face_cust_capture.Text = cus.FaceCamera
-            '    USER_ID.Text = SHIFT_OPEN_BY
-            'End If
         End If
-
 
         Dim SQL As String = "SELECT * FROM VW_CUSTOMER_DOC WHERE CUS_ID=" & CUS_ID
         Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
@@ -530,9 +511,8 @@ Public Class Complete_Order
 
         Dim Result As BackEndInterface.Register.Command_Result
         If DT.Rows.Count > 0 Then
-            Try
-                Dim TXN_Code As String = BL.GET_TXN_CODE(TXN_ID)
-                Result = BackEndInterface.Get_Result("-",
+            Dim TXN_Code As String = BL.GET_TXN_CODE(TXN_ID)
+            Result = BackEndInterface.Get_Result("-",
                                                     CUS_NAME,
                                                     CUS_SURNAME,
                                                     NAT_CODE,
@@ -565,10 +545,6 @@ Public Class Complete_Order
                                                     TXN_ID,
                                                     TXN_Code)
 
-
-            Catch ex As Exception
-
-            End Try
         Else
             '-ไม่มีรายการ Customer
 

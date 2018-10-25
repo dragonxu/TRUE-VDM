@@ -16,10 +16,9 @@ Public Class Export_Batch_File
         Dim Header_Data As String() = New String() {Header.Record_Id, Header.From_System, Header.To_System, Header.STR_Event, Header.Batch_No, Header.File_Creation_Date, Header.File_Creation_Time}
 
 
-        Dim DT_CASH As DataTable = GET_TXN_CASH_COMPLETE()
         Dim Count_Send_Data As Integer = 0
         Dim s As String
-        Dim Search As String = "2018-10-24"
+        Dim Search As String = "2018-10-25"
 
         Using sw As StreamWriter = New StreamWriter(FS)
             For i As Integer = 0 To Header_Data.Length - 1
@@ -369,8 +368,9 @@ Public Class Export_Batch_File
     'VDM
     '--หาจำนวนใบเสร็จต่อวัน
     Public Function GET_PRODUCT_SLIP_PER_DAY(Optional Search As String = "") As DataTable
+        'Dim SQL As String = "SELECT DISTINCT SLIP_CODE  FROM VW_TXN_PRODUCT_COMPLETED" & vbLf
 
-        Dim SQL As String = "SELECT DISTINCT SLIP_CODE  FROM VW_TXN_PRODUCT_COMPLETED" & vbLf
+        Dim SQL As String = "SELECT DISTINCT SLIP_CODE  FROM VW_TXN_COMPLETED" & vbLf
         If Search <> "" Then
             SQL &= " WHERE CONVERT(date, TXN_END)='" & Search & "'"
         End If
@@ -381,8 +381,9 @@ Public Class Export_Batch_File
     End Function
 
     Public Function GET_PRODUCT_SLIP_DETIAL(SLIP_CODE As String, Optional DATE_Search As String = "") As DataTable
+        'Dim SQL As String = "SELECT * FROM VW_TXN_PRODUCT_COMPLETED WHERE 1=1 " & vbLf
 
-        Dim SQL As String = "SELECT * FROM VW_TXN_PRODUCT_COMPLETED WHERE 1=1 " & vbLf
+        Dim SQL As String = "SELECT * FROM VW_TXN_COMPLETED WHERE 1=1 " & vbLf
         If SLIP_CODE <> "" Then
             SQL &= " AND SLIP_CODE='" & SLIP_CODE & "'"
         End If
@@ -397,20 +398,6 @@ Public Class Export_Batch_File
         DA.Fill(DT)
         Return DT
     End Function
-    'VDM
-    Public Function GET_TXN_CASH_COMPLETE(Optional Search As String = "") As DataTable
 
-        Dim SQL As String = "SELECT *,CONVERT(date, TXN_END) DATE_TXN_END  FROM VW_TXN_CASH" & vbLf
-        SQL &= "WHERE TXN_STEP='completed'"
-        If Search <> "" Then
-            SQL &= " AND CONVERT(date, TXN_END)='" & Search & "'"
-        End If
-        Dim DT As New DataTable
-        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
-        DA.Fill(DT)
-
-        Return DT
-
-    End Function
 
 End Class

@@ -2442,8 +2442,8 @@ Public Class VDM_BL
 
 #End Region
 
-    Public Function GET_TXN_PREPAID_REGISTER_PAID(ByVal TXN_ID As Integer)
-        Dim SQL As String = "SELECT * FROM VW_TXN_PREPAID_REGISTER_PAID WHERE TXN_ID=" & TXN_ID
+    Public Function GET_TXN_SIM_PAID(ByVal TXN_ID As Integer)
+        Dim SQL As String = "SELECT * FROM VW_TXN_SIM_PAID WHERE TXN_ID=" & TXN_ID
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         DA.Fill(DT)
