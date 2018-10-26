@@ -53,6 +53,10 @@
                         <td><asp:TextBox ID="customer_birthdate" runat="server" ></asp:TextBox></td>
                     </tr>
                     <tr>
+                        <td>doc_type</td>
+                        <td><asp:TextBox ID="doc_type" runat="server" ></asp:TextBox></td>
+                    </tr>
+                    <tr>
                         <td>customer_id_number</td>
                         <td><asp:TextBox ID="customer_id_number" runat="server" ></asp:TextBox></td>
                     </tr>

@@ -55,16 +55,44 @@
                             <p class="t-complete true-b">COMPLETE ORDER</p>
                             <img src="images/pic-step2.png" />
                         </div>
-                        <div class="step" id="formStep" runat="server">
-                            <div class="step-payment">
-                                <%--<h3 class="t-red true-b">รวมยอดชำระ <i title="฿">27,000</i></h3>--%>
-                                <h3 class="true-b t-red">
+                        <div class="description">
+                            <div class="pic" style="padding: unset; text-align: center;">
+                                <asp:Image ID="img" runat="server" Style="width: 70%; height:320px;"></asp:Image>
+                            </div>
+                            <figure class="col-md-6">
+                                <div class="topic true-l">
+                                    <h1 class="true-l" style="padding-bottom: 30px;">
+                                        <asp:Label ID="lblDISPLAY_NAME" runat="server" Style="font-size: 60pt; line-height: 70px;"></asp:Label>
+                                    </h1>
+                                    <asp:Panel ID="pnlProduct" runat="server">
+                                        <div class="capacity">
+                                            <div style="float: left;">
+                                                <asp:Panel ID="pnlCapacity" runat="server">
+                                                    <p>
+                                                        <asp:Label ID="lblCapacity" runat="server" Text=""></asp:Label>
+                                                    </p>
+                                                </asp:Panel>
+                                            </div>
+                                            <div class="color true-m" style="float: left;">
+                                                <asp:Label ID="lblColor" runat="server" Text=""></asp:Label>
+                                            </div>
+                                        </div>
+                                    </asp:Panel>
+
+
+                                </div>
+
+                            </figure>
+                        </div>
+                        <div class="step-cart">
+                            <div class="total" style="margin-bottom: 30px;">
+                                <h4 class="true-b t-red">
                                     <asp:Label ID="lblPrice_str" runat="server" Text="ยอดชำระ"></asp:Label>
                                     <i title="฿">
-                                        <asp:Label ID="lblPrice_Money" runat="server" Text="39,000"></asp:Label></i>
-                                    <asp:Label ID="lblCurrency_Str" runat="server" Text="บาท"></asp:Label></h3>
-                                
+                                        <asp:Label ID="lblPrice_Money" runat="server" Text=""></asp:Label></i>
+                                    <asp:Label ID="lblCurrency_Str" runat="server" Text="บาท"></asp:Label>
 
+                                </h4>
                             </div>
                         </div>
                     </div>

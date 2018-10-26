@@ -309,9 +309,16 @@ Public Class Device_Shoping_Cart
                 Exit Sub
             End If
             cus.Issuer = id_Issuer.Text
+
+            'If id_Expire.Text <> "" Then
+            '    cus.Expire = C.DateToString(id_Expire.Text, "yyyy-MM-dd")
+            '    If DateDiff(DateInterval.Day, C.StringToDate(id_Expire.Text, "yyyy-MM-dd"), Now) > 0 Then
+            Dim _cultureEnInfo As New Globalization.CultureInfo("en-US")
+            Dim Expire As DateTime = Convert.ToDateTime(id_Expire.Text, _cultureEnInfo)
             If id_Expire.Text <> "" Then
                 cus.Expire = C.DateToString(id_Expire.Text, "yyyy-MM-dd")
-                If DateDiff(DateInterval.Day, cus.Expire, Now) > 0 Then
+                If DateDiff(DateInterval.Day, C.StringToDate((Expire.ToString("yyyy", _cultureEnInfo)) & "-" & Expire.ToString("MM-dd", _cultureEnInfo), "yyyy-MM-dd"), Now) > 0 Then
+
                     ResponseIDCardExpired()
                     Exit Sub
                 End If
@@ -335,6 +342,20 @@ Public Class Device_Shoping_Cart
                 ResponseCannotReadPassport()
                 Exit Sub
             End If
+
+            Dim _cultureEnInfo As New Globalization.CultureInfo("en-US")
+            Dim Expire As DateTime = Convert.ToDateTime(pass_Expire.Text, _cultureEnInfo)
+            If pass_Expire.Text <> "" Then
+                If DateDiff(DateInterval.Day, C.StringToDate((Expire.ToString("yyyy", _cultureEnInfo)) & "-" & Expire.ToString("MM-dd", _cultureEnInfo), "yyyy-MM-dd"), Now) > 0 Then
+                    ResponseIDCardExpired()
+                    Exit Sub
+                End If
+            Else
+                '--------------Error ----------------
+                ResponseCannotReadIDCard()
+                Exit Sub
+            End If
+
 
             cus.FirstName = pass_FirstName.Text
             cus.MiddleName = pass_MiddleName.Text

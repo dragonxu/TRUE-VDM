@@ -4,7 +4,7 @@
     Dim BackEndInterface As New BackEndInterface.Register
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        fn_Register()
+        'fn_Register()
     End Sub
 
     Private Sub btn_Request_Click(sender As Object, e As EventArgs) Handles btn_Request.Click

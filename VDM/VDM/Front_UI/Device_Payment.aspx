@@ -161,7 +161,7 @@
                                                 <div class="col-md-6" style="text-align: center;">
                                                     <h3>
                                                         <p style="border: unset; padding-right: 30px; text-align: right;">
-                                                            <asp:TextBox class="true-b " ID="txtPaid" runat="server" Text="0" Style="text-align: right; width: 300px; float: right; background-color: transparent; border: none; margin-top: -15px;"></asp:TextBox>
+                                                            <asp:TextBox class="true-b " ID="txtPaid" runat="server" Text="0" Style="text-align: right; width: 300px; float: right; background-color: transparent; border: none; margin-top: -15px;" ReadOnly ="true" ></asp:TextBox>
                                                         </p>
                                                     </h3>
                                                 </div>

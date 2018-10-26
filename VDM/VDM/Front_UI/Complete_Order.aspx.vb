@@ -1,4 +1,5 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.Data
+Imports System.Data.SqlClient
 
 Public Class Complete_Order
     Inherits System.Web.UI.Page
@@ -400,7 +401,7 @@ Public Class Complete_Order
             '---------ถ้าไม่ผ่าน แสดง Dialog และออก Slip Error
             Dim SQL_Update As String = "UPDATE TB_SERVICE_TRANSACTION SET  TSM_Result='" & "SIM_Serial:" & SIM_SERIAL & ": " & fn_Register.Message & "' WHERE TXN_ID=" & TXN_ID
             BL.ExecuteNonQuery(SQL_Update)
-
+            lblMSG.Text = fn_Register.Message.ToString
             Dim Script As String = "$(""#clickCannotRegister"").click();"
             ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "register", Script, True)
         End If
@@ -507,7 +508,6 @@ Public Class Complete_Order
         If DT.Rows(0).Item("address_building_floor").ToString <> "" Then address_building_floor = DT.Rows(0).Item("address_building_floor").ToString
         If DT.Rows(0).Item("sddress_sub_district").ToString <> "" Then sddress_sub_district = DT.Rows(0).Item("sddress_sub_district").ToString
         If DT.Rows(0).Item("address_zip").ToString <> "" Then address_zip = DT.Rows(0).Item("address_zip").ToString
-
 
         Dim Result As BackEndInterface.Register.Command_Result
         If DT.Rows.Count > 0 Then

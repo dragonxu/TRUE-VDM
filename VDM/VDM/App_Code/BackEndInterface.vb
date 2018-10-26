@@ -539,6 +539,7 @@ Public Class BackEndInterface
                 ByVal customer_firstname As String,
                 ByVal customer_lastname As String,
                 ByVal customer_birthdate As String,
+                ByVal doc_type As String,
                 ByVal customer_id_number As String,
                 ByVal customer_id_expire_date As String,
                 ByVal address_number As String,
@@ -580,7 +581,7 @@ Public Class BackEndInterface
             PostString &= "            ""lastname"": """ & customer_lastname & """,	" & vbLf
             PostString &= "            ""birthdate"": """ & customer_birthdate & """,	" & vbLf
             PostString &= "            ""customer-type"": ""P"",	" & vbLf
-            PostString &= "            ""id-type"": ""I"",	" & vbLf
+            PostString &= "            ""id-type"": """ & doc_type & """,	" & vbLf
             PostString &= "            ""id-number"": """ & customer_id_number & """,	" & vbLf
             PostString &= "            ""id-expire-date"": """ & customer_id_expire_date & """,	" & vbLf
             PostString &= "            ""customer-level"": ""NON-TOP"",	" & vbLf
@@ -1575,6 +1576,7 @@ Public Class BackEndInterface
                 CUS_NAME,
                 CUS_SURNAME,
                 _DOB,
+                DOC_TYPE,
                 CUS_PID,
                 _EXPIRE,
                 address_number,

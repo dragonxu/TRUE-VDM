@@ -18,7 +18,7 @@ Public Class Export_Batch_File
 
         Dim Count_Send_Data As Integer = 0
         Dim s As String
-        Dim Search As String = "2018-10-25"
+        Dim Search As String = "2018-10-19"
 
         Using sw As StreamWriter = New StreamWriter(FS)
             For i As Integer = 0 To Header_Data.Length - 1
@@ -336,7 +336,9 @@ Public Class Export_Batch_File
                         CodeFront6 = CREDIT_CARD_NO.Substring(0, 6).ToString()
                         CodeBack4 = CREDIT_CARD_NO.Substring(CREDIT_CARD_NO.Length - 4, 4)
                     End If
-                    Result.Approve_Code = DT.Rows(0).Item("Approve_Code").ToString    'Approve Code จริงจาก ธ   ?????
+                    Dim ConvertPAYMENT_CODE As String = CodeFront6.PadRight(CREDIT_CARD_NO.ToString.Length - 4, "x") & CodeBack4
+                    Result.Credit_Card_ID = ConvertPAYMENT_CODE
+                    Result.Approve_Code = DT.Rows(0).Item("Approve_Code").ToString    'Approve Code จริงจาก ธ   ?????  รอดึงข้อมูลจาก view
 
 
                 Case VDM_BL.PaymentMethod.UNKNOWN
