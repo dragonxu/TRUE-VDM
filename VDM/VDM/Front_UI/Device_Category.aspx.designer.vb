@@ -14,11 +14,74 @@ Option Explicit On
 Partial Public Class Device_Category
     
     '''<summary>
-    '''rptList control.
+    '''form1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents rptList As Global.System.Web.UI.WebControls.Repeater
+    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+    
+    '''<summary>
+    '''ScriptManager1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ScriptManager1 As Global.System.Web.UI.ScriptManager
+    
+    '''<summary>
+    '''udpList control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents udpList As Global.System.Web.UI.UpdatePanel
+    
+    '''<summary>
+    '''lblCode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblCode As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''rptPage control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rptPage As Global.System.Web.UI.WebControls.Repeater
+    
+    '''<summary>
+    '''lnkHome control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkHome As Global.System.Web.UI.WebControls.ImageButton
+    
+    '''<summary>
+    '''lnkBack control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkBack As Global.System.Web.UI.WebControls.ImageButton
+    
+    '''<summary>
+    '''UC_CommonUI control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UC_CommonUI As Global.VDM.UC_CommonUI
 End Class

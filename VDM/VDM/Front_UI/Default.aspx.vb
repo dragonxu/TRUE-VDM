@@ -33,8 +33,23 @@ Public Class FrontUI_Default
         If DT.Rows.Count = 0 Then
             Response.Redirect("../Machine_Console/Login.aspx?KO_ID=" & KO_ID)
         Else
+
+            SQL = "SELECT * FROM MS_KIOSK_POSTER WHERE KO_ID=" & KO_ID
+            DA = New SqlDataAdapter(SQL, BL.ConnectionString)
+            DT = New DataTable
+            DA.Fill(DT)
+            If DT.Rows.Count > 0 Then
+                Response.Cookies("POSTER_TYPE").Value = DT.Rows(0).Item("POSTER_TYPE").ToString
+
+            Else
+                Response.Cookies("POSTER_TYPE").Value = DT.Rows(0).Item("POSTER_TYPE").ToString
+
+            End If
+
+
             Response.Redirect("Select_Language.aspx")
         End If
+
 
     End Sub
 

@@ -36,22 +36,102 @@ Public Class Select_Menu
         End Get
     End Property
 
+
 #End Region
 
+
+    Private ReadOnly Property QTY_Device As Integer '------------- เอาไว้เรียกใช้ง่ายๆ ----------
+        Get
+            Try
+                Dim DT As DataTable = Session("DT_QTY_Product")
+                Dim QTY As Integer = 0
+                For i As Integer = 0 To DT.Rows.Count - 1
+                    If VDM_BL.Category.Accessories <> DT.Rows(i).Item("CAT_ID") Then
+                        QTY = 1
+                    End If
+                Next
+                Return QTY
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+    End Property
+    Private ReadOnly Property QTY_Accessories As Integer '------------- เอาไว้เรียกใช้ง่ายๆ ----------
+        Get
+            Try
+                Dim DT As DataTable = Session("DT_QTY_Product")
+                Dim QTY As Integer = 0
+                For i As Integer = 0 To DT.Rows.Count - 1
+                    If VDM_BL.Category.Accessories = DT.Rows(i).Item("CAT_ID") Then
+                        QTY = 1
+                    End If
+                Next
+                Return QTY
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+    End Property
+    Private ReadOnly Property QTY_SIM As Integer '------------- เอาไว้เรียกใช้ง่ายๆ ----------
+        Get
+            Try
+                Dim DT As DataTable = BL.GetList_Current_SIM_Kiosk(KO_ID)
+                Dim QTY As Integer = 0
+                If DT.Rows.Count > 0 Then QTY = 1
+                Return QTY
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+    End Property
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Not IsNumeric(Session("LANGUAGE")) Then
             Response.Redirect("Select_Language.aspx")
         End If
 
+        BindProduct()
+        lnkDevice.Visible = False
+        lnkAccessories.Visible = False
+        lnkSim.Visible = False
+        If QTY_Device > 0 Then lnkDevice.Visible = True
+        If QTY_Accessories > 0 Then lnkAccessories.Visible = True
+        If QTY_SIM > 0 Then lnkSim.Visible = True
+
+        If QTY_Device + QTY_Accessories + QTY_SIM = 1 Then
+            If QTY_Device > 0 Then
+                Response.Redirect("Device_Brand.aspx?CAT_ID=" & VDM_BL.Category.Mobile)
+            ElseIf QTY_Accessories > 0 Then
+                Response.Redirect("Device_Brand.aspx?CAT_ID=" & VDM_BL.Category.Accessories)
+            ElseIf QTY_SIM > 0 Then
+                Response.Redirect("SIM_List.aspx")
+            End If
+        End If
+
     End Sub
+
+    Public Sub BindProduct()
+        Dim SQL As String = ""
+        SQL &= " Select  DISTINCT ISNULL(VW_ALL_PRODUCT.CAT_ID ,1) CAT_ID  " & vbLf
+        SQL &= " From VW_ALL_PRODUCT  " & vbLf
+        SQL &= " INNER Join VW_CURRENT_PRODUCT_STOCK On VW_CURRENT_PRODUCT_STOCK.PRODUCT_ID= VW_ALL_PRODUCT.PRODUCT_ID  " & vbLf
+        SQL &= " WHERE VW_CURRENT_PRODUCT_STOCK.KO_ID =" & KO_ID & "   " & vbLf
+        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Session("DT_QTY_Product") = DT
+    End Sub
+
 
     Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click
         Response.Redirect("Select_Language.aspx")
     End Sub
 
     Private Sub lnkDevice_Click(sender As Object, e As EventArgs) Handles lnkDevice.Click
-        Response.Redirect("Device_Brand.aspx")
+        Response.Redirect("Device_Brand.aspx?CAT_ID=" & VDM_BL.Category.Mobile)
+    End Sub
+    Private Sub lnkAccessories_Click(sender As Object, e As EventArgs) Handles lnkAccessories.Click
+        Response.Redirect("Device_Brand.aspx?CAT_ID=" & VDM_BL.Category.Accessories)
     End Sub
 
     Private Sub lnkSim_Click(sender As Object, e As EventArgs) Handles lnkSim.Click

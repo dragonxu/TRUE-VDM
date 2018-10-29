@@ -175,7 +175,7 @@
         <div id="popupVerifing" class="popup">
           <div class="popup-frame">
             <h3 class="true-m">กำลังตรวจสอบความตรงกันของใบหน้า</h3>
-            <div class="icon"><img src="images/Popup/icon-scanface.png"/></div>
+            <div class="icon"><img src="images/Popup/icon-scanface-gif.gif"/></div>
             <h4 class="true-b">กรุณารอสักครู่</h4>
           </div>
         </div><a id="clickVerifing" href="#popupVerifing" style="display:none;">Click</a>
@@ -183,7 +183,7 @@
         <div id="popupCannotVerify" class="popup">
             <div class="popup-frame" >
                 <h3 class="true-m" id="idCardAlertReason">ขออภัย ใบหน้าไม่ตรงกับบัตร</h3>
-                <div class="icon"><img src="images/Popup/icon-warning-face.png"/></div>
+                <div class="icon"><img src="images/Popup/icon-warning-face-gif.gif"/></div>
                 <h4 class="true-b">กรุณาสแกนใบหน้าอีกครั้ง</h4>
                 <div class="bottom"><a class="btu true-l" onclick="backToScan();" href="javascript:;">ตกลง</a></div>
             </div>
@@ -192,7 +192,7 @@
         <div id="popupNetworkProblem" class="popup">
             <div class="popup-frame" >
                 <h3 class="true-m" id="idCardAlertReason">ไม่สามารถเชื่อมต่อระบบเครือข่าย</h3>
-                <div class="icon"><img src="images/Popup/icon-warning-face.png"/></div>
+                <div class="icon"><img src="images/Popup/icon-warning-face-gif.gif"/></div>
                 <h4 class="true-b">กรุณาสแกนใบหน้าอีกครั้ง</h4>
                 <div class="bottom"><a class="btu true-l" onclick="backToScan();" href="javascript:;">ตกลง</a></div>
             </div>

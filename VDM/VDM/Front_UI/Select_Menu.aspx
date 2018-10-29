@@ -19,6 +19,17 @@
             </asp:LinkButton>
             <%--</a>--%>
         </div>
+        <div class="frame" id="Accessories" runat ="server"  >
+            <asp:LinkButton  ID="lnkAccessories" runat ="server" >
+                <div class="image-cropper">
+                    <span>
+                        <h3 class="true-l"><font color="#FFFFFF">Accessories</font></h3>
+                        <p class="true-l"><font color="#FFFFFF">อุปกรณ์เสริมต่าง ๆ</font></p>
+                      </span>
+                    <img src="images/pic-accessories.jpg" />
+                </div>
+            </asp:LinkButton>
+        </div>
         <div class="frame">
             <asp:LinkButton  ID="lnkSim" runat ="server" >
                 <div class="image-cropper">

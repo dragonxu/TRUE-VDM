@@ -1,6 +1,5 @@
 ﻿Public Class Select_Language
     Inherits System.Web.UI.Page
-
 #Region "ส่วนที่เหมือนกันหมดทุกหน้า"
     Private ReadOnly Property KO_ID As Integer '------------- เอาไว้เรียกใช้ง่ายๆ ----------
         Get
@@ -27,9 +26,22 @@
         End Set
     End Property
 
+    Private ReadOnly Property POSTER_TYPE As String
+        Get
+            Try
+                If Request.Cookies("POSTER_TYPE").Value.ToUpper = "MP4" Then
+                    Return Request.Cookies("POSTER_TYPE").Value.ToUpper
+                Else
+                    Return "PNG"
+                End If
+            Catch ex As Exception
+                Return "PNG"
+            End Try
+        End Get
+    End Property
 #End Region
 
-
+    Dim BL As New VDM_BL
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
 
@@ -38,7 +50,20 @@
             Session.Remove("LANGUAGE")
             Session.Remove("Accept_Contact_EMP")
             Session.Remove("Customer_IDCard")
-            Session.Remove("Customer_Passport")
+        Session.Remove("Customer_Passport")
+
+
+        ''----Image 
+        If POSTER_TYPE = "MP4" Then
+            'video_tvc.Src = BL.PicturePath & "\Poster\TVC\" & KO_ID & ".mp4"
+            'Poster_Img.Src = BL.PicturePath & "\Poster\Image\pic-home-tvc.png"
+            video_tvc.Src = "Poster\tvc\" & KO_ID & ".mp4"
+            Poster_Img.Src = "Poster\image\pic-home-tvc.png"
+        Else
+            div_video.Visible = False
+            Poster_Img.Src = "Poster\image\" & KO_ID & ".png"
+        End If
+
     End Sub
 
     Private Sub TH_ServerClick(sender As Object, e As EventArgs) Handles TH.ServerClick

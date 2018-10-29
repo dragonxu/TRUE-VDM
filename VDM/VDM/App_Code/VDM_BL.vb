@@ -1531,12 +1531,15 @@ Public Class VDM_BL
 
 #Region "Kiosk Product"
 
-    Public Function GetList_Current_Brand_Kiosk(Optional ByVal KO_ID As Integer = 0) As DataTable
+    Public Function GetList_Current_Brand_Kiosk(Optional ByVal KO_ID As Integer = 0, Optional ByVal CAT_ID As Integer = 0) As DataTable
         Dim SQL As String = ""
-        SQL &= "   Select DISTINCT MS_BRAND.BRAND_ID , MS_BRAND.BRAND_NAME" & vbLf
+        SQL &= "   Select DISTINCT MS_BRAND.BRAND_ID , MS_BRAND.BRAND_NAME  ,ISNULL(CAT_ID ,1) CAT_ID" & vbLf
         SQL &= "   From VW_CURRENT_PRODUCT_STOCK" & vbLf
         SQL &= "   INNER Join MS_BRAND ON MS_BRAND.BRAND_ID=VW_CURRENT_PRODUCT_STOCK.BRAND_ID" & vbLf
         SQL &= "   WHERE KO_ID =" & KO_ID & " And MS_BRAND.Active_Status = 1" & vbLf
+        If CAT_ID > 0 Then
+            SQL &= " And ISNULL(CAT_ID ,1)=" & CAT_ID & vbLf
+        End If
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)

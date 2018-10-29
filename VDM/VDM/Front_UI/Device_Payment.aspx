@@ -388,14 +388,14 @@
                         <div class="fancybox-wrap fancybox-desktop fancybox-type-inline fancybox-opened" tabindex="-1" style="width: auto; height: auto; position: fixed; top: 10%; left: 20%; right: 20%; bottom: 35%; opacity: 1; overflow: visible;">
                             <div class="fancybox-skin" style="padding: 0px; width: 100%; height: 100%;">
                                 <div class="fancybox-outer">
-                                    <div class="fancybox-inner" style="overflow: visible; width: 100%; height: 100%;">
+                                    <div class="fancybox-inner" style="overflow: visible; width: 100%; height: 100%; ">
                                         <div id="popup2" style="display: block;">
 
-                                            <div class="privilege" style="width:100%; height:100%; text-align:center; position:relative;">
+                                            <div class="privilege" style="width:100%; height:100%; text-align:center; position:relative;"> 
+                                          <%--<iframe id="paymentGatewayWindow" runat="server" style=" position:absolute; left:10px; width:90%; height:90%;transform: scale(1.1); " >--%>
+                                              <iframe id="paymentGatewayWindow" runat="server" style="position:absolute;top: 50px;left: 40px;width:90%;height:90%;transform: scale(1.1);" >
 
-                                              <iframe id="paymentGatewayWindow" runat="server" style=" position:absolute; left:10px; width:90%; height:90%;" >
-
-                                              </iframe>
+                                              </iframe>  
                                               <asp:TextBox ID="txtCreditReq" runat="server" style="display:none;" />
                                               <asp:Button ID="btnCreditComplete" runat="server" style="display:none;" />
                                             </div>
@@ -416,7 +416,7 @@
                 <div id="TrueMoneyError" class="popup">
                     <div class="popup-frame">
                     <h3 class="true-m">ท่านไม่สามารถชำระค่าบริการ<br/>ผ่านช่องทางนี้ได้</h3>
-                    <div class="icon"><img src="images/Popup/icon-truemoneyError.png"/></div>
+                    <div class="icon"><img src="images/Popup/icon-truemoneyError-gif.gif"/></div>
                     <h4 class="true-b small" style="font-size: 30px;">
                         PAYMENT CODE : <asp:Label ID="lblTMNPaymentCode" runat="server"></asp:Label><br>
                     </h4>
@@ -429,12 +429,35 @@
                 <div id="CreditCardError" class="popup">
                   <div class="popup-frame">
                     <h3 class="true-m">บัตรเครดิตของท่านไม่สามารถทำรายการได้</h3>
-                    <div class="icon"><img src="images/Popup/icon-creditError.png"/></div>
+                    <div class="icon"><img src="images/Popup/icon-creditError-gif.gif"/></div>
                     <h4 class="true-b">กรุณาเปลี่ยนบัตรใหม่</h4>
                     <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close(); closeCredit();" href="javascript:;">ตกลง</a></div>
                   </div>
                 </div>
                 <a id="lnkCreditCardError" href="#CreditCardError" style="display:none;">Credit Card Error</a>
+
+
+                <div id="CashTimeOut" class="popup">
+                    <div class="popup-frame">
+                    <h3 class="true-m">ชำระเกินระยะเวลาที่กำหนด</h3>
+                    <div class="icon"><img src="images/Popup/icon-cash-error-gif.gif"/></div>
+                    
+                    <h4 class="true-b">เริ่มใหม่</h4>
+                    <div class="bottom"><a class="btu true-l" onclick="location.href=location.href;" href="javascript:;">ตกลง</a></div>
+                    </div>
+                </div>
+                <a id="lnkCashTimeOut" href="#CashTimeOut" style="display:none;">Cash TimeOut</a>
+
+                <div id="CashError" class="popup">
+                    <div class="popup-frame">
+                    <h3 class="true-m">ชำระเกินระยะเวลาที่กำหนด</h3>
+                    <div class="icon"><img src="images/Popup/icon-cash-error-gif.gif"/></div>
+                    
+                    <h4 class="true-b">กรุณาติดต่อพนักงาน</h4>
+                    <div class="bottom"><a class="btu true-l"   href="javascript:;">ตกลง</a></div>
+                    </div>
+                </div>
+                <a id="lnkCashError" href="#CashError" style="display:none;">Cash Error</a>
                 <!-----Popup------>
 
             </ContentTemplate>
@@ -544,6 +567,8 @@
 
             $("#lnkTrueMoneyError").fancybox();
             $("#lnkCreditCardError").fancybox();
+            $("#lnkCashTimeOut").fancybox();
+            $("#lnkCashError").fancybox();
 
             setTimeout(function () { $("#btnFirstTime").click();} , 600) ; // Click for postback single time
 
@@ -558,6 +583,13 @@
 
             function showCreditCardError() {
                 $("#lnkCreditCardError").click();
+            }
+
+            function showCashTimeOut() {
+                $('#lnkCashTimeOut').click();
+            }
+            function showCashError() {
+                $('#lnkCashError').click();
             }
 
             

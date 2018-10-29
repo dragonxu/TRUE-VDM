@@ -239,20 +239,47 @@ Public Class Device_Shoping_Cart
 
     End Sub
 
-    Private Sub btnConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
+    Private Sub btnConfirm_ServerClick(sender As Object, e As EventArgs) Handles btnConfirm.Click
         If Not chkActive.Checked Then Exit Sub
+        'ใบเสร็จรับเงินฉบับจริง
+        Dim Script As String = "$(""#lnkSlip"").click();" & vbNewLine
+        Script &= " requestSlip();"
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Slip", Script, True)
 
+    End Sub
+
+    Private Sub btnNextSlip_ServerClick(sender As Object, e As EventArgs) Handles btnNextSlip.ServerClick
         If PRODUCT_ID <> 0 Then
             Response.Redirect("Device_Payment.aspx?PRODUCT_ID=" & PRODUCT_ID)
         Else
-            Response.Redirect("Device_Verify.aspx?SIM_ID=" & SIM_ID)
-        End If
 
+            Dim Script As String = "$(""#btnVerifySlip"").click();" & vbNewLine
+            Script &= " requestVerifySlip();"
+            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "VerifySlip", Script, True)
+
+        End If
     End Sub
+
 
     Private Sub btnVerify_Click(sender As Object, e As EventArgs) Handles btnVerify.Click
         If Not chkActive.Checked Then Exit Sub
 
+        '--ใบเสร็จรับเงินฉบับจริง
+        Dim Script As String = "$(""#lnkSlip"").click();" & vbNewLine
+        Script &= " requestSlip();"
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Slip", Script, True)
+
+
+        'Dim Script As String = "$(""#clickIDCard"").click();" & vbNewLine
+        'If LANGUAGE = VDM_BL.UILanguage.TH Then
+        '    Script &= " requestIDCard();"
+        'Else
+        '    Script &= " requestPassport();"
+        'End If
+        'ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "StartScan", Script, True)
+    End Sub
+
+    Private Sub btnVerifySlip_Click(sender As Object, e As EventArgs) Handles btnVerifySlip.Click
         Dim Script As String = "$(""#clickIDCard"").click();" & vbNewLine
         If LANGUAGE = VDM_BL.UILanguage.TH Then
             Script &= " requestIDCard();"
@@ -468,4 +495,6 @@ Public Class Device_Shoping_Cart
         End If
         Response.Redirect("Device_Verify.aspx?SIM_ID=" & SIM_ID)
     End Sub
+
+
 End Class

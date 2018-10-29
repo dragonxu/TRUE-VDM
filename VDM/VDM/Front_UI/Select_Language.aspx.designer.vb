@@ -23,13 +23,31 @@ Partial Public Class Select_Language
     Protected WithEvents form As Global.System.Web.UI.HtmlControls.HtmlForm
     
     '''<summary>
-    '''UC_CommonUI control.
+    '''div_video control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UC_CommonUI As Global.VDM.UC_CommonUI
+    Protected WithEvents div_video As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''video_tvc control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents video_tvc As Global.System.Web.UI.HtmlControls.HtmlSource
+    
+    '''<summary>
+    '''Poster_Img control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Poster_Img As Global.System.Web.UI.HtmlControls.HtmlImage
     
     '''<summary>
     '''TH control.
@@ -84,4 +102,13 @@ Partial Public Class Select_Language
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RU As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''UC_CommonUI control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UC_CommonUI As Global.VDM.UC_CommonUI
 End Class

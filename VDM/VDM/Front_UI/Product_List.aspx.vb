@@ -98,6 +98,7 @@ Public Class Product_List
     End Property
 
 
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsNumeric(Session("LANGUAGE")) Then
             Response.Redirect("Select_Language.aspx")
@@ -118,14 +119,14 @@ Public Class Product_List
     Dim DT_Product As DataTable
     Private Sub BindList()
         Dim SQL As String = ""
-        SQL &= " Select DISTINCT VW_ALL_PRODUCT.MODEL,VW_ALL_PRODUCT.BRAND_ID,VW_ALL_PRODUCT.BRAND_CODE,VW_ALL_PRODUCT.BRAND_NAME,VW_ALL_PRODUCT.CAT_ID " & vbLf
+        SQL &= " Select DISTINCT VW_ALL_PRODUCT.MODEL,VW_ALL_PRODUCT.BRAND_ID,VW_ALL_PRODUCT.BRAND_CODE,VW_ALL_PRODUCT.BRAND_NAME,ISnull(VW_ALL_PRODUCT.CAT_ID,1) CAT_ID  " & vbLf
         SQL &= " From VW_ALL_PRODUCT " & vbLf
         SQL &= " INNER Join VW_CURRENT_PRODUCT_STOCK ON VW_CURRENT_PRODUCT_STOCK.PRODUCT_ID= VW_ALL_PRODUCT.PRODUCT_ID " & vbLf
         SQL &= " WHERE VW_CURRENT_PRODUCT_STOCK.KO_ID = " & KO_ID & "  AND  VW_ALL_PRODUCT.BRAND_ID=" & BRAND_ID
         If CAT_ID > 0 Then
-            SQL &= " And VW_ALL_PRODUCT.CAT_ID = " & CAT_ID
+            SQL &= " And ISnull(VW_ALL_PRODUCT.CAT_ID,1) = " & CAT_ID
         End If
-        SQL &= " ORDER BY VW_ALL_PRODUCT.CAT_ID , VW_ALL_PRODUCT.MODEL "
+        'SQL &= " ORDER BY VW_ALL_PRODUCT.CAT_ID , VW_ALL_PRODUCT.MODEL "
         Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)
@@ -237,7 +238,7 @@ Public Class Product_List
 
         Select Case e.CommandName
             Case "Select"
-                Response.Redirect("Device_Product_Detail.aspx?PRODUCT_ID=" & e.CommandArgument & "&BRAND_ID=" & BRAND_ID) '& "&MODEL=" & lblProduct.Text)
+                Response.Redirect("Device_Product_Detail.aspx?PRODUCT_ID=" & e.CommandArgument & "&BRAND_ID=" & BRAND_ID & "&CAT_ID=" & CAT_ID) '& "&MODEL=" & lblProduct.Text)
 
         End Select
     End Sub
@@ -247,6 +248,6 @@ Public Class Product_List
     End Sub
 
     Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click
-        Response.Redirect("Device_Brand.aspx")
+        Response.Redirect("Device_Brand.aspx?CAT_ID=" & CAT_ID)
     End Sub
 End Class
