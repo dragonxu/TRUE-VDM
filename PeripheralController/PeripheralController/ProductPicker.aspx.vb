@@ -68,10 +68,17 @@ Public Class ProductPicker
 
         Controller.SetIP(BL.Product_Picker_IP, BL.Product_Picker_Port)
         Controller.Connect()
+        Controller.CloseGate()
 
         Select Case Mode.ToUpper
             Case "SetHome".ToUpper
                 SetHome()
+            Case "CloseGate".ToUpper
+                CloseGate()
+            Case "OpenGate".ToUpper
+                OpenGate()
+            Case "MoveTo".ToUpper
+                MoveTo()
             Case "GoPick".ToUpper
                 GoPick()
         End Select
@@ -79,6 +86,21 @@ Public Class ProductPicker
 
     Private Sub SetHome()
         Dim Result As Boolean = Controller.HomePosition()
+        callBack(Result, "")
+    End Sub
+
+    Private Sub CloseGate()
+        Dim Result As Boolean = Controller.CloseGate()
+        callBack(Result, "")
+    End Sub
+
+    Private Sub OpenGate()
+        Dim Result As Boolean = Controller.BasketPickUp()
+        callBack(Result, "")
+    End Sub
+
+    Private Sub MoveTo()
+        Dim Result As Boolean = Controller.PositionMove(POS_ID)
         callBack(Result, "")
     End Sub
 
