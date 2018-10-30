@@ -10,19 +10,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/CashDispenser.dll">
-      <publishTime>10/22/2018 21:01:00</publishTime>
+      <publishTime>10/30/2018 12:11:10</publishTime>
     </File>
     <File Include="bin/CashReceiver.dll">
-      <publishTime>10/22/2018 21:01:00</publishTime>
+      <publishTime>10/30/2018 12:11:10</publishTime>
     </File>
     <File Include="bin/CoinDispenser.dll">
-      <publishTime>10/22/2018 21:01:00</publishTime>
+      <publishTime>10/30/2018 12:11:10</publishTime>
     </File>
     <File Include="bin/CoinReciever.dll">
-      <publishTime>10/22/2018 21:01:00</publishTime>
+      <publishTime>10/30/2018 12:11:10</publishTime>
     </File>
     <File Include="bin/Controller.dll">
-      <publishTime>10/22/2018 21:01:01</publishTime>
+      <publishTime>10/30/2018 12:11:12</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>09/05/2018 16:10:50</publishTime>
@@ -34,7 +34,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/24/2018 15:18:44</publishTime>
     </File>
     <File Include="bin/PeripheralController.dll">
-      <publishTime>10/23/2018 19:58:54</publishTime>
+      <publishTime>10/30/2018 12:11:22</publishTime>
     </File>
     <File Include="bin/PeripheralController.xml">
       <publishTime>10/22/2018 19:39:04</publishTime>
@@ -187,10 +187,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/08/2018 12:18:16</publishTime>
     </File>
     <File Include="bin/SimDispenser.dll">
-      <publishTime>10/22/2018 02:07:05</publishTime>
+      <publishTime>10/30/2018 12:11:12</publishTime>
     </File>
     <File Include="bin/ThaiNationalIDCard.dll">
-      <publishTime>10/22/2018 21:01:01</publishTime>
+      <publishTime>10/30/2018 12:11:12</publishTime>
     </File>
     <File Include="CashDispense.aspx">
       <publishTime>10/22/2018 18:14:51</publishTime>

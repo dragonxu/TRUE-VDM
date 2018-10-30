@@ -114,8 +114,7 @@
             </footer>
 
         </div>
-
-
+        
 <asp:UpdatePanel ID="UDPTerm" runat="server">
         <ContentTemplate>
 
