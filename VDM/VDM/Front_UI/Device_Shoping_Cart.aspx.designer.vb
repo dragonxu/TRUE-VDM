@@ -149,6 +149,15 @@ Partial Public Class Device_Shoping_Cart
     Protected WithEvents btnVerify As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
+    '''btnVerifySlip control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnVerifySlip As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
     '''lnkHome control.
     '''</summary>
     '''<remarks>
@@ -570,6 +579,24 @@ Partial Public Class Device_Shoping_Cart
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents clickPassportCross As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''btnNextSlip control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnNextSlip As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''lnkSlip control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkSlip As Global.System.Web.UI.HtmlControls.HtmlAnchor
     
     '''<summary>
     '''clickCamTrigger control.

@@ -139,8 +139,11 @@
                         </label>
 
                         <div class="col-md-12" style="text-align: center;">
-                                <asp:Button ID="btnConfirm" runat="server" CssClass="order true-m default " Text="ชำระเงิน" />
+                                <asp:Button ID="btnConfirm" runat="server"  CssClass="order true-m default " Text="ชำระเงิน" />
+                                  <%--  <a id="lnkSlip" class="test-click true-bs" href="#popupTH">ชำระเงิน</a>--%>
+                               <%-- <a ID="lnkTH" runat="server"  href="#popupTH"  CssClass="order true-m default " >ชำระเงิน</a>--%>
                                 <asp:Button ID="btnVerify" runat="server" CssClass="order true-m default " Text="สั่งซื้อ" />
+                                <asp:Button ID="btnVerifySlip" runat="server" CssClass="order true-m default " Text="สั่งซื้อ" Style ="display:none;" />
                         </div>
                 </ContentTemplate>
                 </asp:UpdatePanel>
@@ -219,7 +222,7 @@
         <div id="popupIDCard" class="popup" >
           <div class="popup-frame" >
                 <h3 class="true-m">ขั้นตอนการยืนยันตัวบุคคล</h3>
-                <div class="icon"><img src="images/Popup/icon-idcard.png"/></div>
+                <div class="icon"><img src="images/Popup/icon-idcard-gif.gif"/></div>
                 <h4 class="true-b" style="padding-bottom:30px;">กรุณาสอดบัตรประชาชนของท่าน</h4>
           </div>
         </div>
@@ -228,7 +231,7 @@
         <div id="popupIDCardAlert" class="popup" >
             <div class="popup-frame" >
                 <h3 class="true-m" id="idCardAlertReason">xxxxxxxxxxxxxxxx</h3>
-                <div class="icon"><img src="images/Popup/icon-idcard-alert.png"/></div>
+                <div class="icon"><img src="images/Popup/icon-idcard-alert-gif.gif"/></div>
                 <h4 class="true-b">กรุณาเสียบบัตรใหม่</h4>
                 <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;">ตกลง</a></div>
             </div>
@@ -238,7 +241,7 @@
         <div id="popupIDCardCross" class="popup" >
             <div class="popup-frame" >
                 <h3 class="true-m" id="idCardCrossReason">xxxxxxxxxxxxxxxxx</h3>
-                <div class="icon"><img src="images/Popup/icon-idcard-cross.png"/></div>
+                <div class="icon"><img src="images/Popup/icon-idcard-cross-gif.gif"/></div>
                 <h4 class="true-b">กรุณาเปลี่ยนบัตรใหม่</h4>
                 <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;">ตกลง</a></div>
             </div>
@@ -248,7 +251,7 @@
         <div id="popupPassportAlert" class="popup" >
             <div class="popup-frame" >
                 <h3 class="true-m" id="passportAlertReason">xxxxxxxxxxxxxxxx</h3>
-                <div class="icon"><img src="images/Popup/icon-idcard-alert.png"/></div>
+                <div class="icon"><img src="images/Popup/icon-idcard-alert-gif.gif"/></div>
                 <h4 class="true-b">Please try again</h4>
                 <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;">OK</a></div>
             </div>
@@ -258,12 +261,29 @@
         <div id="popupPassportCross" class="popup" >
             <div class="popup-frame" >
                 <h3 class="true-m" id="passportCrossReason">xxxxxxxxxxxxxxxxx</h3>
-                <div class="icon"><img src="images/Popup/icon-idcard-cross.png"/></div>
+                <div class="icon"><img src="images/Popup/icon-idcard-cross-gif.gif"/></div>
                 <h4 class="true-b">Please try another document</h4>
                 <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;">OK</a></div>
             </div>
         </div>
         <a id="clickPassportCross" runat="server" style="display:none;"  href="#popupPassportCross">Click</a>
+
+
+        <div id="popupSlip" class="popup">
+            <div class="popup-frame">
+                <h3 class="true-m half">หากท่านต้องการ<br />
+                    ใบเสร็จรับเงินฉบับจริง<br />
+                    หรือใบกำกับภาษี</h3>
+                <div class="icon half">
+                    <img src="images/popup/icon-Tax-gif.gif" />
+                </div>
+                <h4 class="true-b">กรุณาติดต่อพนักงานก่อนทำรายการ</h4>
+                <div class="bottom">  
+                   <div class="bottom"><a id="btnNextSlip" runat="server" class="btu true-l">ดำเนินการต่อ</a></div> 
+                </div>
+            </div>
+        </div>
+        <a id="lnkSlip" runat="server" style="display:none;" href="#popupSlip">Slip</a>
 
         <div id="popupCam" class="popup" >
             <div class="popup-frame" style="width:0px; height:0px;" >
@@ -277,6 +297,7 @@
 </form>
 </body>
     <script type="text/javascript">
+        $("#lnkSlip").fancybox();
         $("#clickIDCard").fancybox();
         $("#clickIDCardAlert").fancybox();
         $("#clickIDCardCross").fancybox();
@@ -296,7 +317,7 @@
     <script type="text/javascript">
 
     function requestIDCard() {
-            // Gen URL
+        // Gen URL
             var url =  $('#txtLocalControllerURL').val() + '/ScanIDCard.aspx?timeout=30&callback=updateIDCard&callbackError=verifyError';              
             var script = document.createElement('script');
             script.src = url;
@@ -423,6 +444,14 @@
         
         $('#txtCamData').val(blob);
         $('#btnPostCam').click();
+    }
+
+    function requestSlip() {
+        $('#lnkSlip').click();
+    }
+
+    function requestVerifySlip() {
+        $('#btnVerifySlip').click();
     }
 
     </script>

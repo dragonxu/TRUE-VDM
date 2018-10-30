@@ -23,6 +23,24 @@ Partial Public Class Select_Menu
     Protected WithEvents lnkDevice As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
+    '''Accessories control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Accessories As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''lnkAccessories control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkAccessories As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''lnkSim control.
     '''</summary>
     '''<remarks>

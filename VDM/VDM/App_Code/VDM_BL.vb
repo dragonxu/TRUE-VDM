@@ -213,6 +213,7 @@ Public Class VDM_BL
         Public FaceCamera As String = ""
         Public Face_Recognition_Result As String = ""
         Public Confident_Ratio As String = ""
+        Public Face_Is_Identical As String = ""
         Public Face_Certificate_ID As String = ""
         Public Face_Capture_ID As String = ""
     End Class
@@ -235,6 +236,7 @@ Public Class VDM_BL
         Public FaceCamera As String = ""
         Public Face_Recognition_Result As String = ""
         Public Confident_Ratio As String = ""
+        Public Face_Is_Identical As String = ""
         Public Face_Certificate_ID As String = ""
         Public Face_Capture_ID As String = ""
     End Class
@@ -289,8 +291,10 @@ Public Class VDM_BL
         DR("FaceCamera") = CUSTOMER.FaceCamera
         DR("Face_Recognition_Result") = CUSTOMER.Face_Recognition_Result
         DR("Confident_Ratio") = CUSTOMER.Confident_Ratio
+        DR("Face_Is_Identical") = CUSTOMER.Face_Is_Identical
         DR("Face_Certificate_ID") = CUSTOMER.Face_Certificate_ID
         DR("Face_Capture_ID") = CUSTOMER.Face_Capture_ID
+
         DR("Update_Time") = Now
 
         Dim cmd As New SqlCommandBuilder(DA)
@@ -357,6 +361,7 @@ Public Class VDM_BL
         DR("FaceCamera") = CUSTOMER.FaceCamera
         DR("Face_Recognition_Result") = CUSTOMER.Face_Recognition_Result
         DR("Confident_Ratio") = CUSTOMER.Confident_Ratio
+        DR("Face_Is_Identical") = CUSTOMER.Face_Is_Identical
         DR("Face_Certificate_ID") = CUSTOMER.Face_Certificate_ID
         DR("Face_Capture_ID") = CUSTOMER.Face_Capture_ID
         DR("Update_Time") = Now
@@ -1526,12 +1531,15 @@ Public Class VDM_BL
 
 #Region "Kiosk Product"
 
-    Public Function GetList_Current_Brand_Kiosk(Optional ByVal KO_ID As Integer = 0) As DataTable
+    Public Function GetList_Current_Brand_Kiosk(Optional ByVal KO_ID As Integer = 0, Optional ByVal CAT_ID As Integer = 0) As DataTable
         Dim SQL As String = ""
-        SQL &= "   Select DISTINCT MS_BRAND.BRAND_ID , MS_BRAND.BRAND_NAME" & vbLf
+        SQL &= "   Select DISTINCT MS_BRAND.BRAND_ID , MS_BRAND.BRAND_NAME  ,ISNULL(CAT_ID ,1) CAT_ID" & vbLf
         SQL &= "   From VW_CURRENT_PRODUCT_STOCK" & vbLf
         SQL &= "   INNER Join MS_BRAND ON MS_BRAND.BRAND_ID=VW_CURRENT_PRODUCT_STOCK.BRAND_ID" & vbLf
         SQL &= "   WHERE KO_ID =" & KO_ID & " And MS_BRAND.Active_Status = 1" & vbLf
+        If CAT_ID > 0 Then
+            SQL &= " And ISNULL(CAT_ID ,1)=" & CAT_ID & vbLf
+        End If
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)
@@ -2049,6 +2057,14 @@ Public Class VDM_BL
         SQL &= "	WHERE SLIP_YEAR=RIGHT(DATEPART(yyyy,GETDATE()),2) AND " & vbLf
         SQL &= "	CAST(SLIP_MONTH AS INT)=DATEPART(MM,GETDATE()) AND" & vbLf
         SQL &= "	CAST(SLIP_DAY AS INT)=DATEPART(dd,GETDATE())" & vbLf
+
+        SQL &= "	UNION ALL " & vbLf
+        SQL &= "" & vbLf
+        SQL &= "	SELECT ISNULL(MAX(CAST(SLIP_NO AS INT)),0)+1 SLIP_NO" & vbLf
+        SQL &= "	FROM TB_TRANSACTION_CREDITCARD" & vbLf
+        SQL &= "	WHERE SLIP_YEAR=RIGHT(DATEPART(yyyy,GETDATE()),2) AND " & vbLf
+        SQL &= "	CAST(SLIP_MONTH AS INT)=DATEPART(MM,GETDATE()) AND" & vbLf
+        SQL &= "	CAST(SLIP_DAY AS INT)=DATEPART(dd,GETDATE())" & vbLf
         SQL &= ") A ORDER BY SLIP_NO DESC" & vbLf
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         Dim DT As New DataTable
@@ -2270,6 +2286,21 @@ Public Class VDM_BL
         Return Content
     End Function
 
+    Public Function GET_TXN_CODE(ByVal TXN_ID As Integer) As String
+        Dim SQL As String = "SELECT dbo.FN_TXN_CODE(SITE_CODE,KO_ID,TXN_Y,TXN_M,TXN_D,TXN_N) TXN_Code" & vbLf
+        SQL &= " FROM TB_SERVICE_TRANSACTION " & vbLf
+        SQL &= " WHERE TXN_ID = " & TXN_ID & vbLf
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        DA.Fill(DT)
+        If DT.Rows.Count > 0 Then
+            Return DT.Rows(0)(0)
+        Else
+            Return ""
+        End If
+    End Function
+
+
     Public Sub UPDATE_CONFIRMATION_SLIP(ByVal TXN_ID As Integer, ByVal Content As String)
 
         Dim SQL As String = "SELECT METHOD_ID FROM TB_SERVICE_TRANSACTION WHERE TXN_ID=" & TXN_ID
@@ -2414,8 +2445,8 @@ Public Class VDM_BL
 
 #End Region
 
-    Public Function GET_TXN_PREPAID_REGISTER(ByVal TXN_ID As Integer)
-        Dim SQL As String = "SELECT * FROM VW_TXN_PREPAID_REGISTER WHERE TXN_ID=" & TXN_ID
+    Public Function GET_TXN_SIM_PAID(ByVal TXN_ID As Integer)
+        Dim SQL As String = "SELECT * FROM VW_TXN_SIM_PAID WHERE TXN_ID=" & TXN_ID
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         DA.Fill(DT)

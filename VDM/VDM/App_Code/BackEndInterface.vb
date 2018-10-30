@@ -539,6 +539,7 @@ Public Class BackEndInterface
                 ByVal customer_firstname As String,
                 ByVal customer_lastname As String,
                 ByVal customer_birthdate As String,
+                ByVal doc_type As String,
                 ByVal customer_id_number As String,
                 ByVal customer_id_expire_date As String,
                 ByVal address_number As String,
@@ -580,7 +581,7 @@ Public Class BackEndInterface
             PostString &= "            ""lastname"": """ & customer_lastname & """,	" & vbLf
             PostString &= "            ""birthdate"": """ & customer_birthdate & """,	" & vbLf
             PostString &= "            ""customer-type"": ""P"",	" & vbLf
-            PostString &= "            ""id-type"": ""I"",	" & vbLf
+            PostString &= "            ""id-type"": """ & doc_type & """,	" & vbLf
             PostString &= "            ""id-number"": """ & customer_id_number & """,	" & vbLf
             PostString &= "            ""id-expire-date"": """ & customer_id_expire_date & """,	" & vbLf
             PostString &= "            ""customer-level"": ""NON-TOP"",	" & vbLf
@@ -1293,158 +1294,136 @@ Public Class BackEndInterface
         End Class
 
         '----------------- Function นี้ควร Return เป็น CommandResult จะได้ทั้งผลลัพธ์และ Error Message------------
-        Public Function Get_Result(Face_cust_certificate As String, Face_cust_capture As String, SIM_Serial As String, KO_ID As Integer, USER_ID As Integer, TXN_ID As Integer, Optional ByVal LANGUAGE As VDM_BL.UILanguage = VDM_BL.UILanguage.TH, Optional ByVal Customer_IDCard As VDM_BL.Customer_IDCard = Nothing, Optional ByVal Customer_Passport As VDM_BL.Customer_Passport = Nothing) As Boolean
-            Dim Result_Register As Boolean = True
-            Dim SHOP_CODE As String = GET_SHOP_CODE(KO_ID)
-            Dim Cust_Info As New CUSTOMER_INFO
-
-            Dim SQL As String = "SELECT * FROM TB_CUSTOMER WHERE CUS_ID=" & BL.GET_TXN_CUS_ID(TXN_ID)
-            Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
-            Dim DT_Customer_Info As New DataTable
-            DA.Fill(DT_Customer_Info)
-            If DT_Customer_Info.Rows.Count > 0 Then
-                Cust_Info.CUS_ID = DT_Customer_Info.Rows(0).Item("CUS_ID")
-                Cust_Info.CUS_TITLE = DT_Customer_Info.Rows(0).Item("CUS_TITLE")
-                Cust_Info.CUS_NAME = DT_Customer_Info.Rows(0).Item("CUS_NAME")
-                Cust_Info.CUS_SURNAME = DT_Customer_Info.Rows(0).Item("CUS_SURNAME")
-                Cust_Info.NAT_CODE = DT_Customer_Info.Rows(0).Item("NAT_CODE")
-                Cust_Info.CUS_GENDER = DT_Customer_Info.Rows(0).Item("CUS_GENDER")
-                Cust_Info.CUS_BIRTHDATE = DT_Customer_Info.Rows(0).Item("CUS_BIRTHDATE")
-                Cust_Info.CUS_PID = IIf(Not IsDBNull(DT_Customer_Info.Rows(0).Item("CUS_PID")), DT_Customer_Info.Rows(0).Item("CUS_PID"), "")
-                Cust_Info.CUS_PASSPORT_ID = IIf(Not IsDBNull(DT_Customer_Info.Rows(0).Item("CUS_PASSPORT_ID")), DT_Customer_Info.Rows(0).Item("CUS_PASSPORT_ID"), "")
-                Cust_Info.CUS_PASSPORT_START = DT_Customer_Info.Rows(0).Item("CUS_PASSPORT_START")
-                Cust_Info.CUS_PASSPORT_EXPIRE = DT_Customer_Info.Rows(0).Item("CUS_PASSPORT_EXPIRE")
-                'Cust_Info.CUS_IMAGE = DT_Customer_Info.Rows(0).Item("CUS_IMAGE")
-            End If
+        Public Function Get_Result(
+                                   ByVal CUS_TITLE As String,
+                                    ByVal CUS_NAME As String,
+                                    ByVal CUS_SURNAME As String,
+                                    ByVal NAT_CODE As String,
+                                    ByVal CUS_GENDER As String,
+                                    ByVal CUS_BIRTHDATE As String,
+                                    ByVal CUS_PID As String,
+                                    ByVal DOC_TYPE As String,
+                                    ByVal CUS_DOC_EXPIRE As String,
+                                    ByVal Base64_Certificate As String,
+                                    ByVal Base64_capture As String,
+                                    ByVal face_recognition_result As String,
+                                    ByVal is_identical As String,
+                                    ByVal confident_ratio As String,
+                                    ByVal address_number As String,
+                                    ByVal address_moo As String,
+                                    ByVal address_village As String,
+                                    ByVal address_street As String,
+                                    ByVal address_soi As String,
+                                    ByVal address_district As String,
+                                    ByVal address_province As String,
+                                    ByVal address_building_name As String,
+                                    ByVal address_building_room As String,
+                                    ByVal address_building_floor As String,
+                                    ByVal sddress_sub_district As String,
+                                    ByVal address_zip As String,
+                                    ByVal SIM_Serial As String,
+                                    ByVal KO_ID As Integer,
+                                    ByVal SHOP_CODE As String,
+                                    ByVal USER_ID As Integer,
+                                    ByVal TXN_ID As Integer,
+                                    ByVal TXN_CODE As String) As Command_Result
 
 
             Dim Result As New Command_Result
-            Dim Base64_Certificate As String = ""
-            Dim Base64_capture As String = ""
-            Dim address_number As String = ""
-            Dim address_moo As String = ""
-            Dim address_village As String = ""
-            Dim address_street As String = ""
-            Dim address_soi As String = ""
-            Dim address_district As String = ""
-            Dim address_province As String = ""
-            Dim address_building_name As String = ""
-            Dim address_building_room As String = ""
-            Dim address_building_floor As String = ""
-            Dim sddress_sub_district As String = ""
-            Dim address_zip As String = ""
-            If LANGUAGE = VDM_BL.UILanguage.TH Then
-                Dim cus As New VDM_BL.Customer_IDCard
-                If Not IsNothing(Customer_IDCard) Then
-                    cus = Customer_IDCard
-                    address_number = cus.addrHouseNo
-                    address_moo = "-"
-                    address_village = cus.addrVillageNo
-                    address_street = cus.addrRoad
-                    address_soi = "-"
-                    address_district = cus.addrAmphur
-                    address_province = cus.addrProvince
-                    address_building_name = "-"
-                    address_building_room = "-"
-                    address_building_floor = "-"
-                    sddress_sub_district = "-"
-                    address_zip = "-"
-                    Base64_Certificate = cus.Photo
-                    Base64_capture = cus.FaceCamera
-                End If
-            Else
-                Dim cus As New VDM_BL.Customer_Passport
-                If Not IsNothing(Customer_Passport) Then
-                    cus = Customer_Passport
-                    address_number = "-"
-                    address_moo = "-"
-                    address_village = "-"
-                    address_street = "-"
-                    address_soi = "-"
-                    address_district = "-"
-                    address_province = "-"
-                    address_building_name = "-"
-                    address_building_room = "-"
-                    address_building_floor = "-"
-                    sddress_sub_district = "-"
-                    address_zip = "-"
-                    Base64_Certificate = cus.Photo
-                    Base64_capture = cus.FaceCamera
-                End If
-            End If
+            Result.Status = False
+            Result.Message = ""
+
 #Region "Face_Recognition"
-            Dim BackEndFace_Recognition As New Face_Recognition
-            Dim Response_Face_Recognition As New BackEndInterface.Face_Recognition.Response
-            'Dim Base64_Certificate As String = Face_cust_certificate
-            'Dim Base64_capture As String = Face_cust_capture
-            Response_Face_Recognition = BackEndFace_Recognition.Get_Result(SHOP_CODE, IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID), Base64_Certificate, Base64_capture, 1)
+            '--ไม่ต้องแล้วเนื่องจาก Save ลงตารางตั้งแต่ Verify 
+#End Region
+
+#Region "Validate_Serial"
+            Dim BackEndValidate_Serial As New Validate_Serial
+            Dim Response_Validate_Serial As New BackEndInterface.Validate_Serial.Response
             Try
-                If Not IsNothing(Response_Face_Recognition) Then
-                    Result.Status = Response_Face_Recognition.status
-                    Result.Message = "CUS_ID:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID) & " Type:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), "I", "P") & "ยืนยันตัวตน Step Face_Recognition"
+                Response_Validate_Serial = BackEndValidate_Serial.Get_Result(SHOP_CODE, SIM_Serial)
+                If Response_Validate_Serial.ReturnValues(0).ToString <> "" Then
+                    Result.Message = "TXN : " & TXN_CODE & vbNewLine
+                    Result.Message &= "STEP : VALIDATE SERIAL" & vbNewLine
+                    Result.Message &= Response_Validate_Serial.ErrorMessage
+                    Return Result
+                Else
+                    Result.Message = "TXN : " & TXN_CODE & vbNewLine
+                    Result.Message &= "STEP : INVALID SERIAL" & vbNewLine
+                    Result.Message &= Response_Validate_Serial.ErrorMessage
+                    Return Result
+                    Exit Function  '--ดึงซิมใหม่
                 End If
             Catch ex As Exception
-                Result.Status = Response_Face_Recognition.status
-                Result.Message = "CUS_ID:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID) & " Type:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), "I", "P") & " Step Face_Recognition" & ex.Message
-                Result_Register = False
-                Return Result_Register
-                Exit Function
+                Result.Message = "TXN : " & TXN_CODE & vbNewLine
+                Result.Message &= "STEP : INVALID SERIAL" & vbNewLine
+                Result.Message &= ex.Message
+                Return Result
+                Exit Function  '--ดึงซิมใหม่
             End Try
+
+
 #End Region
+
+
 
 #Region "Prepaid_Validate_Register"
 
             Dim BackEndPrepaid_Validate_Register As New Prepaid_Validate_Register
             Dim Response_Prepaid_Validate As New BackEndInterface.Prepaid_Validate_Register.Response
-            Response_Prepaid_Validate = BackEndPrepaid_Validate_Register.Get_Result(SIM_Serial, IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID), IIf(Not IsDBNull(Cust_Info.CUS_PID), "I", "P"))
+
             Try
-                If Not IsNothing(Response_Prepaid_Validate) Then
-                    Result.Status = Response_Prepaid_Validate.status
-                    Result.Message = "CUS_ID:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID) & " Type:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), "I", "P") & " SIM_Serial:" & SIM_Serial & " Step Prepaid_Validate_Register"
+                Response_Prepaid_Validate = BackEndPrepaid_Validate_Register.Get_Result(SIM_Serial, CUS_PID, DOC_TYPE)
+                If Response_Prepaid_Validate.status <> "SUCCESSFUL" Then
+                    Result.Message = "TXN : " & TXN_CODE & vbNewLine
+                    Result.Message &= "STEP : VALIDATE REGISTER" & vbNewLine
+                    Result.Message &= Response_Prepaid_Validate.display_messages(0).th_message
+                    Return Result
                 End If
             Catch ex As Exception
-                Result.Status = Response_Prepaid_Validate.status
-                Result.Message = "CUS_ID:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID) & " Type:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), "I", "P") & " SIM_Serial:" & SIM_Serial & "Step Prepaid_Validate_Register" & ex.Message
-                Result_Register = False
-                Return Result_Register
-                Exit Function
+                Result.Message = "TXN : " & TXN_CODE & vbNewLine
+                Result.Message &= "STEP : VALIDATE REGISTER" & vbNewLine
+                Result.Message &= ex.Message
+                Return Result
             End Try
 #End Region
 
 #Region "Generate_Order_Id"
             Dim BackEndGenerate_Order_Id As New Generate_Order_Id
             Dim Response_Generate_Order_Id As New BackEndInterface.Generate_Order_Id.Response
-            Response_Generate_Order_Id = BackEndGenerate_Order_Id.Get_Result(SHOP_CODE)
             Try
-
-                If Not IsNothing(Response_Generate_Order_Id) Then
-                    Result.Status = Response_Generate_Order_Id.status
-                    Result.Message = "CUS_ID:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID) & " Type:" & IIf(Not IsDBNull(Cust_Info.CUS_PID), "I", "P") & " SIM_Serial:" & SIM_Serial & " Step Generate_Order_Id"
+                Response_Generate_Order_Id = BackEndGenerate_Order_Id.Get_Result(SHOP_CODE)
+                If Response_Generate_Order_Id.status <> "SUCCESSFUL" Then
+                    Result.Message = "TXN : " & TXN_CODE & vbNewLine
+                    Result.Message &= "STEP : GEN ORDER ID" & vbNewLine
+                    Result.Message &= Response_Generate_Order_Id.display_messages(0).th_message
+                    Return Result
                 End If
             Catch ex As Exception
-                Result.Status = Response_Generate_Order_Id.status
-                Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Generate_Order_Id " & ex.Message
-                Result_Register = False
-                Return Result_Register
-                Exit Function
+                Result.Message = "TXN : " & TXN_CODE & vbNewLine
+                Result.Message &= "STEP : GEN ORDER ID" & vbNewLine
+                Result.Message &= ex.Message
+                Return Result
             End Try
 #End Region
 
 #Region "Delete_File"
             Dim BackEndDelete_File As New Delete_File
             Dim Response_Delete_File As New BackEndInterface.Delete_File.Response
-            Response_Delete_File = BackEndDelete_File.Get_Result(Response_Generate_Order_Id.response_data)
+
             Try
-                If Not IsNothing(Response_Delete_File) Then
-                    Result.Status = Response_Delete_File.status
-                    Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Generate_Order_Id"
+                Response_Delete_File = BackEndDelete_File.Get_Result(Response_Generate_Order_Id.response_data)
+                If Response_Delete_File.status <> "SUCCESSFUL" Then
+                    Result.Message = "TXN : " & TXN_CODE & vbNewLine
+                    Result.Message &= "STEP : DELETE FILE" & vbNewLine
+                    Result.Message &= Response_Delete_File.display_messages(0).th_message
+                    Return Result
                 End If
             Catch ex As Exception
-                Result.Status = Response_Delete_File.status
-                Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Generate_Order_Id " & ex.Message
-                Result_Register = False
-                Return Result_Register
-                Exit Function
+                Result.Message = "TXN : " & TXN_CODE & vbNewLine
+                Result.Message &= "STEP : DELETE FILE" & vbNewLine
+                Result.Message &= ex.Message
+                Return Result
             End Try
 
 #End Region
@@ -1457,20 +1436,20 @@ Public Class BackEndInterface
 
             Dim BackEndSave_File As New Save_File
             Dim Response_Save_File As New BackEndInterface.Save_File.Response
-            Response_Save_File = BackEndSave_File.Get_Result(Response_Generate_Order_Id.response_data, "PNG", Convert_Base64(Merge_bytes))
+
             Try
-
-                If Not IsNothing(Response_Save_File) Then
-                    Result.Status = Response_Save_File.status
-                    Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Save_File"
+                Response_Save_File = BackEndSave_File.Get_Result(Response_Generate_Order_Id.response_data, "PNG", Convert_Base64(Merge_bytes))
+                If Response_Save_File.status <> "SUCCESSFUL" Then
+                    Result.Message = "TXN : " & TXN_CODE & vbNewLine
+                    Result.Message &= "STEP : SAVE FILE" & vbNewLine
+                    Result.Message &= Response_Save_File.display_messages(0).th_message
+                    Return Result
                 End If
-
             Catch ex As Exception
-                Result.Status = Response_Save_File.status
-                Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Save_File " & ex.Message
-                Result_Register = False
-                Return Result_Register
-                Exit Function
+                Result.Message = "TXN : " & TXN_CODE & vbNewLine
+                Result.Message &= "STEP : SAVE FILE" & vbNewLine
+                Result.Message &= ex.Message
+                Return Result
             End Try
 
 #End Region
@@ -1478,30 +1457,30 @@ Public Class BackEndInterface
 #Region "Service_Flow_Create"
             Dim BackEndFlow_Create As New Service_Flow_Create
             Dim Response_Flow_Create As New BackEndInterface.Service_Flow_Create.Response
-            Response_Flow_Create = BackEndFlow_Create.Get_Result(
+            Try
+                Response_Flow_Create = BackEndFlow_Create.Get_Result(
                                     Response_Generate_Order_Id.response_data,
                                     USER_ID,
-                                    IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID),
+                                    CUS_PID,
                                     Response_Prepaid_Validate.response_data.subscriber,
                                     SHOP_CODE,
-                                    Cust_Info.CUS_NAME & " " & Cust_Info.CUS_SURNAME,
+                                    CUS_NAME & " " & CUS_SURNAME,
                                     Response_Prepaid_Validate.response_data.priceplan,
                                     SIM_Serial,
-                                    Response_Face_Recognition.response_data.face_recognition_result,
-                                    Response_Face_Recognition.response_data.is_identical,
-                                    Response_Face_Recognition.response_data.confident_ratio)
-            Try
-
-                If Not IsNothing(Response_Flow_Create) Then
-                    Result.Status = Response_Flow_Create.status
-                    Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Service_Flow_Create"
+                                   face_recognition_result,
+                                   is_identical,
+                                   confident_ratio)
+                If Response_Flow_Create.status <> "SUCCESSFUL" Then
+                    Result.Message = "TXN : " & TXN_CODE & vbNewLine
+                    Result.Message &= "STEP : FLOW CREATE" & vbNewLine
+                    Result.Message &= Response_Flow_Create.display_messages(0).th_message
+                    Return Result
                 End If
             Catch ex As Exception
-                Result.Status = Response_Flow_Create.status
-                Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Service_Flow_Create " & ex.Message
-                Result_Register = False
-                Return Result_Register
-                Exit Function
+                Result.Message = "TXN : " & TXN_CODE & vbNewLine
+                Result.Message &= "STEP : FLOW CREATE" & vbNewLine
+                Result.Message &= ex.Message
+                Return Result
             End Try
 
 
@@ -1510,131 +1489,96 @@ Public Class BackEndInterface
 #Region "Activity_Start"
             Dim BackEndActivity_Start As New Activity_Start
             Dim Response_Activity_Start As New BackEndInterface.Activity_Start.Response
-            Response_Activity_Start = BackEndActivity_Start.Get_Result(Response_Generate_Order_Id.response_data)
+
             Try
-                If Not IsNothing(Response_Activity_Start) Then
-                    Result.Status = Response_Activity_Start.status
-                    Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Activity_Start"
+                Response_Activity_Start = BackEndActivity_Start.Get_Result(Response_Generate_Order_Id.response_data)
+                If Response_Activity_Start.status <> "SUCCESSFUL" Then
+                    Result.Message = "TXN : " & TXN_CODE & vbNewLine
+                    Result.Message &= "STEP : ACT START" & vbNewLine
+                    Result.Message &= Response_Activity_Start.display_messages(0).th_message
+                    Return Result
                 End If
             Catch ex As Exception
-                Result.Status = Response_Activity_Start.status
-                Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Activity_Start " & ex.Message
-                Result_Register = False
-                Return Result_Register
-                Exit Function
+                Result.Message = "TXN : " & TXN_CODE & vbNewLine
+                Result.Message &= "STEP : ACT START" & vbNewLine
+                Result.Message &= ex.Message
+                Return Result
             End Try
 #End Region
 
 #Region "Activity_End"
             Dim BackEndActivity_End As New Activity_End
             Dim Response_Activity_End As New BackEndInterface.Activity_End.Response
-            Response_Activity_End = BackEndActivity_End.Get_Result(Response_Generate_Order_Id.response_data)
+
             Try
-                If Not IsNothing(Response_Activity_End) Then
-                    Result.Status = Response_Activity_End.status
-                    Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Activity_End"
+                Response_Activity_End = BackEndActivity_End.Get_Result(Response_Generate_Order_Id.response_data)
+                If Response_Activity_End.status <> "SUCCESSFUL" Then
+                    Result.Message = "TXN : " & TXN_CODE & vbNewLine
+                    Result.Message &= "STEP : ACT END" & vbNewLine
+                    Result.Message &= Response_Activity_End.display_messages(0).th_message
+                    Return Result
                 End If
             Catch ex As Exception
-                Result.Status = Response_Activity_End.status
-                Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Activity_End " & ex.Message
-                Result_Register = False
-                Return Result_Register
-                Exit Function
+                Result.Message = "TXN : " & TXN_CODE & vbNewLine
+                Result.Message &= "STEP : ACT END" & vbNewLine
+                Result.Message &= ex.Message
+                Return Result
             End Try
 #End Region
 
 #Region "Service_Flow_Finish"
             Dim BackEndFlow_Finish As New Service_Flow_Finish
             Dim Response_Flow_Finish As New BackEndInterface.Service_Flow_Finish.Response
-            Response_Flow_Finish = BackEndFlow_Finish.Get_Result(Response_Generate_Order_Id.response_data)
+
             Try
-                If Not IsNothing(Response_Flow_Finish) Then
-                    Result.Status = Response_Flow_Finish.status
-                    Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Service_Flow_Finish"
+                Response_Flow_Finish = BackEndFlow_Finish.Get_Result(Response_Generate_Order_Id.response_data)
+                If Response_Flow_Finish.status <> "SUCCESSFUL" Then
+                    Result.Message = "TXN : " & TXN_CODE & vbNewLine
+                    Result.Message &= "STEP : FLOW FINISH" & vbNewLine
+                    Result.Message &= Response_Flow_Finish.display_messages(0).th_message
+                    Return Result
                 End If
             Catch ex As Exception
-                Result.Status = Response_Flow_Finish.status
-                Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Service_Flow_Finish " & ex.Message
-                Result_Register = False
-                Return Result_Register
-                Exit Function
+                Result.Message = "TXN : " & TXN_CODE & vbNewLine
+                Result.Message &= "STEP : FLOW FINISH" & vbNewLine
+                Result.Message &= ex.Message
+                Return Result
             End Try
 #End Region
 
 #Region "Prepaid_Register"
 
-            Dim DT_TXN_MAT_CODE As DataTable = BL.GET_TXN_PREPAID_REGISTER(TXN_ID)
-            'Dim mat_code As String = "3000014920" 
-            'Dim mat_desc As String = "ซิมซูเปอร์ฟัน ฟอร์ทีน"
+            Dim DT_TXN_MAT_CODE As DataTable = BL.GET_TXN_SIM_PAID(TXN_ID)
             Dim mat_code As String = ""
             Dim mat_desc As String = ""
             If DT_TXN_MAT_CODE.Rows.Count > 0 Then
                 mat_code = DT_TXN_MAT_CODE.Rows(0).Item("PRODUCT_CODE").ToString
                 mat_desc = DT_TXN_MAT_CODE.Rows(0).Item("PRODUCT_NAME").ToString
             End If
+            Dim _EXPIRE As String = C.DateToString(C.StringToDate(CUS_DOC_EXPIRE, "yyyy-MM-dd"), "yyyy-MM-dd'T'HH:mm:ss'+0700'")
+            Dim _DOB As String = C.DateToString(C.StringToDate(CUS_BIRTHDATE, "yyyy-MM-dd"), "yyyy-MM-dd'T'HH:mm:ss'+0700'")
 
-            'Dim address_number As String = ""
-            'Dim address_moo As String = ""
-            'Dim address_village As String = ""
-            'Dim address_street As String = ""
-            'Dim address_soi As String = ""
-            'Dim address_district As String = ""
-            'Dim address_province As String = ""
-            'Dim address_building_name As String = ""
-            'Dim address_building_room As String = ""
-            'Dim address_building_floor As String = ""
-            'Dim sddress_sub_district As String = ""
-            'Dim address_zip As String = ""
-
-            'If LANGUAGE = VDM_BL.UILanguage.TH Then
-
-            '    Dim cus As New VDM_BL.Customer_IDCard
-            '    If Not IsNothing(Customer_IDCard) Then
-            '        cus = Customer_IDCard
-            '        address_number = cus.addrHouseNo
-            '        address_moo = "-"
-            '        address_village = cus.addrVillageNo
-            '        address_street = cus.addrRoad
-            '        address_soi = "-"
-            '        address_district = cus.addrAmphur
-            '        address_province = cus.addrProvince
-            '        address_building_name = "-"
-            '        address_building_room = "-"
-            '        address_building_floor = "-"
-            '        sddress_sub_district = "-"
-            '        address_zip = "-"
-            '    End If
-            'Else
-            '    Dim cus As New VDM_BL.Customer_Passport
-            '    If Not IsNothing(Customer_Passport) Then
-            '        cus = Customer_Passport
-            '        address_number = "-"
-            '        address_moo = "-"
-            '        address_village = "-"
-            '        address_street = "-"
-            '        address_soi = "-"
-            '        address_district = "-"
-            '        address_province = "-"
-            '        address_building_name = "-"
-            '        address_building_room = "-"
-            '        address_building_floor = "-"
-            '        sddress_sub_district = "-"
-            '        address_zip = "-"
-            '    End If
-            'End If
+            Dim GENDER As String = CUS_GENDER
+            If GENDER.ToUpper = "F" Then
+                GENDER = "2"
+            ElseIf GENDER.ToUpper = "M" Then
+                GENDER = "1"
+            End If
 
             Dim BackEndPrepaid_Register As New Prepaid_Register
             Dim Response_Prepaid_Register As New BackEndInterface.Prepaid_Register.Response
-            Response_Prepaid_Register = BackEndPrepaid_Register.Get_Result(Response_Generate_Order_Id.response_data,
-                Cust_Info.CUS_GENDER, '--ดูว่าบัตรส่งมาเป็นอะไร
-                Cust_Info.CUS_TITLE,
-                Cust_Info.NAT_CODE,
+            Try
+                Response_Prepaid_Register = BackEndPrepaid_Register.Get_Result(Response_Generate_Order_Id.response_data,
+                GENDER,
+                CUS_TITLE,
+                NAT_CODE.Substring(0, 2), 'Cust_Info.NAT_CODE
                 "T5",
-                Cust_Info.CUS_NAME,
-                Cust_Info.CUS_SURNAME,
-                C.DateToString(Cust_Info.CUS_BIRTHDATE, "yyyy-MM-dd'T'HH:mm:ss'+0700'"), '1990-02-05T00:00:00+0700  customer_birthdate
-                IIf(Not IsDBNull(Cust_Info.CUS_PID), Cust_Info.CUS_PID, Cust_Info.CUS_PASSPORT_ID),
-                C.DateToString(Cust_Info.CUS_PASSPORT_EXPIRE, "yyyy-MM-dd'T'HH:mm:ss'+0700'"), '1990-02-05T00:00:00+0700  customer_id_expire_date
+                CUS_NAME,
+                CUS_SURNAME,
+                _DOB,
+                DOC_TYPE,
+                CUS_PID,
+                _EXPIRE,
                 address_number,
                 address_moo,
                 address_village,
@@ -1647,7 +1591,7 @@ Public Class BackEndInterface
                 address_building_floor,
                 sddress_sub_district,
                 address_zip,
-                "-", 'shopCode.Text,
+                SHOP_CODE, 'shopCode.Text,
                 "-", 'shopName.Text,
                 USER_ID,
                 mat_code,  'mat_code.Text,
@@ -1659,26 +1603,25 @@ Public Class BackEndInterface
                 0,' "N"
                 2,  '"PAIR"
                 Response_Prepaid_Validate.response_data.company_code)
-            Try
-                If Not IsNothing(Response_Prepaid_Register) Then
-                    Result.Status = Response_Prepaid_Register.status
-                    Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Prepaid_Register"
+
+                If Response_Prepaid_Register.status <> "SUCCESSFUL" Then
+                    Result.Message = "TXN : " & TXN_CODE & vbNewLine
+                    Result.Message = "STEP : PREPAID REGISTER" & vbNewLine
+                    Result.Message = Response_Prepaid_Register.display_messages(0).th_message
+                    Return Result
                 End If
+
             Catch ex As Exception
-                Result.Status = Response_Prepaid_Register.status
-                Result.Message = "ORDER_ID:" & Response_Generate_Order_Id.response_data & " Step Prepaid_Register " & ex.Message
-                Result_Register = False
-                Return Result_Register
-                Exit Function
+                Result.Message = "TXN : " & TXN_CODE & vbNewLine
+                Result.Message &= "STEP : PREPAID REGISTER" & vbNewLine
+                Result.Message &= ex.Message
+                Return Result
             End Try
-
-
 #End Region
-
-            Return Result_Register
+            Result.Status = True
+            Result.Message = "SUCCESSFUL"
+            Return Result
         End Function
-
-
 
         Public Function Convert_Base64(Image As Byte()) As String
             Dim base64String As String = Convert.ToBase64String(Image, 0, Image.Length)

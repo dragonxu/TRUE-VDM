@@ -239,20 +239,47 @@ Public Class Device_Shoping_Cart
 
     End Sub
 
-    Private Sub btnConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
+    Private Sub btnConfirm_ServerClick(sender As Object, e As EventArgs) Handles btnConfirm.Click
         If Not chkActive.Checked Then Exit Sub
+        'ใบเสร็จรับเงินฉบับจริง
+        Dim Script As String = "$(""#lnkSlip"").click();" & vbNewLine
+        Script &= " requestSlip();"
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Slip", Script, True)
 
+    End Sub
+
+    Private Sub btnNextSlip_ServerClick(sender As Object, e As EventArgs) Handles btnNextSlip.ServerClick
         If PRODUCT_ID <> 0 Then
             Response.Redirect("Device_Payment.aspx?PRODUCT_ID=" & PRODUCT_ID)
         Else
-            Response.Redirect("Device_Verify.aspx?SIM_ID=" & SIM_ID)
-        End If
 
+            Dim Script As String = "$(""#btnVerifySlip"").click();" & vbNewLine
+            Script &= " requestVerifySlip();"
+            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "VerifySlip", Script, True)
+
+        End If
     End Sub
+
 
     Private Sub btnVerify_Click(sender As Object, e As EventArgs) Handles btnVerify.Click
         If Not chkActive.Checked Then Exit Sub
 
+        '--ใบเสร็จรับเงินฉบับจริง
+        Dim Script As String = "$(""#lnkSlip"").click();" & vbNewLine
+        Script &= " requestSlip();"
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Slip", Script, True)
+
+
+        'Dim Script As String = "$(""#clickIDCard"").click();" & vbNewLine
+        'If LANGUAGE = VDM_BL.UILanguage.TH Then
+        '    Script &= " requestIDCard();"
+        'Else
+        '    Script &= " requestPassport();"
+        'End If
+        'ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "StartScan", Script, True)
+    End Sub
+
+    Private Sub btnVerifySlip_Click(sender As Object, e As EventArgs) Handles btnVerifySlip.Click
         Dim Script As String = "$(""#clickIDCard"").click();" & vbNewLine
         If LANGUAGE = VDM_BL.UILanguage.TH Then
             Script &= " requestIDCard();"
@@ -309,9 +336,16 @@ Public Class Device_Shoping_Cart
                 Exit Sub
             End If
             cus.Issuer = id_Issuer.Text
+
+            'If id_Expire.Text <> "" Then
+            '    cus.Expire = C.DateToString(id_Expire.Text, "yyyy-MM-dd")
+            '    If DateDiff(DateInterval.Day, C.StringToDate(id_Expire.Text, "yyyy-MM-dd"), Now) > 0 Then
+            Dim _cultureEnInfo As New Globalization.CultureInfo("en-US")
+            Dim Expire As DateTime = Convert.ToDateTime(id_Expire.Text, _cultureEnInfo)
             If id_Expire.Text <> "" Then
                 cus.Expire = C.DateToString(id_Expire.Text, "yyyy-MM-dd")
-                If DateDiff(DateInterval.Day, cus.Expire, Now) > 0 Then
+                If DateDiff(DateInterval.Day, C.StringToDate((Expire.ToString("yyyy", _cultureEnInfo)) & "-" & Expire.ToString("MM-dd", _cultureEnInfo), "yyyy-MM-dd"), Now) > 0 Then
+
                     ResponseIDCardExpired()
                     Exit Sub
                 End If
@@ -335,6 +369,20 @@ Public Class Device_Shoping_Cart
                 ResponseCannotReadPassport()
                 Exit Sub
             End If
+
+            Dim _cultureEnInfo As New Globalization.CultureInfo("en-US")
+            Dim Expire As DateTime = Convert.ToDateTime(pass_Expire.Text, _cultureEnInfo)
+            If pass_Expire.Text <> "" Then
+                If DateDiff(DateInterval.Day, C.StringToDate((Expire.ToString("yyyy", _cultureEnInfo)) & "-" & Expire.ToString("MM-dd", _cultureEnInfo), "yyyy-MM-dd"), Now) > 0 Then
+                    ResponseIDCardExpired()
+                    Exit Sub
+                End If
+            Else
+                '--------------Error ----------------
+                ResponseCannotReadIDCard()
+                Exit Sub
+            End If
+
 
             cus.FirstName = pass_FirstName.Text
             cus.MiddleName = pass_MiddleName.Text
@@ -447,4 +495,6 @@ Public Class Device_Shoping_Cart
         End If
         Response.Redirect("Device_Verify.aspx?SIM_ID=" & SIM_ID)
     End Sub
+
+
 End Class

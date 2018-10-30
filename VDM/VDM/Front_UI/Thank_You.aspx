@@ -30,7 +30,7 @@
       <div class="priceplan">
         <div class="main3">
           <div class="thank">
-            <img src="images/pic-thank.png">
+            <img src="images/gif/Thank-You.gif" width ="782" height ="318">
               <h4 class="margin-re true-l"><font class="true-m">ท่่านได้ทำรายการเสร็จสิ้น</font><br/>กรุณารับใบเสร็จและสินค้า<br/>ทางช่องรับสินค้า</h4>
           </div>
         </div>

@@ -32,13 +32,58 @@ Partial Public Class Device_Verify
     Protected WithEvents SCM As Global.System.Web.UI.ScriptManager
     
     '''<summary>
-    '''formStep control.
+    '''img control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents formStep As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents img As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
+    '''lblDISPLAY_NAME control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblDISPLAY_NAME As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''pnlProduct control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlProduct As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''pnlCapacity control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlCapacity As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''lblCapacity control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblCapacity As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblColor control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblColor As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''lblPrice_str control.

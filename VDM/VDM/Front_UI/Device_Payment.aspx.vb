@@ -423,9 +423,17 @@ Public Class Device_Payment
 
     Private Sub btnCashTimeout_Click(sender As Object, e As EventArgs) Handles btnCashTimeout.Click
         '------------If pay some amount
-        'If CASH_PAID > 0 Then UpdateCashProblem()
-        Alert(Me.Page, txtCashProblem.Text)
-        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Refresh", "location.href=location.href;", True)
+        If CASH_PAID > 0 Then
+            'UpdateCashProblem()
+            '-------
+        Else
+            Dim Script As String = "$(""#lnkCashTimeOut"").click();" & vbNewLine
+            Script &= " showCashTimeOut();"
+            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "CashTimeOut", Script, True)
+        End If
+
+        'Alert(Me.Page, txtCashProblem.Text)
+        'ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Refresh", "location.href=location.href;", True)
     End Sub
 
     Private Sub btnCashProblem_Click(sender As Object, e As EventArgs) Handles btnCashProblem.Click

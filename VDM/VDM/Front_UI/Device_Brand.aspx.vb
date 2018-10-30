@@ -76,7 +76,15 @@ Public Class Device_Brand
             lblCode.Attributes("Row_Remain") = value
         End Set
     End Property
-
+    Protected ReadOnly Property CAT_ID As Integer
+        Get
+            Try
+                Return Request.QueryString("CAT_ID")
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+    End Property
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsNumeric(Session("LANGUAGE")) Then
             Response.Redirect("Select_Language.aspx")
@@ -101,7 +109,7 @@ Public Class Device_Brand
     Dim DT_Brand As DataTable
     Private Sub BindList()
 
-        Dim DT As DataTable = BL.GetList_Current_Brand_Kiosk(KO_ID)     '--brand ทั้งหมด
+        Dim DT As DataTable = BL.GetList_Current_Brand_Kiosk(KO_ID, CAT_ID)     '--brand ทั้งหมด
         Row_Total = Val(DT.Rows.Count)
         PageCount = Math.Ceiling(Val(Row_Total / Show_Box))
         Row_Remain = Row_Total Mod Show_Box
@@ -183,7 +191,7 @@ Public Class Device_Brand
         If e.Item.ItemType <> ListItemType.Item And e.Item.ItemType <> ListItemType.AlternatingItem Then Exit Sub
         Select Case e.CommandName
             Case "Select"
-                Response.Redirect("Product_List.aspx?BRAND_ID=" & e.CommandArgument)
+                Response.Redirect("Product_List.aspx?BRAND_ID=" & e.CommandArgument & "&CAT_ID=" & CAT_ID)
         End Select
     End Sub
 
@@ -195,6 +203,6 @@ Public Class Device_Brand
     End Sub
 
     Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click
-        Response.Redirect("Select_Menu.aspx")
+        Response.Redirect("Select_Menu.aspx?CAT_ID=" & CAT_ID)
     End Sub
 End Class

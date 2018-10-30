@@ -178,21 +178,25 @@ header img{width:100%; }
 main{ width:100%; display:inline-block !important;}
 .main{width:890px; margin:auto; display:block;}
 .main3{width:935px; margin:auto; display:block;}
-.pic-lang{width:100%; margin-bottom:30px; display:inline-block;}
+.pic-lang{width:100%; margin-bottom:30px; display:inline-block; position:relative;}
+.clip{width:100%; display:inline-block; position:absolute; left:0; top:154px; z-index:99;}
+.clip video{width:100% !important;}
 .pic-lang img{width:100%;}
 .lang{width:100%; display:block;}
-.lang h2{width:100%; margin:0; padding:50px 0 30px 0; line-height:90px; font-size:94px; color:#FFF; text-align:center; font-weight:normal; text-shadow: 0px 0px 25px rgba(0, 0, 0, 0.35); text-transform:uppercase; display:block;}
+.lang h2{width:100%; margin:0; padding:50px 0; line-height:60px; font-size:94px; color:#FFF; text-align:center; font-weight:normal; text-shadow: 0px 0px 25px rgba(0, 0, 0, 0.35); display:block;}
+.lang h2 font{letter-spacing:3.5px; }
 .lang .row{margin:-42px -15px; }
 .lang span{padding:42px 15px; display:block; float:left;}
 .lang span a{width:100%; display:block; float:left;}
 
 .home{width:100%; text-align:center; display:inline-block; }
-.home .frame{width:auto; padding:0 20px; display:inline-block;}
-.home .frame a {width:100%; display:block; position:relative;}
-.home .frame a span{width:auto; text-align:left; position:absolute; top:20px; left:35px; }
-.home .frame a span h3{min-height:140px; line-height:70px; margin:0; color:#000; font-size:125px; letter-spacing:10px; display:block;}
-.home .frame a span p{line-height:26px; margin-top:30px; color:#868686; font-size:40px; display:block;}
-.home .frame a .image-cropper { width:427px; height:802px; position:relative; text-align:center; overflow:hidden; border-radius:15px;
+.home.magin{margin-top:210px; }
+.home .frame{width:100%; padding:20px; text-align:center; display:inline-block;}
+.home .frame a {width:auto; display:inline-block; position:relative;}
+.home .frame a span{width:auto; text-align:right; position:absolute; top:80px; right:20px; }
+.home .frame a span h3{min-height:60px; line-height:60px; margin:0; color:#000; font-size:125px; letter-spacing:10px; display:block;}
+.home .frame a span p{line-height:26px; margin-top:10px; margin-right:14px; color:#868686; font-size:40px; display:block;}
+.home .frame a .image-cropper { width:870px; height:388px; position:relative; text-align:center; overflow:hidden; border-radius:15px;
   -webkit-box-shadow: 8px 10px 8px 0px rgba(0,0,0,0.30);
   -moz-box-shadow: 8px 10px 8px 0px rgba(0,0,0,0.30);
   box-shadow: 8px 10px 8px 0px rgba(0,0,0,0.30);

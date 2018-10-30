@@ -17,6 +17,7 @@
                 customer_firstname.Text,
                 customer_lastname.Text,
                 customer_birthdate.Text,
+                doc_type.Text,
                 customer_id_number.Text,
                 customer_id_expire_date.Text,
                 address_number.Text,

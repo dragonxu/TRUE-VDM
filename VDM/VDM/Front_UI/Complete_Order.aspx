@@ -75,8 +75,9 @@
                                     <div class="step-payment" style="padding: 10px 0 100px 0;">
                                         <h4 class="margin-re true-m">ท่านได้ชำระค่าสินค้าแล้ว</h4>
                                     </div>
-                                    <img src="images/icon-pack-gif.gif">
-                                    <img src="images/icon-Shadow.png">
+                                    <%--<img src="images/icon-pack-gif.gif">
+                                    <img src="images/icon-Shadow.png">--%>
+                                    <img src="images/gif/icon-pack-gif.gif">
                                     <div class="step-payment">
 
 
@@ -96,7 +97,7 @@
                                     <asp:Button ID="btnValidatePrepaid" runat="server" Style="display: none;" />
                                 </div>
 
-                                <asp:Panel ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" Style="position: fixed; left: 500px; top: 100px;">
+                                <asp:Panel ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" Style="position: fixed; left: -500px; top: 100px;">
                                     <asp:TextBox ID="txtBarcode" runat="server"></asp:TextBox>
                                     <asp:Button ID="btnBarcode" runat="server" />
                                     <button type="button" id="btnFocus" value="focus" />
@@ -173,7 +174,7 @@
                     <div id="popupCannotRegister" class="popup">
                         <div class="popup-frame">
                             <h3 class="true-m" id="idCardAlertReason">ขออภัย ระบบไม่สามารถลงทะเบียนซิมได้</h3>
-                            <div class="icon"><img src="images/Popup/icon-warning-face.png" /></div>
+                            <div class="icon"><img src="images/Popup/icon-warning-face-gif.gif" /></div>
                             <h4 class="true-b"><asp:Label ID="lblMSG" runat ="server" ></asp:Label></h4>
                             <div class="bottom">
                                 <a class="btu true-l" id="lnkprint" runat="server">ตกลง</a>
@@ -268,7 +269,10 @@
                 $('#btnNext').click();
             }
 
-
+            function printSlip(TXN_ID) {
+                var url = '../PrintContent.aspx?TXN_ID=' + TXN_ID;
+                $('#CommandTrigger').attr('src', url);
+            }
         </script>
         <uc1:UC_CommonUI runat="server" ID="UC_CommonUI" />
     </form>

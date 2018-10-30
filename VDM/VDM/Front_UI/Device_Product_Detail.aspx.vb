@@ -65,17 +65,31 @@ Public Class Device_Product_Detail
         End Set
     End Property
 
-    Protected Property CAT_ID As Integer
+    'Protected Property CAT_ID As Integer
+    '    Get
+    '        Try
+    '            Return lblCode.Attributes("CAT_ID")
+    '        Catch ex As Exception
+    '            Return 0
+    '        End Try
+    '    End Get
+    '    Set(value As Integer)
+    '        lblCode.Attributes("CAT_ID") = value
+    '    End Set
+    'End Property
+
+    Protected ReadOnly Property CAT_ID As Integer
         Get
             Try
-                Return lblCode.Attributes("CAT_ID")
+                Dim SQL As String = "SELECT ISNULL(CAT_ID," & VDM_BL.Category.Mobile & ") CAT_ID FROM MS_PRODUCT WHERE PRODUCT_ID=" & PRODUCT_ID
+                Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+                Dim DT As New DataTable
+                DA.Fill(DT)
+                Return DT.Rows(0).Item("CAT_ID")
             Catch ex As Exception
                 Return 0
             End Try
         End Get
-        Set(value As Integer)
-            lblCode.Attributes("CAT_ID") = value
-        End Set
     End Property
 
     Protected Property MODEL As String
@@ -478,7 +492,7 @@ Public Class Device_Product_Detail
     End Sub
 
     Private Sub lnkBack_Click(sender As Object, e As ImageClickEventArgs) Handles lnkBack.Click
-        Response.Redirect("Product_List.aspx?BRAND_ID=" & BRAND_ID)
+        Response.Redirect("Product_List.aspx?BRAND_ID=" & BRAND_ID & "&CAT_ID=" & CAT_ID)
     End Sub
 
 End Class

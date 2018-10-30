@@ -86,6 +86,15 @@ Partial Public Class UC_Prepaid_Register
     Protected WithEvents customer_birthdate As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''doc_type control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents doc_type As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''customer_id_number control.
     '''</summary>
     '''<remarks>
