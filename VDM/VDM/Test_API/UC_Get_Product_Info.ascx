@@ -75,6 +75,7 @@
 <br />&nbsp;    "CATEGORY_RECOMMEND": <asp:TextBox ID="CATEGORY_RECOMMEND" runat="server" ></asp:TextBox>
 <br />  },
 <br />  "Price": <asp:TextBox ID="Price" runat="server" ></asp:TextBox>,
+<br />&nbsp;      "ErrorMessage": <asp:TextBox ID="ErrorMessage" runat="server" ></asp:TextBox>,
 <br />  "Captions": [
 <br />&nbsp;    {
 <br />&nbsp;      "SEQ": <asp:TextBox ID="SEQ" runat="server" ></asp:TextBox>,
@@ -84,7 +85,33 @@
 <br />&nbsp;      "DETAIL": <asp:TextBox ID="DETAIL" runat="server" ></asp:TextBox>
 <br />    },
  
+<br />&nbsp;      "L7" 
 
+<br />&nbsp;      { 
+<br />&nbsp;          "errCode": "<asp:TextBox ID="errCode" runat="server" ></asp:TextBox>", 
+<br />&nbsp;          "errMsg": { 
+<br />&nbsp;              "trx-id": "<asp:TextBox ID="errMsgtrx_ID" runat="server" ></asp:TextBox>", 
+<br />&nbsp;              "status": "<asp:TextBox ID="errMsgstatus" runat="server" ></asp:TextBox>", 
+<br />&nbsp;              "process-instance": "<asp:TextBox ID="errMsgprocess_instance" runat="server" ></asp:TextBox>", 
+<br />&nbsp;              "fault": { 
+<br />&nbsp;                  "name": "<asp:TextBox ID="faultname" runat="server" ></asp:TextBox>", 
+<br />&nbsp;                  "code": "<asp:TextBox ID="faultcode" runat="server" ></asp:TextBox>", 
+<br />&nbsp;                  "message": "<asp:TextBox ID="faultmessage" runat="server" ></asp:TextBox>", 
+<br />&nbsp;                  "detailed-message": "<asp:TextBox ID="faultdetailed_message" runat="server" ></asp:TextBox>" 
+<br />&nbsp;              }, 
+<%--<br />&nbsp;              "display-messages": [ 
+<br />&nbsp;                  { 
+<br />&nbsp;                      "message": "Flow 18101900CMU060000001 was not found.", 
+<br />&nbsp;                      "message-type": "ERROR", 
+<br />&nbsp;                      "en-message": "Flow 18101900CMU060000001 was not found.", 
+<br />&nbsp;                      "th-message": "Flow 18101900CMU060000001 was not found.", 
+<br />&nbsp;                      "technical-message": "tmsapnpr1 (instance: SFF_node2) ActivityFlowNotFoundException Flow 18101900CMU060000001 was not found.. " 
+<br />&nbsp;                  } 
+<br />&nbsp;              ] --%>
+<br />&nbsp;          } 
+<br />&nbsp;      }
+
+<br />&nbsp;          "JSON": "<asp:Label ID="lbljson" runat = "server" ></asp:Label>
 
 
 

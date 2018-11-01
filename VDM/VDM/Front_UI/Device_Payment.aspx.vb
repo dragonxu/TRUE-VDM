@@ -104,6 +104,8 @@ Public Class Device_Payment
 
         If Not IsPostBack Then
 
+            If IsNothing(Session("ssCashTimeout")) Then Session("ssCashTimeout") = 0
+
             txtLocalControllerURL.Text = BL.LocalControllerURL
 
             ClearForm()
@@ -430,6 +432,11 @@ Public Class Device_Payment
             Dim Script As String = "$(""#lnkCashTimeOut"").click();" & vbNewLine
             Script &= " showCashTimeOut();"
             ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "CashTimeOut", Script, True)
+            Session("ssCashTimeout") = Session("ssCashTimeout") + 1
+
+            If Session("ssCashTimeout") > 2 Then '--ปล่อยให้ Timeout ครบ 2 ครั้งโดยไม่หยอดให้กลับหน้าหลักเลย
+                Response.Redirect("Select_Language.aspx")
+            End If
         End If
 
         'Alert(Me.Page, txtCashProblem.Text)

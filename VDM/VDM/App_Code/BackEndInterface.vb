@@ -28,12 +28,42 @@ Public Class BackEndInterface
             End Get
         End Property
 
-        Public Function CreateRequest(ByVal URL As String) As WebRequest
+#Region "L7"
+        Public ReadOnly Property ValidateSerialUser As String
+            Get
+                Return AppSettings("ValidateSerialUser").ToString
+            End Get
+        End Property
+        Public ReadOnly Property ValidateSerialPassword As String
+            Get
+                Return AppSettings("ValidateSerialPassword").ToString
+            End Get
+        End Property
+        Public ReadOnly Property GetProductUser As String
+            Get
+                Return AppSettings("GetProductUser").ToString
+            End Get
+        End Property
+        Public ReadOnly Property GetProductPassword As String
+            Get
+                Return AppSettings("GetProductPassword").ToString
+            End Get
+        End Property
+#End Region
+
+        Public Function CreateRequest(ByVal URL As String, Optional Authorization As String = "") As WebRequest
             'Dim webReq As WebRequest = WebRequest.Create("http://www.tit-tech.co.th/cmpg/COM_Wallet.aspx?CUS_ID=1")
+
+            ServicePointManager.ServerCertificateValidationCallback = (Function(sender, certificate, chain, sslPolicyErrors) True)  ' Ignoring SSL errors L7
             Dim webReq As WebRequest = WebRequest.Create(URL)
+
             '--------------- Config Web Request ------------
             webReq.Method = "POST"
             webReq.Timeout = 10000
+
+            'username : password ของ L7  BSD_ICONS:ICONSOPER1
+            Dim Encoded As String = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(Authorization))
+            webReq.Headers.Add("Authorization", "Basic " + Encoded)
 
             webReq.Headers.Add("WEB_METHOD_CHANNEL", "VENDING")
             webReq.Headers.Add("E2E_REFID", "1939900150601")
@@ -49,6 +79,7 @@ Public Class BackEndInterface
 
             WebRequest.Method = "GET"
             Dim WebResponse = WebRequest.GetResponse().GetResponseStream()
+
             Dim Reader As New StreamReader(WebResponse)
             Dim Result = Reader.ReadToEnd()
             Reader.Close()
@@ -129,16 +160,37 @@ Public Class BackEndInterface
 
 #Region "DataModel"
         Public Class Response
+            Public Class errModel
+                Public Property trx_id As String
+                Public Property status As String
+                Public Property process_instance As String
+                Public Property fault As falseModel
+                Public Property display_messages As List(Of displayMessages)
+            End Class
+
+            Public Class falseModel
+                Public Property name As String
+                Public Property code As String
+                Public Property message As String
+                Public Property detailed_message As String
+            End Class
+
+            Public Class displayMessages
+                Public Property message As String
+                Public Property message_type As String
+                Public Property en_message As String
+                Public Property th_message As String
+                Public Property technical_message As String
+            End Class
 
             'Public Property response_data As Response
+            Public Property errCode As String
+            Public Property errMsg As errModel
             Public Property Product As ProductMaster
             Public Property Price As String
             Public Property Captions As List(Of Caption)
-            'Public Class Response
-            '    Public Property Product As ProductMaster
-            '    Public Property Price As String
-            '    '
-            'End Class
+            Public Property JSONString As String
+            Public Property ErrorMessage As String
 
             Public Class ProductMaster
                 Public Property CODE As String
@@ -173,19 +225,29 @@ Public Class BackEndInterface
             End Class
         End Class
 
-        Private CleanKeys() As String = {"response-data"}
+        Private CleanKeys() As String = {"response-data", "trx-id", "process-instance", "detailed-message", "display-messages", "message-type", "en-message", "th-message", "technical-message"}
 #End Region
         Public Function Get_Result(ByVal productCode As String) As Response
-
+            Dim Authorization As String = (New BackEndInterface.General).GetProductUser & ":" & (New BackEndInterface.General).GetProductPassword
             Dim URL As String = (New BackEndInterface.General).GetProductURL & "?productCode=" & productCode
-            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL, Authorization)
 
             Dim PostData As New Dictionary(Of String, String)
             PostData.Add("productCode", productCode)
 
-            JSONString = (New BackEndInterface.General).SendPostString(WebRequest, PostData)
+            Dim Result As Response = Nothing '------------- ยังไงก็ต้อง Return Result ----------------
+            Try
+                JSONString = (New BackEndInterface.General).SendPostString(WebRequest, PostData)
+                Result = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+            Catch ex As Exception
+                Result = New Response
+                Result.ErrorMessage = ex.Message
+            End Try
+            Result.JSONString = JSONString
 
-            Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+            'JSONString = (New BackEndInterface.General).SendPostString(WebRequest, PostData)
+            'Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
+
             Return Result
         End Function
 
@@ -195,7 +257,31 @@ Public Class BackEndInterface
         Public JSONString As String = ""
 
         Public Class Response
+            Public Class errModel
+                Public Property trx_id As String
+                Public Property status As String
+                Public Property process_instance As String
+                Public Property fault As falseModel
+                Public Property display_messages As List(Of displayMessages)
+            End Class
 
+            Public Class falseModel
+                Public Property name As String
+                Public Property code As String
+                Public Property message As String
+                Public Property detailed_message As String
+            End Class
+
+            Public Class displayMessages
+                Public Property message As String
+                Public Property message_type As String
+                Public Property en_message As String
+                Public Property th_message As String
+                Public Property technical_message As String
+            End Class
+
+            Public Property errCode As String
+            Public Property errMsg As errModel
             Public Property JSONString As String
             Public Property ReturnValues As List(Of Object)
             Public Property IsError As String
@@ -225,8 +311,9 @@ Public Class BackEndInterface
             DA.Update(DT)
 
             '---------------- Call ---------------
+            Dim Authorization As String = (New BackEndInterface.General).ValidateSerialUser & ":" & (New BackEndInterface.General).ValidateSerialPassword
             Dim URL As String = (New BackEndInterface.General).ValidateSerialURL & "?Shop=" & Shop & "&Serial=" & Serial
-            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL, Authorization)
 
             Dim Result As Response = Nothing '------------- ยังไงก็ต้อง Return Result ----------------
             Try
@@ -701,8 +788,6 @@ Public Class BackEndInterface
             httpWebRequest.Method = "POST"
 
             Using streamWriter = New StreamWriter(httpWebRequest.GetRequestStream())
-
-
                 streamWriter.Write(JsonData)
                 streamWriter.Flush()
                 streamWriter.Close()
@@ -726,7 +811,7 @@ Public Class BackEndInterface
             Dim httpResponse = DirectCast(httpWebRequest.GetResponse(), HttpWebResponse)
             Using streamReader = New StreamReader(httpResponse.GetResponseStream())
                 Dim result = streamReader.ReadToEnd()
-
+                'httpResponse.StatusCode
                 strResponse = result.ToString()
             End Using
         Catch ex As Exception

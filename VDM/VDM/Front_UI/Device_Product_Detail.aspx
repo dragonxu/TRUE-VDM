@@ -247,7 +247,7 @@
                                                         <h3 class="true-l" style="width: unset; margin-right: 20px;">
                                                             <asp:Label ID="lblPrice_str" runat="server" Text="ราคา"></asp:Label></h3>
                                                         <h2 class="true-l" style="width: unset;" title="฿">
-                                                            <asp:Label ID="lblPrice_Money" runat="server" Text="39,000"></asp:Label>
+                                                            <asp:Label ID="lblPrice_Money" runat="server" Text=""></asp:Label>
                                                             <span>
                                                                 <asp:Label ID="lblCurrency_Str" runat="server" Text="บาท"></asp:Label></span></h2>
 

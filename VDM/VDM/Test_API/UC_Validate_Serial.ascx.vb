@@ -21,7 +21,26 @@
                 IsError.Text = Response.IsError
                 ErrorMessage.Text = Response.ErrorMessage
                 IsNotTransaction.Text = Response.IsNotTransaction.ToString
+
+
+                If Not IsNothing(Response.errCode) Then
+                    errCode.Text = Response.errCode
+                End If
+                If Not IsNothing(Response.errMsg) Then
+                    errMsgtrx_ID.Text = Response.errMsg.trx_id
+                    errMsgstatus.Text = Response.errMsg.status
+                    errMsgprocess_instance.Text = Response.errMsg.process_instance
+                    If Not IsNothing(Response.errMsg.fault) Then
+                        faultname.Text = Response.errMsg.fault.name
+                        faultcode.Text = Response.errMsg.fault.code
+                        faultmessage.Text = Response.errMsg.fault.message
+                        faultdetailed_message.Text = Response.errMsg.fault.detailed_message
+                    End If
+                End If
+                lbljson.Text = Response.JSONString
+
             End If
+
         Catch ex As Exception
             lblErr_Msg.Text = ex.Message
         End Try

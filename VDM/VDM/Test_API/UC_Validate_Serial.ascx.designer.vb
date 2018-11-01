@@ -86,6 +86,87 @@ Partial Public Class UC_Validate_Serial
     Protected WithEvents IsNotTransaction As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''errCode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents errCode As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''errMsgtrx_ID control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents errMsgtrx_ID As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''errMsgstatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents errMsgstatus As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''errMsgprocess_instance control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents errMsgprocess_instance As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''faultname control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents faultname As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''faultcode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents faultcode As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''faultmessage control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents faultmessage As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''faultdetailed_message control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents faultdetailed_message As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''lbljson control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbljson As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''lblErr_Msg control.
     '''</summary>
     '''<remarks>

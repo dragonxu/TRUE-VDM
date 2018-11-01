@@ -579,6 +579,7 @@
     <Content Include="Machine_Console\UC_SIM_Stock.ascx" />
     <Content Include="PrintContent.aspx" />
     <Content Include="PrintSlip.aspx" />
+    <Content Include="Report_TMS_EDI.aspx" />
     <Content Include="Scripts\DragDrop.js" />
     <Content Include="Scripts\extent.js" />
     <Content Include="Scripts\jquery.min.js" />
@@ -946,6 +947,13 @@
     <Compile Include="PrintSlip.aspx.vb">
       <DependentUpon>PrintSlip.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Report_TMS_EDI.aspx.designer.vb">
+      <DependentUpon>Report_TMS_EDI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report_TMS_EDI.aspx.vb">
+      <DependentUpon>Report_TMS_EDI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SignIn.aspx.designer.vb">
       <DependentUpon>SignIn.aspx</DependentUpon>

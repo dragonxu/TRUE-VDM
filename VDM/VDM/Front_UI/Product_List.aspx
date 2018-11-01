@@ -52,7 +52,7 @@
                                     <div>
                                         <div class="description">
                                              <div class="pic-devices"  style="height:350px;"">
-                                                <h3 class="true-l">Devices</h3>
+                                                <h3 class="true-l"><asp:label id="lblHeader" runat ="server" ></asp:label>  </h3>
                                                   <asp:Image ID="img" runat="server"  style="width: unset; height:350px; width:350px;" />
                                                
                                             </div>

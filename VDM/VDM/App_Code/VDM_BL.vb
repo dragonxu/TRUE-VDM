@@ -184,6 +184,16 @@ Public Class VDM_BL
                 Return ""
         End Select
     End Function
+
+    Public Function Get_Category_Name(ByVal Cat As Category) As String
+        Select Case Cat
+            Case Category.Accessories
+                Return "Accessories"
+            Case Else
+                Return "Devices"
+        End Select
+    End Function
+
 #Region "CUSTOMER"
     Public Class Customer_IDCard
         Public CUS_ID As Integer = 0

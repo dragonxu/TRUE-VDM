@@ -152,7 +152,8 @@ Public Class Product_List
 
 
     Private Sub rptPage_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles rptPage.ItemDataBound
-
+        Dim lblHeader As Label = e.Item.FindControl("lblHeader")
+        lblHeader.Text = BL.Get_Category_Name(CAT_ID)
         'PageIndex
         Dim img As Image = e.Item.FindControl("img")
         Dim rptList As Repeater = e.Item.FindControl("rptList")

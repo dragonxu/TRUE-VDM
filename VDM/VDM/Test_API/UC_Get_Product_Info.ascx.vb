@@ -18,8 +18,9 @@
                 Price.Text = Response.Price
 
                 'Product
+                If Not IsNothing(Response.Product.CODE) Then
 
-                CODE.Text = Response.Product.CODE
+                    CODE.Text = Response.Product.CODE
                 DESCRIPTION.Text = Response.Product.DESCRIPTION
                 PLANT_CODE.Text = Response.Product.PLANT_CODE
                 PRODUCT_BRAND_CODE.Text = Response.Product.PRODUCT_BRAND_CODE
@@ -41,15 +42,35 @@
                 CAPACITY.Text = Response.Product.CAPACITY
                 CATEGORY_RECOMMEND.Text = Response.Product.CATEGORY_RECOMMEND
 
-                ''Captions
-                If Response.Captions.Count > 0 Then
-                    SEQ.Text = Response.Captions(0).SEQ
-                    PRODUCT_CODE.Text = Response.Captions(0).PRODUCT_CODE
-                    CAPTION_CODE.Text = Response.Captions(0).CAPTION_CODE
-                    CAPTION_DESC.Text = Response.Captions(0).CAPTION_DESC
-                    DETAIL.Text = Response.Captions(0).DETAIL
+                If Not IsNothing(Response.Captions) Then
+                    ''Captions
+                    If Response.Captions.Count > 0 Then
+                        SEQ.Text = Response.Captions(0).SEQ
+                        PRODUCT_CODE.Text = Response.Captions(0).PRODUCT_CODE
+                        CAPTION_CODE.Text = Response.Captions(0).CAPTION_CODE
+                        CAPTION_DESC.Text = Response.Captions(0).CAPTION_DESC
+                        DETAIL.Text = Response.Captions(0).DETAIL
+                    End If
+                End If
+                    ErrorMessage.Text = Response.ErrorMessage.ToString()
+
                 End If
 
+                If Not IsNothing(Response.errCode) Then
+                    errCode.Text = Response.errCode
+                End If
+                If Not IsNothing(Response.errMsg) Then
+                    errMsgtrx_ID.Text = Response.errMsg.trx_id
+                    errMsgstatus.Text = Response.errMsg.status
+                    errMsgprocess_instance.Text = Response.errMsg.process_instance
+                    If Not IsNothing(Response.errMsg.fault) Then
+                        faultname.Text = Response.errMsg.fault.name
+                        faultcode.Text = Response.errMsg.fault.code
+                        faultmessage.Text = Response.errMsg.fault.message
+                        faultdetailed_message.Text = Response.errMsg.fault.detailed_message
+                    End If
+                End If
+                lbljson.Text = Response.JSONString
 
             End If
         Catch ex As Exception

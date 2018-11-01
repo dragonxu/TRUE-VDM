@@ -277,10 +277,17 @@ Public Class Device_Product_Detail
 
             lblDesc.Text = DT.Rows(0).Item("DESCRIPTION_" & BL.Get_Language_Code(LANGUAGE)).ToString()
 
-            'lblPrice_str.Text = ""
+
             If Not IsDBNull(DT.Rows(0).Item("PRICE")) Then
+                'lblPrice_str.Text = ""
                 lblPrice_Money.Text = FormatNumber(Val(DT.Rows(0).Item("PRICE")), 2)
                 'lblCurrency_Str.Text = ""
+                btnSelect_str.Visible = True
+            Else
+                lblPrice_str.Text = ""
+                lblPrice_Money.Text = "Coming Soon"
+                lblCurrency_Str.Text = ""
+                btnSelect_str.Visible = False
             End If
 
 
