@@ -91,12 +91,30 @@ Public Class Device_Brand
         End If
 
         If Not IsPostBack Then
+            DT_CONTROL = UI_CONTROL()
             BindList()
         Else
             initFormPlugin()
         End If
 
+
+
     End Sub
+
+#Region "UI"
+    Private ReadOnly Property UI_CONTROL As DataTable  '------------- เอาไว้ดึงข้อมูล UI ----------
+        Get
+            Try
+                Return BL.GET_MS_UI_LANGUAGE(LANGUAGE)
+            Catch ex As Exception
+                Return Nothing
+            End Try
+        End Get
+    End Property
+    Dim DT_CONTROL As DataTable
+
+
+#End Region
 
     Private Sub initFormPlugin()
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
@@ -133,6 +151,12 @@ Public Class Device_Brand
     End Sub
 
     Private Sub rptPage_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles rptPage.ItemDataBound
+        Dim lblUI_Brands As Label = e.Item.FindControl("lblUI_Brands")
+        If LANGUAGE > VDM_BL.UILanguage.EN Then
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_Brands.Text & "'"
+            lblUI_Brands.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_Brands.Text)
+            lblUI_Brands.CssClass = "UI"
+        End If
 
         'PageIndex
 

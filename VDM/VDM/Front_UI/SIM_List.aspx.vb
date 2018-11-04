@@ -41,13 +41,41 @@ Public Class SIM_List
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
-
+            DT_CONTROL = UI_CONTROL()
+            Bind_CONTROL()
             BindList()
         Else
             initFormPlugin()
         End If
 
+
     End Sub
+
+#Region "UI"
+    Private ReadOnly Property UI_CONTROL As DataTable  '------------- เอาไว้ดึงข้อมูล UI ----------
+        Get
+            Try
+                Return BL.GET_MS_UI_LANGUAGE(LANGUAGE)
+            Catch ex As Exception
+                Return Nothing
+            End Try
+        End Get
+    End Property
+    Dim DT_CONTROL As DataTable
+    Public Sub Bind_CONTROL()
+        If LANGUAGE > VDM_BL.UILanguage.EN Then
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_SIM.Text & "'"
+            lblUI_SIM.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_SIM.Text)
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_TOPUP.Text & "'"
+            lblUI_TOPUP.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_TOPUP.Text)
+
+            lblUI_SIM.CssClass = "UI"
+            lblUI_TOPUP.CssClass = "UI"
+        End If
+    End Sub
+
+#End Region
     Private Sub initFormPlugin()
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
     End Sub

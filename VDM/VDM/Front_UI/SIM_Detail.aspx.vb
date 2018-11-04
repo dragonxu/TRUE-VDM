@@ -57,6 +57,8 @@ Public Class SIM_Detail
 
         If Not IsPostBack Then
             BindDetail()
+            DT_CONTROL = UI_CONTROL()
+            Bind_CONTROL()
         Else
             initFormPlugin()
         End If
@@ -65,6 +67,45 @@ Public Class SIM_Detail
     Private Sub initFormPlugin()
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
     End Sub
+
+#Region "UI"
+    Private ReadOnly Property UI_CONTROL As DataTable  '------------- เอาไว้ดึงข้อมูล UI ----------
+        Get
+            Try
+                Return BL.GET_MS_UI_LANGUAGE(LANGUAGE)
+            Catch ex As Exception
+                Return Nothing
+            End Try
+        End Get
+    End Property
+    Dim DT_CONTROL As DataTable
+    Public Sub Bind_CONTROL()
+        If LANGUAGE > VDM_BL.UILanguage.TH Then
+            If LANGUAGE = VDM_BL.UILanguage.JP Then
+                DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblPrice_str.Text & "'"
+                lblPrice_str.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblPrice_str.Text)
+                lblPrice_str.Text = lblPrice_str.Text.Replace("ตัวเลข", " " & lblPrice_Money.Text & " ")
+                lblCurrency_Str.Text = ""
+                lblPrice_Money.Visible = False
+                lblPrice_str.CssClass = "UI-JP"
+                h2_Money.Style("display") = "none"
+            Else
+                DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblPrice_str.Text & "'"
+                lblPrice_str.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblPrice_str.Text)
+                DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblCurrency_Str.Text & "'"
+                lblCurrency_Str.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblCurrency_Str.Text)
+                lblPrice_str.CssClass = "UI"
+            End If
+            lblCurrency_Str.CssClass = "UI"
+            'btn
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & btnSelect_str.Text & "'"
+            btnSelect_str.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, btnSelect_str.Text)
+            btnSelect_str.CssClass = "btu true-bs UI"
+
+        End If
+    End Sub
+
+#End Region
 
 #Region "rpt"
 

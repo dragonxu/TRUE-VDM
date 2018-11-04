@@ -66,7 +66,7 @@
                         <div class="priceplan">
                             <div class="main3">
                                 <div class="pic-step">
-                                    <p class="t-cart t-red true-b">SHOPING CART</p>
+                                    <p class="t-cart t-red true-b">SHOPPING CART</p>
                                     <p class="t-payment t-red true-b">PAYMENT</p>
                                     <p class="t-complete t-red true-b">COMPLETE ORDER</p>
                                     <img src="images/pic-step4.png" />

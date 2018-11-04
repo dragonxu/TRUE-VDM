@@ -97,6 +97,20 @@ Public Class Product_List
         End Set
     End Property
 
+#Region "UI"
+    Private ReadOnly Property UI_CONTROL As DataTable  '------------- เอาไว้ดึงข้อมูล UI ----------
+        Get
+            Try
+                Return BL.GET_MS_UI_LANGUAGE(LANGUAGE)
+            Catch ex As Exception
+                Return Nothing
+            End Try
+        End Get
+    End Property
+    Dim DT_CONTROL As DataTable
+
+
+#End Region
 
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -105,6 +119,7 @@ Public Class Product_List
         End If
 
         If Not IsPostBack Then
+            DT_CONTROL = UI_CONTROL()
             BindList()
         Else
             initFormPlugin()
@@ -152,6 +167,7 @@ Public Class Product_List
 
 
     Private Sub rptPage_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles rptPage.ItemDataBound
+
         Dim lblHeader As Label = e.Item.FindControl("lblHeader")
         lblHeader.Text = BL.Get_Category_Name(CAT_ID)
         'PageIndex
@@ -203,6 +219,14 @@ Public Class Product_List
 
         rptList.DataSource = DT
         rptList.DataBind()
+
+
+
+        If LANGUAGE > VDM_BL.UILanguage.EN Then
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblHeader.Text & "'"
+            lblHeader.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblHeader.Text)
+            lblHeader.CssClass = "UI"
+        End If
 
     End Sub
 

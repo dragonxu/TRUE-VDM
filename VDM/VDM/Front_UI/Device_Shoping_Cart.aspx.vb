@@ -104,6 +104,8 @@ Public Class Device_Shoping_Cart
         End If
 
         If Not IsPostBack Then
+            DT_CONTROL = UI_CONTROL()
+            Bind_CONTROL()
             ClearForm()
             If PRODUCT_ID <> 0 Then
                 BindProduct()
@@ -119,6 +121,63 @@ Public Class Device_Shoping_Cart
     Private Sub initFormPlugin()
         'ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
     End Sub
+
+#Region "UI"
+    Private ReadOnly Property UI_CONTROL As DataTable  '------------- เอาไว้ดึงข้อมูล UI ----------
+        Get
+            Try
+                Return BL.GET_MS_UI_LANGUAGE(LANGUAGE)
+            Catch ex As Exception
+                Return Nothing
+            End Try
+        End Get
+    End Property
+    Dim DT_CONTROL As DataTable
+    Public Sub Bind_CONTROL()
+        If LANGUAGE > VDM_BL.UILanguage.TH Then
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_SHOPINGCART.Text & "'"
+            lblUI_SHOPINGCART.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_SHOPINGCART.Text)
+            lblUI_SHOPINGCART.CssClass = "t-cart t-red true-b UI"
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_PAYMENT.Text & "'"
+            lblUI_PAYMENT.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_PAYMENT.Text)
+            lblUI_PAYMENT.CssClass = "t-payment true-b UI"
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_COMPLETEORDER.Text & "'"
+            lblUI_COMPLETEORDER.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_COMPLETEORDER.Text)
+            lblUI_COMPLETEORDER.CssClass = "t-complete true-b UI"
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_Term.Text & "'"
+            lblUI_Term.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_Term.Text)
+            lblUI_Term.CssClass = "UI"
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblPrice_str.Text & "'"
+                lblPrice_str.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblPrice_str.Text)
+                DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblCurrency_Str.Text & "'"
+                lblCurrency_Str.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblCurrency_Str.Text)
+                lblPrice_str.CssClass = "UI"
+
+            lblCurrency_Str.CssClass = "UI"
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_Accept.Text & "'"
+            lblUI_Accept.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_Accept.Text)
+            lblUI_Accept.CssClass = "UI"
+
+
+            'btn
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & btnConfirm.Text & "'"
+            btnConfirm.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, btnConfirm.Text)
+            'btnConfirm.CssClass = "order true-m default UI"
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & btnVerify.Text & "'"
+            btnVerify.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, btnVerify.Text)
+            'btnVerify.CssClass = "order true-m default UI"
+
+        End If
+    End Sub
+
+#End Region
+
 
     Private Sub ClearForm()
         Customer_IDCard = Nothing
@@ -230,11 +289,23 @@ Public Class Device_Shoping_Cart
 
     Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged
         If chkActive.Checked Then
-            btnConfirm.CssClass = "order true-m"
-            btnVerify.CssClass = "order true-m"
+            If LANGUAGE = VDM_BL.UILanguage.TH Then
+                btnConfirm.CssClass = "order true-m"
+                btnVerify.CssClass = "order true-m"
+            Else
+                btnConfirm.CssClass = "order true-m UI"
+                btnVerify.CssClass = "order true-m UI"
+            End If
+
         Else
-            btnConfirm.CssClass = "order true-m default"
-            btnVerify.CssClass = "order true-m default"
+            If LANGUAGE = VDM_BL.UILanguage.TH Then
+                btnConfirm.CssClass = "order true-m default"
+                btnVerify.CssClass = "order true-m default"
+            Else
+                btnConfirm.CssClass = "order true-m default UI"
+                btnVerify.CssClass = "order true-m default UI"
+            End If
+
         End If
 
     End Sub

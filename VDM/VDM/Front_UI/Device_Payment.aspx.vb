@@ -107,7 +107,8 @@ Public Class Device_Payment
             If IsNothing(Session("ssCashTimeout")) Then Session("ssCashTimeout") = 0
 
             txtLocalControllerURL.Text = BL.LocalControllerURL
-
+            DT_CONTROL = UI_CONTROL()
+            Bind_CONTROL()
             ClearForm()
 
             If PRODUCT_ID = 0 And SIM_ID = 0 Then
@@ -129,6 +130,115 @@ Public Class Device_Payment
     Private Sub initFormPlugin()
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
     End Sub
+
+#Region "UI"
+    Private ReadOnly Property UI_CONTROL As DataTable  '------------- เอาไว้ดึงข้อมูล UI ----------
+        Get
+            Try
+                Return BL.GET_MS_UI_LANGUAGE(LANGUAGE)
+            Catch ex As Exception
+                Return Nothing
+            End Try
+        End Get
+    End Property
+    Dim DT_CONTROL As DataTable
+    Public Sub Bind_CONTROL()
+        If LANGUAGE = VDM_BL.UILanguage.TH Then
+            lblUI_Debit.Attributes("Style") = "font-size: 30px;margin-top: 30px;"
+        Else
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_SHOPINGCART.Text & "'"
+            lblUI_SHOPINGCART.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_SHOPINGCART.Text)
+            lblUI_SHOPINGCART.CssClass = "t-cart t-red true-b UI"
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_PAYMENT.Text & "'"
+            lblUI_PAYMENT.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_PAYMENT.Text)
+            lblUI_PAYMENT.CssClass = "t-payment true-b UI"
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_COMPLETEORDER.Text & "'"
+            lblUI_COMPLETEORDER.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_COMPLETEORDER.Text)
+            lblUI_COMPLETEORDER.CssClass = "t-complete true-b UI"
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblPrice_str.Text & "'"
+            lblPrice_str.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblPrice_str.Text)
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblCurrency_Str.Text & "'"
+            lblCurrency_Str.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblCurrency_Str.Text)
+            lblPrice_str.CssClass = "UI"
+            lblCurrency_Str.CssClass = "UI"
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_Cash.Text & "'"
+            lblUI_Cash.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_Cash.Text)
+            lblUI_Cash.Attributes("class") = "UI"
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_Credit.Text & "'"
+            lblUI_Credit.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_Credit.Text)
+            lblUI_Credit.Attributes("class") = "UI"
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_Debit.Text & "'"
+            lblUI_Debit.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_Debit.Text)
+            lblUI_Debit.Attributes("class") = "UI"
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_TrueMoney.Text & "'"
+            lblUI_TrueMoney.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_TrueMoney.Text)
+            lblUI_TrueMoney.Attributes("class") = "UI"
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_SelectPayment.Text & "'"
+            lblUI_SelectPayment.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_SelectPayment.Text)
+            lblUI_SelectPayment.Attributes("class") = "UI"
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_ByCash.Text & "'"
+            lblUI_ByCash.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_ByCash.Text)
+            lblUI_ByCash.Attributes("class") = "UI"
+
+            'Remark Cash
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_remark1.Text & "'"
+            lblUI_remark1.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_remark1.Text)
+            lblUI_remark1.Style("font-size") = "40px"
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_remark2.Text & "'"
+            lblUI_remark2.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_remark2.Text)
+            lblUI_remark2.Style("font-size") = "40px"
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_remark3.Text & "'"
+            lblUI_remark3.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_remark3.Text)
+            lblUI_remark3.Style("font-size") = "30px"
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_remark4.Text & "'"
+            lblUI_remark4.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_remark4.Text)
+            lblUI_remark4.Style("font-size") = "40px"
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_remark5.Text & "'"
+            lblUI_remark5.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_remark5.Text)
+            lblUI_remark5.Attributes("class") = "UI"
+            'Paymeny
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_paymentcompleted.Text & "'"
+            lblUI_paymentcompleted.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_paymentcompleted.Text)
+            lblUI_paymentcompleted.Attributes("class") = "UI"
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_Remain.Text & "'"
+            lblUI_Remain.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_Remain.Text)
+            lblUI_Remain.Attributes("class") = "UI"
+
+            lblUI_Currency_Str1.Text = lblCurrency_Str.Text
+            lblUI_Currency_Str2.Text = lblCurrency_Str.Text
+            lblUI_Currency_Str1.Attributes("class") = "UI"
+            lblUI_Currency_Str2.Attributes("class") = "UI"
+            'Time
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_Time.Text & "'"
+            lblUI_Time.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_Time.Text)
+            lblUI_Time.Attributes("class") = "UI"
+
+
+            'TrueMoney
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_ByTrueMoney.Text & "'"
+            lblUI_ByTrueMoney.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_ByTrueMoney.Text)
+            lblUI_ByTrueMoney.Attributes("class") = "UI"
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_TrueMoney_Step1.Text & "'"
+            lblUI_TrueMoney_Step1.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_TrueMoney_Step1.Text)
+            lblUI_TrueMoney_Step1.Attributes("class") = "UI"
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_TrueMoney_Step2.Text & "'"
+            lblUI_TrueMoney_Step2.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_TrueMoney_Step2.Text)
+            lblUI_TrueMoney_Step2.Attributes("class") = "UI"
+        End If
+    End Sub
+
+#End Region
+
 
     Private Sub ClearForm()
 

@@ -59,6 +59,33 @@ Partial Public Class Device_Payment
     Protected WithEvents txtLocalControllerURL As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''lblUI_SHOPINGCART control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_SHOPINGCART As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUI_PAYMENT control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_PAYMENT As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUI_COMPLETEORDER control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_COMPLETEORDER As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''img control.
     '''</summary>
     '''<remarks>
@@ -158,6 +185,15 @@ Partial Public Class Device_Payment
     Protected WithEvents lnkCash As Global.System.Web.UI.HtmlControls.HtmlAnchor
     
     '''<summary>
+    '''lblUI_Cash control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_Cash As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''lnkCredit control.
     '''</summary>
     '''<remarks>
@@ -165,6 +201,24 @@ Partial Public Class Device_Payment
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkCredit As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''lblUI_Credit control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_Credit As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUI_Debit control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_Debit As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''lnkTruemoney control.
@@ -176,6 +230,15 @@ Partial Public Class Device_Payment
     Protected WithEvents lnkTruemoney As Global.System.Web.UI.HtmlControls.HtmlAnchor
     
     '''<summary>
+    '''lblUI_TrueMoney control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_TrueMoney As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''pnlSelectChoice control.
     '''</summary>
     '''<remarks>
@@ -183,6 +246,15 @@ Partial Public Class Device_Payment
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlSelectChoice As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''lblUI_SelectPayment control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_SelectPayment As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''pnlCash control.
@@ -194,6 +266,69 @@ Partial Public Class Device_Payment
     Protected WithEvents pnlCash As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
+    '''lblUI_ByCash control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_ByCash As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUI_remark1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_remark1 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUI_remark2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_remark2 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUI_remark3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_remark3 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUI_remark4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_remark4 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUI_remark5 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_remark5 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUI_paymentcompleted control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_paymentcompleted As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''txtPaid control.
     '''</summary>
     '''<remarks>
@@ -203,6 +338,24 @@ Partial Public Class Device_Payment
     Protected WithEvents txtPaid As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''lblUI_Currency_Str1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_Currency_Str1 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUI_Remain control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_Remain As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''txtRequire control.
     '''</summary>
     '''<remarks>
@@ -210,6 +363,24 @@ Partial Public Class Device_Payment
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtRequire As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''lblUI_Currency_Str2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_Currency_Str2 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUI_Time control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_Time As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''txt1 control.
@@ -336,6 +507,33 @@ Partial Public Class Device_Payment
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlTruemoney As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''lblUI_ByTrueMoney control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_ByTrueMoney As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUI_TrueMoney_Step1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_TrueMoney_Step1 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUI_TrueMoney_Step2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_TrueMoney_Step2 As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''pnlBarcode control.

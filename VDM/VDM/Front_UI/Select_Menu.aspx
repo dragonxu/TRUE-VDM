@@ -10,9 +10,8 @@
             <asp:LinkButton  ID="lnkDevice" runat ="server" >
                 <div class="image-cropper">
                     <span>
-                        <h3 class="true-l">Devices</h3>
-                        <p class="true-l">โทรศัพท์มือถือ<br />
-                            อุปกรณ์สมาร์ทดีไวซ์</p>
+                        <h3 class="true-l"><asp:Label ID="lblUI_Device" runat ="server" Text ="Devices"></asp:Label>   </h3>
+                        <p class="true-l"><asp:Label ID="lblUI_Device_Desc" runat ="server" Text ="โทรศัพท์มือถือ<br />อุปกรณ์สมาร์ทดีไวซ์"></asp:Label></p>
                     </span>
                     <img src="images/pic-devices.jpg" />
                 </div>
@@ -23,8 +22,8 @@
             <asp:LinkButton  ID="lnkAccessories" runat ="server" >
                 <div class="image-cropper">
                     <span>
-                        <h3 class="true-l"><font color="#FFFFFF">Accessories</font></h3>
-                        <p class="true-l"><font color="#FFFFFF">อุปกรณ์เสริมต่าง ๆ</font></p>
+                        <h3 class="true-l"><asp:Label ID="lblUI_Accessories" runat ="server"  Text ="Accessories" Style ="color:#FFFFFF" ></asp:Label></h3>
+                        <p class="true-l"><asp:Label ID="lblUI_Accessories_Desc" runat ="server" Text ="อุปกรณ์เสริมต่าง ๆ"  Style ="color:#FFFFFF"></asp:Label></p>
                       </span>
                     <img src="images/pic-accessories.jpg" />
                 </div>
@@ -34,9 +33,8 @@
             <asp:LinkButton  ID="lnkSim" runat ="server" >
                 <div class="image-cropper">
                     <span>
-                        <h3 class="true-l">Sim&<br />
-                            Package </h3>
-                        <p class="true-l">เลือกซื้อซิมและแพ็กเกจ</p>
+                        <h3 class="true-l"><asp:Label ID="lblUI_SIM" runat ="server" Text ="Sim&<br />Package"></asp:Label></h3>
+                        <p class="true-l"><asp:Label ID="lblUI_SIM_Desc" runat ="server" Text ="เลือกซื้อซิมและแพ็กเกจ"></asp:Label></p>
                     </span>
                     <img src="images/pic-sim.jpg" />
                 </div>
@@ -47,9 +45,6 @@
      <footer>
                 <nav>
                     <div class="main">
-                        <%--<span class="col-md-6">
-                            <asp:ImageButton ID="lnkHome" runat="server" ImageUrl="images/btu-home.png" />
-                        </span>--%>
                         <span class="col-md-12">
                             <asp:ImageButton ID="lnkBack" runat="server" ImageUrl="images/btu-prev.png" />
                         </span>

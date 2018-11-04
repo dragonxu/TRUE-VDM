@@ -77,6 +77,15 @@ Partial Public Class SIM_Detail
     Protected WithEvents lblPrice_str As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''h2_Money control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents h2_Money As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''lblPrice_Money control.
     '''</summary>
     '''<remarks>

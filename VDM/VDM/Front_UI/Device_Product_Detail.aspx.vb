@@ -127,12 +127,30 @@ Public Class Device_Product_Detail
         End Set
     End Property
 
+#Region "UI"
+    Private ReadOnly Property UI_CONTROL As DataTable  '------------- เอาไว้ดึงข้อมูล UI ----------
+        Get
+            Try
+                Return BL.GET_MS_UI_LANGUAGE(LANGUAGE)
+            Catch ex As Exception
+                Return Nothing
+            End Try
+        End Get
+    End Property
+    Dim DT_CONTROL As DataTable
+    Public Sub Bind_CONTROL()
+
+    End Sub
+
+#End Region
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsNumeric(Session("LANGUAGE")) Then
             Response.Redirect("Select_Language.aspx")
         End If
 
         If Not IsPostBack Then
+            DT_CONTROL = UI_CONTROL()
             PRODUCT_ID = Request.QueryString("PRODUCT_ID")
             If Request.QueryString("MODEL") = Nothing Then
                 Dim SQL As String = ""
@@ -303,7 +321,40 @@ Public Class Device_Product_Detail
         btnSelect_str.CommandArgument = Default_Product_ID
 
 
+        '--UI
+        Dim h3_Price_str As HtmlControl = e.Item.FindControl("h3_Price_str")
+        Dim h2_Money As HtmlControl = e.Item.FindControl("h2_Money")
+        If LANGUAGE > VDM_BL.UILanguage.TH Then
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblDescription_Header.Text & "'"
+            lblDescription_Header.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblDescription_Header.Text)
+            lblDescription_Header.CssClass = "UI"
+            h3_Price_str.Style("margin-right") = "unset"
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblSPEC_Warranty.Text & "'"
+            lblSPEC_Warranty.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblSPEC_Warranty.Text)
+            lblDescription_Header.CssClass = "UI"
 
+            If LANGUAGE = VDM_BL.UILanguage.JP Then
+                DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblPrice_str.Text & "'"
+                lblPrice_str.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblPrice_str.Text)
+                lblPrice_str.Text = lblPrice_str.Text.Replace("ตัวเลข", " " & lblPrice_Money.Text & " ")
+                lblCurrency_Str.Text = ""
+                lblPrice_Money.Visible = False
+                lblPrice_str.CssClass = "UI-JP"
+                h2_Money.Style("display") = "none"
+            Else
+                DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblPrice_str.Text & "'"
+                lblPrice_str.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblPrice_str.Text)
+                DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblCurrency_Str.Text & "'"
+                lblCurrency_Str.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblCurrency_Str.Text)
+                lblPrice_str.CssClass = "UI"
+            End If
+            lblCurrency_Str.CssClass = "UI"
+            'btn
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & btnSelect_str.Text & "'"
+            btnSelect_str.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, btnSelect_str.Text)
+            btnSelect_str.CssClass = "btu true-bs UI"
+
+        End If
     End Sub
 
     Private Sub rptProductList_ItemCommand(source As Object, e As RepeaterCommandEventArgs) Handles rptProductList.ItemCommand
