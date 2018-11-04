@@ -2482,7 +2482,7 @@ Public Class VDM_BL
     Public Function GET_MS_UI_LANGUAGE(ByVal LANGUAGE As UILanguage)
         Dim SQL As String = "SELECT  PAGE_CODE,DISPLAY_TH"
         SQL &= " ,DISPLAY_" & Get_Language_Code(LANGUAGE) & " DISPLAY"
-        SQL &= " FROM MS_UI_LANGUAGE_br"
+        SQL &= " FROM MS_UI_LANGUAGE"
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         DA.Fill(DT)
