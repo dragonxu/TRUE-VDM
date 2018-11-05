@@ -871,7 +871,7 @@ footer nav a{width:auto; display:inline-block;}
 .pic-sim h3 .UI{width:auto; line-height:80px; margin:0; color:#313035; font-size:80px; font-weight:normal; letter-spacing:10px; position:absolute; bottom:15px; left:0; position:relative;}
 .sim ul h3 .UI{width:100%; margin:10px 0 0 0; font-size:60px; color:#FFF; text-align:center; display:inline-block;}
 /*SIM_Detail*/
-.priceplan .list h3 .UI{width:350px; line-height:50px; padding:0; margin:0; color:#424146; font-size:45px; display:inline-block;position:relative;}
+.priceplan .list h3 .UI{width:350px; line-height:50px; padding:0; margin:0; color:#424146; font-size:45px; position:relative;}
 .priceplan .list h2 .UI{width:270px; line-height:50px; padding:0; margin:0; color:#424146; font-size:60px; display:inline-block; position:relative;}
 .priceplan .list h2 .UI-JP{width:270px; line-height:50px; padding:0; margin:0; color:#424146; font-size:60px;   position:relative;}
 /*SIM_Detail btn*/
@@ -888,13 +888,16 @@ footer nav a{width:auto; display:inline-block;}
 .priceplan .check .UI{ font-size:40px; } 
 .priceplan input[type="submit"], .priceplan input[type="button"] .UI{ font-size:35px;  }
 
-/*Device_Payment*/
- 
-.priceplan .step-payment h3 .UI{font-size:45px;}
+/*Device_Payment*/ 
 
 .priceplan .step-payment .btu-payment a dt .UI{ font-size:20px; display:inline-block; position:relative ; }
 .priceplan .step-payment .btu-payment a dt p.text .UI{width:100%; line-height:30px; font-size:10px; display:inline-block; }
 .priceplan .step-payment h4 .UI{font-size:40px;}
-.priceplan .step-payment h3 .UI{font-size:50px; }
+.priceplan .step-payment h3 .UI{font-size:40px; }
 .priceplan .step-payment .f-app p .UI{font-size:30px;}
+.priceplan .step-payment h3 .UI-EN{ font-size:60px;}
+
+/*Complete_Order*/
+.priceplan .thank h4 .UI{line-height:50px; margin:70px 0 0 0; color:#424146; font-size:40px; text-align:center; display:inline-block;}
+
 

@@ -320,6 +320,15 @@ Partial Public Class Device_Payment
     Protected WithEvents lblUI_remark5 As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''divpaymentcompleted control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents divpaymentcompleted As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''lblUI_paymentcompleted control.
     '''</summary>
     '''<remarks>
@@ -327,6 +336,15 @@ Partial Public Class Device_Payment
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblUI_paymentcompleted As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''divMoney control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents divMoney As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''txtPaid control.

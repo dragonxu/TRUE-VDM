@@ -87,7 +87,7 @@ Public Class SIM_Detail
                 lblPrice_str.Text = lblPrice_str.Text.Replace("ตัวเลข", " " & lblPrice_Money.Text & " ")
                 lblCurrency_Str.Text = ""
                 lblPrice_Money.Visible = False
-                lblPrice_str.CssClass = "UI-JP"
+                lblPrice_str.CssClass = "UI"
                 h2_Money.Style("display") = "none"
             Else
                 DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblPrice_str.Text & "'"

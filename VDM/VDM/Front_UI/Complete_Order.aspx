@@ -66,22 +66,26 @@
                         <div class="priceplan">
                             <div class="main3">
                                 <div class="pic-step">
-                                    <p class="t-cart t-red true-b">SHOPPING CART</p>
-                                    <p class="t-payment t-red true-b">PAYMENT</p>
-                                    <p class="t-complete t-red true-b">COMPLETE ORDER</p>
+                                    <p class="t-cart t-red true-b"><asp:Label ID="lblUI_SHOPINGCART" runat="server" Text="SHOPPING CART"></asp:Label></p>
+                                    <p class="t-payment t-red  true-b"><asp:Label ID="lblUI_PAYMENT" runat="server" Text="PAYMENT"></asp:Label></p>
+                                    <p class="t-complete t-red true-b"><asp:Label ID="lblUI_COMPLETEORDER" runat="server" Text="COMPLETE ORDER"></asp:Label></p>
+
                                     <img src="images/pic-step4.png" />
                                 </div>
                                 <div class="pack">
                                     <div class="step-payment" style="padding: 10px 0 100px 0;">
-                                        <h4 class="margin-re true-m">ท่านได้ชำระค่าสินค้าแล้ว</h4>
+                                        <h4 class="margin-re true-m"><asp:Label ID="lblUI_Complete" runat="server" Text="ท่านได้ชำระค่าสินค้าแล้ว"></asp:Label></h4>
                                     </div>
                                     <%--<img src="images/icon-pack-gif.gif">
                                     <img src="images/icon-Shadow.png">--%>
                                     <img src="images/gif/icon-pack-gif.gif">
                                     <div class="step-payment">
 
+                                       <%-- <h5 class="margin-re true-m"><asp:Label ID="lblUI_Plese_Pick" runat="server" Text="กรุณารับสินค้าภายใน"></asp:Label></h5>--%>
 
-                                        <h4 class="margin-re true-m">กรุณารอสักครู่...</h4>
+                                        <h4 class="margin-re true-m"><asp:Label ID="lblUI_Wait" runat="server" Text="กรุณารอสักครู่..."></asp:Label></h4>
+                                        <%--<br />
+                                        <h4 class="margin-re true-m">0<asp:Label ID="lblUI_Minuted" runat="server" Text="กรุณารอสักครู่..."></asp:Label></h4>--%>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

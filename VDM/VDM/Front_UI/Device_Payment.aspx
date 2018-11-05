@@ -59,14 +59,10 @@
                         <div class="priceplan">
                             <div class="main3">
                                 <div class="pic-step" style="padding: 100px 0 0px 0;">
-                                    <p class="t-cart t-red true-b">
-                                        <asp:Label ID="lblUI_SHOPINGCART" runat="server" Text="SHOPPING CART"></asp:Label></p>
-                                    <p class="t-payment true-b">
-                                        <asp:Label ID="lblUI_PAYMENT" runat="server" Text="PAYMENT"></asp:Label></p>
-                                    <p class="t-complete true-b">
-                                        <asp:Label ID="lblUI_COMPLETEORDER" runat="server" Text="COMPLETE ORDER"></asp:Label></p>
-                                    <img src="images/pic-step2.png" />
-                                </div>
+                                    <p class="t-cart t-red true-b"><asp:Label ID="lblUI_SHOPINGCART" runat="server" Text="SHOPPING CART"></asp:Label></p>
+                                    <p class="t-payment t-red  true-b"><asp:Label ID="lblUI_PAYMENT" runat="server" Text="PAYMENT"></asp:Label></p>
+                                    <p class="t-complete true-b"><asp:Label ID="lblUI_COMPLETEORDER" runat="server" Text="COMPLETE ORDER"></asp:Label></p>
+                                    <img src="images/pic-step2.png" /></div>
                                 <div class="description" style="margin: 30px 0px 0px 0px;">
                                     <div class="pic" style="padding: unset; text-align: center;">
                                         <asp:Image ID="img" runat="server" Style="width: 60%;"></asp:Image>
@@ -161,10 +157,10 @@
                                                 <p class="sub true-l" style="font-size: 40px;"><asp:Label ID="lblUI_remark5" runat="server" Text="(รับเฉพาะเงินบาทไทยเท่านั้น)" ></asp:Label></p>
                                             </div>
                                             <div class="f-cash" style="padding: 20px 0;">
-                                                <div class="col-md-4" style="text-align: center;">
+                                                <div id="divpaymentcompleted" runat ="server"  class="col-md-4" style="text-align: center;">
                                                     <h3 class="true-b"><asp:Label ID="lblUI_paymentcompleted" runat="server" Text="ชำระแล้ว" ></asp:Label></h3>
                                                 </div>
-                                                <div class="col-md-6" style="text-align: center;">
+                                                <div id="divMoney" runat ="server"  class="col-md-6" style="text-align: center;">
                                                     <h3>
                                                         <p style="border: unset; padding-right: 30px; text-align: right;">
                                                             <asp:TextBox class="true-b " ID="txtPaid" runat="server" Text="0" Style="text-align: right; width: 300px; float: right; background-color: transparent; border: none; margin-top: -15px;" ReadOnly="true"></asp:TextBox>
@@ -318,15 +314,15 @@
                                                     <div class="pic">
                                                         <img src="images/icon-app.png" />
                                                     </div>
-                                                    <p class="true-m"><asp:Label ID="lblUI_TrueMoney_Step1" runat="server" Text="เปิดแอป TrueMoney Wallet" ></asp:Label>
+                                                    <p class="true-m"><asp:Label ID="lblUI_TrueMoney_Step1" runat="server"  class="true-l" Text="เปิดแอป TrueMoney Wallet" ></asp:Label>
                                                         
                                                     </p>
                                                 </div>
                                                 <div class="f-app">
                                                     <div class="pic">
-                                                        <img src="images/qr-code2.png" />
+                                                        <img src="images/icon-scan-barcode.png" />
                                                     </div>
-                                                    <p class="true-m"><asp:Label ID="lblUI_TrueMoney_Step2" runat="server" Text="และสแกน QR Code" ></asp:Label>
+                                                    <p class="true-m"><asp:Label ID="lblUI_TrueMoney_Step2" runat="server"  class="true-l" Text="และสแกน Barcode" ></asp:Label>
                                                         
                                                     </p>
                                                 </div>
