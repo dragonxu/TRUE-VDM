@@ -66,13 +66,19 @@ Public Class ProductPicker
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        Response.Write(BL.Product_Picker_IP & "<br>" & vbLf)
+        Response.Write(BL.Product_Picker_Port & "<br>" & vbLf)
         Controller.SetIP(BL.Product_Picker_IP, BL.Product_Picker_Port)
         Controller.Connect()
+        Response.Write("Connected<br>" & vbLf)
         Controller.CloseGate()
+        Response.Write("CloseGate<br>" & vbLf)
 
         Select Case Mode.ToUpper
             Case "SetHome".ToUpper
+                Response.Write("BeforeSetHome<br>" & vbLf)
                 SetHome()
+                Response.Write("AfterSetHome<br>" & vbLf)
             Case "CloseGate".ToUpper
                 CloseGate()
             Case "OpenGate".ToUpper
@@ -82,10 +88,12 @@ Public Class ProductPicker
             Case "GoPick".ToUpper
                 GoPick()
         End Select
+
     End Sub
 
     Private Sub SetHome()
         Dim Result As Boolean = Controller.HomePosition()
+        Response.Write("SetHome_Result : " & Result & "<br>" & vbLf)
         callBack(Result, "")
     End Sub
 
