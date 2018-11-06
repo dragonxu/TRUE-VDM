@@ -50,9 +50,9 @@
                 <div class="priceplan">
                     <div class="main3">
                         <div class="pic-step">
-                            <p class="t-cart t-red true-b">SHOPING CART</p>
-                            <p class="t-payment t-red true-b">PAYMENT</p>
-                            <p class="t-complete true-b">COMPLETE ORDER</p>
+                            <p class="t-cart t-red true-b"><asp:Label ID="lblUI_SHOPINGCART" runat="server" Text ="SHOPPING CART"></asp:Label></p>
+                            <p class="t-payment true-b"><asp:Label ID="lblUI_PAYMENT" runat="server" Text ="PAYMENT"></asp:Label></p>
+                            <p class="t-complete true-b"><asp:Label ID="lblUI_COMPLETEORDER" runat="server" Text ="COMPLETE ORDER"></asp:Label></p>
                             <img src="images/pic-step2.png" />
                         </div>
                         <div class="description">

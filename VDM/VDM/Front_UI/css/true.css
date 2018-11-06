@@ -857,3 +857,47 @@ footer .bottom-logo img{width:100%;}
 footer nav{width:100%; padding:20px 0; text-align:center; display:inline-block; background:#FFF; }
 footer nav span{text-align:center; display:inline-block; float:left;}
 footer nav a{width:auto; display:inline-block;}
+
+
+/*form UI*/
+/*Select_Menu*/
+.home .frame a span h3 span  {min-height:60px; line-height:60px; margin:0; color:#000; font-size:125px; letter-spacing:10px; display:block; position:relative;top:30px;}
+.home .frame a span p span {line-height:26px; margin-top:10px; margin-right:14px; color:#868686; font-size:40px; display:block; position:relative;top:40px;}
+.home .frame a span h3 .UI {min-height:60px; line-height:90px; margin:0; color:#000; font-size:90px; letter-spacing:10px; display:block; position:relative;top:30px;}
+/*Device_Brand , Product_List*/
+.pic-devices h3 .UI {width:auto; margin:0; color:#313035; font-size:90px; font-weight:normal; letter-spacing:10px; position:absolute; bottom:0; left:0; position:relative; }
+
+/*SIM_List*/
+.pic-sim h3 .UI{width:auto; line-height:80px; margin:0; color:#313035; font-size:80px; font-weight:normal; letter-spacing:10px; position:absolute; bottom:15px; left:0; position:relative;}
+.sim ul h3 .UI{width:100%; margin:10px 0 0 0; font-size:60px; color:#FFF; text-align:center; display:inline-block;}
+/*SIM_Detail*/
+.priceplan .list h3 .UI{width:350px; line-height:50px; padding:0; margin:0; color:#424146; font-size:45px; position:relative;}
+.priceplan .list h2 .UI{width:270px; line-height:50px; padding:0; margin:0; color:#424146; font-size:60px; display:inline-block; position:relative;}
+.priceplan .list h2 .UI-JP{width:270px; line-height:50px; padding:0; margin:0; color:#424146; font-size:60px;   position:relative;}
+/*SIM_Detail btn*/
+.priceplan .list a.UI{height:50px; line-height:60px; padding:0 35px; margin:30px 0 0 0; color:#FFF; font-size:25px; border-radius:18px; display:inline-block; background:#D80915;}
+
+/*Device_Product_Detail*/
+.priceplan .detail h4 .UI{width:100%; margin:0; font-size:40px; display:inline-block;}
+.priceplan .description span p.bottom .UI{width:100%; padding:10px 0 0 0; font-size:38px; display:inline-block;}
+
+/*Device_Shoping_Cart*/
+.priceplan .pic-step p .UI{width:auto; line-height:45px; color:#FFF; font-size:40px; text-align:center; display:inline-block; top:40px;}
+.priceplan .term h2 .UI{width:100%; padding:0; margin:0; color:#424146; font-size:50px; text-align:center; display:inline-block;}
+.priceplan .step-cart .total h4 .UI{font-size:50px; text-align:center;}
+.priceplan .check .UI{ font-size:40px; } 
+.priceplan input[type="submit"], .priceplan input[type="button"] .UI{ font-size:35px;  }
+
+/*Device_Payment*/ 
+
+.priceplan .step-payment .btu-payment a dt .UI{ font-size:20px; display:inline-block; position:relative ; }
+.priceplan .step-payment .btu-payment a dt p.text .UI{width:100%; line-height:30px; font-size:10px; display:inline-block; }
+.priceplan .step-payment h4 .UI{font-size:40px;}
+.priceplan .step-payment h3 .UI{font-size:40px; }
+.priceplan .step-payment .f-app p .UI{font-size:30px;}
+.priceplan .step-payment h3 .UI-EN{ font-size:60px;}
+
+/*Complete_Order*/
+.priceplan .thank h4 .UI{line-height:50px; margin:70px 0 0 0; color:#424146; font-size:40px; text-align:center; display:inline-block;}
+
+

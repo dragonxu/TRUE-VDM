@@ -42,7 +42,8 @@ Public Class Thank_You
             'Session("TXN_ID") = 83 ' Test True Money
             'Session("TXN_ID") = 65 ' Test Cash
             'Session("TXN_ID") = 196 ' CreditCard
-
+            DT_CONTROL = UI_CONTROL()
+            Bind_CONTROL()
             txtLocalControllerURL.Text = BL.LocalControllerURL
             '---------------- Change And Print Slip--------------
             Change()
@@ -160,5 +161,30 @@ Public Class Thank_You
     Private Sub lnkHome_Click(sender As Object, e As ImageClickEventArgs) Handles lnkHome.Click
         Response.Redirect("Select_Language.aspx")
     End Sub
+
+#Region "UI"
+    Private ReadOnly Property UI_CONTROL As DataTable  '------------- เอาไว้ดึงข้อมูล UI ----------
+        Get
+            Try
+                Return BL.GET_MS_UI_LANGUAGE(LANGUAGE)
+            Catch ex As Exception
+                Return Nothing
+            End Try
+        End Get
+    End Property
+    Dim DT_CONTROL As DataTable
+    Public Sub Bind_CONTROL()
+        If LANGUAGE > VDM_BL.UILanguage.TH Then
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_ThankYou.Text & "'"
+            lblUI_ThankYou.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_ThankYou.Text)
+
+        End If
+
+        If LANGUAGE > VDM_BL.UILanguage.EN Then
+            lblUI_ThankYou.CssClass = "UI"
+        End If
+    End Sub
+
+#End Region
 
 End Class

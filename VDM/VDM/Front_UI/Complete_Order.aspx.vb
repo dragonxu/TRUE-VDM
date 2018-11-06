@@ -246,7 +246,8 @@ Public Class Complete_Order
             'Dim Result As BackEndInterface.Register.Command_Result = fn_Register()
 
             txtLocalControllerURL.Text = BL.LocalControllerURL
-
+            DT_CONTROL = UI_CONTROL()
+            Bind_CONTROL()
             Dim DT As DataTable = BL.Get_Kiosk_Current_Shift(KO_ID)
             If DT.Rows.Count > 0 Then
                 SHIFT_ID = DT.Rows(0).Item("SHIFT_ID")
@@ -273,6 +274,48 @@ Public Class Complete_Order
     Private Sub initFirstTimeScript()
         'txtBarcode.Attributes("onchange") = "leaveBarcode();"
     End Sub
+
+#Region "UI"
+    Private ReadOnly Property UI_CONTROL As DataTable  '------------- เอาไว้ดึงข้อมูล UI ----------
+        Get
+            Try
+                Return BL.GET_MS_UI_LANGUAGE(LANGUAGE)
+            Catch ex As Exception
+                Return Nothing
+            End Try
+        End Get
+    End Property
+    Dim DT_CONTROL As DataTable
+    Public Sub Bind_CONTROL()
+        If LANGUAGE > VDM_BL.UILanguage.TH Then
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_SHOPINGCART.Text & "'"
+            lblUI_SHOPINGCART.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_SHOPINGCART.Text)
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_PAYMENT.Text & "'"
+            lblUI_PAYMENT.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_PAYMENT.Text)
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_COMPLETEORDER.Text & "'"
+            lblUI_COMPLETEORDER.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_COMPLETEORDER.Text)
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_Complete.Text & "'"
+            lblUI_Complete.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_Complete.Text)
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_Wait.Text & "'"
+            lblUI_Wait.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_Wait.Text)
+
+        End If
+
+        If LANGUAGE > VDM_BL.UILanguage.EN Then
+            lblUI_SHOPINGCART.CssClass = "t-cart t-red true-b UI"
+            lblUI_PAYMENT.CssClass = "t-payment t-red  true-b UI"
+            lblUI_COMPLETEORDER.CssClass = "t-complete t-red  true-b UI"
+            lblUI_Complete.CssClass = "UI"
+            lblUI_Wait.CssClass = "UI"
+        End If
+    End Sub
+
+#End Region
+
 
     Private Sub PickUpProduct()
 

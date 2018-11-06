@@ -39,7 +39,6 @@ Public Class Select_Menu
 
 #End Region
 
-
     Private ReadOnly Property QTY_Device As Integer '------------- เอาไว้เรียกใช้ง่ายๆ ----------
         Get
             Try
@@ -84,6 +83,8 @@ Public Class Select_Menu
             End Try
         End Get
     End Property
+
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Not IsNumeric(Session("LANGUAGE")) Then
@@ -108,7 +109,46 @@ Public Class Select_Menu
             End If
         End If
 
+        DT_CONTROL = UI_CONTROL()
+        Bind_CONTROL()
     End Sub
+
+#Region "UI"
+    Private ReadOnly Property UI_CONTROL As DataTable  '------------- เอาไว้ดึงข้อมูล UI ----------
+        Get
+            Try
+                Return BL.GET_MS_UI_LANGUAGE(LANGUAGE)
+            Catch ex As Exception
+                Return Nothing
+            End Try
+        End Get
+    End Property
+    Dim DT_CONTROL As DataTable
+    Public Sub Bind_CONTROL()
+        If LANGUAGE > VDM_BL.UILanguage.EN Then
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_Device.Text & "'"
+            lblUI_Device.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_Device.Text)
+            'DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_Device_Desc.Text & "'"
+            'lblUI_Device_Desc.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_Device_Desc.Text)
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_Accessories.Text & "'"
+            lblUI_Accessories.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_Accessories.Text)
+            'DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_Accessories_Desc.Text & "'"
+            'lblUI_Accessories_Desc.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_Accessories_Desc.Text)
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_SIM.Text & "'"
+            lblUI_SIM.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_SIM.Text)
+            'DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_SIM_Desc.Text & "'"
+            'lblUI_SIM_Desc.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_SIM_Desc.Text)
+
+            lblUI_Device.CssClass = "UI"
+            lblUI_Accessories.CssClass = "UI"
+            lblUI_SIM.CssClass = "UI"
+
+        End If
+    End Sub
+
+#End Region
 
     Public Sub BindProduct()
         Dim SQL As String = ""

@@ -41,6 +41,24 @@ Partial Public Class SIM_List
     Protected WithEvents udpList As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
+    '''lblUI_SIM control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_SIM As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUI_TOPUP control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_TOPUP As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''rptList control.
     '''</summary>
     '''<remarks>

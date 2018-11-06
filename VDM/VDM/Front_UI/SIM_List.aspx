@@ -29,11 +29,10 @@
             <div class="sim">
                 <div class="main3">
                     <div class="pic-sim">
-                        <h3 class="true-l">SIM&<br />
-                            Package</h3>
+                        <h3 class="true-l"><asp:label id="lblUI_SIM" runat ="server" Text ="SIM&<br />Package" ></asp:label></h3>
                         <img src="images/pic-top_sim.png" /></div>
                     <ul  class="col-md-12" style ="text-align :center ;">
-                        <h3 class="true-l">เติมเงิน</h3>
+                        <h3 class="true-l"><asp:label id="lblUI_TOPUP" runat ="server" Text ="เติมเงิน" ></asp:label></h3>
 
                         <asp:Repeater ID="rptList" runat="server" >
                             <ItemTemplate>

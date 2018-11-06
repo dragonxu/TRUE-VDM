@@ -51,7 +51,8 @@
                                             <div>
                                                 <div class="description">
                                                     <div class="pic-devices" style="margin-top: -200px; height:400px;">
-                                                        <h3 class="true-l">Brands</h3>
+                                                        <%--<h3 class="true-l">Brands</h3>--%>
+                                                        <h3 class="true-l"><asp:Label ID="lblUI_Brands" runat ="server" Text ="Brands"></asp:Label></h3>
 
                                                         <img src="images/pic-top_catalog.png" style="width: unset; padding-top: 120px; height:400px; width:400px;" />
                                                     </div>

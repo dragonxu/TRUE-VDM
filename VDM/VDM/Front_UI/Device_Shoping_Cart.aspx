@@ -53,9 +53,9 @@
                 <div class="priceplan">
                     <div class="main3">
                         <div class="pic-step">
-                            <p class="t-cart t-red true-b">SHOPING CART</p>
-                            <p class="t-payment true-b">PAYMENT</p>
-                            <p class="t-complete true-b">COMPLETE ORDER</p>
+                            <p class="t-cart t-red true-b"><asp:Label ID="lblUI_SHOPINGCART" runat="server" Text ="SHOPPING CART"></asp:Label></p>
+                            <p class="t-payment true-b"><asp:Label ID="lblUI_PAYMENT" runat="server" Text ="PAYMENT"></asp:Label></p>
+                            <p class="t-complete true-b"><asp:Label ID="lblUI_COMPLETEORDER" runat="server" Text ="COMPLETE ORDER"></asp:Label></p>
                             <img src="images/pic-step1.png" />
                         </div>
                         <div class="description">
@@ -91,7 +91,7 @@
                             <div class="total" style="margin-bottom: 30px;">
                                 <h4 class="true-b t-red">
                                     <asp:Label ID="lblPrice_str" runat="server" Text="ยอดชำระ"></asp:Label>
-                                    <i title="฿">
+                                    <i title="฿" id="i_Money" runat ="server" >
                                         <asp:Label ID="lblPrice_Money" runat="server" Text=""></asp:Label></i>
                                     <asp:Label ID="lblCurrency_Str" runat="server" Text="บาท"></asp:Label>
 
@@ -100,7 +100,7 @@
                         </div>
 
                         <div class="term" style="height:460px; margin:unset;">
-                            <h2 class="true-m">Term & Condition</h2>
+                            <h2 class="true-m"><asp:Label ID="lblUI_Term" runat="server" Text ="Term & Condition"></asp:Label></h2>
                             <div class="frame" style="height: 380px;">
                                 <span id="content-d3" class="light" style="height:340px; overflow:hidden;">
                                     <p class="true-l">
@@ -133,7 +133,7 @@
                 <ContentTemplate>
                 
                         <label class="check true-l" style="height:100px;">
-                            ข้าพเจ้าได้อ่านข้อกำหนดและเงื่อนไขทุกข้อแล้ว
+                            <asp:Label ID="lblUI_Accept" runat="server" Text ="ข้าพเจ้าได้อ่านข้อกำหนดและเงื่อนไขทุกข้อแล้ว"></asp:Label>
                             <asp:CheckBox ID="chkActive" runat="server" Checked="false" AutoPostBack="true" />
                             <span class="checkmark"></span>
                         </label>

@@ -41,6 +41,51 @@ Partial Public Class Complete_Order
     Protected WithEvents UDP As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
+    '''lblUI_SHOPINGCART control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_SHOPINGCART As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUI_PAYMENT control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_PAYMENT As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUI_COMPLETEORDER control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_COMPLETEORDER As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUI_Complete control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_Complete As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUI_Wait control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_Wait As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''txtLocalControllerURL control.
     '''</summary>
     '''<remarks>

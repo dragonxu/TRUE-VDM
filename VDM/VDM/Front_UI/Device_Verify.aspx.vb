@@ -99,6 +99,8 @@ Public Class Device_Verify
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
+            DT_CONTROL = UI_CONTROL()
+            Bind_CONTROL()
             BindSIM()
             SEQ_Face_Recognition = 1
 
@@ -138,6 +140,53 @@ Public Class Device_Verify
     End Sub
 
 #End Region
+
+#Region "UI"
+    Private ReadOnly Property UI_CONTROL As DataTable  '------------- เอาไว้ดึงข้อมูล UI ----------
+        Get
+            Try
+                Return BL.GET_MS_UI_LANGUAGE(LANGUAGE)
+            Catch ex As Exception
+                Return Nothing
+            End Try
+        End Get
+    End Property
+    Dim DT_CONTROL As DataTable
+    Public Sub Bind_CONTROL()
+        If LANGUAGE > VDM_BL.UILanguage.TH Then
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_SHOPINGCART.Text & "'"
+            lblUI_SHOPINGCART.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_SHOPINGCART.Text)
+            'lblUI_SHOPINGCART.CssClass = "t-cart t-red true-b UI"
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_PAYMENT.Text & "'"
+            lblUI_PAYMENT.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_PAYMENT.Text)
+            'lblUI_PAYMENT.CssClass = "t-payment true-b UI"
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_COMPLETEORDER.Text & "'"
+            lblUI_COMPLETEORDER.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_COMPLETEORDER.Text)
+            'lblUI_COMPLETEORDER.CssClass = "t-complete true-b UI"
+
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblPrice_str.Text & "'"
+            lblPrice_str.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblPrice_str.Text)
+            DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblCurrency_Str.Text & "'"
+            lblCurrency_Str.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblCurrency_Str.Text)
+
+        End If
+
+
+        If LANGUAGE > VDM_BL.UILanguage.EN Then
+            lblUI_SHOPINGCART.CssClass = "t-cart t-red true-b UI"
+            lblUI_PAYMENT.CssClass = "t-payment  t-red  true-b UI"
+            lblUI_COMPLETEORDER.CssClass = "t-complete true-b UI"
+            lblPrice_str.CssClass = "UI"
+            lblCurrency_Str.CssClass = "UI"
+
+        End If
+
+    End Sub
+
+#End Region
+
 
     Private Sub lnkHome_Click(sender As Object, e As ImageClickEventArgs) Handles lnkHome.Click
         Response.Redirect("Select_Menu.aspx")

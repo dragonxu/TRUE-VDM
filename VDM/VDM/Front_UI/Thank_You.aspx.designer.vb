@@ -41,6 +41,15 @@ Partial Public Class Thank_You
     Protected WithEvents UDP As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
+    '''lblUI_ThankYou control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_ThankYou As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''lnkHome control.
     '''</summary>
     '''<remarks>

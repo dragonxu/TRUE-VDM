@@ -23,6 +23,24 @@ Partial Public Class Select_Menu
     Protected WithEvents lnkDevice As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
+    '''lblUI_Device control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_Device As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUI_Device_Desc control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_Device_Desc As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''Accessories control.
     '''</summary>
     '''<remarks>
@@ -41,6 +59,24 @@ Partial Public Class Select_Menu
     Protected WithEvents lnkAccessories As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
+    '''lblUI_Accessories control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_Accessories As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUI_Accessories_Desc control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_Accessories_Desc As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''lnkSim control.
     '''</summary>
     '''<remarks>
@@ -48,6 +84,24 @@ Partial Public Class Select_Menu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkSim As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''lblUI_SIM control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_SIM As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUI_SIM_Desc control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_SIM_Desc As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''lnkBack control.

@@ -32,6 +32,33 @@ Partial Public Class Device_Shoping_Cart
     Protected WithEvents SCM As Global.System.Web.UI.ScriptManager
     
     '''<summary>
+    '''lblUI_SHOPINGCART control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_SHOPINGCART As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUI_PAYMENT control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_PAYMENT As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUI_COMPLETEORDER control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_COMPLETEORDER As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''img control.
     '''</summary>
     '''<remarks>
@@ -95,6 +122,15 @@ Partial Public Class Device_Shoping_Cart
     Protected WithEvents lblPrice_str As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''i_Money control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents i_Money As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''lblPrice_Money control.
     '''</summary>
     '''<remarks>
@@ -113,6 +149,15 @@ Partial Public Class Device_Shoping_Cart
     Protected WithEvents lblCurrency_Str As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''lblUI_Term control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_Term As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''UDPTerm control.
     '''</summary>
     '''<remarks>
@@ -120,6 +165,15 @@ Partial Public Class Device_Shoping_Cart
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents UDPTerm As Global.System.Web.UI.UpdatePanel
+    
+    '''<summary>
+    '''lblUI_Accept control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUI_Accept As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''chkActive control.
