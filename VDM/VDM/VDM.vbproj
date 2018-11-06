@@ -155,7 +155,9 @@
     <Content Include="Front_UI\images\Error_Recieve_Cash.png" />
     <Content Include="Front_UI\images\Gif\icon-pack-gif.gif" />
     <Content Include="Front_UI\images\Gif\Thank-You.gif" />
+    <Content Include="Front_UI\images\icon-barcode.png" />
     <Content Include="Front_UI\images\icon-pack-gif.gif" />
+    <Content Include="Front_UI\images\icon-scan-barcode.png" />
     <Content Include="Front_UI\images\icon-Shadow.png" />
     <Content Include="Front_UI\images\Manage_Console.png" />
     <Content Include="Front_UI\images\pic-accessories.jpg" />

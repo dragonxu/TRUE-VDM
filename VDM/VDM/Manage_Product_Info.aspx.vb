@@ -110,7 +110,14 @@ Public Class Manage_Product_Info
         End Set
     End Property
 
-
+    Protected Property Current_Tab As VDM_BL.UILanguage
+        Get
+            Return Val(txtCode.Attributes("Current_Tab"))
+        End Get
+        Set(value As VDM_BL.UILanguage)
+            txtCode.Attributes("Current_Tab") = value
+        End Set
+    End Property
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsNumeric(Session("USER_ID")) Then
             ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('กรุณาเข้าสู่ระบบ'); window.location.href='SignIn.aspx';", True)
@@ -618,7 +625,7 @@ Public Class Manage_Product_Info
         '-----------------------------------
         pnlList.Visible = False
         pnlEdit.Visible = True
-
+        Current_Tab = VDM_BL.UILanguage.TH
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click

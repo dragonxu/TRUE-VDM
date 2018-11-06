@@ -200,6 +200,14 @@ Public Class Manage_Sim_Info
         End Set
     End Property
 
+    Protected Property Last_Tab As VDM_BL.UILanguage
+        Get
+            Return Val(txtCode.Attributes("Last_Tab"))
+        End Get
+        Set(value As VDM_BL.UILanguage)
+            txtCode.Attributes("Last_Tab") = value
+        End Set
+    End Property
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsNumeric(Session("USER_ID")) Then
@@ -339,7 +347,7 @@ Public Class Manage_Sim_Info
                 lblEditMode.Text = "Edit"
                 '--Detail
                 txtCode.Text = DT.Rows(0).Item("PRODUCT_CODE").ToString
-
+                Last_Tab = VDM_BL.UILanguage.TH
                 ModuleGlobal.ImplementJavaMoneyText(txtPrice)
                 If Not IsDBNull(DT.Rows(0).Item("PRICE")) Then
                     txtPrice.Text = FormatNumber(DT.Rows(0).Item("PRICE"), 2)
@@ -464,18 +472,65 @@ Public Class Manage_Sim_Info
         pnlRUSSIAN.Visible = False
     End Sub
 
+    'Private Sub lnkTab_THAI_Click(sender As Object, e As EventArgs) Handles lnkTab_THAI.Click
+    '    ClearTab()
+    '    Tab_THAI.Attributes("class") = "active"
+    '    pnlTHAI.Visible = True
+    '    Current_Tab = VDM_BL.UILanguage.TH
+    'End Sub
+
     Private Sub lnkTab_THAI_Click(sender As Object, e As EventArgs) Handles lnkTab_THAI.Click
         ClearTab()
         Tab_THAI.Attributes("class") = "active"
         pnlTHAI.Visible = True
-        Current_Tab = VDM_BL.UILanguage.TH
+        Last_Tab = VDM_BL.UILanguage.TH
     End Sub
+
+    'Private Sub lnkTab_ENGLISH_Click(sender As Object, e As EventArgs) Handles lnkTab_ENGLISH.Click
+    '    ClearTab()
+    '    Tab_ENGLISH.Attributes("class") = "active"
+    '    pnlENGLISH.Visible = True
+    '    Current_Tab = VDM_BL.UILanguage.EN
+
+    'End Sub
+
+    'Private Sub lnkTab_CHINESE_Click(sender As Object, e As EventArgs) Handles lnkTab_CHINESE.Click
+    '    ClearTab()
+    '    Tab_CHINESE.Attributes("class") = "active"
+    '    pnlCHINESE.Visible = True
+    '    Current_Tab = VDM_BL.UILanguage.CN
+
+    'End Sub
+
+    'Private Sub lnkTab_JAPANESE_Click(sender As Object, e As EventArgs) Handles lnkTab_JAPANESE.Click
+    '    ClearTab()
+    '    Tab_JAPANESE.Attributes("class") = "active"
+    '    pnlJAPANESE.Visible = True
+    '    Current_Tab = VDM_BL.UILanguage.JP
+    'End Sub
+
+    'Private Sub lnkTab_KOREAN_Click(sender As Object, e As EventArgs) Handles lnkTab_KOREAN.Click
+    '    ClearTab()
+    '    Tab_KOREAN.Attributes("class") = "active"
+    '    pnlKOREAN.Visible = True
+    '    Current_Tab = VDM_BL.UILanguage.KR
+    'End Sub
+
+    'Private Sub lnkTab_RUSSIAN_Click(sender As Object, e As EventArgs) Handles lnkTab_RUSSIAN.Click
+    '    ClearTab()
+    '    Tab_RUSSIAN.Attributes("class") = "active"
+    '    pnlRUSSIAN.Visible = True
+    '    Current_Tab = VDM_BL.UILanguage.RS
+    'End Sub
+
+
+
 
     Private Sub lnkTab_ENGLISH_Click(sender As Object, e As EventArgs) Handles lnkTab_ENGLISH.Click
         ClearTab()
         Tab_ENGLISH.Attributes("class") = "active"
         pnlENGLISH.Visible = True
-        Current_Tab = VDM_BL.UILanguage.EN
+        Last_Tab = VDM_BL.UILanguage.EN
 
     End Sub
 
@@ -483,30 +538,32 @@ Public Class Manage_Sim_Info
         ClearTab()
         Tab_CHINESE.Attributes("class") = "active"
         pnlCHINESE.Visible = True
-        Current_Tab = VDM_BL.UILanguage.CN
-
+        Last_Tab = VDM_BL.UILanguage.CN
     End Sub
 
     Private Sub lnkTab_JAPANESE_Click(sender As Object, e As EventArgs) Handles lnkTab_JAPANESE.Click
         ClearTab()
         Tab_JAPANESE.Attributes("class") = "active"
         pnlJAPANESE.Visible = True
-        Current_Tab = VDM_BL.UILanguage.JP
+        Last_Tab = VDM_BL.UILanguage.JP
     End Sub
 
     Private Sub lnkTab_KOREAN_Click(sender As Object, e As EventArgs) Handles lnkTab_KOREAN.Click
         ClearTab()
         Tab_KOREAN.Attributes("class") = "active"
         pnlKOREAN.Visible = True
-        Current_Tab = VDM_BL.UILanguage.KR
+        Last_Tab = VDM_BL.UILanguage.KR
     End Sub
 
     Private Sub lnkTab_RUSSIAN_Click(sender As Object, e As EventArgs) Handles lnkTab_RUSSIAN.Click
         ClearTab()
         Tab_RUSSIAN.Attributes("class") = "active"
         pnlRUSSIAN.Visible = True
-        Current_Tab = VDM_BL.UILanguage.RS
+        Last_Tab = VDM_BL.UILanguage.RS
     End Sub
+
+
+
 #End Region
 
 
@@ -606,6 +663,7 @@ Public Class Manage_Sim_Info
         '-----------------------------------
         pnlList.Visible = False
         pnlEdit.Visible = True
+        Current_Tab = VDM_BL.UILanguage.TH
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
