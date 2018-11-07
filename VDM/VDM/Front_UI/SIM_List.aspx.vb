@@ -114,8 +114,59 @@ Public Class SIM_List
         End Select
 
     End Sub
+
+    Private ReadOnly Property QTY_Device As Integer '------------- เอาไว้เรียกใช้ง่ายๆ ----------
+        Get
+            Try
+                Dim DT As DataTable = Session("DT_QTY_Product")
+                Dim QTY As Integer = 0
+                For i As Integer = 0 To DT.Rows.Count - 1
+                    If VDM_BL.Category.Accessories <> DT.Rows(i).Item("CAT_ID") Then
+                        QTY = 1
+                    End If
+                Next
+                Return QTY
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+    End Property
+    Private ReadOnly Property QTY_Accessories As Integer '------------- เอาไว้เรียกใช้ง่ายๆ ----------
+        Get
+            Try
+                Dim DT As DataTable = Session("DT_QTY_Product")
+                Dim QTY As Integer = 0
+                For i As Integer = 0 To DT.Rows.Count - 1
+                    If VDM_BL.Category.Accessories = DT.Rows(i).Item("CAT_ID") Then
+                        QTY = 1
+                    End If
+                Next
+                Return QTY
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+    End Property
+    Private ReadOnly Property QTY_SIM As Integer '------------- เอาไว้เรียกใช้ง่ายๆ ----------
+        Get
+            Try
+                Dim DT As DataTable = BL.GetList_Current_SIM_Kiosk(KO_ID)
+                Dim QTY As Integer = 0
+                If DT.Rows.Count > 0 Then QTY = 1
+                Return QTY
+            Catch ex As Exception
+                Return 0
+            End Try
+        End Get
+    End Property
+
     Private Sub lnkHome_Click(sender As Object, e As ImageClickEventArgs) Handles lnkHome.Click
-        Response.Redirect("Select_Menu.aspx")
+        If QTY_Device + QTY_Accessories + QTY_SIM = 1 Then
+            Response.Redirect("Select_Language.aspx")
+        Else
+            Response.Redirect("Select_Menu.aspx")
+        End If
+
     End Sub
 
 

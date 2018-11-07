@@ -49,6 +49,18 @@ Public Class BackEndInterface
                 Return AppSettings("GetProductPassword").ToString
             End Get
         End Property
+
+        Public ReadOnly Property BackEndUser As String
+            Get
+                Return AppSettings("BackEndUser").ToString
+            End Get
+        End Property
+        Public ReadOnly Property BackEndPassword As String
+            Get
+                Return AppSettings("BackEndPassword").ToString
+            End Get
+        End Property
+
 #End Region
 
         Public Function CreateRequest(ByVal URL As String, Optional Authorization As String = "") As WebRequest
@@ -430,8 +442,9 @@ Public Class BackEndInterface
                                    ByVal face_recog_cust_capture As String,
                                    ByVal seq As String) As Response
 
+            Dim Authorization As String = (New BackEndInterface.General).GetProductUser & ":" & (New BackEndInterface.General).GetProductPassword
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL
-            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL, Authorization)
 
             Dim PostData As New Dictionary(Of String, String)
             PostData.Add("partner-code", partner_code)
@@ -542,9 +555,9 @@ Public Class BackEndInterface
             GetString &= "id-number=" & id_number & "&"
             GetString &= "id-type=" & id_type & "&"
             GetString &= "allow-registered="
-
+            Dim Authorization As String = (New BackEndInterface.General).GetProductUser & ":" & (New BackEndInterface.General).GetProductPassword
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
-            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL, Authorization)
 
             Dim PostData As New Dictionary(Of String, String)
             Dim JSONString As String = (New BackEndInterface.General).SendGetURL(WebRequest)
@@ -758,8 +771,9 @@ Public Class BackEndInterface
             PostString &= "    }	" & vbLf
             PostString &= "}	" & vbLf
 
+            Dim Authorization As String = (New BackEndInterface.General).GetProductUser & ":" & (New BackEndInterface.General).GetProductPassword
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL
-            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL, Authorization)
 
             'WebRequest.Headers.Add("WEB_METHOD_CHANNEL", "VENDING")
             'WebRequest.Headers.Add("E2E_REFID", customer_id_number)
@@ -877,8 +891,9 @@ Public Class BackEndInterface
             GetString &= "channel=TLR&"
             GetString &= "dealer=" & dealer
 
+            Dim Authorization As String = (New BackEndInterface.General).GetProductUser & ":" & (New BackEndInterface.General).GetProductPassword
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
-            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL, Authorization)
 
             Dim JSONString As String = (New BackEndInterface.General).SendGetURL(WebRequest)
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
@@ -939,8 +954,9 @@ Public Class BackEndInterface
             GetString &= "order-id=" & order_id & "&"
             GetString &= "form-type=CUST_ID_CARD"
 
+            Dim Authorization As String = (New BackEndInterface.General).GetProductUser & ":" & (New BackEndInterface.General).GetProductPassword
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
-            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL, Authorization)
 
             Dim JSONString As String = (New BackEndInterface.General).SendGetURL(WebRequest)
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
@@ -1002,8 +1018,9 @@ Public Class BackEndInterface
                                    ByVal fileType As String,
                                    ByVal b64File As String) As Response
 
+            Dim Authorization As String = (New BackEndInterface.General).GetProductUser & ":" & (New BackEndInterface.General).GetProductPassword
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL
-            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL, Authorization)
 
             Dim PostData As New Dictionary(Of String, String)
             PostData.Add("orderId", order_id)
@@ -1126,8 +1143,9 @@ Public Class BackEndInterface
             'PostData.Add("CUST_CERTIFICATE_LASER_ID", "")
             PostData.Add("OS", "VENDING")
 
+            Dim Authorization As String = (New BackEndInterface.General).GetProductUser & ":" & (New BackEndInterface.General).GetProductPassword
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
-            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL, Authorization)
 
             Dim JSONString As String = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
@@ -1213,8 +1231,9 @@ Public Class BackEndInterface
             Dim PostData As New Dictionary(Of String, String)
             PostData.Add("order-id", orderId)
 
+            Dim Authorization As String = (New BackEndInterface.General).GetProductUser & ":" & (New BackEndInterface.General).GetProductPassword
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
-            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL, Authorization)
 
             Dim JSONString As String = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
@@ -1281,8 +1300,9 @@ Public Class BackEndInterface
             PostData.Add("activityId", "CONFIRM_ORDER")
 
 
+            Dim Authorization As String = (New BackEndInterface.General).GetProductUser & ":" & (New BackEndInterface.General).GetProductPassword
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
-            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL, Authorization)
 
             Dim JSONString As String = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))
@@ -1345,8 +1365,9 @@ Public Class BackEndInterface
             Dim PostData As New Dictionary(Of String, String)
             PostData.Add("orderId", orderId)
 
+            Dim Authorization As String = (New BackEndInterface.General).GetProductUser & ":" & (New BackEndInterface.General).GetProductPassword
             Dim URL As String = (New BackEndInterface.General).BackEndURL & SubURL & "?" & GetString
-            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL)
+            Dim WebRequest As WebRequest = (New BackEndInterface.General).CreateRequest(URL, Authorization)
 
             Dim JSONString As String = (New BackEndInterface.General).SendPostJSON(WebRequest, PostData)
             Dim Result As Response = JsonConvert.DeserializeObject(Of Response)((New BackEndInterface.General).CleanJSONDash(JSONString, CleanKeys))

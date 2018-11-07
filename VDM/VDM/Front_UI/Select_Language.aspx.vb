@@ -57,11 +57,11 @@
         If POSTER_TYPE = "MP4" Then
             'video_tvc.Src = BL.PicturePath & "\Poster\TVC\" & KO_ID & ".mp4"
             'Poster_Img.Src = BL.PicturePath & "\Poster\Image\pic-home-tvc.png"
-            video_tvc.Src = "Poster\tvc\" & KO_ID & ".mp4"
-            Poster_Img.Src = "Poster\image\pic-home-tvc.png"
+            video_tvc.Src = "Poster/tvc/" & KO_ID & ".mp4"
+            Poster_Img.Src = "Poster/image/pic-home-tvc.png"
         Else
             div_video.Visible = False
-            Poster_Img.Src = "Poster\image\" & KO_ID & ".png"
+            Poster_Img.Src = "Poster/image/" & KO_ID & ".png"
         End If
 
     End Sub
