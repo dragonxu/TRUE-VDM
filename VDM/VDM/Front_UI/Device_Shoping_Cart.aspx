@@ -60,7 +60,8 @@
                         </div>
                         <div class="description">
                             <div class="pic" style="padding: unset; text-align: center;">
-                                <asp:Image ID="img" runat="server" Style="width: 70%; height:320px;"></asp:Image>
+                                <asp:Image ID="img" runat="server" Style="width: 60%;" ></asp:Image>
+<%--                                <asp:Image ID="img" runat="server" Style="width: 70%; height:320px;"></asp:Image>--%>
                             </div>
                             <figure class="col-md-6">
                                 <div class="topic true-l">

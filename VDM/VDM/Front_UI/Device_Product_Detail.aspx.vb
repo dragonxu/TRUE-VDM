@@ -202,12 +202,15 @@ Public Class Device_Product_Detail
         Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)
+        If DT.Rows.Count = 0 Then   '--ไม่มี กลุ่ม Model
+            DT.Rows.Add(1, "", "")
+        End If
+
         DT_Color_Page = DT
         rptProductList.DataSource = DT
         rptProductList.DataBind()
 
-        'rptProductList.DataSource = DT_Color
-        'rptProductList.DataBind()
+
     End Sub
 
 
@@ -262,17 +265,14 @@ Public Class Device_Product_Detail
         '-หา Product ID ที่จะแสดง Item แรก 
         Default_Product_ID = BL.GetProduct_ID_Select(MODEL, e.Item.DataItem("DESCRIPTION_COLOR").ToString(), Default_Capacity, KO_ID, LANGUAGE)
         If Default_Product_ID = 0 Then
-            ' หา ID ใหม่
-
-
+            Default_Product_ID = PRODUCT_ID  ' ID ของ Product เนื่องจากมีสินค้าตัวเดียว
+        Else
+            '-Color
+            Dim rptColor As Repeater = e.Item.FindControl("rptColor")
+            AddHandler rptColor.ItemDataBound, AddressOf rptColor_ItemDataBound
+            rptColor.DataSource = DT_Color_Page
+            rptColor.DataBind()
         End If
-
-        '-Color
-        Dim rptColor As Repeater = e.Item.FindControl("rptColor")
-        AddHandler rptColor.ItemDataBound, AddressOf rptColor_ItemDataBound
-        rptColor.DataSource = DT_Color_Page
-        rptColor.DataBind()
-
 
         '-Detail
         Dim DT As DataTable = BL.GetList_Product_Model(MODEL, KO_ID, Default_Product_ID)
@@ -291,6 +291,8 @@ Public Class Device_Product_Detail
             If DT_Warranty.Rows.Count > 0 Then
                 lblSPEC_Warranty.Text = DT_Warranty.Rows(0).Item("SPEC_NAME").ToString()
                 lblDESCRIPTION_Warranty.Text = DT_Warranty.Rows(0).Item("DESCRIPTION").ToString()
+            Else
+                pnlSPEC_Warranty.Visible = False
             End If
 
             lblDesc.Text = DT.Rows(0).Item("DESCRIPTION_" & BL.Get_Language_Code(LANGUAGE)).ToString()

@@ -8,10 +8,10 @@ Public Class PrintBarcode
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'BindProductSerial()
         'BindProdcutNon()
-        'BindProductAll()
+        BindProductAll()
         'BindSIMSerial()
         'BindProductTest()
-        BindSIM()
+        'BindSIM()
     End Sub
 
     Private Sub BindSIM()
@@ -65,6 +65,8 @@ Public Class PrintBarcode
         Dim SQL As String = "SELECT PRODUCT_CODE" & vbLf
         SQL &= " ,DISPLAY_NAME_TH" & vbLf
         SQL &= " FROM MS_Product" & vbLf
+        SQL &= " where PRODUCT_ID >440" & vbLf
+
         Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)

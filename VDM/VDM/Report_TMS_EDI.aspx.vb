@@ -22,7 +22,7 @@ Public Class Report_TMS_EDI
     Private Sub BindData()
 
         Dim Sql As String = "SELECT * FROM VW_RPT_TMS_EDI "
-        Dim DA As New SqlDataAdapter(Sql, BL.LogConnectionString)
+        Dim DA As New SqlDataAdapter(Sql, BL.ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)
         rptData.DataSource = DT
