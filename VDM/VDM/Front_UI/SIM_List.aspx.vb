@@ -63,6 +63,7 @@ Public Class SIM_List
     End Property
     Dim DT_CONTROL As DataTable
     Public Sub Bind_CONTROL()
+        On Error Resume Next
         If LANGUAGE > VDM_BL.UILanguage.EN Then
             DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_SIM.Text & "'"
             lblUI_SIM.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_SIM.Text)

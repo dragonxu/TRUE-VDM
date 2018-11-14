@@ -147,6 +147,7 @@ Public Class Device_Payment
     End Property
     Dim DT_CONTROL As DataTable
     Public Sub Bind_CONTROL()
+        On Error Resume Next
         If LANGUAGE > VDM_BL.UILanguage.TH Then
             DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_SHOPINGCART.Text & "'"
             lblUI_SHOPINGCART.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_SHOPINGCART.Text)
@@ -308,6 +309,8 @@ Public Class Device_Payment
         lnkTruemoney.Attributes("class") = ""
         txtBarcode.Text = ""
 
+        txtPaid.Attributes("ReadOnly") = "true"
+
         '----------------------- Stop Focus Barcode ----------------------
         Dim Script As String = "stopFocusBarcode();" & vbLf
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "clearBarcode", Script, True)
@@ -356,7 +359,7 @@ Public Class Device_Payment
 
         '--------------- Save Transaction Requested---------------
         SQL = "SELECT TOP 1 * FROM TB_TRANSACTION_CREDITCARD WHERE TXN_ID=" & TXN_ID
-        Dim DA As New SqlDataAdapter(Sql, BL.ConnectionString)
+        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)
         Dim DR As DataRow

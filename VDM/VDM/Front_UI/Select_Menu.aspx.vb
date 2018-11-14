@@ -125,6 +125,7 @@ Public Class Select_Menu
     End Property
     Dim DT_CONTROL As DataTable
     Public Sub Bind_CONTROL()
+        On Error Resume Next
         If LANGUAGE > VDM_BL.UILanguage.EN Then
             DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_Device.Text & "'"
             lblUI_Device.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_Device.Text)

@@ -80,6 +80,7 @@ Public Class SIM_Detail
     End Property
     Dim DT_CONTROL As DataTable
     Public Sub Bind_CONTROL()
+        On Error Resume Next
         If LANGUAGE > VDM_BL.UILanguage.TH Then
             If LANGUAGE = VDM_BL.UILanguage.JP Then
                 DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblPrice_str.Text & "'"

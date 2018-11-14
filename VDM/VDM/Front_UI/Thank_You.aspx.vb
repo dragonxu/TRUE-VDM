@@ -69,8 +69,8 @@ Public Class Thank_You
     Private Sub Change()
         Dim SQL As String = ""
         SQL &= " SELECT ISNULL(MUST_CHANGE,0)-ISNULL(ACTUAL_CHANGE,0) REMAIN_CHANGE" & vbLf
-        Sql &= " FROM TB_TRANSACTION_CASH TXN_CASH" & vbLf
-        Sql &= " LEFT JOIN TB_TRANSACTION_CASH_CHANGE ACTUAL_CHANGE ON TXN_CASH.TXN_ID=ACTUAL_CHANGE.TXN_ID" & vbLf
+        SQL &= " FROM TB_TRANSACTION_CASH TXN_CASH" & vbLf
+        SQL &= " LEFT JOIN TB_TRANSACTION_CASH_CHANGE ACTUAL_CHANGE ON TXN_CASH.TXN_ID=ACTUAL_CHANGE.TXN_ID" & vbLf
         SQL &= " WHERE TXN_CASH.TXN_ID=" & TXN_ID & " AND" & vbLf
         SQL &= " ISNULL(MUST_CHANGE,0)-ISNULL(ACTUAL_CHANGE,0)>0" & vbLf
         Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
@@ -172,6 +172,7 @@ Public Class Thank_You
     End Property
     Dim DT_CONTROL As DataTable
     Public Sub Bind_CONTROL()
+        On Error Resume Next
         If LANGUAGE > VDM_BL.UILanguage.TH Then
             DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_ThankYou.Text & "'"
             lblUI_ThankYou.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_ThankYou.Text)
