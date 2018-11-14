@@ -599,7 +599,7 @@
 
         </script>
 
-        <input type="button" value="Pay20" runat="server" onclick="updatePayment(20, 'true', '');" />
+        <%--<input type="button" value="Pay20" runat="server" onclick="updatePayment(20, 'true', '');" />--%>
 
         <uc1:UC_CommonUI runat="server" ID="CommonUI" />
     </form>
