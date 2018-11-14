@@ -34,7 +34,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/24/2018 15:18:44</publishTime>
     </File>
     <File Include="bin/PeripheralController.dll">
-      <publishTime>11/14/2018 16:55:57</publishTime>
+      <publishTime>11/14/2018 17:00:45</publishTime>
     </File>
     <File Include="bin/PeripheralController.xml">
       <publishTime>10/22/2018 19:39:04</publishTime>
@@ -226,7 +226,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/22/2018 19:11:43</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/07/2018 09:20:01</publishTime>
+      <publishTime>11/14/2018 22:57:38</publishTime>
     </File>
   </ItemGroup>
 </Project>
