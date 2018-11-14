@@ -1307,6 +1307,9 @@
     <Content Include="fonts\sli\Simple-Line-Icons.ttf" />
     <Content Include="fonts\sli\Simple-Line-Icons.woff" />
     <Content Include="fonts\thaisanslite_r1.ttf" />
+    <Content Include="bin\Key\partner_private_key.der" />
+    <Content Include="bin\Key\partner_private_key.pem" />
+    <Content Include="bin\Key\partner_public_key.pem" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

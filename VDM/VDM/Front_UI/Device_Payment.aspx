@@ -330,7 +330,7 @@
                                         </div>
                                     </form>
 
-                                    <asp:Panel ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" Style="position: fixed; left: -500px; top: 200px;">
+                                    <asp:Panel ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" Style="position: fixed; left:500px; top: 200px;">
                                         <asp:TextBox ID="txtBarcode" runat="server"></asp:TextBox>
                                         <asp:Button ID="btnBarcode" runat="server" />
                                     </asp:Panel>
@@ -425,7 +425,7 @@
                         <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;">ตกลง</a></div>
                     </div>
                 </div>
-                <a id="lnkTrueMoneyError" href="#TrueMoneyError" style="display: none;">True Money Error</a>
+                <a id="lnkTrueMoneyError" href="#TrueMoneyError" style="display: none;" >True Money Error</a>
 
                 <div id="CreditCardError" class="popup">
                     <div class="popup-frame">

@@ -66,6 +66,10 @@ Public Class ProductPicker
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        If BL.Simulate_Pick_Product Then
+            SimulateCommand()
+            Exit Sub
+        End If
 
         Controller.SetIP(BL.Product_Picker_IP, BL.Product_Picker_Port)
         Try
@@ -76,8 +80,6 @@ Public Class ProductPicker
             Controller.Connect()
         Catch ex As Exception
         End Try
-
-
 
         Select Case Mode.ToUpper
             Case "SetHome".ToUpper
@@ -96,6 +98,15 @@ Public Class ProductPicker
             Controller.Omron.Disconnect()
         Catch ex As Exception
         End Try
+
+    End Sub
+
+    Private Sub SimulateCommand()
+        Dim EndWait As DateTime = DateAdd(DateInterval.Second, 5, Now)
+        While Now < EndWait
+            Threading.Thread.Sleep(200)
+        End While
+        callBack(True, "")
     End Sub
 
     Private Sub SetHome()

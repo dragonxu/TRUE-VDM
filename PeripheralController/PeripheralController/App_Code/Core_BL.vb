@@ -21,6 +21,9 @@ Public Class Core_BL
     Public Product_Picker_IP As String = AppSettings("Product_Picker_IP").ToString
     Public Product_Picker_Port As Integer = AppSettings("Product_Picker_Port").ToString
 
+    Public Simulate_Pick_Product As Boolean = CBool(AppSettings("Simulate_Pick_Product"))
+    Public Simulate_Pick_SIM As Boolean = CBool(AppSettings("Simulate_Pick_SIM"))
+
     Public SIM_Dispenser_Port As String = AppSettings("SIM_Dispenser_Port").ToString
     Public IDCardReader As String = AppSettings("IDCardReader").ToString
     Public PassportScanPath As String = AppSettings("PassportScanPath").ToString

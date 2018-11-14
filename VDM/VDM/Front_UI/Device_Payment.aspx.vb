@@ -425,8 +425,10 @@ Public Class Device_Payment
 
     Private Sub btnBarcode_Click(sender As Object, e As EventArgs) Handles btnBarcode.Click
         ' Call True Money
-        If txtBarcode.Text = "" Then Exit Sub
+
         Dim Barcode As String = txtBarcode.Text
+
+        If Barcode = "" Then Exit Sub
         txtBarcode.Text = ""
         lblTMNPaymentCode.Text = ""
 
@@ -439,8 +441,10 @@ Public Class Device_Payment
         Dim Amount As Integer = DT.Rows(0).Item("PRICE")
         Dim ISV As String = TMN.Generate_ISV(ShopCode)
         Dim PaymentDescription As String = SITE_NAME_TH
+
         '-------------------- เรียก------------------------
         Dim RESP As TrueMoney.Response = TMN.GetResult(TXN_ID, ISV, Amount, Barcode, PaymentDescription, ShopCode)
+
         '---------------- ตรวจสอบผลลัพธ์ -------------------
         If RESP.status.code.ToLower <> "success" Then
             lblTMNPaymentCode.Text = RESP.Request.payment_code
