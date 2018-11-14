@@ -285,8 +285,13 @@ Public Class Complete_Order
             End Try
         End Get
     End Property
+
     Dim DT_CONTROL As DataTable
+
     Public Sub Bind_CONTROL()
+
+        On Error Resume Next
+
         If LANGUAGE > VDM_BL.UILanguage.TH Then
             DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_SHOPINGCART.Text & "'"
             lblUI_SHOPINGCART.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_SHOPINGCART.Text)
@@ -321,7 +326,7 @@ Public Class Complete_Order
 
         Dim DT As DataTable = BL.Get_Next_Product_To_Pick(KO_ID, PRODUCT_ID)
         If DT.Rows.Count = 0 Then
-
+            '----------- ไปหน้าแจ้งปัญหารายการสินค้า --------------
         Else
             POS_ID = DT.Rows(0).Item("POS_ID")
             SLOT_ID = DT.Rows(0).Item("SLOT_ID")
@@ -608,26 +613,26 @@ Public Class Complete_Order
         Return Result
     End Function
 
-    Private Sub lnkprint_ServerClick(sender As Object, e As EventArgs) Handles lnkprint.ServerClick
-        'Print Slip และกลับหน้าหลัก 
-        Print()
-        Response.Redirect("Select_Language.aspx")
+    'Private Sub lnkprint_ServerClick(sender As Object, e As EventArgs) Handles lnkprint.ServerClick
+    '    'Print Slip และกลับหน้าหลัก 
+    '    Print()
+    '    Response.Redirect("Select_Language.aspx")
 
-    End Sub
+    'End Sub
 
-    Private Sub Print()
+    'Private Sub Print()
 
-        Dim C As New Converter
+    '    Dim C As New Converter
 
-        Dim SQL As String = "SELECT * FROM TB_SERVICE_TRANSACTION" & vbLf
-        SQL &= "WHERE TXN_ID=" & TXN_ID
-        Dim DT As New DataTable
-        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
-        DA.Fill(DT)
-        If DT.Rows.Count = 0 OrElse IsDBNull(DT.Rows(0).Item("METHOD_ID")) Then Exit Sub
+    '    Dim SQL As String = "SELECT * FROM TB_SERVICE_TRANSACTION" & vbLf
+    '    SQL &= "WHERE TXN_ID=" & TXN_ID
+    '    Dim DT As New DataTable
+    '    Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+    '    DA.Fill(DT)
+    '    If DT.Rows.Count = 0 OrElse IsDBNull(DT.Rows(0).Item("METHOD_ID")) Then Exit Sub
 
-        Dim Script As String = "setTimeout( function(){ printSlip(" & TXN_ID & "); } , 1000);"
-        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Print", Script, True)
-    End Sub
+    '    Dim Script As String = "setTimeout( function(){ printSlip(" & TXN_ID & "); } , 1000);"
+    '    ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Print", Script, True)
+    'End Sub
 
 End Class

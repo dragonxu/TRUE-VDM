@@ -39,10 +39,10 @@
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <DefineDebug>false</DefineDebug>
+    <DebugType>Full</DebugType>
+    <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\</OutputPath>
     <DocumentationFile>
     </DocumentationFile>
@@ -232,6 +232,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Controller\Controller\Controller.csproj">
+      <Project>{06e40abd-e6fb-4001-9d67-4b80000f212f}</Project>
+      <Name>Controller</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CashDispenser\CashDispenser.csproj">
       <Project>{4ba63714-f70d-4809-bee4-f2aa2c652253}</Project>
       <Name>CashDispenser</Name>
@@ -247,10 +251,6 @@
     <ProjectReference Include="..\CoinReciever\CoinReciever.csproj">
       <Project>{44082663-f93b-41e8-bbbe-52453adf56cd}</Project>
       <Name>CoinReciever</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Controller\Controller\Controller.csproj">
-      <Project>{06e40abd-e6fb-4001-9d67-4b80000f212f}</Project>
-      <Name>Controller</Name>
     </ProjectReference>
     <ProjectReference Include="..\SimDispenser\SimDispenser\SimDispenser.csproj">
       <Project>{81b3df48-67d4-4ab4-806c-63712ca35780}</Project>

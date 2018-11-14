@@ -75,5 +75,4 @@ Public Class Printer
         Document.Print()
     End Sub
 
-
 End Class

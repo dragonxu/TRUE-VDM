@@ -1193,7 +1193,7 @@ Public Class VDM_BL
 
     Public Function GetList_Kiosk(Optional ByVal KO_ID As Integer = 0) As DataTable
         Dim SQL As String = ""
-        SQL &= " Select KO.KO_ID, KO.KO_CODE, KO.SITE_ID, Site.SITE_CODE,Site.SITE_NAME, KO.ZONE, KO.IP, KO.Mac   " & vbLf
+        SQL &= " Select KO.KO_ID, KO.KO_CODE, KO.SITE_ID, Site.SITE_CODE,Site.SITE_NAME,SITE.SITE_NAME_TH,KO.ZONE,KO.IP,KO.Mac" & vbLf
         SQL &= " , KO.IsOnline, COUNT(SLOT.PRODUCT_ID) Total_Product, KO.Active_Status " & vbLf
         SQL &= " FROM MS_KIOSK KO           " & vbLf
         SQL &= " INNER JOIN MS_Site Site On KO.SITE_ID = Site.SITE_ID" & vbLf
@@ -1202,7 +1202,7 @@ Public Class VDM_BL
         If KO_ID <> 0 Then
             SQL &= " WHERE KO.KO_ID=" & KO_ID & vbLf
         End If
-        SQL &= " GROUP BY KO.KO_ID, KO.KO_CODE, KO.SITE_ID, Site.SITE_CODE,Site.SITE_NAME, KO.ZONE, KO.IP, KO.Mac, KO.IsOnline, KO.Active_Status" & vbLf
+        SQL &= " GROUP BY KO.KO_ID, KO.KO_CODE, KO.SITE_ID, Site.SITE_CODE,Site.SITE_NAME,SITE.SITE_NAME_TH,KO.ZONE, KO.IP, KO.Mac, KO.IsOnline, KO.Active_Status" & vbLf
         SQL &= " ORDER BY KO.KO_ID" & vbLf
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         Dim DT As New DataTable
@@ -1695,10 +1695,10 @@ Public Class VDM_BL
         SQL &= "    SELECT DISTINCT " & vbLf
         SQL &= "           PRODUCT_ID, PRODUCT_CODE, PRODUCT_NAME, KO_ID, MODEL,CAT_ID  " & vbLf
         'SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Color & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) COLOR " & vbLf
-        SQL &= "    	  ,(SELECT DESCRIPTION_TH FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Color & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) COLOR " & vbLf        '--ค้นหาสีใช้ชื่อ Field ภาษาไทยในการค้นหาเพื่อแก้ปัญหา where ด้วยภาษาอื่นๆแล้ว ไม่เจอ  TH บังคับกรอก
+        SQL &= "    	  ,(SELECT TOP 1 DESCRIPTION_TH FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Color & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) COLOR " & vbLf        '--ค้นหาสีใช้ชื่อ Field ภาษาไทยในการค้นหาเพื่อแก้ปัญหา where ด้วยภาษาอื่นๆแล้ว ไม่เจอ  TH บังคับกรอก
 
-        SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Capacity & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) CAPACITY_Mobile " & vbLf
-        SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.CapacityAccessories & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) CAPACITY_Assessory " & vbLf
+        SQL &= "    	  ,(SELECT TOP 1 DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Capacity & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) CAPACITY_Mobile " & vbLf
+        SQL &= "    	  ,(SELECT TOP 1 DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.CapacityAccessories & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) CAPACITY_Assessory " & vbLf
         SQL &= "      From VW_CURRENT_PRODUCT_SPEC " & vbLf
         SQL &= "      Where SPEC_ID In (" & Spec.Color & "," & Spec.Capacity & "," & Spec.CapacityAccessories & ")  AND KO_ID=" & KO_ID
         SQL &= "      Group BY   PRODUCT_ID, PRODUCT_CODE, PRODUCT_NAME, KO_ID,CAT_ID , MODEL, DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " " & vbLf
@@ -1729,14 +1729,14 @@ Public Class VDM_BL
         SQL &= "  SELECT *   FROM ( " & vbLf
         SQL &= "    SELECT DISTINCT " & vbLf
         SQL &= "           PRODUCT_ID, PRODUCT_CODE, PRODUCT_NAME, KO_ID, MODEL,CAT_ID  " & vbLf
-        SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Color & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) DESCRIPTION_COLOR " & vbLf
-        SQL &= "    	  ,(SELECT DESCRIPTION_TH COLOR_TH FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Color & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) COLOR_TH " & vbLf
+        SQL &= "    	  ,(SELECT TOP 1 DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Color & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) DESCRIPTION_COLOR " & vbLf
+        SQL &= "    	  ,(SELECT TOP 1 DESCRIPTION_TH COLOR_TH FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Color & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) COLOR_TH " & vbLf
 
         If CAT_ID = Category.Accessories Then
-            SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.CapacityAccessories & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) DESCRIPTION_CAPACITY " & vbLf
+            SQL &= "    	  ,(SELECT TOP 1 DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.CapacityAccessories & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) DESCRIPTION_CAPACITY " & vbLf
             SQL &= " , 'mbps' Unit "
         Else
-            SQL &= "    	  ,(SELECT DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Capacity & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) DESCRIPTION_CAPACITY " & vbLf
+            SQL &= "    	  ,(SELECT TOP 1 DESCRIPTION_" & Get_Language_Code(LANGUAGE) & " FROM VW_CURRENT_PRODUCT_SPEC VW  WHERE SPEC_ID=" & Spec.Capacity & " And VW.PRODUCT_ID=VW_CURRENT_PRODUCT_SPEC.PRODUCT_ID) DESCRIPTION_CAPACITY " & vbLf
             SQL &= " , 'GB' Unit "
         End If
 
@@ -2075,6 +2075,15 @@ Public Class VDM_BL
         SQL &= "	WHERE SLIP_YEAR=RIGHT(DATEPART(yyyy,GETDATE()),2) AND " & vbLf
         SQL &= "	CAST(SLIP_MONTH AS INT)=DATEPART(MM,GETDATE()) AND" & vbLf
         SQL &= "	CAST(SLIP_DAY AS INT)=DATEPART(dd,GETDATE())" & vbLf
+
+        SQL &= "	UNION ALL " & vbLf
+        SQL &= "" & vbLf
+        SQL &= "	SELECT ISNULL(MAX(CAST(SLIP_NO AS INT)),0)+1 SLIP_NO" & vbLf
+        SQL &= "	FROM TB_SERVICE_TRANSACTION_PROBLEM" & vbLf
+        SQL &= "	WHERE SLIP_YEAR=RIGHT(DATEPART(yyyy,GETDATE()),2) AND " & vbLf
+        SQL &= "	CAST(SLIP_MONTH AS INT)=DATEPART(MM,GETDATE()) AND" & vbLf
+        SQL &= "	CAST(SLIP_DAY AS INT)=DATEPART(dd,GETDATE())" & vbLf
+
         SQL &= ") A ORDER BY SLIP_NO DESC" & vbLf
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         Dim DT As New DataTable

@@ -1,7 +1,6 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="UC_Product_Floor.ascx.vb" Inherits="VDM.UC_Product_Floor" %>
 <%@ Register Src="~/Machine_Console/UC_Product_Slot.ascx" TagPrefix="uc1" TagName="UC_Product_Slot" %>
 
-
 <asp:Panel CssClass="machine_floor" ID="Floor" runat="server" FLOOR_ID="0" Height="0px" >
     
     <asp:LinkButton CssClass="btn btn-info btn-lg btn-block machine_floor_label btn-shadow" ID="CaptionBlock" runat="server">

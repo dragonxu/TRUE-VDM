@@ -42,8 +42,6 @@
     End Property
 #End Region
 
-
-
     Public ReadOnly Property SIMS As List(Of UC_SIM)
         Get
             Dim Result As New List(Of UC_SIM)

@@ -10,7 +10,7 @@ Public Class UC_CommonUI
 
             If Not IsNothing(Request.QueryString("KO_ID")) AndAlso IsNumeric(Request.QueryString("KO_ID")) Then
                 Return Request.QueryString("KO_ID")
-            ElseIf Not IsNothing(Request.Cookies("KO_ID").Value) AndAlso IsNumeric(Request.Cookies("KO_ID").Value) Then
+            ElseIf Not IsNothing(Request.Cookies("KO_ID")) AndAlso IsNumeric(Request.Cookies("KO_ID").Value) Then
                 Return Request.Cookies("KO_ID").Value
             Else
                 Return 0

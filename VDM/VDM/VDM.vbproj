@@ -312,6 +312,7 @@
     <Content Include="Front_UI\SIM_List.aspx" />
     <Content Include="Front_UI\Device_Product_Detail.aspx" />
     <Content Include="Front_UI\Thank_You.aspx" />
+    <Content Include="Front_UI\Transaction_Problem.aspx" />
     <Content Include="Front_UI\tvc\1.mp4" />
     <Content Include="Front_UI\UC_CommonUI.ascx" />
     <Content Include="Global.asax" />
@@ -857,6 +858,13 @@
     </Compile>
     <Compile Include="Front_UI\Thank_You.aspx.vb">
       <DependentUpon>Thank_You.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Front_UI\Transaction_Problem.aspx.designer.vb">
+      <DependentUpon>Transaction_Problem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Front_UI\Transaction_Problem.aspx.vb">
+      <DependentUpon>Transaction_Problem.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Front_UI\UC_CommonUI.ascx.designer.vb">

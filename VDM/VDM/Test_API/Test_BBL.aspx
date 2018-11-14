@@ -7,8 +7,9 @@
     <title>TRUE-VSM</title>
 </head>
 <body>
-<%--<form name="payFormCcard" method="post" action=" https://ipay.bangkokbank.com/b2c/eng/payment/payForm.jsp">
-<input type="hidden" name="merchantId" value="1">
+<%--
+<form name="payFormCcard" method="post" action=" https://ipay.bangkokbank.com/b2c/eng/payment/payForm.jsp">
+<input type="hidden" name="merchantId" value="5979">
 <input type="hidden" name="amount" value="1.0" >
 <input type="hidden" name="orderRef" value="000000000014">
 <input type="hidden" name="currCode" value="764" >
@@ -19,39 +20,37 @@
 <input type="hidden" name="lang" value="E">
 <input type="hidden" name="remark" value="-">
 <input type="submit" value="sample" />
-</form>--%>
-
-<form name="payFormTrue" method="post" action="https://psipay.bangkokbank.com/b2c/eng/payment/payForm.jsp">
-<input type="hidden" name="merchantId" value="3971">
-<input type="hidden" name="amount" value="1.0" >
-<input type="hidden" name="orderRef" value="TRUEVDM37847238904"> <!--เปลี่ยนทุกครั้ง-->
-<input type="hidden" name="currCode" value="764" >
+</form>
+--%>
+<form name="payFormTrue" method="post" action="https://ipay.bangkokbank.com/b2c/eng/payment/payForm.jsp"><br>
+<input type="text" name="merchantId" value="5979"><br>
+<input type="text" name="amount" value="1.0" ><br>
+<input type="text" name="orderRef" value="TRUEVDM37847238904"> <!--เปลี่ยนทุกครั้ง--><br>
+<input type="text" name="currCode" value="764" ><br>
 <input type="hidden" name="successUrl" value="http://www.tit-tech.co.th">
 <input type="hidden" name="failUrl" value="http://www.google.com">
 <input type="hidden" name="cancelUrl" value="http://www.yahoo.com">
 <input type="hidden" name="payType" value="N">
 <input type="hidden" name="lang" value="E">
 <input type="hidden" name="remark" value="-">
-
-
-<input type="submit" value="True Profile" />
+<input type="submit" value="Production" /> https://ipay.bangkokbank.com/b2c/eng/payment/payForm.jsp
 </form> 
-
-<%-- <form name="payFormTrue" method="post" action=" https://ipay.bangkokbank.com/b2c/eng/payment/payForm.jsp">
-<input type="hidden" name="merchantId" value="3971">
-<input type="hidden" name="amount" value="1.0" >
-<input type="hidden" name="orderRef" value="TRUEVDM-837294"> <!--เปลี่ยนทุกครั้ง-->
-<input type="hidden" name="currCode" value="764" >
+<hr>
+ <form name="payFormTrue" method="post" action="https://psipay.bangkokbank.com/b2c/eng/payment/payForm.jsp">
+<input type="text" name="merchantId" value="3971"><br>
+<input type="text" name="amount" value="1.0" ><br>
+<input type="text" name="orderRef" value="TRUEVDM837294"><br> <!--เปลี่ยนทุกครั้ง-->
+<input type="text" name="currCode" value="764" ><br>
 <input type="hidden" name="successUrl" value="http://www.tit-tech.co.th">
 <input type="hidden" name="failUrl" value="http://www.google.com">
 <input type="hidden" name="cancelUrl" value="http://www.yahoo.com">
 <input type="hidden" name="payType" value="N">
 <input type="hidden" name="lang" value="E">
 <input type="hidden" name="remark" value="-">
-<input type="submit" value="Sathit" />
+<input type="submit" value="Test" /> https://psipay.bangkokbank.com/b2c/eng/payment/payForm.jsp
 </form>
 
-  
+  <%--
 <form name="payForm" method="post" action="https://psipay.bangkokbank.com/b2c/eng/dPayment/payComp.jsp">
 <input type="hidden" name="merchantId" value="3971">
 <input type="hidden" name="amount" value="1.0" >

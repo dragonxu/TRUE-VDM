@@ -34,13 +34,12 @@ Public Class Thank_You
 
 #End Region
 
-
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Not IsPostBack Then
             'Response.Cookies("KO_ID").Value = 1
             'Session("TXN_ID") = 83 ' Test True Money
-            'Session("TXN_ID") = 65 ' Test Cash
+            'Session("TXN_ID") = 901 ' Test Cash
             'Session("TXN_ID") = 196 ' CreditCard
             DT_CONTROL = UI_CONTROL()
             Bind_CONTROL()
@@ -48,7 +47,6 @@ Public Class Thank_You
             '---------------- Change And Print Slip--------------
             Change()
             Print()
-
         End If
 
     End Sub
@@ -64,7 +62,7 @@ Public Class Thank_You
         DA.Fill(DT)
         If DT.Rows.Count = 0 OrElse IsDBNull(DT.Rows(0).Item("METHOD_ID")) Then Exit Sub
 
-        Dim Script As String = "setTimeout( function(){ printSlip(" & TXN_ID & "); } , 1000);"
+        Dim Script As String = "printSlip(" & TXN_ID & ");"
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Print", Script, True)
     End Sub
 

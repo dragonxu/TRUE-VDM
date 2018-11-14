@@ -13,7 +13,7 @@ Public Class ProductPicker
                 _control.SetIP(BL.Product_Picker_IP, BL.Product_Picker_Port)
                 _control.Connect()
 
-                Threading.Thread.Sleep(200)
+                Threading.Thread.Sleep(100)
 
                 Application.Lock()
                 Application("Controller") = _control
@@ -66,19 +66,22 @@ Public Class ProductPicker
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        Response.Write(BL.Product_Picker_IP & "<br>" & vbLf)
-        Response.Write(BL.Product_Picker_Port & "<br>" & vbLf)
+
         Controller.SetIP(BL.Product_Picker_IP, BL.Product_Picker_Port)
-        Controller.Connect()
-        Response.Write("Connected<br>" & vbLf)
-        Controller.CloseGate()
-        Response.Write("CloseGate<br>" & vbLf)
+        Try
+            Controller.Omron.Disconnect()
+        Catch ex As Exception
+        End Try
+        Try
+            Controller.Connect()
+        Catch ex As Exception
+        End Try
+
+
 
         Select Case Mode.ToUpper
             Case "SetHome".ToUpper
-                Response.Write("BeforeSetHome<br>" & vbLf)
                 SetHome()
-                Response.Write("AfterSetHome<br>" & vbLf)
             Case "CloseGate".ToUpper
                 CloseGate()
             Case "OpenGate".ToUpper
@@ -89,11 +92,14 @@ Public Class ProductPicker
                 GoPick()
         End Select
 
+        Try
+            Controller.Omron.Disconnect()
+        Catch ex As Exception
+        End Try
     End Sub
 
     Private Sub SetHome()
         Dim Result As Boolean = Controller.HomePosition()
-        Response.Write("SetHome_Result : " & Result & "<br>" & vbLf)
         callBack(Result, "")
     End Sub
 
@@ -120,7 +126,6 @@ Public Class ProductPicker
     Private Sub callBack(ByVal Result As Boolean, ByVal Message As String)
         Dim Script As String = callBackFunction & "(" & Result.ToString.ToLower & ",'" & Message.Replace("'", "") & "');"
         Response.Write(Script)
-        Response.End()
     End Sub
 
 End Class

@@ -925,7 +925,9 @@ Public Class UC_Product_Stock
         Dim SQL As String = ""
 
         '--------- Set Order ----------
-        STOCK_DATA.Columns.Add("ORDER_NO", GetType(Integer))
+        If STOCK_DATA.Columns.IndexOf("ORDER_NO") = -1 Then
+            STOCK_DATA.Columns.Add("ORDER_NO", GetType(Integer))
+        End If
         Dim col() As String = {"CURRENT"}
         STOCK_DATA.DefaultView.RowFilter = "CURRENT IS NOT NULL"
         STOCK_DATA.DefaultView.Sort = ""

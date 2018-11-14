@@ -48,7 +48,7 @@ Public Class Device_Payment
 
     Private Property CASH_PAID As Integer
         Get
-            Return txtPaid.Text
+            Return txtPaid.Text.Replace(",", "").Replace(".", "")
         End Get
         Set(value As Integer)
             txtPaid.Text = value
@@ -98,6 +98,10 @@ Public Class Device_Payment
             Return Val(txtCreditReq.Text)
         End Get
     End Property
+
+    Private Function UNX() As String
+        Return Now.ToOADate.ToString.Replace(".", "")
+    End Function
 
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -324,7 +328,7 @@ Public Class Device_Payment
         lnkCash.Attributes("class") = "current"
         '----------------เริ่มรับชำระ --------------
         Dim Script As String = "RequireCash(); "
-        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "CashPayment", Script, True)
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "CashPayment" & UNX(), Script, True)
     End Sub
 
     Private Sub lnkCredit_ServerClick(sender As Object, e As EventArgs) Handles lnkCredit.ServerClick
@@ -413,7 +417,7 @@ Public Class Device_Payment
         '----------------------- Set Alway Focus Barcode ----------------------
         Dim Script As String = "txtBarcode='" & txtBarcode.ClientID & "';" & vbLf
         Script &= "startFocusBarcode();"
-        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "focusBarcodeReader", Script, True)
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "focusBarcodeReader" & UNX(), Script, True)
     End Sub
 
     Private Sub btnBarcode_Click(sender As Object, e As EventArgs) Handles btnBarcode.Click
@@ -427,16 +431,17 @@ Public Class Device_Payment
         '------------------- Get Parameter --------------
         Dim DT As DataTable = BL.GetList_Kiosk(KO_ID)
         Dim ShopCode As String = DT.Rows(0).Item("SITE_CODE")
+        Dim SITE_NAME_TH As String = DT.Rows(0).Item("SITE_NAME_TH").ToString
         DT = BL.Get_Product_Info_From_ID(PRODUCT_ID)
         Dim Amount As Integer = DT.Rows(0).Item("PRICE")
         Dim ISV As String = TMN.Generate_ISV(ShopCode)
-        Dim PaymentDescription As String = "TRUE-VDM-" & ISV
+        Dim PaymentDescription As String = SITE_NAME_TH
         '-------------------- เรียก------------------------
         Dim RESP As TrueMoney.Response = TMN.GetResult(TXN_ID, ISV, Amount, Barcode, PaymentDescription, ShopCode)
         '---------------- ตรวจสอบผลลัพธ์ -------------------
         If RESP.status.code.ToLower <> "success" Then
             lblTMNPaymentCode.Text = RESP.Request.payment_code
-            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "TrueMoneyError", "$('#lnkTrueMoneyError').click();", True)
+            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "TrueMoneyError" & Now.ToOADate.ToString.Replace(".", ""), "$('#lnkTrueMoneyError').click();", True)
             Exit Sub
         End If
         '---------------- UPDATE Payment Method --------------------
@@ -580,35 +585,36 @@ Public Class Device_Payment
 
     'จ่ายครบ
     Private Sub btnCashCompleted_Click(sender As Object, e As EventArgs) Handles btnCashCompleted.Click
-        UpdateCashCompleted()
+        UpdateCashPayment()
+        ''-------------------------------- Go To Pick ----------------------------------------
+        Response.Redirect("Complete_Order.aspx?PRODUCT_ID=" & PRODUCT_ID & "&SIM_ID=" & SIM_ID)
     End Sub
 
     Private Sub btnCashTimeout_Click(sender As Object, e As EventArgs) Handles btnCashTimeout.Click
         '------------If pay some amount
         If CASH_PAID > 0 Then
-            'UpdateCashProblem()
-            '-------
+            UpdateCashProblem()
+            '------- ResponseRedirect ไปหน้า Problem Slip ------------
         Else
             Dim Script As String = "$(""#lnkCashTimeOut"").click();" & vbNewLine
             Script &= " showCashTimeOut();"
-            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "CashTimeOut", Script, True)
-            Session("ssCashTimeout") = Session("ssCashTimeout") + 1
+            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "CashTimeOut" & UNX(), Script, True)
 
+
+            Session("ssCashTimeout") = Session("ssCashTimeout") + 1
             If Session("ssCashTimeout") > 2 Then '--ปล่อยให้ Timeout ครบ 2 ครั้งโดยไม่หยอดให้กลับหน้าหลักเลย
                 Response.Redirect("Select_Language.aspx")
             End If
+
         End If
-
-        'Alert(Me.Page, txtCashProblem.Text)
-        'ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Refresh", "location.href=location.href;", True)
     End Sub
 
+    '------------ จ่ายไม่ครบแล้ว Timeout ----------------
     Private Sub btnCashProblem_Click(sender As Object, e As EventArgs) Handles btnCashProblem.Click
-        'UpdateCashProblem()
-        'Alert(Me.Page, txtCashProblem.Text)
+        UpdateCashProblem()
     End Sub
 
-    Private Sub UpdateCashCompleted()
+    Private Sub UpdateCashPayment()
 
         '--------------- Update TB_SERVICE_TRANSACTION
         Dim SQL As String = "UPDATE TB_SERVICE_TRANSACTION SET METHOD_ID=" & VDM_BL.PaymentMethod.CASH & vbLf
@@ -616,7 +622,7 @@ Public Class Device_Payment
         BL.ExecuteNonQuery(SQL)
 
         '--------------- Insert TB_TRANSACTION_CASH
-        SQL = "SELECT TOP 1 * FROM TB_TRANSACTION_CASH" & vbLf
+        SQL = "SELECT * FROM TB_TRANSACTION_CASH" & vbLf
         SQL &= " WHERE TXN_ID=" & TXN_ID
         Dim DT As New DataTable
         Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
@@ -646,6 +652,8 @@ Public Class Device_Payment
         DR("TOTAL_PRICE") = PRODUCT_COST
         DR("PAID") = CASH_PAID
         DR("MUST_CHANGE") = CASH_PAID - PRODUCT_COST
+
+
         DR("TXN_TIME") = Now
 
         Dim cmd As New SqlCommandBuilder(DA)
@@ -679,17 +687,39 @@ Public Class Device_Payment
             BL.UPDATE_KIOSK_DEVICE_TRANSACTION_STOCK(KO_ID, TXN_ID, VDM_BL.Device.Cash1000, CInt(txt1000.Text))
         End If
 
-        ''-------------------------------- Go To Pick ----------------------------------------
-        Response.Redirect("Complete_Order.aspx?PRODUCT_ID=" & PRODUCT_ID & "&SIM_ID=" & SIM_ID)
-
     End Sub
 
     Private Sub UpdateCashProblem()
-
-    End Sub
-
-    Private Sub btnFirstTime_Click(sender As Object, e As EventArgs) Handles btnFirstTime.Click
-
+        '-------------------- Update Stock -----------------------------
+        UpdateCashPayment()
+        '-------------------- Keep Transaction Log ---------------------
+        Dim SQL As String = "SELECT TOP 1 * FROM TB_SERVICE_TRANSACTION_PROBLEM WHERE TXN_ID=" & TXN_ID
+        Dim DA As New SqlDataAdapter(SQL, BL.ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+        Dim DR As DataRow = DT.NewRow
+        DR("TXN_ID") = TXN_ID
+        DR("ITEM_NO") = 1
+        If PRODUCT_ID > 0 Then
+            DR("PRODUCT_ID") = PRODUCT_ID
+        Else
+            DR("SIM_ID") = SIM_ID
+        End If
+        DR("SERIAL_NO") = DBNull.Value
+        DR("TOTAL_PRICE") = PRODUCT_COST
+        DR("CASH_PAID") = CASH_PAID
+        DR("CASH_CHANGE") = 0
+        DR("PROBLEM_DETAIL") = txtCashProblem.Text
+        DR("SLIP_YEAR") = Now.Year.ToString.Substring(2, 2)
+        DR("SLIP_MONTH") = Now.Month.ToString.PadLeft(2, "0")
+        DR("SLIP_DAY") = Now.Day.ToString.PadLeft(2, "0")
+        DR("SLIP_NO") = BL.Get_New_Confirmation_Slip_No
+        DR("TXN_TIME") = Now
+        DT.Rows.Add(DR)
+        Dim cmd As New SqlCommandBuilder(DA)
+        DA.Update(DT)
+        '----------------- Redirect To Problem Page --------------------
+        'Response.Redirect("Transaction_Problem.aspx?TXN_ID=" & TXN_ID)
     End Sub
 
 

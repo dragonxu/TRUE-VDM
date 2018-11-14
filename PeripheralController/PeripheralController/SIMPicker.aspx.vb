@@ -6,24 +6,24 @@ Public Class SIMPicker
     Dim BL As New Core_BL
 
 
-    Private ReadOnly Property Controller As Controller.Control
-        Get
-            If IsNothing(Application("Controller")) Then
-                '----------- Init Object And Connect---------
-                Dim _control As New Controller.Control
-                _control.SetIP(BL.Product_Picker_IP, BL.Product_Picker_Port)
-                _control.Connect()
+    'Private ReadOnly Property Controller As Controller.Control
+    '    Get
+    '        If IsNothing(Application("Controller")) Then
+    '            '----------- Init Object And Connect---------
+    '            Dim _control As New Controller.Control
+    '            _control.SetIP(BL.Product_Picker_IP, BL.Product_Picker_Port)
+    '            _control.Connect()
 
-                Threading.Thread.Sleep(200)
+    '            Threading.Thread.Sleep(200)
 
-                Application.Lock()
-                Application("Controller") = _control
-                Application.UnLock()
+    '            Application.Lock()
+    '            Application("Controller") = _control
+    '            Application.UnLock()
 
-            End If
-            Return Application("Controller")
-        End Get
-    End Property
+    '        End If
+    '        Return Application("Controller")
+    '    End Get
+    'End Property
 
     Private ReadOnly Property SIMPicker As SimDispenser.SimDispenser
         Get
@@ -137,21 +137,21 @@ Public Class SIMPicker
     End Sub
 
     Private Sub Forward()
-        Dim EndWait As DateTime = DateAdd(DateInterval.Second, TimeOut, Now)
-        SIMPicker.RotateForward()
-        While Now < EndWait
-            Threading.Thread.Sleep(200)
-        End While
-        SIMPicker.Break()
-        Controller.BasketPickUp() '-----------OpenDoor
+        'Dim EndWait As DateTime = DateAdd(DateInterval.Second, TimeOut, Now)
+        'SIMPicker.RotateForward()
+        'While Now < EndWait
+        '    Threading.Thread.Sleep(200)
+        'End While
+        'SIMPicker.Break()
+        'Controller.BasketPickUp() '-----------OpenDoor
 
-        EndWait = DateAdd(DateInterval.Second, OpenTimeOut, Now)
-        While Now < EndWait
-            Threading.Thread.Sleep(200)
-        End While
+        'EndWait = DateAdd(DateInterval.Second, OpenTimeOut, Now)
+        'While Now < EndWait
+        '    Threading.Thread.Sleep(200)
+        'End While
 
-        Controller.CloseGate() '-----------CloseDoor
-        callBack(True)
+        'Controller.CloseGate() '-----------CloseDoor
+        'callBack(True)
     End Sub
 
     Private Sub callBack(ByVal Result As Boolean)

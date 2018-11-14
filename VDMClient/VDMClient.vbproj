@@ -147,6 +147,12 @@
     <Compile Include="FormKeyboard.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormLeftScreen.Designer.vb">
+      <DependentUpon>FormLeftScreen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormLeftScreen.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormMain.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -178,6 +184,9 @@
     <EmbeddedResource Include="FormKeyboard.resx">
       <DependentUpon>FormKeyboard.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormLeftScreen.resx">
+      <DependentUpon>FormLeftScreen.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.vb</DependentUpon>
     </EmbeddedResource>
@@ -203,6 +212,25 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Mono.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxWMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

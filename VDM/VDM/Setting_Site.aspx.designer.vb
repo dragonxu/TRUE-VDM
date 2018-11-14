@@ -104,6 +104,15 @@ Partial Public Class Setting_Site
     Protected WithEvents txtName As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''txtNameTH control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtNameTH As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''imgIcon control.
     '''</summary>
     '''<remarks>

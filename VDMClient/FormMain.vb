@@ -7,12 +7,14 @@ Imports System.Diagnostics
 Public Class FormMain
 
     Public WithEvents ChromeBrowser As ChromiumWebBrowser
-    'Dim StartURL As String = "http://localhost:62820/Front_UI/Default.aspx?KO_ID=1" '********** Production Check '-********** 
+    'Dim StartURL As String = "http://119.46.96.185/Front_UI/Default.aspx?KO_ID=1" '********** Production Check '-********** 
     'Dim StartURL As String = "http://localhost:62820/Front_UI/Thank_You.aspx" '********** Production Check '-********** 
     Dim StartURL As String = "http://localhost"
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles Me.Load
         CheckForIllegalCrossThreadCalls = False
+
+        StartLeftMovie()
 
         LoadKeyboard()
 
@@ -20,6 +22,19 @@ Public Class FormMain
         InitChromium()
         '------------- Start SIM Dispenser------------
         StartProductController() '********** Production Check '-********** 
+    End Sub
+
+    Public FormLeftPlayer As FormLeftScreen = Nothing
+    Private Sub StartLeftMovie()
+
+        If Screen.AllScreens.Count = 1 Then Exit Sub
+
+        FormLeftPlayer = New FormLeftScreen
+
+        FormLeftPlayer.MainForm = Me
+        FormLeftPlayer.Show()
+        FormLeftPlayer.Location = New Point(-1080, 0)
+        FormLeftPlayer.WindowState = FormWindowState.Maximized
     End Sub
 
     Private Sub InitChromium()
@@ -41,8 +56,9 @@ Public Class FormMain
     End Sub
 
     Private Sub ChromeBrowser_Click(sender As Object, e As EventArgs) Handles ChromeBrowser.Click
+        On Error Resume Next
         If ChromeBrowser.GetBrowser.GetFrameCount = 2 Then
-            If ChromeBrowser.GetFocusedFrame.Url.IndexOf("psipay.bangkokbank") > -1 Then
+            If ChromeBrowser.GetFocusedFrame.Url.ToUpper.IndexOf(".bangkokbank.com".ToUpper) > -1 Then
                 Keyboard.Show()
             End If
         End If
@@ -50,14 +66,14 @@ Public Class FormMain
 
     'Dim LastLoadCam As DateTime = Now
     Dim Camera As FormCamera = Nothing
+    Dim LastPrintTime As DateTime = Now '------------- Prevent Print 2 Copy
+    Dim LastPrintURL As String = "" '------------- Prevent Print 2 Copy
     Private Sub ChromeBrowser_FrameLoadEnd(sender As Object, e As FrameLoadEndEventArgs) Handles ChromeBrowser.FrameLoadEnd
 
         Select Case True
-            Case Not e.Frame.IsMain And e.Frame.Url.IndexOf("psipay.bangkokbank") > -1
+            Case Not e.Frame.IsMain And e.Frame.Url.ToUpper.IndexOf(".bangkokbank.com".ToUpper) > -1
                 Keyboard.Show()
             Case Not e.Frame.IsMain And e.Frame.Url.ToUpper.IndexOf("/CAMCAPTURE.ASPX") > -1
-                'If DateDiff(DateInterval.Second, LastLoadCam, Now) < 2 Then Exit Sub
-                'LastLoadCam = Now
                 If Not IsNothing(Camera) Then Exit Sub
                 Camera = New FormCamera
                 '------------- Get Alias -------------
@@ -79,20 +95,35 @@ Public Class FormMain
 
             Case Not e.Frame.IsMain And e.Frame.Url.ToUpper.IndexOf("/PRINTCONTENT.ASPX") > -1
 
+                Dim URL As String = e.Frame.Url
+
+                '------------- Prevent Print 2 Copy
+                If LastPrintURL = URL And DateDiff(DateInterval.Second, LastPrintTime, Now) < 5 Then
+                    Exit Sub
+                End If
+
                 Dim C As New Converter
-                Dim Data As Byte() = New WebClient().DownloadData(e.Frame.Url)
+                Dim Data As Byte() = New WebClient().DownloadData(URL)
                 Dim Content As String = C.ByteToString(Data, Converter.EncodeType._UTF8)
 
                 If Content <> "" Then
                     Dim Printer As New Printer
                     Printer.Content = Content
                     Printer.Print()
+                    LastPrintTime = Now '------------- Prevent Print 2 Copy
+                    LastPrintURL = URL '------------- Prevent Print 2 Copy
                 End If
 
             Case Else
                 Keyboard.Hide()
                 ClearCamera()
+
         End Select
+    End Sub
+
+    Private Sub ProductPickerCallBack(ByVal callback As String, ByVal Result As Boolean, ByVal Message As String)
+        Dim Script As String = callback & "(" & Result.ToString.ToLower & ",'" & Message.Replace("'", "") & "');"
+        ChromeBrowser.GetBrowser.MainFrame.ExecuteJavaScriptAsync(Script)
     End Sub
 
     Public Sub ClearCamera()
@@ -117,7 +148,5 @@ Public Class FormMain
             Dim result As String = New WebClient().DownloadString(url)
         Catch : End Try
     End Sub
-
-
 
 End Class

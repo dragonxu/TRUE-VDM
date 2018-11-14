@@ -81,6 +81,7 @@ Public Class Setting_Site
 
         Dim lblCode As Label = e.Item.FindControl("lblCode")
         Dim lblName As Label = e.Item.FindControl("lblName")
+        Dim lblNameTH As Label = e.Item.FindControl("lblNameTH")
         Dim lblAddress As Label = e.Item.FindControl("lblAddress")
         Dim lblKiosk As Label = e.Item.FindControl("lblKiosk")
 
@@ -88,6 +89,7 @@ Public Class Setting_Site
 
         lblCode.Text = e.Item.DataItem("Site_Code").ToString
         lblName.Text = e.Item.DataItem("Site_Name").ToString
+        lblNameTH.Text = e.Item.DataItem("Site_Name_TH").ToString
 
         If Not IsDBNull(e.Item.DataItem("TUMBOL_NAME")) Then
             If e.Item.DataItem("PROVINCE_CODE").ToString = "10" Then
@@ -177,6 +179,7 @@ Public Class Setting_Site
 
         txtCode.Text = ""
         txtName.Text = ""
+        txtNameTH.Text = ""
         '------------ Clear Province Location -----------
         BL.Bind_DDL_Province(ddlProvince)
         ddlProvince_SelectedIndexChanged(ddlProvince, Nothing)
@@ -231,6 +234,11 @@ Public Class Setting_Site
             Exit Sub
         End If
 
+        If txtNameTH.Text = "" Then
+            Message_Toastr("กรอก Name TH", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page)
+            Exit Sub
+        End If
+
         If IsNothing(SITE_Icon) Then
             Message_Toastr("เลือก Icon", ToastrMode.Warning, ToastrPositon.TopRight, Me.Page)
             Exit Sub
@@ -270,6 +278,7 @@ Public Class Setting_Site
 
         DR("Site_Code") = txtCode.Text
         DR("Site_Name") = txtName.Text
+        DR("Site_Name_TH") = txtNameTH.Text
 
         If ddlProvince.SelectedIndex > 0 Then
             DR("PROVINCE_CODE") = ddlProvince.Items(ddlProvince.SelectedIndex).Value

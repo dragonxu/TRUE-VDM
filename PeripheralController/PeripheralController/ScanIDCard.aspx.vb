@@ -11,7 +11,7 @@ Public Class ScanIDCard
                 '----------- Init Object And Connect---------
                 Dim _reader As New ThaiIDCard
 
-                Threading.Thread.Sleep(100)
+                'Threading.Thread.Sleep(100)
 
                 Application.Lock()
                 Application("ThaiCardReader") = _reader
@@ -58,7 +58,6 @@ Public Class ScanIDCard
 
     Dim PersonalInfo As Personal = Nothing
     Private Sub WaitToRead()
-
 
         Dim EndWait As DateTime = DateAdd(DateInterval.Second, TimeOut, Now)
 

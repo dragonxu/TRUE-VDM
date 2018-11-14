@@ -163,7 +163,7 @@
                                                 <div id="divMoney" runat ="server"  class="col-md-6" style="text-align: center;">
                                                     <h3>
                                                         <p style="border: unset; padding-right: 30px; text-align: right;">
-                                                            <asp:TextBox class="true-b " ID="txtPaid" runat="server" Text="0" Style="text-align: right; width: 300px; float: right; background-color: transparent; border: none; margin-top: -15px;" ReadOnly="true"></asp:TextBox>
+                                                            <asp:TextBox class="true-b " ID="txtPaid" runat="server" Text="0" Style="text-align: right; width: 300px; float: right; background-color: transparent; border: none; margin-top: -15px;" ></asp:TextBox>
                                                         </p>
                                                     </h3> 
                                                 </div>
@@ -444,7 +444,6 @@
                         <h3 class="true-m">ชำระเกินระยะเวลาที่กำหนด</h3>
                         <div class="icon">
                             <img src="images/Popup/icon-cash-error-gif.gif" /></div>
-
                         <h4 class="true-b">เริ่มใหม่</h4>
                         <div class="bottom"><a class="btu true-l" onclick="location.href=location.href;" href="javascript:;">ตกลง</a></div>
                     </div>
@@ -520,7 +519,7 @@
                     }
                     clearInterval(cashTimer);
                     disableCashIn();
-                    $('#txtCashProblem').val(message);
+                    $('#txtCashProblem').val(message); // Timeout
                     $('#btnCashProblem').click();
                 }
             }
@@ -541,7 +540,7 @@
 
             }
 
-            var cashSec = 150;
+            var cashSec = 151;
             var cashCounter = function () {
                 if (cashSec <= 0) {
                     $('#txtCashProblem').val('ชำระเกินระยะเวลาที่กำหนด');
@@ -592,12 +591,15 @@
             function showCashTimeOut() {
                 $('#lnkCashTimeOut').click();
             }
+
             function showCashError() {
                 $('#lnkCashError').click();
             }
 
 
         </script>
+
+        <input type="button" value="Pay20" runat="server" onclick="updatePayment(20, 'true', '');" />
 
         <uc1:UC_CommonUI runat="server" ID="CommonUI" />
     </form>

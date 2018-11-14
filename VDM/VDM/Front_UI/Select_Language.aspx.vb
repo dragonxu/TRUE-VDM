@@ -47,9 +47,9 @@
 
         '---------- Start New Transaction After This Page----------
         Session.Remove("TXN_ID")
-            Session.Remove("LANGUAGE")
-            Session.Remove("Accept_Contact_EMP")
-            Session.Remove("Customer_IDCard")
+        Session.Remove("LANGUAGE")
+        Session.Remove("Accept_Contact_EMP")
+        Session.Remove("Customer_IDCard")
         Session.Remove("Customer_Passport")
 
 

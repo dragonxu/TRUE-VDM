@@ -24,6 +24,7 @@
                       <th>Icon</th>
                       <th>Code</th>
                       <th>Name</th>
+                      <th>Name TH</th>
                       <th>Address</th>
                       <th>Total Machine(s)</th>
                       <th>Action</th>
@@ -35,7 +36,8 @@
                         <tr>                 
                           <td data-title="Icon" style="min-width:80px;"><asp:Image ID="img" runat="server" Width="80px" ImageUrl="images/BlankIcon.png" /></td>
                           <td data-title="Site Code"><asp:Label ID="lblCode" runat="server"></asp:Label></td>
-                          <td data-title="Site Name"><asp:Label ID="lblName" runat="server"></asp:Label></td>
+                          <td data-title="Name"><asp:Label ID="lblName" runat="server"></asp:Label></td>
+                          <td data-title="Name TH"><asp:Label ID="lblNameTH" runat="server"></asp:Label></td>
                           <td data-title="Address"><asp:Label ID="lblAddress" runat="server"></asp:Label></td>
                           <td data-title="Total Machine(s)" class="numeric"><asp:Label ID="lblKiosk" runat="server"></asp:Label></td>   
                           <td data-title="Action" style="width:140px;">
@@ -85,6 +87,12 @@
                         <label class="col-sm-2 control-label">Name <span style="color:red">*</span></label>
                         <div class="col-sm-4">
                           <asp:TextBox ID="txtName" runat="server" CssClass="form-control" MaxLength="100"></asp:TextBox>                      
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Name TH<span style="color:red">*</span></label>
+                        <div class="col-sm-4">
+                          <asp:TextBox ID="txtNameTH" runat="server" CssClass="form-control" MaxLength="100"></asp:TextBox>                      
                         </div>
                       </div>
                       

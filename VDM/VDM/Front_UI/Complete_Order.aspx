@@ -187,6 +187,7 @@
                     </div>
                     <a id="clickCannotRegister" style="display:none;"  href="#popupCannotRegister">Click</a>
 
+                    <%--<iframe id="frmCommand" style="width:0px; height:0px; visibility:hidden;"></iframe>--%>
 
                 </ContentTemplate>
             </asp:UpdatePanel>
@@ -198,8 +199,9 @@
 
             function pickProduct() {
                 // Gen URL
-                var url = $('#txtLocalControllerURL').val() + '/ProductPicker.aspx?Mode=GoPick&OpenTimeOut=10&POS_ID=' + $('#txtPosID').val() + '&callback=productPicked';
+                var url = $('#txtLocalControllerURL').val() + '/ProductPicker.aspx?Mode=GoPick&OpenTimeOut=20&POS_ID=' + $('#txtPosID').val() + '&callback=productPicked';
 
+                //$('#frmCommand').attr('src', url);
                 var script = document.createElement('script');
                 script.src = url;
                 var body = document.getElementsByTagName('body')[0];
