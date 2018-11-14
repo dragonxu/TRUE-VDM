@@ -71,8 +71,12 @@ Public Class FormMain
     Private Sub ChromeBrowser_FrameLoadEnd(sender As Object, e As FrameLoadEndEventArgs) Handles ChromeBrowser.FrameLoadEnd
 
         Select Case True
-            Case Not e.Frame.IsMain And e.Frame.Url.ToUpper.IndexOf(".bangkokbank.com".ToUpper) > -1
+            'Case Not e.Frame.IsMain And (e.Frame.Url.ToUpper.IndexOf(".bangkokbank.com".ToUpper) > -1 Or e.Frame.Url.ToUpper.IndexOf("Payment_Gateway_Keyboard.html".ToUpper) > -1)
+            Case Not e.Frame.IsMain And e.Frame.Url.ToUpper.IndexOf("Keyboard_Show.html".ToUpper) > -1
                 Keyboard.Show()
+            Case Not e.Frame.IsMain And e.Frame.Url.ToUpper.IndexOf("Keyboard_Hide.html".ToUpper) > -1
+                Keyboard.Hide()
+
             Case Not e.Frame.IsMain And e.Frame.Url.ToUpper.IndexOf("/CAMCAPTURE.ASPX") > -1
                 If Not IsNothing(Camera) Then Exit Sub
                 Camera = New FormCamera
@@ -113,8 +117,8 @@ Public Class FormMain
                     LastPrintTime = Now '------------- Prevent Print 2 Copy
                     LastPrintURL = URL '------------- Prevent Print 2 Copy
                 End If
+            Case e.Frame.IsMain
 
-            Case Else
                 Keyboard.Hide()
                 ClearCamera()
 

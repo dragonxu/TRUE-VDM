@@ -313,6 +313,7 @@ Public Class Device_Payment
 
         '----------------------- Stop Focus Barcode ----------------------
         Dim Script As String = "stopFocusBarcode();" & vbLf
+        Script &= "hideKeyboard();" & vbLf
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "clearBarcode", Script, True)
         '----------------------- Stop Cash In ----------------------
         CloseCashReciever()
@@ -342,7 +343,8 @@ Public Class Device_Payment
         lnkCredit.Attributes("class") = "current"
 
         Dim url As String = "Payment_Gateway_Start.aspx?amount=" & PRODUCT_COST & ".00&PRODUCT_ID=" & PRODUCT_ID
-        paymentGatewayWindow.Src = url
+        Dim Script As String = "$('#paymentGatewayWindow').attr('src','" & url & "'); "
+        ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "PayCredit" & UNX(), Script, True)
 
     End Sub
 

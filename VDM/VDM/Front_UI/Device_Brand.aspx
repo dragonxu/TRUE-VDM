@@ -62,7 +62,7 @@
                                                                 <li class="col-md-4">
 
                                                                     <asp:LinkButton id="btnBrand" runat="server" CommandName="Select">
-                                                                        <p class="true-m" style="text-align: center; font-size: 30px;">
+                                                                        <p class="true-m" style="text-align: center; display:none; font-size: 30px;">
                                                                             <asp:Label ID="lblBrand" runat="server"></asp:Label>
                                                                         </p>
                                                                         <asp:Image ID="img" runat="server" Width="311px" Height="311px"></asp:Image>

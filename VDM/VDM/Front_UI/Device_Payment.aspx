@@ -185,7 +185,7 @@
                                                     <h3 class="true-b t-red"><asp:Label ID="lblUI_Currency_Str2" runat="server" Text="บาท" ></asp:Label></h3>
                                                 </div>
                                             </div>
-                                            <p class="time true-l"><asp:Label ID="lblUI_Time" runat="server" Text="เวลาชำระเงินสดคงเหลือ" ></asp:Label> <span id="castTimeOut"></span></p>
+                                            <p class="time true-l"><asp:Label ID="lblUI_Time" runat="server" Text="เวลาชำระเงินสดคงเหลือ" ></asp:Label> <span id="cashTimeOut"></span></p>
                                         </div>
 
                                         <div style="position: absolute; top: 300px; right: 100px; display: none;" class="row">
@@ -234,77 +234,6 @@
                                     </form>
                                 </asp:Panel>
 
-                                <%--<asp:Panel ID="pnlCredit" runat="server">
-                                    <form class="step">
-                                        <div class="step-payment">
-                                            <h4 class="true-m">ชำระด้วยบัตรเครดิต</h4>
-                                            <div class="f-card">
-                                                <fieldset>
-                                                    <p class="true-m">Card Type</p>
-                                                    <div class="field">
-                                                        <label class="checkcard">
-                                                            <input checked="checked" name="radio" type="radio">
-                                                            <span class="radiobtn"></span>
-                                                            <img src="images/icon-visa.png">
-                                                        </label>
-                                                        <label class="checkcard">
-                                                            <input name="radio" type="radio">
-                                                            <span class="radiobtn"></span>
-                                                            <img src="images/icon-express.png">
-                                                        </label>
-                                                        <label class="checkcard">
-                                                            <input name="radio" type="radio">
-                                                            <span class="radiobtn"></span>
-                                                            <img src="images/icon-dinersclub.png">
-                                                        </label>
-                                                    </div>
-                                                </fieldset>
-                                                <fieldset>
-                                                    <p class="true-m">Card Number</p>
-                                                    <div class="field">
-                                                        <input class="true-l bg-field" name="" type="text">
-                                                    </div>
-                                                </fieldset>
-                                                <fieldset>
-                                                    <p class="true-m">Name on Card</p>
-                                                    <div class="field">
-                                                        <input class="true-l bg-field" name="" type="text">
-                                                    </div>
-                                                </fieldset>
-                                                <fieldset>
-                                                    <p class="true-m">CCV Number</p>
-                                                    <div class="field">
-                                                        <input class="true-l bg-field" name="" placeholder="***" type="password">
-                                                    </div>
-                                                </fieldset>
-                                                <fieldset>
-                                                    <p class="true-m">Expiration Date</p>
-                                                    <div class="field-spit">
-                                                        <input class="true-l bg-field" name="" placeholder="MM" type="text">
-                                                    </div>
-                                                    <em class="true-l">/</em>
-                                                    <div class="field-spit">
-                                                        <input class="true-l bg-field" name="" placeholder="YY" type="text">
-                                                    </div>
-                                                </fieldset>
-                                                <div class="col-md-12" style="text-align: center;">
-                                                    <input class="order true-m" name="" type="submit" value="ส่ง" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </asp:Panel>
-
-
-                                <div id="popup1">
-                                  <div class="privilege">
-                                    <h3 class="true-m">สิทธิพิเศษสำหรับลูกค้า</h3>
-                                    <a id="clicksetp2" class="idcard" href="#popup2"><img src="images/pic-idcard.png"/></a>
-                                    <h4 class="true-l">กรุณาสอดบัตรประชาชนของท่าน</h4>
-                                    <br/><br/> <br/><br/>
-                                  </div>
-                                </div>--%>
-
                                 <asp:Panel ID="pnlTruemoney" runat="server">
                                     <form class="step">
                                         <div class="step-payment">
@@ -330,7 +259,7 @@
                                         </div>
                                     </form>
 
-                                    <asp:Panel ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" Style="position: fixed; left:500px; top: 200px;">
+                                    <asp:Panel ID="pnlBarcode" runat="server" DefaultButton="btnBarcode" Style="position: fixed; left:-500px; top: 200px;">
                                         <asp:TextBox ID="txtBarcode" runat="server"></asp:TextBox>
                                         <asp:Button ID="btnBarcode" runat="server" />
                                     </asp:Panel>
@@ -353,37 +282,6 @@
                     </footer>
                 </div>
 
-                <%--<asp:Panel ID="pnlCredit" runat="server" Visible ="false" >
-                    <div class="fancybox-overlay fancybox-overlay-fixed" style="width: auto; height: auto; display: block;">
-                        <div class="fancybox-wrap fancybox-desktop fancybox-type-inline fancybox-opened" tabindex="-1" style="width: auto; height: auto; position: fixed; top: 10%; left: 20%; right: 30%; bottom: 30%; opacity: 1; overflow: visible;">
-                            <div class="fancybox-skin" style="padding: 0px; width: 100%; height: 100%;">
-                                <div class="fancybox-outer">
-                                    <div class="fancybox-inner" style="overflow: visible; width: 100%; height: 100%;">
-                                        <div id="popup2" style="display: block;">
-
-                                            <div class="privilege" style="width:100%; height:100%;">
-
-                                                <h3 class="true-m" style="margin: 20px 0 60px 0;">สำเร็จ</h3>
-                                                <div class="idcard">
-                                                    <img src="images/pic-idcard2.png">
-                                                </div>
-
-                                                <h4 class="true-m t-red">อย่าลืมเก็บบัตรของท่าน</h4>
-                                               <div class="icon" style="margin: 0px 0 50px 0">
-                                                    <asp:LinkButton ID="btnStart_Take_Photos" runat="server" class="btu true-l" Text="เริ่มแสกนใบหน้า"></asp:LinkButton>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a title="Close" class="fancybox-item fancybox-close" href="javascript:;"></a>
-                                <asp:LinkButton ID="lnkCloseCredit" runat="server" class="fancybox-item fancybox-close"></asp:LinkButton>
-                            </div>
-                        </div>
-                    </div>
-                </asp:Panel>--%>
-
                 <asp:Panel ID="pnlCredit" runat="server" Visible="false">
                     <div class="fancybox-overlay fancybox-overlay-fixed" style="width: auto; height: auto; display: block;">
                         <div class="fancybox-wrap fancybox-desktop fancybox-type-inline fancybox-opened" tabindex="-1" style="width: auto; height: auto; position: fixed; top: 10%; left: 20%; right: 20%; bottom: 35%; opacity: 1; overflow: visible;">
@@ -394,7 +292,8 @@
 
                                             <div class="privilege" style="width: 100%; height: 100%; text-align: center; position: relative;">
                                                 <%--<iframe id="paymentGatewayWindow" runat="server" style=" position:absolute; left:10px; width:90%; height:90%;transform: scale(1.1); " >--%>
-                                                <iframe id="paymentGatewayWindow" runat="server" style="position: absolute; top: 50px; left: 40px; width: 90%; height: 90%; transform: scale(1.1);"></iframe>
+                                                <iframe id="paymentGatewayWindow" style="position: absolute; top: 50px; left: 40px; width: 90%; height: 90%; transform: scale(1.1);" onload="requireKeyboard();"></iframe>
+                                                <iframe id="paymentGatewayKeyboard" style="width:0px; height:0px; visibility:hidden;"></iframe>
                                                 <asp:TextBox ID="txtCreditReq" runat="server" Style="display: none;" />
                                                 <asp:Button ID="btnCreditComplete" runat="server" Style="display: none;" />
                                             </div>
@@ -559,7 +458,7 @@
                         displaySec = '0' + displaySec;
                     }
                     // display
-                    $('#castTimeOut').html(displayMin + ':' + displaySec);
+                    $('#cashTimeOut').html(displayMin + ':' + displaySec);
                 }
             }
             var cashTimer = setInterval(cashCounter, 1000);
@@ -576,14 +475,18 @@
             setTimeout(function () { $("#btnFirstTime").click(); }, 600); // Click for postback single time
 
             function closeCredit() {
-                $('#paymentGatewayWindow').load(function () {
-                    $('#btnCloseCredit').click();
-                });
-                $('#paymentGatewayWindow').css('visibility', 'hidden');
-                $('#paymentGatewayWindow').attr('src', 'images/fancybox_overlay.png');
-                // Go Somewhere to close chromium keyboard
+                hideKeyboard();
+                $('#btnCloseCredit').click();
             }
 
+            function hideKeyboard() {
+                document.getElementById('paymentGatewayKeyboard').src = "Keyboard_Hide.html";
+            }
+
+            function requireKeyboard() {
+                document.getElementById('paymentGatewayKeyboard').src = "Keyboard_Show.html";
+            }
+           
             function showCreditCardError() {
                 $("#lnkCreditCardError").click();
             }
@@ -596,6 +499,12 @@
                 $('#lnkCashError').click();
             }
 
+            var toHideKeyboard = function checkKeyboard() {
+                if (!document.getElementById("pnlCredit")) {
+                    hideKeyboard();
+                }
+            }
+            setInterval(toHideKeyboard, 2000);
 
         </script>
 
@@ -604,8 +513,6 @@
         <uc1:UC_CommonUI runat="server" ID="CommonUI" />
     </form>
 
-    <%--    <script src="../scripts/jquery.onScreenKeyboard.js" type="text/javascript"></script>
-    <script src="../scripts/onScreenKeyboard.js" type="text/javascript" ></script>--%>
 </body>
 </html>
 

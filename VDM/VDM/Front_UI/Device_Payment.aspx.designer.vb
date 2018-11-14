@@ -608,15 +608,6 @@ Partial Public Class Device_Payment
     Protected WithEvents pnlCredit As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''paymentGatewayWindow control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents paymentGatewayWindow As Global.System.Web.UI.HtmlControls.HtmlIframe
-    
-    '''<summary>
     '''txtCreditReq control.
     '''</summary>
     '''<remarks>
