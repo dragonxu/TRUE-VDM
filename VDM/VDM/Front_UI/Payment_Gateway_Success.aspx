@@ -2,6 +2,6 @@
 
 <script type="text/javascript">
 
-    parent.document.getElementById('btnCreditComplete').click();
+    //parent.document.getElementById('btnCreditComplete').click();
 
 </script>

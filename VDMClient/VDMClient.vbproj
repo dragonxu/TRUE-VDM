@@ -141,6 +141,12 @@
     <Compile Include="FormCamera.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormCreditCard.Designer.vb">
+      <DependentUpon>FormCreditCard.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormCreditCard.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormKeyboard.Designer.vb">
       <DependentUpon>FormKeyboard.vb</DependentUpon>
     </Compile>
@@ -180,6 +186,9 @@
   <ItemGroup>
     <EmbeddedResource Include="FormCamera.resx">
       <DependentUpon>FormCamera.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCreditCard.resx">
+      <DependentUpon>FormCreditCard.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormKeyboard.resx">
       <DependentUpon>FormKeyboard.vb</DependentUpon>

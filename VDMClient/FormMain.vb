@@ -9,7 +9,7 @@ Public Class FormMain
     Public WithEvents ChromeBrowser As ChromiumWebBrowser
     'Dim StartURL As String = "http://119.46.96.185/Front_UI/Default.aspx?KO_ID=1" '********** Production Check '-********** 
     'Dim StartURL As String = "http://localhost:62820/Front_UI/Thank_You.aspx" '********** Production Check '-********** 
-    Dim StartURL As String = "http://localhost:49211"
+    Public StartURL As String = "http://localhost"
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles Me.Load
         CheckForIllegalCrossThreadCalls = False
@@ -18,8 +18,10 @@ Public Class FormMain
 
         LoadKeyboard()
 
-        'Cursor.Hide() '********** Production Check '-********** 
+        Cursor.Hide() '********** Production Check '-********** 
         InitChromium()
+
+        InitCreditForm()
         '------------- Start SIM Dispenser------------
         StartProductController() '********** Production Check '-********** 
     End Sub
@@ -39,6 +41,16 @@ Public Class FormMain
 
     Private Sub InitChromium()
         Dim settings As New CefSettings
+        '------------------- Certificate ------------------
+        settings.IgnoreCertificateErrors = True
+        ''-------------------- Set Cache Path --------------
+        'Dim CachePath As String = Application.StartupPath & "\Cache"
+        'If Not Directory.Exists(CachePath) Then
+        '    Directory.CreateDirectory(CachePath)
+        'End If
+        'settings.CachePath = CachePath
+        'settings.PersistSessionCookies = True
+        '''------------------- End Setting ----------------
         CefSharp.Cef.Initialize(settings)
         ChromeBrowser = New ChromiumWebBrowser("about:blank")
         Me.Controls.Add(ChromeBrowser)
@@ -46,6 +58,15 @@ Public Class FormMain
         ChromeBrowser.Load(StartURL)
         AddHandler ChromeBrowser.AddressChanged, AddressOf ChromeBrowser_AddressChanged
         AddHandler ChromeBrowser.FrameLoadEnd, AddressOf ChromeBrowser_FrameLoadEnd
+
+    End Sub
+
+    Public CreditForm As FormCreditCard = Nothing
+    Public LastCreditTime As DateTime = Now
+    Dim LastCreditURL As String = ""
+    Private Sub InitCreditForm()
+        CreditForm = New FormCreditCard
+        CreditForm.MainForm = Me
     End Sub
 
     Private Sub ChromeBrowser_AddressChanged(sender As Object, e As AddressChangedEventArgs)
@@ -55,29 +76,34 @@ Public Class FormMain
         End If
     End Sub
 
-    Private Sub ChromeBrowser_Click(sender As Object, e As EventArgs) Handles ChromeBrowser.Click
-        On Error Resume Next
-        If ChromeBrowser.GetBrowser.GetFrameCount = 2 Then
-            If ChromeBrowser.GetFocusedFrame.Url.ToUpper.IndexOf(".bangkokbank.com".ToUpper) > -1 Then
-                Keyboard.Show()
-            End If
-        End If
-    End Sub
 
-    'Dim LastLoadCam As DateTime = Now
+
     Dim Camera As FormCamera = Nothing
     Dim LastPrintTime As DateTime = Now '------------- Prevent Print 2 Copy
     Dim LastPrintURL As String = "" '------------- Prevent Print 2 Copy
+
     Private Sub ChromeBrowser_FrameLoadEnd(sender As Object, e As FrameLoadEndEventArgs) Handles ChromeBrowser.FrameLoadEnd
 
         Select Case True
-            'Case Not e.Frame.IsMain And (e.Frame.Url.ToUpper.IndexOf(".bangkokbank.com".ToUpper) > -1 Or e.Frame.Url.ToUpper.IndexOf("Payment_Gateway_Keyboard.html".ToUpper) > -1)
-            Case Not e.Frame.IsMain And e.Frame.Url.ToUpper.IndexOf("Keyboard_Show.html".ToUpper) > -1
-                Keyboard.Show()
-            Case Not e.Frame.IsMain And e.Frame.Url.ToUpper.IndexOf("Keyboard_Hide.html".ToUpper) > -1
-                Keyboard.Hide()
 
-            Case Not e.Frame.IsMain And e.Frame.Url.ToUpper.IndexOf("/CAMCAPTURE.ASPX") > -1
+            Case Not e.Frame.IsMain And e.Frame.Url.ToUpper.IndexOf("Payment_Gateway_Init".ToUpper) > -1
+
+                Dim URL As String = e.Frame.Url
+                '------------- Prevent Print 2 Copy
+                If LastCreditURL = URL And DateDiff(DateInterval.Second, LastCreditTime, Now) < 2 Then
+                    RaiseCancelCreditScript()
+                    Exit Sub
+                End If
+
+                LastCreditTime = Now
+                LastCreditURL = URL
+
+                CreditForm.ShowPaymentForm(URL.Replace("Payment_Gateway_Init", "Payment_Gateway_Start"))
+
+                LastCreditTime = Now
+                LastCreditURL = URL
+
+            Case Not e.Frame.IsMain And e.Frame.Url.ToUpper.IndexOf("CAMCAPTURE.ASPX") > -1
                 If Not IsNothing(Camera) Then Exit Sub
                 Camera = New FormCamera
                 '------------- Get Alias -------------
@@ -119,15 +145,12 @@ Public Class FormMain
                 End If
             Case e.Frame.IsMain
 
+                CreditForm.HidePaymentForm()
                 Keyboard.Hide()
                 ClearCamera()
 
         End Select
-    End Sub
 
-    Private Sub ProductPickerCallBack(ByVal callback As String, ByVal Result As Boolean, ByVal Message As String)
-        Dim Script As String = callback & "(" & Result.ToString.ToLower & ",'" & Message.Replace("'", "") & "');"
-        ChromeBrowser.GetBrowser.MainFrame.ExecuteJavaScriptAsync(Script)
     End Sub
 
     Public Sub ClearCamera()
@@ -137,7 +160,7 @@ Public Class FormMain
         End If
     End Sub
 
-    Dim Keyboard As FormKeyboard = Nothing
+    Public Keyboard As FormKeyboard = Nothing
 
     Private Sub LoadKeyboard()
         Keyboard = New FormKeyboard
@@ -152,5 +175,28 @@ Public Class FormMain
             Dim result As String = New WebClient().DownloadString(url)
         Catch : End Try
     End Sub
+
+#Region "CreditCard Script"
+
+    Public Sub RaiseCancelCreditScript()
+        LastCreditTime = Now
+        Dim Script As String = "closeCredit();" & vbLf
+        ChromeBrowser.GetBrowser.MainFrame.ExecuteJavaScriptAsync(Script)
+    End Sub
+
+    Public Sub RaiseFailCreditScript()
+        LastCreditTime = Now
+        Dim Script As String = "showCreditCardError();" & vbLf
+        ChromeBrowser.GetBrowser.MainFrame.ExecuteJavaScriptAsync(Script)
+
+    End Sub
+
+    Public Sub RaiseSuccessCreditScript(ByVal RED_ID As String)
+        LastCreditTime = Now
+        Dim Script As String = "$('#txtCreditReq').val('" & RED_ID & "');" & vbLf
+        Script &= "$('#btnCreditComplete').click();"
+        ChromeBrowser.GetBrowser.MainFrame.ExecuteJavaScriptAsync(Script)
+    End Sub
+#End Region
 
 End Class

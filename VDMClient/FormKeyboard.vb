@@ -2,6 +2,7 @@
 Public Class FormKeyboard
 
     Public Property MainForm As FormMain
+    Public Property TargetFrom As Form
 
     Enum CaseMode
         Lower = 1
@@ -171,13 +172,13 @@ Public Class FormKeyboard
     Private Sub btn_alpha_MouseDown(sender As Object, e As MouseEventArgs)
         Dim btn As Button = sender
         KeyEvent = btn.Text
-        MainForm.Focus()
+        TargetFrom.Focus()
     End Sub
 
     Private Sub btn_ctrl_MouseDown(sender As Object, e As MouseEventArgs)
         Dim btn As Button = sender
         KeyEvent = btn.Tag
-        MainForm.Focus()
+        TargetFrom.Focus()
     End Sub
 
 

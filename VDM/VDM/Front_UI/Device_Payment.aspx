@@ -282,33 +282,10 @@
                     </footer>
                 </div>
 
-                <asp:Panel ID="pnlCredit" runat="server" Visible="false">
-                    <div class="fancybox-overlay fancybox-overlay-fixed" style="width: auto; height: auto; display: block;">
-                        <div class="fancybox-wrap fancybox-desktop fancybox-type-inline fancybox-opened" tabindex="-1" style="width: auto; height: auto; position: fixed; top: 10%; left: 20%; right: 20%; bottom: 35%; opacity: 1; overflow: visible;">
-                            <div class="fancybox-skin" style="padding: 0px; width: 100%; height: 100%;">
-                                <div class="fancybox-outer">
-                                    <div class="fancybox-inner" style="overflow: visible; width: 100%; height: 100%;">
-                                        <div id="popup2" style="display: block;">
-
-                                            <div class="privilege" style="width: 100%; height: 100%; text-align: center; position: relative;">
-                                                <%--<iframe id="paymentGatewayWindow" runat="server" style=" position:absolute; left:10px; width:90%; height:90%;transform: scale(1.1); " >--%>
-                                                <iframe id="paymentGatewayWindow" style="position: absolute; top: 50px; left: 40px; width: 90%; height: 90%; transform: scale(1.1);" onload="requireKeyboard();"></iframe>
-                                                <iframe id="paymentGatewayKeyboard" style="width:0px; height:0px; visibility:hidden;"></iframe>
-                                                <asp:TextBox ID="txtCreditReq" runat="server" Style="display: none;" />
-                                                <asp:Button ID="btnCreditComplete" runat="server" Style="display: none;" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <%--<a title="Close" class="fancybox-item fancybox-close" href="javascript:;"></a>--%>
-                                <a id="aCloseCredit" class="fancybox-item fancybox-close" onclick="closeCredit();"></a>
-                                <asp:Button ID="btnCloseCredit" runat="server" Style="display: none;" />
-                            </div>
-                        </div>
-                    </div>
-
-
-                </asp:Panel>
+                <asp:TextBox ID="txtCreditReq" runat="server" Style="display: none;" />
+                <asp:Button ID="btnCreditComplete" runat="server" Style="display: none;" />
+                <iframe id="paymentGatewayWindow" style="width: 0px; height: 0px;"></iframe>
+                <asp:Button ID="btnCloseCredit" runat="server" Style="display: none;" />
 
                 <!-----Popup------>
                 <div id="TrueMoneyError" class="popup">
@@ -475,18 +452,9 @@
             setTimeout(function () { $("#btnFirstTime").click(); }, 600); // Click for postback single time
 
             function closeCredit() {
-                hideKeyboard();
                 $('#btnCloseCredit').click();
             }
-
-            function hideKeyboard() {
-                document.getElementById('paymentGatewayKeyboard').src = "Keyboard_Hide.html";
-            }
-
-            function requireKeyboard() {
-                document.getElementById('paymentGatewayKeyboard').src = "Keyboard_Show.html";
-            }
-           
+            
             function showCreditCardError() {
                 $("#lnkCreditCardError").click();
             }

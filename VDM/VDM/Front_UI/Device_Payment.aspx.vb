@@ -300,7 +300,6 @@ Public Class Device_Payment
         'PAYMENT_METHOD = VDM_BL.PaymentMethod.UNKNOWN
 
         pnlCash.Visible = False
-        pnlCredit.Visible = False
         pnlTruemoney.Visible = False
         pnlSelectChoice.Visible = True
         'current
@@ -339,11 +338,13 @@ Public Class Device_Payment
         ClearForm()
 
         pnlSelectChoice.Visible = False
-        pnlCredit.Visible = True
         lnkCredit.Attributes("class") = "current"
 
-        Dim url As String = "Payment_Gateway_Start.aspx?amount=" & PRODUCT_COST & ".00&PRODUCT_ID=" & PRODUCT_ID
+        'Dim url As String = "Payment_Gateway_Start.aspx?amount=" & PRODUCT_COST & ".00&PRODUCT_ID=" & PRODUCT_ID
+
+        Dim url As String = "Payment_Gateway_Init.aspx?amount=" & PRODUCT_COST & ".00&PRODUCT_ID=" & PRODUCT_ID & "&TXN_ID=" & TXN_ID
         Dim Script As String = "$('#paymentGatewayWindow').attr('src','" & url & "'); "
+
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "PayCredit" & UNX(), Script, True)
 
     End Sub
