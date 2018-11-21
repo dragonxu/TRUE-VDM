@@ -112,6 +112,7 @@ Public Class Device_Payment
 
             txtLocalControllerURL.Text = BL.LocalControllerURL
             DT_CONTROL = UI_CONTROL()
+            DT_CONTROL_POPUP = UI_CONTROL_POPUP()
             Bind_CONTROL()
             ClearForm()
 
@@ -146,6 +147,17 @@ Public Class Device_Payment
         End Get
     End Property
     Dim DT_CONTROL As DataTable
+    Private ReadOnly Property UI_CONTROL_POPUP As DataTable  '------------- เอาไว้ดึงข้อมูล UI ----------
+        Get
+            Try
+                Return BL.GET_MS_UI_CONTROL_POPUP(LANGUAGE)
+            Catch ex As Exception
+                Return Nothing
+            End Try
+        End Get
+    End Property
+    Dim DT_CONTROL_POPUP As DataTable
+
     Public Sub Bind_CONTROL()
         On Error Resume Next
         If LANGUAGE > VDM_BL.UILanguage.TH Then
@@ -242,6 +254,35 @@ Public Class Device_Payment
             divpaymentcompleted.Attributes("class") = "col-md-6"
             divMoney.Attributes("class") = "col-md-4"
 
+            '===UI_CONTROL_POPUP===
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblTrueMoneyError_Header' "
+            lblTrueMoneyError_Header.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblTrueMoneyError_Header.Text)
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblTrueMoneyError_Detail' "
+            lblTrueMoneyError_Detail.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblTrueMoneyError_Detail.Text)
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblTrueMoneyError_btn' "
+            lblTrueMoneyError_btn.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblTrueMoneyError_btn.Text)
+
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblCreditCardError_Header' "
+            lblCreditCardError_Header.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblCreditCardError_Header.Text)
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblCreditCardError_Detail' "
+            lblCreditCardError_Detail.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblCreditCardError_Detail.Text)
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblCreditCardError_btn' "
+            lblCreditCardError_btn.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblCreditCardError_btn.Text)
+
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblCashTimeOut_Header' "
+            lblCashTimeOut_Header.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblCashTimeOut_Header.Text)
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblCashTimeOut_Detail' "
+            lblCashTimeOut_Detail.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblCashTimeOut_Detail.Text)
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblCashTimeOut_btn' "
+            lblCashTimeOut_btn.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblCashTimeOut_btn.Text)
+
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblCashTimeOut_Header2' "
+            lblCashTimeOut_Header2.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblCashTimeOut_Header2.Text)
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblCashTimeOut_Detail2' "
+            lblCashTimeOut_Detail2.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblCashTimeOut_Detail2.Text)
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblCashTimeOut_btn2' "
+            lblCashTimeOut_btn2.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblCashTimeOut_btn2.Text)
+
             If LANGUAGE <> VDM_BL.UILanguage.EN Then
                 '    lblUI_paymentcompleted.Attributes("class") = "UI-EN"
                 '    lblUI_Remain.Attributes("class") = "UI-EN"
@@ -285,6 +326,24 @@ Public Class Device_Payment
             lblUI_ByTrueMoney.Attributes("class") = "UI"
             lblUI_TrueMoney_Step1.Attributes("class") = "UI"
             lblUI_TrueMoney_Step2.Attributes("class") = "UI"
+
+            '===UI_CONTROL_POPUP===
+            lblTrueMoneyError_Header.Style("font-size") = "35px"
+            lblTrueMoneyError_Detail.Style("font-size") = "30px"
+            lblTrueMoneyError_btn.Style("font-size") = "30px"
+
+            lblCreditCardError_Header.Style("font-size") = "35px"
+            lblCreditCardError_Detail.Style("font-size") = "30px"
+            lblCreditCardError_btn.Style("font-size") = "30px"
+
+            lblCashTimeOut_Header.Style("font-size") = "35px"
+            lblCashTimeOut_Detail.Style("font-size") = "30px"
+            lblCashTimeOut_btn.Style("font-size") = "30px"
+
+            lblCashTimeOut_Header2.Style("font-size") = "35px"
+            lblCashTimeOut_Detail2.Style("font-size") = "30px"
+            lblCashTimeOut_btn2.Style("font-size") = "30px"
+
         Else
             lblUI_Credit.Style("font-size") = "30px"
             lblUI_Debit.Attributes("style") = "font-size: 30px;margin-top: 30px;"

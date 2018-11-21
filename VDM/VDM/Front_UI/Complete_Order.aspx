@@ -83,7 +83,7 @@
 
                                        <%-- <h5 class="margin-re true-m"><asp:Label ID="lblUI_Plese_Pick" runat="server" Text="กรุณารับสินค้าภายใน"></asp:Label></h5>--%>
 
-                                        <h4 class="margin-re true-m"><asp:Label ID="lblUI_Wait" runat="server" Text="กรุณารอสักครู่..."></asp:Label></h4>
+                                        <h4 class="margin-re true-m"><asp:Label ID="lblUI_Wait" runat="server" Text="กรุณารอสักครู่…"></asp:Label></h4>
                                         <%--<br />
                                         <h4 class="margin-re true-m">0<asp:Label ID="lblUI_Minuted" runat="server" Text="กรุณารอสักครู่..."></asp:Label></h4>--%>
                                     </div>
@@ -177,11 +177,11 @@
 
                     <div id="popupCannotRegister" class="popup">
                         <div class="popup-frame">
-                            <h3 class="true-m" id="idCardAlertReason">ขออภัย ระบบไม่สามารถลงทะเบียนซิมได้</h3>
+                            <h3 class="true-m" id="idCardAlertReason"><asp:Label ID="lblpopupCannotRegister_Header" runat="server" Text ="ขออภัย ระบบไม่สามารถลงทะเบียนซิมได้"></asp:Label></h3>
                             <div class="icon"><img src="images/Popup/icon-warning-face-gif.gif" /></div>
                             <h4 class="true-b"><asp:Label ID="lblMSG" runat ="server" ></asp:Label></h4>
                             <div class="bottom">
-                                <a class="btu true-l" id="lnkprint" runat="server">ตกลง</a>
+                                <a class="btu true-l" id="lnkprint" runat="server"><asp:Label ID="lblpopupCannotRegister_btn" runat="server" Text ="ตกลง"></asp:Label></a>
                             </div>
                         </div>
                     </div>

@@ -52,6 +52,8 @@
         Session.Remove("Customer_IDCard")
         Session.Remove("Customer_Passport")
 
+        Session.Remove("ssPickUpSIM")
+        Session.Remove("ssCashTimeout")
 
         ''----Image 
         If POSTER_TYPE = "MP4" Then

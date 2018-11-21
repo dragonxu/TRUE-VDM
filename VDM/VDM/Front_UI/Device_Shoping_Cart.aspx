@@ -104,27 +104,8 @@
                             <h2 class="true-m"><asp:Label ID="lblUI_Term" runat="server" Text ="Term & Condition"></asp:Label></h2>
                             <div class="frame" style="height: 380px;">
                                 <span id="content-d3" class="light" style="height:340px; overflow:hidden;">
-                                    <p class="true-l">
-                                        ข้อกำหนดและเงื่อนไขรายการส่งเสริมการขาย 4G+ FUN Unlimited 299, 4G+ FUN Unlimited 399, 4G+ FUN Unlimited 499, 4G+ FUN Unlimited 599, 4G+ FUN Unlimited 699, 4G+ FUN Unlimited 899, 4G+ FUN Unlimited 1099, 4G+ FUN Unlimited 1299, 4G+ FUN Unlimited 1499, และ 4G+ FUN Unlimited 1899
-                                        <br />
-                                        <br />
-                                        1. รายการส่งเสริมการขายนี้ สำหรับผู้สมัครใช้บริการเลขหมายใหม่โทรศัพท์เคลื่อนที่ ทรูมูฟ เอช ของบริษัท เรียล มูฟ จำกัด (“เรียลมูฟ”) ระบบรายเดือน ในนามบุคคลธรรมดา ตั้งแต่วันที่ 6 กุมภาพันธ์ 2559 ถึง 31 มีนาคม 2561 หรือจนกว่าจะมีการเปลี่ยนแปลง
-                                        <br />
-                                        2. รายละเอียดรายการส่งเสริมการขาย: อัตราค่าบริการยังไม่รวมภาษีมูลค่าเพิ่ม<br />
-                                        2.1 รายการส่งเสริมการขาย 4G+ FUN Unlimited 299<br />
-                                        สิทธิตามแพ็กเกจปกติ:<br />
-                                        คิดอัตราค่าใช้บริการเหมาจ่ายขั้นต่ำรายเดือน 299 บาท ต่อเดือน ผู้ใช้บริการจะได้รับสิทธิใช้บริการ ดังนี้<br />
-                                        (1) โทรทุกเครือข่ายจำนวน 100 นาทีต่อเดือน<br />
-                                        (2) บริการ 4G ที่ความเร็วสูงสุด 300 เมกะบิตต่อวินาที (Mbps) และบริการ 3G/EDGE/GPRS ที่ความเร็วสูงสุด 42 เมกะบิตต่อวินาที (Mbps) เป็นจำนวน 1 กิกะไบต์ (GB)หลังจากนั้น จะใช้ได้ไม่จำกัดปริมาณที่ความเร็วสูงสุดไม่เกิน 128 กิโลบิตต่อวินาที (Kbps)<br />
-                                        (3) บริการ Wi-Fi ที่ความเร็วสูงสุด 200 เมกะไบต์ต่อวินาที (Mbps) ไม่จำกัดปริมาณการใช้งาน<br />
-                                        ได้ไม่จำกัดปริมาณการใช้งาน ที่ความเร็วสูงสุด 300 เมกะบิตต่อวินาที(Mbps)
-                                        <br />
-                                        <br />
-                                        เป็นระยะเวลา 12 เดือน (รอบบิล) ผ่าน URL ที่เป็นไปตามข้อกำหนดและเงื่อนไขการใช้งานของแต่ละบริการ
-                                        โดยสามารถรับไอเทมโค้ดได้ 1 ครั้ง
-                                                    ผ่านแอปพลิเคชัน TrueID โดยลูกค้าจะต้องไม่มียอดค้างชำระตั้งแต่รอบบิลแรกเป็นต้นไป กล่อง TMH Exclusive Legend ประกอบด้วย Dragon Master Zuka (Exclusive Skin) หรือ ชิ้นส่วนฮีโร่ 40 ชิ้น หรือ ชิ้นส่วนฮีโร่ 20 ชิ้น หรือ ชิ้นส่วนฮีโร่ 10 ชิ้น โดยลูกค้าจะได้รับไอเทมใดไอเทมหนึ่ง
-                                                    ไอเทมพิเศษที่ได้รับ มีจำนวนจำกัด ไม่สามารถแลกเปลี่ยนเป็นอย่างอื่นได้ บนโทรศัพท์เคลื่อนที่หรือแท๊บเล็ต ในกรณีที่ผู้ใช้บริการใช้ website อื่นหรือลิงค์หรือการแชร์ที่ปรากฏบนหน้าแอปพลิเคชันTrueID ผู้ใช้บริการจะต้องชำระค่าใช้บริการเพิ่มเติม(ถ้ามี)ตามอัตราที่ระบุในแพ็กเกจที่ผู้ใช้บริการเลือกใช้งานอยู่ ณ ขณะนั้น หรือหากในแพ็กเกจที่เลือกใช้ ไม่ได้ระบุไว้ ให้คิดค่าบริการตามเงื่อนไขที่บริษัทกำหนด
-                                        เฉพาะบริการภายในแอปพลิเคชันเกม ROV บนโทรศัพทํเคลื่อนที่ หรือแท๊บเล็ต ในกรณีที่ ผู้ใช้บริการใช้ website อื่นหรือลิงค์หรือการแชร์ที่ปรากฏบนหน้าแอปพลิเคชันเกม ROV ผู้ใช้บริการจะต้องชำระค่าใช้บริการเพิ่มเติม (ถ้ามี) ตามอัตราที่ระบุในแพ็คเกจที่ผู้ใช้บริการเลือกใช้งานอยู่ ณ ขณะนั้น หรือหากในแพ็คเกจที่เลือกใช้ ไม่ได้ระบุไว้ ให้คิดค่าบริการตามเงื่อนไขที่บริษัทกำหนด
+                                    <p id="p_term" runat ="server"  class="true-l" style ="width :unset ;">
+                                        <asp:Label ID="lblDescription" runat="server"></asp:Label>
                                     </p>
                                 </span>
                             </div>
@@ -222,49 +203,49 @@
 
         <div id="popupIDCard" class="popup" >
           <div class="popup-frame" >
-                <h3 class="true-m">ขั้นตอนการยืนยันตัวบุคคล</h3>
+                <h3 class="true-m"><asp:Label ID="lblpopupIDCard_Header" runat="server" Text ="ขั้นตอนการยืนยันตัวบุคคล"></asp:Label></h3>
                 <div class="icon"><img src="images/Popup/icon-idcard-gif.gif"/></div>
-                <h4 class="true-b" style="padding-bottom:30px;">กรุณาสอดบัตรประชาชนของท่าน</h4>
+                <h4 class="true-b" style="padding-bottom:30px;"><asp:Label ID="lblpopupIDCard_Detail" runat="server" Text ="กรุณาสอดบัตรประชาชนของท่าน"></asp:Label></h4>
           </div>
         </div>
-        <a id="clickIDCard" runat="server" style="display:none;" href="#popupIDCard">สั่งซื้อ</a>
+        <a id="clickIDCard" runat="server" style="display:none;" href="#popupIDCard"><asp:Label ID="lblpopupIDCard_btn" runat="server" Text ="สั่งซื้อ"></asp:Label></a>
 
         <div id="popupIDCardAlert" class="popup" >
             <div class="popup-frame" >
-                <h3 class="true-m" id="idCardAlertReason">xxxxxxxxxxxxxxxx</h3>
+                <h3 class="true-m" id="idCardAlertReason"><asp:Label ID="lblpopupIDCardAlert_Header" runat="server" Text ="xxxxxxxxxxxxxxxx"></asp:Label></h3>
                 <div class="icon"><img src="images/Popup/icon-idcard-alert-gif.gif"/></div>
-                <h4 class="true-b">กรุณาเสียบบัตรใหม่</h4>
-                <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;">ตกลง</a></div>
+                <h4 class="true-b"><asp:Label ID="lblpopupIDCardAlert_Detail" runat="server" Text ="กรุณาเสียบบัตรใหม่"></asp:Label>กรุณาเสียบบัตรใหม่</h4>
+                <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;"><asp:Label ID="lblpopupIDCardAlert_btn" runat="server" Text ="ตกลง"></asp:Label></a></div>
             </div>
         </div>
         <a id="clickIDCardAlert" runat="server" style="display:none;"  href="#popupIDCardAlert">Click</a>
 
         <div id="popupIDCardCross" class="popup" >
             <div class="popup-frame" >
-                <h3 class="true-m" id="idCardCrossReason">xxxxxxxxxxxxxxxxx</h3>
+                <h3 class="true-m" id="idCardCrossReason"><asp:Label ID="lblpopupIDCardCross_Header" runat="server" Text ="xxxxxxxxxxxxxxxx"></asp:Label></h3>
                 <div class="icon"><img src="images/Popup/icon-idcard-cross-gif.gif"/></div>
-                <h4 class="true-b">กรุณาเปลี่ยนบัตรใหม่</h4>
-                <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;">ตกลง</a></div>
+                <h4 class="true-b"><asp:Label ID="lblpopupIDCardCross_Detail" runat="server" Text ="กรุณาเปลี่ยนบัตรใหม่"></asp:Label></h4>
+                <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;"><asp:Label ID="lblpopupIDCardCross_btn" runat="server" Text ="ตกลง"></asp:Label></a></div>
             </div>
         </div>
         <a id="clickIDCardCross" runat="server" style="display:none;"  href="#popupIDCardCross">Click</a>
 
         <div id="popupPassportAlert" class="popup" >
             <div class="popup-frame" >
-                <h3 class="true-m" id="passportAlertReason">xxxxxxxxxxxxxxxx</h3>
+                <h3 class="true-m" id="passportAlertReason"><asp:Label ID="lblpopupPassportAlert_Header" runat="server" Text ="xxxxxxxxxxxxxxxx"></asp:Label></h3>
                 <div class="icon"><img src="images/Popup/icon-idcard-alert-gif.gif"/></div>
-                <h4 class="true-b">Please try again</h4>
-                <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;">OK</a></div>
+                <h4 class="true-b"><asp:Label ID="lblpopupPassportAlert_Detail" runat="server" Text ="Please try again"></asp:Label></h4>
+                <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;"><asp:Label ID="lblpopupPassportAlert_btn" runat="server" Text ="OK"></asp:Label></a></div>
             </div>
         </div>
         <a id="clickPassportAlert" runat="server" style="display:none;"  href="#popupPassportAlert">Click</a>
 
         <div id="popupPassportCross" class="popup" >
             <div class="popup-frame" >
-                <h3 class="true-m" id="passportCrossReason">xxxxxxxxxxxxxxxxx</h3>
+                <h3 class="true-m" id="passportCrossReason"><asp:Label ID="lblpopupPassportCross_Header" runat="server" Text ="xxxxxxxxxxxxxxxx"></asp:Label></h3>
                 <div class="icon"><img src="images/Popup/icon-idcard-cross-gif.gif"/></div>
-                <h4 class="true-b">Please try another document</h4>
-                <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;">OK</a></div>
+                <h4 class="true-b"><asp:Label ID="lblpopupPassportCross_Detail" runat="server" Text ="Please try another document"></asp:Label></h4>
+                <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;"><asp:Label ID="lblpopupPassportCross_btn" runat="server" Text ="OK"></asp:Label></a></div>
             </div>
         </div>
         <a id="clickPassportCross" runat="server" style="display:none;"  href="#popupPassportCross">Click</a>
@@ -272,15 +253,15 @@
 
         <div id="popupSlip" class="popup">
             <div class="popup-frame">
-                <h3 class="true-m half">หากท่านต้องการ<br />
-                    ใบเสร็จรับเงินฉบับจริง<br />
-                    หรือใบกำกับภาษี</h3>
+                <h3 class="true-m half"><asp:Label ID="lblpopupSlip_Header" runat="server" Text ="หากท่านต้องการ<br />ใบเสร็จรับเงินฉบับจริง<br />หรือใบกำกับภาษี"></asp:Label></h3>
+<%--                <h3 class="true-m half">หากท่านต้องการ<br />ใบเสร็จรับเงินฉบับจริง<br />หรือใบกำกับภาษี</h3>--%>
+
                 <div class="icon half">
                     <img src="images/popup/icon-Tax-gif.gif" />
                 </div>
-                <h4 class="true-b">กรุณาติดต่อพนักงานก่อนทำรายการ</h4>
+                <h4 class="true-b"><asp:Label ID="lblpopupSlip_Detail" runat="server" Text ="กรุณาติดต่อพนักงานก่อนทำรายการ"></asp:Label></h4>
                 <div class="bottom">  
-                   <div class="bottom"><a id="btnNextSlip" runat="server" class="btu true-l">ดำเนินการต่อ</a></div> 
+                   <div class="bottom"><a id="btnNextSlip" runat="server" class="btu true-l"><asp:Label ID="lblpopupSlip_btn" runat="server" Text ="ดำเนินการต่อ"></asp:Label></a></div> 
                 </div>
             </div>
         </div>
@@ -311,6 +292,8 @@
                 $.mCustomScrollbar.defaults.scrollButtons.enable = true; //enable scrolling buttons by default
                 $.mCustomScrollbar.defaults.axis = "yx"; //enable 2 axis scrollbars by default
                 $("#content-d3").mCustomScrollbar({ theme: "dark-3" });
+                $("#content-d4").mCustomScrollbar({ theme: "dark-3" });
+
             });
         })(jQuery);
     </script>

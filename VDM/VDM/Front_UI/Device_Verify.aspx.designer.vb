@@ -300,4 +300,76 @@ Partial Public Class Device_Verify
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnFace_Recognition As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''lblpopupVerifing_Header control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupVerifing_Header As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblpopupVerifing_Detail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupVerifing_Detail As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblpopupCannotVerify_Header control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupCannotVerify_Header As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblpopupCannotVerify_Detail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupCannotVerify_Detail As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblpopupCannotVerify_btn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupCannotVerify_btn As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblpopupNetworkProblem_Header control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupNetworkProblem_Header As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblpopupNetworkProblem_Detail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupNetworkProblem_Detail As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblpopupNetworkProblem_btn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupNetworkProblem_btn As Global.System.Web.UI.WebControls.Label
 End Class

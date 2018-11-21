@@ -247,6 +247,7 @@ Public Class Complete_Order
 
             txtLocalControllerURL.Text = BL.LocalControllerURL
             DT_CONTROL = UI_CONTROL()
+            DT_CONTROL_POPUP = UI_CONTROL_POPUP()
             Bind_CONTROL()
             Dim DT As DataTable = BL.Get_Kiosk_Current_Shift(KO_ID)
             If DT.Rows.Count > 0 Then
@@ -285,8 +286,18 @@ Public Class Complete_Order
             End Try
         End Get
     End Property
-
     Dim DT_CONTROL As DataTable
+
+    Private ReadOnly Property UI_CONTROL_POPUP As DataTable  '------------- เอาไว้ดึงข้อมูล UI ----------
+        Get
+            Try
+                Return BL.GET_MS_UI_CONTROL_POPUP(LANGUAGE)
+            Catch ex As Exception
+                Return Nothing
+            End Try
+        End Get
+    End Property
+    Dim DT_CONTROL_POPUP As DataTable
 
     Public Sub Bind_CONTROL()
 
@@ -307,6 +318,12 @@ Public Class Complete_Order
             DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblUI_Wait.Text & "'"
             lblUI_Wait.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblUI_Wait.Text)
 
+            '===UI_CONTROL_POPUP===
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupCannotRegister_Header' "
+            lblpopupCannotRegister_Header.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupCannotRegister_Header.Text)
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupCannotRegister_btn' "
+            lblpopupCannotRegister_btn.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupCannotRegister_btn.Text)
+
         End If
 
         If LANGUAGE > VDM_BL.UILanguage.EN Then
@@ -315,6 +332,10 @@ Public Class Complete_Order
             lblUI_COMPLETEORDER.CssClass = "t-complete t-red  true-b UI"
             lblUI_Complete.CssClass = "UI"
             lblUI_Wait.CssClass = "UI"
+
+            lblpopupCannotRegister_Header.Style("font-size") = "35px"
+            lblpopupCannotRegister_btn.Style("font-size") = "30px"
+
         End If
     End Sub
 

@@ -2497,7 +2497,57 @@ Public Class VDM_BL
         DA.Fill(DT)
         Return DT
     End Function
+
+    Public Function GET_MS_UI_CONTROL_POPUP(ByVal LANGUAGE As UILanguage)
+        Dim SQL As String = "SELECT  PAGE_CODE,CONTROL_ID"
+        SQL &= " ,DISPLAY_" & Get_Language_Code(LANGUAGE) & " DISPLAY"
+        SQL &= " FROM MS_UI_CONTROL_POPUP"
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        DA.Fill(DT)
+        Return DT
+    End Function
+
+    Public Function GET_MS_TERM_CONDITION(ByVal LANGUAGE As UILanguage, ByVal PAGE_TYPE As String)
+        Dim SQL As String = "SELECT  PAGE_CODE,CONTROL_ID"
+        SQL &= " ,DISPLAY_" & Get_Language_Code(LANGUAGE) & " DISPLAY"
+        SQL &= " FROM MS_TERM_CONDITION"
+        SQL &= " WHERE PAGE_TYPE='" & PAGE_TYPE & "'"
+        Dim DT As New DataTable
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        DA.Fill(DT)
+        Return DT
+    End Function
 #End Region
 
+
+
+#Region "DLL"
+
+    Public Sub BindDDlShop_Code(ByRef ddl As DropDownList, Optional ByVal SelectedValue As Integer = -1)
+
+        Dim SQL As String = "SELECT * ,ISNULL(SITE_CODE +' :'+ SITE_NAME_TH,SITE_CODE)  FULL_SITE_NAME  FROM VW_ALL_SITE ORDER BY SITE_CODE"
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+
+        ddl.Items.Clear()
+        ddl.Items.Add(New ListItem("", 0))
+        For i As Integer = 0 To DT.Rows.Count - 1
+            Dim Item As New ListItem(DT.Rows(i).Item("FULL_SITE_NAME"), DT.Rows(i).Item("SITE_CODE"))
+            ddl.Items.Add(Item)
+        Next
+
+        ddl.SelectedIndex = 0
+        For i As Integer = 0 To ddl.Items.Count - 1
+            If ddl.Items(i).Value.ToString = SelectedValue.ToString Then
+                ddl.SelectedIndex = i
+                Exit For
+            End If
+        Next
+
+    End Sub
+
+#End Region
 
 End Class

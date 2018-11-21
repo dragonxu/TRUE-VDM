@@ -100,6 +100,7 @@ Public Class Device_Verify
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             DT_CONTROL = UI_CONTROL()
+            DT_CONTROL_POPUP = UI_CONTROL_POPUP()
             Bind_CONTROL()
             BindSIM()
             SEQ_Face_Recognition = 1
@@ -152,6 +153,17 @@ Public Class Device_Verify
         End Get
     End Property
     Dim DT_CONTROL As DataTable
+    Private ReadOnly Property UI_CONTROL_POPUP As DataTable  '------------- เอาไว้ดึงข้อมูล UI ----------
+        Get
+            Try
+                Return BL.GET_MS_UI_CONTROL_POPUP(LANGUAGE)
+            Catch ex As Exception
+                Return Nothing
+            End Try
+        End Get
+    End Property
+    Dim DT_CONTROL_POPUP As DataTable
+
     Public Sub Bind_CONTROL()
         On Error Resume Next
         If LANGUAGE > VDM_BL.UILanguage.TH Then
@@ -172,6 +184,26 @@ Public Class Device_Verify
             DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & lblCurrency_Str.Text & "'"
             lblCurrency_Str.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, lblCurrency_Str.Text)
 
+            '===UI_CONTROL_POPUP===
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupVerifing_Header' "
+            lblpopupVerifing_Header.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupVerifing_Header.Text)
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupVerifing_Detail' "
+            lblpopupVerifing_Detail.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupVerifing_Detail.Text)
+
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupCannotVerify_Header' "
+            lblpopupCannotVerify_Header.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupCannotVerify_Header.Text)
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupCannotVerify_Detail' "
+            lblpopupCannotVerify_Detail.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupCannotVerify_Detail.Text)
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupCannotVerify_btn' "
+            lblpopupCannotVerify_btn.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupCannotVerify_btn.Text)
+
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupNetworkProblem_Header' "
+            lblpopupNetworkProblem_Header.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupNetworkProblem_Header.Text)
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupNetworkProblem_Detail' "
+            lblpopupNetworkProblem_Detail.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupNetworkProblem_Detail.Text)
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupNetworkProblem_btn' "
+            lblpopupNetworkProblem_btn.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupNetworkProblem_btn.Text)
+
         End If
 
 
@@ -182,6 +214,17 @@ Public Class Device_Verify
             lblPrice_str.CssClass = "UI"
             lblCurrency_Str.CssClass = "UI"
 
+            '===UI_CONTROL_POPUP===
+            lblpopupVerifing_Header.Style("font-size") = "35px"
+            lblpopupVerifing_Detail.Style("font-size") = "30px"
+
+            lblpopupCannotVerify_Header.Style("font-size") = "35px"
+            lblpopupCannotVerify_Detail.Style("font-size") = "30px"
+            lblpopupCannotVerify_btn.Style("font-size") = "30px"
+
+            lblpopupNetworkProblem_Header.Style("font-size") = "35px"
+            lblpopupNetworkProblem_Detail.Style("font-size") = "30px"
+            lblpopupNetworkProblem_btn.Style("font-size") = "30px"
         End If
 
     End Sub

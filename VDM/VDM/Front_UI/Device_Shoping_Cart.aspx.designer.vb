@@ -158,6 +158,24 @@ Partial Public Class Device_Shoping_Cart
     Protected WithEvents lblUI_Term As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''p_term control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents p_term As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''lblDescription control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblDescription As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''UDPTerm control.
     '''</summary>
     '''<remarks>
@@ -590,6 +608,24 @@ Partial Public Class Device_Shoping_Cart
     Protected WithEvents btnKeepInfo As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
+    '''lblpopupIDCard_Header control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupIDCard_Header As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblpopupIDCard_Detail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupIDCard_Detail As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''clickIDCard control.
     '''</summary>
     '''<remarks>
@@ -597,6 +633,42 @@ Partial Public Class Device_Shoping_Cart
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents clickIDCard As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''lblpopupIDCard_btn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupIDCard_btn As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblpopupIDCardAlert_Header control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupIDCardAlert_Header As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblpopupIDCardAlert_Detail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupIDCardAlert_Detail As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblpopupIDCardAlert_btn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupIDCardAlert_btn As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''clickIDCardAlert control.
@@ -608,6 +680,33 @@ Partial Public Class Device_Shoping_Cart
     Protected WithEvents clickIDCardAlert As Global.System.Web.UI.HtmlControls.HtmlAnchor
     
     '''<summary>
+    '''lblpopupIDCardCross_Header control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupIDCardCross_Header As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblpopupIDCardCross_Detail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupIDCardCross_Detail As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblpopupIDCardCross_btn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupIDCardCross_btn As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''clickIDCardCross control.
     '''</summary>
     '''<remarks>
@@ -615,6 +714,33 @@ Partial Public Class Device_Shoping_Cart
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents clickIDCardCross As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''lblpopupPassportAlert_Header control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupPassportAlert_Header As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblpopupPassportAlert_Detail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupPassportAlert_Detail As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblpopupPassportAlert_btn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupPassportAlert_btn As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''clickPassportAlert control.
@@ -626,6 +752,33 @@ Partial Public Class Device_Shoping_Cart
     Protected WithEvents clickPassportAlert As Global.System.Web.UI.HtmlControls.HtmlAnchor
     
     '''<summary>
+    '''lblpopupPassportCross_Header control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupPassportCross_Header As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblpopupPassportCross_Detail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupPassportCross_Detail As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblpopupPassportCross_btn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupPassportCross_btn As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''clickPassportCross control.
     '''</summary>
     '''<remarks>
@@ -635,6 +788,24 @@ Partial Public Class Device_Shoping_Cart
     Protected WithEvents clickPassportCross As Global.System.Web.UI.HtmlControls.HtmlAnchor
     
     '''<summary>
+    '''lblpopupSlip_Header control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupSlip_Header As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblpopupSlip_Detail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupSlip_Detail As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''btnNextSlip control.
     '''</summary>
     '''<remarks>
@@ -642,6 +813,15 @@ Partial Public Class Device_Shoping_Cart
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnNextSlip As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''lblpopupSlip_btn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupSlip_btn As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''lnkSlip control.

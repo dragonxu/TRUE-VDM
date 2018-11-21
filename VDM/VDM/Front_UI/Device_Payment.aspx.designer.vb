@@ -626,6 +626,15 @@ Partial Public Class Device_Payment
     Protected WithEvents btnCloseCredit As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
+    '''lblTrueMoneyError_Header control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTrueMoneyError_Header As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''lblTMNPaymentCode control.
     '''</summary>
     '''<remarks>
@@ -633,6 +642,105 @@ Partial Public Class Device_Payment
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblTMNPaymentCode As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblTrueMoneyError_Detail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTrueMoneyError_Detail As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblTrueMoneyError_btn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTrueMoneyError_btn As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblCreditCardError_Header control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblCreditCardError_Header As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblCreditCardError_Detail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblCreditCardError_Detail As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblCreditCardError_btn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblCreditCardError_btn As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblCashTimeOut_Header control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblCashTimeOut_Header As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblCashTimeOut_Detail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblCashTimeOut_Detail As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblCashTimeOut_btn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblCashTimeOut_btn As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblCashTimeOut_Header2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblCashTimeOut_Header2 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblCashTimeOut_Detail2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblCashTimeOut_Detail2 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblCashTimeOut_btn2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblCashTimeOut_btn2 As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''CommonUI control.

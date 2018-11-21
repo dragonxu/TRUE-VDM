@@ -23,6 +23,69 @@ Partial Public Class Report_TMS_EDI
     Protected WithEvents lblUser_ID As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''udpSearch control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents udpSearch As Global.System.Web.UI.UpdatePanel
+    
+    '''<summary>
+    '''ddlService control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlService As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''ddlShop_Name control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlShop_Name As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''txtStartDate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtStartDate As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''txtStartDate_CalendarExtender control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtStartDate_CalendarExtender As Global.AjaxControlToolkit.CalendarExtender
+    
+    '''<summary>
+    '''btnApply control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnApply As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''lnkExcel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkExcel As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''udpReport control.
     '''</summary>
     '''<remarks>
@@ -50,47 +113,47 @@ Partial Public Class Report_TMS_EDI
     Protected WithEvents rptData As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
-    '''lbl_SUM_Trans_Total control.
+    '''lblSUM_Cash control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbl_SUM_Trans_Total As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblSUM_Cash As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lbl_SUM_Trans_Success control.
+    '''lblSUM_TMN_Wallet control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbl_SUM_Trans_Success As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblSUM_TMN_Wallet As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lbl_SUM_Qty_Success control.
+    '''lblSUM_Credit_Card control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbl_SUM_Qty_Success As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblSUM_Credit_Card As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lbl_SUM_Qty_Total control.
+    '''lblSUM_QtyTotal control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbl_SUM_Qty_Total As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblSUM_QtyTotal As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lbl_SUM_Value control.
+    '''lblSUM_Value control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbl_SUM_Value As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblSUM_Value As Global.System.Web.UI.WebControls.Label
 End Class

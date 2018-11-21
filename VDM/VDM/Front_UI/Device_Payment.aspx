@@ -290,26 +290,25 @@
                 <!-----Popup------>
                 <div id="TrueMoneyError" class="popup">
                     <div class="popup-frame">
-                        <h3 class="true-m">ท่านไม่สามารถชำระค่าบริการ<br />
-                            ผ่านช่องทางนี้ได้</h3>
+                        <h3 class="true-m"><asp:Label ID="lblTrueMoneyError_Header" runat="server" Text ="ท่านไม่สามารถชำระค่าบริการ<br />ผ่านช่องทางนี้ได้"></asp:Label> </h3>
                         <div class="icon">
                             <img src="images/Popup/icon-truemoneyError-gif.gif" /></div>
                         <h4 class="true-b small" style="font-size: 30px;">PAYMENT CODE :
                             <asp:Label ID="lblTMNPaymentCode" runat="server"></asp:Label><br>
                         </h4>
-                        <h4 class="true-b">กรุณาติดต่อพนักงาน</h4>
-                        <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;">ตกลง</a></div>
+                        <h4 class="true-b"><asp:Label ID="lblTrueMoneyError_Detail" runat="server" Text ="กรุณาติดต่อพนักงาน"></asp:Label></h4>
+                        <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close();" href="javascript:;"><asp:Label ID="lblTrueMoneyError_btn" runat="server" Text ="ตกลง"></asp:Label></a></div>
                     </div>
                 </div>
                 <a id="lnkTrueMoneyError" href="#TrueMoneyError" style="display: none;" >True Money Error</a>
 
                 <div id="CreditCardError" class="popup">
                     <div class="popup-frame">
-                        <h3 class="true-m">บัตรเครดิตของท่านไม่สามารถทำรายการได้</h3>
+                        <h3 class="true-m"><asp:Label ID="lblCreditCardError_Header" runat="server" Text ="บัตรเครดิตของท่านไม่สามารถทำรายการได้"></asp:Label></h3>
                         <div class="icon">
                             <img src="images/Popup/icon-creditError-gif.gif" /></div>
-                        <h4 class="true-b">กรุณาเปลี่ยนบัตรใหม่</h4>
-                        <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close(); closeCredit();" href="javascript:;">ตกลง</a></div>
+                        <h4 class="true-b"><asp:Label ID="lblCreditCardError_Detail" runat="server" Text ="กรุณาเปลี่ยนบัตรใหม่"></asp:Label></h4>
+                        <div class="bottom"><a class="btu true-l" onclick="$.fancybox.close(); closeCredit();" href="javascript:;"><asp:Label ID="lblCreditCardError_btn" runat="server" Text ="ตกลง"></asp:Label></a></div>
                     </div>
                 </div>
                 <a id="lnkCreditCardError" href="#CreditCardError" style="display: none;">Credit Card Error</a>
@@ -317,23 +316,23 @@
 
                 <div id="CashTimeOut" class="popup">
                     <div class="popup-frame">
-                        <h3 class="true-m">ชำระเกินระยะเวลาที่กำหนด</h3>
+                        <h3 class="true-m"><asp:Label ID="lblCashTimeOut_Header" runat="server" Text ="ชำระเกินระยะเวลาที่กำหนด"></asp:Label></h3>
                         <div class="icon">
                             <img src="images/Popup/icon-cash-error-gif.gif" /></div>
-                        <h4 class="true-b">เริ่มใหม่</h4>
-                        <div class="bottom"><a class="btu true-l" onclick="location.href=location.href;" href="javascript:;">ตกลง</a></div>
+                        <h4 class="true-b"><asp:Label ID="lblCashTimeOut_Detail" runat="server" Text ="เริ่มใหม่"></asp:Label></h4>
+                        <div class="bottom"><a class="btu true-l" onclick="location.href=location.href;" href="javascript:;"><asp:Label ID="lblCashTimeOut_btn" runat="server" Text ="ตกลง"></asp:Label></a></div>
                     </div>
                 </div>
                 <a id="lnkCashTimeOut" href="#CashTimeOut" style="display: none;">Cash TimeOut</a>
 
                 <div id="CashError" class="popup">
                     <div class="popup-frame">
-                        <h3 class="true-m">ชำระเกินระยะเวลาที่กำหนด</h3>
+                        <h3 class="true-m"><asp:Label ID="lblCashTimeOut_Header2" runat="server" Text ="ชำระเกินระยะเวลาที่กำหนด"></asp:Label></h3>
                         <div class="icon">
                             <img src="images/Popup/icon-cash-error-gif.gif" /></div>
 
-                        <h4 class="true-b">กรุณาติดต่อพนักงาน</h4>
-                        <div class="bottom"><a class="btu true-l" href="javascript:;">ตกลง</a></div>
+                        <h4 class="true-b"><asp:Label ID="lblCashTimeOut_Detail2" runat="server" Text ="กรุณาติดต่อพนักงาน"></asp:Label></h4>
+                        <div class="bottom"><a class="btu true-l" href="javascript:;"><asp:Label ID="lblCashTimeOut_btn2" runat="server" Text ="ตกลง"></asp:Label></a></div>
                     </div>
                 </div>
                 <a id="lnkCashError" href="#CashError" style="display: none;">Cash Error</a>

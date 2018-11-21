@@ -173,27 +173,27 @@
 
         <div id="popupVerifing" class="popup">
           <div class="popup-frame">
-            <h3 class="true-m">กำลังตรวจสอบความตรงกันของใบหน้า</h3>
+            <h3 class="true-m"><asp:Label ID="lblpopupVerifing_Header" runat="server" Text ="กำลังตรวจสอบความตรงกันของใบหน้า"></asp:Label></h3>
             <div class="icon"><img src="images/Popup/icon-scanface-gif.gif"/></div>
-            <h4 class="true-b">กรุณารอสักครู่</h4>
+            <h4 class="true-b"><asp:Label ID="lblpopupVerifing_Detail" runat="server" Text ="กรุณารอสักครู่"></asp:Label></h4>
           </div>
         </div><a id="clickVerifing" href="#popupVerifing" style="display:none;">Click</a>
 
         <div id="popupCannotVerify" class="popup">
             <div class="popup-frame" >
-                <h3 class="true-m" id="idCardAlertReason">ขออภัย ใบหน้าไม่ตรงกับบัตร</h3>
+                <h3 class="true-m" id="idCardAlertReason"><asp:Label ID="lblpopupCannotVerify_Header" runat="server" Text ="ขออภัย ใบหน้าไม่ตรงกับบัตร"></asp:Label></h3>
                 <div class="icon"><img src="images/Popup/icon-warning-face-gif.gif"/></div>
-                <h4 class="true-b">กรุณาสแกนใบหน้าอีกครั้ง</h4>
-                <div class="bottom"><a class="btu true-l" onclick="backToScan();" href="javascript:;">ตกลง</a></div>
+                <h4 class="true-b"><asp:Label ID="lblpopupCannotVerify_Detail" runat="server" Text ="กรุณาสแกนใบหน้าอีกครั้ง"></asp:Label></h4>
+                <div class="bottom"><a class="btu true-l" onclick="backToScan();" href="javascript:;"><asp:Label ID="lblpopupCannotVerify_btn" runat="server" Text ="ตกลง"></asp:Label></a></div>
             </div>
         </div> <a id="clickCannotVerify" href="#popupCannotVerify" style="display:none;">Click</a>
  
         <div id="popupNetworkProblem" class="popup">
             <div class="popup-frame" >
-                <h3 class="true-m" id="idCardAlertReason">ไม่สามารถเชื่อมต่อระบบเครือข่าย</h3>
+                <h3 class="true-m" id="idCardAlertReason"><asp:Label ID="lblpopupNetworkProblem_Header" runat="server" Text ="ไม่สามารถเชื่อมต่อระบบเครือข่าย"></asp:Label></h3>
                 <div class="icon"><img src="images/Popup/icon-warning-face-gif.gif"/></div>
-                <h4 class="true-b">กรุณาสแกนใบหน้าอีกครั้ง</h4>
-                <div class="bottom"><a class="btu true-l" onclick="backToScan();" href="javascript:;">ตกลง</a></div>
+                <h4 class="true-b"><asp:Label ID="lblpopupNetworkProblem_Detail" runat="server" Text ="กรุณาสแกนใบหน้าอีกครั้ง"></asp:Label></h4>
+                <div class="bottom"><a class="btu true-l" onclick="backToScan();" href="javascript:;"><asp:Label ID="lblpopupNetworkProblem_btn" runat="server" Text ="ตกลง"></asp:Label></a></div>
             </div>
         </div> <a id="clickNetworkProblem" href="#popupNetworkProblem" style="display:none;">Click</a>
 

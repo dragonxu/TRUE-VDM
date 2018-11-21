@@ -284,6 +284,15 @@ Partial Public Class Complete_Order
     Protected WithEvents Message As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''lblpopupCannotRegister_Header control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupCannotRegister_Header As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''lblMSG control.
     '''</summary>
     '''<remarks>
@@ -300,6 +309,15 @@ Partial Public Class Complete_Order
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lnkprint As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''lblpopupCannotRegister_btn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblpopupCannotRegister_btn As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''UC_CommonUI control.

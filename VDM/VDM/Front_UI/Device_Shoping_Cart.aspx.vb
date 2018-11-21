@@ -105,8 +105,10 @@ Public Class Device_Shoping_Cart
 
         If Not IsPostBack Then
             DT_CONTROL = UI_CONTROL()
+            DT_CONTROL_POPUP = UI_CONTROL_POPUP()
             Bind_CONTROL()
             ClearForm()
+            Bind_TERM_CONDITION()
             If PRODUCT_ID <> 0 Then
                 BindProduct()
             Else
@@ -133,6 +135,18 @@ Public Class Device_Shoping_Cart
         End Get
     End Property
     Dim DT_CONTROL As DataTable
+
+    Private ReadOnly Property UI_CONTROL_POPUP As DataTable  '------------- เอาไว้ดึงข้อมูล UI ----------
+        Get
+            Try
+                Return BL.GET_MS_UI_CONTROL_POPUP(LANGUAGE)
+            Catch ex As Exception
+                Return Nothing
+            End Try
+        End Get
+    End Property
+    Dim DT_CONTROL_POPUP As DataTable
+
     Public Sub Bind_CONTROL()
         On Error Resume Next
         If LANGUAGE > VDM_BL.UILanguage.TH Then
@@ -172,6 +186,43 @@ Public Class Device_Shoping_Cart
             DT_CONTROL.DefaultView.RowFilter = "DISPLAY_TH='" & btnVerify.Text & "'"
             btnVerify.Text = IIf(DT_CONTROL.DefaultView.Count > 0, DT_CONTROL.DefaultView(0).Item("DISPLAY").ToString, btnVerify.Text)
 
+
+            '===UI_CONTROL_POPUP===
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupSlip_Header' "
+            lblpopupSlip_Header.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupSlip_Header.Text)
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupSlip_Detail' "
+            lblpopupSlip_Detail.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupSlip_Detail.Text)
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupSlip_btn' "
+            lblpopupSlip_btn.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupSlip_btn.Text)
+
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupIDCard_Header' "
+            lblpopupIDCard_Header.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupIDCard_Header.Text)
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupIDCard_Detail' "
+            lblpopupIDCard_Detail.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupIDCard_Detail.Text)
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupIDCard_btn' "
+            lblpopupIDCard_btn.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupIDCard_btn.Text)
+
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupIDCardAlert_Detail' "
+            lblpopupIDCardAlert_Detail.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupIDCardAlert_Detail.Text)
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupIDCardAlert_btn' "
+            lblpopupIDCardAlert_btn.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupIDCardAlert_btn.Text)
+
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupIDCardCross_Detail' "
+            lblpopupIDCardCross_Detail.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupIDCardCross_Detail.Text)
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupIDCardCross_btn' "
+            lblpopupIDCardCross_btn.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupIDCardCross_btn.Text)
+
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupPassportAlert_Detail' "
+            lblpopupPassportAlert_Detail.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupPassportAlert_Detail.Text)
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupPassportAlert_btn' "
+            lblpopupPassportAlert_btn.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupPassportAlert_btn.Text)
+
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupPassportCross_Detail' "
+            lblpopupPassportCross_Detail.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupPassportCross_Detail.Text)
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupPassportCross_btn' "
+            lblpopupPassportCross_btn.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupPassportCross_btn.Text)
+
+
         End If
 
         If LANGUAGE > VDM_BL.UILanguage.EN Then
@@ -182,7 +233,60 @@ Public Class Device_Shoping_Cart
             lblPrice_str.CssClass = "UI"
             lblCurrency_Str.CssClass = "UI"
             lblUI_Accept.CssClass = "UI"
+
+            '===UI_CONTROL_POPUP===
+            lblpopupSlip_Header.Style("font-size") = "35px"
+            lblpopupSlip_Detail.Style("font-size") = "30px"
+            lblpopupSlip_btn.Style("font-size") = "30px"
+
+            lblpopupIDCard_Header.Style("font-size") = "35px"
+            lblpopupIDCard_Detail.Style("font-size") = "30px"
+            lblpopupIDCard_btn.Style("font-size") = "30px"
+
+            lblpopupIDCardAlert_Header.Style("font-size") = "35px"
+            lblpopupIDCardAlert_Detail.Style("font-size") = "30px"
+            lblpopupIDCardAlert_btn.Style("font-size") = "30px"
+
+            lblpopupIDCardCross_Header.Style("font-size") = "35px"
+            lblpopupIDCardCross_Detail.Style("font-size") = "30px"
+            lblpopupIDCardCross_btn.Style("font-size") = "30px"
+
+            lblpopupPassportAlert_Header.Style("font-size") = "35px"
+            lblpopupPassportAlert_Detail.Style("font-size") = "30px"
+            lblpopupPassportAlert_btn.Style("font-size") = "30px"
+
+            lblpopupPassportCross_Header.Style("font-size") = "35px"
+            lblpopupPassportCross_Detail.Style("font-size") = "30px"
+            lblpopupPassportCross_btn.Style("font-size") = "30px"
         End If
+    End Sub
+
+#End Region
+
+#Region "TERM_CONDITION"
+
+
+
+    Public Sub Bind_TERM_CONDITION()
+        Dim DT As DataTable
+        If PRODUCT_ID <> 0 Then
+            DT = BL.GET_MS_TERM_CONDITION(LANGUAGE, "PRODUCT")
+        Else
+            DT = BL.GET_MS_TERM_CONDITION(LANGUAGE, "SIM")
+        End If
+        If DT.Rows.Count > 0 Then
+            On Error Resume Next
+            If LANGUAGE > 0 Then
+                DT.DefaultView.RowFilter = "CONTROL_ID='lblDescription' "
+                lblDescription.Text = IIf(DT.DefaultView.Count > 0, DT.DefaultView(0).Item("DISPLAY").ToString, lblDescription.Text)
+            End If
+            If LANGUAGE > VDM_BL.UILanguage.EN Then
+                lblDescription.Style("line-height") = "35px"
+                lblDescription.Style("font-size") = "22px"
+            End If
+        End If
+
+
     End Sub
 
 #End Region
@@ -529,15 +633,30 @@ Public Class Device_Shoping_Cart
     End Sub
 
     Private Sub ResponseIDCardExpired()
+        lblpopupIDCardCross_Header.Text = "ขออภัย บัตรของท่านหมดอายุ"
+        On Error Resume Next
+        If LANGUAGE > VDM_BL.UILanguage.TH Then
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupIDCardCross_Header' "
+            lblpopupIDCardCross_Header.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupIDCardCross_Header.Text)
+        End If
+
         Dim Script As String = ""
-        Script &= "$('#idCardCrossReason').html('ขออภัย บัตรของท่านหมดอายุ');" & vbLf
+        Script &= "$('#idCardCrossReason').html('" & lblpopupIDCardCross_Header.Text & "');" & vbLf
         Script &= "$('#clickIDCardCross').click();" & vbLf
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "IDCardExpired", Script, True)
     End Sub
 
     Private Sub ResponseCannotReadIDCard()
+
+        lblpopupIDCardAlert_Header.Text = "ขออภัย ไม่สามารถอ่านบัตรประชาชนของท่านได้"
+        On Error Resume Next
+        If LANGUAGE > VDM_BL.UILanguage.TH Then
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupIDCardAlert_Header' "
+            lblpopupIDCardAlert_Header.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupIDCardAlert_Header.Text)
+        End If
+
         Dim Script As String = ""
-        Script &= "$('#idCardAlertReason').html('ขออภัย ไม่สามารถอ่านบัตรประชาชนของท่านได้');" & vbLf
+        Script &= "$('#idCardAlertReason').html('" & lblpopupIDCardAlert_Header.Text & "');" & vbLf    'Script &= "$('#idCardAlertReason').html('ขออภัย ไม่สามารถอ่านบัตรประชาชนของท่านได้');" & vbLf
         Script &= "$('#clickIDCardAlert').click();" & vbLf
         ' Auto ReScan
         Script &= "setTimeOut(function(){ $(""#clickIDCard"").click();requestIDCard();},1000);" & vbNewLine
@@ -546,8 +665,14 @@ Public Class Device_Shoping_Cart
     End Sub
 
     Private Sub ResponseCannotReadPassport()
+        lblpopupPassportAlert_Header.Text = "Cannot read your document"
+        On Error Resume Next
+        If LANGUAGE > VDM_BL.UILanguage.TH Then
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupPassportAlert_Header' "
+            lblpopupPassportAlert_Header.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupPassportAlert_Header.Text)
+        End If
         Dim Script As String = ""
-        Script &= "$('#passportAlertReason').html('Cannot read your document');" & vbLf
+        Script &= "$('#passportAlertReason').html('" & lblpopupPassportAlert_Header.Text & "');" & vbLf
         Script &= "$('#clickPassportAlert').click();" & vbLf
         ' Auto ReScan
         Script &= "setTimeOut(function(){ $(""#clickIDCard"").click();requestIDCard();},1000);" & vbNewLine
@@ -556,8 +681,14 @@ Public Class Device_Shoping_Cart
     End Sub
 
     Private Sub ResponsePassportExpired()
+        lblpopupPassportCross_Header.Text = "Your document has expired"
+        On Error Resume Next
+        If LANGUAGE > VDM_BL.UILanguage.TH Then
+            DT_CONTROL_POPUP.DefaultView.RowFilter = "CONTROL_ID='lblpopupPassportCross_Header' "
+            lblpopupPassportCross_Header.Text = IIf(DT_CONTROL_POPUP.DefaultView.Count > 0, DT_CONTROL_POPUP.DefaultView(0).Item("DISPLAY").ToString, lblpopupPassportCross_Header.Text)
+        End If
         Dim Script As String = ""
-        Script &= "$('#passportCrossReason').html('Your document has expired');" & vbLf
+        Script &= "$('#passportCrossReason').html('" & lblpopupPassportCross_Header.Text & "');" & vbLf
         Script &= "$('#clickPassportCross').click();" & vbLf
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "PassportExpired", Script, True)
     End Sub

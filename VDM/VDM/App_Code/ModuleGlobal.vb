@@ -508,4 +508,9 @@ Module ModuleGlobal
     End Function
 #End Region
 
+    Public Function FormatSystemDate(ByVal D As DateTime) As String
+        Return D.Year & "-" & D.Month.ToString.PadLeft(2, "0") & "-" & D.Day.ToString.PadLeft(2, "0")
+    End Function
+
+
 End Module
