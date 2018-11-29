@@ -475,8 +475,8 @@ Public Class UC_Shift_Recieve
             Sum = Sum + Val(lbl_Amount.Text.Replace(",", ""))
             Remain = Remain + Val(lbl_Remain.Text.Replace(",", ""))
         Next
-        lbl_SumCoinIn.Text = Val(Sum)
-        lbl_RemainCoinIn.Text = Val(Remain)
+        lbl_SumCashIn.Text = Val(Sum)
+        lbl_RemainCashIn.Text = Val(Remain)
 
         lblSum.Text = FormatNumber(Total, 0)
         Return DT
@@ -550,13 +550,21 @@ Public Class UC_Shift_Recieve
                     Else
                         DR = DT.Rows(0)
                     End If
+                    'Select Case Session("SHIFT_Status")
+                    '    Case VDM_BL.ShiftStatus.Close
+                    '        DR("CLOSE_BEFORE") = IIf(Val(DT_Data.Rows(i).Item("Current_Qty")) <> 0, Val(DT_Data.Rows(i).Item("Current_Qty")), DBNull.Value)
+                    '        DR("CLOSE_FINAL") = IIf(Val(DT_Data.Rows(i).Item("Remain")) <> 0, Val(DT_Data.Rows(i).Item("Remain")), DBNull.Value)
+                    '    Case VDM_BL.ShiftStatus.Open
+                    '        DR("OPEN_BEFORE") = IIf(Val(DT_Data.Rows(i).Item("Current_Qty")) <> 0, Val(DT_Data.Rows(i).Item("Current_Qty")), DBNull.Value)
+                    '        DR("OPEN_FINAL") = IIf(Val(DT_Data.Rows(i).Item("Remain")) <> 0, Val(DT_Data.Rows(i).Item("Remain")), DBNull.Value)
+                    'End Select
                     Select Case Session("SHIFT_Status")
                         Case VDM_BL.ShiftStatus.Close
-                            DR("CLOSE_BEFORE") = IIf(Val(DT_Data.Rows(i).Item("Current_Qty")) <> 0, Val(DT_Data.Rows(i).Item("Current_Qty")), DBNull.Value)
-                            DR("CLOSE_FINAL") = IIf(Val(DT_Data.Rows(i).Item("Remain")) <> 0, Val(DT_Data.Rows(i).Item("Remain")), DBNull.Value)
-                        Case VDM_BL.ShiftStatus.Open
                             DR("OPEN_BEFORE") = IIf(Val(DT_Data.Rows(i).Item("Current_Qty")) <> 0, Val(DT_Data.Rows(i).Item("Current_Qty")), DBNull.Value)
                             DR("OPEN_FINAL") = IIf(Val(DT_Data.Rows(i).Item("Remain")) <> 0, Val(DT_Data.Rows(i).Item("Remain")), DBNull.Value)
+                        Case VDM_BL.ShiftStatus.Open
+                            DR("CLOSE_BEFORE") = IIf(Val(DT_Data.Rows(i).Item("Current_Qty")) <> 0, Val(DT_Data.Rows(i).Item("Current_Qty")), DBNull.Value)
+                            DR("CLOSE_FINAL") = IIf(Val(DT_Data.Rows(i).Item("Remain")) <> 0, Val(DT_Data.Rows(i).Item("Remain")), DBNull.Value)
                     End Select
                     cmd = New SqlCommandBuilder(DA)
                     DA.Update(DT)
@@ -581,14 +589,23 @@ Public Class UC_Shift_Recieve
                     Else
                         DR = DT.Rows(0)
                     End If
+                    'Select Case Session("SHIFT_Status")
+                    '    Case VDM_BL.ShiftStatus.Close
+                    '        DR("CLOSE_BEFORE") = IIf(Val(DT_Data.Rows(i).Item("Current_Qty")) <> 0, Val(DT_Data.Rows(i).Item("Current_Qty")), DBNull.Value)
+                    '        DR("CLOSE_FINAL") = IIf(Val(DT_Data.Rows(i).Item("Remain")) <> 0, Val(DT_Data.Rows(i).Item("Remain")), DBNull.Value)
+                    '    Case VDM_BL.ShiftStatus.Open
+                    '        DR("OPEN_BEFORE") = IIf(Val(DT_Data.Rows(i).Item("Current_Qty")) <> 0, Val(DT_Data.Rows(i).Item("Current_Qty")), DBNull.Value)
+                    '        DR("OPEN_FINAL") = IIf(Val(DT_Data.Rows(i).Item("Remain")) <> 0, Val(DT_Data.Rows(i).Item("Remain")), DBNull.Value)
+                    'End Select
                     Select Case Session("SHIFT_Status")
-                        Case VDM_BL.ShiftStatus.Close
-                            DR("CLOSE_BEFORE") = IIf(Val(DT_Data.Rows(i).Item("Current_Qty")) <> 0, Val(DT_Data.Rows(i).Item("Current_Qty")), DBNull.Value)
-                            DR("CLOSE_FINAL") = IIf(Val(DT_Data.Rows(i).Item("Remain")) <> 0, Val(DT_Data.Rows(i).Item("Remain")), DBNull.Value)
-                        Case VDM_BL.ShiftStatus.Open
+                        Case VDM_BL.ShiftStatus.Close  '--ต้องเปิด
                             DR("OPEN_BEFORE") = IIf(Val(DT_Data.Rows(i).Item("Current_Qty")) <> 0, Val(DT_Data.Rows(i).Item("Current_Qty")), DBNull.Value)
                             DR("OPEN_FINAL") = IIf(Val(DT_Data.Rows(i).Item("Remain")) <> 0, Val(DT_Data.Rows(i).Item("Remain")), DBNull.Value)
+                        Case VDM_BL.ShiftStatus.Open
+                            DR("CLOSE_BEFORE") = IIf(Val(DT_Data.Rows(i).Item("Current_Qty")) <> 0, Val(DT_Data.Rows(i).Item("Current_Qty")), DBNull.Value)
+                            DR("CLOSE_FINAL") = IIf(Val(DT_Data.Rows(i).Item("Remain")) <> 0, Val(DT_Data.Rows(i).Item("Remain")), DBNull.Value)
                     End Select
+
                     cmd = New SqlCommandBuilder(DA)
                     DA.Update(DT)
                 Next

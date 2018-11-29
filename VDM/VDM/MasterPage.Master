@@ -115,19 +115,19 @@
             </a>
             <ul class="sub-menu">
               <li id="mnu_Report_Product_Input" runat="server">
-                <a href="javascript:;">                  
+                <a href="Report_Product_Input.aspx">                  
                   <i class="icon-docs"></i>
                   <span>การนำสินค้าเข้าเครื่อง</span>
                 </a>                
               </li>              
               <li id="mnu_Report_Product_Output" runat="server">
-                 <a href="javascript:;">                  
+                 <a href="Report_Product_Output.aspx">                  
                   <i class="icon-docs"></i>
                   <span>สินค้าออกจากเครื่อง</span>
                 </a>                
               </li>
               <li id="mnu_Report_Product_Stock" runat="server">
-                <a href="javascript:;">                  
+                <a href="Report_Product_Stock.aspx">                  
                   <i class="icon-docs"></i>
                   <span>สินค้าคงเครื่อง</span>
                 </a>                

@@ -17,17 +17,15 @@ Public Class Report_TMS_EDI
     End Property
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
+        If Not IsNumeric(Session("USER_ID")) Then
+            ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Alert", "alert('กรุณาเข้าสู่ระบบ'); window.location.href='SignIn.aspx';", True)
+            Exit Sub
+        End If
         If Not IsPostBack Then
             ClearForm()
             BindData()
-
         Else
-
-
-
             initFormPlugin()
-
         End If
 
 
@@ -36,14 +34,11 @@ Public Class Report_TMS_EDI
     Private Sub initFormPlugin()
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "Plugin", "initFormPlugin();", True)
         ScriptManager.RegisterStartupScript(Me.Page, GetType(String), "ReadOnly", "DateReadOnly();", True)
-
-
-
     End Sub
 
     Private Sub ClearForm()
         ddlService.SelectedIndex = 0
-        BL.BindDDlShop_Code(ddlShop_Name)
+        BL.Bind_DDlShop_Code(ddlShop_Name)
         txtStartDate.Text = ""
     End Sub
 
@@ -54,6 +49,7 @@ Public Class Report_TMS_EDI
         Sql &= " SELECT * " & vbLf
         Sql &= " , dbo.udf_ReportTimeDisplay(DATE_TXN_END ,2) TimeDisplay" & vbLf
         Sql &= " FROM VW_RPT_TMS_EDI WHERE 1=1 " & vbLf
+        '---SEARCH--
         If ddlService.SelectedIndex > 0 Then
             Sql &= " AND ITEM_TYPE='" & ddlService.SelectedItem.Text & "' " & vbLf
             lblHeader.Text &= " ประเภท " & ddlService.SelectedItem.Text
@@ -71,7 +67,6 @@ Public Class Report_TMS_EDI
                 lblHeader.Text &= " ยอดขายทั้งหมด "
             End If
         Catch ex As Exception
-
         End Try
 
         If ddlShop_Name.SelectedIndex > 0 Then
@@ -87,7 +82,7 @@ Public Class Report_TMS_EDI
         DA.Fill(DT)
 
         If DT.Rows.Count > 0 Then
-            lblHeader.Text &= " " & FormatNumber(DT.Rows.Count, 0) & " รายการ"
+            lblHeader.Text &= " พบ " & FormatNumber(DT.Rows.Count, 0) & " รายการ"
 
             Dim CASH_QTY As Object = DT.Compute("SUM(CASH_QTY)", "")
             Dim TMN_WALLET_QTY As Object = DT.Compute("SUM(TMN_WALLET_QTY)", "")
@@ -150,8 +145,13 @@ Public Class Report_TMS_EDI
         Dim lnkTXT As HtmlAnchor = e.Item.FindControl("lnkTXT")
         Dim btnDownload As Button = e.Item.FindControl("btnDownload")
 
-        lblTime.Text = e.Item.DataItem("TimeDisplay").ToString
+        'lblTime.Text = e.Item.DataItem("TimeDisplay").ToString
+
+        If Not IsDBNull(e.Item.DataItem("DATE_TXN_END")) Then
+            lblTime.Text = CV.DateToString(e.Item.DataItem("DATE_TXN_END"), "dd/MM/yyyy")
+        End If
         lblTime.Attributes("DATE_TXN_END") = ModuleGlobal.FormatSystemDate(e.Item.DataItem("DATE_TXN_END"))
+
         lblService.Text = e.Item.DataItem("ITEM_TYPE").ToString
         lblShop_Name.Text = e.Item.DataItem("FULL_SITE_NAME").ToString
         lblShop_Name.Attributes("SITE_CODE") = e.Item.DataItem("SITE_CODE").ToString

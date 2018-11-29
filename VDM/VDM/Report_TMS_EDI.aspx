@@ -21,7 +21,7 @@
                    <div class="form-group">
                     <label class="col-sm-2 control-label">Service</label>
                     <div class="col-sm-10">                      
-                      <asp:DropDownList ID="ddlService" runat="server" CssClass="chosen form-control" AutoPostBack="True" style="width: 100%;">
+                      <asp:DropDownList ID="ddlService" runat="server" CssClass="form-control" AutoPostBack="True" style="width: 100%;">
                           <asp:ListItem Value ="-1" Text =""></asp:ListItem>
                           <asp:ListItem Value ="0" Text ="PRODUCT"></asp:ListItem>
                           <asp:ListItem Value ="1" Text ="SIM"></asp:ListItem>
@@ -33,25 +33,12 @@
                    <div class="form-group">
                     <label class="col-sm-2 control-label">Shop Name</label>
                     <div class="col-sm-10">                      
-                      <asp:DropDownList ID="ddlShop_Name" runat="server" CssClass="chosen form-control" AutoPostBack="True" style="width: 100%;">
+                      <asp:DropDownList ID="ddlShop_Name" runat="server" CssClass="form-control" AutoPostBack="True" style="width: 100%;">
                           
                       </asp:DropDownList>
                     </div>
                   </div>                    
-                </div>
-                <%--<div class="col-lg-5">
-                   <div class="form-group">
-                    <label class="col-sm-2 control-label">By</label>
-                    <div class="col-sm-10">
-                            <div class="btn-group btn-group-justified">
-                              <asp:LinkButton id="aByHour" runat="server" CssClass="btn btn-success">Hourly</asp:LinkButton>
-                              <asp:LinkButton id="aByDay" runat="server" CssClass="btn btn-default">Daily</asp:LinkButton>
-                              <asp:LinkButton id="aByMonth" runat="server" CssClass="btn btn-default">Monthly</asp:LinkButton>
-                              <asp:LinkButton id="aByYear" runat="server" CssClass="btn btn-default">Yearly</asp:LinkButton>                             
-                            </div>                                           
-                    </div>
-                  </div>                    
-                </div>--%>
+                </div> 
 
                
                 <div class="col-lg-5">
@@ -61,7 +48,7 @@
                         <asp:TextBox CssClass="form-control m-b" ID="txtStartDate" runat="server" placeholder="Select Date"     ></asp:TextBox>
                         
                     <cc1:CalendarExtender ID="txtStartDate_CalendarExtender" runat="server" 
-                             Format="MMM dd yyyy" TargetControlID="txtStartDate" PopupPosition="BottomLeft"></cc1:CalendarExtender>
+                             Format="dd/MM/yyyy" TargetControlID="txtStartDate" PopupPosition="BottomLeft"></cc1:CalendarExtender>
                       
                     </div>
                   </div>                    

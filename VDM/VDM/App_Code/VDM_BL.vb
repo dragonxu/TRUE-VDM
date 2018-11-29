@@ -1478,6 +1478,14 @@ Public Class VDM_BL
         SQL &= "  And TB_TRANSACTION_STOCK.D_ID=" & D_ID & " " & vbLf
         SQL &= "  And TB_TRANSACTION_STOCK.Unit_Value=" & Unit_Value & "  " & vbLf
         SQL &= "  ORDER BY TB_TRANSACTION_STOCK.TXN_ID DESC " & vbLf
+
+
+
+
+
+
+
+
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
         Dim DT As New DataTable
         DA.Fill(DT)
@@ -2524,7 +2532,7 @@ Public Class VDM_BL
 
 #Region "DLL"
 
-    Public Sub BindDDlShop_Code(ByRef ddl As DropDownList, Optional ByVal SelectedValue As Integer = -1)
+    Public Sub Bind_DDlShop_Code(ByRef ddl As DropDownList, Optional ByVal SelectedValue As Integer = -1)
 
         Dim SQL As String = "SELECT * ,ISNULL(SITE_CODE +' :'+ SITE_NAME_TH,SITE_CODE)  FULL_SITE_NAME  FROM VW_ALL_SITE ORDER BY SITE_CODE"
         Dim DA As New SqlDataAdapter(SQL, ConnectionString)
@@ -2532,9 +2540,40 @@ Public Class VDM_BL
         DA.Fill(DT)
 
         ddl.Items.Clear()
-        ddl.Items.Add(New ListItem("", 0))
+        ddl.Items.Add(New ListItem("  ", 0))
         For i As Integer = 0 To DT.Rows.Count - 1
             Dim Item As New ListItem(DT.Rows(i).Item("FULL_SITE_NAME"), DT.Rows(i).Item("SITE_CODE"))
+            ddl.Items.Add(Item)
+        Next
+
+        ddl.SelectedIndex = 0
+        For i As Integer = 0 To ddl.Items.Count - 1
+            If ddl.Items(i).Value.ToString = SelectedValue.ToString Then
+                ddl.SelectedIndex = i
+                Exit For
+            End If
+        Next
+
+    End Sub
+
+    Public Sub Bind_DDlKiosk_Code(ByRef ddl As DropDownList, Optional ByVal SITE_CODE As String = "", Optional ByVal SelectedValue As Integer = -1)
+
+        Dim SQL As String = " SELECT MS_KIOSK.* , VW_ALL_SITE.SITE_CODE" & vbLf
+        SQL &= " FROM MS_KIOSK"
+        SQL &= " LEFT JOIN VW_ALL_SITE ON VW_ALL_SITE.SITE_ID=MS_KIOSK.SITE_ID"
+        If SITE_CODE <> "" Then
+            SQL &= "  WHERE VW_ALL_SITE.SITE_CODE='" & SITE_CODE & "'" & vbLf
+        End If
+        SQL &= " ORDER BY KO_CODE"
+
+        Dim DA As New SqlDataAdapter(SQL, ConnectionString)
+        Dim DT As New DataTable
+        DA.Fill(DT)
+
+        ddl.Items.Clear()
+        ddl.Items.Add(New ListItem("  ", 0))
+        For i As Integer = 0 To DT.Rows.Count - 1
+            Dim Item As New ListItem(DT.Rows(i).Item("KO_CODE"), DT.Rows(i).Item("KO_ID"))
             ddl.Items.Add(Item)
         Next
 

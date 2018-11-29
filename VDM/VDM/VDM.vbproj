@@ -582,6 +582,9 @@
     <Content Include="Machine_Console\UC_SIM_Stock.ascx" />
     <Content Include="PrintContent.aspx" />
     <Content Include="PrintSlip.aspx" />
+    <Content Include="Report_Product_Input.aspx" />
+    <Content Include="Report_Product_Output.aspx" />
+    <Content Include="Report_Product_Stock.aspx" />
     <Content Include="Report_TMS_EDI.aspx" />
     <Content Include="Scripts\DragDrop.js" />
     <Content Include="Scripts\extent.js" />
@@ -701,8 +704,6 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="WebForm1.aspx" />
-    <Content Include="WebForm2.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\BackEndInterface.vb" />
@@ -958,6 +959,27 @@
     </Compile>
     <Compile Include="PrintSlip.aspx.vb">
       <DependentUpon>PrintSlip.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Report_Product_Input.aspx.designer.vb">
+      <DependentUpon>Report_Product_Input.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report_Product_Input.aspx.vb">
+      <DependentUpon>Report_Product_Input.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Report_Product_Output.aspx.designer.vb">
+      <DependentUpon>Report_Product_Output.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report_Product_Output.aspx.vb">
+      <DependentUpon>Report_Product_Output.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Report_Product_Stock.aspx.designer.vb">
+      <DependentUpon>Report_Product_Stock.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report_Product_Stock.aspx.vb">
+      <DependentUpon>Report_Product_Stock.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Report_TMS_EDI.aspx.designer.vb">
@@ -1277,20 +1299,6 @@
     </Compile>
     <Compile Include="Upload_User_Form.aspx.vb">
       <DependentUpon>Upload_User_Form.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.vb">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm1.aspx.vb">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="WebForm2.aspx.designer.vb">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm2.aspx.vb">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
   </ItemGroup>
